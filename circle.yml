@@ -72,7 +72,7 @@ jobs:
       ENV: DEMO
     <<: *deploy
 
-  deploy_production:
+  deploy_prod:
     environment:
       ENV: PROD
     <<: *deploy
