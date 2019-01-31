@@ -1,3 +1,0 @@
-# Atoms
-
-{{outlet}}
