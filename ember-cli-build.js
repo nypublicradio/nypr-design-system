@@ -4,6 +4,18 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
+    postcssOptions: {
+      compile: {
+        enabled: false,
+      },
+      filter: {
+        enabled: true,
+        plugins: [
+          require('tailwindcss')('./config/tailwind.js')
+        ]
+      }
+    },
+
     'sass-vars': {
       appDir: 'tests/dummy/app',
       files: [
