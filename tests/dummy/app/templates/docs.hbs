@@ -2,6 +2,10 @@
   {{#viewer.nav as |nav|}}
     {{nav.section 'Introduction'}}
     {{nav.section 'Atoms'}}
+    {{nav.item 'Global' 'docs.atoms.global'}}
+    {{#nav.subnav as |sub|}}
+      {{sub.item 'Colors' 'docs.atoms.global.colors'}}
+    {{/nav.subnav}}
   {{/viewer.nav}}
 
   {{#viewer.main}}

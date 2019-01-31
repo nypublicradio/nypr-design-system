@@ -10,6 +10,11 @@ const Router = AddonDocsRouter.extend(RouterScroll, {
 
 Router.map(function() {
   docsRoute(this, function() {
+    this.route('atoms', function() {
+      this.route('global', function() {
+        this.route('colors');
+      });
+    });
   });
 
   this.route('not-found', {path: '/*path'});
