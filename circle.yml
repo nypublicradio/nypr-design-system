@@ -33,10 +33,10 @@ deploy: &deploy
     - checkout
     - <<: *restore_node
     - deploy:
-      name: Deploy to GitHub pages
-      command: |
-        env | sed -n "s/^${ENV}_//p" >> .env
-        npx ember deploy `echo $ENV | awk '{print tolower($0)}'` --verbose
+        name: Deploy to GitHub pages
+        command: |
+          env | sed -n "s/^${ENV}_//p" >> .env
+          npx ember deploy "$(echo $ENV | awk '{print tolower($0)}')" --verbose
 
 jobs:
   install:
