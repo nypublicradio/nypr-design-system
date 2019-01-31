@@ -32,6 +32,9 @@ deploy: &deploy
   steps:
     - checkout
     - <<: *restore_node
+    - add_ssh_keys:
+        fingerprints:
+          - "f9:f2:63:78:2d:c4:f1:45:af:b6:aa:f3:34:f5:9f:c2"
     - deploy:
         name: Deploy to GitHub pages
         command: |
