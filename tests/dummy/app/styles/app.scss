@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.AddonDocs-DocsViewer-Nav {
+  width: auto;
+  padding-left: 0;
+}
+
+.docs-header > header > div{
+  max-width: none;
+}
