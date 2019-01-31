@@ -1,0 +1,18 @@
+@tailwind preflight;
+@tailwind components;
+@tailwind utilities;
+
+@import "nypr-design-system/vars/colors";
+
+:root {
+  --brand-primary: #{$black}; // string interpolation required for css variables
+}
+
+.AddonDocs-DocsViewer-Nav {
+  width: auto;
+  padding-left: 0;
+}
+
+.docs-header > header > div{
+  max-width: none;
+}
