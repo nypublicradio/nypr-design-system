@@ -14,7 +14,11 @@ module.exports = function(environment) {
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
         Date: false
-      }
+      },
+
+      'ember-cli-string-helpers': {
+        only: ['dasherize', 'humanize']
+      },
     },
 
     APP: {
