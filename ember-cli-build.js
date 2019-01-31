@@ -4,7 +4,14 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
-    // Add options here
+    'sass-vars': {
+      appDir: 'tests/dummy/app',
+      files: [
+        {colors: 'app/styles/nypr-design-system/vars/_colors.scss'},
+        {'wnyc-colors': 'app/styles/nypr-design-system/vars/_wnyc-colors.scss'},
+        {'gothamist-colors': 'app/styles/nypr-design-system/vars/_gothamist-colors.scss'}
+      ]
+    }
   });
 
   /*

@@ -54,16 +54,20 @@
     "ember-try": "^1.0.0",
     "eslint-plugin-ember": "^5.2.0",
     "eslint-plugin-node": "^7.0.1",
+    "filendir": "^1.0.2",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0",
     "sass": "^1.16.1",
+    "strip-json-comments": "^2.0.1",
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
-  }
+    "configPath": "tests/dummy/config",
+    "paths": [
+      "lib/sass-vars"
+    ]
   },
   "homepage": "https://nypublicradio.github.io/nypr-design-system"
 }
