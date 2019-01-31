@@ -3,8 +3,15 @@
 
 module.exports = function(deployTarget) {
   let ENV = {
-    build: {}
-    // include other plugin configuration that applies to all deploy targets here
+    build: {},
+    'git-ci': {
+      userName: 'nypr-deloy',
+      userEmail: 'nypr-deploy@circleci',
+      deployKeyPath: '/home/circleci/.ssh/id_rsa_f9f263782dc4f145afb6aaf334f59fc2'
+    },
+    git: {
+      commitMessage: '[skip ci] Deployed %@'
+    }
   };
 
   if (deployTarget === 'development') {
