@@ -14,6 +14,7 @@ Router.map(function() {
       this.route('global', function() {
         this.route('colors');
       });
+      this.route('buttons');
     });
   });
 
