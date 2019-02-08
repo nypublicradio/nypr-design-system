@@ -4,5 +4,5 @@ import layout from '../templates/components/color-showcase';
 export default Component.extend({
   layout,
 
-  classNames: ['flex', 'justify-between', 'flex-wrap'],
+  classNames: ['color-showcase', 'flex', 'justify-between', 'flex-wrap'],
 });
