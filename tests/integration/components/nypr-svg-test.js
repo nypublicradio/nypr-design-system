@@ -11,16 +11,9 @@ module('Integration | Component | nypr-svg', function(hooks) {
     // Handle any actions with this.set('myAction', function(val) { ... });
 
     await render(hbs`{{nypr-svg}}`);
+    assert.equal(this.element.textContent.trim(), '', 'renders nothing with no inputs');
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#nypr-svg}}
-        template block text
-      {{/nypr-svg}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    await render(hbs`{{nypr-svg icon="whatever"}}`);
+    assert.ok('renders ok with a bad filename');
   });
 });
