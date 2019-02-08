@@ -1,1 +1,1 @@
-{"jsonapi":{"version":"1.0"},"data":{"type":"project","id":"nypr-design-system","attributes":{"name":"nypr-design-system","version":"0.0.0","navigationIndex":[]},"relationships":{"modules":{"data":[]}}}}
+{"jsonapi":{"version":"1.0"},"data":{"type":"project","id":"nypr-design-system","attributes":{"name":"nypr-design-system","version":"0.0.2","navigationIndex":[]},"relationships":{"modules":{"data":[]}}}}
