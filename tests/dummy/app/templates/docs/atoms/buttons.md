@@ -20,8 +20,10 @@
 {{/docs-demo}}
 
 ### Theme Samples
-{{#theme-chooser as |theme|}}
-  {{#nypr-button theme=theme}}
-    foo
-  {{/nypr-button}}
+{{#theme-chooser as |chooser|}}
+  {{#chooser.item}}
+    {{#nypr-button theme=chooser.theme}}
+      foo
+    {{/nypr-button}}
+  {{/chooser.item}}
 {{/theme-chooser}}
