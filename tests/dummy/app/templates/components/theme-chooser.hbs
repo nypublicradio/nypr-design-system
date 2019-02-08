@@ -1,6 +1,6 @@
 {{#each themes as |theme|}}
-  <div class="theme-item">
-    <div class="theme-slug">{{theme}}</div>
-    {{yield theme}}
-  </div>
+  {{yield (hash
+    theme=theme
+    item=(component 'theme-chooser/item' theme=theme)
+  )}}
 {{/each}}
