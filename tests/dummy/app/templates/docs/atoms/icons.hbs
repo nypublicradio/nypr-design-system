@@ -1,0 +1,28 @@
+<table class="example-grid">
+  <thead>
+    <tr>
+      <th></th>
+      <th><code>default</code></th>
+
+      {{#theme-chooser tagName='' as |chooser|}}
+        <th><code>{{chooser.theme}}</code></th>
+      {{/theme-chooser}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |path|}}
+      <tr>
+        <td class="example-label"><code>{{path}}</code></td>
+        <td>
+          {{nypr-svg path}}
+        </td>
+
+        {{#theme-chooser tagName='' as |chooser|}}
+          <td>
+            {{nypr-svg path class=chooser.theme}}
+          </td>
+        {{/theme-chooser}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

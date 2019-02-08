@@ -15,6 +15,7 @@ Router.map(function() {
         this.route('colors');
       });
       this.route('buttons');
+      this.route('icons');
     });
   });
 
