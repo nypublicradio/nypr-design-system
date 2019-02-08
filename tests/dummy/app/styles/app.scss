@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import "nypr-design-system/vars/colors";
+@import "nypr-design-system/components/nypr-button";
 
 :root {
   --brand-primary: #{$black}; // string interpolation required for css variables
