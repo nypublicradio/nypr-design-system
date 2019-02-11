@@ -40,7 +40,6 @@ deploy: &deploy
         command: |
           env | sed -n "s/^${ENV}_//p" >> .env
           # unignore generated sass vars for deployments
-          echo '!/tests/dummy/app/utils/sass-vars' >> .gitignore
           npx ember deploy "$(echo $ENV | awk '{print tolower($0)}')" --verbose
 
 jobs:
