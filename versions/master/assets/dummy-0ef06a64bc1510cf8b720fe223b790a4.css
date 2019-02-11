@@ -1,3 +1,8 @@
+.example-grid thead,
+.example-label {
+  font-size: 12px;
+}
+
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -6298,10 +6303,6 @@ table {
 .example-grid td *,
 .example-grid th * {
   vertical-align: middle;
-}
-
-.example-label {
-  font-size: 12px;
 }
 
 @media (min-width: 576px) {
