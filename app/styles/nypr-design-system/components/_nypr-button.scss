@@ -1,5 +1,6 @@
 @import "../mixins/buttons";
 
+// BEGIN-SNIPPET nypr-button.scss
 .nypr-button {
   @include btn;
 }
@@ -17,3 +18,4 @@
   border-radius: 30px;
   background-color: $wnyc-red;
 }
+// END-SNIPPET

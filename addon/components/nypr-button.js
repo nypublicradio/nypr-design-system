@@ -1,3 +1,4 @@
+// BEGIN-SNIPPET nypr-button.js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from '../templates/components/nypr-button';
@@ -17,3 +18,4 @@ export default Component.extend({
     return `nypr-button--${this.theme || 'nypr'}`;
   })
 });
+//END-SNIPPET
