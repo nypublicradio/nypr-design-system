@@ -1,0 +1,17 @@
+{{#if parents}}
+  <p>
+    <strong><code>{{name}}</code></strong> is used in
+    {{#each parents as |parent|}}
+      {{link-to parent (concat 'docs.components.' parent)}},
+    {{/each}}
+  </p>
+{{/if}}
+
+{{#if children}}
+  <p>
+    <strong><code>{{name}}</code></strong> uses
+    {{#each children as |child|}}
+      {{link-to child (concat 'docs.components.' child)}},
+    {{/each}}
+  </p>
+{{/if}}
