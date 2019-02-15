@@ -4,12 +4,14 @@
     {{nav.item 'Welcome' 'docs.index'}}
 
     {{nav.section 'Atoms'}}
-    {{nav.item 'Global' 'docs.atoms.global'}}
     {{#nav.subnav as |sub|}}
-      {{sub.item 'Colors' 'docs.atoms.global.colors'}}
+      {{nav.section 'Global'}}
+      {{sub.item 'Colors' 'docs.colors'}}
     {{/nav.subnav}}
-    {{nav.item 'Buttons' 'docs.atoms.buttons'}}
-    {{nav.item 'Icons' 'docs.atoms.icons'}}
+    {{nav.item 'nypr-button' 'docs.components.nypr-button'}}
+    {{nav.item 'nypr-card' 'docs.components.nypr-card'}}
+    {{nav.item 'story-header' 'docs.components.story-header'}}
+    {{nav.item 'Icons' 'docs.components.icons'}}
 
   {{/viewer.nav}}
 

@@ -10,12 +10,12 @@ const Router = AddonDocsRouter.extend(RouterScroll, {
 
 Router.map(function() {
   docsRoute(this, function() {
-    this.route('atoms', function() {
-      this.route('global', function() {
-        this.route('colors');
-      });
-      this.route('buttons');
+    this.route('colors');
+    this.route('components', function() {
       this.route('icons');
+      this.route('nypr-button');
+      this.route('nypr-card');
+      this.route('story-header');
     });
   });
 
