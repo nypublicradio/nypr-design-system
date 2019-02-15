@@ -1,0 +1,9 @@
+{{!-- BEGIN-SNIPPET nypr-card.hbs --}}
+{{#nypr-button}}
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    default button text
+  {{/if}}
+{{/nypr-button}}
+{{!-- END-SNIPPET --}}
