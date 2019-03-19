@@ -2,7 +2,7 @@
   <p>
     <strong><code>{{name}}</code></strong> is used in
     {{#each parents as |parent|}}
-      {{link-to parent (concat 'docs.components.' parent)}},
+      {{link-to parent.label parent.value}},
     {{/each}}
   </p>
 {{/if}}
@@ -11,7 +11,7 @@
   <p>
     <strong><code>{{name}}</code></strong> uses
     {{#each children as |child|}}
-      {{link-to child (concat 'docs.components.' child)}},
+      {{link-to child.label child.value}},
     {{/each}}
   </p>
 {{/if}}
