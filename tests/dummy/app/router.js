@@ -16,6 +16,7 @@ Router.map(function() {
       this.route('nypr-button');
       this.route('nypr-card');
       this.route('story-header');
+      this.route('media-object');
     });
   });
 
