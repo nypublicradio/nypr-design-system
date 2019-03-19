@@ -1,9 +1,19 @@
 {{!-- BEGIN-SNIPPET nypr-card.hbs --}}
-{{#nypr-button}}
-  {{#if (has-block)}}
-    {{yield}}
-  {{else}}
-    default button text
-  {{/if}}
-{{/nypr-button}}
+{{#media-object as |mo|}}
+
+  {{#mo.media}}
+    <img src={{thumbnail}} alt={{title}} >
+  {{/mo.media}}
+
+  {{#mo.object}}
+    <h3>{{title}}</h3>
+
+    <p>{{body}}</p>
+
+    {{#nypr-button}}
+      {{buttonText}}
+    {{/nypr-button}}
+  {{/mo.object}}
+
+{{/media-object}}
 {{!-- END-SNIPPET --}}
