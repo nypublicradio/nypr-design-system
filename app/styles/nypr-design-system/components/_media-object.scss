@@ -1,0 +1,24 @@
+.media-object {
+  display: flex;
+  align-items: flex-start;
+
+  &.center {
+    align-items: center;
+  }
+
+  &.bottom {
+    align-items: flex-end;
+  }
+}
+
+.media-object__media {
+  margin-right: 30px;
+
+  > img {
+    display: block;
+  }
+}
+
+.media-object__object {
+  flex: 1;
+}
