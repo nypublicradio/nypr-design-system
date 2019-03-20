@@ -6252,6 +6252,40 @@ table {
   background-color: #de1e3d;
 }
 
+.nypr-card {
+  border: 1px solid #333;
+  padding: 16px;
+}
+
+.nypr-card p {
+  margin: 8px 0;
+}
+
+.media-object {
+  display: flex;
+  align-items: flex-start;
+}
+
+.media-object.center {
+  align-items: center;
+}
+
+.media-object.bottom {
+  align-items: flex-end;
+}
+
+.media-object__media {
+  margin-right: 30px;
+}
+
+.media-object__media>img {
+  display: block;
+}
+
+.media-object__object {
+  flex: 1;
+}
+
 :root {
   --brand-primary: #333;
 }
