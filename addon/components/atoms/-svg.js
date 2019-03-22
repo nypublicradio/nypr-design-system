@@ -10,6 +10,11 @@ const msg = icon =>
 
   If an svg template can't be found, a warning will be printed.
 
+  Usage:
+  ```hbs
+  {{atoms/-svg icon='wnyc-logo'}}
+  ```
+
   @class atoms/-svg
 */
 export default Component.extend({

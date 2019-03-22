@@ -3,6 +3,17 @@ import layout from '../../templates/components/atoms/-picture';
 
 /**
   Picture element. Renders `<source>` elements for provided s, m, l, or xl breakpoints and images.
+
+  Usage:
+  ```hbs
+  {{atoms/-picture
+    break-xl=1000
+    src-xl='https://example.com/xlarge-img.jpg'
+    break-l=800
+    src-l='https://example.com/large-img.jpg'
+    alt='Descriptive alt text'
+  }}
+  ```
   @class atoms/-picture
 */
 export default Component.extend({

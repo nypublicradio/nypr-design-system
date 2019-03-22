@@ -6,8 +6,15 @@ import layout from '../../templates/components/atoms/-button';
 /**
   Base button. Use this component to compose more specific buttons and components.
 
+  Usage:
+  ```hbs
+  {{#atoms/-button}}
+    Click Me
+  {{/atoms/-button}}
+  ```
+
   @class atoms/-button
-  @yield {Block} block Arbitrary block for element contents
+  @yield {Block} block 
 */
 export default Component.extend({
   layout,
