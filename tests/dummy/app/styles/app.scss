@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @import "nypr-design-system/vars/colors";
-@import "nypr-design-system/components/nypr-button";
-@import "nypr-design-system/components/media-object";
+@import "nypr-design-system/atoms/-button";
+@import "nypr-design-system/atoms/media-object";
 
 :root {
   --brand-primary: #{$black}; // string interpolation required for css variables
