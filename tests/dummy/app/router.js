@@ -11,6 +11,7 @@ const Router = AddonDocsRouter.extend(RouterScroll, {
 Router.map(function() {
   docsRoute(this, function() {
     this.route('colors');
+    this.route('typography');
     this.route('atoms', function() {
       this.route('-button');
       this.route('-picture');
