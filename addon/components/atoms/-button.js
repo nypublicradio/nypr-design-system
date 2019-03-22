@@ -7,6 +7,7 @@ import layout from '../../templates/components/atoms/-button';
   Base button. Use this component to compose more specific buttons and components.
 
   @class atoms/-button
+  @yield {Block} block Arbitrary block for element contents
 */
 export default Component.extend({
   layout,
