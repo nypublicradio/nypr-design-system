@@ -81,6 +81,21 @@ Basic time element.
   {{demo.snippet name='time.hbs' label='Usage'}}
 {{/docs-demo}}
 
+## Components
+
+### `story-headline`
+Make text suitable for a story headline
+
+{{#docs-demo as |demo|}}
+  {{#demo.example name='headline.hbs'}}
+    {{#atoms/story-headline}}
+      Headline with Lots of Text Can Sit Here on Multiple Lines
+    {{/atoms/story-headline}}
+  {{/demo.example}}
+
+  {{demo.snippet name='headline.hbs' label='Usage'}}
+{{/docs-demo}}
+
 
 
 ### `atoms/-kicker`
