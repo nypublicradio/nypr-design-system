@@ -51,3 +51,33 @@
   <dd>And it gets a definition too, which is this line.</dd>
 </dl>
 
+## Text Elements
+
+### `<blockquote />`
+
+Basic blockquote element. The `<p/>` tag is required for decoration.
+
+{{#docs-demo as |demo|}}
+  {{#demo.example name='blockquote.hbs'}}
+    <blockquote>
+      <p>
+        Lorem ipsum
+      </p>
+    </blockquote>
+  {{/demo.example}}
+
+  {{demo.snippet name='blockquote.hbs' label='Usage'}}
+{{/docs-demo}}
+
+### `<time />`
+
+Basic time element.
+
+{{#docs-demo as |demo|}}
+  {{#demo.example name='time.hbs'}}
+    <time datetime={{now}}>{{moment-format (now) 'MMMM Do YYYY, h:mm:ss a'}}</time>
+  {{/demo.example}}
+
+  {{demo.snippet name='time.hbs' label='Usage'}}
+{{/docs-demo}}
+
