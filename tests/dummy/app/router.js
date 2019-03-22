@@ -18,6 +18,9 @@ Router.map(function() {
       this.route('media-object');
       this.route('icons');
     });
+    this.route('molecules', function() {
+      this.route('-figcaption');
+    })
     this.route('components', function() {
       this.route('nypr-card');
       this.route('story-header');
