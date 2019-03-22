@@ -15,9 +15,9 @@ Router.map(function() {
       this.route('-button');
       this.route('-picture');
       this.route('media-object');
+      this.route('icons');
     });
     this.route('components', function() {
-      this.route('icons');
       this.route('nypr-card');
       this.route('story-header');
     });

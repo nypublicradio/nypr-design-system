@@ -1,9 +1,9 @@
+## Available Icons
 <table class="example-grid">
   <thead>
     <tr>
       <th></th>
       <th><code>default</code></th>
-
       {{#theme-chooser tagName='' as |chooser|}}
         <th><code>{{chooser.theme}}</code></th>
       {{/theme-chooser}}
@@ -14,15 +14,30 @@
       <tr>
         <td class="example-label"><code>{{path}}</code></td>
         <td>
-          {{nypr-svg path}}
+          {{atoms/-svg path}}
         </td>
 
         {{#theme-chooser tagName='' as |chooser|}}
           <td>
-            {{nypr-svg path class=chooser.theme}}
+            {{atoms/-svg path class=chooser.theme}}
           </td>
         {{/theme-chooser}}
       </tr>
     {{/each}}
   </tbody>
 </table>
+
+## `atoms/-svg`
+
+Render the above icons using the `{{atoms/-svg}}` component.
+
+
+### Usage
+
+{{#docs-demo as |demo|}}
+  {{#demo.example name='svg-example.hbs'}}
+    {{atoms/-svg icon='wnyc-logo'}}
+  {{/demo.example}}
+
+  {{demo.snippet 'svg-example.hbs' label='Usage'}}
+{{/docs-demo}}
