@@ -6252,15 +6252,6 @@ table {
   background-color: #de1e3d;
 }
 
-.nypr-card {
-  border: 1px solid #333;
-  padding: 16px;
-}
-
-.nypr-card p {
-  margin: 8px 0;
-}
-
 .media-object {
   display: flex;
   align-items: flex-start;
@@ -6337,6 +6328,10 @@ table {
 .example-grid td *,
 .example-grid th * {
   vertical-align: middle;
+}
+
+svg {
+  fill: inherit;
 }
 
 @media (min-width: 576px) {
