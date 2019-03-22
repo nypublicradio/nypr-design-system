@@ -4106,7 +4106,7 @@ for(var t in e.presenceSet=Object.create(null),this.presenceSet)e.presenceSet[t]
 return e.list=this.toArray(),e.size=this.size,e},e}(),e.default=t}),define("component-lineage/components/component-lineage",["exports","component-lineage/templates/components/component-lineage","dummy/component-manifest"],function(e,t,r){"use strict"
 function n(e){return function(e){if(Array.isArray(e)){for(var t=0,r=new Array(e.length);t<e.length;t++)r[t]=e[t]
 return r}}(e)||function(e){if(Symbol.iterator in Object(e)||"[object Arguments]"===Object.prototype.toString.call(e))return Array.from(e)}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance")}()}function i(e){return[e,function(){var t=this,r=[]
-return this.get(e).forEach(function(e){try{var n="docs.components.".concat(e)
+return(this.get(e)||[]).forEach(function(e){try{var n="docs.components.".concat(e)
 t.router.urlFor(n),r.push({label:e,value:n})}catch(i){}}),r}]}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var o=Ember.Component.extend({layout:t.default,router:Ember.inject.service(),manifest:Ember.computed("name",function(){return r.default[this.name]}),children:Ember.computed.apply(void 0,n(i("manifest.children"))),parents:Ember.computed.apply(void 0,n(i("manifest.parents")))})
 e.default=o}),define("component-lineage/templates/components/component-lineage",["exports"],function(e){"use strict"
@@ -6884,7 +6884,7 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["media-object"],classNameBindings:["valign"]})
 e.default=r}),define("nypr-design-system/components/nypr-button",["exports","nypr-design-system/templates/components/nypr-button"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,tagName:"button",classNames:["nypr-button"],classNameBindings:["themeClass"],attributeBindings:["type"],type:"button",themeClass:Ember.computed("theme",function(){return"nypr-button--".concat(this.theme||"nypr")})})
+var r=Ember.Component.extend({layout:t.default,tagName:"button",classNames:["nypr-button","o-button"],classNameBindings:["tierClass"],attributeBindings:["type","role"],role:"button",type:"button",tier:null,tierClass:Ember.computed("tier",function(){return this.tier?"o-button--".concat(this.tier):""}),click:function(){}})
 e.default=r}),define("nypr-design-system/components/nypr-card",["exports","nypr-design-system/templates/components/nypr-card"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["nypr-card"],tagName:"article",buttonText:"default button text"})
