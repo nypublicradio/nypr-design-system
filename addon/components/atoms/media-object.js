@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import layout from '../templates/components/media-object';
+import layout from '../../templates/components/atoms/media-object';
 
 export default Component.extend({
   layout,

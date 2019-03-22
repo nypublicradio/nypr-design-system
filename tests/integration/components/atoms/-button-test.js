@@ -1,24 +1,24 @@
-import { module, skip } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | nypr-button', function(hooks) {
+module('Integration | Component | atoms/-button', function(hooks) {
   setupRenderingTest(hooks);
 
-  skip('it renders', async function(assert) {
+  test('it renders', async function(assert) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`{{nypr-button}}`);
+    await render(hbs`{{atoms/-button}}`);
 
     assert.equal(this.element.textContent.trim(), '');
 
     // Template block usage:
     await render(hbs`
-      {{#nypr-button}}
+      {{#atoms/-button}}
         template block text
-      {{/nypr-button}}
+      {{/atoms/-button}}
     `);
 
     assert.equal(this.element.textContent.trim(), 'template block text');

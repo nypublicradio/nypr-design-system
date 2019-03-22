@@ -1,12 +1,12 @@
-// BEGIN-SNIPPET nypr-button.js
+// BEGIN-SNIPPET atoms-button.js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import layout from '../templates/components/nypr-button';
+import layout from '../../templates/components/atoms/-button';
 
 /**
   Base button. Use this component to compose more specific buttons and components.
 
-  @class NyprButton
+  @class atoms/-button
 */
 export default Component.extend({
   layout,
@@ -20,14 +20,16 @@ export default Component.extend({
   /**
     Specify the `role` attribute. Default is 'button'.
     @argument role
-    @type {string}
+    @type {String?}
+    @default 'button'
   */
   role: 'button',
 
   /**
     Specify the `type` attribute for the button. Default is "button".
     @argument type
-    @type {string}
+    @type {String?}
+    @default 'button'
   */
   type: 'button',
 
@@ -35,7 +37,7 @@ export default Component.extend({
     Which tier in the visual heirarchy this button should be.
 
     @argument tier
-    @type {string}
+    @type {String?}
   */
   tier: null,
 
@@ -43,8 +45,8 @@ export default Component.extend({
   /**
     Computes the class applied based on the value of `tier`
 
-    @accessor tierClass
-    @type {string}
+    @computed tierClass
+    @type {String}
   */
   tierClass: computed('tier', function() {
     return this.tier ? `o-button--${this.tier}` : '';
@@ -54,7 +56,7 @@ export default Component.extend({
     Specify a click handler
 
     @argument click
-    @type {function}
+    @type {Function?}
   */
   click() {}
 });

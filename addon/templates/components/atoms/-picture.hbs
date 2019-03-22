@@ -1,0 +1,17 @@
+{{#if @break-xl}}
+  <source srcset={{@src-xl}} media="(min-width: {{@break-xl}}px)">
+{{/if}}
+
+{{#if @break-l}}
+  <source srcset={{@src-l}} media="(min-width: {{@break-l}}px)">
+{{/if}}
+
+{{#if @break-m}}
+  <source srcset={{@src-m}} media="(min-width: {{@break-m}}px)">
+{{/if}}
+
+{{#if @lazy}}
+  <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src={{@src-s}} itemprop="image" alt={{@alt}} >
+{{else}}
+  <img src={{@src-s}} itemprop="image" alt={{@alt}} >
+{{/if}}
