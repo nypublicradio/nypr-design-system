@@ -6225,33 +6225,6 @@ table {
   z-index: auto;
 }
 
-.nypr-button {
-  appearance: none;
-  border: none;
-  padding: 0;
-  font-family: inherit;
-  border-radius: 0;
-  background: 0 0;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  color: inherit;
-}
-
-.nypr-button--nypr {
-  color: #000;
-  padding: 8px;
-  border: 1px solid #333;
-}
-
-.nypr-button--wnyc {
-  color: #fff;
-  font-weight: 700;
-  padding: 8px 16px;
-  border-radius: 30px;
-  background-color: #de1e3d;
-}
-
 .media-object {
   display: flex;
   align-items: flex-start;
