@@ -83,7 +83,7 @@ Basic time element.
 
 ## Components
 
-### `story-headline`
+### `atoms/story-headline`
 Make text suitable for a story headline
 
 {{#docs-demo as |demo|}}

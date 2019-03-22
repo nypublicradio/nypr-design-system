@@ -1,6 +1,6 @@
 ## `atoms/-picture`
 
-Render a `<picture />` element with `srcset` values set for provided breakpoints.
+Render a `<picture/>` element with `srcset` values set for provided breakpoints.
 
 All arguments are provided below.
 
