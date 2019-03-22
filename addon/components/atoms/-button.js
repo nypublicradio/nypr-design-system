@@ -14,13 +14,13 @@ import layout from '../../templates/components/atoms/-button';
   ```
 
   @class atoms/-button
-  @yield {Block} block 
+  @yield {Block} block
 */
 export default Component.extend({
   layout,
   tagName: 'button',
 
-  classNames: ['nypr-button', 'o-button'],
+  classNames: ['o-button'],
   classNameBindings: ['tierClass'],
 
   attributeBindings: ['type', 'role'],
