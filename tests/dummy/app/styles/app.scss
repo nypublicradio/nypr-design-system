@@ -66,3 +66,7 @@
 .example-label {
   font-size: 12px;
 }
+
+svg {
+  fill: inherit; // design system sets svg colors with cascading classes
+}
