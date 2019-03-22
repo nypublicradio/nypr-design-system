@@ -96,6 +96,22 @@ Make text suitable for a story headline
   {{demo.snippet name='headline.hbs' label='Usage'}}
 {{/docs-demo}}
 
+### `atoms/section-heading`
+Make text suitable for a section heading. Pass a block or a text parameter.
+
+{{#docs-demo as |demo|}}
+  {{#demo.example name='section.hbs'}}
+    Using a block:
+    {{#atoms/section-heading}}
+      This is a Section Heading
+    {{/atoms/section-heading}}
+
+    Using a positional param:
+    {{atoms/section-heading 'Foo Bar Section'}}
+  {{/demo.example}}
+
+  {{demo.snippet name='headline.hbs' label='Usage'}}
+{{/docs-demo}}
 
 
 ### `atoms/-kicker`
