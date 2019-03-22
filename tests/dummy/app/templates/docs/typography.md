@@ -81,3 +81,22 @@ Basic time element.
   {{demo.snippet name='time.hbs' label='Usage'}}
 {{/docs-demo}}
 
+
+
+### `atoms/-kicker`
+
+Kicker used for decorating metadata. Pass a block or a test parameter.
+
+{{#docs-demo as |demo|}}
+  {{#demo.example name='kicker.hbs'}}
+    Using a block:
+    {{#atoms/-kicker}}
+      Category
+    {{/atoms/-kicker}}
+
+    Using a positional param:
+    {{atoms/-kicker 'News'}}
+  {{/demo.example}}
+
+  {{demo.snippet name='kicker.hbs' label='Usage'}}
+{{/docs-demo}}
