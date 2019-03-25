@@ -1,9 +1,9 @@
-# Atoms
+# Molecules
 
 {{outlet}}
 
 ## Lineage
 <ComponentLineage
-  @prefix='atoms'
+  @prefix='molecules'
   @name={{this.target.currentRoute.localName}}
 />
