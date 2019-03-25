@@ -1,21 +1,22 @@
+// BEGIN-SNIPPET nypr-a-svg.js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { getOwner } from '@ember/application';
 
 const msg = icon =>
-  `Could not find an icon in nypr-design-system/app/templates/components/atoms/-svg named ${icon}`;
+  `Could not find an icon in nypr-design-system/app/templates/components/nypr-a-svg named ${icon}`;
 
 /**
-  A component that will safely render any svg icon found in the `app/templates/components/atoms/-svg` tree.
+  A component that will safely render any svg icon found in the `app/templates/components/nypr-a-svg` tree.
 
   If an svg template can't be found, a warning will be printed.
 
   Usage:
   ```hbs
-  {{atoms/-svg icon='wnyc-logo'}}
+  <NyprASvg @icon='wnyc-logo'/>
   ```
 
-  @class atoms/-svg
+  @class nypr-a-svg
 */
 export default Component.extend({
   tagName: '',
@@ -40,15 +41,16 @@ export default Component.extend({
     Looks up the svg template
 
     @accessor svgPartial
-   */
+  */
   svgPartial: computed(function() {
     let owner = getOwner(this);
-    let templateExists = Boolean(owner.lookup(`templates/component:atoms/-svg/${this.icon}`));
+    let templateExists = Boolean(owner.lookup(`templates/component:nypr-a-svg/${this.icon}`));
     if (templateExists) {
-      return `components/atoms/-svg/${this.icon}`;
+      return `components/nypr-a-svg/${this.icon}`;
     } else {
       console.warn(msg(this.icon)); // eslint-disable-line
       return false;
     }
   })
 });
+// END-SNIPPET
