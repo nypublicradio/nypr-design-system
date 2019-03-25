@@ -1,7 +1,7 @@
 {
   "name": "nypr-design-system",
   "version": "0.0.4",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "New York Public Radio design system",
   "keywords": [
     "ember-addon"
   ],
