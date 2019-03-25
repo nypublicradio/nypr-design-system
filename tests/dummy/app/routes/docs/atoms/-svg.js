@@ -9,10 +9,4 @@ export default Route.extend({
       .map(path => path.split('/').slice(-1))
       .flat();
   },
-
-  actions: {
-    didTransition() {
-      this.controllerFor('docs.atoms').set('targetName', 'atoms/-svg');
-    }
-  }
 });

@@ -18,7 +18,7 @@ Router.map(function() {
       this.route('-button');
       this.route('-picture');
       this.route('media-object');
-      this.route('icons');
+      this.route('-svg');
     });
     this.route('molecules', function() {
       this.route('-figcaption');

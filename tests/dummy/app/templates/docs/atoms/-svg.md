@@ -14,12 +14,12 @@
       <tr>
         <td class="example-label"><code>{{path}}</code></td>
         <td>
-          {{atoms/-svg path}}
+          {{atoms/-svg icon=path}}
         </td>
 
         {{#theme-chooser tagName='' as |chooser|}}
           <td>
-            {{atoms/-svg path class=chooser.theme}}
+            {{atoms/-svg icon=path class=chooser.theme}}
           </td>
         {{/theme-chooser}}
       </tr>
