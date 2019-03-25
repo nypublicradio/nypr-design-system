@@ -3,6 +3,7 @@
     <strong><code>{{@prefix}}/{{@name}}</code></strong> is used in
     {{#each this.parents as |parent|}}
       {{link-to parent.label parent.value}}
+      {{unless (eq parent this.parents.lastObject) ','}}
     {{/each}}
   </p>
 {{/if}}
@@ -12,6 +13,7 @@
     <strong><code>{{@prefix}}/{{@name}}</code></strong> uses
     {{#each this.children as |child|}}
       {{link-to child.label child.value}}
+      {{unless (eq child this.children.lastObject) ','}}
     {{/each}}
   </p>
 {{/if}}
