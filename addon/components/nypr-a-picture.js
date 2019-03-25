@@ -1,20 +1,15 @@
+// BEGIN-SNIPPET nypr-a-picture.js
 import Component from '@ember/component';
-import layout from '../../templates/components/atoms/-picture';
+import layout from '../templates/components/nypr-a-picture';
 
 /**
   Picture element. Renders `<source>` elements for provided s, m, l, or xl breakpoints and images.
 
   Usage:
   ```hbs
-  {{atoms/-picture
-    break-xl=1000
-    src-xl='https://example.com/xlarge-img.jpg'
-    break-l=800
-    src-l='https://example.com/large-img.jpg'
-    alt='Descriptive alt text'
-  }}
+  <NyprAPicture @break-xl=1000 @src-xl='https://example.com/xlarge-img.jpg' @break-l=800 @src-l='https://example.com/large-img.jpg' @alt='Descriptive alt text'/>
   ```
-  @class atoms/-picture
+  @class nypr-a-picture
 */
 export default Component.extend({
   tagName: 'picture',
@@ -91,3 +86,4 @@ export default Component.extend({
   */
   alt: null,
 });
+// END-SNIPPET

@@ -3,11 +3,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | atoms/-picture', function(hooks) {
+module('Integration | Component | nypr-a-picture', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{atoms/-picture}}`);
+    await render(hbs`<NyprAPicture/>`);
 
     assert.dom('picture.picture').exists();
   });

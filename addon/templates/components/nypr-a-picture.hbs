@@ -1,3 +1,4 @@
+{{!-- BEGIN-SNIPPET nypr-a-picture.hbs --}}
 {{#if @break-xl}}
   <source srcset={{@src-xl}} media="(min-width: {{@break-xl}}px)">
 {{/if}}
@@ -15,3 +16,4 @@
 {{else}}
   <img src={{@src-s}} itemprop="image" alt={{@alt}} >
 {{/if}}
+{{!-- END-SNIPPET --}}
