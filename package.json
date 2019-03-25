@@ -32,7 +32,7 @@
     "color": "^3.1.0",
     "ember-auto-import": "^1.2.19",
     "ember-cli": "~3.7.1",
-    "ember-cli-addon-docs": "^0.6.2",
+    "ember-cli-addon-docs": "noslouch/ember-cli-addon-docs#patch-1",
     "ember-cli-addon-docs-yuidoc": "^0.2.1",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-deploy": "^1.0.2",
