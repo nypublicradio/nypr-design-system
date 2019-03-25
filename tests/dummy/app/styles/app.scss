@@ -2,20 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+
 @import "nypr-design-system/vars/colors";
 @import "nypr-design-system/atoms/media-object";
 
+@import "app-vars";
+
 :root {
-  --brand-primary: #{$black}; // string interpolation required for css variables
+  // string interpolation required for css variables
+  --brand-primary: #{$black};
+  --brand-secondary: #{$light-cornflower-blue};
 }
+
+html,
+body,
+p {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 1rem;
+  line-height: 1.625;
+}
+
+input[type=search],
+input[type=text],
+input[type=email],
+input[type=tel] {
+  font-family: 'Lato', sans-serif !important;
+}
+
+a {
+  color: var(--brand-secondary);
+}
+
+:not(.theme-typography) {
+  > h1:not(.o-headline),
+  > h2:not(.o-section-heading),
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    letter-spacing: initial;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+  }
+
+  > h2 {
+    font-size: 1.5em;
+  }
+
+  > h3 {
+    font-size: 1.17em;
+  }
+}
+
 
 .AddonDocs-DocsViewer-Nav {
   width: auto;
   padding-left: 0;
 }
 
-.docs-header > header > div{
-  max-width: none;
+.docs-header {
+
+  > header > div {
+    max-width: none;
+  }
+
+  input[type=text] {
+    font-size: 12px;
+    padding: 8px 8px 8px 24px;
+  }
 }
 
 .example-grid {
