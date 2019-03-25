@@ -2,12 +2,14 @@
 
 ### Headings
 
-<h1>This is an H1 element</h1>
-<h2>This is an H2 element</h2>
-<h3>This is an H3 element</h3>
-<h4>This is an H4 element</h4>
-<h5>This is an H5 element</h5>
-<h6>This is an H6 element</h6>
+<div class="theme-typography">
+  <h1>This is an H1 element</h1>
+  <h2>This is an H2 element</h2>
+  <h3>This is an H3 element</h3>
+  <h4>This is an H4 element</h4>
+  <h5>This is an H5 element</h5>
+  <h6>This is an H6 element</h6>
+</div>
 
 ### Lists
 
