@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .liquid-child,
 svg:not(:root) {
   overflow: hidden;
@@ -2971,7 +2973,7 @@ body {
 }
 
 .docs-text-grey,
-input:focus[data-search-box-input]::placeholder {
+input[data-search-box-input]::placeholder:focus {
   color: #b8c2cc;
 }
 
@@ -15488,7 +15490,7 @@ h3>a:before {
 h1>.heading-anchor:before,
 h2>.heading-anchor:before,
 h3>.heading-anchor:before {
-  content: '\B6';
+  content: "¶";
   cursor: pointer;
   display: block;
   float: left;

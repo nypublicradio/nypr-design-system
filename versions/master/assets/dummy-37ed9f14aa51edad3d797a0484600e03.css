@@ -1,6 +1,13 @@
-.example-grid thead,
-.example-label {
-  font-size: 12px;
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400i,700);
+
+body,
+html,
+input[type=email],
+input[type=search],
+input[type=tel],
+input[type=text],
+p {
+  font-family: Lato, sans-serif !important;
 }
 
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
@@ -6252,6 +6259,42 @@ table {
 
 :root {
   --brand-primary: #333;
+  --brand-secondary: #98d2eb;
+}
+
+body,
+html,
+p {
+  font-size: 1rem;
+  line-height: 1.625;
+}
+
+a {
+  color: var(--brand-secondary);
+}
+
+:not(.theme-typography)>h1:not(.o-headline),
+:not(.theme-typography)>h2:not(.o-section-heading),
+:not(.theme-typography)>h3,
+:not(.theme-typography)>h4,
+:not(.theme-typography)>h5,
+:not(.theme-typography)>h6 {
+  letter-spacing: initial;
+  font-family: Lato, sans-serif;
+  font-weight: 700;
+}
+
+:not(.theme-typography)>h2 {
+  font-size: 1.5em;
+}
+
+:not(.theme-typography)>h3 {
+  font-size: 1.17em;
+}
+
+.example-grid thead,
+.example-label {
+  font-size: 12px;
 }
 
 .AddonDocs-DocsViewer-Nav {
@@ -6261,6 +6304,11 @@ table {
 
 .docs-header>header>div {
   max-width: none;
+}
+
+.docs-header input[type=text] {
+  font-size: 12px;
+  padding: 8px 8px 8px 24px;
 }
 
 .example-grid {
