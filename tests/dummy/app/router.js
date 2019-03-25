@@ -21,10 +21,6 @@ Router.map(function() {
     this.route('molecules', function() {
       this.route('-figcaption');
     })
-    this.route('components', function() {
-      this.route('nypr-card');
-      this.route('story-header');
-    });
   });
 
   this.route('not-found', {path: '/*path'});
