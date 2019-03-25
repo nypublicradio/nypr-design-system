@@ -1,19 +1,19 @@
-// BEGIN-SNIPPET atoms-button.js
+// BEGIN-SNIPPET nypr-a-button.js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import layout from '../../templates/components/atoms/-button';
+import layout from '../templates/components/nypr-a-button';
 
 /**
   Base button. Use this component to compose more specific buttons and components.
 
   Usage:
   ```hbs
-  {{#atoms/-button}}
+  <NyprAButton>
     Click Me
-  {{/atoms/-button}}
+  </NyprAButton>
   ```
 
-  @class atoms/-button
+  @class nypr-a-button
   @yield {Block} block
 */
 export default Component.extend({

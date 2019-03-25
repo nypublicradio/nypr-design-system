@@ -15,7 +15,7 @@ Router.map(function() {
       this.route('typography');
     });
     this.route('atoms', function() {
-      this.route('-button');
+      this.route('nypr-a-button');
       this.route('-picture');
       this.route('media-object');
       this.route('-svg');
