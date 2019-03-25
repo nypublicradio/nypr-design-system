@@ -17,7 +17,7 @@ Router.map(function() {
     this.route('atoms', function() {
       this.route('nypr-a-button');
       this.route('nypr-a-picture');
-      this.route('media-object');
+      this.route('nypr-a-media-object');
       this.route('nypr-a-svg');
     });
     this.route('molecules', function() {
