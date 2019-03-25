@@ -116,20 +116,22 @@ Make text suitable for a section heading. Pass a block or a text parameter.
 {{/docs-demo}}
 
 
-### `atoms/-kicker`
+### `nypr-a-kicker`
 
 Kicker used for decorating metadata. Pass a block or a test parameter.
 
-{{#docs-demo as |demo|}}
-  {{#demo.example name='kicker.hbs'}}
+<DocsDemo as |demo|>
+  <demo.example @name='kicker-usage.hbs'>
     Using a block:
-    {{#atoms/-kicker}}
+    <NyprAKicker>
       Category
-    {{/atoms/-kicker}}
+    </NyprAKicker>
 
     Using an argument:
-    {{atoms/-kicker text='News'}}
-  {{/demo.example}}
+    <NyprAKicker @text='News'/>
+  </demo.example>
 
-  {{demo.snippet name='kicker.hbs' label='Usage'}}
-{{/docs-demo}}
+  <demo.snippet @name='kicker-usage.hbs' @label='Usage'/>
+  <demo.snippet @name='nypr-a-kicker.hbs' @label='nypr-a-kicker.hbs'/>
+  <demo.snippet @name='nypr-a-kicker.js' @label='nypr-a-kicker.js'/>
+</DocsDemo>

@@ -3,19 +3,19 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | atoms/-kicker', function(hooks) {
+module('Integration | Component | nypr-a-kicker', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{atoms/-kicker}}`);
+    await render(hbs`<NyprAKicker/>`);
 
     assert.equal(this.element.textContent.trim(), '');
 
     // Template block usage:
     await render(hbs`
-      {{#atoms/-kicker}}
+      <NyprAKicker>
         template block text
-      {{/atoms/-kicker}}
+      </NyprAKicker>
     `);
 
     assert.equal(this.element.textContent.trim(), 'template block text');
