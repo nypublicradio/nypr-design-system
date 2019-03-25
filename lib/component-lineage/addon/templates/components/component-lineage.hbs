@@ -1,17 +1,17 @@
-{{#if parents}}
+{{#if this.parents}}
   <p>
-    <strong><code>{{name}}</code></strong> is used in
-    {{#each parents as |parent|}}
-      {{link-to parent.label parent.value}},
+    <strong><code>{{@prefix}}/{{@name}}</code></strong> is used in
+    {{#each this.parents as |parent|}}
+      {{link-to parent.label parent.value}}
     {{/each}}
   </p>
 {{/if}}
 
-{{#if children}}
+{{#if this.children}}
   <p>
-    <strong><code>{{name}}</code></strong> uses
-    {{#each children as |child|}}
-      {{link-to child.label child.value}},
+    <strong><code>{{@prefix}}/{{@name}}</code></strong> uses
+    {{#each this.children as |child|}}
+      {{link-to child.label child.value}}
     {{/each}}
   </p>
 {{/if}}

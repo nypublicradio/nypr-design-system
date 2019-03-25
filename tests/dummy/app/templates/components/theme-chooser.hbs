@@ -1,4 +1,4 @@
-{{#each themes as |theme|}}
+{{#each this.themes as |theme|}}
   {{yield (hash
     theme=theme
     item=(component 'theme-chooser/item' theme=theme)

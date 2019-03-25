@@ -23,7 +23,4 @@ export default Component.extend({
     @type {String?}
   */
   text: null,
-
-}).reopenClass({
-  positionalParams: ['text']
 });

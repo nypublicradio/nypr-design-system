@@ -51,6 +51,4 @@ export default Component.extend({
       return false;
     }
   })
-}).reopenClass({
-  positionalParams: ['icon', 'class'],
 });

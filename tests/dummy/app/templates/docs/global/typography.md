@@ -127,8 +127,8 @@ Kicker used for decorating metadata. Pass a block or a test parameter.
       Category
     {{/atoms/-kicker}}
 
-    Using a positional param:
-    {{atoms/-kicker 'News'}}
+    Using an argument:
+    {{atoms/-kicker text='News'}}
   {{/demo.example}}
 
   {{demo.snippet name='kicker.hbs' label='Usage'}}

@@ -22,6 +22,4 @@ export default Component.extend({
     @type {String?}
   */
   credit: null,
-}).reopenClass({
-  positionalParams: ['caption', 'credit']
 });
