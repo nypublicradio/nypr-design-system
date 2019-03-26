@@ -21,7 +21,7 @@ Router.map(function() {
       this.route('nypr-a-svg');
     });
     this.route('molecules', function() {
-      this.route('-figcaption');
+      this.route('nypr-m-figcaption');
     })
   });
 
