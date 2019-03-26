@@ -4,6 +4,11 @@ import layout from '../templates/components/nypr-m-figcaption';
 
 /**
   `<figcaption/>` molecule for a `<figure/>` element.
+
+  Usage:
+  ```hbs
+  <NyprMFigcaption @caption="hello world" @credit="Getty Images" />
+  ```
   @class nypr-m-figcaption
 */
 export default Component.extend({
