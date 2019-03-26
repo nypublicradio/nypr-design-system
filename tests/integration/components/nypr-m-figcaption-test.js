@@ -15,7 +15,7 @@ module('Integration | Component | nypr-m-figcaption', function(hooks) {
       credit: CREDIT,
     });
     await render(hbs`
-      <NyprMFigcaption @caption=caption @credit=credit/>
+      <NyprMFigcaption @caption={{caption}} @credit={{credit}}/>
     `);
 
     assert.dom('figcaption.o-figure__caption').exists();
