@@ -53,7 +53,7 @@ export default Component.extend({
   /**
     Computes the class applied based on the value of `tier`
 
-    @computed tierClass
+    @accessor tierClass
     @type {String}
   */
   tierClass: computed('tier', function() {
