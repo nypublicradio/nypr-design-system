@@ -1,25 +1,24 @@
-{{#docs-viewer as |viewer|}}
-  {{#viewer.nav as |nav|}}
-    {{nav.section 'Introduction'}}
-    {{nav.item 'Welcome' 'docs.index'}}
+<DocsViewer as |viewer|>
+  <viewer.nav as |nav|>
+    <nav.section @label='Introduction'/>
+    <nav.item @label='Welcome' @route='docs.index'/>
 
-    {{nav.section 'Global'}}
-    {{nav.item 'Colors' 'docs.global.colors'}}
-    {{nav.item 'Typography' 'docs.global.typography'}}
+    <nav.section @label='Global'/>
+    <nav.item @label='Colors' @route='docs.global.colors'/>
+    <nav.item @label='Typography' @route='docs.global.typography'/>
 
-    {{nav.section 'Atoms'}}
-    {{nav.item 'Buttons' 'docs.atoms.nypr-a-button'}}
-    {{nav.item 'Icons' 'docs.atoms.nypr-a-svg'}}
-    {{nav.item 'Media Object' 'docs.atoms.nypr-a-media-object'}}
-    {{nav.item 'Picture' 'docs.atoms.nypr-a-picture'}}
+    <nav.section @label='Atoms'/>
+    <nav.item @label='Buttons' @route='docs.atoms.nypr-a-button'/>
+    <nav.item @label='Icons' @route='docs.atoms.nypr-a-svg'/>
+    <nav.item @label='Media Object' @route='docs.atoms.nypr-a-media-object'/>
+    <nav.item @label='Picture' @route='docs.atoms.nypr-a-picture'/>
 
-    {{nav.section 'Molecules'}}
-    {{nav.item 'Figcaption' 'docs.molecules.-figcaption'}}
+    <nav.section @label='Molecules'/>
+    <nav.item @label='Figcaption' @route='docs.molecules.nypr-m-figcaption'/>
 
+  </viewer.nav>
 
-  {{/viewer.nav}}
-
-  {{#viewer.main}}
+  <viewer.main>
     {{outlet}}
-  {{/viewer.main}}
-{{/docs-viewer}}
+  </viewer.main>
+</DocsViewer>

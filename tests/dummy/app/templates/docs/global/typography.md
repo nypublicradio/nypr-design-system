@@ -59,29 +59,29 @@
 
 Basic blockquote element. The `<p/>` tag is required for decoration.
 
-{{#docs-demo as |demo|}}
-  {{#demo.example name='blockquote.hbs'}}
+<DocsDemo as |demo|>
+  <demo.example @name='blockquote.hbs'>
     <blockquote>
       <p>
         Lorem ipsum
       </p>
     </blockquote>
-  {{/demo.example}}
+  </demo.example>
 
-  {{demo.snippet name='blockquote.hbs' label='Usage'}}
-{{/docs-demo}}
+  <demo.snippet @name='blockquote.hbs' @label='Usage'/>
+</DocsDemo>
 
 ### `<time />`
 
 Basic time element.
 
-{{#docs-demo as |demo|}}
-  {{#demo.example name='time.hbs'}}
+<DocsDemo as |demo|>
+  <demo.example @name='time.hbs'>
     <time datetime={{now}}>{{moment-format (now) 'MMMM Do YYYY, h:mm:ss a'}}</time>
-  {{/demo.example}}
+  </demo.example>
 
-  {{demo.snippet name='time.hbs' label='Usage'}}
-{{/docs-demo}}
+  <demo.snippet @name='time.hbs' @label='Usage'/>
+</DocsDemo>
 
 ## Components
 
@@ -126,7 +126,7 @@ Make text suitable for a section heading. Pass a block or a text argument.
 
 ### `nypr-a-kicker`
 
-Kicker used for decorating metadata. Pass a block or a test parameter.
+Kicker used for decorating metadata. Pass a block or a test argument.
 
 <DocsDemo as |demo|>
   <demo.example @name='kicker-usage.hbs'>
@@ -134,7 +134,7 @@ Kicker used for decorating metadata. Pass a block or a test parameter.
     <NyprAKicker>
       Category
     </NyprAKicker>
-
+    <br>
     Using an argument:
     <NyprAKicker @text='News'/>
   </demo.example>
