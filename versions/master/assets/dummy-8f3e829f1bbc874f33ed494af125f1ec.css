@@ -6292,6 +6292,10 @@ a {
   font-size: 1.17em;
 }
 
+:not(.theme-typography)>h4 {
+  font-size: 1rem;
+}
+
 .example-grid thead,
 .example-label {
   font-size: 12px;
