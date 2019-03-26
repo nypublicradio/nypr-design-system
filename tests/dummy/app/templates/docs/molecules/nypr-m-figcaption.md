@@ -1,6 +1,6 @@
 ## `nypr-m-figcaption`
 
-Render a `<ficaption/>` element with with a `caption` and `credit`.
+Render a `<figcaption/>` element with with a `caption` and `credit`.
 
 ### Examples
 <DocsDemo as |demo|>
