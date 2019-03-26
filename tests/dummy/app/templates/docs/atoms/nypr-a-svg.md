@@ -14,12 +14,12 @@
       <tr>
         <td class="example-label"><code>{{path}}</code></td>
         <td>
-          <NyprASvg @icon={{path}} />
+          {{nypr-a-svg icon=path}}
         </td>
 
         <ThemeChooser @tagName='' as |chooser|>
           <td>
-            <NyprASvg @icon={{path}} @class={{chooser.theme}}/>
+            {{nypr-a-svg icon=path class=chooser.theme}}
           </td>
         </ThemeChooser>
       </tr>
