@@ -3,7 +3,4 @@
 {{outlet}}
 
 ## Lineage
-<ComponentLineage
-  @prefix='molecules'
-  @name={{this.target.currentRoute.localName}}
-/>
+<ComponentLineage @name={{this.target.currentRoute.localName}} />
