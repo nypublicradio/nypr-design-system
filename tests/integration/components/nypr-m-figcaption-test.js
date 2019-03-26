@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | molecules/-figcaption', function(hooks) {
+module('Integration | Component | nypr-m-figcaption', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
@@ -15,7 +15,7 @@ module('Integration | Component | molecules/-figcaption', function(hooks) {
       credit: CREDIT,
     });
     await render(hbs`
-      {{molecules/-figcaption caption=caption credit=credit}}
+      <NyprMFigcaption @caption=caption @credit=credit/>
     `);
 
     assert.dom('figcaption.o-figure__caption').exists();

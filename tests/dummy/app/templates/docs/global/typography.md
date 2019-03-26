@@ -85,35 +85,43 @@ Basic time element.
 
 ## Components
 
-### `atoms/story-headline`
-Make text suitable for a story headline
+### `nypr-a-story-headline`
+Make text suitable for a story headline. Pass a block or a text argument.
 
-{{#docs-demo as |demo|}}
-  {{#demo.example name='headline.hbs'}}
-    {{#atoms/story-headline}}
-      Headline with Lots of Text Can Sit Here on Multiple Lines
-    {{/atoms/story-headline}}
-  {{/demo.example}}
-
-  {{demo.snippet name='headline.hbs' label='Usage'}}
-{{/docs-demo}}
-
-### `atoms/section-heading`
-Make text suitable for a section heading. Pass a block or a text parameter.
-
-{{#docs-demo as |demo|}}
-  {{#demo.example name='section.hbs'}}
+<DocsDemo as |demo|>
+  <demo.example @name='story-headline-example.hbs'>
     Using a block:
-    {{#atoms/section-heading}}
+    <NyprAStoryHeadline>
+      Headline with Lots of Text Can Sit Here on Multiple Lines
+    </NyprAStoryHeadline>
+
+    Using an argument:
+    <NyprAStoryHeadline @text='Long Headline Which Might Be Passed as a Variable'/>
+  </demo.example>
+
+  <demo.snippet @name='story-headline-example.hbs' @label='Usage'/>
+  <demo.snippet @name='nypr-a-story-headline.hbs' @label='nypr-a-story-headline.hbs'/>
+  <demo.snippet @name='nypr-a-story-headline.js' @label='nypr-a-story-headline.js'/>
+</DocsDemo>
+
+### `nypr-a-section-heading`
+Make text suitable for a section heading. Pass a block or a text argument.
+
+<DocsDemo as |demo|>
+  <demo.example @name='section-heading-example.hbs'>
+    Using a block:
+    <NyprASectionHeading>
       This is a Section Heading
-    {{/atoms/section-heading}}
+    </NyprASectionHeading>
 
-    Using a positional param:
-    {{atoms/section-heading 'Foo Bar Section'}}
-  {{/demo.example}}
+    Using an argument:
+    <NyprASectionHeading @text='Title of Section'/>
+  </demo.example>
 
-  {{demo.snippet name='headline.hbs' label='Usage'}}
-{{/docs-demo}}
+  <demo.snippet @name='section-heading-example.hbs' @label='Usage'/>
+  <demo.snippet @name='nypr-a-section-heading.js' @label='nypr-a-section-heading.js'/>
+  <demo.snippet @name='nypr-a-section-heading.hbs' @label='nypr-a-section-heading.hbs'/>
+</DocsDemo>
 
 
 ### `nypr-a-kicker`

@@ -1,9 +1,10 @@
+// BEGIN-SNIPPET nypr-m-figcaption.js
 import Component from '@ember/component';
-import layout from '../../templates/components/molecules/-figcaption';
+import layout from '../templates/components/nypr-m-figcaption';
 
 /**
   `<figcaption/>` molecule for a `<figure/>` element.
-  @class molecules/-figcaption
+  @class nypr-m-figcaption
 */
 export default Component.extend({
   layout,
@@ -23,3 +24,4 @@ export default Component.extend({
   */
   credit: null,
 });
+// END-SNIPPET

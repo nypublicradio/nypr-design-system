@@ -3,22 +3,22 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | atoms/story-headline', function(hooks) {
+module('Integration | Component | nypr-a-story-headline', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`{{atoms/story-headline}}`);
+    await render(hbs`<NyprAStoryHeadline/>`);
 
     assert.equal(this.element.textContent.trim(), '');
 
     // Template block usage:
     await render(hbs`
-      {{#atoms/story-headline}}
+      <NyprAStoryHeadline>
         template block text
-      {{/atoms/story-headline}}
+      </NyprAStoryHeadline>
     `);
 
     assert.dom('h1.o-headline').hasText('template block text');
