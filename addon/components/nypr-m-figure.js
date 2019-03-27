@@ -14,6 +14,7 @@ import { computed } from '@ember/object';
   ```
 
   @class nypr-m-figure
+  @yield {Block} block Arbitrary body for the component.
 */
 export default Component.extend({
   tagName: 'figure',
