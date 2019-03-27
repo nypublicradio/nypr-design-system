@@ -19,7 +19,11 @@ export default Component.extend({
   tagName: 'figure',
   classNames: ['o-figure'],
   classNameBindings: ['captionAlignment'],
+  attributeBindings: ['role'],
+
   layout,
+
+  role: 'group',
 
   /**
     Specify a horizontal alignment.
