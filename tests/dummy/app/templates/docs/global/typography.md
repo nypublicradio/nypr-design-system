@@ -90,13 +90,9 @@ Make text suitable for a story headline. Pass a block or a text argument.
 
 <DocsDemo as |demo|>
   <demo.example @name='story-headline-example.hbs'>
-    Using a block:
     <NyprAStoryHeadline>
       Headline with Lots of Text Can Sit Here on Multiple Lines
     </NyprAStoryHeadline>
-
-    Using an argument:
-    <NyprAStoryHeadline @text='Long Headline Which Might Be Passed as a Variable'/>
   </demo.example>
 
   <demo.snippet @name='story-headline-example.hbs' @label='Usage'/>
@@ -104,18 +100,15 @@ Make text suitable for a story headline. Pass a block or a text argument.
   <demo.snippet @name='nypr-a-story-headline.js' @label='nypr-a-story-headline.js'/>
 </DocsDemo>
 
+
 ### `nypr-a-section-heading`
 Make text suitable for a section heading. Pass a block or a text argument.
 
 <DocsDemo as |demo|>
   <demo.example @name='section-heading-example.hbs'>
-    Using a block:
     <NyprASectionHeading>
       This is a Section Heading
     </NyprASectionHeading>
-
-    Using an argument:
-    <NyprASectionHeading @text='Title of Section'/>
   </demo.example>
 
   <demo.snippet @name='section-heading-example.hbs' @label='Usage'/>
@@ -130,13 +123,9 @@ Kicker used for decorating metadata. Pass a block or a test argument.
 
 <DocsDemo as |demo|>
   <demo.example @name='kicker-usage.hbs'>
-    Using a block:
     <NyprAKicker>
       Category
     </NyprAKicker>
-    <br>
-    Using an argument:
-    <NyprAKicker @text='News'/>
   </demo.example>
 
   <demo.snippet @name='kicker-usage.hbs' @label='Usage'/>
