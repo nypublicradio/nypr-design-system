@@ -24,7 +24,15 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    'component-lineage': {
+      routeOverrides: {
+        'nypr-a-kicker': 'docs.global.typography',
+        'nypr-a-story-headline': 'docs.global.typography',
+        'nypr-a-section-heading': 'docs.global.typography',
+      }
+    },
   };
 
   if (environment === 'development') {
