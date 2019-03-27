@@ -1,0 +1,33 @@
+{{!-- BEGIN-SNIPPET nypr-m-block.hbs --}}
+<div class="c-block__media">
+  <a href={{@url}}>
+    <img src={{@src}} itemprop="image" alt={{or @alt @title}} >
+  </a>
+</div>
+
+<div class="c-block__object u-spacing--half">
+  <div class="c-block__eyebrow">
+    <NyprAKicker @text={{@category}} />
+  </div>
+
+  <h3 class="c-block__title">
+    <a href={{@url}}>
+      {{@title}}
+    </a>
+  </h3>
+
+  <div class="u-spacing">
+    {{#if @tease}}
+      <div class="c-block__dek o-rte-text">
+        <p>{{@tease}}</p>
+      </div>
+    {{/if}}
+
+    <NyprMBlockMeta
+      @author={{@author}}
+      @commentCount={{@commentCount}}
+      @url={{@url}}
+    />
+  </div>
+</div>
+{{!-- END-SNIPPET --}}

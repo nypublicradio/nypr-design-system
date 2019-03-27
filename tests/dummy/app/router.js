@@ -23,6 +23,7 @@ Router.map(function() {
     this.route('molecules', function() {
       this.route('nypr-m-figcaption');
       this.route('nypr-m-figure');
+      this.route('nypr-m-block');
       this.route('nypr-m-block-meta');
     });
   });
