@@ -22,6 +22,14 @@ export default Component.extend({
   tagName: '',
 
   /**
+    Classname to be applied to rendered SVG markup.
+
+    @argument class
+    @type {String}
+  */
+  class: null,
+
+  /**
     Filename of the icon to render.
 
     @argument icon
@@ -30,12 +38,12 @@ export default Component.extend({
   icon: null,
 
   /**
-    Classname to be applied to rendered SVG markup.
+    Height attribute in pixels
 
-    @argument class
-    @type {String}
+    @argument height
+    @type {Number}
   */
-  class: null,
+  height: null,
 
   /**
     Looks up the svg template
@@ -51,6 +59,14 @@ export default Component.extend({
       console.warn(msg(this.icon)); // eslint-disable-line
       return false;
     }
-  })
+  }),
+
+  /**
+    Width attribute in pixels
+
+    @argument width
+    @type {Number}
+  */
+  width: null,
 });
 // END-SNIPPET
