@@ -1,0 +1,12 @@
+{{!-- BEGIN-SNIPPET nypr-a-toggle-box.hbs --}}
+<BasicDropdown
+  @calculatePosition={{@calculatePosition}}
+  @horizontalPosition={{@horizontalPosition}}
+  @verticalPostion={{@verticalPostion}}
+  as |dd|>
+  {{yield (hash
+    trigger=(component 'nypr-a-toggle-box/trigger' dd=dd icon=icon)
+    dropdown=(component 'nypr-a-toggle-box/dropdown' dd=dd)
+  )}}
+</BasicDropdown>
+{{!-- END-SNIPPET --}}

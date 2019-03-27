@@ -31,6 +31,7 @@
     "broccoli-merge-files": "^0.8.0",
     "color": "^3.1.0",
     "ember-auto-import": "^1.2.19",
+    "ember-basic-dropdown": "^2.0.0-alpha.4",
     "ember-cli": "~3.7.1",
     "ember-cli-addon-docs": "noslouch/ember-cli-addon-docs#patch-1",
     "ember-cli-addon-docs-yuidoc": "^0.2.1",
