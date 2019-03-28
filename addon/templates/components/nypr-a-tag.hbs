@@ -1,0 +1,7 @@
+{{!-- BEGIN-SNIPPET nypr-a-tag.hbs --}}
+{{#if @url}}
+  <a href={{@url}} class="o-tag">{{or @prefix this.prefix}}{{@tag}}</a>
+{{else}}
+  <span class="o-tag">{{or @prefix this.prefix}}{{@tag}}</span>
+{{/if}}
+{{!-- END-SNIPPET --}}
