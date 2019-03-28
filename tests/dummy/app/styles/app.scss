@@ -1,10 +1,15 @@
+// CSS imports
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
 
+// third party imports
 @import "ember-basic-dropdown";
 
+// design system
 @import "nypr-design-system/vars/colors";
 @import "nypr-design-system/atoms/media-object";
+@import "nypr-design-system/objects/toggle-box";
 
+// local
 @import "app-vars";
 
 :root {
