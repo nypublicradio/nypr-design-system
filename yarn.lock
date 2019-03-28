@@ -4849,7 +4849,7 @@ ember-auto-import@^1.2.19:
     walk-sync "^0.3.3"
     webpack "~4.28"
 
-ember-basic-dropdown@^2.0.0:
+ember-basic-dropdown@^2.0.0-alpha.4:
   version "2.0.0-alpha.4"
   resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-2.0.0-alpha.4.tgz#102621c6ddefde308e2efd38274d95c03fda5a67"
   integrity sha512-t9Pg6VzsvEWfYjLSSQy5XuC5PIUZM+2ZraFBNu/amwSmzvPjyGI9/hoOnz8Jqkq5fCVRItqkqICH/l+3l9p20w==
@@ -5569,7 +5569,7 @@ ember-component-css@^0.6.7:
     rsvp "^4.8.4"
     walk-sync "^1.0.1"
 
-ember-composable-helpers@^2.1.0:
+ember-composable-helpers@^2.1.0, ember-composable-helpers@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/ember-composable-helpers/-/ember-composable-helpers-2.2.0.tgz#a03984eaddf65ee08cb9ff554a24b0d671651af3"
   integrity sha512-VWFYfxPLkgmEoL5aplh8dEwzAhmERfPzIGZeb+O7PhT0of5SYtJeOJFbIIXV2NkVHcDothwUu3IEALsWBsES8A==
