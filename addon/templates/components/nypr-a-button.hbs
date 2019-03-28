@@ -1,3 +1,26 @@
 {{!-- BEGIN-SNIPPET nypr-a-button.hbs --}}
-{{yield}}
+{{#if @url}}
+  <a href={{@url}} class="{{unless @blank 'o-button'}} {{this.tierClass}}" ...attributes>
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{@text}}
+    {{/if}}
+  </a>
+{{else}}
+  <button
+    class="{{unless @blank 'o-button'}} {{this.tierClass}}"
+    role={{or @role this.role}}
+    type={{or @type this.type}}
+    {{action (optional @onclick)}}
+    ...attributes>
+
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{@text}}
+    {{/if}}
+
+  </button>
+{{/if}}
 {{!-- END-SNIPPET --}}

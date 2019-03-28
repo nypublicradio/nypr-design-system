@@ -6,6 +6,8 @@ import layout from '../templates/components/nypr-a-button';
 /**
   Base button. Use this component to compose more specific buttons and components.
 
+  If a `@url` is passed, an `a` tag is rendered.
+
   Usage:
   ```hbs
   <NyprAButton>
@@ -18,12 +20,21 @@ import layout from '../templates/components/nypr-a-button';
 */
 export default Component.extend({
   layout,
-  tagName: 'button',
+  tagName: '',
 
-  classNames: ['o-button'],
-  classNameBindings: ['tierClass'],
+  /**
+    Make this a plain, unstyled button. Useful for wrapping icons
 
-  attributeBindings: ['type', 'role'],
+    @argument blank
+    @type {Boolean}
+  */
+
+  /**
+    Specify a click handler
+
+    @argument onclick
+    @type {Function?}
+  */
 
   /**
     Specify the `role` attribute. Default is 'button'.
@@ -32,6 +43,21 @@ export default Component.extend({
     @default 'button'
   */
   role: 'button',
+  /**
+    Text for element contents
+
+    @argument text
+    @type {String?}
+  */
+  text: null,
+
+  /**
+    Which tier in the visual heirarchy this button should be.
+
+    @argument tier
+    @type {String?}
+  */
+  tier: null,
 
   /**
     Specify the `type` attribute for the button. Default is "button".
@@ -42,13 +68,12 @@ export default Component.extend({
   type: 'button',
 
   /**
-    Which tier in the visual heirarchy this button should be.
+    URL for linking
 
-    @argument tier
+    @argument url
     @type {String?}
   */
-  tier: null,
-
+  url: null,
 
   /**
     Computes the class applied based on the value of `tier`
@@ -59,13 +84,5 @@ export default Component.extend({
   tierClass: computed('tier', function() {
     return this.tier ? `o-button--${this.tier}` : '';
   }),
-
-  /**
-    Specify a click handler
-
-    @argument click
-    @type {Function?}
-  */
-  click() {}
 });
 //END-SNIPPET

@@ -1,26 +1,39 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | nypr-a-button', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    assert.expect(3);
 
-    await render(hbs`<NyprAButton/>`);
+    await render(hbs`<NyprAButton @text='Foo' />`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom('.o-button').hasText('Foo');
 
-    // Template block usage:
+    this.set('click', () => assert.ok('click handler called'));
+
     await render(hbs`
-      <NyprAButton>
-        template block text
+      <NyprAButton @onclick={{click}}>
+        Click Me
       </NyprAButton>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom('.o-button').hasText('Click Me');
+    await click('.o-button');
+  });
+
+  test('alternate forms', async function(assert) {
+
+    await render(hbs`<NyprAButton @url='https://example.com' @text='foo' />`);
+    assert.dom('a.o-button').hasAttribute('href', 'https://example.com', 'passing a @url makes an `a` tag');
+    assert.dom('a.o-button').hasText('foo');
+
+    await render(hbs`<NyprAButton @blank={{true}} @text='plain' />`);
+    assert.dom('button.o-button').doesNotExist('rendered without class');
+    assert.dom('button').exists('rendered a blank button');
+
   });
 });
