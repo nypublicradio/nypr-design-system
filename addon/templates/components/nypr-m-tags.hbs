@@ -1,0 +1,11 @@
+{{!-- BEGIN-SNIPPET nypr-m-tags.hbs --}}
+{{#if (has-block)}}
+  {{#each @tags as |tag|}}
+    {{yield (component 'nypr-a-tag' tag=tag prefix=(or @prefix this.prefix)) tag}}
+  {{/each}}
+{{else}}
+  {{#each @tags as |tag|}}
+    <NyprATag @tag={{tag}} @prefix={{or @prefix this.prefix}} />
+  {{/each}}
+{{/if}}
+{{!-- END-SNIPPET --}}

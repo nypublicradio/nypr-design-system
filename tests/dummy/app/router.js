@@ -27,6 +27,7 @@ Router.map(function() {
       this.route('nypr-m-figure');
       this.route('nypr-m-block');
       this.route('nypr-m-block-meta');
+      this.route('nypr-m-tags');
     });
   });
 
