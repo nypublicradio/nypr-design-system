@@ -29,6 +29,9 @@ Router.map(function() {
       this.route('nypr-m-block-meta');
       this.route('nypr-m-tags');
     });
+    this.route('organisms', function() {
+      this.route('nypr-o-contact');
+    })
   });
 
   this.route('not-found', {path: '/*path'});
