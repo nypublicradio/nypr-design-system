@@ -1,0 +1,20 @@
+{{!-- BEGIN-SNIPPET nypr-o-article-footer.hbs --}}
+<div class="c-article__tags">
+  {{yield (hash tags=(component 'nypr-m-tags'))}}
+</div>
+
+<div class="u-section-spacing">
+  <div class="c-article__contact">
+    {{yield (hash contact=(component 'nypr-o-contact'))}}
+  </div>
+
+  <div class="c-article__donate">
+    {{yield (hash donate=(component 'nypr-o-donate'))}}
+  </div>
+
+  <div class="c-article__comments">
+    {{yield (hash comments=(component 'nypr-o-comments'))}}
+  </div>
+
+</div>
+{{!-- END-SNIPPET --}}

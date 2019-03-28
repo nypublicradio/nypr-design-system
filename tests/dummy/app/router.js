@@ -31,6 +31,7 @@ Router.map(function() {
     });
     this.route('organisms', function() {
       this.route('nypr-o-article-body');
+      this.route('nypr-o-article-footer')
       this.route('nypr-o-contact');
       this.route('nypr-o-donate');
     })
