@@ -1,0 +1,6 @@
+{{! template-lint-disable no-triple-curlies }}
+{{#if (has-block)}}
+  {{yield}}
+{{else}}
+  {{{@body}}}
+{{/if}}

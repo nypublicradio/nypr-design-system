@@ -30,6 +30,7 @@ Router.map(function() {
       this.route('nypr-m-tags');
     });
     this.route('organisms', function() {
+      this.route('nypr-o-article-body');
       this.route('nypr-o-contact');
       this.route('nypr-o-donate');
     })
