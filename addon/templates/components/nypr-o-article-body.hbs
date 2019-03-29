@@ -1,6 +1,8 @@
 {{! template-lint-disable no-triple-curlies }}
+{{!-- BEGIN-SNIPPET nypr-o-article-body.hbs --}}
 {{#if (has-block)}}
   {{yield}}
 {{else}}
   {{{@body}}}
 {{/if}}
+{{!-- END-SNIPPET --}}
