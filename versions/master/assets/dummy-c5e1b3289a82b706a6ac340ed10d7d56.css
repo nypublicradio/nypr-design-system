@@ -1,5 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,400i,700);
 
+fieldset,
+label {
+  margin-bottom: 8px;
+}
+
 body,
 html,
 input[type=email],
@@ -55,6 +60,11 @@ p {
   align-items: flex-start;
 }
 
+.media-object__media>img,
+label {
+  display: block;
+}
+
 .media-object.center {
   align-items: center;
 }
@@ -65,10 +75,6 @@ p {
 
 .media-object__media {
   margin-right: 30px;
-}
-
-.media-object__media>img {
-  display: block;
 }
 
 .media-object__object {
@@ -89,6 +95,10 @@ html,
 p {
   font-size: 1rem;
   line-height: 1.625;
+}
+
+label {
+  cursor: pointer;
 }
 
 a {
