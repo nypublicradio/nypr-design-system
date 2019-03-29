@@ -58,6 +58,10 @@ Given the following definitions:
       </div>
     </fieldset>
 
+    <p>
+      <button class="btn" {{action 'chooseSponsor'}}><strong>Or View a Sponsor</strong></button>
+    </p>
+
     <!-- BEGIN-SNIPPET byline-example.hbs -->
     <NyprMByline @authors={{authors}} @sponsor={{sponsor}} />
     <!-- END-SNIPPET -->

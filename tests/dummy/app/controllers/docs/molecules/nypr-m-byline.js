@@ -78,7 +78,7 @@ export default Controller.extend({
         sponsor: null,
       });
     },
-    setSponsor() {
+    chooseSponsor() {
       this.setProperties({
         sponsor: SPONSOR,
         authors: null,
