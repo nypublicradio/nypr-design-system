@@ -25,4 +25,25 @@ module('Integration | Component | nypr-o-donate', function(hooks) {
     assert.dom('.c-donate-tout__inner p').hasText('hello world');
     assert.dom('a.o-button').hasAttribute('href', 'http://example.com/pledge');
   });
+
+  test('yields a block for the "message" area', async function(assert) {
+    const TEXT = 'Donate';
+    const URL = 'https://example.com';
+
+    this.setProperties({
+      TEXT,
+      URL,
+      message: '<p data-test-message>hello <strong>world</strong></p>',
+    });
+
+    await render(hbs`
+      <NyprODonate @linkText={{TEXT}} @linkUrl={{URL}}>
+        {{{message}}}
+      </NyprODonate>
+    `);
+
+    assert.dom('[data-test-message]').hasText('hello world');
+    assert.dom('a.o-button').hasAttribute('href', URL);
+    assert.dom('a.o-button').hasText(TEXT);
+  });
 });

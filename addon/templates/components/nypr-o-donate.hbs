@@ -13,9 +13,13 @@
     </NyprAButton>
   {{/if}}
 
-  <p data-test-donate-message>
-    {{{@message}}}
-  </p>
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    <p data-test-donate-message>
+      {{{@message}}}
+    </p>
+  {{/if}}
 
   <NyprAButton @url={{@linkUrl}}>
     {{@linkText}}
