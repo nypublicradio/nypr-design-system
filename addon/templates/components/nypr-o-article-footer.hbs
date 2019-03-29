@@ -1,20 +1,19 @@
 {{!-- BEGIN-SNIPPET nypr-o-article-footer.hbs --}}
-<div class="c-article__tags">
+<div class="c-article__tags" data-test-article-footer-tags>
   {{yield (hash tags=(component 'nypr-m-tags'))}}
 </div>
 
 <div class="u-section-spacing">
-  <div class="c-article__contact">
+  <div class="c-article__contact" data-test-article-footer-contact>
     {{yield (hash contact=(component 'nypr-o-contact'))}}
   </div>
 
-  <div class="c-article__donate">
+  <div class="c-article__donate" data-test-article-footer-donate>
     {{yield (hash donate=(component 'nypr-o-donate'))}}
   </div>
 
-  <div class="c-article__comments">
+  <div class="c-article__comments" data-test-article-footer-comments>
     {{yield (hash comments=(component 'blank-template'))}}
   </div>
-
 </div>
 {{!-- END-SNIPPET --}}
