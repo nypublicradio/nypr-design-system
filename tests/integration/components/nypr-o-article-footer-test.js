@@ -28,14 +28,15 @@ module('Integration | Component | nypr-o-article-footer', function(hooks) {
         <footer.tags @tags={{tags}} as |Tag tag|>
           <Tag @url='http://example.com/tags/{{tag}}'/>
         </footer.tags>
+
         <footer.contact>
           {{contact}}
         </footer.contact>
+
         <footer.donate
-           @message={{donateMessage}}
-           @linkText={{donateCta}}
-           @linkUrl='https://example.com/pledge'
-        />
+          @linkText={{donateCta}}
+          @linkUrl='https://example.com/pledge'
+          @message={{donateMessage}}/>
 
         <footer.comments>
           comments go here
