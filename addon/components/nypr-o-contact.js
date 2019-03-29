@@ -22,7 +22,7 @@ export default Component.extend({
   /**
     Text content
 
-    @agument text
+    @argument text
     @type {String}
   */
   text: null,
