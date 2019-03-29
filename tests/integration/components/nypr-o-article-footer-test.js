@@ -37,13 +37,15 @@ module('Integration | Component | nypr-o-article-footer', function(hooks) {
            @linkUrl='https://example.com/pledge'
         />
 
-        <!-- <footer.comments /> -->
+        <footer.comments>
+          comments go here
+        </footer.comments>
       </NyprOArticleFooter>
     `);
 
     assert.dom('.o-tag').exists({count: 2});
     assert.dom('.c-article__contact').hasText(CONTACT);
     assert.dom('[data-test-donate-message]').hasText(DONATE_MESSAGE);
-    assert.dom('[data-test-article-footer]');
+    assert.dom('[data-test-article-footer-comments]').hasText('comments go here');
   });
 });
