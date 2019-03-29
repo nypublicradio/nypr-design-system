@@ -1,0 +1,20 @@
+{{!-- BEGIN-SNIPPET nypr-m-byline.hbs --}}
+{{#if @authors}}
+  By
+  {{#each @authors as |author|}}
+    {{~#if (and (not (has-next author @authors)) (gt @authors.length 1))~}}
+     &nbsp;and&nbsp;
+    {{~else if (and (has-next author @authors) (has-previous author @authors))~}}
+      ,&nbsp;
+    {{~/if~}}
+    <a href={{author.url}} class="u-has-accent u-has-accent--neutral" data-test-author-name>
+      {{author.name}}
+    </a>
+    {{~#with author.org as |org|~}}
+      , (<a href={{org.url}} class="u-has-accent u-has-accent--neutral" data-test-author-org><em>{{org.name}}</em></a>)
+    {{~/with~}}
+  {{/each}}
+{{else if @sponsor}}
+  <a href={{@sponsor.url}} target="_blank" rel="noopener noreferrer" data-test-sponsor-name>Sponsored by {{@sponsor.name}}</a>
+{{/if}}
+{{!-- END-SNIPPET --}}

@@ -26,6 +26,16 @@ p {
   line-height: 1.625;
 }
 
+label {
+  display: block;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+fieldset {
+  margin-bottom: 8px;
+}
+
 input[type=search],
 input[type=text],
 input[type=email],
