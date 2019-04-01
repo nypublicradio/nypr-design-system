@@ -1,0 +1,9 @@
+{{!-- BEGIN-SNIPPET nypr-m-breadcrumb.hbs --}}
+{{#each @breadcrumbs as |breadcrumb|}}
+  {{#if breadcrumb.url}}
+    <a href={{breadcrumb.url}} class="o-breadcrumb">{{breadcrumb.label}}</a>
+  {{else}}
+    <span class="o-breadcrumb">{{breadcrumb.label}}</span>
+  {{/if}}
+{{/each}}
+{{!-- END-SNIPPET --}}
