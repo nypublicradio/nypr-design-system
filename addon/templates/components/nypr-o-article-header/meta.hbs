@@ -1,0 +1,28 @@
+{{!-- BEGIN-SNIPPET nypr-o-article-header-meta.hbs --}}
+<div class="c-article__meta u-spacing--half u-font--secondary-style u-font--xs">
+  {{yield (hash
+    byline=(component 'nypr-m-byline')
+  )}}
+  <div class="c-article__meta-group">
+    {{yield (hash publishDate=(component 'nypr-o-article-header/publish-date'))}}
+
+    &bull;
+
+    <a
+      href={{@commentsUrl}}
+      class="u-has-accent u-has-accent--secondary">
+      {{@commentCount}}
+    </a>
+
+    {{#if @galleryPhotosCount}}
+      &bull;
+      <a href={{@galleryUrl}} class="u-has-accent u-has-accent--secondary">
+        {{@galleryPhotosCount}} {{if (eq @galleryPhotosCount 1) 'Photo' 'Photos'}}
+        <span class="o-icon o-icon--gallery u-icon--xs">
+          <NyprASvg @icon='gallery'/>
+        </span>
+      </a>
+    {{/if}}
+  </div>
+</div>
+{{!-- END-SNIPPET --}}

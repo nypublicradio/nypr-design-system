@@ -1,0 +1,10 @@
+<div class="l-container l-container--12col u-spacing--and-half">
+  {{yield (hash
+    breadcrumb=(component 'nypr-m-breadcrumb')
+    headline=(component 'nypr-a-story-headline' class='c-article__headline')
+  )}}
+</div>
+
+{{yield (hash
+  meta=(component 'nypr-o-article-header/meta')
+)}}
