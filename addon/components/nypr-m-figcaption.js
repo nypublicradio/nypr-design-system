@@ -10,6 +10,9 @@ import layout from '../templates/components/nypr-m-figcaption';
   <NyprMFigcaption @caption="hello world" @credit="Getty Images" />
   ```
   @class nypr-m-figcaption
+  @yield {Hash} hash
+  @yield {Component} hash.caption `nypr-m-figcaption/caption`
+  @yield {Component} hash.credit `nypr-m-figcaption/credit`
 */
 export default Component.extend({
   layout,
@@ -21,12 +24,10 @@ export default Component.extend({
     @argument caption
     @type {String?}
   */
-  caption: null,
 
   /**
     @argument credit
     @type {String?}
   */
-  credit: null,
 });
 // END-SNIPPET
