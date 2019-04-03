@@ -16,10 +16,10 @@ module('Integration | Component | nypr-o-related-content', function(hooks) {
     }])
     await render(hbs`<NyprORelatedContent/>`);
 
-    assert.dom('3.c-related-content__heading').hasText('Related');
+    assert.dom('h3.c-related-content__heading').hasText('Related');
     assert.dom('a').doesNotExist();
 
-    await render(hbs`<NyprORelatedContent @items={{items}}`);
+    await render(hbs`<NyprORelatedContent @items={{items}}/>`);
     assert.dom('a').exists({count: 2});
 
   });
