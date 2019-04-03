@@ -27,6 +27,14 @@ p {
   line-height: 1.625;
 }
 
+[class*=c-],
+[class*=o-],
+[class*=u-] {
+  p {
+    margin: 0;
+  }
+}
+
 label {
   display: block;
   margin-bottom: 8px;
@@ -70,7 +78,8 @@ a {
   }
 
   > h4 {
-    font-size: 1rem;
+    font-size: 1.10rem;
+    margin: 1.33rem 0;
   }
 }
 
