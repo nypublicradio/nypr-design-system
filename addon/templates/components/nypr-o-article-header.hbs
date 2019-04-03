@@ -1,32 +1,6 @@
 {{!-- BEGIN-SNIPPET nypr-o-article-header.hbs --}}
 {{yield (hash
   top=(component 'nypr-o-article-header/top')
+  lead=(component 'nypr-o-article-header/lead')
 )}}
-
-<div class="c-article__lead">
-
-  <div class="l-container l-container--10col">
-
-    <div class="c-article__share u-border-accent u-border-accent--right">
-      {% include 'molecules-share-tools' %}
-    </div>
-
-    {%
-      include 'molecules-lead'
-      with {
-        "lead_classes": "c-article__lead"
-      }
-    %}
-  </div>
-
-  <div class="c-article__related c-article__related--wide-screens">
-    {%
-      include 'organisms-related-content'
-      with {
-        "related_classes": "u-border-accent u-border-accent--left"
-      }
-    %}
-  </div>
-
-</div>
 {{!-- END-SNIPPET --}}

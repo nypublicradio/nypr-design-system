@@ -9,6 +9,6 @@ module('Integration | Component | nypr-o-article-header', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`<NyprOArticleHeader/>`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom('.c-article__header').exists();
   });
 });
