@@ -1,0 +1,9 @@
+<h3 class="c-related-content__heading u-font--secondary-style u-font--xs">Related</h3>
+
+<ul class="c-related-content__list u-spacing">
+  {{#each @items as |item|}}
+    <li>
+      <a href={{item.url}} class="u-has-accent u-has-accent--secondary u-font--s">{{item.title}}</a>
+    </li>
+  {{/each}}
+</ul>
