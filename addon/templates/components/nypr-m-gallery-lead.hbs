@@ -1,0 +1,36 @@
+{{!-- BEGIN-SNIPPET nypr-m-gallery-lead.hbs --}}
+<div class="c-lead-gallery__top">
+
+  <NyprMFigure as |figure|>
+    <figure.image @src-s={{this.currentSlide.src}} />
+
+    <figure.caption as |caption|>
+      {{#if this.currentSlide.credit}}
+        <caption.credit @credit={{this.currentSlide.credit}}/>
+      {{/if}}
+
+      {{#if this.currentSlide.title}}
+        <h2 class="c-lead-gallery__title">{{this.currentSlide.title}}</h2>
+      {{/if}}
+
+      {{#if this.currentSlide.caption}}
+        <figure.caption @caption={{this.currentSlide.caption}} />
+      {{/if}}
+    </figure.caption>
+  </NyprMFigure>
+
+</div>
+
+<div class="c-lead-gallery__thumbs">
+  {{#each @slides as |slide i|}}
+    <button {{action 'setCurrent' i}} class="c-lead-gallery__thumbs-thumb" data-test-gallery-thumb={{i}}>
+      <img src={{slide.src}} alt={{slide.caption}}>
+    </button>
+  {{/each}}
+  <button
+    class="c-lead-gallery__thumbs-thumb c-lead-gallery__thumbs-thumb-text u-font--secondary-style u-font--xs">
+    View all
+    <span>{{@slides.length}}</span>
+  </button>
+</div>
+{{!-- END-SNIPPET --}}
