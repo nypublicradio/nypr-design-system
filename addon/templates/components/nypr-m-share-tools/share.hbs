@@ -1,0 +1,11 @@
+{{!-- BEGIN-SNIPPET nypr-m-share-tools-share.hbs --}}
+<button class="c-share-tools__link" {{action 'openShare' @service @params}}>
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    <span class="o-icon u-icon--xs">
+      <NyprASvg @icon={{@service}}/>
+    </span>
+  {{/if}}
+</button>
+{{!-- END-SNIPPET --}}
