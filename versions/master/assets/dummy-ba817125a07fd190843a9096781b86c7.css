@@ -85,6 +85,10 @@ label {
   padding: 8px;
 }
 
+.c-article-header__center {
+  position: relative;
+}
+
 :root {
   --brand-primary: #333;
   --brand-secondary: #98d2eb;
@@ -95,6 +99,12 @@ html,
 p {
   font-size: 1rem;
   line-height: 1.625;
+}
+
+[class*=c-] p,
+[class*=o-] p,
+[class*=u-] p {
+  margin: 0;
 }
 
 label {
@@ -126,7 +136,8 @@ a {
 }
 
 :not(.theme-typography)>h4 {
-  font-size: 1rem;
+  font-size: 1.1rem;
+  margin: 1.33rem 0;
 }
 
 .example-grid thead,
