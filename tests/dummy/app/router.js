@@ -39,6 +39,7 @@ Router.map(function() {
       this.route('nypr-o-article-header');
       this.route('nypr-o-contact');
       this.route('nypr-o-donate');
+      this.route('nypr-o-related-content');
     })
   });
 
