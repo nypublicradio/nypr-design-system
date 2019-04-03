@@ -1,0 +1,9 @@
+{{!-- BEGIN-SNIPPET nypr-m-figcaption-credit.hbs --}}
+<span class="o-credit">
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{@credit}}
+  {{/if}}
+</span>
+{{!-- END-SNIPPET --}}
