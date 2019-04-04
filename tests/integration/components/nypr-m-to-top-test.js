@@ -1,26 +1,56 @@
-import { module, test } from 'qunit';
+import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import test from 'ember-sinon-qunit/test-support/test';
 
 module('Integration | Component | nypr-m-to-top', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    await render(hbs`<NyprMToTop/>`);
 
-    await render(hbs`{{nypr-m-to-top}}`);
+    assert.dom('[data-test-to-top]').exists();
+  });
 
-    assert.equal(this.element.textContent.trim(), '');
+  test('it scrolls to the top of the window', async function() {
+    this.mock(window)
+      .expects('scrollTo')
+      .withArgs({top: 0, behavior: 'smooth'});
 
-    // Template block usage:
+    await render(hbs`<NyprMToTop/>`);
+    await click('[data-test-to-top]');
+  });
+
+  test('it scrolls to a given target', async function() {
     await render(hbs`
-      {{#nypr-m-to-top}}
-        template block text
-      {{/nypr-m-to-top}}
+      <div id="target"/>
+      <NyprMToTop @selector='#target'/>
     `);
+    let target = document.querySelector('#target');
+    let y = target.offsetTop - target.offsetHeight;
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    this.mock(window)
+      .expects('scrollTo')
+      .withArgs({top: y, behavior: 'smooth'});
+
+    await click('[data-test-to-top]');
+  });
+
+  test('it scrolls to a given offset', async function() {
+    const OFFSET = 500;
+    this.set('offset', OFFSET);
+    await render(hbs`
+      <div id="target"/>
+      <NyprMToTop @offset={{offset}} @selector='#target'/>
+    `);
+    let target = document.querySelector('#target');
+    let y = target.offsetTop - (target.offsetHeight + OFFSET);
+
+    this.mock(window)
+      .expects('scrollTo')
+      .withArgs({top: y, behavior: 'smooth'});
+
+    await click('[data-test-to-top]');
   });
 });
