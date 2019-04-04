@@ -1,6 +1,6 @@
 ## `nypr-o-article-header`
 
-### Example Usage
+### Example Article Usage
 
 <DocsDemo as |demo|>
   <demo.example>
@@ -30,6 +30,9 @@
         <lead.left>
           <NyprMShareTools as |share|>
             <share.link @service='twitter'/>
+            <share.link @service='facebook'/>
+            <share.link @service='instagram'/>
+            <share.link @service='email'/>
           </NyprMShareTools>
         </lead.left>
 
@@ -56,6 +59,10 @@
   </demo.example>
 
   <demo.snippet @name='article-header-example.hbs' @label='Usage'/>
-  <demo.snippet @name='nypr-o-article-header.js' @label='nypr-o-article-header.js'/>
   <demo.snippet @name='nypr-o-article-header.hbs' @label='nypr-o-article-header.hbs'/>
+  <demo.snippet @name='nypr-o-article-header-top.hbs' @label='top.hbs'/>
+  <demo.snippet @name='nypr-o-article-header-meta.hbs' @label='meta.hbs'/>
+  <demo.snippet @name='nypr-o-article-header-publish-date.hbs' @label='publish-date.hbs'/>
+  <demo.snippet @name='nypr-o-article-header-lead.hbs' @label='lead.hbs'/>
+  <demo.snippet @name='nypr-o-article-header.js' @label='nypr-o-article-header.js'/>
 </DocsDemo>
