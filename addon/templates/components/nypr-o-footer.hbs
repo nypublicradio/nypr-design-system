@@ -1,0 +1,80 @@
+{{!-- BEGIN-SNIPPET nypr-o-footer.hbs --}}
+<NyprMToTop/>
+
+<footer class="c-main-footer">
+
+  <div class="l-container l-wrap u-spacing--triple">
+
+    <div class="c-main-footer__inner">
+
+      <div class="c-main-footer__col1 u-spacing--triple">
+
+        <div class="c-main-footer__branding">
+
+          <div class="c-main-footer__logo">
+            <a href="/">
+              <NyprASvg @icon='gothamist-logo--stacked'/>
+            </a>
+          </div>
+
+          <div class="c-main-footer__utility">
+
+            <a href="" class="c-main-footer__send-story u-font--secondary-style u-font--xs"><strong>Send Us a Story Idea</strong></a>
+
+            <div class="c-main-footer__social">
+              <NyprMShareTools as |share|>
+                <share.link @service='facebook'/>
+                <share.link @service='twitter'/>
+                <share.link @service='instagram'/>
+                <share.link @service='youtube'/>
+              </NyprMShareTools>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="c-main-footer__slogan">
+          {{yield (hash slogan=(component 'blank-template'))}}
+        </div>
+
+        <div class="c-main-footer__nav">
+          {{yield (hash nav=(component 'nypr-m-secondary-nav'))}}
+        </div>
+
+      </div>
+
+      <div class="c-main-footer__col2">
+
+        <div class="c-main-footer__signup">
+          {{yield (hash signup=(component 'blank-template'))}}
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="c-main-footer__brand-group">
+      <div class="c-main-footer__nypr-logo">
+        <NyprASvg @icon='nypr-logo'/>
+      </div>
+
+      <NyprMBrandsLinkroll/>
+    </div>
+
+    <div class="c-main-footer__bottom">
+
+      <div class="c-main-footer__copyright">
+        <p class="u-font--secondary-style u-font--xs u-color--white">&copy; {{moment-format (now) 'YYYY'}} New York Public Radio. All rights reserved.</p>
+      </div>
+
+      <div class="c-main-footer__terms-links">
+        <a href="" class="u-font--secondary-style u-font--xs"><strong>Terms of Use</strong></a>
+        <a href="" class="u-font--secondary-style u-font--xs"><strong>Privacy Policy</strong></a>
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+{{!-- END-SNIPPET --}}
