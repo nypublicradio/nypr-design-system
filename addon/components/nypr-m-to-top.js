@@ -1,3 +1,4 @@
+// BEGIN-SNIPPET nypr-m-to-top.js
 import Component from '@ember/component';
 import layout from '../templates/components/nypr-m-to-top';
 
@@ -33,3 +34,4 @@ export default Component.extend({
     window.scrollTo({top: y, behavior: 'smooth'});
   }
 });
+// END-SNIPPET
