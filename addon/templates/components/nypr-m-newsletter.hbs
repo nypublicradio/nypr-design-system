@@ -10,14 +10,15 @@
       <span class="c-newsletter-form__icon o-icon o-icon--newsletter-form u-icon--s">
         <NyprASvg @icon='arrow-dashed'/>
       </span>
-      {{yield (hash blurb=(component 'blank-template'))}}
+      <span data-test-newsletter-blurb>
+        {{yield (hash blurb=(component 'blank-template'))}}
+      </span>
     </p>
   </div>
 
   <div class="c-newsletter-form__field-group">
     <label for="newsletter" class="is-vishidden">Newsletter signup</label>
     {{input
-      data-test-input='email'
       required=true
       name="newsletter"
       type="email"
@@ -26,6 +27,7 @@
       value=this.email
     }}
     <button
+      data-test-newsletter-submit
       type="submit"
       class="o-button o-button--c-quaternary c-newsletter-form__button"
       disabled={{or this.onSubmit.isRunning (not this.legalChecked)}}
@@ -39,6 +41,7 @@
 
   {{#if this.onSubmit.last}}
     <div class="c-newsletter-form__message">
+      {{! template-lint-disable no-triple-curlies }}
       {{{or this.onSubmit.last.value this.onSubmit.last.error}}}
     </div>
   {{/if}}
