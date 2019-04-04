@@ -1,4 +1,7 @@
 {{!-- BEGIN-SNIPPET nypr-m-share-tools.hbs --}}
+{{#if @label}}
+  <span class="c-share-tools__label u-font--secondary-style u-font--xs u-color--white">{{@label}}</span>
+{{/if}}
 <div class="c-share-tools__group">
   {{yield (hash
     share=(component 'nypr-m-share-tools/share')

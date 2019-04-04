@@ -1,7 +1,5 @@
 {{!-- BEGIN-SNIPPET nypr-m-share-tools-link.hbs --}}
-<a href={{or @href this.href}} class="c-share-tools__link {{@service}}">
-  <span class="o-icon u-icon--xs">
-    <NyprASvg @icon={{@service}}/>
-  </span>
+<a href={{or @href this.href}} class="c-share-tools__link o-icon {{@service}}">
+  <NyprASvg @icon={{@service}}/>
 </a>
 {{!-- END-SNIPPET --}}
