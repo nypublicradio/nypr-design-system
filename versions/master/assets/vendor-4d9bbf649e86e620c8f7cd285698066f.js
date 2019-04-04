@@ -7542,14 +7542,17 @@ this.get("listeners")[e]=i,n.addListener&&n.addListener(function(e){Ember.run(nu
 define("ember-router-scroll/index",["exports","ember-app-scheduler"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Mixin.create({service:Ember.inject.service("router-scroll"),isFastBoot:Ember.computed(function(){var e=Ember.getOwner(this).lookup("service:fastboot")
-return!!e&&e.get("isFastBoot")}),init:function(){this._super.apply(this,arguments),(0,t.setupRouter)(this)},destroy:function(){(0,t.reset)(),this._super.apply(this,arguments)},willTransition:function(){this._super.apply(this,arguments),Ember.get(this,"isFastBoot")||Ember.get(this,"service").update()},didTransition:function(e){for(var r=this,n=arguments.length,i=new Array(n>1?n-1:0),o=1;o<n;o++)i[o-1]=arguments[o];(this._super.apply(this,[e].concat(i)),Ember.get(this,"isFastBoot"))||(Ember.get(this,"service.delayScrollTop")?(0,t.whenRouteIdle)().then(function(){r.updateScrollPosition(e)}):Ember.run.scheduleOnce("render",this,function(){return r.updateScrollPosition(e)}))},updateScrollPosition:function(e){var t,r=Ember.get(this,"currentURL"),n=r?document.getElementById(r.split("#").pop()):null
+return!!e&&e.get("isFastBoot")}),init:function(){var e=this
+this._super.apply(this,arguments),(0,t.setupRouter)(this),this.on("routeWillChange",function(){e._routeWillChange()}),this.on("routeDidChange",function(t){e._routeDidChange(t)})},destroy:function(){(0,t.reset)(),this._super.apply(this,arguments)},updateScrollPosition:function(e){var t,r=Ember.get(this,"currentURL"),n=r?document.getElementById(r.split("#").pop()):null
 if(Ember.get(this,"service.isFirstLoad"))Ember.get(this,"service").unsetFirstLoad()
-else if(t=r&&r.indexOf("#")>-1&&n?{x:n.offsetLeft,y:n.offsetTop}:Ember.get(this,"service.position"),!e.some(function(e){return Ember.get(e,"handler.controller.preserveScrollPosition")})){var i=Ember.get(this,"service.scrollElement")
+else if(t=r&&r.indexOf("#")>-1&&n?{x:n.offsetLeft,y:n.offsetTop}:Ember.get(this,"service.position"),!Ember.get(e,"handler.controller.preserveScrollPosition")){var i=Ember.get(this,"service.scrollElement")
 if(Ember.get(this,"service.targetElement"))window.scrollTo(t.x,t.y)
 else if("window"===i)window.scrollTo(t.x,t.y)
 else if("#"===i.charAt(0)){var o=document.getElementById(i.substring(1))
-o&&(o.scrollLeft=t.x,o.scrollTop=t.y)}}}})
-e.default=r}),define("ember-router-scroll/locations/router-scroll",["exports"],function(e){"use strict"
+o&&(o.scrollLeft=t.x,o.scrollTop=t.y)}}},_routeWillChange:function(){Ember.get(this,"isFastBoot")||Ember.get(this,"service").update()},_routeDidChange:function(e){var r=this
+Ember.get(this,"isFastBoot")||(Ember.get(this,"service.delayScrollTop")?(0,t.whenRouteIdle)().then(function(){r.updateScrollPosition(e)}):Ember.run.scheduleOnce("render",this,function(){return r.updateScrollPosition(e)}))}})
+var n=r
+e.default=n}),define("ember-router-scroll/locations/router-scroll",["exports"],function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var t=function(){return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(e){var t=16*Math.random()|0
 return("x"===e?t:3&t|8).toString(16)})},r=Ember.HistoryLocation.extend({pushState:function(e){var r={path:e,uuid:t()}
