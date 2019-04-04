@@ -32,6 +32,7 @@ Router.map(function() {
       this.route('nypr-m-breadcrumb');
       this.route('nypr-m-gallery-lead');
       this.route('nypr-m-share-tools');
+      this.route('nypr-m-newsletter');
     });
     this.route('organisms', function() {
       this.route('nypr-o-article-body');

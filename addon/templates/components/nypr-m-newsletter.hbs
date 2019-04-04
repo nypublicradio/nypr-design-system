@@ -1,0 +1,56 @@
+{{!-- BEGIN-SNIPPET nypr-m-newsletter.hbs --}}
+<div class="c-newsletter-form__graphic">
+  {{yield (hash graphic=(component 'blank-template'))}}
+</div>
+
+<div class="c-newsletter-form__inner u-spacing">
+
+  <div class="c-newsletter-form__text">
+    <p>
+      <span class="c-newsletter-form__icon o-icon o-icon--newsletter-form u-icon--s">
+        <NyprASvg @icon='arrow-dashed'/>
+      </span>
+      {{yield (hash blurb=(component 'blank-template'))}}
+    </p>
+  </div>
+
+  <div class="c-newsletter-form__field-group">
+    <label for="newsletter" class="is-vishidden">Newsletter signup</label>
+    {{input
+      data-test-input='email'
+      required=true
+      name="newsletter"
+      type="email"
+      class="c-newsletter-form__input"
+      placeholder="your@email.com"
+      value=this.email
+    }}
+    <button
+      type="submit"
+      class="o-button o-button--c-quaternary c-newsletter-form__button"
+      disabled={{or this.onSubmit.isRunning (not this.legalChecked)}}
+    >
+      <span class="c-newsletter-form__submit-icon o-icon o-icon--newsletter-form">
+        <NyprASvg @icon='arrow-dashed'/>
+      </span>
+      <span class="is-vishidden">Submit email</span>
+    </button>
+  </div>
+
+  {{#if this.onSubmit.last}}
+    <div class="c-newsletter-form__message">
+      {{{or this.onSubmit.last.value this.onSubmit.last.error}}}
+    </div>
+  {{/if}}
+
+  <div class="c-newsletter-form__terms">
+    <label class="c-newsletter-form__terms-checkbox">
+      {{input type='checkbox' class='o-checkbox' checked=this.legalChecked}}
+      <p class="u-font--xs">
+        {{yield (hash legal=(component 'blank-template' text=this.defaultLegal))}}
+      </p>
+    </label>
+  </div>
+
+</div>
+{{!-- END-SNIPPET --}}
