@@ -1,0 +1,14 @@
+{{#if @navItems}}
+  <ul class="c-secondary-nav__list">
+    {{#each @navItems as |item|}}
+      <li class="c-secondary-nav__item">
+        <a
+          href={{item.url}}
+          class="c-secondary-nav__link u-font--secondary-style u-font--xs u-color--white u-has-accent u-has-accent--white"
+        >
+          {{item.title}}
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}
