@@ -1,0 +1,24 @@
+{{!-- BEGIN-SNIPPET nypr-m-brands-linkroll.hbs --}}
+<NyprAToggleBox class="c-toggle-box--linkroll" @calculatePosition={{this.calculatePosition}} as |toggle|>
+  <toggle.trigger>
+    <strong>View All Brands</strong>
+  </toggle.trigger>
+
+  <toggle.dropdown>
+    <nav class="c-nypr-nav" role="navigation" aria-label="NYPR brands navigation">
+      <ul class="c-nypr-nav__list">
+        {{#each (or @navItems this.navItems) as |item|}}
+          <li class="c-nypr-nav__item">
+            <a
+              href={{item.url}}
+              class="c-nypr-nav__link u-has-accent u-has-accent--secondary"
+            >
+              {{item.title}}
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+    </nav>
+  </toggle.dropdown>
+</NyprAToggleBox>
+{{!-- END-SNIPPET --}}
