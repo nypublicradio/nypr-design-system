@@ -6307,6 +6307,17 @@ label {
   padding: 8px;
 }
 
+.c-toggle-box__label:before {
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  transform: none;
+  border: 12px solid transparent;
+  border-bottom-color: #fff;
+  bottom: -15px;
+  right: -5px;
+}
+
 .c-article-header__center {
   position: relative;
 }
