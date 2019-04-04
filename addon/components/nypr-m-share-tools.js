@@ -5,6 +5,13 @@ import layout from '../templates/components/nypr-m-share-tools';
 export default Component.extend({
   layout,
   classNames: ['c-share-tools'],
+
+  /**
+    Label text
+
+    @argument label
+    @type {String}
+  */
 });
 // END-SNIPPET
 
