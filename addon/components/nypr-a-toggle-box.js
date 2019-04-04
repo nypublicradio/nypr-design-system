@@ -10,6 +10,9 @@ export default Component.extend({
   layout,
 
   classNames: ['c-toggle-box'],
+  classNameBindings: ['open:this-is-active'],
+
+  open: false,
 
   /**
     Icon trigger

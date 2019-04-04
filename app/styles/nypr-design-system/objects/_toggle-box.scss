@@ -1,3 +1,14 @@
 .c-toggle-box__dropdown {
   padding: 8px;
 }
+
+.c-toggle-box__label:before {
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  transform: none;
+  border: 12px solid transparent;
+  border-bottom-color: white;
+  bottom: -15px;
+  right: -5px;
+}

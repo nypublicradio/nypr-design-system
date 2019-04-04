@@ -3,6 +3,8 @@
   @calculatePosition={{@calculatePosition}}
   @horizontalPosition={{@horizontalPosition}}
   @verticalPostion={{@verticalPostion}}
+  @onOpen={{action (mut this.open) true}}
+  @onClose={{action (mut this.open) false}}
   as |dd|>
   {{yield (hash
     trigger=(component 'nypr-a-toggle-box/trigger' dd=dd icon=icon)
