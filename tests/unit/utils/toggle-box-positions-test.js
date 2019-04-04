@@ -1,10 +1,10 @@
 import toggleBoxPositions from 'dummy/utils/toggle-box-positions';
-import { module, test } from 'qunit';
+import { module, skip } from 'qunit';
 
-module('Unit | Utility | toggle-box-positions', function(hooks) {
+module('Unit | Utility | toggle-box-positions', function() {
 
   // Replace this with your real tests.
-  test('it works', function(assert) {
+  skip('it works', function(assert) {
     let result = toggleBoxPositions();
     assert.ok(result);
   });
