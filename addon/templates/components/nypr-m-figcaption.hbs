@@ -5,11 +5,8 @@
     credit=(component 'nypr-m-figcaption/credit')
   )}}
 {{else}}
-  {{#if @caption}}
-    {{nypr-m-figcaption/caption caption=@caption}}
-  {{/if}}
-  {{#if @credit}}
-    {{nypr-m-figcaption/credit credit=@credit}}
+  {{#if (or @caption @credit)}}
+    {{nypr-m-figcaption/caption caption=@caption credit=@credit}}
   {{/if}}
 {{/if}}
 {{!-- END-SNIPPET --}}
