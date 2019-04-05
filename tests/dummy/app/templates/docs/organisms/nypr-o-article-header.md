@@ -28,7 +28,7 @@
 
       <header.lead as |lead|>
         <lead.left>
-          <NyprMShareTools as |share|>
+          <NyprMShareTools @vertical={{true}} as |share|>
             <share.link @service='twitter'/>
             <share.link @service='facebook'/>
             <share.link @service='instagram'/>

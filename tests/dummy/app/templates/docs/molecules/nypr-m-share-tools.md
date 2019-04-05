@@ -16,8 +16,11 @@ Supported services are defined in `addon/components/nypr-m-share-tools.js`.
   <demo.example>
 
     <h4>Links</h4>
+    <p>
+      <button class="btn" {{action (mut vertical) (not vertical)}}>Change Orientation</button>
+    </p>
     <!-- BEGIN-SNIPPET share-tools-links.hbs -->
-    <NyprMShareTools as |tools|>
+    <NyprMShareTools @vertical={{vertical}} as |tools|>
       <tools.link @service='facebook' @username='foo'/>
       <tools.link @service='twitter' @username='bar'/>
       <tools.link @service='instagram' @username='baz'/>

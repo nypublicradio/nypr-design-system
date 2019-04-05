@@ -5,6 +5,15 @@ import layout from '../templates/components/nypr-m-share-tools';
 export default Component.extend({
   layout,
   classNames: ['c-share-tools'],
+  classNameBindings: ['vertical:c-share-tools--vertical'],
+
+  /**
+    Use vertical orientation
+
+    @argument vertical
+    @type {Boolean}
+  */
+  vertical: false,
 
   /**
     Label text
