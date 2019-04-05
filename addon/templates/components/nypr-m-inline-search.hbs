@@ -1,0 +1,10 @@
+{{!-- BEGIN-SNIPPET nypr-m-inline-search.hbs --}}
+{{#if (has-block)}}
+  {{yield (hash
+    open=(component 'nypr-m-inline-search/open' onclick=(action (mut isOpen) true) ariaExpanded=(if isOpen 'true' 'false'))
+    form=(component 'nypr-m-inline-search/form' close=(action (mut isOpen) false) class=@formClass isOpen=isOpen)
+  )}}
+{{else}}
+  {{nypr-m-inline-search/form search=(action (optional @search)) class=@formClass}}
+{{/if}}
+{{!-- END-SNIPPET --}}
