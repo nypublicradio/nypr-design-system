@@ -37,7 +37,7 @@ Render a `<figure/>` element with with `<figcaption/>` and `<picture/>` elements
   <demo.example @name='figure-block-usage.hbs'>
     <NyprMFigure as |figure|>
       <div style="background-color: darkseagreen;">
-        <figure.caption @caption='Caption for This Image' />
+        <figure.figcaption @caption='Caption for This Image' />
       </div>
 
       <figure.image @src-s='https://picsum.photos/800/400' />

@@ -17,7 +17,7 @@ import { computed } from '@ember/object';
   @yield {Block} block Arbitrary body for the component.
   @yield {Hash} hash
   @yield {Component} hash.image `nypr-m-figure/image`
-  @yield {Component} hash.caption `nypr-m-figcaption`
+  @yield {Component} hash.figcaption `nypr-m-figcaption`
 */
 export default Component.extend({
   tagName: 'figure',
