@@ -13,7 +13,7 @@ import layout from '../templates/components/nypr-a-picture';
 */
 export default Component.extend({
   tagName: 'picture',
-  classNames: ['picture'],
+  classNames: ['o-picture'],
   layout,
 
   /**

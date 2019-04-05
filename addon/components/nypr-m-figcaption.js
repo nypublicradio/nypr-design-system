@@ -18,16 +18,16 @@ export default Component.extend({
   layout,
 
   tagName: 'figcaption',
-  classNames: ['o-figure__caption', 'o-caption'],
+  classNames: ['o-caption'],
 
   /**
     @argument caption
-    @type {String?}
+    @type {String}
   */
 
   /**
     @argument credit
-    @type {String?}
+    @type {String}
   */
 });
 // END-SNIPPET

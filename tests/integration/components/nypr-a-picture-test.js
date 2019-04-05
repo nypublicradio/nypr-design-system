@@ -9,6 +9,6 @@ module('Integration | Component | nypr-a-picture', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`<NyprAPicture/>`);
 
-    assert.dom('picture.picture').exists();
+    assert.dom('picture').exists();
   });
 });
