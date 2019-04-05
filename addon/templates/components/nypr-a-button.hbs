@@ -12,7 +12,7 @@
     class="{{unless @blank 'o-button'}} {{this.tierClass}}"
     role={{or @role this.role}}
     type={{or @type this.type}}
-    {{action (optional @onclick)}}
+    onClick={{optional @onclick}}
     ...attributes>
 
     {{#if (has-block)}}
