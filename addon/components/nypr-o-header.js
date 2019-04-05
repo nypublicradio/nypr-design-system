@@ -16,5 +16,8 @@ export default Component.extend({
   layout,
   tagName: 'header',
   classNames: ['c-main-header'],
+  classNameBindings: ['isOpen:side-menu-is-active'],
+
+  isOpen: false,
 });
 // END-SNIPPET
