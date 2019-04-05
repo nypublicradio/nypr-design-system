@@ -2,7 +2,7 @@
 import Component from '@ember/component';
 import layout from '../templates/components/nypr-m-brands-linkroll';
 
-import { positionBottomCenter } from './nypr-a-toggle-box';
+import { positionBottomCenter } from '../utils/toggle-box-positions';
 
 const NAV_ITEMS = [{
   url: 'https://www.wnyc.org',
