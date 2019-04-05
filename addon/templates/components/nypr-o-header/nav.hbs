@@ -1,0 +1,9 @@
+<ul>
+  {{#each this.navItems as |item|}}
+    <li class="c-primary-nav__item">
+      <a href={{item.url}} class="c-primary-nav__link {{@linkClass}}">
+        {{item.title}}
+      </a>
+    </li>
+  {{/each}}
+</ul>

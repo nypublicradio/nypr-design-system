@@ -1,0 +1,18 @@
+<div class="c-main-header__ad-unit">
+  {{yield (hash leaderboard=(component 'blank-template'))}}
+</div>
+
+<div class="c-main-header__inner js-stop-prop">
+
+  {{yield (hash
+    site=(component 'nypr-m-header.site')
+    article=(component 'nypr-m-header.article')
+    gallery=(component 'nypr-m-header.gallery')
+  )}}
+
+  <div class="c-content-overlay"></div>
+</div>
+
+{% if has_progress_bar %}
+  {% include 'molecules-progress-bar' %}
+{% endif %}
