@@ -1,10 +1,12 @@
-<div class="c-main-header__ad-unit">
-  {{yield (hash leaderboard=(component 'blank-template'))}}
-</div>
+{{yield (hash leaderboard=(component 'nypr-o-header/leaderboard'))}}
 
-<div class="c-main-header__inner js-stop-prop">
+<div class="c-main-header__inner">
 
   {{yield (hash
+    menu=(component 'nypr-o-header/menu' donateURL=@donateURL)
+    left=(component 'nypr-o-header/left' openMenu=(action (mut this.isOpen) (not this.isOpen)) ariaExpanded=(if this.isOpen 'true' 'false'))
+    nav=(component 'nypr-o-header/nav' class="c-primary-nav--top")
+    right=(component 'nypr-o-header/right')
   )}}
 
   <div class="c-content-overlay"></div>

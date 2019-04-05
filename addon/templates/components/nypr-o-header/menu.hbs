@@ -1,21 +1,15 @@
+{{!-- BEGIN-SNIPPET nypr-o-header-menu.hbs --}}
 <div class="c-side-menu__group">
 
   <div class="c-side-menu__branding">
-    <NyprASvg @icon='gothamist-logo'/>
+    {{yield (hash branding=(component 'blank-template'))}}
   </div>
 
-  <NyprAButton
-    class='c-side-menu__donate'
-    @url='https://pledge3.wnyc.org/donate/gothamist/onestep/?utm_medium=partnersite&utm_source=gothamist&utm_campaign=brandheader'>
+  <NyprAButton class='c-side-menu__donate' @url=@donateUrl>
     Donate
   </NyprAButton>
 
-
-  {{nypr-o-header/menu
-    navItems=@primaryNav
-    class="c-primary-nav--side"
-    linkClass="u-has-accent u-has-accent--quaternary"
-  }}
+  {{yield (hash primaryNav=(component 'nypr-o-header/nav' class="c-primary-nav--side" linkClass="u-has-accent u-has-accent--quarternary"))}}
 
   <div class="c-side-menu__social">
     <NyprMShareTools @label='Follow Us' as |share|>
@@ -31,23 +25,15 @@
 <div class="c-side-menu__group">
 
   <div class="c-side-menu__secondary-nav">
-    <NyprMSecondaryNav @navItems={{@secondaryNav}}/>
+    {{yield (hash secondaryNav=(component 'nypr-m-secondary-nav'))}}
   </div>
 
   <div class="u-spacing">
-    {%
-      include '@molecules/forms/search-entry.twig'
-      with {
-        "search_classes": "c-search--side"
-      }
-    %}
-    {%
-      include '@atoms/buttons/button.twig'
-      with {
-        "button_text": "Send a Story Idea",
-        "button_classes": "c-side-menu__send-story o-button--quaternary u-full-width"
-      }
-    %}
+    <NyprMInlineSearch @formClass="c-search--side"/>
+
+    <NyprAButton class="c-side-menu__send-story o-button--quaternary u-full-width">
+      Send a Story Idea
+    </NyprAButton>
   </div>
 
   <div class="c-side-menu__nypr-logo">
@@ -72,3 +58,4 @@
   </div>
 
 </div>
+{{!-- END-SNIPPET --}}
