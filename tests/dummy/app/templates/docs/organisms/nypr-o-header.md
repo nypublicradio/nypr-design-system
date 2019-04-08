@@ -5,116 +5,117 @@
 <DocsDemo as |demo|>
   <demo.example>
     <fieldset>
-      <legend>Demo Controls. Viewing: {{if (eq type 'A') 'Article' (if (eq type 'G') 'Gallery' 'Default')}}</legend>
+      <legend>Demo Controls. Viewing: {{if STORY 'Article' (if GALLERY 'Gallery' 'Default')}}</legend>
       <p>
         <label>View as Default
-          <input type='radio' name='header' value='D' onChange={{action (mut type) value='target.value'}} checked=true/>
+          <input type='radio' name='header' value='D' onChange={{action 'setHeader' value='target.value'}} checked=true/>
         </label>
       </p>
       <p>
         <label>View as Article
-          <input type='radio' name='header' value='A' onChange={{action (mut type) value='target.value'}}/>
+          <input type='radio' name='header' value='A' onChange={{action 'setHeader' value='target.value'}}/>
         </label>
       </p>
       <p>
         <label>View as Gallery
-          <input type='radio' name='header' value='G' onChange={{action (mut type) value='target.value'}}/>
+          <input type='radio' name='header' value='G' onChange={{action 'setHeader' value='target.value'}}/>
         </label>
       </p>
     </fieldset>
 
+    <div class="theme-typography" style="margin: 0 -200px;">
     <!-- BEGIN-SNIPPET footer-example.hbs -->
-    <NyprOHeader
-      @donateURL='https://pledge3.wnyc.org/donate/gothamist/onestep/?utm_medium=partnersite&utm_source=gothamist&utm_campaign=brandheader'
-      class={{if (eq type 'A') 'c-main-header--article' (if (eq type 'G') 'c-main-header--gallery' '')}}
-      as |header|>
-      {{#unless (xor (eq type 'A') (eq type 'G'))}}
-        <header.leaderboard>
-          <picture>
-            <source media="(min-width: 750px)" srcset="https://tpc.googlesyndication.com/simgad/3866766746825522936">
-            <img src="https://s0.2mdn.net/5188901/TINCUP_OUTSIDEONLINE_300x50.jpg" alt="">
-          </picture>
-        </header.leaderboard>
-      {{/unless}}
+      <NyprOHeader
+        @donateURL={{DONATE_URL}}
+        as |header|>
+        {{#unless (or STORY GALLERY)}}
+          <header.leaderboard>
+            <picture>
+              <source media="(min-width: 750px)" srcset="https://tpc.googlesyndication.com/simgad/3866766746825522936">
+              <img src="https://s0.2mdn.net/5188901/TINCUP_OUTSIDEONLINE_300x50.jpg" alt="">
+            </picture>
+          </header.leaderboard>
+        {{/unless}}
 
-      <header.menu as |menu|>
-        <menu.branding>
-          <NyprASvg @icon='gothamist-logo'/>
-        </menu.branding>
-
-        <menu.primaryNav @navItems={{PRIMARY_NAV_ITEMS}} />
-
-        <menu.secondaryNav @navItems={{SECONDARY_NAV_ITEMS}} />
-      </header.menu>
-
-      <header.left as |left|>
-        <left.branding>
-          <a href="http://gothamist.com" target="\_blank">
+        <header.menu as |menu|>
+          <menu.branding>
             <NyprASvg @icon='gothamist-logo'/>
-          </a>
-        </left.branding>
+          </menu.branding>
 
-        {{#if (eq type 'A')}}
-          <left.headline>
-          sup
-          </left.headline>
-        {{/if}}
+          <menu.primaryNav @navItems={{PRIMARY_NAV_ITEMS}} />
 
-      </header.left>
+          <menu.secondaryNav @navItems={{SECONDARY_NAV_ITEMS}} />
+        </header.menu>
 
-      {{#unless (or (eq type 'A') (eq type 'G'))}}
-        <header.nav @navItems={{PRIMARY_NAV_ITEMS}}/>
-      {{/unless}}
+        <header.left as |left|>
+          <left.branding>
+            <a href="http://gothamist.com">
+              <NyprASvg @icon='gothamist-logo'/>
+            </a>
+          </left.branding>
 
-      <header.right as |right|>
-        {{#if (eq type 'A')}}
-          <right.share>
-            <NyprMShareTools @label='Share' as |tools|>
-              <tools.share @service='facebook' />
-              <tools.share @service='twitter' @params={{hash text='Read this great article' via='WNYC'}}/>
-            </NyprMShareTools>
-          </right.share>
+          {{#if STORY}}
+            <left.headline>
+              {{STORY.title}}
+            </left.headline>
+          {{/if}}
 
-          <NyprAButton
-            class='c-main-header__donate o-button--sm'
-            @url='https://pledge3.wnyc.org/donate/gothamist/onestep/?utm_medium=partnersite&utm_source=gothamist&utm_campaign=brandheader'>
-            Donate
-          </NyprAButton>
+        </header.left>
 
-          <right.search as |search|>
-            <search.open/>
-            <search.form/>
-          </right.search>
+        {{#unless (or STORY GALLERY)}}
+          <header.nav @navItems={{PRIMARY_NAV_ITEMS}}/>
+        {{/unless}}
 
-        {{else if (eq type 'G')}}
-          <right.share>
-            <NyprMShareTools @label='Share' as |tools|>
-              <tools.share @service='facebook' />
-              <tools.share @service='twitter' @params={{hash text='Read this great article' via='WNYC'}}/>
-            </NyprMShareTools>
-          </right.share>
+        <header.right as |right|>
+          {{#if STORY}}
+            <right.share>
+              <NyprMShareTools @label='Share' as |tools|>
+                <tools.share @service='facebook' />
+                <tools.share @service='twitter' @params={{hash text='Read this great article' via='WNYC'}}/>
+              </NyprMShareTools>
+            </right.share>
 
-          <NyprAButton @blank={{true}} class="u-padding--half">
-            <NyprASvg @icon='close' class="c-main-header__close"/>
-          </NyprAButton>
-        {{else}}
+            <NyprAButton
+              class='c-main-header__donate o-button--sm'
+              @url={{DONATE_URL}}>
+              Donate
+            </NyprAButton>
 
-          <NyprAButton
-            class='c-main-header__donate o-button--sm'
-            @url='https://pledge3.wnyc.org/donate/gothamist/onestep/?utm_medium=partnersite&utm_source=gothamist&utm_campaign=brandheader'>
-            Donate
-          </NyprAButton>
+            <right.search as |search|>
+              <search.open/>
+              <search.form/>
+            </right.search>
 
-          <right.search as |search|>
-            <search.open/>
-            <search.form/>
-          </right.search>
+          {{else if GALLERY}}
+            <right.share>
+              <NyprMShareTools @label='Share' as |tools|>
+                <tools.share @service='facebook' />
+                <tools.share @service='twitter' @params={{hash text='Read this great article' via='WNYC'}}/>
+              </NyprMShareTools>
+            </right.share>
 
-        {{/if}}
+            <NyprAButton @blank={{true}} class="u-padding--half">
+              <NyprASvg @icon='close' class="c-main-header__close"/>
+            </NyprAButton>
+          {{else}}
 
-      </header.right>
-    </NyprOHeader>
+            <NyprAButton
+              class='c-main-header__donate o-button--sm'
+              @url={{DONATE_URL}}>
+              Donate
+            </NyprAButton>
+
+            <right.search as |search|>
+              <search.open/>
+              <search.form/>
+            </right.search>
+
+          {{/if}}
+
+        </header.right>
+      </NyprOHeader>
     <!-- END-SNIPPET -->
+    </div>
   </demo.example>
 
   <demo.snippet @name='footer-example.hbs' @label='Usage'/>
