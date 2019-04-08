@@ -40,7 +40,8 @@ p {
 }
 
 label {
-  display: block;
+  display: inline-block;
+  line-height: 1;
   margin-bottom: 8px;
   cursor: pointer;
 }
