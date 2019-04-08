@@ -27,7 +27,6 @@ $ember-basic-dropdown-content-z-index: 10000;
 html,
 body,
 p {
-  font-family: 'Lato', sans-serif !important;
   font-size: 1rem;
   line-height: 1.625;
 }
@@ -65,7 +64,7 @@ input[type=tel] {
   > h5,
   > h6 {
     letter-spacing: initial;
-    font-family: 'Lato', sans-serif;
+    // font-family: 'Lato', sans-serif;
     font-weight: bold;
   }
 
