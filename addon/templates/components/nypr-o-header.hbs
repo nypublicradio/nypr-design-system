@@ -9,9 +9,9 @@
     right=(component 'nypr-o-header/right')
   )}}
 
+  {{#if this.outOfViewport}}
+    <NyprMProgressBar />
+  {{/if}}
+
   <div class="c-content-overlay"></div>
 </div>
-
-{% if has_progress_bar %}
-  {% include 'molecules-progress-bar' %}
-{% endif %}
