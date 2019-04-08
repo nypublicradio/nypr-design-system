@@ -1,6 +1,6 @@
 {{yield (hash leaderboard=(component 'nypr-o-header/leaderboard'))}}
 
-<div class="c-main-header__inner">
+<div class="c-main-header__inner {{if this.outOfViewport 'c-floating-header is-visible'}}">
 
   {{yield (hash
     menu=(component 'nypr-o-header/menu' donateURL=@donateURL)
