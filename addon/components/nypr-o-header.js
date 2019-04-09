@@ -46,13 +46,17 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    this._boundListener = bind(this, '_scrollListener');
-    window.addEventListener('scroll', this._boundListener);
+    if (typeof FastBoot === 'undefined') {
+      this._boundListener = bind(this, '_scrollListener');
+      window.addEventListener('scroll', this._boundListener);
+    }
   },
 
   willDestroy() {
     this._super(...arguments);
-    window.removeEventListener('scroll', this._boundListener);
+    if (typeof FastBoot === 'undefined') {
+      window.removeEventListener('scroll', this._boundListener);
+    }
   },
 
   /**
