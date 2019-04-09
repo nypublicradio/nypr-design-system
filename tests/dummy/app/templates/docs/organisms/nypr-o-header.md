@@ -24,7 +24,7 @@
     </fieldset>
 
     <div class="theme-typography" style="margin: 0 -200px;">
-    <!-- BEGIN-SNIPPET footer-example.hbs -->
+    <!-- BEGIN-SNIPPET header-example.hbs -->
       <NyprOHeader
         @donateURL={{DONATE_URL}}
         as |header|>
@@ -68,12 +68,10 @@
 
         <header.right as |right|>
           {{#if STORY}}
-            <right.share>
-              <NyprMShareTools @label='Share' as |tools|>
-                <tools.share @service='facebook' />
-                <tools.share @service='twitter' @params={{hash text='Read this great article' via='WNYC'}}/>
-              </NyprMShareTools>
-            </right.share>
+            <NyprMShareTools @label='Share' as |tools|>
+              <tools.share @service='facebook' />
+              <tools.share @service='twitter' @params={{hash text='Read this great article' via='WNYC'}}/>
+            </NyprMShareTools>
 
             <NyprAButton
               class='c-main-header__donate o-button--sm'
@@ -87,12 +85,10 @@
             </right.search>
 
           {{else if GALLERY}}
-            <right.share>
-              <NyprMShareTools @label='Share' as |tools|>
-                <tools.share @service='facebook' />
-                <tools.share @service='twitter' @params={{hash text='Read this great article' via='WNYC'}}/>
-              </NyprMShareTools>
-            </right.share>
+            <NyprMShareTools @label='Share' as |tools|>
+              <tools.share @service='facebook' />
+              <tools.share @service='twitter' @params={{hash text='Read this great article' via='WNYC'}}/>
+            </NyprMShareTools>
 
             <NyprAButton @blank={{true}} class="u-padding--half">
               <NyprASvg @icon='close' class="c-main-header__close"/>
@@ -118,7 +114,26 @@
     </div>
   </demo.example>
 
-  <demo.snippet @name='footer-example.hbs' @label='Usage'/>
-  <demo.snippet @name='nypr-o-footer.hbs' @label='nypr-o-footer.hbs'/>
-  <demo.snippet @name='nypr-o-footer.js' @label='nypr-o-footer.js'/>
+  <demo.snippet @name='header-example.hbs' @label='Usage'/>
+  <demo.snippet @name='nypr-o-header.hbs' @label='nypr-o-header.hbs'/>
+  <demo.snippet @name='nypr-o-header.js' @label='nypr-o-header.js'/>
 </DocsDemo>
+
+### Nested Components
+
+{{#docs-demo as |demo|}}
+
+  {{demo.snippet name='nypr-o-header-leaderboard.hbs' label='nypr-o-header/leaderboard.hbs'}}
+  {{demo.snippet name='nypr-o-header-leaderboard.js' label='nypr-o-header/leaderboard.js'}}
+  {{demo.snippet name='nypr-o-header-menu.hbs' label='nypr-o-header/menu.hbs'}}
+  {{demo.snippet name='nypr-o-header-menu.js' label='nypr-o-header/menu.js'}}
+  {{demo.snippet name='nypr-o-header-nav.hbs' label='nypr-o-header/nav.hbs'}}
+  {{demo.snippet name='nypr-o-header-nav.js' label='nypr-o-header/nav.js'}}
+  {{demo.snippet name='nypr-o-header-left.hbs' label='nypr-o-header/left.hbs'}}
+  {{demo.snippet name='nypr-o-header-left.js' label='nypr-o-header/left.js'}}
+  {{demo.snippet name='nypr-o-header-headline.hbs' label='nypr-o-header/headline.hbs'}}
+  {{demo.snippet name='nypr-o-header-headline.js' label='nypr-o-header/headline.js'}}
+  {{demo.snippet name='nypr-o-header-right.hbs' label='nypr-o-header/right.hbs'}}
+  {{demo.snippet name='nypr-o-header-right.js' label='nypr-o-header/right.js'}}
+
+{{/docs-demo}}

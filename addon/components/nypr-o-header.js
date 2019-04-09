@@ -6,12 +6,21 @@ import layout from '../templates/components/nypr-o-header';
 /**
  Site header
 
+ See [usage docs](/docs/organisms/nypr-o-header) for more.
+
  @class nypr-o-header
  @yield {Hash} hash
- @yield {Component} hash.leaderboard `blank-template`
- @yield {Component} hash.site `nypr-m-meta/site`
- @yield {Component} hash.article `nypr-m-meta/article`
- @yield {Component} hash.gallery `nypr-m-meta/gallery`
+ @yield {Block} hash.leaderboard `nypr-o-header/leaderboard`
+ @yield {Component} hash.menu `nypr-o-header/menu`
+ @yield {Block} hash.menu.branding `blank-template`
+ @yield {Component} hash.menu.primaryNav `nypr-o-header/nav`
+ @yield {Component} hash.menu.secondaryNav `nypr-m-secondary-nav`
+ @yield {Component} hash.left `nypr-o-header/left`
+ @yield {Block} hash.left.branding `blank-template`
+ @yield {Block} hash.left.headline `nypr-o-header/headline`
+ @yield {Component} hash.nav `nypr-o-header/nav`
+ @yield {Component} hash.right `nypr-o-header/right`
+ @yield {Component} hash.right.search `nypr-m-inline-search`
 */
 export default Component.extend({
   layout,
@@ -19,7 +28,21 @@ export default Component.extend({
   classNames: ['c-main-header'],
   classNameBindings: ['isOpen:side-menu-is-active', 'outOfViewport'],
 
+  /**
+    Controls whether the side menu is open
+
+    @field isOpen
+    @type {Boolean}
+  */
   isOpen: false,
+
+  /**
+    Indicates whether or not the header has been scrolled up, out of the viewport.
+
+    @field outOfViewport
+    @type {Boolean}
+  */
+  outOfViewport: false,
 
   init() {
     this._super(...arguments);
@@ -33,9 +56,11 @@ export default Component.extend({
   },
 
   /**
+    Measures whether the bottom of the element is out of the viewport
+
     @method _scrollListener
     @param {EventObject} event
-    @return {Void}
+    @return {void}
   */
   _scrollListener() {
     debounce(this, () => {

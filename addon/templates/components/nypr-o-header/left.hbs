@@ -1,3 +1,4 @@
+{{!-- BEGIN-SNIPPET nypr-o-header-left.hbs --}}
 <div class="c-menu-toggle">
   <NyprAButton class="o-menu-toggle" aria-expanded={{ariaExpanded}} @blank={{true}} @onclick={{@openMenu}}>
     <span class="is-vishidden">Menu</span>
@@ -10,3 +11,4 @@
 </div>
 
 {{yield (hash headline=(component 'nypr-o-header/headline'))}}
+{{!-- END-SNIPPET --}}
