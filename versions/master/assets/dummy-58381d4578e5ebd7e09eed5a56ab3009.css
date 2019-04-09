@@ -5,16 +5,6 @@ label {
   margin-bottom: 8px;
 }
 
-body,
-html,
-input[type=email],
-input[type=search],
-input[type=tel],
-input[type=text],
-p {
-  font-family: Lato, sans-serif !important;
-}
-
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -6250,7 +6240,7 @@ table {
 .ember-basic-dropdown-content {
   position: absolute;
   width: auto;
-  z-index: 1000;
+  z-index: 10000;
   background-color: #fff;
 }
 
@@ -6282,11 +6272,6 @@ table {
   align-items: flex-start;
 }
 
-.media-object__media>img,
-label {
-  display: block;
-}
-
 .media-object.center {
   align-items: center;
 }
@@ -6299,12 +6284,16 @@ label {
   margin-right: 30px;
 }
 
+.media-object__media>img {
+  display: block;
+}
+
 .media-object__object {
   flex: 1;
 }
 
 .c-toggle-box__dropdown {
-  padding: 8px;
+  padding: 16px;
 }
 
 .c-toggle-box__label:before {
@@ -6341,11 +6330,16 @@ p {
 }
 
 label {
+  display: inline-block;
+  line-height: 1;
   cursor: pointer;
 }
 
-a {
-  color: var(--brand-secondary);
+input[type=email],
+input[type=search],
+input[type=tel],
+input[type=text] {
+  font-family: Lato, sans-serif !important;
 }
 
 :not(.theme-typography)>h1:not(.o-headline),
@@ -6355,7 +6349,6 @@ a {
 :not(.theme-typography)>h5,
 :not(.theme-typography)>h6 {
   letter-spacing: initial;
-  font-family: Lato, sans-serif;
   font-weight: 700;
 }
 
