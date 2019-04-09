@@ -9,7 +9,7 @@ module('Integration | Component | nypr-a-kicker', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`<NyprAKicker/>`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom('.o-kicker').exists();
 
     // Template block usage:
     await render(hbs`

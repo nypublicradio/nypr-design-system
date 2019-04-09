@@ -7,8 +7,11 @@ module('Integration | Component | nypr-a-picture', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`<NyprAPicture/>`);
+    const IMG = 'https://picsum.photos/300';
+    this.set('img', IMG);
+    await render(hbs`<NyprAPicture @src-s={{img}}/>`);
 
     assert.dom('picture').exists();
+    assert.dom('picture img').hasAttribute('src', IMG);
   });
 });

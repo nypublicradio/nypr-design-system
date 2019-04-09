@@ -9,7 +9,7 @@ module('Integration | Component | nypr-a-section-heading', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`<NyprASectionHeading/>`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom('h2.o-section-heading').exists();
 
     // Template block usage:
     await render(hbs`
