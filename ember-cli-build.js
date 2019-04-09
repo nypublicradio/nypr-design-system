@@ -24,6 +24,9 @@ module.exports = function(defaults) {
         {'wnyc-colors': 'app/styles/nypr-design-system/vars/_wnyc-colors.scss'},
         {'gothamist-colors': 'app/styles/nypr-design-system/vars/_gothamist-colors.scss'}
       ]
+    },
+    'component-lineage': {
+      enabled: true,
     }
   });
 
