@@ -29,7 +29,8 @@ export default Component.extend({
       }
       let scrolled = window.pageYOffset;
       let docHeight = document.body.getBoundingClientRect().height - window.innerHeight;
-      this.set('progress', scrolled / docHeight);
+      let progress = scrolled / docHeight
+      this.set('progress', isNaN(progress) ? 0 : progress);
     }, 150);
   }
 });
