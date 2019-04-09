@@ -1,26 +1,31 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, waitFor } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | nypr-m-progress-bar', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    await render(hbs`<NyprMProgressBar/>`);
+    assert.dom('.o-progress').exists();
+  });
 
-    await render(hbs`{{nypr-m-progress-bar}}`);
+  test('it updates as you scroll', async function(assert) {
+    const testingContainer = document.querySelector('#ember-testing-container');
+    const HEIGHT = 5000;
+    const OLD_POSITION = testingContainer.style.position;
+    testingContainer.style.height = `${HEIGHT}px`;
+    testingContainer.style.position = 'relative';
 
-    assert.equal(this.element.textContent.trim(), '');
+    await render(hbs`<NyprMProgressBar/>`);
 
-    // Template block usage:
-    await render(hbs`
-      {{#nypr-m-progress-bar}}
-        template block text
-      {{/nypr-m-progress-bar}}
-    `);
+    window.scrollTo(0, HEIGHT);
+    await waitFor('progress[value="1"]')
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom('.o-progress').hasAttribute('value', '1');
+
+    testingContainer.style.height = '';
+    testingContainer.style.position = OLD_POSITION;
   });
 });
