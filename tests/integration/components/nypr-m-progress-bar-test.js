@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { module, skip, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, waitFor } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
@@ -11,7 +11,7 @@ module('Integration | Component | nypr-m-progress-bar', function(hooks) {
     assert.dom('.o-progress').exists();
   });
 
-  test('it updates as you scroll', async function(assert) {
+  skip('it updates as you scroll', async function(assert) {
     const testingContainer = document.querySelector('#ember-testing-container');
     const HEIGHT = 5000;
     const OLD_POSITION = testingContainer.style.position;
