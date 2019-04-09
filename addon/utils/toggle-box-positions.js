@@ -7,6 +7,9 @@
   @param {Number} rightOffset Specify an optional offset from the right edge
 */
 export function positionRightCenter(trigger, content, rightOffset = 0) {
+  if (typeof rightOffset !== 'number') {
+    rightOffset = 0;
+  }
   let { top, left, width, height } = trigger.getBoundingClientRect();
   let { height: contentHeight } = content.getBoundingClientRect();
   let style = {
@@ -26,6 +29,9 @@ export function positionRightCenter(trigger, content, rightOffset = 0) {
   @param {Number} topOffset Specify an optional offset from the top edge
 */
 export function positionTopCenter(trigger, content, topOffset = 0) {
+  if (typeof topOffset !== 'number') {
+    topOffset = 0;
+  }
   let { top, left: triggerLeft, width: triggerWidth } = trigger.getBoundingClientRect();
   let { height: contentHeight, width: contentWidth } = content.getBoundingClientRect();
 
@@ -48,6 +54,9 @@ export function positionTopCenter(trigger, content, topOffset = 0) {
   @param {Number} bottomOffset Specify an optional offset from the bottom edge
 */
 export function positionBottomCenter(trigger, content, bottomOffset = 0) {
+  if (typeof bottomOffset !== 'number') {
+    bottomOffset = 0;
+  }
   let { top, left: triggerLeft, width: triggerWidth, height: triggerHeight } = trigger.getBoundingClientRect();
   let { width: contentWidth } = content.getBoundingClientRect();
 
