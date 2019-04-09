@@ -1,7 +1,7 @@
 {{!-- BEGIN-SNIPPET nypr-o-article-header-publish-date.hbs --}}
 <span class="o-published-date__time">
-  <time datetime={{moment-format @publishDate}}>
-    {{moment-format @publishDate (or @format this.format)}}
+  <time datetime={{moment-format @publishDate 'YYYY-MM-DDThh:mmZ' @inputFormat}}>
+    {{moment-format @publishDate (or @format this.format) @inputFormat}}
   </time>
 </span>
 {{!-- END-SNIPPET --}}
