@@ -18,7 +18,7 @@ module('Integration | Component | nypr-m-figcaption', function(hooks) {
       <NyprMFigcaption @caption={{caption}} @credit={{credit}}/>
     `);
 
-    assert.dom('figcaption.o-figure__caption').exists();
+    assert.dom('figcaption.o-caption').exists();
     assert.dom('figcaption').includesText(CAPTION);
     assert.dom('figcaption .o-credit').hasText(CREDIT);
   })
