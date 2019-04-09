@@ -1,6 +1,6 @@
 {
   "name": "nypr-design-system",
-  "version": "0.1.0-rc5",
+  "version": "0.1.0-rc6",
   "description": "New York Public Radio design system",
   "keywords": [
     "ember-addon"
@@ -35,8 +35,8 @@
     "ember-truth-helpers": "^2.1.0",
     "filendir": "^1.0.2",
     "glob": "^7.1.3",
-    "sass": "^1.16.1",
     "sander": "^0.6.0",
+    "sass": "^1.16.1",
     "strip-json-comments": "^2.0.1"
   },
   "devDependencies": {
