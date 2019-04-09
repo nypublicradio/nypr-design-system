@@ -21,7 +21,7 @@ module('Integration | Component | nypr-m-progress-bar', function(hooks) {
     await render(hbs`<NyprMProgressBar/>`);
 
     window.scrollTo(0, HEIGHT);
-    await waitFor('.o-progress[value="1"]', {timeout: 1500});
+    await waitFor('.o-progress[value="1"]', {timeout: 5000});
 
     assert.dom('.o-progress').hasAttribute('value', '1');
 
