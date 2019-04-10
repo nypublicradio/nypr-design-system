@@ -1,14 +1,14 @@
 {{!-- BEGIN-SNIPPET nypr-a-toggle-box.hbs --}}
-<BasicDropdown
-  @calculatePosition={{@calculatePosition}}
-  @horizontalPosition={{@horizontalPosition}}
-  @verticalPostion={{@verticalPostion}}
-  @onOpen={{action (mut this.open) true}}
-  @onClose={{action (mut this.open) false}}
-  as |dd|>
+{{#basic-dropdown
+  calculatePosition=@calculatePosition
+  horizontalPosition=@horizontalPosition
+  verticalPostion=@verticalPostion
+  onOpen=(action (mut this.open) true)
+  onClose=(action (mut this.open) false)
+  as |dd|}}
   {{yield (hash
-    trigger=(component 'nypr-a-toggle-box/trigger' dd=dd icon=icon)
-    dropdown=(component 'nypr-a-toggle-box/dropdown' dd=dd)
+    trigger=(component 'nypr-a-toggle-box/trigger' button=dd.trigger icon=icon)
+    dropdown=(component dd.content class="c-toggle-box__dropdown")
   )}}
-</BasicDropdown>
+{{/basic-dropdown}}
 {{!-- END-SNIPPET --}}

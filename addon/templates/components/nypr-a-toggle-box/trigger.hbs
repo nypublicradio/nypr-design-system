@@ -1,9 +1,9 @@
-<@dd.Trigger class="c-toggle-box__label o-text-with-icon">
+{{#component @button class="c-toggle-box__label o-text-with-icon"}}
   {{yield}}
 
   {{#if (eq @icon 'caret-down')}}
     <span class="o-icon o-icon--caret u-icon--xs">
-      <NyprASvg @icon="caret-down" />
+      <NyprASvg @icon={{@icon}} />
     </span>
   {{/if}}
-</@dd.Trigger>
+{{/component}}
