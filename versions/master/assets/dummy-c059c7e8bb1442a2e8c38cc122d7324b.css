@@ -6227,6 +6227,31 @@ table {
   z-index: auto;
 }
 
+.media-object {
+  display: flex;
+  align-items: flex-start;
+}
+
+.media-object.center {
+  align-items: center;
+}
+
+.media-object.bottom {
+  align-items: flex-end;
+}
+
+.media-object__media {
+  margin-right: 30px;
+}
+
+.media-object__media>img {
+  display: block;
+}
+
+.media-object__object {
+  flex: 1;
+}
+
 .ember-basic-dropdown {
   position: relative;
 }
@@ -6265,31 +6290,6 @@ table {
 
 .ember-basic-dropdown-content-wormhole-origin {
   display: inline;
-}
-
-.media-object {
-  display: flex;
-  align-items: flex-start;
-}
-
-.media-object.center {
-  align-items: center;
-}
-
-.media-object.bottom {
-  align-items: flex-end;
-}
-
-.media-object__media {
-  margin-right: 30px;
-}
-
-.media-object__media>img {
-  display: block;
-}
-
-.media-object__object {
-  flex: 1;
 }
 
 .c-toggle-box__dropdown {
