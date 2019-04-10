@@ -1,6 +1,6 @@
-import { module, skip, test } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, waitFor } from '@ember/test-helpers';
+import { render, waitUntil } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | nypr-m-progress-bar', function(hooks) {
@@ -11,9 +11,10 @@ module('Integration | Component | nypr-m-progress-bar', function(hooks) {
     assert.dom('.o-progress').exists();
   });
 
-  skip('it updates as you scroll', async function(assert) {
+  test('it updates as you scroll', async function(assert) {
+
     const testingContainer = document.querySelector('#ember-testing-container');
-    const HEIGHT = 5000;
+    const HEIGHT = window.innerHeight * 2;
     const OLD_POSITION = testingContainer.style.position;
     testingContainer.style.height = `${HEIGHT}px`;
     testingContainer.style.position = 'relative';
@@ -21,9 +22,9 @@ module('Integration | Component | nypr-m-progress-bar', function(hooks) {
     await render(hbs`<NyprMProgressBar/>`);
 
     window.scrollTo(0, HEIGHT);
-    await waitFor('.o-progress[value="1"]', {timeout: 5000});
+    await waitUntil(() => this.element.querySelector('.o-progress').value > 0);
 
-    assert.dom('.o-progress').hasAttribute('value', '1');
+    assert.ok(`.o-progress has value ${this.element.querySelector('.o-progress')}`);
 
     testingContainer.style.height = '';
     testingContainer.style.position = OLD_POSITION;
