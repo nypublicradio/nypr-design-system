@@ -5,10 +5,6 @@
 // CSS imports
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
 
-// third party imports
-$ember-basic-dropdown-content-z-index: 10000;
-@import "ember-basic-dropdown";
-
 // design system
 @import "nypr-design-system/vars/colors";
 @import "nypr-design-system/atoms/media-object";
