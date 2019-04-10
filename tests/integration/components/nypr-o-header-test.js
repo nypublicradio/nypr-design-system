@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, waitFor } from '@ember/test-helpers';
+import { render, click, waitUntil } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | nypr-o-header', function(hooks) {
@@ -98,10 +98,6 @@ module('Integration | Component | nypr-o-header', function(hooks) {
 
   test('floating header', async function(assert) {
     const testingContainer = document.querySelector('#ember-testing-container');
-    const HEIGHT = 5000;
-    const OLD_POSITION = testingContainer.style.position;
-    testingContainer.style.height = `${HEIGHT}px`;
-    testingContainer.style.position = 'relative';
 
     await render(hbs`
       <NyprOHeader as |header|>
@@ -110,8 +106,24 @@ module('Integration | Component | nypr-o-header', function(hooks) {
       </NyprOHeader>
     `);
 
+    // CSS can play factor. without styles, this element is taller than the window
+    // with styles, it's rather short, so use the larger of the two.
+    // double them so there's enough space to scroll past the element and trigger the progress bar
+    const HEADER_HEIGHT = this.element.querySelector('.c-main-header').scrollHeight * 2;
+    const WINDOW_HEIGHT = window.innerHeight * 2;
+    const HEIGHT = HEADER_HEIGHT > WINDOW_HEIGHT ? HEADER_HEIGHT : WINDOW_HEIGHT;
+
+    const OLD_POSITION = testingContainer.style.position;
+
+    testingContainer.style.height = `${HEIGHT}px`;
+    testingContainer.style.position = 'relative';
+
     window.scrollTo(0, HEIGHT)
-    await waitFor('.o-progress');
+
+    await waitUntil(() => {
+      let progress = this.element.querySelector('.o-progress');
+      return progress && progress.value > 0;
+    }, {timeout: 2000});
 
     assert.dom('.o-progress').exists();
     assert.dom('.c-main-header__inner.c-floating-header.is-visible').exists();
