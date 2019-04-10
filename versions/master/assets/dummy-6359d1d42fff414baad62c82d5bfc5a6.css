@@ -6323,9 +6323,9 @@ p {
   line-height: 1.625;
 }
 
-[class*=c-] p,
-[class*=o-] p,
-[class*=u-] p {
+[class^=c-] p,
+[class^=o-] p,
+[class^=u-] p {
   margin: 0;
 }
 
