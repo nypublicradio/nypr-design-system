@@ -31,9 +31,9 @@ p {
   line-height: 1.625;
 }
 
-[class*=c-],
-[class*=o-],
-[class*=u-] {
+[class^=c-],
+[class^=o-],
+[class^=u-] {
   p {
     margin: 0;
   }
