@@ -7798,6 +7798,7 @@ function r(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?argum
 var i=Ember.Component.extend({layout:t.default,classNames:["c-share-tools"],classNameBindings:["vertical:c-share-tools--vertical"],vertical:!1})
 e.default=i
 var o=function(e){return Object.keys(e).filter(function(t){return e[t]}).map(function(t){return"".concat(t,"=").concat(e[t])}).join("&")},s={facebook:{profileBase:"https://www.facebook.com/",shareBase:"https://www.facebook.com/sharer.php",getParams:function(e){return"u=".concat(e)}},twitter:{profileBase:"https://twitter.com/",shareBase:"https://twitter.com/intent/tweet",getParams:function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{}
+return o(r({},t,{url:e}))}},reddit:{shareBase:"https://www.reddit.com/submit",getParams:function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{}
 return o(r({},t,{url:e}))}},instagram:{profileBase:"https://www.instagram.com/",shareBase:"",getParams:function(){}},email:{shareBase:"mailto:",getParams:function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{}
 return o(r({},t,{url:e}))}}}
 e.SERVICE_MAP=s}),define("nypr-design-system/components/nypr-m-share-tools/link",["exports","nypr-design-system/templates/components/nypr-m-share-tools/link","nypr-design-system/components/nypr-m-share-tools"],function(e,t,r){"use strict"
