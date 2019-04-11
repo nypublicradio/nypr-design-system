@@ -94,6 +94,7 @@ module('Integration | Component | nypr-o-header', function(hooks) {
     await click('.o-menu-toggle');
 
     assert.dom('.c-main-header.side-menu-is-active').exists();
+    assert.dom('body.side-menu-is-active', document).exists();
   });
 
   test('floating header', async function(assert) {
@@ -125,10 +126,32 @@ module('Integration | Component | nypr-o-header', function(hooks) {
       return progress && progress.value > 0;
     }, {timeout: 2000});
 
+    const HEADER_CONTENTS = this.element.querySelector('.c-main-header__inner');
+
     assert.dom('.o-progress').exists();
     assert.dom('.c-main-header__inner.c-floating-header.is-visible').exists();
+    assert.dom('.c-main-header__spacer').hasStyle({
+      height: `${HEADER_CONTENTS.getBoundingClientRect().height}px`,
+    });
 
     testingContainer.style.height = '';
     testingContainer.style.position = OLD_POSITION;
-  })
+  });
+
+  test('makes room for an ad', async function(assert) {
+    await render(hbs`
+      <NyprOHeader as |header|>
+        <header.leaderboard>
+          <div style="height: 500px;"/>
+        </header.leaderboard>
+        <header.menu/>
+        <header.left/>
+      </NyprOHeader>
+    `);
+
+    await click('.o-menu-toggle');
+
+    const ad = this.element.querySelector('.c-main-header__ad-unit');
+    assert.equal(this.element.querySelector('.c-side-menu').style.height, `calc(100vh - ${ad.offsetHeight}px)`);
+  });
 });
