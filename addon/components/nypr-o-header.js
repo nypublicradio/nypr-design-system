@@ -144,7 +144,7 @@ export default Component.extend({
     @param {EventObject} event
     @return {void}
   */
-  _scrollListener() {
+  _scrollListener(/* e */) {
     debounce(this, () => {
       let el;
       if (this.floatLandmark) {
