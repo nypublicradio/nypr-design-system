@@ -1,6 +1,8 @@
 // BEGIN-SNIPPET nypr-o-header.js
 import Component from '@ember/component';
 import { debounce, bind } from '@ember/runloop';
+import { computed } from '@ember/object';
+import { htmlSafe } from '@ember/string';
 import layout from '../templates/components/nypr-o-header';
 
 /**
@@ -11,6 +13,7 @@ import layout from '../templates/components/nypr-o-header';
  @class nypr-o-header
  @yield {Hash} hash
  @yield {Block} hash.leaderboard `nypr-o-header/leaderboard`
+ @yield {Boolean} hash.outOfViewport
  @yield {Component} hash.menu `nypr-o-header/menu`
  @yield {Block} hash.menu.branding `blank-template`
  @yield {Component} hash.menu.primaryNav `nypr-o-header/nav`
@@ -44,6 +47,31 @@ export default Component.extend({
   */
   outOfViewport: false,
 
+  /**
+    CSS Selector to target for "out of viewport" state
+
+    @argument floatLandmark
+    @type {String}
+  */
+
+  /**
+   Computes current vertical spacing of the header to prevent proceding elements from moving up
+   or down when the header is removed from/added to the document flow.
+
+   Returned as an inline CSS declaration
+
+   @accessor spacerStyle
+   @type {String}
+  */
+  spacerStyle: computed('outOfViewport', function() {
+    let style = '';
+    if (typeof FastBoot === 'undefined' && this.outOfViewport) {
+      let { height } = this.element.querySelector('.c-main-header__inner').getBoundingClientRect();
+      style = `height: ${height}px;`;
+    }
+    return htmlSafe(style);
+  }),
+
   init() {
     this._super(...arguments);
     if (typeof FastBoot === 'undefined') {
@@ -68,7 +96,13 @@ export default Component.extend({
   */
   _scrollListener() {
     debounce(this, () => {
-      let { top, height } = this.element.getBoundingClientRect();
+      let el;
+      if (this.floatLandmark) {
+        el = document.querySelector(this.floatLandmark);
+      } else {
+        el = this.element;
+      }
+      let { top, height } = el.getBoundingClientRect();
       this.set('outOfViewport', top + height < 0);
     }, 150);
   }

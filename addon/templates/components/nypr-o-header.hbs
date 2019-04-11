@@ -7,6 +7,7 @@
     left=(component 'nypr-o-header/left' openMenu=(action (mut this.isOpen) (not this.isOpen)) ariaExpanded=(if this.isOpen 'true' 'false'))
     nav=(component 'nypr-o-header/nav' class="c-primary-nav--top")
     right=(component 'nypr-o-header/right')
+    outOfViewport=this.outOfViewport
   )}}
 
   {{#if this.outOfViewport}}
@@ -14,4 +15,7 @@
   {{/if}}
 
   <div class="c-content-overlay"></div>
+
 </div>
+
+<div class="c-main-header__spacer" style={{spacerStyle}}></div>
