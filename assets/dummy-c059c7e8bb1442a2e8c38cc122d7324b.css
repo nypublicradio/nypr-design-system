@@ -1,6 +1,8 @@
-.example-grid thead,
-.example-label {
-  font-size: 12px;
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400i,700);
+
+fieldset,
+label {
+  margin-bottom: 8px;
 }
 
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
@@ -6225,35 +6227,152 @@ table {
   z-index: auto;
 }
 
-.nypr-button {
-  appearance: none;
-  border: none;
-  padding: 0;
-  font-family: inherit;
-  border-radius: 0;
-  background: 0 0;
+.media-object {
   display: flex;
-  align-self: center;
-  justify-content: center;
-  color: inherit;
+  align-items: flex-start;
 }
 
-.nypr-button--nypr {
-  color: #000;
-  padding: 8px;
-  border: 1px solid #333;
+.media-object.center {
+  align-items: center;
 }
 
-.nypr-button--wnyc {
-  color: #fff;
-  font-weight: 700;
-  padding: 8px 16px;
-  border-radius: 30px;
-  background-color: #de1e3d;
+.media-object.bottom {
+  align-items: flex-end;
+}
+
+.media-object__media {
+  margin-right: 30px;
+}
+
+.media-object__media>img {
+  display: block;
+}
+
+.media-object__object {
+  flex: 1;
+}
+
+.ember-basic-dropdown {
+  position: relative;
+}
+
+.ember-basic-dropdown,
+.ember-basic-dropdown-content,
+.ember-basic-dropdown-content * {
+  box-sizing: border-box;
+}
+
+.ember-basic-dropdown-content {
+  position: absolute;
+  width: auto;
+  z-index: 10000;
+  background-color: #fff;
+}
+
+.ember-basic-dropdown-content--left {
+  left: 0;
+}
+
+.ember-basic-dropdown-content--right {
+  right: 0;
+}
+
+.ember-basic-dropdown-overlay {
+  position: fixed;
+  background: rgba(0, 0, 0, .5);
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.ember-basic-dropdown-content-wormhole-origin {
+  display: inline;
+}
+
+.c-toggle-box__dropdown {
+  padding: 16px;
+}
+
+.c-toggle-box__label:before {
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  transform: none;
+  border: 12px solid transparent;
+  border-bottom-color: #fff;
+  bottom: -15px;
+  right: -5px;
+}
+
+.c-article-header__center {
+  position: relative;
 }
 
 :root {
   --brand-primary: #333;
+  --brand-secondary: #98d2eb;
+}
+
+body,
+html,
+p {
+  font-size: 1rem;
+  line-height: 1.625;
+}
+
+[class^=c-] p,
+[class^=o-] p,
+[class^=u-] p {
+  margin: 0;
+}
+
+label {
+  display: inline-block;
+  line-height: 1;
+  cursor: pointer;
+}
+
+input[type=email],
+input[type=search],
+input[type=tel],
+input[type=text] {
+  font-family: Lato, sans-serif !important;
+}
+
+:not(.theme-typography)>h1:not(.o-headline),
+:not(.theme-typography)>h2:not(.o-section-heading),
+:not(.theme-typography)>h3,
+:not(.theme-typography)>h4,
+:not(.theme-typography)>h5,
+:not(.theme-typography)>h6 {
+  letter-spacing: initial;
+  font-weight: 700;
+}
+
+:not(.theme-typography)>h2 {
+  font-size: 1.5em;
+}
+
+:not(.theme-typography)>h3 {
+  font-size: 1.17em;
+  font-weight: initial;
+}
+
+:not(.theme-typography)>h4 {
+  font-size: 1.1rem;
+  margin: 1.33rem 0;
+}
+
+.example-grid thead,
+.example-label {
+  font-size: 12px;
+}
+
+img {
+  border-style: none;
 }
 
 .AddonDocs-DocsViewer-Nav {
@@ -6263,6 +6382,11 @@ table {
 
 .docs-header>header>div {
   max-width: none;
+}
+
+.docs-header input[type=text] {
+  font-size: 12px;
+  padding: 8px 8px 8px 24px;
 }
 
 .example-grid {
@@ -6303,6 +6427,16 @@ table {
 .example-grid td *,
 .example-grid th * {
   vertical-align: middle;
+}
+
+svg {
+  fill: inherit;
+}
+
+.btn {
+  background-color: #eaeaea;
+  padding: 8px 12px;
+  color: #333;
 }
 
 @media (min-width: 576px) {
