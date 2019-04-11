@@ -107,8 +107,8 @@ export default Component.extend({
    @return {void}
   */
   toggleMenu(force, _e) { // eslint-disable-line no-unused-vars
-    // arity can change depending where it's called
-    if (arguments.length === 1) {
+    // arg order can change depending where it's called
+    if (force instanceof Event) {
       _e = force;
       force = undefined;
     }
