@@ -70,7 +70,9 @@ export default Component.extend(ClickOutsideMixin, {
 
   willDestroy() {
     this._super(...arguments);
-    this.removeClickOutsideListener();
+    if (typeof FastBoot === 'undefined') {
+      this.removeClickOutsideListener();
+    }
   },
 });
 // END-SNIPPET
