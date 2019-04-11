@@ -84,7 +84,34 @@ export default Component.extend({
     this._super(...arguments);
     if (typeof FastBoot === 'undefined') {
       window.removeEventListener('scroll', this._boundListener);
+
+      // clean up tests
+      document.body.classList.remove('side-menu-is-active');
     }
+  },
+
+  /**
+   Toggle open menu state and corresponding state class on body element
+
+   @method toggleMenu
+   @param {Boolean} force optional boolean value to set the value instead of toggling it
+   @param {Event} e click event
+   @return {void}
+  */
+  toggleMenu(force, _e) { // eslint-disable-line no-unused-vars
+    // arity can change depending where it's called
+    if (arguments.length === 1) {
+      _e = force;
+      force = undefined;
+    }
+    if (typeof force === 'boolean') {
+      this.set('isOpen', force);
+    } else {
+      this.toggleProperty('isOpen');
+    }
+
+    document.body.classList.toggle('side-menu-is-active', force);
+
   },
 
   /**
@@ -106,6 +133,5 @@ export default Component.extend({
       this.set('outOfViewport', top + height < 0);
     }, 150);
   }
-
 });
 // END-SNIPPET
