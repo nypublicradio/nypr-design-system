@@ -40,9 +40,11 @@ export const SERVICE_MAP = {
   twitter: {
     profileBase: 'https://twitter.com/',
     shareBase: 'https://twitter.com/intent/tweet',
-    getParams(url, params = {}) {
-      return filter({...params, url});
-    }
+    getParams: (url, params = {}) => filter({...params, url}),
+  },
+  reddit: {
+    shareBase: 'https://www.reddit.com/submit',
+    getParams: (url, params = {}) => filter({...params, url}),
   },
   instagram: {
     profileBase: 'https://www.instagram.com/',
@@ -51,9 +53,7 @@ export const SERVICE_MAP = {
   },
   email: {
     shareBase: 'mailto:',
-    getParams(url, params = {}) {
-      return filter({...params, url});
-    }
+    getParams: (url, params = {}) => filter({...params, url}),
   },
 };
 // END-SNIPPET
