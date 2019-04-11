@@ -9,7 +9,7 @@
   </div>
 
   <div class="c-article__donate" data-test-article-footer-donate>
-    {{yield (hash donate=(component 'nypr-o-donate'))}}
+    {{yield (hash donate=(component 'nypr-o-donate' isActive=this.inViewport))}}
   </div>
 
   <div class="c-article__comments" data-test-article-footer-comments>

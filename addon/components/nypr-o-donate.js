@@ -18,6 +18,7 @@ import layout from '../templates/components/nypr-o-donate';
 export default Component.extend({
   layout,
   classNames: ['c-donate-tout'],
+  classNameBindings: ['isActive'],
 
   /**
     Close button action

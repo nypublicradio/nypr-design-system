@@ -1,5 +1,7 @@
 // BEGIN-SNIPPET nypr-o-article-footer.js
 import Component from '@ember/component';
+import { debounce, bind } from '@ember/runloop';
+
 import layout from '../templates/components/nypr-o-article-footer';
 
 /**
@@ -35,5 +37,44 @@ import layout from '../templates/components/nypr-o-article-footer';
 export default Component.extend({
   layout,
   classNames: ['c-article__footer', 'u-section-spacing'],
+
+  init() {
+    this._super(...arguments);
+    if (typeof FastBoot === 'undefined') {
+      this._boundListener = bind(this, '_scrollListener');
+      window.addEventListener('scroll', this._boundListener);
+    }
+  },
+
+  willDestroy() {
+    this._super(...arguments);
+    if (typeof FastBoot === 'undefined') {
+      window.removeEventListener('scroll', this._boundListener);
+    }
+  },
+
+  /**
+    Indicates whether or not this element is in the viewport
+
+    @field inViewport
+    @type {Boolean}
+  */
+  inViewport: false,
+
+
+  /**
+    Measures whether the footer is scrolled into view, and shows donate tout if so.
+
+    @method _scrollListener
+    @param {EventObject} event
+    @return {void}
+  */
+  _scrollListener(/* e */) {
+    debounce(this, () => {
+      let footerTopEdge = this.element.offsetTop
+      let viewportBottom = (window.scrollY + window.innerHeight)
+      this.set('inViewport', footerTopEdge < viewportBottom); // top of footer has passed the bottom of the viewport
+    }, 150);
+  }
 });
 // END-SNIPPET
