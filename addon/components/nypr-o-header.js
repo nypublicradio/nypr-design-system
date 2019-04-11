@@ -55,6 +55,14 @@ export default Component.extend({
   */
 
   /**
+    Offset for menu height to make room for an ad at the top of the screen
+
+    @field menuHeightOffset
+    @type {Number}
+  */
+  menuHeightOffset: 0,
+
+  /**
    Computes current vertical spacing of the header to prevent proceding elements from moving up
    or down when the header is removed from/added to the document flow.
 
@@ -112,6 +120,21 @@ export default Component.extend({
 
     document.body.classList.toggle('side-menu-is-active', force);
 
+    this.setMenuHeightOffset();
+  },
+
+  /**
+    Measure vertical space taken up by leaderboard ad, if any.
+    It's the top of the screen, so the offsetTop of the header wrapper will give us the desired value
+
+    @method setMenuHeightOffset
+    @return {void}
+  */
+  setMenuHeightOffset() {
+    let header = this.element.querySelector('#header-inner');
+    if (header) {
+      this.set('menuHeightOffset', header.offsetTop);
+    }
   },
 
   /**
