@@ -6,13 +6,14 @@
   <div class="c-article__meta-group">
     {{yield (hash publishDate=(component 'nypr-o-article-header/publish-date'))}}
 
-    &bull;
-
-    <a
-      href={{@commentsUrl}}
-      class="u-has-accent u-has-accent--secondary">
-      {{@commentCount}}
-    </a>
+    {{#if @commentCount}}
+      &bull;
+      <a
+        href={{@commentsUrl}}
+        class="u-has-accent u-has-accent--secondary">
+        {{@commentCount}} {{if (eq @commentCount 1) 'Comment' 'Comments'}}
+      </a>
+    {{/if}}
 
     {{#if @galleryPhotosCount}}
       &bull;
