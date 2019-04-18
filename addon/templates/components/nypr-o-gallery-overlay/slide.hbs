@@ -1,0 +1,50 @@
+{{!-- BEGIN-SNIPPET nypr-o-gallery-overlay-slide.hbs --}}
+<div class="c-slide__header u-spacing--half l-wrap">
+  <h2 class="c-slide__heading u-font--l">{{@slide.title}}</h2>
+  <div class="c-slide__count u-font--secondary-style u-color--gray--light u-font--xs">
+    Slide {{this.count}} of {{@total}}
+  </div>
+</div>
+
+<div class="c-slide__content u-spacing">
+
+  <div class="c-slide__media u-spacing--half">
+
+    <div class="c-slide__image">
+      <NyprAPicture @src-s={{@slide.full}} />
+    </div>
+
+    <div class="c-slide__meta l-wrap">
+
+      <span class="o-credit">
+        {{@slide.credit}}
+      </span>
+
+      <NyprAToggleBox
+        class="c-toggle-box--share"
+        @calculatePosition={{this.calculatePosition}}
+        @renderInPlace={{true}}
+        as |toggle|>
+        <toggle.trigger>
+          <strong>Share</strong>
+        </toggle.trigger>
+
+        <toggle.dropdown>
+          <NyprMShareTools as |tools|>
+            <tools.share @service='facebook' />
+            <tools.share @service='twitter' />
+            <tools.share @service='reddit' />
+            <tools.share @service='email' />
+          </NyprMShareTools>
+        </toggle.dropdown>
+      </NyprAToggleBox>
+    </div>
+
+  </div>
+
+  <div class="c-slide__dek o-rte-text l-wrap">
+    <p>{{{@slide.caption}}}</p>
+  </div>
+
+</div>
+{{!-- END-SNIPPET --}}

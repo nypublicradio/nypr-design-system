@@ -1,0 +1,55 @@
+{{!-- BEGIN-SNIPPET nypr-o-gallery-overlay.hbs --}}
+<div class="c-gallery-overlay">
+
+  <div class="l-container l-container--content u-spacing--double">
+
+    <div class="l-wrap">
+      {{#if @parentRoute}}
+        {{#link-to @parentRoute @parentModel class="o-back-to-link js-toggle"}}
+          <span class="o-icon o-icon--prev-caret u-path-fill--white u-icon--xs">
+            <NyprASvg @icon="caret-down"/>
+          </span>
+          <span class="u-has-accent u-has-accent--white">
+            {{@title}}
+          </span>
+        {{/link-to}}
+      {{/if}}
+    </div>
+
+    <div class="u-spacing--quad">
+
+      {{#each @slides as |slide i|}}
+        {{nypr-o-gallery-overlay/slide
+          active=(eq i (cast @activeImage 'number'))
+          register=(action this.registerSlide)
+          slide=slide
+          index=i
+          total=@slides.length
+        }}
+        {{#if (eq i 1)}}
+          <div class="l-wrap">
+            {{yield (hash billboard=(component 'nypr-o-gallery-overlay/billboard'))}}
+          </div>
+        {{/if}}
+      {{/each}}
+
+      <span class="o-end-label u-font--secondary-style u-font--xs u-color--gray">
+        <span class="o-icon o-icon--down-arrow u-icon--m">
+          <NyprASvg @icon='arrow-dashed'/>
+        </span>
+        End
+      </span>
+
+    </div>
+
+    <div class="u-align--center">
+      {{#if @parentRoute}}
+        {{#link-to @parentRoute @parentModel class="o-button c-gallery-overlay__back o-button--c-quaternary"}}
+          Back to Article
+        {{/link-to}}
+      {{/if}}
+    </div>
+
+  </div>
+</div>
+{{!-- END-SNIPPET --}}
