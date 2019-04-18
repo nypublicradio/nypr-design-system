@@ -6,6 +6,10 @@ $ember-basic-dropdown-content-z-index: 10000;
   padding: 16px;
 }
 
+.c-toggle-box__label {
+  cursor: pointer;
+}
+
 .c-toggle-box__label:before {
   width: 0;
   height: 0;
@@ -15,4 +19,12 @@ $ember-basic-dropdown-content-z-index: 10000;
   border-bottom-color: white;
   bottom: -15px;
   right: -5px;
+}
+
+.c-toggle-box--share {
+
+  .c-toggle-box__dropdown {
+    width: 115px;
+  }
+
 }
