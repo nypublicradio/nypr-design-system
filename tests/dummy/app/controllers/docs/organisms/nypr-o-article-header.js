@@ -4,16 +4,7 @@ import { set } from '@ember/object';
 import Controller from '@ember/controller';
 
 import { ITEMS } from './nypr-o-related-content';
-
-const GALLERY = [{
-  caption: 'This is a slide caption',
-  credit: 'Getty',
-  src: 'https://picsum.photos/600?random',
-  title: 'This is what a slide title looks like',
-}, {
-  caption: 'This is another slide caption without a credit',
-  src: 'https://picsum.photos/600?random=1'
-}];
+import { GALLERY } from './nypr-o-gallery-overlay';
 
 const STORY = {
   breadcrumbs: [{
