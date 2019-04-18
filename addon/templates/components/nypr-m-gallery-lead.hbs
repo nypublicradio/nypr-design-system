@@ -30,7 +30,9 @@
     {{/if}}
   {{/each}}
   <button
-    class="c-lead-gallery__thumbs-thumb c-lead-gallery__thumbs-thumb-text u-font--secondary-style u-font--xs">
+    class="c-lead-gallery__thumbs-thumb c-lead-gallery__thumbs-thumb-text u-font--secondary-style u-font--xs"
+    {{action (optional @viewAll)}}
+  >
     View all
     <span>{{@slides.length}}</span>
   </button>
