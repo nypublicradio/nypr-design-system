@@ -13,7 +13,11 @@ The main difference between these positioning functions and what `ember-basic-dr
       {{#each-in POSITIONS as |position fn|}}
         <p>
           <label>{{position}}
-            <input type='radio' name='position' onChange={{action (mut calculatePosition) fn}} />
+            <input
+              type='radio'
+              name='position'
+              onChange={{action (queue (action (mut calculatePosition) fn) (action (mut currentPosition) position))}}
+              checked={{eq currentPosition position}} />
           </label>
         </p>
       {{/each-in}}
