@@ -4,6 +4,6 @@ import layout from '../../templates/components/nypr-o-gallery-overlay/billboard'
 
 export default Component.extend({
   layout,
-  classNames: ['o-ad', 'o-ad--billboard'],
+  tagName: '',
 });
 // END-SNIPPET

@@ -26,11 +26,8 @@
           index=i
           total=@slides.length
         }}
-        {{#if (eq i 1)}}
-          <div class="l-wrap">
-            {{yield (hash billboard=(component 'nypr-o-gallery-overlay/billboard'))}}
-          </div>
-        {{/if}}
+
+        {{yield i (hash billboard=(component 'nypr-o-gallery-overlay/billboard'))}}
       {{/each}}
 
       <span class="o-end-label u-font--secondary-style u-font--xs u-color--gray">
