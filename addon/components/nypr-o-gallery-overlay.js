@@ -26,10 +26,20 @@ export default Component.extend({
     }
   },
 
+  didInsertElement() {
+    if (this.takeover) {
+      this._boundResizeListener = bind(this, '_resizeListener');
+      window.addEventListener('resize', this._boundResizeListener);
+      this._resizeListener();
+    }
+  },
+
   willDestroy() {
     this._super(...arguments);
     if (typeof FastBoot === 'undefined') {
       window.removeEventListener('scroll', this._boundListener);
+      window.removeEventListener('resize', this._boundResizeListener);
+      document.body.style.height = '';
     }
   },
 
@@ -40,6 +50,14 @@ export default Component.extend({
     @type {Array[HTMLElement]}
   */
   slideRefs: null,
+
+  /**
+    Specify whether the gallery should resize the body to to the gallery's height
+
+    @argument takeover
+    @type {Boolean}
+  */
+  takeover: true,
 
   /**
     Parent route for "return" links
@@ -136,6 +154,23 @@ export default Component.extend({
       }
     }, 100);
   },
+
+  /**
+    Force the body's height to match the gallery's height. Enables consistent measurements.
+
+    @method _resizeListener
+    @param {EventObject} event
+    @return {void}
+  */
+  _resizeListener(/* e */) {
+    debounce(this, () => {
+      let { height } = this.element.getBoundingClientRect();
+      height = `${height}px`;
+      if (document.body.style.height !== height) {
+        document.body.style.height = height;
+      }
+    }, 100);
+  }
 });
 // END-SNIPPET
 
