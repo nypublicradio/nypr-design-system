@@ -23,8 +23,9 @@ module('Integration | Component | nypr-o-header', function(hooks) {
       RIGHT_SIDE,
     });
 
+    // test injection for leaderboard
     await render(hbs`
-      <NyprOHeader as |header|>
+      <NyprOHeader @rules={{hash leaderboard=true}} as |header|>
         <header.leaderboard>
           {{LEADERBOARD}}
         </header.leaderboard>
@@ -119,8 +120,9 @@ module('Integration | Component | nypr-o-header', function(hooks) {
   });
 
   test('makes room for an ad', async function(assert) {
+    // leaderboard test injection
     await render(hbs`
-      <NyprOHeader as |header|>
+      <NyprOHeader @rules={{hash leaderboard=true}} as |header|>
         <header.leaderboard>
           <div style="height: 500px;"/>
         </header.leaderboard>
