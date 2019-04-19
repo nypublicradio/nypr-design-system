@@ -98,8 +98,6 @@ module('Integration | Component | nypr-o-header', function(hooks) {
   });
 
   test('floating header', async function(assert) {
-    const testingContainer = document.querySelector('#ember-testing-container');
-
     await render(hbs`
       <NyprOHeader as |header|>
         <header.menu/>
@@ -107,24 +105,7 @@ module('Integration | Component | nypr-o-header', function(hooks) {
       </NyprOHeader>
     `);
 
-    // CSS can play factor. without styles, this element is taller than the window
-    // with styles, it's rather short, so use the larger of the two.
-    // double them so there's enough space to scroll past the element and trigger the progress bar
-    const HEADER_HEIGHT = this.element.querySelector('.c-main-header').scrollHeight * 2;
-    const WINDOW_HEIGHT = window.innerHeight * 2;
-    const HEIGHT = HEADER_HEIGHT > WINDOW_HEIGHT ? HEADER_HEIGHT : WINDOW_HEIGHT;
-
-    const OLD_POSITION = testingContainer.style.position;
-
-    testingContainer.style.height = `${HEIGHT}px`;
-    testingContainer.style.position = 'relative';
-
-    window.scrollTo(0, HEIGHT)
-
-    await waitUntil(() => {
-      let progress = this.element.querySelector('.o-progress');
-      return progress && progress.value > 0;
-    }, {timeout: 2000});
+    let reset = await scrollPastHeader(this);
 
     const HEADER_CONTENTS = this.element.querySelector('.c-main-header__inner');
 
@@ -134,8 +115,7 @@ module('Integration | Component | nypr-o-header', function(hooks) {
       height: `${HEADER_CONTENTS.getBoundingClientRect().height}px`,
     });
 
-    testingContainer.style.height = '';
-    testingContainer.style.position = OLD_POSITION;
+    reset();
   });
 
   test('makes room for an ad', async function(assert) {
@@ -155,3 +135,33 @@ module('Integration | Component | nypr-o-header', function(hooks) {
     assert.equal(this.element.querySelector('.c-side-menu').style.height, `calc(100vh - ${ad.offsetHeight}px)`);
   });
 });
+
+async function scrollPastHeader(owner) {
+  const testingContainer = document.querySelector('#ember-testing-container');
+
+  // CSS can play factor. without styles, this element is taller than the window
+  // with styles, it's rather short, so use the larger of the two.
+  // double them so there's enough space to scroll past the element and trigger the progress bar
+  const HEADER_HEIGHT = owner.element.querySelector('.c-main-header').scrollHeight * 2;
+  const WINDOW_HEIGHT = window.innerHeight * 2;
+  const HEIGHT = HEADER_HEIGHT > WINDOW_HEIGHT ? HEADER_HEIGHT : WINDOW_HEIGHT;
+
+  const OLD_POSITION = testingContainer.style.position;
+
+  function reset() {
+    testingContainer.style.height = '';
+    testingContainer.style.position = OLD_POSITION;
+  }
+
+  testingContainer.style.height = `${HEIGHT}px`;
+  testingContainer.style.position = 'relative';
+
+  window.scrollTo(0, HEIGHT);
+
+  await waitUntil(() => {
+    let progress = owner.element.querySelector('.o-progress');
+    return progress && progress.value > 0;
+  }, {timeout: 2000})
+
+  return reset;
+}
