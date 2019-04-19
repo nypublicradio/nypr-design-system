@@ -134,6 +134,42 @@ module('Integration | Component | nypr-o-header', function(hooks) {
     const ad = this.element.querySelector('.c-main-header__ad-unit');
     assert.equal(this.element.querySelector('.c-side-menu').style.height, `calc(100vh - ${ad.offsetHeight}px)`);
   });
+
+  test('yields active rules', async function(assert) {
+    let service = this.owner.lookup('service:nypr-o-header');
+
+    service.addRule(null, {
+      resting: {
+        foo: true,
+      },
+      floating: {
+        bar: true,
+      }
+    });
+
+    await render(hbs`
+      <NyprOHeader as |header|>
+        <header.left>
+          <div id="example">
+            {{#if header.rules.foo}}
+              foo
+            {{/if}}
+            {{#if header.rules.bar}}
+              bar
+            {{/if}}
+          </div>
+        </header.left>
+      </NyprOHeader>
+    `);
+
+    assert.dom('#example').hasText('foo', 'resting state should turn on `foo` rule');
+
+    let reset = await scrollPastHeader(this);
+
+    assert.dom('#example').hasText('bar', 'floating state should turn on `bar` rule');
+
+    reset();
+  });
 });
 
 async function scrollPastHeader(owner) {
