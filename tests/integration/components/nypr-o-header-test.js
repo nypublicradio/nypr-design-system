@@ -108,12 +108,13 @@ module('Integration | Component | nypr-o-header', function(hooks) {
 
     let reset = await scrollPastHeader(this);
 
-    const HEADER_CONTENTS = this.element.querySelector('.c-main-header__inner');
+    const { height:HEADER_HEIGHT } = this.element.querySelector('.c-main-header__inner').getBoundingClientRect();
+    const { height:PROGRESS_HEIGHT } = this.element.querySelector('.o-progress').getBoundingClientRect();
 
     assert.dom('.o-progress').exists();
     assert.dom('.c-main-header__inner.c-floating-header.is-visible').exists();
     assert.dom('.c-main-header__spacer').hasStyle({
-      height: `${HEADER_CONTENTS.getBoundingClientRect().height}px`,
+      height: `${HEADER_HEIGHT + PROGRESS_HEIGHT}px`,
     });
 
     reset();
