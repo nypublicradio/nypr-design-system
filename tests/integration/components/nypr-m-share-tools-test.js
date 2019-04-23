@@ -60,4 +60,28 @@ module('Integration | Component | nypr-m-share-tools', function(hooks) {
 
     await click('button.c-share-tools__link');
   });
+
+  test('it can override the derived share url', async function() {
+    const URL = 'http://example.com';
+    const TEXT = 'bar';
+    const VIA = 'baz';
+    this.mock(window)
+      .expects('open')
+      .withArgs(`https://twitter.com/intent/tweet?text=${TEXT}&via=${VIA}&url=${URL}`);
+
+    this.setProperties({
+      TEXT,
+      VIA,
+      URL,
+    });
+
+    await render(hbs`
+      <NyprMShareTools as |tools|>
+        <tools.share @service='twitter' @url={{URL}} @params={{hash text=TEXT via=VIA}}/>
+      </NyprMShareTools>
+    `);
+
+    await click('button.c-share-tools__link');
+
+  })
 });

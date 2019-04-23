@@ -31,6 +31,13 @@ export default Component.extend({
   */
 
   /**
+    Optional URL to override the derived share URL
+
+    @argument url
+    @type {String}
+  */
+
+  /**
     Measure window center to position pop up
 
     @method getPopupPosition
@@ -55,14 +62,15 @@ export default Component.extend({
     @method getURL
     @param {String} service
     @param {Object} params
+    @param {String} override
     @return {String} url
   */
-  getURL(service, params) {
+  getURL(service, params, override) {
     if (!SERVICE_MAP[service]) {
       return;
     }
     let { shareBase, getParams } = SERVICE_MAP[service];
-    let url = window.location.toString();
+    let url = override || window.location.toString();
 
     return `${shareBase}?${getParams(url, params)}`
   },
@@ -74,15 +82,16 @@ export default Component.extend({
     @method openShare
     @param {String} service Name of the target service
     @param {Object} params Parameters to pass to share dialog
+    @param {String} urlOverride Optional override to the derived URL
     @return {void}
   */
   actions: {
-    openShare(service, params) {
+    openShare(service, params, urlOverride) {
       if (!service) {
         return;
       }
 
-      let url = this.getURL(service, params);
+      let url = this.getURL(service, params, urlOverride);
       let popupPosition = this.getPopupPosition();
       var newWindow = window.open(url, 'share window', windowString(popupPosition));
 
