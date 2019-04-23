@@ -36,6 +36,10 @@ export default Component.extend({
     // track which slide is on screen
     this._boundScrollListener = bind(this, '_activeSlideWatcher');
     window.addEventListener('scroll', this._boundScrollListener);
+
+    // CSS transition
+    this.element.classList.add('is-active');
+
   },
 
   willDestroy() {
