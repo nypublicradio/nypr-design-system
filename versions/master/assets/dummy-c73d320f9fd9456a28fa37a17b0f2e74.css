@@ -1,5 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,400i,700);
 
+.c-toggle-box__label,
+label {
+  cursor: pointer;
+}
+
 fieldset,
 label {
   margin-bottom: 8px;
@@ -6307,6 +6312,10 @@ table {
   right: -5px;
 }
 
+.c-toggle-box--share .c-toggle-box__dropdown {
+  width: 115px;
+}
+
 .c-article-header__center {
   position: relative;
 }
@@ -6332,7 +6341,6 @@ p {
 label {
   display: inline-block;
   line-height: 1;
-  cursor: pointer;
 }
 
 input[type=email],
