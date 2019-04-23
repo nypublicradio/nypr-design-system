@@ -21,6 +21,7 @@ import { inViewport } from '../helpers/in-viewport';
 export default Component.extend({
   layout,
   classNames: ['c-article__gallery'],
+  classNameBindings: ['takeover::c-article__gallery--static'],
   attributeBindings: ['data-test-gallery-overlay'],
   'data-test-gallery-overlay': true,
 
