@@ -9,7 +9,7 @@
           <span class="o-icon o-icon--prev-caret u-path-fill--white u-icon--xs">
             <NyprASvg @icon="caret-down"/>
           </span>
-          <span class="u-has-accent u-has-accent--white">
+          <span class="u-has-accent u-has-accent--white" data-test-gallery-title>
             {{@title}}
           </span>
         {{/link-to}}
@@ -25,6 +25,7 @@
           slide=slide
           index=i
           total=@slides.length
+          data-test-gallery-slide=i
         }}
 
         {{yield i (hash billboard=(component 'nypr-o-gallery-overlay/billboard'))}}
