@@ -189,6 +189,7 @@ async function scrollPastHeader(owner) {
   function reset() {
     testingContainer.style.height = '';
     testingContainer.style.position = OLD_POSITION;
+    testingContainer.scrollTo(0, 0);
   }
 
   testingContainer.style.height = `${HEIGHT}px`;

@@ -28,5 +28,6 @@ module('Integration | Component | nypr-m-progress-bar', function(hooks) {
 
     testingContainer.style.height = '';
     testingContainer.style.position = OLD_POSITION;
+    testingContainer.scrollTo(0, 0);
   });
 });
