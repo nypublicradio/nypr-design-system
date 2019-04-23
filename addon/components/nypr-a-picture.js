@@ -85,5 +85,17 @@ export default Component.extend({
     @type {String?}
   */
   alt: null,
+
+  /**
+    Width for image element
+    @argument width
+    @type {Number}
+  */
+
+  /**
+    Height for image element
+    @argument height
+    @type {Number}
+  */
 });
 // END-SNIPPET
