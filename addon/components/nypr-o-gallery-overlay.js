@@ -24,9 +24,9 @@ export default Component.extend({
 
   didInsertElement() {
     if (this.takeover) {
-      this._boundResizeListener = bind(this, '_resizeListener');
+      this._boundResizeListener = bind(this, '_setBodyHeight');
       window.addEventListener('resize', this._boundResizeListener);
-      this._resizeListener();
+      this._setBodyHeight();
     }
   },
 
@@ -127,12 +127,12 @@ export default Component.extend({
   /**
     Calls `viewedSlide` handler when a slide enters or exits a view
 
-    @method _scrollListener
+    @method _activeSlideWatcher
     @param {EventObject} event
     @return {void}
   */
-  _scrollListener(/* e */) {
     debounce(this, () => {
+  _activeSlideWatcher(/* e */) {
       let i;
       let currentEl;
       let els = this.slideRefs;
@@ -154,11 +154,11 @@ export default Component.extend({
   /**
     Force the body's height to match the gallery's height. Enables consistent measurements.
 
-    @method _resizeListener
+    @method _setBodyHeight
     @param {EventObject} event
     @return {void}
   */
-  _resizeListener(/* e */) {
+  _setBodyHeight(/* e */) {
     debounce(this, () => {
       let { height } = this.element.getBoundingClientRect();
       height = `${height}px`;
@@ -166,7 +166,8 @@ export default Component.extend({
         document.body.style.height = height;
       }
     }, 100);
-  }
+  },
+
 });
 // END-SNIPPET
 
