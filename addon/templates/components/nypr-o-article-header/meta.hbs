@@ -17,12 +17,12 @@
 
     {{#if @galleryPhotosCount}}
       &bull;
-      <a href={{@galleryUrl}} class="u-has-accent u-has-accent--secondary">
+      {{#link-to @galleryRoute class="u-has-accent u-has-accent--secondary"}}
         {{@galleryPhotosCount}} {{if (eq @galleryPhotosCount 1) 'Photo' 'Photos'}}
         <span class="o-icon o-icon--gallery u-icon--xs">
           <NyprASvg @icon='gallery'/>
         </span>
-      </a>
+      {{/link-to}}
     {{/if}}
   </div>
 </div>
