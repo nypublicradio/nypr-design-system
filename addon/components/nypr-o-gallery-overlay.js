@@ -2,9 +2,12 @@
 import Component from '@ember/component';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
-import { debounce, bind } from '@ember/runloop';
+import { debounce, throttle, bind/*, schedule*/ } from '@ember/runloop';
 
 import layout from '../templates/components/nypr-o-gallery-overlay';
+
+import { inViewport } from '../helpers/in-viewport';
+
 
 /**
   Gallery overlay
@@ -23,16 +26,22 @@ export default Component.extend({
   },
 
   didInsertElement() {
+    // make sure the body height matches the gallery height for scroll measure purposes
     if (this.takeover) {
       this._boundResizeListener = bind(this, '_setBodyHeight');
       window.addEventListener('resize', this._boundResizeListener);
       this._setBodyHeight();
     }
+
+    // track which slide is on screen
+    this._boundScrollListener = bind(this, '_activeSlideWatcher');
+    window.addEventListener('scroll', this._boundScrollListener);
   },
 
   willDestroy() {
     this._super(...arguments);
     if (typeof FastBoot === 'undefined') {
+      // clear watchers for body height and currently viewed slide
       window.removeEventListener('scroll', this._boundListener);
       window.removeEventListener('resize', this._boundResizeListener);
       document.body.style.height = '';
@@ -125,21 +134,22 @@ export default Component.extend({
   },
 
   /**
-    Calls `viewedSlide` handler when a slide enters or exits a view
+    Handles some DOM management for scrolling events
+    - calls `viewedSlide` handler when a slide enters the viewport
 
     @method _activeSlideWatcher
     @param {EventObject} event
     @return {void}
   */
-    debounce(this, () => {
   _activeSlideWatcher(/* e */) {
+    throttle(this, () => {
       let i;
       let currentEl;
       let els = this.slideRefs;
 
       for (i = 0; i < els.length; i++) {
         let slide = els[i];
-        if (inViewport(slide)) {
+        if (inViewport(slide, {offset: {top: window.innerHeight / 2}})) {
           currentEl = slide;
           break;
         }
@@ -170,8 +180,3 @@ export default Component.extend({
 
 });
 // END-SNIPPET
-
-function inViewport(el) {
-  let { top, bottom } = el.getBoundingClientRect();
-  return top >= 0 && bottom <= window.innerHeight;
-}
