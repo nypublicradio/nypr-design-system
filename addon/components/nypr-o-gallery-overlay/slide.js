@@ -55,6 +55,18 @@ export default Component.extend({
     return this.index + 1;
   }),
 
+  /**
+    Manually pass in the share URL so `image` query param is in sync with
+    the slide itself, and not the current scroll position.
+
+    @accessor shareURL
+    @type {String}
+  */
+  shareURL: computed('index', function() {
+    let { protocol, host, pathname } = window.location;
+    return `${protocol}//${host}${pathname}?image=${this.index}`;
+  }),
+
   calculatePosition(trigger/*, content, wormhole, options*/) {
     let { height } = trigger.getBoundingClientRect();
 
