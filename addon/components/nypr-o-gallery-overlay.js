@@ -19,11 +19,7 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    if (typeof FastBoot === 'undefined') {
-      this.set('slideRefs', A([]));
-      this._boundListener = bind(this, '_scrollListener');
-      window.addEventListener('scroll', this._boundListener);
-    }
+    this.set('slideRefs', A([]));
   },
 
   didInsertElement() {
