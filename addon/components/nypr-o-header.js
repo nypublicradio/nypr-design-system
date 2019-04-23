@@ -160,8 +160,10 @@ export default Component.extend({
       let el;
       if (this.floatLandmark) {
         el = document.querySelector(this.floatLandmark);
-      } else {
+      } else if (this.element) {
         el = this.element;
+      } else {
+        return;
       }
       let { top, height } = el.getBoundingClientRect();
       this.set('outOfViewport', top + height < 0);
