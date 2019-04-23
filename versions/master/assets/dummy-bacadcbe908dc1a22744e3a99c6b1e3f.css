@@ -6320,6 +6320,24 @@ table {
   position: relative;
 }
 
+.c-article__gallery.gallery-is-active {
+  transform: translateX(100%);
+  height: auto;
+  opacity: 1;
+  top: 0;
+  transition: opacity .2s ease;
+}
+
+.c-article__gallery.c-article__gallery--static {
+  transform: initial;
+  position: initial;
+  top: initial;
+  left: initial;
+  height: initial;
+  opacity: initial;
+  transition: initial;
+}
+
 :root {
   --brand-primary: #333;
   --brand-secondary: #98d2eb;
