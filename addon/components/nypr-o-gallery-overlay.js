@@ -4,7 +4,7 @@ import imagesloaded from 'imagesloaded';
 import Component from '@ember/component';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
-import { debounce, throttle, bind/*, schedule*/ } from '@ember/runloop';
+import { debounce, throttle, bind } from '@ember/runloop';
 
 import layout from '../templates/components/nypr-o-gallery-overlay';
 
