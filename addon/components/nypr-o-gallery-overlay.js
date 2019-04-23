@@ -1,4 +1,6 @@
 // BEGIN-SNIPPET nypr-o-gallery-overlay.js
+import imagesloaded from 'imagesloaded';
+
 import Component from '@ember/component';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
@@ -40,6 +42,25 @@ export default Component.extend({
     // CSS transition
     this.element.classList.add('is-active');
 
+    // scroll to an image if its index is passed in
+    if (this.activeImage) {
+      let index = this.activeImage;
+      let activeSlide = this.slideRefs[index];
+
+      // wait for all slides to load so scroll position is correct
+      imagesloaded(this.element.querySelectorAll('.c-slide'), () => {
+        const HEADER_OFFSET = 80;
+
+        let image = activeSlide.querySelector('img');
+        let { top, height:imageHeight } = image.getBoundingClientRect();
+
+        let imageAtTopOfWindow = top + window.scrollY;
+        let diff = Math.abs(window.innerHeight - imageHeight);
+        let targetY = imageAtTopOfWindow - (diff / 2) - HEADER_OFFSET;
+
+        window.scrollTo(0, targetY);
+      });
+    }
   },
 
   willDestroy() {

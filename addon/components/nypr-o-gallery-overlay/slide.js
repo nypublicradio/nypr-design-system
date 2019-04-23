@@ -12,7 +12,6 @@ export default Component.extend({
     this.register(this.element);
 
     if (this.active) {
-      window.scrollTo(0, this.element.offsetTop - 200);
     }
   },
 
