@@ -35,6 +35,17 @@ export default Component.extend({
   */
 
   /**
+    Parameters to pass into share tools. Should have keys for:
+    - facebook
+    - twitter
+    - reddit
+    - email
+
+    @argument share
+    @type {Object}
+  */
+
+  /**
     Current slide's one-based position
 
     @field count

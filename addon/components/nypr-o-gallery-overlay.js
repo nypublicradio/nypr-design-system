@@ -95,6 +95,17 @@ export default Component.extend({
   */
 
   /**
+    Parameters to pass into each slide's share tools. Should have keys for:
+    - facebook
+    - twitter
+    - reddit
+    - email
+
+    @argument share
+    @type {Object}
+  */
+
+  /**
     Specify whether the gallery should resize the body to to the gallery's height
 
     @argument takeover
