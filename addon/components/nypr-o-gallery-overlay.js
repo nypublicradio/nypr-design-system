@@ -24,7 +24,7 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    this.set('slideRefs', A([]));
+    this.set('slideEls', A([]));
   },
 
   didInsertElement() {
@@ -43,9 +43,9 @@ export default Component.extend({
     this.element.classList.add('gallery-is-active');
 
     // scroll to an image if its index is passed in
-    if (this.activeImage) {
-      let index = this.activeImage;
-      let activeSlide = this.slideRefs[index];
+    if (this.activeSlide) {
+      let index = this.activeSlide;
+      let activeSlide = this.slideEls[index];
 
       // wait for all slides to load so scroll position is correct
       imagesloaded(this.element.querySelectorAll('.c-slide'), () => {
@@ -76,10 +76,17 @@ export default Component.extend({
   /**
     References to slide elements. Set to an empty EmberArray the `init` hook.
 
-    @field slideRefs
+    @field slideEls
     @type {Array[HTMLElement]}
   */
-  slideRefs: null,
+  slideEls: null,
+
+  /**
+    Scroll to the slide at the given index
+
+    @argument activeSlide
+    @type {Number}
+  */
 
   /**
     Specify whether the gallery should resize the body to to the gallery's height
@@ -139,23 +146,23 @@ export default Component.extend({
     @accessor currentSlide
     @type {HTMLElement}
   */
-  currentSlide: computed('slideRefs', 'currentIndex', function() {
-    if (!this.slideRefs) {
+  currentSlide: computed('slideEls', 'currentIndex', function() {
+    if (!this.slideEls) {
       return null;
     }
 
-    return this.slideRefs[this.currentIndex];
+    return this.slideEls[this.currentIndex];
   }),
 
   /**
-    Receives a new slide and adds it to the `slideRefs` field
+    Receives a new slide and adds it to the `slideEls` field
 
     @method registerSlide
     @param {HTMLElement} slideEl
     @return {void}
   */
   registerSlide(slideEl) {
-    this.slideRefs.pushObject(slideEl);
+    this.slideEls.pushObject(slideEl);
   },
 
   /**
@@ -170,7 +177,7 @@ export default Component.extend({
     throttle(this, () => {
       let i;
       let currentEl;
-      let els = this.slideRefs;
+      let els = this.slideEls;
 
       for (i = 0; i < els.length; i++) {
         let slide = els[i];
