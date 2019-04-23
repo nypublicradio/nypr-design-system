@@ -40,7 +40,7 @@ export default Component.extend({
     window.addEventListener('scroll', this._boundScrollListener);
 
     // CSS transition
-    this.element.classList.add('is-active');
+    this.element.classList.add('gallery-is-active');
 
     // scroll to an image if its index is passed in
     if (this.activeImage) {
