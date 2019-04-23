@@ -53,7 +53,16 @@ export const SERVICE_MAP = {
   },
   email: {
     shareBase: 'mailto:',
-    getParams: (url, params = {}) => filter({...params, url}),
+    getParams: (url, params = {}) => {
+      if (typeof params.subject === 'string') {
+        params.subject = params.subject.replace('{{URL}}', url);
+      }
+      if (typeof params.body === 'string') {
+        params.body = params.body.replace('{{URL}}', url);
+      }
+
+      return filter(params);
+    }
   },
 };
 // END-SNIPPET

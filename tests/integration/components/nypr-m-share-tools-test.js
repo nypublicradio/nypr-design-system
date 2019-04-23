@@ -82,6 +82,26 @@ module('Integration | Component | nypr-m-share-tools', function(hooks) {
     `);
 
     await click('button.c-share-tools__link');
+  });
+
+  test('it can substitute a variable for the derived URL', async function() {
+    const BODY = 'check out {{URL}}';
+
+    this.mock(window)
+      .expects('open')
+      .withArgs(`mailto:?body=check out ${window.location.toString()}`);
+
+    this.setProperties({
+      BODY,
+    });
+
+    await render(hbs`
+      <NyprMShareTools as |tools|>
+        <tools.share @service='email' @params={{hash body=BODY}}/>
+      </NyprMShareTools>
+    `);
+
+    await click('button.c-share-tools__link');
 
   })
 });
