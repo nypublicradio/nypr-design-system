@@ -78,7 +78,11 @@ export default Component.extend({
   spacerStyle: computed('outOfViewport', function() {
     let style = '';
     if (typeof FastBoot === 'undefined' && this.outOfViewport) {
+      let progressBar = this.element.querySelector('.o-progress');
       let { height } = this.element.querySelector('.c-main-header__inner').getBoundingClientRect();
+      if (progressBar) {
+        height += progressBar.getBoundingClientRect().height;
+      }
       style = `height: ${height}px;`;
     }
     return htmlSafe(style);
