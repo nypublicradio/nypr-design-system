@@ -76,6 +76,7 @@
     "eslint-plugin-ember": "^5.2.0",
     "eslint-plugin-node": "^7.0.1",
     "loader.js": "^4.7.0",
+    "morgan": "^1.3.2",
     "qunit-dom": "^0.8.0",
     "tailwind": "^3.0.0"
   },
