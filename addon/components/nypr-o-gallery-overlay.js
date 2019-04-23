@@ -49,16 +49,19 @@ export default Component.extend({
 
       // wait for all slides to load so scroll position is correct
       imagesloaded(this.element.querySelectorAll('.c-slide'), () => {
-        const HEADER_OFFSET = 80;
+        // const HEADER_OFFSET = 80;
 
         let image = activeSlide.querySelector('img');
-        let { top, height:imageHeight } = image.getBoundingClientRect();
+        // let { top, height:imageHeight } = image.getBoundingClientRect();
+        //
+        // let imageAtTopOfWindow = top + window.scrollY;
+        // let diff = Math.abs(window.innerHeight - imageHeight);
+        // let targetY = imageAtTopOfWindow - (diff / 2) - HEADER_OFFSET;
+        //
+        // window.scrollTo(0, targetY);
 
-        let imageAtTopOfWindow = top + window.scrollY;
-        let diff = Math.abs(window.innerHeight - imageHeight);
-        let targetY = imageAtTopOfWindow - (diff / 2) - HEADER_OFFSET;
-
-        window.scrollTo(0, targetY);
+        // TODO: see if this passes QA
+        image.scrollIntoView({block: 'center'});
       });
     }
   },
