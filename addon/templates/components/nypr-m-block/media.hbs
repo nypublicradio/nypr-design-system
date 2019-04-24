@@ -1,0 +1,19 @@
+<a href={{@url}}>
+  <NyprAPicture
+    @src-s={{@srcS}}
+    @break-m={{@breakM}}
+    @src-m={{@srcM}}
+    @break-l={{@breakL}}
+    @src-l={{@srcL}}
+    @break-xl={{@breakXL}}
+    @src-xl={{@srcXL}}
+    @alt={{@alt}}
+    @lazy={{@lazy}}
+    @width={{@width}}
+    @height={{@height}}
+  />
+</a>
+
+{{#if @tag}}
+  {{#link-to @tag.route class="c-block__tag o-kicker"}}{{@tag}}{{/link-to}}
+{{/if}}

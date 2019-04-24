@@ -1,9 +1,16 @@
 {{!-- BEGIN-SNIPPET nypr-m-block-meta.hbs --}}
-<span class="c-block-meta__author u-font--scondary-style u-font--xs u-color--septenary">{{@author}}</span>
-<a href={{@url}} class="c-block-meta__comments u-font--secondary-style u-font--xs u-color--septenary">
-  <span class="o-icon o-icon--comment u-icon--xs">
-    <NyprASvg @icon='comment'/>
-  </span>
-  [{{@commentCount}}]
-</a>
+{{#if @author}}
+  <span class="c-block-meta__author u-font--secondary-style u-font--xs">{{@author}}</span>
+{{/if}}
+{{#if @timestamp}}
+  <span class="c-block-meta__timestamp u-font--secondary-style u-font--xs">{{@timestamp}}</span>
+{{/if}}
+{{#if @commentCount}}
+  <a href={{@commentURL}} class="c-block-meta__comments u-font--secondary-style u-font--xs">
+    <span class="o-icon o-icon--comment u-icon--xs">
+      <NyprASvg @icon='comment'/>
+    </span>
+    {{@commentCount}}
+  </a>
+{{/if}}
 {{!-- END-SNIPPET --}}

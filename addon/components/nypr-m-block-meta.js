@@ -14,7 +14,7 @@ import layout from '../templates/components/nypr-m-block-meta';
 */
 export default Component.extend({
   layout,
-  classNames: ['c-block-meta'],
+  classNames: ['c-block-meta', 'u-color--meta'],
 
   /**
     Author name
