@@ -1,3 +1,7 @@
-<a class="c-block__title-link" href={{@titleURL}}>
-  {{@title}}
-</a>
+{{#link-to @titleRoute @titleModel class="c-block__title-link"}}
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{@title}}
+  {{/if}}
+{{/link-to}}

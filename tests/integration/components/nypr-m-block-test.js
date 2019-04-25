@@ -11,7 +11,11 @@ module('Integration | Component | nypr-m-block', function(hooks) {
     assert.dom('.c-block').exists();
 
     await render(hbs`<NyprMBlock @orientation='h'/>`);
-    assert.dom('.c-block--item').exists('`orientation` controls view');
+    assert.dom('.c-block--horizontal').exists('`orientation` controls a class');
 
+    await render(hbs`<NyprMBlock @orientation='h' @size='l'/>`);
+    assert.dom('.c-block--horizontal.c-block--horizontal--large').exists('`size` controls a class');
+
+    await render(hbs`<NyprMBlock @orientation='h' @size='l'/>`);
   });
 });

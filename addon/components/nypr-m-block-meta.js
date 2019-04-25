@@ -22,7 +22,6 @@ export default Component.extend({
     @argument author
     @type {String}
   */
-  author: null,
 
   /**
     Comment count
@@ -30,15 +29,27 @@ export default Component.extend({
     @argument commentCount
     @type {Number}
   */
-  commentCount: null,
 
   /**
-    Story url. Will lead to comments section of given story url
+    Used to build a link to item's comments.
 
-    @argument url
+    @argument route
     @type {String}
   */
-  url: null,
+
+  /**
+    Used to build a link to item's comments.
+
+    @argument model
+    @type {String|Model}
+  */
+
+  /**
+    Used to build a link to item's comments.
+
+    @argument hash
+    @type {String}
+  */
 
 });
 // END-SNIPPET

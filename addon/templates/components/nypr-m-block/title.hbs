@@ -1,4 +1,9 @@
-{{yield (hash
-  h2=(component 'nypr-m-block/h2')
-  h3=(component 'nypr-m-block/h3')
-)}}
+{{#if (eq @h2 '')}}
+  {{#nypr-m-block/h2}}
+    {{yield}}
+  {{/nypr-m-block/h2}}
+{{else if (eq @h3 '')}}
+  {{#nypr-m-block/h3}}
+    {{yield}}
+  {{/nypr-m-block/h3}}
+{{/if}}

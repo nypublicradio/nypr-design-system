@@ -6,11 +6,11 @@
   <span class="c-block-meta__timestamp u-font--secondary-style u-font--xs">{{@timestamp}}</span>
 {{/if}}
 {{#if @commentCount}}
-  <a href={{@commentURL}} class="c-block-meta__comments u-font--secondary-style u-font--xs">
+  {{#link-to @route @model (query-params to=@hash) class="c-block-meta__comments u-font--secondary-style u-font--xs"}}
     <span class="o-icon o-icon--comment u-icon--xs">
       <NyprASvg @icon='comment'/>
     </span>
     {{@commentCount}}
-  </a>
+  {{/link-to}}
 {{/if}}
 {{!-- END-SNIPPET --}}

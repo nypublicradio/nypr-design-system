@@ -8,47 +8,43 @@ import { computed } from '@ember/object';
 
   Usage:
   ```hbs
-  <NyprMBlock @url='https://example.com/story' @src='https://picsum.photos/400/500' @alt='alt text' @category='news' @title='Story Title' @tease='Short summary of the story' @author='Jen Chung' @commentCount=100 />
+  <NyprMBlock @orientation={{orientation}} @size={{size}} as |block|>
+    <block.media @url='https://example.com/story' @srcS='https://picsum.photos/800/450' @alt='alt text' @tag={{hash label='Foo' slug='foo'}} />
+
+    <block.object as |o|>
+      <o.eyebrow @text='News'/>
+
+      <o.title @h2>
+        Story Title
+      </o.title>
+
+      <o.body as |body|>
+        <body.text>
+          Short summary of the story
+        </body.text>
+
+        <body.meta @author='Jen Chung' @commentCount=46 />
+      </o.body>
+    </block.object>
+
+  </NyprMBlock>
   ```
 
   @class nypr-m-block
+  @yield {Hash} hash
+  @yield {Component} title `nypr-m-block/title`
+  @yield {Component} media `nypr-m-block/media`
+  @yield {Hash} object `nypr-m-block/object`
+  @yield {Component} object.eyebrow `nypr-m-block/eyebrow`
+  @yield {Component} object.title `nypr-m-block/title`
+  @yield {Hash} object.body `nypr-m-block/body`
+  @yield {Component} object.body.text `nypr-m-block/text`
+  @yield {Component} object.body.meta `nypr-m-block-meta`
 */
 export default Component.extend({
   layout,
   classNames: ['c-block'],
-  classNameBindings: ['orientationClass'],
-
-  /**
-   Alt text for image. Defaults to @title if null.
-
-   @argument alt
-   @type {String}
-  */
-  alt: null,
-
-  /**
-    Author name
-
-    @argument author
-    @type {String}
-  */
-  author: null,
-
-  /**
-    Category
-
-    @argument category
-    @type {String}
-  */
-  category: null,
-
-  /**
-    Comment count
-
-    @argument commentCount
-    @type {Number}
-  */
-  commentCount: null,
+  classNameBindings: ['orientationClass', 'sizeClass'],
 
   /**
     Layout orientation.
@@ -60,6 +56,15 @@ export default Component.extend({
   orientation: 'v',
 
   /**
+    Block size.
+    One of `'l'` or `'s'`
+
+    @argument size
+    @type {String}
+  */
+  size: 'l',
+
+  /**
     Compute orientation class based on `'orientation'`
 
     @accessor orientationClass
@@ -68,35 +73,28 @@ export default Component.extend({
   orientationClass: computed('orientation', function() {
     switch(this.orientation) {
       case 'h':
-        return 'c-block--item';
+        return 'c-block--horizontal';
       case 'v':
         return null;
     }
   }),
 
   /**
-    Image url
+    Compute size class based on `'size'`
 
-    @argument src
+    @accessor sizeClass
     @type {String}
   */
-  src: null,
-
-  /**
-    Story title
-
-    @argument title
-    @type {String}
-  */
-  title: null,
-
-  /**
-    Story url. Will lead to comments section of given story url
-
-    @argument url
-    @type {String}
-  */
-  url: null,
-
+  sizeClass: computed('size', function() {
+    switch(this.size) {
+      case 'l':
+        return this.orientation === 'h' ? 'c-block--horizontal--large' : null;
+      case 's':
+        // not implemented
+        return;
+      default:
+        return null;
+    }
+  }),
 });
 // END-SNIPPET

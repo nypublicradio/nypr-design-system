@@ -1,4 +1,4 @@
-<a href={{@url}}>
+{{#link-to @route @model}}
   <NyprAPicture
     @src-s={{@srcS}}
     @break-m={{@breakM}}
@@ -12,8 +12,8 @@
     @width={{@width}}
     @height={{@height}}
   />
-</a>
+{{/link-to}}
 
 {{#if @tag}}
-  {{#link-to @tag.route class="c-block__tag o-kicker"}}{{@tag}}{{/link-to}}
+  {{#link-to @tagRoute @tag.model class="c-block__tag o-kicker"}}{{@tag.label}}{{/link-to}}
 {{/if}}

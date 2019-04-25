@@ -6,7 +6,6 @@ Render a story tease with the passed in arguments.
 <DocsDemo as |demo|>
   <demo.example @name='block-meta-example.hbs'>
     <NyprMBlockMeta
-      @url='https://example.com/story'
       @author='Jen Chung'
       @commentCount=100
     />

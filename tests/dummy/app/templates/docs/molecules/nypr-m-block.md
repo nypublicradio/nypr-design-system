@@ -12,19 +12,43 @@ Render a story tease with the passed in arguments.
       </button>
     </p>
     <p>Orientation: <strong>{{or this.orientation 'v'}}</strong></p>
+    <p>
+      Toggle block size (horizontal only):
+      <button class="btn" {{action (mut this.size) (if (eq this.size 'l') 's' 'l')}}>
+        Toggle
+      </button>
+    </p>
+    <p>Size: <strong>{{or this.size 's'}}</strong></p>
 
     <!-- BEGIN-SNIPPET block-example.hbs -->
-    <NyprMBlock
-      @url='https://example.com/story'
-      @src='https://picsum.photos/400/250'
-      @alt='alt text'
-      @category='news'
-      @title='Story Title'
-      @tease='Short summary of the story'
-      @author='Jen Chung'
-      @commentCount=100
-      @orientation={{this.orientation}}
-    />
+    <NyprMBlock @orientation={{this.orientation}} @size={{this.size}} as |block|>
+      <block.media
+        @url='https://example.com/story'
+        @srcS='https://picsum.photos/800/450'
+        @alt='alt text'
+        @tag={{hash label='Foo' slug='foo'}}
+      />
+
+      <block.object as |o|>
+        <o.eyebrow @text='News'/>
+
+        <o.title @h2>
+          Story Title
+        </o.title>
+
+        <o.body as |body|>
+          <body.text>
+            Short summary of the story
+          </body.text>
+
+          <body.meta
+            @author='Jen Chung'
+            @commentCount=46
+          />
+        </o.body>
+      </block.object>
+
+    </NyprMBlock>
     <!-- END-SNIPPET -->
   </demo.example>
 
