@@ -41,9 +41,7 @@ module('Integration | Component | nypr-o-gallery-overlay', function(hooks) {
     assert.dom('[data-test-gallery-billboard]').includesText(AD_TEXT);
 
     const gallery = document.querySelector('[data-test-gallery-overlay]');
-    assert.dom(document.body).hasStyle({
-      height: `${gallery.getBoundingClientRect().height}px`
-    }, 'resizes body to match gallery height');
+    assert.equal(document.body.style.height, `${gallery.getBoundingClientRect().height}px`, 'resizes body to match gallery height');
   });
 
   test('it scrolls to a slide at the specified zero-based index on render', async function(assert) {

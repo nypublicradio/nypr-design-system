@@ -148,6 +148,7 @@ export default Component.extend({
     @argument viewedSlide
     @type {Function}
   */
+  viewedSlide() {},
 
   /**
     Current slide's index. Updated directly by scroll handler.
