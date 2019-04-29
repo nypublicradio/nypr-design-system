@@ -1,9 +1,5 @@
 {{! template-lint-disable no-triple-curlies }}
 {{!-- BEGIN-SNIPPET nypr-o-donate.hbs --}}
-<div class="c-donate-tout__graphic">
-  <NyprASvg @icon='pointing-finger'/>
-</div>
-
 <div class="c-donate-tout__inner">
   {{#if @close}}
     <NyprAButton class="c-donate-tout__close" data-test-donate-close @onclick={{@close}} @blank={{true}}>
@@ -12,6 +8,10 @@
       </span>
     </NyprAButton>
   {{/if}}
+
+  <div class="c-donate-tout__graphic">
+    <NyprASvg @icon='pointing-finger'/>
+  </div>
 
   {{#if (has-block)}}
     {{yield}}
