@@ -24,7 +24,7 @@
         <footer.signup>
           <NyprMNewsletter as |newsletter|>
             <newsletter.graphic>
-              <NyprASvg @icon='confetti'/>
+              <NyprASvg @icon='party-confetti'/>
             </newsletter.graphic>
             <newsletter.blurb>Sign up today</newsletter.blurb>
 

@@ -14,7 +14,7 @@ To render the legal language, you must include `<newsletter.legal/>` in the pass
       as |newsletter|>
 
       <newsletter.graphic>
-        <NyprASvg @icon='confetti'/>
+        <NyprASvg @icon='party-confetti'/>
       </newsletter.graphic>
 
       <newsletter.blurb>

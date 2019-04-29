@@ -21,7 +21,7 @@ module('Integration | Component | nypr-m-newsletter', function(hooks) {
       <NyprMNewsletter as |newsletter|>
 
         <newsletter.graphic>
-          <NyprASvg @icon='confetti'/>
+          <NyprASvg @icon='party-confetti'/>
         </newsletter.graphic>
 
         <newsletter.blurb>
@@ -33,7 +33,7 @@ module('Integration | Component | nypr-m-newsletter', function(hooks) {
       </NyprMNewsletter>
     `);
 
-    assert.dom('.c-newsletter-form__graphic svg.party-confetti').exists('can render into graphic slot');
+    assert.dom('.c-newsletter-form__graphic svg.party-confetti-icon').exists('can render into graphic slot');
     assert.dom('[data-test-newsletter-blurb]').hasText(BLURB);
     assert.dom('.c-newsletter-form__terms').hasText(DEFAULT_LEGAL, 'must use the yielded `.legal` component in order to display terms');
 
