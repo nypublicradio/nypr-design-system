@@ -14,6 +14,13 @@ const BLOCKS = [{
   summary: 'Nobody asked for it but they built it anyway.',
   author: 'Beth Fertig',
   commentCount: 2,
+}, {
+  title: 'Statue in Central Park Begs New Yorkers to Look Away',
+  thumbnail: '/test-image3.jpeg',
+  section: 'Arts & Entertainment',
+  summary: "It's not grotesque, but it's also definitely not beautiful",
+  author: "Jim O'Grady",
+  commentCount: 0,
 }];
 
 export default Controller.extend({
