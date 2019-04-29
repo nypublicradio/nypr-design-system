@@ -16,44 +16,21 @@
     </p>
   </div>
 
-  <div class="c-newsletter-form__field-group">
-    <label for="newsletter" class="is-vishidden">Newsletter signup</label>
-    {{input
-      required=true
-      name="newsletter"
-      type="email"
-      class="c-newsletter-form__input"
-      placeholder="your@email.com"
-      value=this.email
-    }}
-    <button
-      data-test-newsletter-submit
-      type="submit"
-      class="o-button o-button--c-quaternary c-newsletter-form__button"
-      disabled={{or this.onSubmit.isRunning (not this.legalChecked)}}
-    >
+  <NyprMNewsletterForm class="u-spacing" @endpoint={{@endpoint}} @params={{@params}} as |form|>
+    <form.label/>
+
+    <form.input/>
+
+    <form.submit class="o-button--c-quarternary">
       <span class="c-newsletter-form__submit-icon o-icon o-icon--newsletter-form">
         <NyprASvg @icon='arrow-dashed'/>
       </span>
       <span class="is-vishidden">Submit email</span>
-    </button>
-  </div>
+    </form.submit>
 
-  {{#if this.onSubmit.last}}
-    <div class="c-newsletter-form__message">
-      {{! template-lint-disable no-triple-curlies }}
-      {{{or this.onSubmit.last.value this.onSubmit.last.error}}}
-    </div>
-  {{/if}}
-
-  <div class="c-newsletter-form__terms">
-    <label class="c-newsletter-form__terms-checkbox">
-      {{input type='checkbox' class='o-checkbox' checked=this.legalChecked}}
-      <p class="u-font--xs">
-        {{yield (hash legal=(component 'blank-template' text=this.defaultLegal))}}
-      </p>
-    </label>
-  </div>
-
+    <form.legal>
+      {{yield (hash legal=(component form.legal))}}
+    </form.legal>
+  </NyprMNewsletterForm>
 </div>
 {{!-- END-SNIPPET --}}

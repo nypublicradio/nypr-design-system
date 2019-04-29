@@ -33,6 +33,7 @@ Router.map(function() {
       this.route('nypr-m-gallery-lead');
       this.route('nypr-m-share-tools');
       this.route('nypr-m-newsletter');
+      this.route('nypr-m-newsletter-form');
       this.route('nypr-m-to-top');
       this.route('nypr-m-brands-linkroll');
       this.route('nypr-m-progress-bar');

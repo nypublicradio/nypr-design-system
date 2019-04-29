@@ -1,0 +1,34 @@
+<div class="c-newsletter-form__field-group">
+  <label for="newsletter" class="is-vishidden">
+    {{yield (hash label=(component 'blank-template' text=this.defaultLabel))}}
+  </label>
+  {{yield (hash
+    input=(component 'nypr-m-newsletter-form/input'
+      required=true
+      name="newsletter"
+      type="email"
+      class="c-newsletter-form__input"
+      placeholder="your@email.com"
+      value=this.email
+    )
+    submit=(component 'nypr-m-newsletter-form/button'
+      disabled=(or this.onSubmit.isRunning (not this.legalChecked))
+    )
+  )}}
+</div>
+
+{{#if this.onSubmit.last}}
+  <div class="c-newsletter-form__message">
+    {{! template-lint-disable no-triple-curlies }}
+    {{{or this.onSubmit.last.value this.onSubmit.last.error}}}
+  </div>
+{{/if}}
+
+<div class="c-newsletter-form__terms">
+  <label class="c-newsletter-form__terms-checkbox">
+    {{input type='checkbox' class='o-checkbox' checked=this.legalChecked}}
+    <p class="u-font--xs">
+      {{yield (hash legal=(component 'blank-template' text=this.defaultLegal))}}
+    </p>
+  </label>
+</div>
