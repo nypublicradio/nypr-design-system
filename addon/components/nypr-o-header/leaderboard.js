@@ -5,5 +5,13 @@ import layout from '../../templates/components/nypr-o-header/leaderboard';
 export default Component.extend({
   layout,
   classNames: ['c-main-header__ad-unit'],
+
+  /**
+    Hide the advertising label
+
+    @argument hideLabel
+    @type {Boolean}
+  */
+
 });
 // END-SNIPPET
