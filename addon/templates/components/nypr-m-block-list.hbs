@@ -1,0 +1,7 @@
+<ul class="u-spacing--and-half">
+  {{#each @items as |item i|}}
+    <li>
+      {{yield item i}}
+    </li>
+  {{/each}}
+</ul>
