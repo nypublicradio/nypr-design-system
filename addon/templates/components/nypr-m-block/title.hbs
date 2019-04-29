@@ -1,9 +1,9 @@
 {{#if (eq @h2 '')}}
-  {{#nypr-m-block/h2}}
+  {{#nypr-m-block/h2 route=@route url=@url hasGallery=@galleryIcon}}
     {{yield}}
   {{/nypr-m-block/h2}}
 {{else if (eq @h3 '')}}
-  {{#nypr-m-block/h3}}
+  {{#nypr-m-block/h3 route=@route url=@url hasGallery=@galleryIcon}}
     {{yield}}
   {{/nypr-m-block/h3}}
 {{/if}}

@@ -14,7 +14,7 @@ import { computed } from '@ember/object';
     <block.object as |o|>
       <o.eyebrow @text='News'/>
 
-      <o.title @h2>
+      <o.title @h2 @route={{array 'story' 'slug'}}>
         Story Title
       </o.title>
 

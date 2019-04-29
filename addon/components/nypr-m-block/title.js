@@ -38,4 +38,26 @@ export default Component.extend({
     @argument h3
     @type {Boolean}
   */
+
+  /**
+    Parameters passed to a `link-to` component.
+    [`<route name>`,`<model or identifier>`]
+
+    @argument route
+    @type {Array[String]}
+  */
+
+  /**
+    External url. If specified, will render a conventional `<a/>` tag with `target="_blank" rel="noopener"`.
+
+    @argument url
+    @type {String}
+  */
+
+  /**
+    Specify if a gallery icon should be rendered
+
+    @argument galleryIcon
+    @type {Boolean}
+  */
 });
