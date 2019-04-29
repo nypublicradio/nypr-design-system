@@ -50,6 +50,7 @@ Router.map(function() {
       this.route('nypr-o-donate');
       this.route('nypr-o-related-content');
       this.route('nypr-o-sponsored-tout');
+      this.route('nypr-o-newsletter-tout');
     })
   });
 
