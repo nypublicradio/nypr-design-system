@@ -1,3 +1,4 @@
+// BEGIN-SNIPPET nypr-o-sponsored-tout.js
 import Component from '@ember/component';
 import layout from '../templates/components/nypr-o-sponsored-tout';
 
@@ -18,3 +19,4 @@ export default Component.extend({
     @type {String}
   */
 });
+// END-SNIPPET
