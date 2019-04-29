@@ -5,6 +5,10 @@ Blocks are used to display individual pieces of content, similar to the concept 
 The other components on this page provide various layout configurations in the form of empty DOM elements; it is up to the user to fill those elements with their own `<NyprMBlock/>` component to ensure proper layouts.
 
 
+<aside>
+  The <code>nypr-m-block</code> component yields several nested blocks to accommodate UIs that are decoupled from data structures. It's recommended that developers wrap the <code>nypr-m-block</code> component in component that's local to their application. This can help reduce the noise on application level route templates.
+</aside>
+
 ### `nypr-m-block`
 The `<NyprMBlock/>` component provides layout options that are similar to the famous [media object](http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/).
 
