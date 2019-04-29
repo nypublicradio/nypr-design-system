@@ -104,7 +104,7 @@ Provides a simple list context for rendering multiple blocks.
 Provides a two column layout for blocks.
 
 <aside>
-  This component only provides empty HTML elements configured to space out `nypr-m-block`s anad `nypr-m-block-list`s evenly. It is up to the developer to actually render the proper components.
+  This component only provides empty HTML elements configured to space out `nypr-m-block`s and `nypr-m-block-list`s evenly. It is up to the developer to actually render the proper components.
 </aside>
 
 <DocsDemo as |demo|>
