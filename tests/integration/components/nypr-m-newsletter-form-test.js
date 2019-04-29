@@ -6,10 +6,10 @@ import test from 'ember-sinon-qunit/test-support/test';
 
 import * as fetch from 'fetch';
 
-import { DEFAULT_SUBSCRIBED_MESSAGE } from 'dummy/components/nypr-m-newsletter-form';
+import { DEFAULT_SUBSCRIBED_MESSAGE } from 'nypr-design-system/components/nypr-m-newsletter-form';
 
 
-module('Integration | Component | nypr-m-newsletter', function(hooks) {
+module('Integration | Component | nypr-m-newsletter-form', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it handles successful submissions', async function(assert) {
@@ -33,7 +33,10 @@ module('Integration | Component | nypr-m-newsletter', function(hooks) {
       .resolves(SUCCESS_RESPONSE);
 
     await render(hbs`
-      <NyprMNewsletterForm @endpoint={{ENDPOINT}} @params={{OTHER_PARAMS}} />
+      <NyprMNewsletterForm @endpoint={{ENDPOINT}} @params={{OTHER_PARAMS}} as |form|>
+        <form.input/>
+        <form.submit/>
+      </NyprMNewsletterForm>
     `);
 
     await fillIn('.c-newsletter-form__input', EMAIL);

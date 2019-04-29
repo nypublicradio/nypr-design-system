@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-import { DEFAULT_LEGAL } from 'dummy/components/nypr-m-newsletter-form';
+import { DEFAULT_LEGAL } from 'nypr-design-system/components/nypr-m-newsletter-form';
 
 module('Integration | Component | nypr-m-newsletter', function(hooks) {
   setupRenderingTest(hooks);
