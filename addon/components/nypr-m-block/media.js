@@ -13,33 +13,27 @@ export default Component.extend({
   classNames: ['c-block__media'],
 
   /**
-    Route for link-to helper
+    Array of arguments to pass to `link-to` helper:
+    - ['<route name>`, `<model or identifier>']
 
     @argument route
+    @type {Array}
+  */
+
+  /**
+    An external url. If supplied, this will render a conventional `<a/>` tag with `target="_blank"`.
+
+    @argument url
     @type {String}
   */
 
   /**
-    Model for link-to helper
-
-    @argument model
-    @type {String|Model}
-  */
-
-  /**
-    Optional tag to display with `model` and `label` keys.
-
-    Model is passed to the `link-to` helper to render a link, and can be a `String` or a `Model` instance.
+    Optional tag to display with `route` and `label` keys:
+    - `label` display text
+    - `route` array of arguments to pass to link-to component [`<route name>`, `<model or identifier>`]
 
     @argument tag
     @type {Object}
-  */
-
-  /**
-    Route for tag's link-to helper.
-
-    @agument tagRoute
-    @type {String}
   */
 
 });
