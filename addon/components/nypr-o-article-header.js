@@ -14,9 +14,9 @@ import layout from '../templates/components/nypr-o-article-header';
   @yield {Component} hash.top.meta.byline `nypr-m-byline`
   @yield {Component} hash.top.meta.publishDate `nypr-o-article-header/publish-date`
   @yield {Component} hash.lead `nypr-o-article-header/lead`
-  @yield {Component} hash.lead.left `blank-template`
-  @yield {Component} hash.lead.center `blank-template`
-  @yield {Component} hash.lead.right `blank-template`
+  @yield {Block} hash.lead.left `blank-template`
+  @yield {Block} hash.lead.center `blank-template`
+  @yield {Block} hash.lead.right `blank-template`
 */
 export default Component.extend({
   layout,

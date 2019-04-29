@@ -14,9 +14,10 @@ export const DEFAULT_SUBSCRIBED_MESSAGE = "Thanks for signing up!";
   Newsletter sign up widget
 
   @class nypr-m-newsletter
-  @yield {Hash} graphic `blank-template`
-  @yield {Hash} blurb `blank-template`
-  @yield {Hash} legal `blank-template`
+  @yield {Hash} hash
+  @yield {Block} hash.graphic `blank-template`
+  @yield {Block} hash.blurb `blank-template`
+  @yield {Block} hash.legal `blank-template`
 */
 export default Component.extend({
   layout,

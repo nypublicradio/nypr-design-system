@@ -7,9 +7,9 @@ import layout from '../templates/components/nypr-o-footer';
 
   @class nypr-o-footer
   @yield {Hash} hash
-  @yield {Component} hash.slogan blank-template
-  @yield {Component} hash.nav nypr-m-secondary-nav
-  @yield {Component} hash.signup blank-template
+  @yield {Block} hash.slogan `blank-template`
+  @yield {Component} hash.nav `nypr-m-secondary-nav`
+  @yield {Block} hash.signup `blank-template`
 */
 export default Component.extend({
   layout,

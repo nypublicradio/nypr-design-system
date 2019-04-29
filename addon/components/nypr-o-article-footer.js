@@ -31,7 +31,7 @@ import layout from '../templates/components/nypr-o-article-footer';
   @yield {Component} hash.tags `nypr-m-tags`
   @yield {Component} hash.contact `nypr-o-contact`
   @yield {Component} hash.donate `nypr-o-donate`
-  @yield {Component} hash.comments `blank-template`
+  @yield {Block} hash.comments `blank-template`
 */
 
 export default Component.extend({
