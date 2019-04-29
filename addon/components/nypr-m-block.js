@@ -9,7 +9,7 @@ import { computed } from '@ember/object';
   Usage:
   ```hbs
   <NyprMBlock @orientation={{orientation}} @size={{size}} as |block|>
-    <block.media @url='https://example.com/story' @srcS='https://picsum.photos/800/450' @alt='alt text' @tag={{hash label='Foo' slug='foo'}} />
+    <block.media @route={{array 'story' 'slug'}} @srcS='https://picsum.photos/800/450' @alt='alt text' />
 
     <block.object as |o|>
       <o.eyebrow @text='News'/>
