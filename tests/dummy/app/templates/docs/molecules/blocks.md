@@ -62,3 +62,35 @@ The `<NyprMBlock/>` component provides layout options that are similar to the fa
   <demo.snippet @name='nypr-m-block.hbs' @label='nypr-m-block.hbs'/>
 </DocsDemo>
 
+### `nypr-m-block-list`
+
+Provides a simple list context for rendering multiple blocks.
+
+<aside>
+This component provides a `ul` tag with an `li` for each item in the given `@items` argument. Users should take the yielded `item` context variable and render an `nypr-m-block` component.
+</aside>
+
+<DocsDemo as |demo|>
+  <demo.example @name="block-list-usage.hbs">
+    <NyprMBlockList @items={{BLOCKS}} as |item|>
+
+      <NyprMBlock as |block|>
+        <block.media @srcS={{item.thumbnail}}/>
+
+        <block.object as |o|>
+          <o.eyebrow @text={{item.section}}/>
+
+          <o.title @h3>{{item.title}}</o.title>
+
+          <o.body as |body|>
+            <body.text>{{item.summary}}</body.text>
+            <body.meta @author={{item.author}} @commentCount={{item.commentCount}}/>
+          </o.body>
+        </block.object>
+      </NyprMBlock>
+
+    </NyprMBlockList>
+  </demo.example>
+
+  <demo.snippet @name="block-list-usage.hbs" @label='Usage'/>
+</DocsDemo>
