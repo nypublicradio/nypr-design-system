@@ -1,12 +1,30 @@
 {{!-- BEGIN-SNIPPET nypr-a-button.hbs --}}
-{{#if @url}}
-  <a href={{@url}} class="{{unless @blank 'o-button'}} {{this.tierClass}}" ...attributes>
-    {{#if (has-block)}}
-      {{yield}}
-    {{else}}
-      {{@text}}
-    {{/if}}
-  </a>
+{{#if (or @url @route)}}
+  {{#if @url}}
+    <a
+      href={{@url}}
+      target="_blank"
+      rel="noopener"
+      class="{{unless @blank 'o-button'}} {{this.tierClass}}"
+      ...attributes>
+      {{#if (has-block)}}
+        {{yield}}
+      {{else}}
+        {{@text}}
+      {{/if}}
+    </a>
+  {{else}}
+    {{#link-to
+      params=@route
+      class=(concat (unless @blank 'o-button') this.tierClass)
+    }}
+      {{#if (has-block)}}
+        {{yield}}
+      {{else}}
+        {{@text}}
+      {{/if}}
+    {{/link-to}}
+  {{/if}}
 {{else}}
   <button
     class="{{unless @blank 'o-button'}} {{this.tierClass}}"

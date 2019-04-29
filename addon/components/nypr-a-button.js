@@ -6,7 +6,7 @@ import layout from '../templates/components/nypr-a-button';
 /**
   Base button. Use this component to compose more specific buttons and components.
 
-  If a `@url` is passed, an `a` tag is rendered.
+  If a `@url` is passed, an `a` tag is rendered with `target="_blank" rel="noopener"`
 
   Usage:
   ```hbs
@@ -33,13 +33,13 @@ export default Component.extend({
     Specify a click handler
 
     @argument onclick
-    @type {Function?}
+    @type {Function}
   */
 
   /**
     Specify the `role` attribute. Default is 'button'.
     @argument role
-    @type {String?}
+    @type {String}
     @default 'button'
   */
   role: 'button',
@@ -47,7 +47,7 @@ export default Component.extend({
     Text for element contents
 
     @argument text
-    @type {String?}
+    @type {String}
   */
   text: null,
 
@@ -55,7 +55,7 @@ export default Component.extend({
     Which tier in the visual heirarchy this button should be.
 
     @argument tier
-    @type {String?}
+    @type {String}
   */
   tier: null,
 
@@ -68,12 +68,21 @@ export default Component.extend({
   type: 'button',
 
   /**
-    URL for linking
+    External URL
 
     @argument url
-    @type {String?}
+    @type {String}
   */
   url: null,
+
+  /**
+    Route arguments for `link-to` component.
+
+    [`<route name>`, `<model or identifier>`]
+
+    @argument route
+    @type {Array}
+  */
 
   /**
     Computes the class applied based on the value of `tier`
