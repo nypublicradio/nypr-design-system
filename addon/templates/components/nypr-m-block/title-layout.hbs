@@ -6,7 +6,7 @@
       {{@title}}
     {{/if}}
   </a>
-{{else}}
+{{else if @route}}
   {{#link-to params=@route class="c-block__title-link"}}
     {{#if (has-block)}}
       {{yield}}
@@ -14,4 +14,10 @@
       {{@title}}
     {{/if}}
   {{/link-to}}
+{{else}}
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{@title}}
+  {{/if}}
 {{/if}}

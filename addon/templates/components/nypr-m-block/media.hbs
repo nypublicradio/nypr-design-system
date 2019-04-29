@@ -14,7 +14,7 @@
       @height={{@height}}
     />
   </a>
-{{else}}
+{{else if @route}}
   {{#link-to params=@route}}
     <NyprAPicture
       @src-s={{@srcS}}
@@ -30,6 +30,20 @@
       @height={{@height}}
     />
   {{/link-to}}
+{{else}}
+  <NyprAPicture
+    @src-s={{@srcS}}
+    @break-m={{@breakM}}
+    @src-m={{@srcM}}
+    @break-l={{@breakL}}
+    @src-l={{@srcL}}
+    @break-xl={{@breakXL}}
+    @src-xl={{@srcXL}}
+    @alt={{@alt}}
+    @lazy={{@lazy}}
+    @width={{@width}}
+    @height={{@height}}
+  />
 {{/if}}
 
 {{#if @tag}}
