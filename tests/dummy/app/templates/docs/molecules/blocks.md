@@ -67,7 +67,7 @@ The `<NyprMBlock/>` component provides layout options that are similar to the fa
 Provides a simple list context for rendering multiple blocks.
 
 <aside>
-This component provides a `ul` tag with an `li` for each item in the given `@items` argument. Users should take the yielded `item` context variable and render an `nypr-m-block` component.
+  This component provides a `ul` tag with an `li` for each item in the given `@items` argument. Users should take the yielded `item` context variable and render an `nypr-m-block` component.
 </aside>
 
 <DocsDemo as |demo|>
