@@ -94,3 +94,43 @@ This component provides a `ul` tag with an `li` for each item in the given `@ite
 
   <demo.snippet @name="block-list-usage.hbs" @label='Usage'/>
 </DocsDemo>
+
+### `nypr-o-block-list-group`
+
+Provides a two column layout for blocks.
+
+<aside>
+  This component only provides empty HTML elements configured to space out `nypr-m-block`s anad `nypr-m-block-list`s evenly. It is up to the developer to actually render the proper components.
+</aside>
+
+<DocsDemo as |demo|>
+  <demo.example @name="block-list-group-usage.hbs">
+    <NyprOBlockListGroup as |blg|>
+      <blg.col1>
+        <NyprMBlockList @items={{BLOCKS}} as |item|>
+
+          <NyprMBlock @orientation='h' @size='s' as |block|>
+            <block.media @srcS={{item.thumbnail}}/>
+            <block.object as |o|>
+              <o.eyebrow @text={{item.section}}/>
+              <o.title @h3>{{item.title}}</o.title>
+              <o.body as |body|>
+                <body.text>{{item.summary}}</body.text>
+                <body.meta @author={{item.author}} @commentCount={{item.commentCount}}/>
+              </o.body>
+            </block.object>
+          </NyprMBlock>
+
+        </NyprMBlockList>
+      </blg.col1>
+
+      <blg.col2 as |col|>
+        <col.ad @size='short'>
+          Ad here
+        </col.ad>
+      </blg.col2>
+    </NyprOBlockListGroup>
+  </demo.example>
+
+  <demo.snippet @name="block-list-group-usage.hbs" @label="Usage"/>
+</DocsDemo>
