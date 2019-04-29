@@ -1,0 +1,12 @@
+<span class="c-read-more-nav__label u-font--secondary-style u-font--xs">
+  Read More In:
+</span>
+<ul>
+  {{#each @items as |item|}}
+    <li class="c-read-more-nav__item">
+      <LinkTo @params={{item.route}} class="c-read-more-nav__link u-has-accent u-has-accent--primary">
+        {{item.label}}
+      </LinkTo>
+    </li>
+  {{/each}}
+</ul>
