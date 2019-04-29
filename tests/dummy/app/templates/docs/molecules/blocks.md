@@ -1,8 +1,13 @@
-## `nypr-m-block`
+## Blocks
 
-Render a story tease with the passed in arguments.
+Blocks are used to display individual pieces of content, similar to the concept of a "card". When a list of content needs to be rendered out, the `<NyprMBlock/>` component should be used.
 
-### Examples
+The other components on this page provide various layout configurations in the form of empty DOM elements; it is up to the user to fill those elements with their own `<NyprMBlock/>` component to ensure proper layouts.
+
+
+### `nypr-m-block`
+The `<NyprMBlock/>` component provides layout options that are similar to the famous [media object](http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/).
+
 <DocsDemo as |demo|>
   <demo.example>
     <p>
@@ -24,9 +29,9 @@ Render a story tease with the passed in arguments.
     <NyprMBlock @orientation={{this.orientation}} @size={{this.size}} as |block|>
       <block.media
         @url='https://example.com/story'
-        @srcS='https://picsum.photos/800/450'
+        @srcS='/test-image1.jpeg'
         @alt='alt text'
-        @tag={{hash label='Foo' slug='foo'}}
+        @tag={{hash label='Foo' route=(array null 'bar')}}
       />
 
       <block.object as |o|>
@@ -56,3 +61,4 @@ Render a story tease with the passed in arguments.
   <demo.snippet @name='nypr-m-block.js' @label='nypr-m-block.js'/>
   <demo.snippet @name='nypr-m-block.hbs' @label='nypr-m-block.hbs'/>
 </DocsDemo>
+
