@@ -138,3 +138,83 @@ Provides a two column layout for blocks.
 
   <demo.snippet @name="block-list-group-usage.hbs" @label="Usage"/>
 </DocsDemo>
+
+### `nypr-o-featured-block-list`
+
+Provides a two column layout with more white space, a heading, and other decorative UI bits.
+
+<aside>
+  This component only provides empty HTML elements configured to space out `nypr-m-block`s and `nypr-m-block-list`s evenly. It is up to the developer to actually render the proper components.
+</aside>
+
+<DocsDemo as |demo|>
+  <demo.example @name="featured-block-list-usage.hbs">
+    <NyprOFeaturedBlockList as |fbl|>
+      <fbl.heading>
+        <span class="c-featured-blocks__heading-icon o-icon u-icon--s u-path-fill--quaternary">
+          <NyprASvg @icon='arrow-stylish'/>
+        </span>
+        Featured
+      </fbl.heading>
+
+      <fbl.featured>
+        {{#with (get BLOCKS 0) as |item|}}
+          <NyprMBlock as |block|>
+            <block.media
+              @srcS={{item.thumbnail}}
+            />
+
+            <block.object as |o|>
+              <o.eyebrow @text={{item.section}}/>
+
+              <o.title @h3>
+                {{item.title}}
+              </o.title>
+
+              <o.body as |body|>
+                <body.text>
+                  {{item.summary}}
+                </body.text>
+
+                <body.meta
+                  @timestamp="1 hour ago"
+                  @commentCount={{item.commentCount}}
+                />
+              </o.body>
+            </block.object>
+          </NyprMBlock>
+        {{/with}}
+      </fbl.featured>
+
+      <fbl.col>
+        <NyprMBlockList @items={{slice 1 undefined BLOCKS}} as |item|>
+          <NyprMBlock @orientation='h' @size='s' as |block|>
+            <block.media
+              @srcS={{item.thumbnail}}
+            />
+
+            <block.object as |o|>
+              <o.eyebrow @text={{item.section}}/>
+
+              <o.title @h3>
+                {{item.title}}
+              </o.title>
+
+              <o.body as |body|>
+                <body.meta
+                  @timestamp="1 hour ago"
+                  @commentCount={{item.commentCount}}
+                />
+              </o.body>
+            </block.object>
+          </NyprMBlock>
+        </NyprMBlockList>
+      </fbl.col>
+
+    </NyprOFeaturedBlockList>
+
+  </demo.example>
+
+  <demo.snippet @name="featured-block-list-usage.hbs" @label="Usage"/>
+
+</DocsDemo>

@@ -1,0 +1,1 @@
+export { default } from 'nypr-design-system/components/nypr-o-featured-block-list/heading';
