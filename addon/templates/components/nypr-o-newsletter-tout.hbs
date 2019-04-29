@@ -1,0 +1,47 @@
+<div class="c-newsletter-tout__inner">
+
+  <div class="c-newsletter-tout__media">
+    <NyprAPicture
+      @src-s={{@img.src}}
+      @alt={{@img.alt}}
+    />
+  </div>
+
+  <div class="c-newsletter-tout__content u-spacing">
+
+    <div class="c-newsletter-tout__text u-spacing">
+      <h3 class="c-newsletter-tout__heading" data-test-newsletter-tout-heading>
+        <strong class="o-bg-text-accent">
+          {{yield (hash heading=(component 'blank-template'))}}
+        </strong>
+      </h3>
+      <div class="c-newsletter-tout__dek o-rte-text" data-test-newsletter-tout-blurb>
+        {{yield (hash blurb=(component 'blank-template'))}}
+      </div>
+    </div>
+
+    <NyprMNewsletterForm
+      class="c-newsletter-tout__form u-spacing"
+      @endpoint={{@endpoint}}
+      @params={{@params}}
+      as |form|>
+
+      <form.label/>
+
+      <form.input/>
+
+      <form.submit>
+        <span class="c-newsletter-form__submit-icon o-icon o-icon--newsletter-tout">
+          <NyprASvg @icon='arrow-skinny'/>
+        </span>
+        <span class="is-vishidden">Submit email</span>
+      </form.submit>
+
+      <form.legal>
+        {{yield (hash legal=(component form.legal))}}
+      </form.legal>
+    </NyprMNewsletterForm>
+
+  </div>
+
+</div>
