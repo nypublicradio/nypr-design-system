@@ -86,7 +86,7 @@ export default Component.extend({
     @accessor sizeClass
     @type {String}
   */
-  sizeClass: computed('size', function() {
+  sizeClass: computed('size', 'orientation', function() {
     switch(this.size) {
       case 'l':
         return this.orientation === 'h' ? 'c-block--horizontal--large' : null;
