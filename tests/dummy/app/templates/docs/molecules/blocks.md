@@ -33,7 +33,7 @@ The `<NyprMBlock/>` component provides layout options that are similar to the fa
     <NyprMBlock @orientation={{this.orientation}} @size={{this.size}} as |block|>
       <block.media
         @url='https://example.com/story'
-        @srcS='/test-image1.jpeg'
+        @srcS='https://picsum.photos/id/237/600/400'
         @alt='alt text'
         @tag={{hash label='Foo' route=(array null 'bar')}}
       />
