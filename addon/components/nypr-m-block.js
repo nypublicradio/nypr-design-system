@@ -45,7 +45,6 @@ export default Component.extend({
   layout,
   classNames: ['c-block'],
   classNameBindings: ['orientationClass', 'sizeClass'],
-  attributeBindings: ['data-test-nypr-block'],
 
   /**
     Layout orientation.

@@ -16,5 +16,5 @@ import layout from '../templates/components/nypr-o-featured-block-list';
 export default Component.extend({
   layout,
   tagName: 'section',
-  classNames: ['c-featured-blocks', 'o-section', 'u-breakout']
+  classNames: ['c-featured-blocks', 'o-section', 'u-breakout'],
 });
