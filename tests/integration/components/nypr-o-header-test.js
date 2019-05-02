@@ -9,7 +9,7 @@ module('Integration | Component | nypr-o-header', function(hooks) {
   test('it renders', async function(assert) {
     const LEADERBOARD = 'ad unit';
     const BRANDING = 'some logo';
-    const PRIMARY_NAV = [{url: '/one', Title: 'One'}, {url: '/two', Title: 'Two'}];
+    const PRIMARY_NAV = [{route: ['foo'], text: 'One'}, {route: ['bar'], text: 'Two'}];
     const SECONDARY_NAV = [{url: '/three', Title: 'Three'}, {url: '/four', Title: 'Four'}];
     const HEADLINE = "headline";
     const RIGHT_SIDE = 'foo';
