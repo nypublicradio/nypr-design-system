@@ -2,9 +2,9 @@
 <ul>
   {{#each @navItems as |item|}}
     <li class="c-primary-nav__item">
-      <a href={{item.url}} class="c-primary-nav__link {{@linkClass}}">
-        {{item.title}}
-      </a>
+      {{#link-to params=item.route class=(concat 'c-primary-nav__link ' @linkClass)}}
+        {{item.text}}
+      {{/link-to}}
     </li>
   {{/each}}
 </ul>
