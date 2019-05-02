@@ -1,5 +1,12 @@
 # `nypr-design-system` changelog
 
+## `0.1.0`
+- initial internal release
+- article template components
+- header bar
+- side menu
+- footer
+
 ## `0.0.4`
 - adds a `component-lineage` in-repo addon 282d379
 - adds a corresponding `component-lineage` component to render out the actual related component names e45f006
