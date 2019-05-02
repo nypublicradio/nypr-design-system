@@ -99,8 +99,9 @@ module('Integration | Component | nypr-o-header', function(hooks) {
   });
 
   test('floating header', async function(assert) {
+    // header test injection
     await render(hbs`
-      <NyprOHeader as |header|>
+      <NyprOHeader @rules={{hash progressBar=true}} as |header|>
         <header.menu/>
         <header.left/>
       </NyprOHeader>
@@ -167,7 +168,10 @@ module('Integration | Component | nypr-o-header', function(hooks) {
 
     assert.dom('#example').hasText('foo', 'resting state should turn on `foo` rule');
 
-    let reset = await scrollPastHeader(this);
+    function headerIsFloating(owner) {
+      return owner.element.querySelector('.c-floating-header');
+    }
+    let reset = await scrollPastHeader(this, headerIsFloating);
 
     assert.dom('#example').hasText('bar', 'floating state should turn on `bar` rule');
 
@@ -175,7 +179,15 @@ module('Integration | Component | nypr-o-header', function(hooks) {
   });
 });
 
-async function scrollPastHeader(owner) {
+function findProgressBar(owner) {
+  let progress = owner.element.querySelector('.o-progress');
+  return progress && progress.value > 0;
+}
+
+async function scrollPastHeader(owner, cb) {
+  if (!cb) {
+    cb = findProgressBar;
+  }
   const testingContainer = document.querySelector('#ember-testing-container');
 
   // CSS can play factor. without styles, this element is taller than the window
@@ -198,10 +210,7 @@ async function scrollPastHeader(owner) {
 
   window.scrollTo(0, HEIGHT);
 
-  await waitUntil(() => {
-    let progress = owner.element.querySelector('.o-progress');
-    return progress && progress.value > 0;
-  }, {timeout: 2000})
+  await waitUntil(() => cb(owner), {timeout: 2000})
 
   return reset;
 }
