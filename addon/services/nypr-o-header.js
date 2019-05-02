@@ -5,7 +5,7 @@ import { inject } from '@ember/service';
 /**
   Backing service for arbitrary variables based on UI state of the `nypr-o-header` component.
 
-  The `addRule` API specifies values to be yielded by the header based on its `floating` or `resting `state`.
+  The `addRule` API specifies values to be yielded by the header based on its `floating` or `resting `state`. The `all` key will set rules in both states.
 
   Rulesets are namespaced by a route identifier and updated when the header's `outOfViewport` state changes or when the router's `currentRouteName` changes.
 
@@ -18,13 +18,15 @@ import { inject } from '@ember/service';
   beforeModel() {
     this.header.addRule('route.name', {
       resting: {
-        nav: true,
         search: true,
       },
       floating: {
         donate: true,
         share: true,
-      }
+      },
+      all: {
+        nav: true,
+      },
     });
   }
   ```
@@ -40,12 +42,11 @@ export default Service.extend({
   },
 
   /**
-    Rulesets map. Keys are route names and values are an object with a set of rules for `resting` and `floating` states.
+    Rulesets map. Keys are route names and values are an object with a set of rules for `resting`, `floating`, and `all` states.
 
     @field rulesets
     @type {Object}
   */
-  // rulesets: null,
 
   /**
     Header component calls this when it is initialized so the service can access its state.
@@ -63,7 +64,7 @@ export default Service.extend({
 
     @method addRule
     @param {String} route Dotted route name identifier, e.g. `article.gallery`
-    @param {Object} ruleset Hash of values to be applied to the header when the given route is entered, e.g. `{floating: { foo: true }, resting: {bar: true}}`. `floating` and `resting` keys are required
+    @param {Object} ruleset Hash of values to be applied to the header when the given route is entered, e.g. `{floating: { foo: true }, resting: {bar: true}, all: {baz: true}}`. `floating` and `resting` keys are required
     @return {void}
   */
   addRule(route, ruleset = {}) {
@@ -98,6 +99,9 @@ export default Service.extend({
     let ruleset = this.rulesets[route];
     if (ruleset) {
       let rules = ruleset[isFloating ? 'floating' : 'resting'];
+
+      // include any `all` rules no matter the state
+      rules = {...rules, ...ruleset.all};
 
       // replace rules wholesale to keep rule management sane and "truty only"
       this.component.setProperties({rules});
