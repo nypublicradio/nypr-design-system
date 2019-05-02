@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## `0.2.0`
+- blocks and assorted layout components
+- nypr-o-header service for managing rules
+- share tools
+- gallery overlay
+
 ## `0.1.0`
 - initial internal release
 - article template components
