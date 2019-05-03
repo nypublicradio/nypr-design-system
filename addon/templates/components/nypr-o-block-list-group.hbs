@@ -1,4 +1,12 @@
 {{yield (hash
-  col1=(component 'nypr-o-block-list-group/column' class='c-block-group__col1' register=(action addColumn))
-  col2=(component 'nypr-o-block-list-group/column' class='c-block-group__col2' register=(action addColumn))
+  col1=(component 'nypr-o-block-list-group/column'
+    class='c-block-group__col1'
+    onRender=(action addColumn)
+    onDestroy=(action removeColumn)
+  )
+  col2=(component 'nypr-o-block-list-group/column'
+    class='c-block-group__col2'
+    onRender=(action addColumn)
+    onDestroy=(action removeColumn)
+  )
 )}}

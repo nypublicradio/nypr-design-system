@@ -108,32 +108,48 @@ Provides a two column layout for blocks.
 </aside>
 
 <DocsDemo as |demo|>
-  <demo.example @name="block-list-group-usage.hbs">
-    <NyprOBlockListGroup as |blg|>
-      <blg.col1>
-        <NyprMBlockList @items={{BLOCKS}} as |item|>
+  <demo.example @name='foo'>
 
-          <NyprMBlock @orientation='h' @size='s' as |block|>
-            <block.media @srcS={{item.thumbnail}}/>
-            <block.object as |o|>
-              <o.eyebrow @text={{item.section}}/>
-              <o.title @h3>{{item.title}}</o.title>
-              <o.body as |body|>
-                <body.text>{{item.summary}}</body.text>
-                <body.meta @author={{item.author}} @commentCount={{item.commentCount}}/>
-              </o.body>
-            </block.object>
-          </NyprMBlock>
+    <p>
+      <button class="btn" {{action (mut singleColumn) (not singleColumn)}}>
+        Show as {{if singleColumn 'Two Column' 'Single Column'}}
+      </button>
+    </p>
 
-        </NyprMBlockList>
-      </blg.col1>
+    <p>
+      <button class="btn" {{action (mut twoUp) (not twoUp)}}>
+        Show as {{if twoUp 'Offset' 'Equal Width'}}
+      </button>
+    </p>
+    <!-- BEGIN-SNIPPET block-list-group-usage.hbs -->
+      <NyprOBlockListGroup @twoUp={{twoUp}} as |blg|>
+        <blg.col1>
+          <NyprMBlockList @items={{BLOCKS}} as |item|>
 
-      <blg.col2 as |col|>
-        <col.ad @size='short'>
-          Ad here
-        </col.ad>
-      </blg.col2>
-    </NyprOBlockListGroup>
+            <NyprMBlock @orientation='h' @size='s' as |block|>
+              <block.media @srcS={{item.thumbnail}}/>
+              <block.object as |o|>
+                <o.eyebrow @text={{item.section}}/>
+                <o.title @h3>{{item.title}}</o.title>
+                <o.body as |body|>
+                  <body.text>{{item.summary}}</body.text>
+                  <body.meta @author={{item.author}} @commentCount={{item.commentCount}}/>
+                </o.body>
+              </block.object>
+            </NyprMBlock>
+
+          </NyprMBlockList>
+        </blg.col1>
+
+        {{#unless singleColumn}}
+          <blg.col2 as |col|>
+            <col.ad @size='short'>
+              Ad here
+            </col.ad>
+          </blg.col2>
+        {{/unless}}
+      </NyprOBlockListGroup>
+    <!-- END-SNIPPET -->
   </demo.example>
 
   <demo.snippet @name="block-list-group-usage.hbs" @label="Usage"/>

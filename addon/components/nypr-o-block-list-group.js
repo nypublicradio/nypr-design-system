@@ -16,7 +16,10 @@ import { equal } from '@ember/object/computed';
 export default Component.extend({
   layout,
   classNames: ['c-block-group', 'o-section'],
-  classNameBindings: ['isSingleColumn:c-block-group--single-col'],
+  classNameBindings: [
+    'isSingleColumn:c-block-group--single-col',
+    'twoUp:c-block-group--2up',
+  ],
   tagName: 'section',
 
   init() {
@@ -42,6 +45,15 @@ export default Component.extend({
     this.columns.pushObject(component);
   },
 
+  /**
+    Remove column from tracked list
+
+    @method removeColumn
+    @param {Component} column component
+  */
+  removeColumn(component) {
+    this.columns.removeObject(component);
+  },
 
   /**
     Computes if there's more than one column rendered
@@ -50,5 +62,12 @@ export default Component.extend({
     @type {Boolean}
   */
   isSingleColumn: equal('columns.length', 1),
+
+  /**
+    Make the columns equal width
+
+    @argument twoUp
+    @type {Boolean}
+  */
 
 });

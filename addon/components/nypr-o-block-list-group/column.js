@@ -6,6 +6,9 @@ export default Component.extend({
   classNames: ['c-block-group__col', 'u-spacing--and-half'],
 
   didInsertElement() {
-    this.register(this);
+    this.onRender(this);
   },
+  willDestroy() {
+    this.onDestroy(this);
+  }
 });
