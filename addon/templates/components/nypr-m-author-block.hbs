@@ -1,0 +1,46 @@
+<div class="c-author-block__meta u-spacing--half">
+
+  <h3 class="c-author-block__title c-block__title" data-test-author-name>
+    {{@author.name}}
+  </h3>
+
+  <div class="c-author-block__info">
+    {{#if @author.title}}
+      <span
+        class="c-author-block__role u-font--secondary-style u-color--gray u-font--xs"
+        data-test-author-title
+      >
+        <strong>{{@author.title}}</strong>
+      </span>
+    {{/if}}
+    {{!-- <a href="" class="c-author-block__details u-font--secondary-style u-has-accent u-has-accent--secondary u-font--xs">Articles</a> --}}
+  </div>
+
+  <div class="c-author-block__social">
+    <NyprMShareTools as |tools|>
+      {{#each-in @author.contact as |service value|}}
+        <tools.link @service={{service}} @username={{value}}/>
+      {{/each-in}}
+    </NyprMShareTools>
+  </div>
+
+</div>
+
+{{#if @author.image}}
+  <div class="c-author-block__media" data-test-author-media>
+    <NyprAPicture @src-s={{@author.image}} @alt={{@author.name}} />
+  </div>
+{{/if}}
+
+<div class="c-author-block__object u-spacing--half">
+
+  {{#if @author.bio}}
+    <div class="c-author-block__dek o-rte-text u-spacing js-clamp--3">
+      <p data-test-author-bio>
+        {{{@author.bio}}}
+      </p>
+      {{!-- <button class="c-author-block__dek-toggle js-toggle-parent o-text-with-icon u-font--secondary-style u-has-accent u-has-accent--secondary u-font--xs">Read&nbsp;<span class="u-active--on">More</span><span class="u-active--off">Less</span><span class="o-icon o-icon--caret">{% include '@atoms/icons/icon-caret.twig' %}</span></button> --}}
+    </div>
+  {{/if}}
+
+</div>
