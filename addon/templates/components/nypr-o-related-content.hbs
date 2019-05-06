@@ -4,7 +4,20 @@
 <ul class="c-related-content__list u-spacing">
   {{#each @items as |item|}}
     <li>
-      <a href={{item.url}} class="u-has-accent u-has-accent--secondary u-font--s">{{item.title}}</a>
+      {{#if item.route}}
+        {{#link-to params=item.route class="u-has-accent u-has-accent--secondary u-font--s"}}
+          {{item.title}}
+        {{/link-to}}
+      {{else}}
+        <a
+          href={{item.url}}
+          class="u-has-accent u-has-accent--secondary u-font--s"
+          target="_blank"
+          rel="noopener"
+        >
+          {{item.title}}
+        </a>
+      {{/if}}
     </li>
   {{/each}}
 </ul>

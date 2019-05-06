@@ -1,6 +1,20 @@
 {{!-- BEGIN-SNIPPET nypr-a-tag.hbs --}}
 {{#if @url}}
-  <a href={{@url}} class="o-tag">{{or @prefix this.prefix}}{{@tag}}</a>
+  <a
+    href={{@url}}
+    target="_blank"
+    rel="noopener"
+    class="o-tag"
+    ...attributes>
+    {{or @prefix this.prefix}}{{@tag}}
+  </a>
+{{else if @route}}
+  {{#link-to
+    params=@route
+    class='o-tag'
+  }}
+    {{or @prefix this.prefix}}{{@tag}}
+  {{/link-to}}
 {{else}}
   <span class="o-tag">{{or @prefix this.prefix}}{{@tag}}</span>
 {{/if}}

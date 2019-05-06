@@ -1,7 +1,17 @@
 {{!-- BEGIN-SNIPPET nypr-m-breadcrumb.hbs --}}
 {{#each @breadcrumbs as |breadcrumb|}}
-  {{#if breadcrumb.url}}
-    <a href={{breadcrumb.url}} class="o-breadcrumb">{{breadcrumb.label}}</a>
+  {{#if breadcrumb.route}}
+    {{#link-to params=breadcrumb.route class="o-breadcrumb"}}
+      {{breadcrumb.label}}
+    {{/link-to}}
+  {{else if breadcrumb.url}}
+    <a
+      href={{breadcrumb.url}}
+      class="o-breadcrumb"
+      target="_blank"
+      rel="noopener">
+      {{breadcrumb.label}}
+    </a>
   {{else}}
     <span class="o-breadcrumb">{{breadcrumb.label}}</span>
   {{/if}}

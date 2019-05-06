@@ -7,14 +7,30 @@
     {{~else if (and (has-next author @authors) (has-previous author @authors))~}}
       ,&nbsp;
     {{~/if~}}
-    <a href={{author.url}} class="u-has-accent u-has-accent--neutral" data-test-author-name>
-      {{author.name}}
-    </a>
+    {{#if author.route}}
+      {{#link-to params=author.route class="u-has-accent u-has-accent--neutral" data-test-author-name=author.name}}
+        {{author.name}}
+      {{/link-to}}
+    {{else}}
+      <a
+        href={{author.url}}
+        target="_blank"
+        rel="noopener"
+        class="u-has-accent u-has-accent--neutral"
+        data-test-author-name
+      >
+        {{author.name}}
+      </a>
+    {{/if}}
     {{~#with author.org as |org|~}}
-      , (<a href={{org.url}} class="u-has-accent u-has-accent--neutral" data-test-author-org><em>{{org.name}}</em></a>)
+      {{#if org.route}}
+        , ({{#link-to params=org.route class="u-has-accent u-has-accent--neutral" data-test-author-org=org.name}}<em>{{org.name}}</em>{{/link-to}})
+      {{else}}
+        , (<a href={{org.url}} target="_blank" rel="noopener" class="u-has-accent u-has-accent--neutral" data-test-author-org><em>{{org.name}}</em></a>)
+      {{/if}}
     {{~/with~}}
   {{/each}}
 {{else if @sponsor}}
-  <a href={{@sponsor.url}} target="_blank" rel="noopener noreferrer" data-test-sponsor-name>Sponsored by {{@sponsor.name}}</a>
+  <a href={{@sponsor.url}} target="_blank" rel="noopener" data-test-sponsor-name>Sponsored by {{@sponsor.name}}</a>
 {{/if}}
 {{!-- END-SNIPPET --}}
