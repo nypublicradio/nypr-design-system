@@ -23,7 +23,7 @@ module('Integration | Component | nypr-m-author-block', function(hooks) {
 
     assert.dom('[data-test-author-name]').hasText(AUTHOR.name);
     assert.dom('[data-test-author-title]').hasText(AUTHOR.title);
-    assert.dom('[data-test-author-media]').hasAttribute('src', AUTHOR.image);
+    assert.dom('[data-test-author-media] img').hasAttribute('src', AUTHOR.image);
     assert.dom('[data-test-author-bio]').hasText(AUTHOR.bio);
   });
 });
