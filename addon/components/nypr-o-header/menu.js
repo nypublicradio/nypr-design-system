@@ -5,9 +5,12 @@ import { closest } from 'ember-click-outside/utils';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/string';
+import { inject } from '@ember/service';
 import layout from '../../templates/components/nypr-o-header/menu';
 
 export default Component.extend(ClickOutsideMixin, {
+  router: inject(),
+
   layout,
   classNames: ['c-side-menu'],
   attributeBindings: ['style'],
@@ -66,6 +69,8 @@ export default Component.extend(ClickOutsideMixin, {
   didInsertElement() {
     this._super(...arguments);
     this.addClickOutsideListener();
+
+    this.router.on('routeDidChange', this.close);
   },
 
   willDestroy() {
