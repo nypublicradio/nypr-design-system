@@ -53,6 +53,7 @@ export const SERVICE_MAP = {
   },
   email: {
     shareBase: 'mailto:',
+    profileBase: 'mailto:',
     getParams: (url, params = {}) => {
       if (typeof params.subject === 'string') {
         params.subject = params.subject.replace('{{URL}}', url);
