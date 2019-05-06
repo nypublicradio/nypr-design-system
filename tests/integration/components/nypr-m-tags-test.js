@@ -23,7 +23,7 @@ module('Integration | Component | nypr-m-tags', function(hooks) {
     `);
     assert.dom('a.o-tag').exists({count: 2});
     findAll('a.o-tag').forEach(el => {
-      assert.dom(el).hasAttribute('href', `/tags/${el.textContent.slice(1)}`);
+      assert.dom(el).hasAttribute('href', `/tags/${el.textContent.trim().slice(1)}`);
     })
   });
 });
