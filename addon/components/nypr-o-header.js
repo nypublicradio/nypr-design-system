@@ -160,7 +160,8 @@ export default Component.extend({
       let el;
       if (this.floatLandmark) {
         el = document.querySelector(this.floatLandmark);
-      } else if (this.element) {
+      }
+      if (!el && this.element) {
         el = this.element;
       } else {
         return;
