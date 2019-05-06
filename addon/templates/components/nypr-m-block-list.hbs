@@ -1,3 +1,9 @@
+{{#if @heading}}
+  <h2 class="o-section__heading o-bg-text-accent">
+    {{@heading}}
+  </h2>
+{{/if}}
+
 <ul class="u-spacing--and-half">
   {{#each @items as |item i|}}
     <li>

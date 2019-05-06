@@ -17,4 +17,11 @@ export default Component.extend({
     @argument items
     @type {Array}
   */
+
+  /**
+    Optional heading text
+
+    @argument heading
+    @type {String}
+  */
 });
