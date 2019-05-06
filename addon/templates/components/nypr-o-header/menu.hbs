@@ -29,11 +29,10 @@
   </div>
 
   <div class="u-spacing">
-    <NyprMInlineSearch @formClass="c-search--side"/>
-
-    <NyprAButton class="c-side-menu__send-story o-button--quaternary u-full-width">
-      Send a Story Idea
-    </NyprAButton>
+    {{yield (hash
+      search=(component 'nypr-m-inline-search' formClass="c-search--side")
+      tipButton=(component 'nypr-a-button' class="c-side-menu__send-story o-button--quaternary u-full-width")
+    )}}
   </div>
 
   <div class="c-side-menu__nypr-logo">
