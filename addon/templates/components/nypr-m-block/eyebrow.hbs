@@ -1,11 +1,5 @@
-{{#if @route}}
-  {{#link-to params=@route}}
-    <NyprAKicker @text={{@text}}/>
-  {{/link-to}}
-{{else if @url}}
-  <a href={{@url}} target="_blank" rel="noopener">
-    <NyprAKicker @text={{@text}}/>
-  </a>
-{{else}}
-  <NyprAKicker @text={{@text}}/>
-{{/if}}
+<NyprAKicker
+  @text={{@text}}
+  @url={{@url}}
+  @route={{@route}}
+/>
