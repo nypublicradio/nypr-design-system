@@ -16,13 +16,26 @@ import layout from '../templates/components/nypr-a-kicker';
 */
 export default Component.extend({
   layout,
-  classNames: ['o-kicker'],
+  tagName: '',
 
   /**
     Text contents.
     @argument text
-    @type {String?}
+    @type {String}
   */
-  text: null,
+
+  /**
+    Arguments to pass to a link-to component
+
+    @argument route
+    @type {Array}
+  */
+
+  /**
+    URL for anchor tag
+
+    @argument url
+    @type {String}
+  */
 });
 // END-SNIPPET

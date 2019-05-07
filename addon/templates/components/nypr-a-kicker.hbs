@@ -1,7 +1,35 @@
 {{!-- BEGIN-SNIPPET nypr-a-kicker.hbs --}}
-{{#if (has-block)}}
-  {{yield}}
+{{#if @url}}
+  <a
+    href={{@url}}
+    target="_blank"
+    rel="noopener"
+    class="o-kicker"
+    ...attributes>
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{@text}}
+    {{/if}}
+  </a>
+{{else if @route}}
+  {{#link-to
+    params=@route
+    class='o-kicker'
+  }}
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{@text}}
+    {{/if}}
+  {{/link-to}}
 {{else}}
-  {{@text}}
+  <span class="o-kicker">
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{@text}}
+    {{/if}}
+  </span>
 {{/if}}
 {{!-- END-SNIPPET --}}
