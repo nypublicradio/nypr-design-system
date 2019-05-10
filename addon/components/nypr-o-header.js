@@ -163,7 +163,7 @@ export default Component.extend({
       }
       if (!el && this.element) {
         el = this.element;
-      } else {
+      } else if (!el) {
         return;
       }
       let { top, height } = el.getBoundingClientRect();
