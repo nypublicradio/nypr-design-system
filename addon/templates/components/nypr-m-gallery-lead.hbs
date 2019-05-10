@@ -24,7 +24,7 @@
 <div class="c-lead-gallery__thumbs">
   {{#each @slides as |slide i|}}
     {{#if (lt i 4)}}
-      <button {{action 'setCurrent' i}} class="c-lead-gallery__thumbs-thumb" data-test-gallery-thumb={{i}}>
+      <button {{action 'setCurrent' i}} class="c-lead-gallery__thumbs-thumb {{if (eq this.currentIndex i) 'is-active'}}" data-test-gallery-thumb={{i}}>
         <img src={{slide.src}} alt={{slide.caption}}>
       </button>
     {{/if}}
