@@ -51,6 +51,10 @@ export const SERVICE_MAP = {
     shareBase: '',
     getParams() {},
   },
+  youtube: {
+    profileBase: 'https://www.youtube.com/channel',
+    getParams() {},
+  },
   email: {
     shareBase: 'mailto:',
     profileBase: 'mailto:',
