@@ -1,7 +1,9 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, waitUntil } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+
+import { scrollPastHeader } from 'nypr-design-system/test-support';
 
 module('Integration | Component | nypr-o-header', function(hooks) {
   setupRenderingTest(hooks);
@@ -178,39 +180,3 @@ module('Integration | Component | nypr-o-header', function(hooks) {
     reset();
   });
 });
-
-function findProgressBar(owner) {
-  let progress = owner.element.querySelector('.o-progress');
-  return progress && progress.value > 0;
-}
-
-async function scrollPastHeader(owner, cb) {
-  if (!cb) {
-    cb = findProgressBar;
-  }
-  const testingContainer = document.querySelector('#ember-testing-container');
-
-  // CSS can play factor. without styles, this element is taller than the window
-  // with styles, it's rather short, so use the larger of the two.
-  // double them so there's enough space to scroll past the element and trigger the progress bar
-  const HEADER_HEIGHT = owner.element.querySelector('.c-main-header').scrollHeight * 2;
-  const WINDOW_HEIGHT = window.innerHeight * 2;
-  const HEIGHT = HEADER_HEIGHT > WINDOW_HEIGHT ? HEADER_HEIGHT : WINDOW_HEIGHT;
-
-  const OLD_POSITION = testingContainer.style.position;
-
-  function reset() {
-    testingContainer.style.height = '';
-    testingContainer.style.position = OLD_POSITION;
-    testingContainer.scrollTo(0, 0);
-  }
-
-  testingContainer.style.height = `${HEIGHT}px`;
-  testingContainer.style.position = 'relative';
-
-  window.scrollTo(0, HEIGHT);
-
-  await waitUntil(() => cb(owner), {timeout: 2000})
-
-  return reset;
-}
