@@ -52,7 +52,7 @@ export const SERVICE_MAP = {
     getParams() {},
   },
   youtube: {
-    profileBase: 'https://www.youtube.com/channel',
+    profileBase: 'https://www.youtube.com/channel/',
     getParams() {},
   },
   email: {
