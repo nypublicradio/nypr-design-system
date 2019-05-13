@@ -39,7 +39,7 @@ export default Component.extend({
     }
 
     // track which slide is on screen
-    this._boundScrollListener = bind(this, '_activeSlideWatcher');
+    this._boundScrollListener = bind(this, '_currentSlideWatcher');
     window.addEventListener('scroll', this._boundScrollListener);
 
     // CSS transition
@@ -180,12 +180,17 @@ export default Component.extend({
   /**
     Handles some DOM management for scrolling events
     - calls `viewedSlide` handler when a slide enters the viewport
+    - skips a loop if the gallery has been initialized with a slide
 
-    @method _activeSlideWatcher
+    @method _currentSlideWatcher
     @param {EventObject} event
     @return {void}
   */
-  _activeSlideWatcher(/* e */) {
+  _currentSlideWatcher(/* e */) {
+    if (this.slideForInit) {
+      this.slideForInit = null;
+      return;
+    }
     throttle(this, () => {
       let i;
       let currentEl;
