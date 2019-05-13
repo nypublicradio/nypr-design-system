@@ -28,7 +28,7 @@ module('Integration | Component | nypr-o-header', function(hooks) {
     // test injection for leaderboard
     await render(hbs`
       <NyprOHeader @rules={{hash leaderboard=true}} as |header|>
-        <header.leaderboard>
+        <header.leaderboard @hideLabel={{true}}>
           {{LEADERBOARD}}
         </header.leaderboard>
 
