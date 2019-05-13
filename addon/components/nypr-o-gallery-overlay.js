@@ -46,15 +46,15 @@ export default Component.extend({
     this.element.classList.add('gallery-is-active');
 
     // scroll to an image if its index is passed in
-    if (this.activeSlide) {
-      let index = this.activeSlide;
-      let activeSlide = this.slideEls[index];
+    if (this.slideForInit) {
+      let index = this.slideForInit;
+      let slideToScrollTo = this.slideEls[index];
 
       // wait for all slides to load so scroll position is correct
       imagesloaded(this.element.querySelectorAll('.c-slide'), () => {
         // const HEADER_OFFSET = 80;
 
-        let image = activeSlide.querySelector('img');
+        let image = slideToScrollTo.querySelector('img');
         // let { top, height:imageHeight } = image.getBoundingClientRect();
         //
         // let imageAtTopOfWindow = top + window.scrollY;
@@ -88,9 +88,9 @@ export default Component.extend({
   slideEls: null,
 
   /**
-    Scroll to the slide at the given index
+    Scroll to the slide at the given index on initial render
 
-    @argument activeSlide
+    @argument slideForInit
     @type {Number}
   */
 

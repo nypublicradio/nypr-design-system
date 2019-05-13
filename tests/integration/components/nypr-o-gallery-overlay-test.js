@@ -46,7 +46,7 @@ module('Integration | Component | nypr-o-gallery-overlay', function(hooks) {
 
   test('it scrolls to a slide at the specified zero-based index on render', async function(assert) {
     const TITLE = 'Foo Gallery';
-    const ACTIVE_SLIDE = SLIDES.length - 1;
+    const SLIDE_FOR_INIT = SLIDES.length - 1;
 
     this.setProperties({
       SLIDES: SLIDES.map((slide, i) => {
@@ -54,7 +54,7 @@ module('Integration | Component | nypr-o-gallery-overlay', function(hooks) {
         return slide;
       }),
       TITLE,
-      ACTIVE_SLIDE,
+      SLIDE_FOR_INIT,
     });
 
     await render(hbs`
@@ -62,16 +62,16 @@ module('Integration | Component | nypr-o-gallery-overlay', function(hooks) {
         @title={{TITLE}}
         @parentRoute={{array 'foo' 'bar'}}
         @slides={{SLIDES}}
-        @activeSlide={{ACTIVE_SLIDE}}
+        @slideForInit={{SLIDE_FOR_INIT}}
       />
     `);
 
-    const activeSlide = document.querySelector(`[data-test-gallery-slide="${ACTIVE_SLIDE}"]`);
+    const slideForInit = document.querySelector(`[data-test-gallery-slide="${SLIDE_FOR_INIT}"]`);
     // await pauseTest();
     await waitUntil(() => {
-      return inViewport(activeSlide);
+      return inViewport(slideForInit);
     }, {timeout: 1000});
-    assert.ok(`slide ${ACTIVE_SLIDE + 1} should be visible`);
+    assert.ok(`slide ${SLIDE_FOR_INIT + 1} should be visible`);
   });
 
   test('slides call the gallery `registerSlide` method on insert', async function(assert) {
