@@ -2,7 +2,11 @@
 <div class="c-lead-gallery__top">
 
   <NyprMFigure as |figure|>
-    <figure.image @src-s={{this.currentSlide.full}} />
+    <figure.image
+      @src-s={{this.currentSlide.full}}
+      onclick={{action 'goToSlide'}}
+      data-test-gallery-current
+    />
 
     <figure.figcaption as |caption|>
       {{#if this.currentSlide.credit}}
