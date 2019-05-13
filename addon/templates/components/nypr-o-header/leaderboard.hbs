@@ -1,8 +1,9 @@
 {{!-- BEGIN-SNIPPET nypr-o-header-leaderboard.hbs --}}
 <div class="o-ad o-ad--leaderboard">
   {{yield}}
+
+  {{#unless @hideLabel}}
+    <NyprAAdLabel/>
+  {{/unless}}
 </div>
-{{#unless @hideLabel}}
-  <NyprAAdLabel/>
-{{/unless}}
 {{!-- END-SNIPPET --}}
