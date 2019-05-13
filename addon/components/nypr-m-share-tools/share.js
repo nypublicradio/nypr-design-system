@@ -5,7 +5,7 @@ import layout from '../../templates/components/nypr-m-share-tools/share';
 import { SERVICE_MAP } from '../nypr-m-share-tools';
 
 const windowString = ({top, left}) =>
-  `location=no,toolbar=no,menubar=no,scrollbars=no,status=no,width=600,height=600,top=${top},left=${left}`
+  `location=no,toolbar=no,menubar=no,scrollbars=no,status=no,width=550,height=600,top=${top},left=${left}`
 
 /**
   Share Tools Share Button
