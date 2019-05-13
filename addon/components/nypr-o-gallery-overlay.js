@@ -73,7 +73,7 @@ export default Component.extend({
     this._super(...arguments);
     if (typeof FastBoot === 'undefined') {
       // clear watchers for body height and currently viewed slide
-      window.removeEventListener('scroll', this._boundListener);
+      window.removeEventListener('scroll', this._boundScrollListener);
       window.removeEventListener('resize', this._boundResizeListener);
       document.body.style.height = '';
     }
