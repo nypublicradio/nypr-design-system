@@ -13,7 +13,11 @@
         <strong>{{@author.title}}</strong>
       </span>
     {{/if}}
-    {{!-- <a href="" class="c-author-block__details u-font--secondary-style u-has-accent u-has-accent--secondary u-font--xs">Articles</a> --}}
+    {{#if @articleRoute}}
+      {{#link-to params=@articleRoute class="c-author-block__details u-font--secondary-style u-has-accent u-has-accent--secondary u-font--xs"}}
+        Articles
+      {{/link-to}}
+    {{/if}}
   </div>
 
   <div class="c-author-block__social">
