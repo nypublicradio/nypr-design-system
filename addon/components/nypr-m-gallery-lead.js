@@ -27,6 +27,11 @@ export default Component.extend({
   actions: {
     setCurrent(index) {
       this.set('currentIndex', index);
+    },
+    goToSlide() {
+      if (this.goToSlide) {
+        this.goToSlide(this.currentIndex);
+      }
     }
   },
 
@@ -34,6 +39,13 @@ export default Component.extend({
     Handler for "View All" button
 
     @argument viewAll
+    @type {Function}
+  */
+
+  /**
+    Handler for clicks on the current slide button
+
+    @argument goToSlide
     @type {Function}
   */
 });

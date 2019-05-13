@@ -1,7 +1,8 @@
-import { module, test } from 'qunit';
+import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import test from 'ember-sinon-qunit/test-support/test';
 
 const GALLERY = [{
   caption: 'This is a slide caption',
@@ -29,7 +30,8 @@ module('Integration | Component | nypr-m-gallery-lead', function(hooks) {
 
   test('it renders', async function(assert) {
     this.set('gallery', GALLERY);
-    await render(hbs`<NyprMGalleryLead @slides={{gallery}}/>`);
+    this.set('goToSlide', this.mock('goToSlide is called with the current index when clicking the current slide').once().withArgs(1));
+    await render(hbs`<NyprMGalleryLead @slides={{gallery}} @goToSlide={{goToSlide}} />`);
 
     assert.dom('.c-lead-gallery').exists();
     assert.dom('.c-lead-gallery__thumbs-thumb').exists({count: GALLERY.length + 1}, 'one thumbnail for each image plus the "view all" button');
@@ -37,6 +39,8 @@ module('Integration | Component | nypr-m-gallery-lead', function(hooks) {
     assert.dom('.c-lead-gallery__thumbs-thumb-text').hasText(`View all ${GALLERY.length}`);
 
     await click('[data-test-gallery-thumb="1"]');
-    assert.dom('figure.o-figure img').hasAttribute('src', GALLERY[1].src);
+    assert.dom('figure.o-figure img').hasAttribute('src', GALLERY[1].src, 'it changes the active slide when clicking a thumbnail');
+
+    await click('[data-test-gallery-current]');
   });
 });
