@@ -70,12 +70,13 @@ export default Component.extend({
     return `${protocol}//${host}${pathname}?image=${this.index}`;
   }),
 
-  calculatePosition(trigger/*, content, wormhole, options*/) {
-    let { height, right } = trigger.getBoundingClientRect();
+  calculatePosition(trigger, content/*, wormhole, options*/) {
+    let { height } = trigger.getBoundingClientRect();
+    let { right } = content.getBoundingClientRect();
 
     return {
       style: {
-        right: right < (window.innerWidth || document.documentElement.clientWidth) ? -10 : -25,
+        right: right > (window.innerWidth || document.documentElement.clientWidth) ? -5 : -25,
         top: height + 15,
       }
     }
