@@ -20,7 +20,6 @@
 
       {{#each @slides as |slide i|}}
         {{nypr-o-gallery-overlay/slide
-          active=(eq i (cast @activeImage 'number'))
           register=(action this.registerSlide)
           slide=slide
           index=i
