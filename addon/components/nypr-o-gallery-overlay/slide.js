@@ -71,11 +71,11 @@ export default Component.extend({
   }),
 
   calculatePosition(trigger/*, content, wormhole, options*/) {
-    let { height } = trigger.getBoundingClientRect();
+    let { height, right } = trigger.getBoundingClientRect();
 
     return {
       style: {
-        right: -25,
+        right: right < (window.innerWidth || document.documentElement.clientWidth) ? -10 : -25,
         top: height + 15,
       }
     }
