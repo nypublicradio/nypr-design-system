@@ -55,7 +55,7 @@ export default Component.extend({
       let docHeight = document.body.getBoundingClientRect().height - window.innerHeight;
       let progress = scrolled / docHeight
       this.set('progress', isNaN(progress) ? 0 : progress);
-    }, 150);
+    }, 75);
   }
 });
 // END-SNIPPET
