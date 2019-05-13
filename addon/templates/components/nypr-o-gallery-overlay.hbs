@@ -5,7 +5,7 @@
 
     <div class="l-wrap">
       {{#if @parentRoute}}
-        {{#link-to @parentRoute @parentModel class="o-back-to-link"}}
+        {{#link-to params=@parentRoute class="o-back-to-link"}}
           <span class="o-icon o-icon--prev-caret u-path-fill--white u-icon--xs">
             <NyprASvg @icon="caret-down"/>
           </span>
@@ -43,7 +43,7 @@
 
     <div class="u-align--center">
       {{#if @parentRoute}}
-        {{#link-to @parentRoute @parentModel class="o-button c-gallery-overlay__back o-button--c-quaternary"}}
+        {{#link-to params=@parentRoute class="o-button c-gallery-overlay__back o-button--c-quaternary"}}
           Back to Article
         {{/link-to}}
       {{/if}}

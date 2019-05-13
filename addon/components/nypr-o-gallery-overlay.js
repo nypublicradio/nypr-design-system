@@ -115,16 +115,10 @@ export default Component.extend({
 
   /**
     Parent route for "return" links
+    - ['<route name>', '<model or identifier>']
 
     @argument parentRoute
-    @type {String}
-  */
-
-  /**
-    Parent route model for "return" links
-
-    @argument parentModel
-    @type {Class}
+    @type {Array[String]}
   */
 
   /**
