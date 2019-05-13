@@ -23,7 +23,7 @@ module('Integration | Component | nypr-o-gallery-overlay', function(hooks) {
     await render(hbs`
       <NyprOGalleryOverlay
         @title={{TITLE}}
-        @parentRoute='so it renders'
+        @parentRoute={{array 'foo' 'bar'}}
         @slides={{SLIDES}}
         as |index gallery|>
 
@@ -60,7 +60,7 @@ module('Integration | Component | nypr-o-gallery-overlay', function(hooks) {
     await render(hbs`
       <NyprOGalleryOverlay
         @title={{TITLE}}
-        @parentRoute='so it renders'
+        @parentRoute={{array 'foo' 'bar'}}
         @slides={{SLIDES}}
         @activeSlide={{ACTIVE_SLIDE}}
       />
