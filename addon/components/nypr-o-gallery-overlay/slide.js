@@ -1,12 +1,15 @@
 // BEGIN-SNIPPET nypr-o-gallery-overlay-slide.js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { reads } from '@ember/object/computed';
 import layout from '../../templates/components/nypr-o-gallery-overlay/slide';
 
 export default Component.extend({
   layout,
   classNames: ['c-slide', 'u-spacing--and-half'],
   attributeBindings: ['data-test-gallery-slide'],
+
+  'data-test-gallery-slide': reads('index'),
 
   didInsertElement() {
     this._super(...arguments);
