@@ -4,13 +4,19 @@
     <span class="o-icon o-icon--dashed-arrow u-icon--s">
       <NyprASvg @icon='arrow-dashed'/>
     </span>
-  {{/if}}
-  <span>
+    <span>
+      {{#if (has-block)}}
+        {{yield}}
+      {{else}}
+        {{{@credit}}}
+      {{/if}}
+    </span>
+  {{else}}
     {{#if (has-block)}}
       {{yield}}
     {{else}}
       {{{@credit}}}
     {{/if}}
-  </span>
+  {{/if}}
 </span>
 {{!-- END-SNIPPET --}}

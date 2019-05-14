@@ -34,33 +34,42 @@ module('Integration | Component | nypr-m-figcaption', function(hooks) {
     await render(hbs`
       <NyprMFigcaption @caption={{caption}} @credit={{credit}}/>
     `);
-    assert.dom('.o-caption__text > span > span.o-icon').exists('inline form puts the icon insdide an unmarked span.');
+    assert.dom('.o-caption > .o-icon').exists('inline form puts the icon insdide the caption root');
+    assert.dom('.o-caption > .o-icon + .o-caption__text').exists('inline form puts the text as a sibling to the icon');
+    assert.dom('.o-caption > .o-caption__text > span:not(.o-credit)').hasText(CAPTION);
+    assert.dom('.o-caption > .o-caption__text > span.o-credit').hasText(CREDIT);
 
     await render(hbs`
       <NyprMFigcaption @credit={{credit}}/>
     `);
-    assert.dom('.o-caption__text > span.o-credit > span.o-icon').exists('inline form WITHOUT a caption puts the icon inside the credit span');
-
-    await render(hbs`
-      <NyprMFigcaption as |figcaption|>
-        <figcaption.caption @caption={{caption}} @credit={{credit}} />
-      </NyprMFigcaption>
-    `);
-    assert.dom('.o-caption__text > span > span.o-icon').exists('block form with inline caption puts the icon insdide an unmarked span.');
+    assert.dom('.o-caption > .o-caption__text > span.o-credit > span.o-icon').exists('inline form WITHOUT a caption puts the icon inside the credit span');
+    assert.dom('.o-caption > .o-caption__text > span.o-credit > span:not(.o-icon)').hasText(CREDIT);
 
     await render(hbs`
       <NyprMFigcaption as |figcaption|>
         <figcaption.caption @caption={{caption}} />
-        <figcaption.credit @credit={{credit}} />
       </NyprMFigcaption>
     `);
-    assert.dom('.o-caption__text > span > span.o-icon').exists('block form with inline caption and inline credit puts the icon inside an unmarked span.');
+    assert.dom('.o-caption > .o-icon + .o-caption__text').exists('block form with only an inline caption puts the icon directly below `.o-caption` as a sibling of `.o-caption__text`')
+    assert.dom('.o-caption > .o-caption__text > span').hasText(CAPTION);
+
+    await render(hbs`
+      <NyprMFigcaption as |figcaption|>
+        <figcaption.credit @credit={{credit}} />
+        <figcaption.caption @caption={{caption}} />
+      </NyprMFigcaption>
+    `);
+    assert.dom('.o-caption > .o-credit + .o-icon + .o-caption__text').exists('adding a credit does not interfere with the icon rendering');
+    assert.dom('.o-caption > .o-credit > span').doesNotExist('no inner span for credit');
+    assert.dom('.o-caption > .o-credit').hasText(CREDIT);
+    assert.dom('.o-caption > .o-caption__text > span').hasText(CAPTION);
 
     await render(hbs`
       <NyprMFigcaption as |figcaption|>
         <figcaption.credit @credit={{credit}} @includeIcon={{true}}/>
       </NyprMFigcaption>
     `);
-    assert.dom('.o-caption > span.o-credit > span.o-icon').exists('block form with only inline credit requires @includeIcon to show an icon');
+    assert.dom('.o-caption > .o-credit > span.o-icon').exists('block form with only inline credit requires @includeIcon to show an icon');
+    assert.dom('.o-caption > .o-credit > span:not(.o-icon)').hasText(CREDIT, 'rendering with `@includeIcon` adds a wrapper span')
   })
 });
