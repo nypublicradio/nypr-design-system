@@ -7802,7 +7802,8 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:"",isOpen:!1})
 e.default=r}),define("nypr-design-system/components/nypr-m-inline-search/form",["exports","nypr-design-system/templates/components/nypr-m-inline-search/form"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,tagName:"form",classNames:["c-search"],classNameBindings:["isOpen"],attributeBindings:["role"],role:"dialog",submit:function(e){e.preventDefault(),this.search(this.query)}})
+var r=Ember.Component.extend({layout:t.default,tagName:"form",classNames:["c-search"],classNameBindings:["isOpen"],attributeBindings:["role"],role:"dialog",didInsertElement:function(){this._super.apply(this,arguments),this._boundTransitionHandler=Ember.run.bind(this,"focusInput"),this.element.addEventListener("transitionend",Ember.run.bind(this,"focusInput"))},willDestroyElement:function(){this.element.removeEventListener("transitionend",this._boundTransitionHandler)},focusInput:function(e){var t=this.element.querySelector(".c-search__input")
+e.target===t&&this.isOpen&&t.focus()},submit:function(e){e.preventDefault(),this.search(this.query)}})
 e.default=r})
 define("nypr-design-system/components/nypr-m-inline-search/open",["exports","nypr-design-system/templates/components/nypr-m-inline-search/open"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
