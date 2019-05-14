@@ -7896,8 +7896,7 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["c-block-group","o-section"],classNameBindings:["isSingleColumn:c-block-group--single-col","twoUp:c-block-group--2up"],tagName:"section",init:function(){this._super.apply(this,arguments),this.set("columns",Ember.A([]))},columns:null,addColumn:function(e){this.columns.pushObject(e)},removeColumn:function(e){this.columns.removeObject(e)},isSingleColumn:Ember.computed.equal("columns.length",1)})
 e.default=r}),define("nypr-design-system/components/nypr-o-block-list-group/ad",["exports","nypr-design-system/templates/components/nypr-o-block-list-group/ad"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,classNames:["o-ad"],classNameBindings:["sizeClass"],size:null,sizeClass:Ember.computed("size",function(){switch(this.size){case"short":return"o-ad--300x250"
-case"tall":return"o-ad--300x600-flex"}})})
+var r=Ember.Component.extend({layout:t.default,classNames:["o-ad"]})
 e.default=r}),define("nypr-design-system/components/nypr-o-block-list-group/column",["exports","nypr-design-system/templates/components/nypr-o-block-list-group/column"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["c-block-group__col","u-spacing--and-half"],didInsertElement:function(){this.onRender(this)},willDestroy:function(){this.onDestroy(this)}})
