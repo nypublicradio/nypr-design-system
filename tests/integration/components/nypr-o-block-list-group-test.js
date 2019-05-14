@@ -34,25 +34,15 @@ module('Integration | Component | nypr-o-block-list-group', function(hooks) {
     assert.dom('.c-block-group').hasClass('c-block-group--single-col');
   });
 
-  test('the ad unit has mutiple sizes', async function(assert) {
+  test('the ad unit renders', async function(assert) {
     await render(hbs`
       <NyprOBlockListGroup as |blg|>
         <blg.col1 as |col|>
-          <col.ad @size='short'/>
+          <col.ad />
         </blg.col1>
       </NyprOBlockListGroup>
     `);
 
-    assert.dom('.o-ad--300x250').exists();
-
-    await render(hbs`
-      <NyprOBlockListGroup as |blg|>
-        <blg.col1 as |col|>
-          <col.ad @size='tall'/>
-        </blg.col1>
-      </NyprOBlockListGroup>
-    `);
-
-    assert.dom('.o-ad--300x600-flex').exists();
+    assert.dom('.o-ad').exists();
   });
 });
