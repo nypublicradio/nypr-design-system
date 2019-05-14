@@ -6,6 +6,9 @@ import { htmlSafe } from '@ember/string';
 import { inject } from '@ember/service';
 import layout from '../templates/components/nypr-o-header';
 
+
+const DEBOUNCE_TIMER = 75;
+
 /**
  Site header
 
@@ -168,7 +171,7 @@ export default Component.extend({
       }
       let { top, height } = el.getBoundingClientRect();
       this.set('outOfViewport', top + height < 0);
-    }, 150);
+    }, DEBOUNCE_TIMER);
   }
 });
 // END-SNIPPET

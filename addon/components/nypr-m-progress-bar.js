@@ -3,6 +3,9 @@ import Component from '@ember/component';
 import { debounce, bind } from '@ember/runloop';
 import layout from '../templates/components/nypr-m-progress-bar';
 
+
+const DEBOUNCE_TIMER = 75;
+
 /**
   Progress bar to display how much of `document.body` has been scrolled.
 
@@ -55,7 +58,7 @@ export default Component.extend({
       let docHeight = document.body.getBoundingClientRect().height - window.innerHeight;
       let progress = scrolled / docHeight
       this.set('progress', isNaN(progress) ? 0 : progress);
-    }, 75);
+    }, DEBOUNCE_TIMER);
   }
 });
 // END-SNIPPET
