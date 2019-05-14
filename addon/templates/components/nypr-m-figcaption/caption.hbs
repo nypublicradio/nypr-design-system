@@ -1,20 +1,27 @@
 {{!-- BEGIN-SNIPPET nypr-m-figcaption-caption.hbs --}}
 <div class="o-caption__text">
-  <span class="o-icon o-icon--dashed-arrow u-icon--s">
-    <NyprASvg @icon='arrow-dashed'/>
-  </span>
   {{#if (has-block)}}
     <span>
+      <span class="o-icon o-icon--dashed-arrow u-icon--s">
+        <NyprASvg @icon='arrow-dashed'/>
+      </span>
+
       {{yield}}
     </span>
   {{else if @caption}}
     <span>
+      <span class="o-icon o-icon--dashed-arrow u-icon--s">
+        <NyprASvg @icon='arrow-dashed'/>
+      </span>
+
       {{{@caption}}}
     </span>
   {{/if}}
 
   {{#if @credit}}
-    {{nypr-m-figcaption/credit credit=@credit}}
+    {{nypr-m-figcaption/credit
+      credit=@credit
+      includeIcon=(and (not @caption) (not (has-block)))}}
   {{/if}}
 </div>
 {{!-- END-SNIPPET --}}

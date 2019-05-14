@@ -1,9 +1,16 @@
 {{!-- BEGIN-SNIPPET nypr-m-figcaption-credit.hbs --}}
 <span class="o-credit">
-  {{#if (has-block)}}
-    {{yield}}
-  {{else}}
-    {{{@credit}}}
+  {{#if @includeIcon}}
+    <span class="o-icon o-icon--dashed-arrow u-icon--s">
+      <NyprASvg @icon='arrow-dashed'/>
+    </span>
   {{/if}}
+  <span>
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{{@credit}}}
+    {{/if}}
+  </span>
 </span>
 {{!-- END-SNIPPET --}}
