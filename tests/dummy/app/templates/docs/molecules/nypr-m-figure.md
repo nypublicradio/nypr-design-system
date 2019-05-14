@@ -10,14 +10,14 @@ Render a `<figure/>` element with with `<figcaption/>` and `<picture/>` elements
     <NyprMFigure
       @caption='This is a figcaption!'
       @credit='Getty Images'
-      @break-xl=1200
-      @src-xl='https://picsum.photos/1200/800'
-      @break-l=1000
-      @src-l='https://picsum.photos/1000/600'
-      @break-m=800
-      @src-m='https://picsum.photos/800/500'
-      @break-s=600
-      @src-s='https://picsum.photos/600/400'
+      @breakXl=1200
+      @srcXl='https://picsum.photos/1200/800'
+      @breakL=1000
+      @srcL='https://picsum.photos/1000/600'
+      @breakM=800
+      @srcM='https://picsum.photos/800/500'
+      @breakS=600
+      @srcS='https://picsum.photos/600/400'
       @alt='Pass in an alt tag'
     />
   </demo.example>
@@ -40,7 +40,7 @@ Render a `<figure/>` element with with `<figcaption/>` and `<picture/>` elements
         <figure.figcaption @caption='Caption for This Image' />
       </div>
 
-      <figure.image @src-s='https://picsum.photos/800/400' />
+      <figure.image @srcS='https://picsum.photos/800/400' />
     </NyprMFigure>
   </demo.example>
 

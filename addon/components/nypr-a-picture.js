@@ -7,7 +7,7 @@ import layout from '../templates/components/nypr-a-picture';
 
   Usage:
   ```hbs
-  <NyprAPicture @break-xl=1000 @src-xl='https://example.com/xlarge-img.jpg' @break-l=800 @src-l='https://example.com/large-img.jpg' @alt='Descriptive alt text'/>
+  <NyprAPicture @breakXl=1000 @srcXl='https://example.com/xlarge-img.jpg' @breakL=800 @srcL='https://example.com/large-img.jpg' @alt='Descriptive alt text'/>
   ```
   @class nypr-a-picture
 */
@@ -18,71 +18,71 @@ export default Component.extend({
 
   /**
     Extra Large Breakpoint
-    @argument break-xl
-    @type {Number?}
+    @argument breakXl
+    @type {Number}
   */
-  'break-xl': null,
+  breakXl: null,
 
   /**
     Image url for corresponding extra large breakpoint
-    @argument src-xl
-    @type {String?}
+    @argument srcXl
+    @type {String}
   */
-  'src-xl': null,
+  srcXl: null,
 
   /**
     Large Breakpoint
-    @argument break-l
-    @type {Number?}
+    @argument breakL
+    @type {Number}
   */
-  'break-l': null,
+  breakL: null,
 
   /**
     Image url for corresponding large breakpoint
-    @argument src-l
-    @type {String?}
+    @argument srcL
+    @type {String}
   */
-  'src-l': null,
+  srcL: null,
 
   /**
     Medium Breakpoint
-    @argument break-m
-    @type {Number?}
+    @argument breakM
+    @type {Number}
   */
-  'break-m': null,
+  breakM: null,
 
   /**
     Image url for corresponding medium breakpoint
-    @argument src-m
-    @type {String?}
+    @argument srcM
+    @type {String}
   */
-  'src-m': null,
+  srcM: null,
 
   /**
     Small Breakpoint
-    @argument break-s
-    @type {String?}
+    @argument breakS
+    @type {String}
   */
-  'break-s': null,
+  breakS: null,
 
   /**
     Image url for corresponding small breakpoint
-    @argument src-s
-    @type {String?}
+    @argument srcS
+    @type {String}
   */
-  'src-s': null,
+  srcS: null,
 
   /**
     Should this image lazy load or not?
     @argument lazy
-    @type {Boolean?}
+    @type {Boolean}
   */
   lazy: false,
 
   /**
     Text for `alt` attribute.
     @argument alt
-    @type {String?}
+    @type {String}
   */
   alt: null,
 

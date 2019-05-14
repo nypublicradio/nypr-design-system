@@ -10,7 +10,7 @@ import { computed } from '@ember/object';
 
   Usage:
   ```hbs
-  <NyprMFigure @caption='hello' @credit='getty' @src-s='https://picsum.photos/800/600' />
+  <NyprMFigure @caption='hello' @credit='getty' @srcS='https://picsum.photos/800/600' />
   ```
 
   @class nypr-m-figure

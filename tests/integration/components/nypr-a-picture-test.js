@@ -9,7 +9,7 @@ module('Integration | Component | nypr-a-picture', function(hooks) {
   test('it renders', async function(assert) {
     const IMG = 'https://picsum.photos/300';
     this.set('img', IMG);
-    await render(hbs`<NyprAPicture @src-s={{img}}/>`);
+    await render(hbs`<NyprAPicture @srcS={{img}}/>`);
 
     assert.dom('picture').exists();
     assert.dom('picture img').hasAttribute('src', IMG);

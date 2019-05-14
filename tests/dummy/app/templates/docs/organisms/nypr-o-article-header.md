@@ -41,7 +41,7 @@
             <NyprMGalleryLead @slides={{STORY.gallery}} />
           {{else}}
             <NyprMFigure
-              @src-s={{STORY.leadImage.src}}
+              @srcS={{STORY.leadImage.src}}
               @caption={{STORY.leadImage.caption}}
               @credit={{STORY.leadImage.credit}}
             />
