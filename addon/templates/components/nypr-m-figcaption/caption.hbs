@@ -3,13 +3,15 @@
   <span class="o-icon o-icon--dashed-arrow u-icon--s">
     <NyprASvg @icon='arrow-dashed'/>
   </span>
-  <span>
-    {{#if (has-block)}}
+  {{#if (has-block)}}
+    <span>
       {{yield}}
-    {{else}}
+    </span>
+  {{else if @caption}}
+    <span>
       {{{@caption}}}
-    {{/if}}
-  </span>
+    </span>
+  {{/if}}
 
   {{#if @credit}}
     {{nypr-m-figcaption/credit credit=@credit}}
