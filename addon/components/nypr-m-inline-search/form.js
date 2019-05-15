@@ -33,7 +33,11 @@ export default Component.extend({
 
   submit(e) {
     e.preventDefault();
-    this.search(this.query);
+    if (this.query) {
+      this.search(this.query);
+    } else if (this.close) {
+      this.close();
+    }
   },
 
   /**

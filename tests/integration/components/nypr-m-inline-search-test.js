@@ -24,7 +24,7 @@ module('Integration | Component | nypr-m-inline-search', function(hooks) {
   });
 
   test('interactivity', async function(assert) {
-    assert.expect(3);
+    assert.expect(4);
 
     const QUERY = 'foo';
     const SEARCH = val => assert.equal(val, QUERY);
@@ -50,6 +50,10 @@ module('Integration | Component | nypr-m-inline-search', function(hooks) {
 
     await fillIn('.c-search__input', QUERY);
     await click('[data-test-inline-search-submit]');
+
+    await fillIn('.c-search__input', '');
+    await click('[data-test-inline-search-submit]');
+    assert.dom('.c-search.is-open').doesNotExist('should close if field is empty and submit is clicked');
 
   });
 });
