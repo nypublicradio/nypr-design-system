@@ -70,6 +70,11 @@ export default Component.extend({
   */
   menuHeightOffset: 0,
 
+  init() {
+    this._super(...arguments);
+
+    this.headerService.register(this);
+  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -103,12 +108,6 @@ export default Component.extend({
     }
     return htmlSafe(style);
   }),
-
-  init() {
-    this._super(...arguments);
-
-    this.headerService.register(this);
-  },
   /**
    Toggle open menu state and corresponding state class on body element
 
