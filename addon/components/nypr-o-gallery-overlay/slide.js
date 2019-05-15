@@ -71,12 +71,16 @@ export default Component.extend({
   }),
 
   calculatePosition(trigger, content/*, wormhole, options*/) {
-    let { height } = trigger.getBoundingClientRect();
-    let { right } = content.getBoundingClientRect();
+    const BUFFER = 10;
+    let { height, right } = trigger.getBoundingClientRect();
+    let { padding } = window.getComputedStyle(content);
+    padding = parseInt(padding, 10);
+
+    let distanceFromEdge = Math.abs(right - document.documentElement.clientWidth);
 
     return {
       style: {
-        right: right > (window.innerWidth || document.documentElement.clientWidth) ? -5 : -25,
+        right: distanceFromEdge < padding + BUFFER ? -5 : -padding * 2,
         top: height + 15,
       }
     }
