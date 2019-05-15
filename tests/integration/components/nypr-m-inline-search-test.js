@@ -24,7 +24,7 @@ module('Integration | Component | nypr-m-inline-search', function(hooks) {
   });
 
   test('interactivity', async function(assert) {
-    assert.expect(4);
+    assert.expect(5);
 
     const QUERY = 'foo';
     const SEARCH = val => assert.equal(val, QUERY);
@@ -42,6 +42,7 @@ module('Integration | Component | nypr-m-inline-search', function(hooks) {
 
     await click('.c-search-toggle');
     assert.dom('.c-search.is-open').exists();
+    assert.dom('button.c-search__button[type="submit"]').exists('submit button exists');
 
     await fillIn('.c-search__input', QUERY);
     await click('[data-test-inline-search-submit]');
