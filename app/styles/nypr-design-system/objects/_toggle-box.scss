@@ -14,11 +14,15 @@ $ember-basic-dropdown-content-z-index: 10000;
   width: 0;
   height: 0;
   background-color: transparent;
-  transform: none;
+  transform: translateY(20px);
   border: 12px solid transparent;
   border-bottom-color: white;
   bottom: -15px;
   right: -5px;
+}
+
+.c-toggle-box.this-is-active .c-toggle-box__label:before {
+  transform: translateY(0);
 }
 
 .c-toggle-box--share {
@@ -26,5 +30,26 @@ $ember-basic-dropdown-content-z-index: 10000;
   .c-toggle-box__dropdown {
     width: 115px;
   }
+}
 
+.c-toggle-box__dropdown.ember-basic-dropdown--transitioning-in {
+  will-change: transform, opacity;
+  animation: scale-fade-in .2s ease-out;
+}
+
+.c-toggle-box__dropdown.ember-basic-dropdown--transitioning-out {
+  will-change: transform, opacity;
+  animation: scale-fade-in .2s ease-out reverse;
+}
+
+@keyframes scale-fade-in {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
