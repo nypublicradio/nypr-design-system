@@ -34,6 +34,11 @@ module('Integration | Component | nypr-a-button', function(hooks) {
     await render(hbs`<NyprAButton @blank={{true}} @text='plain' />`);
     assert.dom('button.o-button').doesNotExist('rendered without class');
     assert.dom('button').exists('rendered a blank button');
-
   });
+
+  test('classes can be added via component helper form', async function(assert) {
+    await render(hbs`{{component 'nypr-a-button' class='foo' text='bar'}}`);
+
+    assert.dom('button.o-button.foo').hasText('bar');
+  })
 });
