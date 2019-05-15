@@ -21,7 +21,10 @@ const DEBOUNCE_TIMER = 75;
  @yield {Component} hash.menu `nypr-o-header/menu`
  @yield {Block} hash.menu.branding `blank-template`
  @yield {Component} hash.menu.primaryNav `nypr-o-header/nav`
+ @yield {Component} hash.menu.social `nypr-m-share-tools`
  @yield {Component} hash.menu.secondaryNav `nypr-m-secondary-nav`
+ @yield {Component} hash.menu.search `nypr-m-inline-search`
+ @yield {Component} hash.menu.tipButton `nypr-a-button`
  @yield {Component} hash.left `nypr-o-header/left`
  @yield {Block} hash.left.branding `blank-template`
  @yield {Block} hash.left.headline `nypr-o-header/headline`
