@@ -5,7 +5,7 @@
       href={{@url}}
       target="_blank"
       rel="noopener"
-      class="{{unless @blank 'o-button'}} {{this.tierClass}}"
+      class="{{unless @blank 'o-button'}} {{this.tierClass}} {{@class}}"
       ...attributes>
       {{#if (has-block)}}
         {{yield}}
@@ -16,7 +16,7 @@
   {{else}}
     {{#link-to
       params=@route
-      class=(concat (unless @blank 'o-button') this.tierClass)
+      class=(concat (unless @blank 'o-button') this.tierClass @class)
     }}
       {{#if (has-block)}}
         {{yield}}
@@ -27,7 +27,7 @@
   {{/if}}
 {{else}}
   <button
-    class="{{unless @blank 'o-button'}} {{this.tierClass}}"
+    class="{{unless @blank 'o-button'}} {{this.tierClass}} {{@class}}"
     role={{or @role this.role}}
     type={{or @type this.type}}
     onClick={{optional @onclick}}
