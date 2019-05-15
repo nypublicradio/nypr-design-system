@@ -69,6 +69,22 @@ export default Component.extend({
   */
   menuHeightOffset: 0,
 
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    this._boundListener = bind(this, '_scrollListener');
+    window.addEventListener('scroll', this._boundListener);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    window.removeEventListener('scroll', this._boundListener);
+    // test cleanup
+    document.body.classList.remove('side-menu-is-active');
+  },
+
   /**
    Computes current vertical spacing of the header to prevent proceding elements from moving up
    or down when the header is removed from/added to the document flow.
@@ -95,23 +111,7 @@ export default Component.extend({
     this._super(...arguments);
 
     this.headerService.register(this);
-
-    if (typeof FastBoot === 'undefined') {
-      this._boundListener = bind(this, '_scrollListener');
-      window.addEventListener('scroll', this._boundListener);
-    }
   },
-
-  willDestroy() {
-    this._super(...arguments);
-    if (typeof FastBoot === 'undefined') {
-      window.removeEventListener('scroll', this._boundListener);
-
-      // clean up tests
-      document.body.classList.remove('side-menu-is-active');
-    }
-  },
-
   /**
    Toggle open menu state and corresponding state class on body element
 
