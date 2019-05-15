@@ -35,6 +35,7 @@ export default Component.extend({
   tagName: 'header',
   classNames: ['c-main-header'],
   classNameBindings: ['isOpen:side-menu-is-active', 'outOfViewport'],
+  attributeBindings: ['spacerHeight:style'],
 
   headerService: inject('nypr-o-header'),
 
@@ -91,17 +92,13 @@ export default Component.extend({
 
    Returned as an inline CSS declaration
 
-   @accessor spacerStyle
+   @accessor spacerHeight
    @type {String}
   */
-  spacerStyle: computed('outOfViewport', function() {
+  spacerHeight: computed('outOfViewport', function() {
     let style = '';
     if (typeof FastBoot === 'undefined' && this.outOfViewport) {
-      let progressBar = this.element.querySelector('.o-progress');
-      let { height } = this.element.querySelector('.c-main-header__inner').getBoundingClientRect();
-      if (progressBar) {
-        height += progressBar.getBoundingClientRect().height;
-      }
+      let { height } = this.element.getBoundingClientRect();
       style = `height: ${height}px;`;
     }
     return htmlSafe(style);
