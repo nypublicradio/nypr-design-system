@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import layout from '../templates/components/nypr-o-block-list-group';
 
 import { A } from '@ember/array';
+import { computed } from '@ember/object';
 import { equal } from '@ember/object/computed';
 
 /**
@@ -18,7 +19,7 @@ export default Component.extend({
   classNames: ['c-block-group', 'o-section'],
   classNameBindings: [
     'isSingleColumn:c-block-group--single-col',
-    'twoUp:c-block-group--2up',
+    'layoutClass',
   ],
   tagName: 'section',
 
@@ -64,10 +65,28 @@ export default Component.extend({
   isSingleColumn: equal('columns.length', 1),
 
   /**
-    Make the columns equal width
+    String value used to compute layout class
 
-    @argument twoUp
-    @type {Boolean}
+    @argument arrange
+    @type {String}
   */
+
+  /**
+    Computes the value of the layout class
+
+    @accessor layoutClass
+    @type {String}
+  */
+  layoutClass: computed('arrange', function() {
+    switch(this.arrange) {
+      case 'two-up':
+        return 'c-block-group--2up';
+      case 'offset':
+        return 'c-block-group--offset';
+      case 'right-rail':
+        return 'c-block-group--right-rail';
+    }
+
+  }),
 
 });

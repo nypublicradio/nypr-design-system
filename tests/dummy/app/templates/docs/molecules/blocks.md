@@ -115,14 +115,26 @@ Provides a two column layout for blocks.
         Show as {{if singleColumn 'Two Column' 'Single Column'}}
       </button>
     </p>
+    <aside>Columns are declarative. Simply add the column to your template or not</aside>
 
     <p>
-      <button class="btn" {{action (mut twoUp) (not twoUp)}}>
-        Show as {{if twoUp 'Offset' 'Equal Width'}}
-      </button>
+      <label>
+        <input name="layout" type="radio" onclick={{action (mut arrange) 'two-up'}}>
+        Two Up
+      </label>
+      <label>
+        <input name="layout" type="radio" onclick={{action (mut arrange) 'offset'}}>
+        Offset
+      </label>
+      <label>
+        <input name="layout" type="radio" onclick={{action (mut arrange) 'right-rail'}}>
+        Right Rail
+      </label>
     </p>
+    <p><code>@layout</code>: <code>{{arrange}}</code></p>
+
     <!-- BEGIN-SNIPPET block-list-group-usage.hbs -->
-      <NyprOBlockListGroup @twoUp={{twoUp}} as |blg|>
+      <NyprOBlockListGroup @arrange={{arrange}} as |blg|>
         <blg.col1>
           <NyprMBlockList @items={{BLOCKS}} as |item|>
 
