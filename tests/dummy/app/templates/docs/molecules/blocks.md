@@ -133,7 +133,7 @@ Provides a two column layout for blocks.
     </p>
     <p><code>@layoutType</code>: <strong>{{or layoutType 'right-rail'}}</strong></p>
     <aside>
-      Green and blue borders added for reference.
+      <code>right-rail</code> is the defualt. Green and blue borders added for reference.
     </aside>
 
     <!-- BEGIN-SNIPPET block-list-group-usage.hbs -->
