@@ -67,7 +67,7 @@ export default Component.extend({
   /**
     String value used to compute layout class
 
-    @argument layoutStyle
+    @argument layoutType
     @type {String}
   */
 
@@ -77,8 +77,8 @@ export default Component.extend({
     @accessor layoutClass
     @type {String}
   */
-  layoutClass: computed('layoutStyle', function() {
-    switch(this.layoutStyle) {
+  layoutClass: computed('layoutType', function() {
+    switch(this.layoutType) {
       case 'two-up':
         return 'c-block-group--2up';
       case 'offset':
