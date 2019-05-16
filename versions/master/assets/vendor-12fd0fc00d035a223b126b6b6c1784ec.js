@@ -7893,7 +7893,9 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:""})
 e.default=r}),define("nypr-design-system/components/nypr-o-block-list-group",["exports","nypr-design-system/templates/components/nypr-o-block-list-group"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,classNames:["c-block-group","o-section"],classNameBindings:["isSingleColumn:c-block-group--single-col","twoUp:c-block-group--2up"],tagName:"section",init:function(){this._super.apply(this,arguments),this.set("columns",Ember.A([]))},columns:null,addColumn:function(e){this.columns.pushObject(e)},removeColumn:function(e){this.columns.removeObject(e)},isSingleColumn:Ember.computed.equal("columns.length",1)})
+var r=Ember.Component.extend({layout:t.default,classNames:["c-block-group","o-section"],classNameBindings:["isSingleColumn:c-block-group--single-col","layoutClass"],tagName:"section",init:function(){this._super.apply(this,arguments),this.set("columns",Ember.A([]))},columns:null,addColumn:function(e){this.columns.pushObject(e)},removeColumn:function(e){this.columns.removeObject(e)},isSingleColumn:Ember.computed.equal("columns.length",1),layoutClass:Ember.computed("arrange",function(){switch(this.arrange){case"two-up":return"c-block-group--2up"
+case"offset":return"c-block-group--offset"
+case"right-rail":return"c-block-group--right-rail"}})})
 e.default=r}),define("nypr-design-system/components/nypr-o-block-list-group/ad",["exports","nypr-design-system/templates/components/nypr-o-block-list-group/ad"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["o-ad"]})
