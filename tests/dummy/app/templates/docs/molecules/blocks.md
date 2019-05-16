@@ -119,22 +119,22 @@ Provides a two column layout for blocks.
 
     <p>
       <label>
-        <input name="layout" type="radio" onclick={{action (mut arrange) 'two-up'}}>
+        <input name="layout" type="radio" onclick={{action (mut layoutType) 'two-up'}}>
         Two Up
       </label>
       <label>
-        <input name="layout" type="radio" onclick={{action (mut arrange) 'offset'}}>
+        <input name="layout" type="radio" onclick={{action (mut layoutType) 'offset'}}>
         Offset
       </label>
       <label>
-        <input name="layout" type="radio" onclick={{action (mut arrange) 'right-rail'}}>
+        <input name="layout" type="radio" onclick={{action (mut layoutType) 'right-rail'}}>
         Right Rail
       </label>
     </p>
-    <p><code>@layout</code>: <code>{{arrange}}</code></p>
+    <p><code>@layoutType</code>: <code>{{layoutType}}</code></p>
 
     <!-- BEGIN-SNIPPET block-list-group-usage.hbs -->
-      <NyprOBlockListGroup @arrange={{arrange}} as |blg|>
+      <NyprOBlockListGroup @layoutType={{layoutType}} as |blg|>
         <blg.col1>
           <NyprMBlockList @items={{BLOCKS}} as |item|>
 
