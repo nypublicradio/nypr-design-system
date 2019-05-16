@@ -119,6 +119,10 @@ Provides a two column layout for blocks.
 
     <p>
       <label>
+        <input name="layout" type="radio" onclick={{action (mut layoutType) 'right-rail'}} checked>
+        Right Rail
+      </label>
+      <label>
         <input name="layout" type="radio" onclick={{action (mut layoutType) 'two-up'}}>
         Two Up
       </label>
@@ -126,16 +130,15 @@ Provides a two column layout for blocks.
         <input name="layout" type="radio" onclick={{action (mut layoutType) 'offset'}}>
         Offset
       </label>
-      <label>
-        <input name="layout" type="radio" onclick={{action (mut layoutType) 'right-rail'}}>
-        Right Rail
-      </label>
     </p>
-    <p><code>@layoutType</code>: <code>{{layoutType}}</code></p>
+    <p><code>@layoutType</code>: <strong>{{or layoutType 'right-rail'}}</strong></p>
+    <aside>
+      Green and blue borders added for reference.
+    </aside>
 
     <!-- BEGIN-SNIPPET block-list-group-usage.hbs -->
       <NyprOBlockListGroup @layoutType={{layoutType}} as |blg|>
-        <blg.col1>
+        <blg.col1 style="border: 2px solid green;">
           <NyprMBlockList @items={{BLOCKS}} as |item|>
 
             <NyprMBlock @orientation='h' @size='s' as |block|>
@@ -154,8 +157,8 @@ Provides a two column layout for blocks.
         </blg.col1>
 
         {{#unless singleColumn}}
-          <blg.col2 as |col|>
-            <col.ad @size='short'>
+          <blg.col2 style="border: 2px solid blue;" as |col|>
+            <col.ad>
               Ad here
             </col.ad>
           </blg.col2>
