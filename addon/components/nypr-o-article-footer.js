@@ -66,9 +66,13 @@ export default Component.extend({
   */
   _scrollListener(/* e */) {
     debounce(this, () => {
-      let footerTopEdge = this.element.offsetTop
-      let viewportBottom = (window.scrollY + window.innerHeight)
-      this.set('inViewport', footerTopEdge < viewportBottom); // top of footer has passed the bottom of the viewport
+      let windowCenter = document.documentElement.clientHeight / 2;
+      let footerTopEdge = this.element.getBoundingClientRect().top;
+
+      if (footerTopEdge - windowCenter < 0) {
+        this.set('inViewport', true);
+        window.removeEventListener('scroll', this._boundListener);
+      }
     }, 150);
   }
 });
