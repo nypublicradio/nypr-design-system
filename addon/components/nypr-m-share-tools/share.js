@@ -73,6 +73,11 @@ export default Component.extend({
     let url = override || window.location.toString();
 
     return `${shareBase}?${getParams(url, params)}`
+    if (this.utm) {
+      let utmParams = Object.keys(this.utm).map(key => `${key}=${this.utm[key]}`).join('&');
+      url += `?${encodeURIComponent(utmParams)}`;
+    }
+
   },
 
 
