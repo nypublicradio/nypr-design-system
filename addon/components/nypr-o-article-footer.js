@@ -38,19 +38,15 @@ export default Component.extend({
   layout,
   classNames: ['c-article__footer', 'u-section-spacing'],
 
-  init() {
+  didInsertElement() {
     this._super(...arguments);
-    if (typeof FastBoot === 'undefined') {
-      this._boundListener = bind(this, '_scrollListener');
-      window.addEventListener('scroll', this._boundListener);
-    }
+    this._boundListener = bind(this, '_scrollListener');
+    window.addEventListener('scroll', this._boundListener);
   },
 
-  willDestroy() {
+  willDestroyElement() {
     this._super(...arguments);
-    if (typeof FastBoot === 'undefined') {
-      window.removeEventListener('scroll', this._boundListener);
-    }
+    window.removeEventListener('scroll', this._boundListener);
   },
 
   /**
@@ -60,7 +56,6 @@ export default Component.extend({
     @type {Boolean}
   */
   inViewport: false,
-
 
   /**
     Measures whether the footer is scrolled into view, and shows donate tout if so.
