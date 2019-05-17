@@ -23,7 +23,7 @@ function findProgressBar(owner) {
   @param testForFloatingState {Function} Passed to `waitUntil` as a callback and should return true if header is determined to be "floating". This will default to `findProgressBar`.
   @return reset {Function} Curried function that will reset CSS tweaks that allow for floating header testing
 */
-export async function scrollPastHeader(owner, testForFloatingState) {
+export async function scrollPastTarget(owner, target, testForFloatingState) {
   if (!testForFloatingState) {
     testForFloatingState = findProgressBar;
   }
@@ -32,9 +32,9 @@ export async function scrollPastHeader(owner, testForFloatingState) {
   // CSS can play factor. without styles, this element is taller than the window
   // with styles, it's rather short, so use the larger of the two.
   // double them so there's enough space to scroll past the element and trigger the progress bar
-  const HEADER_HEIGHT = owner.element.querySelector('.c-main-header').scrollHeight * 2;
+  const TARGET_Y = owner.element.querySelector(target).offsetTop + window.innerHeight;
   const WINDOW_HEIGHT = window.innerHeight * 2;
-  const HEIGHT = HEADER_HEIGHT > WINDOW_HEIGHT ? HEADER_HEIGHT : WINDOW_HEIGHT;
+  const HEIGHT = TARGET_Y > WINDOW_HEIGHT ? TARGET_Y : WINDOW_HEIGHT;
 
   const OLD_POSITION = testingContainer.style.position;
 
@@ -52,4 +52,8 @@ export async function scrollPastHeader(owner, testForFloatingState) {
   await waitUntil(() => testForFloatingState(owner), {timeout: 2000})
 
   return reset;
+}
+
+export async function scrollPastHeader(owner, testForFloatingState) {
+  return scrollPastTarget(owner, '.c-main-header', testForFloatingState);
 }
