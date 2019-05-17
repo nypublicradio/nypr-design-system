@@ -60,24 +60,22 @@ export default Component.extend({
     Build a URL to the given services share dialog
 
     @method getURL
-    @param {String} service
-    @param {Object} params
     @param {String} override
     @return {String} url
   */
-  getURL(service, params, override) {
-    if (!SERVICE_MAP[service]) {
+  getURL(override) {
+    if (!SERVICE_MAP[this.service]) {
       return;
     }
-    let { shareBase, getParams } = SERVICE_MAP[service];
+    let { shareBase, getParams } = SERVICE_MAP[this.service];
     let url = override || window.location.toString();
 
-    return `${shareBase}?${getParams(url, params)}`
     if (this.utm) {
       let utmParams = Object.keys(this.utm).map(key => `${key}=${this.utm[key]}`).join('&');
       url += `?${encodeURIComponent(utmParams)}`;
     }
 
+    return `${shareBase}?${getParams(url, this.params)}`
   },
 
 
@@ -85,18 +83,16 @@ export default Component.extend({
     Opens a share dialog
 
     @method openShare
-    @param {String} service Name of the target service
-    @param {Object} params Parameters to pass to share dialog
-    @param {String} urlOverride Optional override to the derived URL
     @return {void}
   */
   actions: {
-    openShare(service, params, urlOverride) {
-      if (!service) {
+    openShare() {
+      if (!this.service) {
         return;
       }
 
-      let url = this.getURL(service, params, urlOverride);
+      let urlOverride = this.url;
+      let url = this.getURL(urlOverride);
       let popupPosition = this.getPopupPosition();
       var newWindow = window.open(url, 'share window', windowString(popupPosition));
 
