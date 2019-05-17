@@ -8,11 +8,25 @@
   </span>
 {{/if}}
 {{#if @commentCount}}
-  {{#link-to params=@commentRoute class="c-block-meta__comments u-font--secondary-style u-font--xs"}}
-    <span class="o-icon o-icon--comment u-icon--xs">
-      <NyprASvg @icon='comment'/>
-    </span>
-    {{@commentCount}}
-  {{/link-to}}
+  {{#if @commentRoute}}
+    {{#link-to params=@commentRoute class="c-block-meta__comments u-font--secondary-style u-font--xs"}}
+      <span class="o-icon o-icon--comment u-icon--xs">
+        <NyprASvg @icon='comment'/>
+      </span>
+      {{@commentCount}}
+    {{/link-to}}
+  {{else if @commentURL}}
+    <a
+      href={{@commentURL}}
+      class="c-block-meta__comments u-font--secondary-style u-font--xs"
+      target="_blank"
+      rel="noopener"
+    >
+      <span class="o-icon o-icon--comment u-icon--xs">
+        <NyprASvg @icon='comment'/>
+      </span>
+      {{@commentCount}}
+    </a>
+  {{/if}}
 {{/if}}
 {{!-- END-SNIPPET --}}
