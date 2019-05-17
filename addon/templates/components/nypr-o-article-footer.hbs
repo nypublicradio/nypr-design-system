@@ -12,6 +12,10 @@
     {{yield (hash donate=(component 'nypr-o-donate' isActive=this.inViewport))}}
   </div>
 
+  <div class="c-article__ad" data-test-article-footer-ad>
+    {{yield (hash ad=(component 'blank-template'))}}
+  </div>
+
   <div class="c-article__comments" data-test-article-footer-comments>
     {{yield (hash comments=(component 'blank-template'))}}
   </div>
