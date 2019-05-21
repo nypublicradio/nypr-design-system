@@ -7860,7 +7860,7 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var n=Ember.Component.extend({tagName:"",layout:t.default,getPopupPosition:function(){var e=screen.availLeft,t=screen.availTop
 return{left:screen.availWidth/2-300+e,top:screen.availHeight/2-300+t}},getURL:function(e){var t=this
 if(r.SERVICE_MAP[this.service]){var n=r.SERVICE_MAP[this.service],i=n.shareBase,o=n.getParams,s=e||window.location.toString()
-if(this.utm){var a=Object.keys(this.utm).map(function(e){return"".concat(e,"=").concat(t.utm[e])}).join("&")
+if(this.utm){var a=Object.keys(this.utm).map(function(e){return"".concat(e,"=utm_").concat(t.utm[e])}).join("&")
 s+="?".concat(encodeURIComponent(a))}return"".concat(i,"?").concat(o(s,this.params))}},actions:{openShare:function(){if(this.service){var e,t,r,n=this.url,i=this.getURL(n),o=this.getPopupPosition(),s=window.open(i,"share window",(t=(e=o).top,r=e.left,"location=no,toolbar=no,menubar=no,scrollbars=no,status=no,width=550,height=600,top=".concat(t,",left=").concat(r)))
 null!=s&&s.focus&&s.focus()}}}})
 e.default=n}),define("nypr-design-system/components/nypr-m-tags",["exports","nypr-design-system/templates/components/nypr-m-tags"],function(e,t){"use strict"
