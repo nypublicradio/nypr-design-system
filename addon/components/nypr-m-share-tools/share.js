@@ -71,7 +71,7 @@ export default Component.extend({
     let url = override || window.location.toString();
 
     if (this.utm) {
-      let utmParams = Object.keys(this.utm).map(key => `${key}=${this.utm[key]}`).join('&');
+      let utmParams = Object.keys(this.utm).map(key => `${key}=utm_${this.utm[key]}`).join('&');
       url += `?${encodeURIComponent(utmParams)}`;
     }
 
