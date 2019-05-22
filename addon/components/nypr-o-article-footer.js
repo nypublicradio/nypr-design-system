@@ -66,10 +66,11 @@ export default Component.extend({
   */
   _watchForTout(/* e */) {
     debounce(this, () => {
+      let toutInDom = this.element.querySelector('.c-donate-tout');
       let windowCenter = document.documentElement.clientHeight / 2;
       let footerTopEdge = this.element.getBoundingClientRect().top;
 
-      if (footerTopEdge - windowCenter < 0) {
+      if (toutInDom && footerTopEdge - windowCenter < 0) {
         this.set('inViewport', true);
         window.removeEventListener('scroll', this._watchForTout);
       }
