@@ -66,6 +66,9 @@ export default Component.extend({
   */
   _watchForTout(/* e */) {
     debounce(this, () => {
+      if (!this.element) {
+        return;
+      }
       let toutInDom = this.element.querySelector('.c-donate-tout');
       let windowCenter = document.documentElement.clientHeight / 2;
       let footerTopEdge = this.element.getBoundingClientRect().top;
