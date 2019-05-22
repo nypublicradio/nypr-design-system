@@ -7875,9 +7875,9 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["c-article__body","o-rte-text","u-spacing","l-container--content"],body:null})
 e.default=r}),define("nypr-design-system/components/nypr-o-article-footer",["exports","nypr-design-system/templates/components/nypr-o-article-footer"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,classNames:["c-article__footer","u-section-spacing"],didInsertElement:function(){this._super.apply(this,arguments),this._boundListener=Ember.run.bind(this,"_scrollListener"),window.addEventListener("scroll",this._boundListener)},willDestroyElement:function(){this._super.apply(this,arguments),window.removeEventListener("scroll",this._boundListener)},inViewport:!1,_scrollListener:function(){var e=this
-Ember.run.debounce(this,function(){var t=document.documentElement.clientHeight/2
-e.element.getBoundingClientRect().top-t<0&&(e.set("inViewport",!0),window.removeEventListener("scroll",e._boundListener))},150)}})
+var r=Ember.Component.extend({layout:t.default,classNames:["c-article__footer","u-section-spacing"],didInsertElement:function(){this._super.apply(this,arguments),this._boundListener=Ember.run.bind(this,"_watchForTout"),window.addEventListener("scroll",this._watchForTout)},willDestroyElement:function(){this._super.apply(this,arguments),window.removeEventListener("scroll",this._watchForTout)},inViewport:!1,_watchForTout:function(){var e=this
+Ember.run.debounce(this,function(){var t=e.element.querySelector(".c-donate-tout"),r=document.documentElement.clientHeight/2,n=e.element.getBoundingClientRect().top
+t&&n-r<0&&(e.set("inViewport",!0),window.removeEventListener("scroll",e._watchForTout))},150)}})
 e.default=r}),define("nypr-design-system/components/nypr-o-article-header",["exports","nypr-design-system/templates/components/nypr-o-article-header"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:"header",classNames:["c-article__header","u-spacing--and-half","l-container"]})
