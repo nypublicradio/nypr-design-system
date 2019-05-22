@@ -40,13 +40,13 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    this._boundListener = bind(this, '_scrollListener');
-    window.addEventListener('scroll', this._boundListener);
+    this._boundListener = bind(this, '_watchForTout');
+    window.addEventListener('scroll', this._watchForTout);
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    window.removeEventListener('scroll', this._boundListener);
+    window.removeEventListener('scroll', this._watchForTout);
   },
 
   /**
@@ -60,18 +60,18 @@ export default Component.extend({
   /**
     Measures whether the footer is scrolled into view, and shows donate tout if so.
 
-    @method _scrollListener
+    @method _watchForTout
     @param {EventObject} event
     @return {void}
   */
-  _scrollListener(/* e */) {
+  _watchForTout(/* e */) {
     debounce(this, () => {
       let windowCenter = document.documentElement.clientHeight / 2;
       let footerTopEdge = this.element.getBoundingClientRect().top;
 
       if (footerTopEdge - windowCenter < 0) {
         this.set('inViewport', true);
-        window.removeEventListener('scroll', this._boundListener);
+        window.removeEventListener('scroll', this._watchForTout);
       }
     }, 150);
   }
