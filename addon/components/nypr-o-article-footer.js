@@ -41,12 +41,12 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
     this._boundListener = bind(this, '_watchForTout');
-    window.addEventListener('scroll', this._watchForTout);
+    window.addEventListener('scroll', this._boundListener);
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    window.removeEventListener('scroll', this._watchForTout);
+    window.removeEventListener('scroll', this._boundListener);
   },
 
   /**
@@ -66,9 +66,6 @@ export default Component.extend({
   */
   _watchForTout(/* e */) {
     debounce(this, () => {
-      if (!this.element) {
-        return;
-      }
       let toutInDom = this.element.querySelector('.c-donate-tout');
       let windowCenter = document.documentElement.clientHeight / 2;
       let footerTopEdge = this.element.getBoundingClientRect().top;
