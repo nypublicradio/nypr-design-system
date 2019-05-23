@@ -7950,7 +7950,7 @@ var r=t.getBoundingClientRect(),n=r.top,i=r.height
 e.set("outOfViewport",n+i<0)},75)}})
 e.default=r}),define("nypr-design-system/components/nypr-o-header/headline",["exports","nypr-design-system/templates/components/nypr-o-header/headline"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,tagName:"h1",classNames:["c-main-header__title","u-truncate"]})
+var r=Ember.Component.extend({layout:t.default,tagName:"span",classNames:["c-main-header__title","u-truncate"]})
 e.default=r}),define("nypr-design-system/components/nypr-o-header/leaderboard",["exports","nypr-design-system/templates/components/nypr-o-header/leaderboard"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["c-main-header__ad-unit"]})
