@@ -20,8 +20,16 @@
     alt={{@alt}}
     width={{@width}}
     height={{@height}}
-    >
+    srcset={{@srcSet}}
+  >
 {{else}}
-  <img src={{@srcS}} itemprop="image" alt={{@alt}} width={{@width}} height={{@height}}>
+  <img
+    src={{@srcS}}
+    itemprop="image"
+    alt={{@alt}}
+    width={{@width}}
+    height={{@height}}
+    srcset={{@srcSet}}
+  >
 {{/if}}
 {{!-- END-SNIPPET --}}
