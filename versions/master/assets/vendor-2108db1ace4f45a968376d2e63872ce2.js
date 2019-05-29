@@ -7942,7 +7942,7 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:"header",classNames:["c-main-header"],classNameBindings:["isOpen:side-menu-is-active","outOfViewport"],attributeBindings:["spacerHeight:style"],headerService:Ember.inject.service("nypr-o-header"),isOpen:!1,outOfViewport:!1,menuHeightOffset:0,init:function(){this._super.apply(this,arguments),this.headerService.register(this)},didInsertElement:function(){this._super.apply(this,arguments),this._boundListener=Ember.run.bind(this,"_scrollListener"),window.addEventListener("scroll",this._boundListener)},willDestroyElement:function(){this._super.apply(this,arguments),window.removeEventListener("scroll",this._boundListener),document.body.classList.remove("side-menu-is-active")},spacerHeight:Ember.computed("outOfViewport",function(){var e=""
 if("undefined"==typeof FastBoot&&this.outOfViewport){var t=this.element.getBoundingClientRect().height
 e="height: ".concat(t,"px;")}return Ember.String.htmlSafe(e)}),toggleMenu:function(e,t){e instanceof Event&&(e,e=void 0),"boolean"==typeof e?this.set("isOpen",e):this.toggleProperty("isOpen"),document.body.classList.toggle("side-menu-is-active",e),this.setMenuHeightOffset()},setMenuHeightOffset:function(){var e=this.element.querySelector("#header-inner")
-e&&this.set("menuHeightOffset",e.offsetTop)},_scrollListener:function(){var e=this
+e&&this.set("menuHeightOffset",e.offsetTop-window.scrollY)},_scrollListener:function(){var e=this
 Ember.run.debounce(this,function(){var t
 if(e.floatLandmark&&(t=document.querySelector(e.floatLandmark)),!t&&e.element)t=e.element
 else if(!t)return
