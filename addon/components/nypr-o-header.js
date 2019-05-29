@@ -146,7 +146,7 @@ export default Component.extend({
   setMenuHeightOffset() {
     let header = this.element.querySelector('#header-inner');
     if (header) {
-      this.set('menuHeightOffset', header.offsetTop);
+      this.set('menuHeightOffset', header.offsetTop - window.scrollY);
     }
   },
 
