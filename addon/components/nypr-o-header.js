@@ -8,6 +8,8 @@ import layout from '../templates/components/nypr-o-header';
 
 
 const DEBOUNCE_TIMER = 75;
+const DOWN = 'down';
+const UP = 'up';
 
 /**
  Site header
@@ -158,7 +160,17 @@ export default Component.extend({
     @return {void}
   */
   _scrollListener(/* e */) {
+    let direction;
+    let lastScroll = window.pageYOffset;
     debounce(this, () => {
+      if (lastScroll < window.pageYOffset) {
+        direction = this._lastDirection = DOWN;
+      } else if (lastScroll > window.pageYOffset) {
+        direction = this._lastDirection = UP;
+      } else {
+        direction = this._lastDirection;
+      }
+
       let el;
       if (this.floatLandmark) {
         el = document.querySelector(this.floatLandmark);
@@ -168,8 +180,13 @@ export default Component.extend({
       } else if (!el) {
         return;
       }
+
       let { top, height } = el.getBoundingClientRect();
-      this.set('outOfViewport', top + height < 0);
+      let { paddingBottom } = window.getComputedStyle(el);
+
+      let threshold = direction === DOWN ? 0 : height - parseInt(paddingBottom, 10);
+
+      this.set('outOfViewport', top + height < threshold);
     }, DEBOUNCE_TIMER);
   }
 });
