@@ -13,18 +13,19 @@
     {{/if}}
   </a>
 {{else if @route}}
-  {{#link-to
-    params=@route
+  <LinkTo
+    @params={{@route}}
     class='o-kicker'
-  }}
+    ...attributes
+  >
     {{#if (has-block)}}
       {{yield}}
     {{else}}
       {{@text}}
     {{/if}}
-  {{/link-to}}
+  </LinkTo>
 {{else}}
-  <span class="o-kicker">
+  <span class="o-kicker" ...attributes>
     {{#if (has-block)}}
       {{yield}}
     {{else}}
