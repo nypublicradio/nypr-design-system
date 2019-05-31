@@ -13,7 +13,7 @@ export default Component.extend(ClickOutsideMixin, {
 
   layout,
   classNames: ['c-side-menu'],
-  attributeBindings: ['style'],
+  attributeBindings: ['style', 'aria-hidden'],
 
   /**
     Items for primary nav

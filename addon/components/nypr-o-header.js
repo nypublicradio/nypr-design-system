@@ -136,6 +136,10 @@ export default Component.extend({
     document.body.classList.toggle('side-menu-is-active', force);
 
     this.setMenuHeightOffset();
+
+    if (this.get('isOpen') === true){
+      this.focusMenu();
+    }
   },
 
   /**
@@ -150,6 +154,19 @@ export default Component.extend({
     if (header) {
       this.set('menuHeightOffset', header.offsetTop - window.scrollY);
     }
+  },
+
+  /**
+    Focus on the side menu
+    For accessibility, so screenreaders go to the menu once it is open
+
+    @method setMenuHeightOffset
+    @return {void}
+  */
+  focusMenu(){
+    let menu = this.element.querySelector(".c-side-menu__aria-begin");
+    menu.setAttribute('tabIndex', -1);
+    menu.focus();
   },
 
   /**
