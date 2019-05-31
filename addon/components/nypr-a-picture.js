@@ -1,6 +1,7 @@
 // BEGIN-SNIPPET nypr-a-picture.js
 import Component from '@ember/component';
 import layout from '../templates/components/nypr-a-picture';
+import { computed } from '@ember/object';
 
 /**
   Picture element. Renders `<source>` elements for provided s, m, l, or xl breakpoints and images.
@@ -14,7 +15,12 @@ import layout from '../templates/components/nypr-a-picture';
 export default Component.extend({
   tagName: 'picture',
   classNames: ['o-picture'],
+  classNameBindings: ['ratioClass'],
   layout,
+
+  ratioClass: computed('ratio', function() {
+    return `u-img-ratio--${this.ratio}`;
+  }),
 
   /**
     Extra Large Breakpoint
