@@ -10,14 +10,16 @@
       &bull;
       <a
         href={{@commentsUrl}}
-        class="u-has-accent u-has-accent--secondary">
+        class="u-has-accent u-has-accent--secondary"
+        data-test-comments-link
+      >
         {{@commentCount}} {{if (eq @commentCount 1) 'Comment' 'Comments'}}
       </a>
     {{/if}}
 
     {{#if @galleryPhotosCount}}
       &bull;
-      {{#link-to @galleryRoute class="u-has-accent u-has-accent--secondary"}}
+      {{#link-to @galleryRoute class="u-has-accent u-has-accent--secondary" data-test-gallery-link=true}}
         {{@galleryPhotosCount}} {{if (eq @galleryPhotosCount 1) 'Photo' 'Photos'}}
         <span class="o-icon o-icon--gallery u-icon--xs">
           <NyprASvg @icon='gallery'/>
