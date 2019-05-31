@@ -1,6 +1,8 @@
 {{!-- BEGIN-SNIPPET nypr-o-gallery-overlay-slide.hbs --}}
 <div class="c-slide__header u-spacing--half l-wrap l-container--content">
-  <h2 class="c-slide__heading u-font--l">{{@slide.title}}</h2>
+  {{#if @slide.title}}
+    <h2 class="c-slide__heading u-font--l">{{@slide.title}}</h2>
+  {{/if}}
   <div class="c-slide__count u-font--secondary-style u-color--gray--light u-font--xs">
     Slide {{this.count}} of {{@total}}
   </div>
