@@ -160,7 +160,7 @@ export default Component.extend({
     Focus on the side menu
     For accessibility, so screenreaders go to the menu once it is open
 
-    @method setMenuHeightOffset
+    @method focusMenu
     @return {void}
   */
   focusMenu(){
