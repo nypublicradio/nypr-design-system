@@ -1,8 +1,8 @@
 {{!-- BEGIN-SNIPPET nypr-o-header-nav.hbs --}}
 <ul>
-  {{#each @navItems as |item|}}
+  {{#each @navItems as |item i|}}
     <li class="c-primary-nav__item">
-      {{#link-to params=item.route class=(concat 'c-primary-nav__link ' @linkClass)}}
+      {{#link-to params=item.route class=(concat 'c-primary-nav__link ' @linkClass) data-test-nav-link=i}}
         {{item.text}}
       {{/link-to}}
     </li>
