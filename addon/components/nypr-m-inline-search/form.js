@@ -55,6 +55,9 @@ export default Component.extend(ClickOutsideMixin, {
     @return {void}
   */
   clickOutside(e) {
+    if (!this.close) {
+      return;
+    }
     if (!closest(e.target, '.c-search') && !closest(e.target, '.c-search-toggle')) {
       this.close();
     }
