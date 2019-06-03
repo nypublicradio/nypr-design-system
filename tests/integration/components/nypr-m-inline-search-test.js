@@ -24,7 +24,7 @@ module('Integration | Component | nypr-m-inline-search', function(hooks) {
   });
 
   test('interactivity', async function(assert) {
-    assert.expect(5);
+    assert.expect(7);
 
     const QUERY = 'foo';
     const SEARCH = val => assert.equal(val, QUERY);
@@ -38,23 +38,30 @@ module('Integration | Component | nypr-m-inline-search', function(hooks) {
         <search.open/>
         <search.form @search={{SEARCH}}/>
       </NyprMInlineSearch>
+
+      <div id="outside">not in the search form</div>
     `);
 
     await click('.c-search-toggle');
     assert.dom('.c-search.is-open').exists();
     assert.dom('button.c-search__button[type="submit"]').exists('submit button exists');
 
+    await fillIn('.c-search__input', '');
+    await click('#outside');
+    assert.dom('.c-search.is-open').doesNotExist('should close on blur');
+
+    await click('.c-search-toggle');
     await fillIn('.c-search__input', QUERY);
     await click('[data-test-inline-search-submit]');
+
+    assert.dom('.c-search.is-open').exists();
+    await fillIn('.c-search__input', '');
+    await click('[data-test-inline-search-submit]');
+    assert.dom('.c-search.is-open').doesNotExist('should close if field is empty and submit is clicked');
 
     await render(hbs`<NyprMInlineSearch @search={{SEARCH}} />`);
 
     await fillIn('.c-search__input', QUERY);
     await click('[data-test-inline-search-submit]');
-
-    await fillIn('.c-search__input', '');
-    await click('[data-test-inline-search-submit]');
-    assert.dom('.c-search.is-open').doesNotExist('should close if field is empty and submit is clicked');
-
   });
 });
