@@ -7,6 +7,8 @@ export default Component.extend({
   classNames: ['c-main-header__ad-unit'],
   attributeBindings: ['aria-hidden'],
 
+  'aria-hidden': 'true',
+
   /**
     Hide the advertising label
 

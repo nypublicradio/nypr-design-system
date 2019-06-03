@@ -1,5 +1,5 @@
 {{#if this.rules.leaderboard}}
-  {{yield (hash leaderboard=(component 'nypr-o-header/leaderboard' aria-hidden='true'))}}
+  {{yield (hash leaderboard=(component 'nypr-o-header/leaderboard'))}}
 {{/if}}
 
 <div class="c-main-header__inner {{if this.outOfViewport 'c-floating-header is-visible'}}" id="header-inner">
