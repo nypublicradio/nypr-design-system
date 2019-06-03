@@ -41,8 +41,8 @@ export default Component.extend(ClickOutsideMixin, {
     e.preventDefault();
     if (this.query) {
       this.search(this.query);
-    } else if (this.close) {
-      this.close();
+    } else {
+      this.doClose();
     }
   },
 
@@ -55,10 +55,20 @@ export default Component.extend(ClickOutsideMixin, {
     @return {void}
   */
   clickOutside(e) {
-    if (!this.close) {
-      return;
-    }
     if (!closest(e.target, '.c-search') && !closest(e.target, '.c-search-toggle')) {
+      this.doClose();
+    }
+  },
+
+  /**
+    Handles closing the form. Clears the input and guards for if the action isn't passed in
+
+    @method doClose
+    @return {void}
+  */
+  doClose() {
+    if (this.close) {
+      this.set('query', null); // clear the query on close
       this.close();
     }
   },
