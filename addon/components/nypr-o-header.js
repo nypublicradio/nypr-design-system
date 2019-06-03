@@ -137,7 +137,7 @@ export default Component.extend({
 
     this.setMenuHeightOffset();
 
-    if (this.get('isOpen') === true){
+    if (this.isOpen === true){
       this.focusMenu();
     }
   },
