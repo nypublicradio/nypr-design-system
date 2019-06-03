@@ -4,6 +4,7 @@ import { closest } from 'ember-click-outside/utils';
 
 import Component from '@ember/component';
 import { bind } from '@ember/runloop';
+import { computed } from '@ember/object';
 
 import layout from '../../templates/components/nypr-m-inline-search/form';
 
@@ -12,8 +13,12 @@ export default Component.extend(ClickOutsideMixin, {
   tagName: 'form',
   classNames: ['c-search'],
   classNameBindings: ['isOpen'],
-  attributeBindings: ['role'],
+  attributeBindings: ['role', 'ariaHidden:aria-hidden'],
   role: 'dialog',
+
+  ariaHidden: computed('isOpen', function() {
+    return this.get('isOpen') ? "false" : "true";
+  }),
 
   didInsertElement() {
     this._super(...arguments);
