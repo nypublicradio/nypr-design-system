@@ -19,7 +19,9 @@ export default Component.extend({
   layout,
 
   ratioClass: computed('ratio', function() {
-    return `u-img-ratio--${this.ratio}`;
+    if (this.ratio) {
+      return `u-img-ratio--${this.ratio}`;
+    }
   }),
 
   /**
