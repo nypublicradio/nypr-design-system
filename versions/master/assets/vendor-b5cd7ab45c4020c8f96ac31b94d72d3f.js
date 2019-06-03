@@ -7709,7 +7709,7 @@ var r=Ember.Component.extend({layout:t.default,classNames:["media-object"],class
 e.default=r})
 define("nypr-design-system/components/nypr-a-picture",["exports","nypr-design-system/templates/components/nypr-a-picture"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({tagName:"picture",classNames:["o-picture"],classNameBindings:["ratioClass"],layout:t.default,ratioClass:Ember.computed("ratio",function(){return"u-img-ratio--".concat(this.ratio)}),breakXl:null,srcXl:null,breakL:null,srcL:null,breakM:null,srcM:null,breakS:null,srcS:null,lazy:!1,alt:null})
+var r=Ember.Component.extend({tagName:"picture",classNames:["o-picture"],classNameBindings:["ratioClass"],layout:t.default,ratioClass:Ember.computed("ratio",function(){if(this.ratio)return"u-img-ratio--".concat(this.ratio)}),breakXl:null,srcXl:null,breakL:null,srcL:null,breakM:null,srcM:null,breakS:null,srcS:null,lazy:!1,alt:null})
 e.default=r}),define("nypr-design-system/components/nypr-a-section-heading",["exports","nypr-design-system/templates/components/nypr-a-section-heading"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:"h2",classNames:["o-section-heading"],text:null})
