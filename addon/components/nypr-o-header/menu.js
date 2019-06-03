@@ -73,11 +73,9 @@ export default Component.extend(ClickOutsideMixin, {
     this.router.on('routeDidChange', this.close);
   },
 
-  willDestroy() {
+  willDestroyElement() {
     this._super(...arguments);
-    if (typeof FastBoot === 'undefined') {
-      this.removeClickOutsideListener();
-    }
+    this.removeClickOutsideListener();
   },
 });
 // END-SNIPPET
