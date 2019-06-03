@@ -7800,11 +7800,11 @@ var r=Ember.Component.extend({layout:t.default,classNames:["c-lead","c-lead-gall
 e.default=r}),define("nypr-design-system/components/nypr-m-inline-search",["exports","nypr-design-system/templates/components/nypr-m-inline-search"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:"",isOpen:!1})
-e.default=r}),define("nypr-design-system/components/nypr-m-inline-search/form",["exports","nypr-design-system/templates/components/nypr-m-inline-search/form"],function(e,t){"use strict"
+e.default=r}),define("nypr-design-system/components/nypr-m-inline-search/form",["exports","ember-click-outside/mixin","ember-click-outside/utils","nypr-design-system/templates/components/nypr-m-inline-search/form"],function(e,t,r,n){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,tagName:"form",classNames:["c-search"],classNameBindings:["isOpen"],attributeBindings:["role"],role:"dialog",didInsertElement:function(){this._super.apply(this,arguments),this._boundTransitionHandler=Ember.run.bind(this,"focusInput"),this.element.addEventListener("transitionend",Ember.run.bind(this,"focusInput"))},willDestroyElement:function(){this.element.removeEventListener("transitionend",this._boundTransitionHandler)},focusInput:function(e){var t=this.element.querySelector(".c-search__input")
-e.target===t&&this.isOpen&&t.focus()},submit:function(e){e.preventDefault(),this.query?this.search(this.query):this.close&&this.close()}})
-e.default=r})
+var i=Ember.Component.extend(t.default,{layout:n.default,tagName:"form",classNames:["c-search"],classNameBindings:["isOpen"],attributeBindings:["role"],role:"dialog",didInsertElement:function(){this._super.apply(this,arguments),this.addClickOutsideListener(),this._boundTransitionHandler=Ember.run.bind(this,"focusInput"),this.element.addEventListener("transitionend",Ember.run.bind(this,"focusInput"))},willDestroyElement:function(){this.removeClickOutsideListener(),this.element.removeEventListener("transitionend",this._boundTransitionHandler)},focusInput:function(e){var t=this.element.querySelector(".c-search__input")
+e.target===t&&this.isOpen&&t.focus()},submit:function(e){e.preventDefault(),this.query?this.search(this.query):this.close&&this.close()},clickOutside:function(e){(0,r.closest)(e.target,".c-search")||(0,r.closest)(e.target,".c-search-toggle")||this.close()}})
+e.default=i})
 define("nypr-design-system/components/nypr-m-inline-search/open",["exports","nypr-design-system/templates/components/nypr-m-inline-search/open"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:""})
@@ -7876,8 +7876,8 @@ var r=Ember.Component.extend({layout:t.default,classNames:["c-article__body","o-
 e.default=r}),define("nypr-design-system/components/nypr-o-article-footer",["exports","nypr-design-system/templates/components/nypr-o-article-footer"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["c-article__footer","u-section-spacing"],didInsertElement:function(){this._super.apply(this,arguments),this._boundListener=Ember.run.bind(this,"_watchForTout"),window.addEventListener("scroll",this._boundListener)},willDestroyElement:function(){this._super.apply(this,arguments),window.removeEventListener("scroll",this._boundListener)},inViewport:!1,_watchForTout:function(){var e=this
-Ember.run.debounce(this,function(){var t=e.element.querySelector(".c-donate-tout"),r=document.documentElement.clientHeight/2,n=e.element.getBoundingClientRect().top
-t&&n-r<0&&(e.set("inViewport",!0),window.removeEventListener("scroll",e._watchForTout))},150)}})
+Ember.run.debounce(this,function(){if(!e.isDestroyed&&!e.isDestroying){var t=e.element.querySelector(".c-donate-tout"),r=document.documentElement.clientHeight/2,n=e.element.getBoundingClientRect().top
+t&&n-r<0&&(e.set("inViewport",!0),window.removeEventListener("scroll",e._watchForTout))}},150)}})
 e.default=r}),define("nypr-design-system/components/nypr-o-article-header",["exports","nypr-design-system/templates/components/nypr-o-article-header"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:"header",classNames:["c-article__header","u-spacing--and-half","l-container"]})
@@ -7959,7 +7959,7 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["c-main-header__left","_u-truncate--flex"]})
 e.default=r}),define("nypr-design-system/components/nypr-o-header/menu",["exports","ember-click-outside/mixin","ember-click-outside/utils","nypr-design-system/templates/components/nypr-o-header/menu"],function(e,t,r,n){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var i=Ember.Component.extend(t.default,{router:Ember.inject.service(),layout:n.default,classNames:["c-side-menu"],attributeBindings:["style"],style:Ember.computed("heightOffset",function(){return Ember.String.htmlSafe("height: calc(100vh - ".concat(this.heightOffset,"px);"))}),clickOutside:function(e){(0,r.closest)(e.target,".c-menu-toggle")||this.close()},didInsertElement:function(){this._super.apply(this,arguments),this.addClickOutsideListener(),this.router.on("routeDidChange",this.close)},willDestroy:function(){this._super.apply(this,arguments),"undefined"==typeof FastBoot&&this.removeClickOutsideListener()}})
+var i=Ember.Component.extend(t.default,{router:Ember.inject.service(),layout:n.default,classNames:["c-side-menu"],attributeBindings:["style"],style:Ember.computed("heightOffset",function(){return Ember.String.htmlSafe("height: calc(100vh - ".concat(this.heightOffset,"px);"))}),clickOutside:function(e){(0,r.closest)(e.target,".c-menu-toggle")||this.close()},didInsertElement:function(){this._super.apply(this,arguments),this.addClickOutsideListener(),this.router.on("routeDidChange",this.close)},willDestroyElement:function(){this._super.apply(this,arguments),this.removeClickOutsideListener()}})
 e.default=i}),define("nypr-design-system/components/nypr-o-header/nav",["exports","nypr-design-system/templates/components/nypr-o-header/nav"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:"nav",classNames:["c-primary-nav"],attributeBindings:["role","aria-label"],role:"navigation","aria-label":"Primary navigation"})
