@@ -1,10 +1,13 @@
 // BEGIN-SNIPPET nypr-m-inline-search-form.js
+import ClickOutsideMixin from 'ember-click-outside/mixin';
+import { closest } from 'ember-click-outside/utils';
+
 import Component from '@ember/component';
 import { bind } from '@ember/runloop';
 
 import layout from '../../templates/components/nypr-m-inline-search/form';
 
-export default Component.extend({
+export default Component.extend(ClickOutsideMixin, {
   layout,
   tagName: 'form',
   classNames: ['c-search'],
@@ -15,12 +18,15 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
+    this.addClickOutsideListener();
+
     this._boundTransitionHandler = bind(this, 'focusInput');
 
     this.element.addEventListener('transitionend', bind(this, 'focusInput'));
   },
 
   willDestroyElement() {
+    this.removeClickOutsideListener();
     this.element.removeEventListener('transitionend', this._boundTransitionHandler);
   },
 
@@ -36,6 +42,20 @@ export default Component.extend({
     if (this.query) {
       this.search(this.query);
     } else if (this.close) {
+      this.close();
+    }
+  },
+
+
+  /**
+    Handler called by `ClickOutsideMixin`
+
+    @method clickOutside
+    @param {Event} e
+    @return {void}
+  */
+  clickOutside(e) {
+    if (!closest(e.target, '.c-search') && !closest(e.target, '.c-search-toggle')) {
       this.close();
     }
   },
