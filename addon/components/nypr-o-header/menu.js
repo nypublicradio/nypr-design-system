@@ -44,6 +44,13 @@ export default Component.extend(ClickOutsideMixin, {
   */
 
   /**
+    Open/closed state
+
+    @argument isOpen
+    @type {Boolean}
+  */
+
+  /**
     Height offset computed as an inline CSS declaration
 
     @accessor style
@@ -61,7 +68,7 @@ export default Component.extend(ClickOutsideMixin, {
     @return {void}
   */
   clickOutside(e) {
-    if (!closest(e.target, '.c-menu-toggle')) {
+    if (!closest(e.target, '.c-menu-toggle') && this.isOpen) {
       this.close();
     }
   },
