@@ -135,10 +135,9 @@ export default Component.extend({
 
     document.body.classList.toggle('side-menu-is-active', force);
 
-    this.setMenuHeightOffset();
-
     if (this.isOpen === true){
       this.focusMenu();
+      this.setMenuHeightOffset();
     }
   },
 
