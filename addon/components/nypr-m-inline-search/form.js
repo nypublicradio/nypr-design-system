@@ -46,6 +46,7 @@ export default Component.extend(ClickOutsideMixin, {
     e.preventDefault();
     if (this.query) {
       this.search(this.query);
+      this.set('query', null);
     } else {
       this.doClose();
     }
