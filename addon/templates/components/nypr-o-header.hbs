@@ -1,6 +1,4 @@
-{{#if this.rules.leaderboard}}
-  {{yield (hash leaderboard=(component 'nypr-o-header/leaderboard'))}}
-{{/if}}
+{{yield (hash leaderboard=(component 'nypr-o-header/leaderboard'))}}
 
 <div class="c-main-header__inner {{if this.outOfViewport 'c-floating-header is-visible'}}" id="header-inner">
 
