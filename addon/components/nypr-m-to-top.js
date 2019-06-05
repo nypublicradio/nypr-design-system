@@ -32,6 +32,20 @@ export default Component.extend({
     let target = document.querySelector(this.selector);
     let y = target ? target.offsetTop - (target.offsetHeight + offset) : 0;
     window.scrollTo({top: y, behavior: 'smooth'});
+
+    this.focusOnTop();
+  },
+
+  /**
+    Focus screenreaders at top of page too
+
+    @method focusOnTop
+    @return {Void}
+  */
+  focusOnTop(){
+    let header = document.getElementsByTagName("header")[0];
+    header.setAttribute('tabIndex', -1);
+    header.focus();
   }
 });
 // END-SNIPPET
