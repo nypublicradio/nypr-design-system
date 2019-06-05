@@ -44,8 +44,11 @@ export default Component.extend({
   */
   focusOnTop(){
     let header = document.getElementsByTagName("header")[0];
-    header.setAttribute('tabIndex', -1);
-    header.focus();
+    if (header){
+      header.setAttribute('tabIndex', -1);
+      header.focus();
+    }
+
   }
 });
 // END-SNIPPET
