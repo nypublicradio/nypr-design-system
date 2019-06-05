@@ -7869,7 +7869,8 @@ var r=Ember.Component.extend({layout:t.default,classNames:["o-tags"],tags:null,p
 e.default=r}),define("nypr-design-system/components/nypr-m-to-top",["exports","nypr-design-system/templates/components/nypr-m-to-top"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:"",offset:0,toTop:function(){var e=this.offset,t=document.querySelector(this.selector),r=t?t.offsetTop-(t.offsetHeight+e):0
-window.scrollTo({top:r,behavior:"smooth"})}})
+window.scrollTo({top:r,behavior:"smooth"}),this.focusOnTop()},focusOnTop:function(){var e=document.getElementsByTagName("header")[0]
+e&&(e.setAttribute("tabIndex",-1),e.focus())}})
 e.default=r}),define("nypr-design-system/components/nypr-o-article-body",["exports","nypr-design-system/templates/components/nypr-o-article-body"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["c-article__body","o-rte-text","u-spacing","l-container--content"],body:null})
