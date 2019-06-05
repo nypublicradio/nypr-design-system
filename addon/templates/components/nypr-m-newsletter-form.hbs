@@ -20,8 +20,8 @@
 
   <div class="c-newsletter-form__message" aria-live="polite">
     {{#if this.onSubmit.last}}
-    {{! template-lint-disable no-triple-curlies }}
-    {{{or this.onSubmit.last.value this.onSubmit.last.error}}}
+      {{! template-lint-disable no-triple-curlies }}
+      {{{or this.onSubmit.last.value this.onSubmit.last.error}}}
     {{/if}}
   </div>
 
