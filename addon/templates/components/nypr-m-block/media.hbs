@@ -1,5 +1,5 @@
 {{#if @url}}
-  <a href={{@url}} target="_blank" rel="noopener">
+  <a href={{@url}} target="_blank" rel="noopener" aria-label={{@ariaLabel}}>
     <NyprAPicture
       @srcS={{@srcS}}
       @breakM={{@breakM}}
@@ -17,7 +17,7 @@
     />
   </a>
 {{else if @route}}
-  {{#link-to params=@route}}
+  {{#link-to params=@route aria-label=@ariaLabel}}
     <NyprAPicture
       @srcS={{@srcS}}
       @breakM={{@breakM}}
