@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `1.0.1`
+- tips email in footer. hardcoded for gothamist launch.
+
 ## `1.0.0`
 - first major release ahead of gothamist launch
 
