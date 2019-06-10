@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `1.0.0`
+- first major release ahead of gothamist launch
+
 ## `0.2.0`
 - blocks and assorted layout components
 - nypr-o-header service for managing rules
