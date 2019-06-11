@@ -1,10 +1,12 @@
 {{#component @button class="c-toggle-box__label o-text-with-icon" tagName=
   'button'}}
-  {{yield}}
+  <span aria-label="{{@ariaLabel}}">
+    {{yield}}
 
-  {{#if (eq @icon 'caret-down')}}
+    {{#if (eq @icon 'caret-down')}}
     <span class="o-icon o-icon--caret u-icon--xs">
       <NyprASvg @icon={{@icon}} />
     </span>
-  {{/if}}
+    {{/if}}
+</span>
 {{/component}}
