@@ -55,5 +55,18 @@ module('Integration | Component | nypr-m-block', function(hooks) {
     `);
 
     assert.dom('.c-block__title--is-audio').exists();
+
+    await render(hbs`
+      <NyprMBlock as |block|>
+        <block.object as |o|>
+          <o.title @h2 @hasVideo={{true}} @hasGallery={{true}}>
+            Foo
+          </o.title>
+        </block.object>
+      </NyprMBlock>
+    `);
+
+    assert.dom('.c-block__title--is-gallery').exists();
+    assert.dom('.c-block__title--is-video').doesNotExist('gallery takes precedence over video');
   })
 });
