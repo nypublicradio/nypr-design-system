@@ -20,6 +20,6 @@ export default Component.extend({
     @argument format
     @type {String}
   */
-  format: 'MMM D, YYYY h:mmA'
+  format: 'MMM D, YYYY h:mm A'
 });
 // END-SNIPPET
