@@ -23,9 +23,11 @@
 
     <div class="c-slide__meta l-wrap l-container--content">
 
-      <span class="o-credit">
-        {{{@slide.credit}}}
-      </span>
+      {{#if @slide.credit}}
+        <span class="o-credit">
+          <span class="is-vishidden">image credit </span>{{{@slide.credit}}}
+        </span>
+      {{/if}}
 
       <NyprAToggleBox
         class="c-toggle-box--share"
