@@ -5,7 +5,7 @@
 
     <div class="l-wrap l-container--content">
       {{#if @parentRoute}}
-        {{#link-to params=@parentRoute class="o-back-to-link"}}
+        {{#link-to params=@parentRoute class="o-back-to-link" aria-label=(concat "Related Article: " @title)}}
           <span class="o-icon o-icon--prev-caret u-path-fill--white u-icon--xs">
             <NyprASvg @icon="caret-down"/>
           </span>
