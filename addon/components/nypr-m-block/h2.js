@@ -6,23 +6,11 @@ export default Component.extend({
   layout,
   tagName: 'h2',
   classNames: ['c-block__title'],
-  classNameBindings: ['galleryIconClass', 'videoIconClass', 'audioIconClass', 'externalIconClass'],
+  classNameBindings: ['galleryIconClass', 'externalIconClass'],
 
   galleryIconClass: computed('hasGallery', function() {
     if (this.hasGallery) {
       return 'c-block__title--has-icon c-block__title--is-gallery';
-    }
-  }),
-
-  videoIconClass: computed('hasVideo', function() {
-    if (this.hasVideo) {
-      return 'c-block__title--has-icon c-block__title--is-gallery';
-    }
-  }),
-
-  audioIconClass: computed('hasAudio', function() {
-    if (this.hasAudio) {
-      return 'c-block__title--has-icon c-block__title--is-audio';
     }
   }),
 

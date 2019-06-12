@@ -57,7 +57,7 @@ export default Component.extend({
   /**
     Specify if a gallery icon should be rendered
 
-    @argument hasGallery
+    @argument galleryIcon
     @type {Boolean}
   */
 });
