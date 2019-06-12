@@ -1,6 +1,4 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { collect } from '@ember/object/computed';
 import layout from '../../templates/components/nypr-m-block/title';
 
 /**
@@ -76,33 +74,4 @@ export default Component.extend({
     @argument hasAudio
     @type {Boolean}
   */
-
-  galleryIconClass: computed('hasGallery', function() {
-    if (this.hasGallery) {
-      return 'c-block__title--has-icon c-block__title--is-gallery';
-    }
-  }),
-
-  videoIconClass: computed('hasVideo', function() {
-    if (this.hasVideo && !this.hasGallery) {
-      return 'c-block__title--has-icon c-block__title--is-video';
-    }
-  }),
-
-  audioIconClass: computed('hasAudio', function() {
-    if (this.hasAudio) {
-      return 'c-block__title--has-icon c-block__title--is-audio';
-    }
-  }),
-
-  externalIconClass: computed('url', function() {
-    if (this.url) {
-      return 'c-block__title--has-icon c-block__title--is-outbound-link';
-    }
-  }),
-
-  iconClasses: collect('galleryIconClass', 'videoIconClass', 'audioIconClass', 'externalIconClass'),
-  iconClassNames: computed('iconClasses', function() {
-    return this.iconClasses.join(' ');
-  }),
 });
