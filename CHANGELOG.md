@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## `1.0.3`
+- fix timestamp formatting [DS-315]
+
+## `1.0.2`
+- comments out advertisment label
+
 ## `1.0.1`
 - tips email in footer. hardcoded for gothamist launch.
 
