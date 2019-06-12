@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `1.0.4`
+- test selector for a release
+
 ## `1.0.3`
 - fix timestamp formatting [DS-315]
 
