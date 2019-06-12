@@ -16,7 +16,7 @@ export default Component.extend({
 
   videoIconClass: computed('hasVideo', function() {
     if (this.hasVideo) {
-      return 'c-block__title--has-icon c-block__title--is-gallery';
+      return 'c-block__title--has-icon c-block__title--is-video';
     }
   }),
 
