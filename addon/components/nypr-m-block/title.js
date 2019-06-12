@@ -60,18 +60,4 @@ export default Component.extend({
     @argument hasGallery
     @type {Boolean}
   */
-
-  /**
-    Specify if a video icon should be rendered
-
-    @argument hasVideo
-    @type {Boolean}
-  */
-
-  /**
-    Specify if an audio icon should be rendered
-
-    @argument hasAudio
-    @type {Boolean}
-  */
 });
