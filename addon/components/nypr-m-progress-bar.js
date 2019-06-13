@@ -37,7 +37,7 @@ export default Component.extend({
     this._measure();
   },
 
-  willDestroy() {
+  willDestroyElement() {
     this._super(...arguments);
     window.removeEventListener('scroll', this._boundListener);
     window.removeEventListener('resize', this._boundListener);
