@@ -7,7 +7,7 @@
   <toggle.dropdown>
     <nav class="c-nypr-nav" role="navigation" aria-label="NYPR brands navigation">
       <ul class="c-nypr-nav__list">
-        {{#each (or @navItems this.navItems) as |item|}}
+        {{#each this.items as |item|}}
           <li class="c-nypr-nav__item">
             <a
               href={{item.url}}
