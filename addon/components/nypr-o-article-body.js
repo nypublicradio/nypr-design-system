@@ -1,6 +1,8 @@
+/* global instgrm, twttr */
 // BEGIN-SNIPPET nypr-o-article-body.js
 import Component from '@ember/component';
 import layout from '../templates/components/nypr-o-article-body';
+import { schedule } from '@ember/runloop';
 
 /**
  Article body element
@@ -27,5 +29,23 @@ export default Component.extend({
     @type {String}
   */
   body: null,
+
+  didRender() {
+    schedule('afterRender', () => {
+      // instagram embeds need a manual push after rehydration
+      // ember will re-render a fastboot DOM tree,
+      // but the IG embed script will only operate once
+      if (typeof instgrm !== 'undefined') {
+        instgrm.Embeds.process();
+      }
+
+      // load twitter widgets manually after twitter callback has run
+      // twitter scripts are stripped from gothamist payload responses to allow
+      // for more reliable rendering
+      if (typeof twttr !== 'undefined') {
+        twttr.ready(() => twttr.widgets.load());
+      }
+    });
+  }
 });
 // END-SNIPPET
