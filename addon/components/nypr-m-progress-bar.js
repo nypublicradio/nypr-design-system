@@ -54,9 +54,20 @@ export default Component.extend({
       if (this.isDestroyed || this.isDestroying) {
         return;
       }
+      let target = document.querySelector(`${this.target}`);
+      if (!target) {
+        target = document.body;
+      }
+      let distanceToTargetBottom = target.offsetHeight + target.offsetTop;
+      let parent = target.offsetParent;
+      while(parent) {
+        distanceToTargetBottom += parent.offsetTop;
+        parent = parent.offsetParent;
+      }
+
       let scrolled = window.pageYOffset;
-      let docHeight = document.body.getBoundingClientRect().height - window.innerHeight;
-      let progress = scrolled / docHeight
+      let windowHeight = window.innerHeight;
+      let progress = scrolled / (distanceToTargetBottom - windowHeight);
       this.set('progress', isNaN(progress) ? 0 : progress);
     }, DEBOUNCE_TIMER);
   }
