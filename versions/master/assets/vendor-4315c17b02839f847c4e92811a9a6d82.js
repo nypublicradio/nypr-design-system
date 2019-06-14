@@ -7877,7 +7877,7 @@ window.scrollTo({top:r,behavior:"smooth"}),this.focusOnTop()},focusOnTop:functio
 e&&(e.setAttribute("tabIndex",-1),e.focus())}})
 e.default=r}),define("nypr-design-system/components/nypr-o-article-body",["exports","nypr-design-system/templates/components/nypr-o-article-body"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,classNames:["c-article__body","o-rte-text","u-spacing","l-container--content"],body:null})
+var r=Ember.Component.extend({layout:t.default,classNames:["c-article__body","o-rte-text","u-spacing","l-container--content"],body:null,didRender:function(){Ember.run.schedule("afterRender",function(){"undefined"!=typeof instgrm&&instgrm.Embeds.process(),"undefined"!=typeof twttr&&twttr.ready(function(){return twttr.widgets.load()})})}})
 e.default=r}),define("nypr-design-system/components/nypr-o-article-footer",["exports","nypr-design-system/templates/components/nypr-o-article-footer"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["c-article__footer","u-section-spacing"],didInsertElement:function(){this._super.apply(this,arguments),this._boundListener=Ember.run.bind(this,"_watchForTout"),window.addEventListener("scroll",this._boundListener)},willDestroyElement:function(){this._super.apply(this,arguments),window.removeEventListener("scroll",this._boundListener)},inViewport:!1,_watchForTout:function(){var e=this
