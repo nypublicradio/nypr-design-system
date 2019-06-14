@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `1.0.6`
+- render gallery overlay titles as raw HTML
+
 ## `1.0.5`
 - #13 move third-party API calls to article body component
 - #14 update brands linkroll to exclude brands
