@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## `1.0.5`
+- #13 move third-party API calls to article body component
+- #14 update brands linkroll to exclude brands
+
 ## `1.0.4`
 - test selector for a release
 
