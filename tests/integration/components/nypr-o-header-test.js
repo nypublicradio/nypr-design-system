@@ -103,7 +103,7 @@ module('Integration | Component | nypr-o-header', function(hooks) {
   test('floating header', async function(assert) {
     // header test injection
     await render(hbs`
-      <NyprOHeader @rules={{hash progressBar=true}} as |header|>
+      <NyprOHeader @rules={{hash progressTarget=true}} as |header|>
         <header.menu/>
         <header.left/>
       </NyprOHeader>
