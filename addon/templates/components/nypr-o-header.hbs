@@ -11,8 +11,8 @@
     rules=this.rules
   )}}
 
-  {{#if this.rules.progressBar}}
-    <NyprMProgressBar />
+  {{#if this.rules.progressTarget}}
+    <NyprMProgressBar @target={{this.rules.progressTarget}}/>
   {{/if}}
 
   <div class="c-content-overlay"></div>
