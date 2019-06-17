@@ -6,9 +6,7 @@ export default Component.extend({
   layout,
   tagName: 'nav',
   classNames: ['c-primary-nav'],
-  attributeBindings: ['role', 'aria-label'],
-
-  role: 'navigation',
-  'aria-label': 'Primary navigation',
+  attributeBindings: ['aria-label'],
+  'aria-label': 'Primary',
 });
 // END-SNIPPET
