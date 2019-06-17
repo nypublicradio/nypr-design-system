@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## `1.0.7`
+- svg and image accessibility updates [DS-310] & [DS-307]
+- update progress bar to accept a target to measure against
+
 ## `1.0.6`
 - render gallery overlay titles as raw HTML
 
