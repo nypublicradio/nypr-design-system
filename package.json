@@ -21,6 +21,7 @@
     "test:all": "ember try:each"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0",
     "broccoli-merge-files": "^0.8.0",
     "ember-auto-import": "^1.2.19",
     "ember-basic-dropdown": "^1.1.2",

@@ -23,16 +23,18 @@
 
     <div class="c-slide__meta l-wrap l-container--content">
 
-      <span class="o-credit">
-        {{{@slide.credit}}}
-      </span>
+      {{#if @slide.credit}}
+        <span class="o-credit">
+          <span class="is-vishidden">image credit </span>{{{@slide.credit}}}
+        </span>
+      {{/if}}
 
       <NyprAToggleBox
         class="c-toggle-box--share"
         @calculatePosition={{this.calculatePosition}}
         @renderInPlace={{true}}
         as |toggle|>
-        <toggle.trigger>
+        <toggle.trigger @ariaLabel="Share this image">
           <strong>Share</strong>
         </toggle.trigger>
 
@@ -41,10 +43,12 @@
             <tools.share
               @service='facebook'
               @url={{this.shareURL}}
+              @ariaLabel="Share on Facebook"
             />
             <tools.share
               @service='twitter'
               @url={{this.shareURL}}
+              @ariaLabel="Share on Twitter"
               @params={{hash
                 text=@share.twitter.text
                 via=@share.twitter.via
@@ -52,12 +56,14 @@
             <tools.share
               @service='reddit'
               @url={{this.shareURL}}
+              @ariaLabel="Share on Reddit"
               @params={{hash
                 title=@share.reddit.title
             }}/>
             <tools.share
               @service='email'
               @url={{this.shareURL}}
+              @ariaLabel="Share via email"
               @params={{hash
                 subject=@share.email.subject
                 body=@share.email.body

@@ -1,5 +1,5 @@
 {{!-- BEGIN-SNIPPET nypr-m-share-tools-share.hbs --}}
-<button class="c-share-tools__link o-icon" {{action 'openShare'}} ...attributes>
+<button class="c-share-tools__link o-icon" {{action 'openShare'}} aria-label={{@ariaLabel}} ...attributes>
   {{#if (has-block)}}
     {{yield}}
   {{else}}

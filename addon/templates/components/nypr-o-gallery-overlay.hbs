@@ -5,7 +5,7 @@
 
     <div class="l-wrap l-container--content">
       {{#if @parentRoute}}
-        {{#link-to params=@parentRoute class="o-back-to-link"}}
+        {{#link-to params=@parentRoute class="o-back-to-link" aria-label=(concat "Related Article: " @title)}}
           <span class="o-icon o-icon--prev-caret u-path-fill--white u-icon--xs">
             <NyprASvg @icon="caret-down"/>
           </span>
@@ -31,7 +31,7 @@
         {{yield i (hash billboard=(component 'nypr-o-gallery-overlay/billboard'))}}
       {{/each}}
 
-      <span class="o-end-label u-font--secondary-style u-font--xs u-color--gray">
+      <span class="o-end-label u-font--secondary-style u-font--xs u-color--gray" aria-description="End of Gallery">
         <span class="o-icon o-icon--down-arrow u-icon--m">
           <NyprASvg @icon='arrow-dashed'/>
         </span>
@@ -42,7 +42,7 @@
 
     <div class="u-align--center">
       {{#if @parentRoute}}
-        {{#link-to params=@parentRoute class="o-button c-gallery-overlay__back o-button--c-quaternary"}}
+        {{#link-to params=@parentRoute class="o-button c-gallery-overlay__back o-button--c-quaternary" aria-label=(concat "Back to Article: " @title)}}
           Back to Article
         {{/link-to}}
       {{/if}}

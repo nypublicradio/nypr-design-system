@@ -12,7 +12,7 @@ module('Integration | Component | nypr-a-toggle-box', function(hooks) {
     await render(hbs`
       <NyprAToggleBox as |toggle|>
         <toggle.trigger>
-          <span>Toggle Box Label</span>
+          <span class="the-label">Toggle Box Label</span>
         </toggle.trigger>
 
         <toggle.dropdown>
@@ -22,7 +22,7 @@ module('Integration | Component | nypr-a-toggle-box', function(hooks) {
     `);
 
     // target span b/c there's an icon with assistive text in the label
-    assert.dom('.c-toggle-box__label span').hasText('Toggle Box Label');
+    assert.dom('.c-toggle-box__label span.the-label').hasText('Toggle Box Label');
     await clickTrigger();
     assert.dom('.c-toggle-box__dropdown').hasText('Dropdown Contents');
   });
