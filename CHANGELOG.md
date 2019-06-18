@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## `1.0.8`
+- #7 accessibility improvements for newsletter signup module
+- #10 accessibility improvements for gallery
+- #16 add 'Advertisement' back to ad label component
+- #16 remove built in ad label from several templates
+
 ## `1.0.7`
 - svg and image accessibility updates [DS-310] & [DS-307]
 - update progress bar to accept a target to measure against
