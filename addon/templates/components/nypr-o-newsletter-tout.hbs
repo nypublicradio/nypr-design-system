@@ -1,6 +1,6 @@
 {{!-- BEGIN-SNIPPET nypr-o-newsletter-tout.hbs --}}
 <div class="c-newsletter-tout__inner">
-
+  {{#if @ariaTitle}}<h2 class="is-vishidden">{{@ariaTitle}}</h2>{{/if}}
   <div class="c-newsletter-tout__media">
     <NyprAPicture
       @srcS={{@img.src}}

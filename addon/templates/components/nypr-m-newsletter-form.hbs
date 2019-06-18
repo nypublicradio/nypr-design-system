@@ -17,12 +17,14 @@
   )}}
 </div>
 
-{{#if this.onSubmit.last}}
-  <div class="c-newsletter-form__message">
-    {{! template-lint-disable no-triple-curlies }}
-    {{{or this.onSubmit.last.value this.onSubmit.last.error}}}
+
+  <div class="c-newsletter-form__message" aria-live="polite">
+    {{#if this.onSubmit.last}}
+      {{! template-lint-disable no-triple-curlies }}
+      {{{or this.onSubmit.last.value this.onSubmit.last.error}}}
+    {{/if}}
   </div>
-{{/if}}
+
 
 <div class="c-newsletter-form__terms">
   <label class="c-newsletter-form__terms-checkbox">
