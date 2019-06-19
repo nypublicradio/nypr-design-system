@@ -1,16 +1,16 @@
 {{!-- BEGIN-SNIPPET nypr-m-block-meta.hbs --}}
 {{#if @author}}
-  <span class="c-block-meta__author u-font--secondary-style u-font--xs">{{@author}}</span>
+  <span class="c-block-meta__author u-font--secondary-style u-font--xxs">{{@author}}</span>
 {{/if}}
 {{#if @timestamp}}
-  <span class="c-block-meta__timestamp u-font--secondary-style u-font--xs" data-test-timestamp>
+  <span class="c-block-meta__timestamp u-font--secondary-style u-font--xxs" data-test-timestamp>
     {{@timestamp}}
   </span>
 {{/if}}
 {{#if @commentCount}}
   {{#if @commentRoute}}
     {{#link-to params=@commentRoute class="c-block-meta__comments u-font--secondary-style u-font--xs"}}
-      <span class="o-icon o-icon--comment u-icon--xs">
+      <span class="o-icon o-icon--comment u-icon--xxs">
         <NyprASvg @icon='comment'/>
       </span>
       {{@commentCount}}
