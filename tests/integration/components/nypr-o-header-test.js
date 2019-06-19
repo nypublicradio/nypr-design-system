@@ -94,7 +94,7 @@ module('Integration | Component | nypr-o-header', function(hooks) {
       </NyprOHeader>
     `);
 
-    await click('.o-menu-toggle');
+    await click('.c-main-header__left .o-menu-toggle');
 
     assert.dom('.c-main-header.side-menu-is-active').exists();
     assert.dom('body.side-menu-is-active', document).exists();
@@ -115,29 +115,10 @@ module('Integration | Component | nypr-o-header', function(hooks) {
 
     assert.dom('.o-progress').exists();
     assert.dom('.c-main-header__inner.c-floating-header.is-visible').exists();
-    assert.dom('.c-main-header').hasStyle({
-      height: `${HEADER_HEIGHT}px`,
-    });
+    const header = this.element.querySelector('.c-main-header');
+    assert.equal(Math.round(header.offsetHeight), Math.round(HEADER_HEIGHT));
 
     reset();
-  });
-
-  test('makes room for an ad', async function(assert) {
-    // leaderboard test injection
-    await render(hbs`
-      <NyprOHeader @rules={{hash leaderboard=true}} as |header|>
-        <header.leaderboard>
-          <div style="height: 500px;"/>
-        </header.leaderboard>
-        <header.menu/>
-        <header.left/>
-      </NyprOHeader>
-    `);
-
-    await click('.o-menu-toggle');
-
-    const ad = this.element.querySelector('.c-main-header__ad-unit');
-    assert.equal(this.element.querySelector('.c-side-menu').style.height, `calc(100vh - ${ad.offsetHeight}px)`);
   });
 
   test('yields active rules', async function(assert) {
