@@ -7814,7 +7814,7 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:""})
 e.default=r}),define("nypr-design-system/components/nypr-m-nav-read-more",["exports","nypr-design-system/templates/components/nypr-m-nav-read-more"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,tagName:"nav",classNames:["c-read-more-nav","u-breakout"]})
+var r=Ember.Component.extend({layout:t.default,tagName:"nav",classNames:["c-read-more-nav","u-breakout"],attributeBindings:["aria-label"],"aria-label":"Read More"})
 e.default=r}),define("nypr-design-system/components/nypr-m-newsletter-form",["exports","nypr-design-system/templates/components/nypr-m-newsletter-form","ember-concurrency","fetch"],function(e,t,r,n){"use strict"
 function i(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{},n=Object.keys(r)
 "function"==typeof Object.getOwnPropertySymbols&&(n=n.concat(Object.getOwnPropertySymbols(r).filter(function(e){return Object.getOwnPropertyDescriptor(r,e).enumerable}))),n.forEach(function(t){o(e,t,r[t])})}return e}function o(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}Object.defineProperty(e,"__esModule",{value:!0}),e.default=e.DEFAULT_LABEL=e.DEFAULT_SUBSCRIBED_MESSAGE=e.DEFAULT_LEGAL=void 0
@@ -7848,7 +7848,7 @@ var i=window.pageYOffset/(r-window.innerHeight)
 e.set("progress",isNaN(i)?0:i)}},75)}})
 e.default=r}),define("nypr-design-system/components/nypr-m-secondary-nav",["exports","nypr-design-system/templates/components/nypr-m-secondary-nav"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,tagName:"nav",classNames:["c-secondary-nav"],attributeBindings:["role","aria-label"],role:"navigation","aria-label":"Secondary navigation"})
+var r=Ember.Component.extend({layout:t.default,tagName:"nav",classNames:["c-secondary-nav"],attributeBindings:["aria-label"],"aria-label":"Secondary"})
 e.default=r}),define("nypr-design-system/components/nypr-m-share-tools",["exports","nypr-design-system/templates/components/nypr-m-share-tools"],function(e,t){"use strict"
 function r(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{},i=Object.keys(r)
 "function"==typeof Object.getOwnPropertySymbols&&(i=i.concat(Object.getOwnPropertySymbols(r).filter(function(e){return Object.getOwnPropertyDescriptor(r,e).enumerable}))),i.forEach(function(t){n(e,t,r[t])})}return e}function n(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}Object.defineProperty(e,"__esModule",{value:!0}),e.SERVICE_MAP=e.default=void 0
@@ -7971,7 +7971,7 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var i=Ember.Component.extend(t.default,{router:Ember.inject.service(),layout:n.default,classNames:["c-side-menu"],attributeBindings:["style","aria-hidden"],style:Ember.computed("heightOffset",function(){return Ember.String.htmlSafe("height: calc(100vh - ".concat(this.heightOffset,"px);"))}),clickOutside:function(e){!(0,r.closest)(e.target,".c-menu-toggle")&&this.isOpen&&this.close()},didInsertElement:function(){this._super.apply(this,arguments),this.addClickOutsideListener(),this.router.on("routeDidChange",this.close)},willDestroyElement:function(){this._super.apply(this,arguments),this.removeClickOutsideListener()}})
 e.default=i}),define("nypr-design-system/components/nypr-o-header/nav",["exports","nypr-design-system/templates/components/nypr-o-header/nav"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,tagName:"nav",classNames:["c-primary-nav"],attributeBindings:["role","aria-label"],role:"navigation","aria-label":"Primary navigation"})
+var r=Ember.Component.extend({layout:t.default,tagName:"nav",classNames:["c-primary-nav"],attributeBindings:["aria-label"],"aria-label":"Primary"})
 e.default=r}),define("nypr-design-system/components/nypr-o-header/right",["exports","nypr-design-system/templates/components/nypr-o-header/right"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,classNames:["c-main-header__right"]})
