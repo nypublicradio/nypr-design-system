@@ -10,6 +10,8 @@ export default Component.extend({
   layout,
   tagName: 'nav',
   classNames: ['c-read-more-nav', 'u-breakout'],
+  attributeBindings: ['aria-label'],
+  'aria-label': 'Read More',
 
   /**
     List of items to render as links. Each item requires the following keys:
