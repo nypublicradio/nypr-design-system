@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## `1.0.9`
+- #20 support srcset in gallery lead thumbnails
+- fix share button arrow alignment
+- accesibility nav roles and labels
+- misc pattern lab sync
+
 ## `1.0.8`
 - #7 accessibility improvements for newsletter signup module
 - #10 accessibility improvements for gallery
