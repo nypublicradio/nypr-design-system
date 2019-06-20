@@ -17,9 +17,10 @@ module('Integration | Component | nypr-m-box-banner', function(hooks) {
       <NyprMBoxBanner as |banner|>
         <banner.title>TITLE</banner.title>
 
-        <banner.dek>BODY</banner.dek>
-
-        <banner.cta>CTA</banner.cta>
+        <banner.body as |body|>
+          <body.dek>BODY</body.dek>
+          <body.cta>CTA</body.cta>
+        </banner.body>
       </NyprMBoxBanner>
     `);
 

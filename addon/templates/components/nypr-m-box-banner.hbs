@@ -11,14 +11,8 @@
   </NyprAButton>
 {{/if}}
 
-{{yield (hash title=(component 'nypr-m-box-banner/title'))}}
-
-<div class="o-box-banner__group u-spacing">
-
-  {{yield (hash
-    dek=(component 'nypr-m-box-banner/dek')
-    cta=(component 'nypr-m-box-banner/cta')
-  )}}
-
-</div>
+{{yield (hash
+  title=(component 'nypr-m-box-banner/title')
+  body=(component 'nypr-m-box-banner/body')
+)}}
 {{!-- END-SNIPPET --}}
