@@ -11,5 +11,5 @@ import layout from '../../templates/components/nypr-m-block/body';
 */
 export default Component.extend({
   layout,
-  classNames: ['c-block__body', 'u-spacing'],
+  classNames: ['c-block__body', 'u-spacing--quarter'],
 });
