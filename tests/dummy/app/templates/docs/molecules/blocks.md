@@ -66,6 +66,41 @@ The `<NyprMBlock/>` component provides layout options that are similar to the fa
   <demo.snippet @name='nypr-m-block.hbs' @label='nypr-m-block.hbs'/>
 </DocsDemo>
 
+#### "Urgent" Style block
+
+The `nypr-m-block` accepts an `@urgent` argument that provides some alternate styling. You can use the yielded components to render a "breaking news" style block like so:
+
+<DocsDemo as |demo|>
+  <demo.example @name="urgent-style-usage.hbs">
+
+    <NyprMBlock @urgent={{true}} as |block|>
+      <block.object as |o|>
+
+        <o.eyebrow @text='Breaking News'/>
+
+        <o.title @h3>
+          <a href="">
+            Families Say NYPD Victim-Blaming Compounds Grief
+          </a>
+        </o.title>
+
+        <o.body as |body|>
+          <body.meta @timestamp='Just Now'/>
+
+          <body.text>
+            <p>A <a href="">coalition of community groups</a> are suing the city to stop a multi-billion dollar mega development.</p>
+          </body.text>
+        </o.body>
+
+      </block.object>
+    </NyprMBlock>
+
+  </demo.example>
+
+  <demo.snippet @name="urgent-style-usage.hbs" @label="Usage"/>
+</DocsDemo>
+
+
 ### `nypr-m-block-list`
 
 Provides a simple list context for rendering multiple blocks.

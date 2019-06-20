@@ -44,7 +44,7 @@ import { computed } from '@ember/object';
 export default Component.extend({
   layout,
   classNames: ['c-block'],
-  classNameBindings: ['orientationClass', 'sizeClass'],
+  classNameBindings: ['orientationClass', 'sizeClass', 'urgent:c-block--urgent'],
 
   /**
     Layout orientation.

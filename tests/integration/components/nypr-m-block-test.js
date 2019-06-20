@@ -16,7 +16,8 @@ module('Integration | Component | nypr-m-block', function(hooks) {
     await render(hbs`<NyprMBlock @orientation='h' @size='l'/>`);
     assert.dom('.c-block--horizontal.c-block--horizontal--large').exists('`size` controls a class');
 
-    await render(hbs`<NyprMBlock @orientation='h' @size='l'/>`);
+    await render(hbs`<NyprMBlock @urgent={{true}} />`);
+    assert.dom('.c-block--urgent').exists();
   });
 
   test('icons', async function(assert) {
