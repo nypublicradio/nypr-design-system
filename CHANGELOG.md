@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `1.0.10`
+see release notes
+
 ## `1.0.9`
 - #20 support srcset in gallery lead thumbnails
 - fix share button arrow alignment
