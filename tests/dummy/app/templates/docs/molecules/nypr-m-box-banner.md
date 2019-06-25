@@ -17,7 +17,7 @@ A simple box to display notifications or callouts. Includes areas for `title`, `
 
       <p>
         <label for="close">Show close button</label>
-        <input id="close" type="checkbox" onclick={{action (mut close) (action (mut close) undefined)}} checked={{close}}>
+        <input id="close" type="checkbox" onclick={{action 'toggleCloseFn'}} checked={{close}}>
       </p>
     </fieldset>
 
