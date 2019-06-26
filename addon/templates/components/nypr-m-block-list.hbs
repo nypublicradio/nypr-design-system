@@ -6,7 +6,7 @@
 
 <ul class="u-spacing--and-half">
   {{#each @items as |item i|}}
-    <li>
+    <li data-test-block-list-item={{i}}>
       {{yield item i}}
     </li>
   {{/each}}
