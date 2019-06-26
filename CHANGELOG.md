@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `1.1.0`
+- #23 adds bo banner molecule
+
 ## `1.0.10`
 see release notes
 
