@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `1.1.11
+- #12 audio and video icon support
+
 ## `1.1.0`
 - #23 adds bo banner molecule
 
