@@ -1,1 +1,0 @@
-export { default } from 'nypr-design-system/components/nypr-m-block/h3';

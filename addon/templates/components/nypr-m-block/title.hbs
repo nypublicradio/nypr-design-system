@@ -1,9 +1,31 @@
 {{#if (eq @h2 '')}}
-  {{#nypr-m-block/h2 route=@route url=@url hasGallery=@galleryIcon data-test-block-title=true}}
-    {{yield}}
-  {{/nypr-m-block/h2}}
+  <h2
+    class="c-block__title {{this.iconClassNames}}"
+    data-test-block-title
+  >
+    {{#nypr-m-block/title-layout
+      route=@route
+      url=@url
+      hasGallery=@hasGallery
+      hasVideo=@hasVideo
+      hasAudio=@hasAudio
+    }}
+      {{yield}}
+    {{/nypr-m-block/title-layout}}
+  </h2>
 {{else if (eq @h3 '')}}
-  {{#nypr-m-block/h3 route=@route url=@url hasGallery=@galleryIcon data-test-block-title=true}}
-    {{yield}}
-  {{/nypr-m-block/h3}}
+  <h3
+    class="c-block__title {{this.iconClassNames}}"
+    data-test-block-title
+  >
+    {{#nypr-m-block/title-layout
+      route=@route
+      url=@url
+      hasGallery=@hasGallery
+      hasVideo=@hasVideo
+      hasAudio=@hasAudio
+    }}
+      {{yield}}
+    {{/nypr-m-block/title-layout}}
+  </h3>
 {{/if}}
