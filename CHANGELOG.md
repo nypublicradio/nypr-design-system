@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## `1.1.2`
+- #19 UTM fixes for gallery shares
+- Add spacing class to footer
+
 ## `1.0.8`
 - #7 accessibility improvements for newsletter signup module
 - #10 accessibility improvements for gallery
