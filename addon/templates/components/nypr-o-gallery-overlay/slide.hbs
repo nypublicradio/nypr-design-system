@@ -44,11 +44,13 @@
               @service='facebook'
               @url={{this.shareURL}}
               @ariaLabel="Share on Facebook"
+              @utm={{@share.facebook.utm}}
             />
             <tools.share
               @service='twitter'
               @url={{this.shareURL}}
               @ariaLabel="Share on Twitter"
+              @utm={{@share.twitter.utm}}
               @params={{hash
                 text=@share.twitter.text
                 via=@share.twitter.via
@@ -57,6 +59,7 @@
               @service='reddit'
               @url={{this.shareURL}}
               @ariaLabel="Share on Reddit"
+              @utm={{@share.reddit.utm}}
               @params={{hash
                 title=@share.reddit.title
             }}/>
@@ -64,6 +67,7 @@
               @service='email'
               @url={{this.shareURL}}
               @ariaLabel="Share via email"
+              @utm={{@share.email.utm}}
               @params={{hash
                 subject=@share.email.subject
                 body=@share.email.body
