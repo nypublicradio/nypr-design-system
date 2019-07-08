@@ -14,9 +14,11 @@
       </span>
     {{/if}}
     {{#if @articleRoute}}
-      {{#link-to params=@articleRoute class="c-author-block__details u-font--secondary-style u-has-accent u-has-accent--secondary u-font--xs"}}
-        Articles
-      {{/link-to}}
+      <span class="c-author-block__details">
+        {{#link-to params=@articleRoute class="u-font--secondary-style u-has-accent u-has-accent--secondary u-font--xs"}}
+          Articles
+        {{/link-to}}
+      </span>
     {{/if}}
   </div>
 

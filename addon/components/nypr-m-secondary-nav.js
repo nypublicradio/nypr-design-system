@@ -11,9 +11,8 @@ export default Component.extend({
   tagName: 'nav',
   classNames: ['c-secondary-nav'],
 
-  attributeBindings: ['role', 'aria-label'],
-  role: 'navigation',
-  'aria-label': 'Secondary navigation',
+  attributeBindings: ['aria-label'],
+  'aria-label': 'Secondary',
 
   /**
     Navigation items objects with `url` and `title` keys.

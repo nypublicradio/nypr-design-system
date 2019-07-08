@@ -3,8 +3,6 @@ import ClickOutsideMixin from 'ember-click-outside/mixin';
 import { closest } from 'ember-click-outside/utils';
 
 import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { htmlSafe } from '@ember/string';
 import { inject } from '@ember/service';
 import layout from '../../templates/components/nypr-o-header/menu';
 
@@ -13,7 +11,7 @@ export default Component.extend(ClickOutsideMixin, {
 
   layout,
   classNames: ['c-side-menu'],
-  attributeBindings: ['style', 'aria-hidden'],
+  attributeBindings: ['aria-hidden'],
 
   /**
     Items for primary nav
@@ -37,28 +35,11 @@ export default Component.extend(ClickOutsideMixin, {
   **/
 
   /**
-    Offset height by this amount to make room for an ad at the top fo the screen
-
-    @argument heightOffset
-    @type {Number}
-  */
-
-  /**
     Open/closed state
 
     @argument isOpen
     @type {Boolean}
   */
-
-  /**
-    Height offset computed as an inline CSS declaration
-
-    @accessor style
-    @type {String}
-  */
-  style: computed('heightOffset', function() {
-    return htmlSafe(`height: calc(100vh - ${this.heightOffset}px);`);
-  }),
 
   /**
     Handler called by `ClickOutsideMixin`

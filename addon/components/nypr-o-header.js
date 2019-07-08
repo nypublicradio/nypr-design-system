@@ -67,14 +67,6 @@ export default Component.extend({
     @type {String}
   */
 
-  /**
-    Offset for menu height to make room for an ad at the top of the screen
-
-    @field menuHeightOffset
-    @type {Number}
-  */
-  menuHeightOffset: 0,
-
   init() {
     this._super(...arguments);
 
@@ -137,21 +129,6 @@ export default Component.extend({
 
     if (this.isOpen === true){
       this.focusMenu();
-      this.setMenuHeightOffset();
-    }
-  },
-
-  /**
-    Measure vertical space taken up by leaderboard ad, if any.
-    It's the top of the screen, so the offsetTop of the header wrapper will give us the desired value
-
-    @method setMenuHeightOffset
-    @return {void}
-  */
-  setMenuHeightOffset() {
-    let header = this.element.querySelector('#header-inner');
-    if (header) {
-      this.set('menuHeightOffset', header.offsetTop);
     }
   },
 

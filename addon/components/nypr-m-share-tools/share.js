@@ -73,12 +73,12 @@ export default Component.extend({
     if (this.utm) {
       let utmParams = Object.keys(this.utm).map(key => `utm_${key}=${this.utm[key]}`).join('&');
 
-      utmParams = encodeURIComponent(utmParams);
       if (url.indexOf('?') > -1) {
         url += `&${utmParams}`;
       } else {
         url += `?${utmParams}`;
       }
+      url = encodeURIComponent(url);
     }
 
     return `${shareBase}?${getParams(url, this.params)}`

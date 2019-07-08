@@ -1,8 +1,27 @@
 # `nypr-design-system` changelog
 
+## `1.1.3`
+- Fix bad release
+
 ## `1.1.2`
 - #19 UTM fixes for gallery shares
 - Add spacing class to footer
+
+## `1.1.11`
+- #12 audio and video icon support
+
+## `1.1.0`
+- #23 adds bo banner molecule
+
+## `1.0.10`
+see release notes
+
+## `1.0.9`
+- #20 support srcset in gallery lead thumbnails
+- fix share button arrow alignment
+- accesibility nav roles and labels
+- misc pattern lab sync
+>>>>>>> 66f7544bdf8ff1317e843e88052e1d7bc843bbb1
 
 ## `1.0.8`
 - #7 accessibility improvements for newsletter signup module

@@ -1,0 +1,18 @@
+{{!-- BEGIN-SNIPPET nypr-m-box-banner.hbs --}}
+{{#if @close}}
+  <NyprAButton
+    class="o-box-banner__close"
+    @blank={{true}}
+    @onclick={{@close}}
+  >
+    <span class="o-icon u-icon--xs o-icon--close">
+      <NyprASvg @icon='close'/>
+    </span>
+  </NyprAButton>
+{{/if}}
+
+{{yield (hash
+  title=(component 'nypr-m-box-banner/title')
+  body=(component 'nypr-m-box-banner/body')
+)}}
+{{!-- END-SNIPPET --}}
