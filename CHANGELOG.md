@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## `1.1.4`
+- Security updates
+- #27 Update box-banner
+
 ## `1.1.3`
 - Fix bad release
 
