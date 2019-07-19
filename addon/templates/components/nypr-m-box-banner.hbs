@@ -10,9 +10,10 @@
     </span>
   </NyprAButton>
 {{/if}}
-
-{{yield (hash
-  title=(component 'nypr-m-box-banner/title')
-  body=(component 'nypr-m-box-banner/body')
-)}}
+<div class="o-box-banner__inner l-container l-container--16col">
+  {{yield (hash
+    title=(component 'nypr-m-box-banner/title')
+    body=(component 'nypr-m-box-banner/body')
+  )}}
+</div>
 {{!-- END-SNIPPET --}}
