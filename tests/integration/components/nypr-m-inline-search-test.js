@@ -68,4 +68,14 @@ module('Integration | Component | nypr-m-inline-search', function(hooks) {
     await fillIn('.c-search__input', QUERY);
     await click('[data-test-inline-search-submit]');
   });
+
+  test('can init with a query value', async function(assert) {
+    const QUERY = 'foo';
+    this.setProperties({
+      QUERY,
+    });
+    await render(hbs`<NyprMInlineSearch @query={{QUERY}}/>`);
+
+    assert.dom('.c-search__input').hasValue(QUERY);
+  });
 });

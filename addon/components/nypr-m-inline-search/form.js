@@ -46,7 +46,11 @@ export default Component.extend(ClickOutsideMixin, {
     e.preventDefault();
     if (this.query) {
       this.search(this.query);
-      this.set('query', null);
+
+      if (this.isOpen) {
+        // if it's block form, clear the query
+        this.set('query', null);
+      }
     } else {
       this.doClose();
     }
@@ -94,7 +98,7 @@ export default Component.extend(ClickOutsideMixin, {
   */
 
   /**
-    Is the form open or closed
+    Is the form open or closed. Only set in block form.
 
     @field isOpen
     @type {Boolean}
