@@ -79,6 +79,7 @@ export default Service.extend({
     this._updateRules();
   },
 
+  // eslint-disable-next-line ember/no-observers
   observer: observer('component.outOfViewport', 'router.currentRouteName', function() {
     this._updateRules()
   }),
