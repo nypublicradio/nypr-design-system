@@ -1,7 +1,8 @@
-import { module, test } from 'qunit';
+import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, fillIn } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import test from 'ember-sinon-qunit/test-support/test';
 
 module('Integration | Component | nypr-m-inline-search', function(hooks) {
   setupRenderingTest(hooks);
@@ -77,5 +78,23 @@ module('Integration | Component | nypr-m-inline-search', function(hooks) {
     await render(hbs`<NyprMInlineSearch @query={{QUERY}}/>`);
 
     assert.dom('.c-search__input').hasValue(QUERY);
+  });
+
+  test('can update search value from outer context', async function(assert) {
+    const SEARCH = this.spy();
+    const QUERY = 'foo'
+    this.setProperties({
+      SEARCH,
+      QUERY,
+    });
+
+    await render(hbs`<NyprMInlineSearch @query={{QUERY}} @search={{SEARCH}}/>`);
+    await click('[data-test-inline-search-submit]');
+
+    this.set('QUERY', 'bar');
+    await click('[data-test-inline-search-submit]');
+
+    assert.ok(SEARCH.firstCall.calledWith('foo'), 'first call is called with the initial value');
+    assert.ok(SEARCH.secondCall.calledWith('bar'), 'second call is called with the updated value');
   });
 });
