@@ -20,6 +20,23 @@ export default Component.extend(ClickOutsideMixin, {
     return this.get('isOpen') ? "false" : "true";
   }),
 
+  init() {
+    this._super(...arguments);
+
+    // shadow passed in value
+    // but don't bind to it
+    if (this.query) {
+      this.set('value', this.query);
+    }
+  },
+
+  didUpdateAttrs() {
+    this._super(...arguments);
+
+    // update local value if passed in query is updated
+    this.set('value', this.query);
+  },
+
   didInsertElement() {
     this._super(...arguments);
 
@@ -44,12 +61,12 @@ export default Component.extend(ClickOutsideMixin, {
 
   submit(e) {
     e.preventDefault();
-    if (this.query) {
-      this.search(this.query);
+    if (this.value) {
+      this.search(this.value);
 
       if (this.isOpen) {
-        // if it's block form, clear the query
-        this.set('query', null);
+        // if it's block form, clear the input value
+        this.set('value', null);
       }
     } else {
       this.doClose();
@@ -78,7 +95,7 @@ export default Component.extend(ClickOutsideMixin, {
   */
   doClose() {
     if (this.close) {
-      this.set('query', null); // clear the query on close
+      this.set('value', null); // clear the input value on close
       this.close();
     }
   },
@@ -91,7 +108,7 @@ export default Component.extend(ClickOutsideMixin, {
   */
 
   /**
-    Perform a search with given query
+    Perform a search with given input value
 
     @argument search
     @type {Function}
