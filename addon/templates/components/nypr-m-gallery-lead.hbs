@@ -1,7 +1,9 @@
 {{!-- BEGIN-SNIPPET nypr-m-gallery-lead.hbs --}}
 <div class="c-lead-gallery__top">
 
-  <NyprMFigure as |figure|>
+  <NyprMFigure
+    data-test-gallery-lead-preview
+    as |figure|>
     <figure.image
       @srcS={{this.currentSlide.preview}}
       onclick={{action 'goToSlide'}}
@@ -34,6 +36,7 @@
     {{/if}}
   {{/each}}
   <button
+    data-test-gallery-lead-view-all
     class="c-lead-gallery__thumbs-thumb c-lead-gallery__thumbs-thumb-text u-font--secondary-style u-font--xs"
     {{action (optional @viewAll)}}
   >
