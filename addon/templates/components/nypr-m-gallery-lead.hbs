@@ -33,7 +33,7 @@
       <button {{action 'setCurrent' i}} class="c-lead-gallery__thumbs-thumb {{if (eq this.currentIndex i) 'is-active'}}" data-test-gallery-thumb={{i}}>
         <img
           src={{slide.thumb}}
-          {{!-- srcset={{slide.thumbSrcSet}} --}}
+          srcset={{slide.thumbSrcSet}}
           alt={{slide.caption}}
         >
       </button>
