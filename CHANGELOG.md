@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `1.1.5`
+- inline form updates
+
 ## `1.1.4`
 - Security updates
 - #27 Update box-banner
@@ -25,7 +28,6 @@ see release notes
 - fix share button arrow alignment
 - accesibility nav roles and labels
 - misc pattern lab sync
->>>>>>> 66f7544bdf8ff1317e843e88052e1d7bc843bbb1
 
 ## `1.0.8`
 - #7 accessibility improvements for newsletter signup module
