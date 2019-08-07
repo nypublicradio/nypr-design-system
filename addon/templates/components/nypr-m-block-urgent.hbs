@@ -1,5 +1,5 @@
 {{!-- BEGIN-SNIPPET nypr-m-block-urgent.hbs --}}
-<NyprMBlock class='c-block--urgent' as |block| >
+<NyprMBlock class=(concat 'c-block--urgent ' @class) as |block| >
   <block.object as |o|>
     <o.eyebrow @text={{or @category 'Breaking News'}} />
     <o.title @h2 @url={{@url}} @route={{@route}}>
