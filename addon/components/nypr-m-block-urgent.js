@@ -21,7 +21,7 @@ import layout from '../templates/components/nypr-m-block-urgent';
 */
 export default Component.extend({
   layout,
-  element: '',
+  tagName: '',
 });
 
 // END-SNIPPET
