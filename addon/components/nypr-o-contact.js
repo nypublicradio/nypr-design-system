@@ -17,7 +17,7 @@ import layout from '../templates/components/nypr-o-contact';
 */
 export default Component.extend({
   layout,
-  classNames: ['c-contact-tout', 'o-rte-text', 'u-reversed-out'],
+  classNames: ['c-contact-tout', 'o-rte-text', 'u-reversed-out', 'o-3d-heading'],
 
   /**
     Text content
