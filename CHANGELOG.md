@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `1.1.7`
+- Add m-block-urgent (breaking news banner)
+
 ## `1.1.6`
 - update contact touts to conform with new pattern lab styles
 
