@@ -1,0 +1,16 @@
+{{!-- BEGIN-SNIPPET nypr-m-block-urgent.hbs --}}
+<NyprMBlock class={{concat 'c-block--urgent ' @class}} as |block| >
+  <block.object as |o|>
+    <o.eyebrow @text={{or @category 'Breaking News'}} />
+    <o.title @h2 @url={{@url}} @route={{@route}}>
+      {{@title}}
+    </o.title>
+    <o.body as |body|>
+      <body.meta @timestamp={{@timestamp}}/>
+      <body.text>
+        {{{@description}}}
+      </body.text>
+    </o.body>
+  </block.object>
+</NyprMBlock>
+{{!-- END-SNIPPET --}}
