@@ -7746,7 +7746,7 @@ Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({layout:t.default,tagName:""})
 e.default=r}),define("nypr-design-system/components/nypr-m-block",["exports","nypr-design-system/templates/components/nypr-m-block"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var r=Ember.Component.extend({layout:t.default,classNames:["c-block"],classNameBindings:["orientationClass","sizeClass"],orientation:"v",size:"l",orientationClass:Ember.computed("orientation",function(){switch(this.orientation){case"h":return"c-block--horizontal"
+var r=Ember.Component.extend({layout:t.default,classNames:["c-block"],classNameBindings:["orientationClass","sizeClass","urgent:c-block--urgent"],orientation:"v",size:"l",orientationClass:Ember.computed("orientation",function(){switch(this.orientation){case"h":return"c-block--horizontal"
 case"v":return null}}),sizeClass:Ember.computed("size","orientation",function(){switch(this.size){case"l":return"h"===this.orientation?"c-block--horizontal--large":null
 case"s":return
 default:return null}})})
