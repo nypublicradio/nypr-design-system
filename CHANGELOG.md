@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `1.1.8`
+- support `@urgent` param for urgent block variation
+
 ## `1.1.7`
 - Add m-block-urgent (breaking news banner)
 
