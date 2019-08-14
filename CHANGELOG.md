@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## `2.0.0`
+- [BREAKING] argument changes to the following components:
+ - `<NyprMGalleryLead/>`
+ - `<NyprOGallery::slide/>`
+ - `<NyprOArticleHeader::meta/>`
+
 ## `1.1.8`
 - support `@urgent` param for urgent block variation
 
