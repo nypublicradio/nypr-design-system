@@ -8,14 +8,26 @@
       {{#if (has-block)}}
         {{yield}}
       {{else}}
-        {{{@credit}}}
+        {{#if @creditLink}}
+          <a href={{@creditLink}} rel="noopener" target="_blank">
+            {{{@credit}}}
+          </a>
+        {{else}}
+          {{{@credit}}}
+        {{/if}}
       {{/if}}
     </span>
   {{else}}
     {{#if (has-block)}}
       {{yield}}
     {{else}}
-      {{{@credit}}}
+      {{#if @creditLink}}
+        <a href={{@creditLink}} rel="noopener" target="_blank">
+          {{{@credit}}}
+        </a>
+      {{else}}
+        {{{@credit}}}
+      {{/if}}
     {{/if}}
   {{/if}}
 </span>

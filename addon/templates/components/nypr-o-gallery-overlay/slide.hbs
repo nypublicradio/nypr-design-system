@@ -33,7 +33,14 @@
 
       {{#if @slide.credit}}
         <span class="o-credit">
-          <span class="is-vishidden">image credit </span>{{{@slide.credit}}}
+          <span class="is-vishidden">image credit </span>
+          {{#if @slide.creditLink}}
+            <a href={{@slide.creditLink}} target="_blank" rel="noopener">
+              {{{@slide.credit}}}
+            </a>
+          {{else}}
+            {{{@slide.credit}}}
+          {{/if}}
         </span>
       {{/if}}
 

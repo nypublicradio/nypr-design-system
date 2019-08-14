@@ -13,7 +13,7 @@
 
     <figure.figcaption as |caption|>
       {{#if this.currentSlide.credit}}
-        <caption.credit @credit={{this.currentSlide.credit}} @includeIcon={{unless this.currentSlide.caption true}}/>
+        <caption.credit @credit={{this.currentSlide.credit}} @creditLink={{this.currentSlide.creditLink}} @includeIcon={{unless this.currentSlide.caption true}}/>
       {{/if}}
 
       {{#if this.currentSlide.title}}
