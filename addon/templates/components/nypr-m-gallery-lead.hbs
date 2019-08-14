@@ -6,6 +6,7 @@
     as |figure|>
     <figure.image
       @srcS={{this.currentSlide.srcS}}
+      @alt={{this.currentSlide.alt}}
       onclick={{action 'goToSlide'}}
       data-test-gallery-current
     />
@@ -34,7 +35,7 @@
         <img
           src={{slide.thumb}}
           srcset={{slide.thumbSrcSet}}
-          alt={{slide.caption}}
+          alt={{slide.alt}}
         >
       </button>
     {{/if}}
