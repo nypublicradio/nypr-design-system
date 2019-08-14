@@ -1,7 +1,7 @@
 version: 2
 
 node_key: &node_key
-  key: node-deps-{{ arch }}-{{ checksum "yarn.lock" }}-{{ checksum "circle.yml" }}
+  key: node-deps-v2-{{ arch }}-{{ checksum "yarn.lock" }}-{{ checksum "circle.yml" }}
 
 restore_node: &restore_node
   restore_cache:

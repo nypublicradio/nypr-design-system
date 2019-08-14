@@ -1,9 +1,11 @@
 {{!-- BEGIN-SNIPPET nypr-m-gallery-lead.hbs --}}
 <div class="c-lead-gallery__top">
 
-  <NyprMFigure as |figure|>
+  <NyprMFigure
+    data-test-gallery-lead-preview
+    as |figure|>
     <figure.image
-      @srcS={{this.currentSlide.preview}}
+      @srcS={{this.currentSlide.srcS}}
       onclick={{action 'goToSlide'}}
       data-test-gallery-current
     />
@@ -29,11 +31,16 @@
   {{#each @slides as |slide i|}}
     {{#if (lt i 4)}}
       <button {{action 'setCurrent' i}} class="c-lead-gallery__thumbs-thumb {{if (eq this.currentIndex i) 'is-active'}}" data-test-gallery-thumb={{i}}>
-        <img src={{slide.thumb}} srcset={{slide.thumbSrcSet}} alt={{slide.caption}}>
+        <img
+          src={{slide.thumb}}
+          srcset={{slide.thumbSrcSet}}
+          alt={{slide.caption}}
+        >
       </button>
     {{/if}}
   {{/each}}
   <button
+    data-test-gallery-lead-view-all
     class="c-lead-gallery__thumbs-thumb c-lead-gallery__thumbs-thumb-text u-font--secondary-style u-font--xs"
     {{action (optional @viewAll)}}
   >

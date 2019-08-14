@@ -1,14 +1,26 @@
 {{!-- BEGIN-SNIPPET nypr-a-picture.hbs --}}
 {{#if @breakXl}}
-  <source srcset={{@srcXl}} media="(min-width: {{@breakXl}}px)">
+  <source
+    data-test-source-xl
+    srcset={{@srcXl}}
+    media="(min-width: {{@breakXl}}px)"
+  >
 {{/if}}
 
 {{#if @breakL}}
-  <source srcset={{@srcL}} media="(min-width: {{@breakL}}px)">
+  <source
+    data-test-source-l
+    srcset={{@srcL}}
+    media="(min-width: {{@breakL}}px)"
+  >
 {{/if}}
 
 {{#if @breakM}}
-  <source srcset={{@srcM}} media="(min-width: {{@breakM}}px)">
+  <source
+    data-test-source-m
+    srcset={{@srcM}}
+    media="(min-width: {{@breakM}}px)"
+  >
 {{/if}}
 
 {{#if @lazy}}
