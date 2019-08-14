@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `2.0.2`
+- [ENHANCEMENT] support linked image credits
+
 ## `2.0.1`
 - [ENHANCEMENT] pass in image metadata to gallery and image components
 
