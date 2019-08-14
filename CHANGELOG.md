@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `2.0.1`
+- [ENHANCEMENT] pass in image metadata to gallery and image components
+
 ## `2.0.0`
 - [BREAKING] argument changes to the following components:
  - `<NyprMGalleryLead/>`
