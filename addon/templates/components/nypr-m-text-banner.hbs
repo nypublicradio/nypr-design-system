@@ -1,5 +1,5 @@
-{{!-- BEGIN-SNIPPET nypr-m-block-urgent.hbs --}}
-<NyprMBlock @urgent={{true}} ...attributes as |block| >
+{{!-- BEGIN-SNIPPET nypr-m-text-banner.hbs --}}
+<NyprMBlock @urgent={{true}} as |block| >
   <block.object as |o|>
     <o.eyebrow @text={{or @category 'Breaking News'}} />
     <o.title @h2 @url={{@url}} @route={{@route}}>

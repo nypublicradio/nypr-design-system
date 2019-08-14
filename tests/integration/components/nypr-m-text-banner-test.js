@@ -3,15 +3,15 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | nypr-m-block-urgent', function(hooks) {
+module('Integration | Component | nypr-m-text-banner', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
     await render(hbs`
-      <NyprMBlockUrgent/>
+      <NyprMTextBanner/>
     `);
 
-    assert.dom('.c-block.c-block--urgent').exists();
+    assert.dom('.o-text-banner').exists();
   });
 
   test('it renders properties', async function(assert) {
@@ -30,7 +30,7 @@ module('Integration | Component | nypr-m-block-urgent', function(hooks) {
     });
 
     await render(hbs`
-      <NyprMBlockUrgent
+      <NyprMTextBanner
         @category={{category}}
         @title={{title}}
         @url={{url}}
