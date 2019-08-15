@@ -1,4 +1,4 @@
-/* global instgrm, twttr */
+/* global instgrm, twttr, FB */
 // BEGIN-SNIPPET nypr-o-article-body.js
 import Component from '@ember/component';
 import layout from '../templates/components/nypr-o-article-body';
@@ -44,6 +44,11 @@ export default Component.extend({
       // for more reliable rendering
       if (typeof twttr !== 'undefined') {
         twttr.ready(() => twttr.widgets.load());
+      }
+
+      // parse any facebook embeds
+      if (typeof FB !== 'undefined') {
+        FB.XFBML.parse();
       }
     });
   }
