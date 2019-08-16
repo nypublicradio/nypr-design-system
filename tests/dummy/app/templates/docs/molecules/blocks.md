@@ -51,7 +51,7 @@ The `<NyprMBlock/>` component provides layout options that are similar to the fa
           </body.text>
 
           <body.meta
-            @author='Jen Chung'
+            @authors={{array (hash name='Jen Chung')}}
             @commentCount=46
           />
         </o.body>
@@ -123,7 +123,7 @@ Provides a simple list context for rendering multiple blocks.
 
           <o.body as |body|>
             <body.text>{{item.summary}}</body.text>
-            <body.meta @author={{item.author}} @commentCount={{item.commentCount}}/>
+            <body.meta @authors={{array (hash name=item.author)}} @commentCount={{item.commentCount}}/>
           </o.body>
         </block.object>
       </NyprMBlock>
@@ -183,7 +183,7 @@ Provides a two column layout for blocks.
                 <o.title @h3>{{item.title}}</o.title>
                 <o.body as |body|>
                   <body.text>{{item.summary}}</body.text>
-                  <body.meta @author={{item.author}} @commentCount={{item.commentCount}}/>
+                  <body.meta @authors={{array (hash name=item.author)}} @commentCount={{item.commentCount}}/>
                 </o.body>
               </block.object>
             </NyprMBlock>

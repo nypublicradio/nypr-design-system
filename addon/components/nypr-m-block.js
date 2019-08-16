@@ -23,7 +23,7 @@ import { computed } from '@ember/object';
           Short summary of the story
         </body.text>
 
-        <body.meta @author='Jen Chung' @commentCount=46 />
+        <body.meta @authors={{array (hash name='Jen Chung')}} @commentCount=46 />
       </o.body>
     </block.object>
 

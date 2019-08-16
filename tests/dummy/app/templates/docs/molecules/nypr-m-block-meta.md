@@ -6,7 +6,7 @@ Render a story tease with the passed in arguments.
 <DocsDemo as |demo|>
   <demo.example @name='block-meta-example.hbs'>
     <NyprMBlockMeta
-      @author='Jen Chung'
+      @authors={{array (hash name='Jen Chung') (hash name='Jake Dobkin')}}
       @commentCount=100
     />
   </demo.example>

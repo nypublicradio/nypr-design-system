@@ -7,7 +7,7 @@ import layout from '../templates/components/nypr-m-block-meta';
 
   Usage:
   ```hbs
-  <NyprMBlockMeta @author={{@author}} @commentCount={{@commentCount}} @url={{@url}} />
+  <NyprMBlockMeta @authors={{@authors}} @commentCount={{@commentCount}} @commentRoute={{array 'comments'}}/>
   ```
 
   @class nypr-m-block-meta
@@ -17,10 +17,10 @@ export default Component.extend({
   classNames: ['c-block-meta', 'u-color--meta'],
 
   /**
-    Author name
+    Author list
 
-    @argument author
-    @type {String}
+    @argument authors
+    @type {Array[Object{name String}]}
   */
 
   /**
@@ -31,25 +31,19 @@ export default Component.extend({
   */
 
   /**
-    Used to build a link to item's comments.
+    Array of params passed to `link-to` to construct a url to the comments section
 
-    @argument route
-    @type {String}
+    @argument commentRoute
+    @type {Array[route String, models Object|Array]}
   */
 
   /**
-    Used to build a link to item's comments.
+    If passed in, a plain old anchor will be rendered instead of a `link-to`
 
-    @argument model
-    @type {String|Model}
-  */
-
-  /**
-    Used to build a link to item's comments.
-
-    @argument hash
+    @argument commentURL
     @type {String}
   */
+
 
 });
 // END-SNIPPET
