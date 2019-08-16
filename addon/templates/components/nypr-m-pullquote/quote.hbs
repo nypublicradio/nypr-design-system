@@ -1,0 +1,9 @@
+{{!-- BEGIN-SNIPPET nypr-m-pullquote-quote.hbs --}}
+<span class="o-bg-text-accent">
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{@quote}}
+  {{/if}}
+</span>
+{{!-- END-SNIPPET --}}

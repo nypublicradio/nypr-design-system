@@ -39,6 +39,7 @@ Router.map(function() {
       this.route('nypr-m-progress-bar');
       this.route('nypr-m-inline-search');
       this.route('nypr-m-box-banner');
+      this.route('nypr-m-pullquote');
     });
     this.route('organisms', function() {
       this.route('nypr-o-header');

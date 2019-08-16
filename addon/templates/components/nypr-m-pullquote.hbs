@@ -1,0 +1,11 @@
+{{!-- BEGIN-SNIPPET nypr-m-pullquote.hbs --}}
+{{#if (has-block)}}
+  {{yield (hash
+    quote=(component 'nypr-m-pullquote/quote')
+    attribution=(component 'nypr-m-pullquote/attribution')
+  )}}
+{{else}}
+  {{nypr-m-pullquote/quote quote=@quote}}
+  {{nypr-m-pullquote/attribution attribution=@attribution}}
+{{/if}}
+{{!-- END-SNIPPET --}}
