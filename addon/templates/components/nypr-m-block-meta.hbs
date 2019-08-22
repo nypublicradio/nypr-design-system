@@ -3,11 +3,12 @@
   <span class="c-block-meta__author u-font--secondary-style u-font--xxs">
     {{#each @authors as |author|}}
       {{~#if (and (not (has-next author @authors)) (gt @authors.length 1))~}}
-         &nbsp;and&nbsp;
+        {{! the linter doesn't count the encoded space as a character when it comes to indentation }}
+       &nbsp;and&nbsp;
       {{~else if (and (has-next author @authors) (has-previous author @authors))~}}
         ,&nbsp;
       {{~/if~}}
-      
+
       {{author.name}}
     {{/each}}
   </span>
