@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## `2.0.3`
+- [ENHANCEMENT] article body component parces facebook embed
+- [ENHANCEMENT] support multiple authors in meta block
+- [ENHANCEMENT] add nypr-m-pull-quote molecule
+- [CHANGE] remove nypr-m-block-urgent, replace with nypr-m-text-banner
+
 ## `2.0.2`
 - [ENHANCEMENT] support linked image credits
 
