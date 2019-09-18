@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `2.0.4`
+- [ENHANCEMENT] allow passing in image dimensions to `nypr-m-figure`
+
 ## `2.0.3`
 - [ENHANCEMENT] article body component parces facebook embed
 - [ENHANCEMENT] support multiple authors in meta block
