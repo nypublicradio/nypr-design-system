@@ -12,7 +12,7 @@ module.exports = function(defaults) {
     },
     sassOptions: {
       sourceMap: true,
-    }
+    },
     snippetSearchPaths: ['app', 'addon', 'tests/dummy/app'],
     postcssOptions: {
       compile: {
