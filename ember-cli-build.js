@@ -4,6 +4,15 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
+    sourcemaps: {
+      enabled: true,
+    },
+    babel: {
+      sourceMaps: 'inline',
+    },
+    sassOptions: {
+      sourceMap: true,
+    }
     snippetSearchPaths: ['app', 'addon', 'tests/dummy/app'],
     postcssOptions: {
       compile: {
