@@ -3,33 +3,33 @@ import Controller from '@ember/controller';
 const DONATE_URL= "https://pledge3.wnyc.org/donate/gothamist/onestep/?utm_medium=partnersite&utm_source=gothamist&utm_campaign=brandheader";
 
 const PRIMARY_NAV_ITEMS = [{
-  title: 'News',
+  text: 'News',
   url: '/news',
 }, {
-  title: 'Arts & Entertainment',
+  text: 'Arts & Entertainment',
   url: '/arts-entertainment',
 }, {
-  title: 'Food',
+  text: 'Food',
   url: '/food',
 }, {
-  title: 'Popular',
+  text: 'Popular',
   url: '/popular',
 }];
 
 const SECONDARY_NAV_ITEMS = [{
-  title: 'Advertising',
+  text: 'Advertising',
   url: '/advertising'
 }, {
-  title: 'Contact Us',
+  text: 'Contact Us',
   url: '/contact',
 }, {
-  title: 'Newsetter',
+  text: 'Newsetter',
   url: '/newseltter',
 }, {
-  title: 'RSS Feed',
+  text: 'RSS Feed',
   url: '/feed.xml',
 }, {
-  title: 'Staff',
+  text: 'Staff',
   url: '/staff',
 }];
 
