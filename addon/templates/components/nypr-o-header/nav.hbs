@@ -2,9 +2,23 @@
 <ul>
   {{#each @navItems as |item i|}}
     <li class="c-primary-nav__item">
-      {{#link-to params=item.route class=(concat 'c-primary-nav__link ' @linkClass) data-test-nav-link=i}}
-        {{item.text}}
-      {{/link-to}}
+      {{#if item.route}}
+        {{#link-to
+          params=item.route
+          class=(concat 'c-primary-nav__link ' @linkClass)
+          data-test-nav-link=i
+        }}
+          {{item.text}}
+        {{/link-to}}
+      {{else if item.url}}
+        <a
+          href="{{item.url}}"
+          class="c-primary-nav__link {{@linkClass}}"
+          data-test-nav-link={{i}}
+        >
+          {{item.text}}
+        </a>
+      {{/if}}
     </li>
   {{/each}}
 </ul>
