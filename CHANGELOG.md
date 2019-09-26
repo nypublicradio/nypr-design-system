@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## `2.0.5`
+- [ENHANCMENT] add source maps
+- [BUGFIX] allow for non-route urls in nav menu (not sure how this worked previously :thinking:)
+
 ## `2.0.4`
 - [ENHANCEMENT] allow passing in image dimensions to `nypr-m-figure`
 
