@@ -61,6 +61,12 @@
               @ariaLabel="Share on Facebook"
               @utm={{@share.facebook.utm}}
             />
+              <tools.share
+              @service='spotify'
+              @url={{this.shareURL}}
+              @ariaLabel="Share with Spotify"
+              @utm={{@share.spotify.utm}}
+            />
             <tools.share
               @service='twitter'
               @url={{this.shareURL}}

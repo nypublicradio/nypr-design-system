@@ -32,6 +32,10 @@ const filter = params =>
 
 // BEGIN-SNIPPET share-tools-services.js
 export const SERVICE_MAP = {
+  spotify: {
+    profileBase: 'https://open.spotify.com/playlist/',
+    getParams() {},
+  },
   facebook: {
     profileBase: 'https://www.facebook.com/',
     shareBase: 'https://www.facebook.com/sharer.php',
