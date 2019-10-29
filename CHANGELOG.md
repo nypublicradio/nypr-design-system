@@ -1,8 +1,5 @@
 # `nypr-design-system` changelog
 
-## `2.0.6`
-- [ENHANCEMENT] add spotify links to `<NyprMShareTools>`
-
 ## `2.0.5`
 - [ENHANCMENT] add source maps
 - [BUGFIX] allow for non-route urls in nav menu (not sure how this worked previously :thinking:)

@@ -205,7 +205,7 @@ module.exports = {
       'Fira Sans',
       'Droid Sans',
       'Helvetica Neue',
-      'sans-serif'
+      'sans-serif',
     ],
     'serif': [
       'Constantia',
