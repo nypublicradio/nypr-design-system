@@ -23,10 +23,10 @@
       </a>
     {{/if}}
     {{~#with author.org as |org|~}}
-      {{#if org.route}}
-        , ({{#link-to params=org.route class="u-has-accent u-has-accent--neutral" data-test-author-org=org.name}}<em>{{org.name}}</em>{{/link-to}})
+      {{#if org.external_link}}
+        (<a href={{org.external_link}} target="_blank" rel="noopener" class="u-has-accent u-has-accent--neutral" data-test-author-org-link><em data-test-author-org>{{org.name}}</em></a>)
       {{else}}
-        , (<a href={{org.url}} target="_blank" rel="noopener" class="u-has-accent u-has-accent--neutral" data-test-author-org><em>{{org.name}}</em></a>)
+        (<em data-test-author-org>{{org.name}}</em>)
       {{/if}}
     {{~/with~}}
   {{/each}}
