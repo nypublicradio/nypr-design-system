@@ -24,9 +24,9 @@
     {{/if}}
     {{~#with author.org as |org|~}}
       {{#if org.external_link}}
-        (<a href={{org.external_link}} target="_blank" rel="noopener" class="u-has-accent u-has-accent--neutral" data-test-author-org-link><em data-test-author-org>{{org.name}}</em></a>)
+        <a href={{org.external_link}} target="_blank" rel="noopener" class="u-has-accent u-has-accent--neutral" data-test-author-org-link>(<span data-test-author-org>{{org.name}}</span>)</a>
       {{else}}
-        (<em data-test-author-org>{{org.name}}</em>)
+        (<span data-test-author-org>{{org.name}}</span>)
       {{/if}}
     {{~/with~}}
   {{/each}}
