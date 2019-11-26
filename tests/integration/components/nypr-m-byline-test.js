@@ -74,7 +74,7 @@ module('Integration | Component | nypr-m-byline', function(hooks) {
       assert.dom(el).hasAttribute('href', CONTRIBUTORS[i].url);
     });
 
-    findAll('[data-test-author-org]').forEach((el, i) => {
+    findAll('[data-test-author-org-link]').forEach((el, i) => {
       assert.dom(el).hasText(CONTRIBUTORS[i].org.name);
       assert.dom(el).hasAttribute('href', CONTRIBUTORS[i].org.url);
     });
