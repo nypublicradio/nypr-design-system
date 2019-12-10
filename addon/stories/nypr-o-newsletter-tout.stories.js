@@ -9,7 +9,7 @@ export const NyprONewsletterTout = () => {
         @params={{params}}
         @img={{hash
             src='http://www.gothamist.com/static-images/wtc.png'
-            alt='We the Commuters"
+            alt="We the Commuters"
         }}
         as |tout|>
         <tout.heading>
