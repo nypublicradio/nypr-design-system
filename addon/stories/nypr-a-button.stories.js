@@ -1,9 +1,10 @@
 import hbs from 'htmlbars-inline-precompile';
 import { text, withKnobs } from '@storybook/addon-knobs';
+import { withA11y } from '@storybook/addon-a11y';
 
 export default {
   title: 'nypr-a-button',
-  decorators: [withKnobs],
+  decorators: [withA11y, withKnobs],
 };
 
 export const NyprAButton = () => {
