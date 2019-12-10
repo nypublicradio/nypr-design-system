@@ -1,0 +1,142 @@
+/*------------------------------------*\
+    $STYLEGUIDE UPDATES
+\*------------------------------------*/
+
+$c-white: #fff;
+$c-gray--dark: #000;
+$c-gray--dark: #333333;
+$space: 20px;
+$max-width: 1400px;
+
+.c-color {
+  display: flex;
+
+  &__item {
+    padding: $space/2;
+    border: 1px solid gray;
+    margin-right: $space;
+  }
+
+  &__swatch {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin-bottom: $space/2;
+  }
+}
+
+.sg-size {
+  width: 170px;
+  @media (min-width: 700px) {
+    width: auto;
+  }
+}
+
+.sg-nav {
+  li:first-child {
+    @media (min-width: 620px) {
+      border-left: 1px solid rgba($c-white, .3);
+    }
+  }
+  > li:last-child {
+    display: none;
+  }
+}
+
+.sg-main {
+  max-width: $max-width;
+  padding: $space;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sg-header {
+  background-image: url("/images/NYPR-logo--white.png");
+  background-position: 4px 4px;
+  background-repeat: no-repeat;
+  background-size: 58px 25px;
+  background-color: $c-gray--dark;
+  padding-left: 65px;
+
+  a {
+    color: $c-white;
+
+    &.active {
+      background-color: darken($c-gray--dark, 10);
+    }
+
+    &:hover {
+      background-color: darken($c-gray--dark, 16);
+    }
+  }
+}
+
+.sg-acc-panel {
+  li {
+    background-color: darken($c-gray--dark, 10);
+  }
+}
+
+.sg-current-size {
+  color: $c-white;
+}
+
+.sg-acc-handle {
+  &:after {
+    color: rgba($c-white, .5);
+  }
+
+  &.active {
+    background-color: darken($c-gray--dark, 10);
+  }
+}
+
+.sg-current-size .sg-input {
+  background-color: darken($c-gray--dark, 20);
+  color: $c-white;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: auto;
+  max-width: 35px;
+  text-align: center;
+}
+
+.typeahead.tt-input {
+  background-color: darken($c-gray--dark, 16) !important;
+  color: $c-white;
+}
+
+.sg-tools-toggle {
+  background-color: $c-gray--dark;
+
+  path {
+    fill: $c-white;
+  }
+}
+
+.sg-subtype {
+  > * {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.5;
+    font-size: 24px;
+  }
+}
+
+.sg-pattern .sg-pattern-example {
+  > * {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  > svg {
+    width: 50px;
+    height: 50px;
+
+    path {
+      fill: $c-gray--dark;
+    }
+  }
+}

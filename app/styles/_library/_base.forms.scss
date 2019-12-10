@@ -1,0 +1,135 @@
+/*------------------------------------*\
+    $FORMS
+\*------------------------------------*/
+
+form ol,
+form ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+legend {
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: none;
+  appearance: none;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=search],
+input[type=tel] {
+  font-size: 18px;
+  padding: $space;
+  font-family: $ff-font--monospace;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+input[type=radio],
+input[type=checkbox] {
+  outline: none;
+  margin: 0;
+  margin-right: 8px;
+  height: 17px;
+  width: 17px;
+  line-height: 15px;
+  background-size: 15px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  display: block;
+  float: left;
+  border: 2px solid $c-border-color;
+  padding: 0;
+  user-select: none;
+  appearance: none;
+  background-color: $c-faux-black;
+}
+
+input[type=radio] + label,
+input[type=checkbox] + label {
+  display: inline-block;
+  top: -2px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 0;
+}
+
+input[type=radio]:checked,
+input[type=checkbox]:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath d='M26.08,3.56l-2,1.95L10.61,19l-5-4L3.47,13.29,0,17.62l2.17,1.73L9.1,24.9,11,26.44l1.77-1.76L28.05,9.43,30,7.48Z' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 10px;
+}
+
+input[type=radio] {
+  border-radius: 50px;
+}
+
+/* clears the 'X' from Internet Explorer */
+input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
+input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+
+/* clears the 'X' from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+/* removes the blue background on Chrome's autocomplete */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+select {
+  appearance: none;
+  cursor: pointer;
+  text-indent: 0.01px;
+  text-overflow: "";
+  background: url("../images/icons/icon-arrow-down.svg") center left ($space / 2) no-repeat;
+  background-size: calc(20px - 5px) calc(20px - 5px);
+  padding-left: calc((20px * 2) - 5px);
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+::placeholder {
+  color: $c-brown-grey;
+  font-family: $ff-font--monospace;
+}
+
+
+// don't apply hover effects to form buttons
+form {
+  .o-button {
+
+    &:before {
+      display: none;
+    }
+    &:hover {
+      transform: none;
+      background-color: $c-primary;
+    }
+  }
+}

@@ -1,0 +1,612 @@
+/*------------------------------------*\
+    $TEXT TYPES
+\*------------------------------------*/
+
+/**
+ * Font Families
+ */
+.u-font {
+  font-family: $ff-font;
+}
+
+.u-font--primary {
+  font-family: $ff-font--primary;
+}
+
+@mixin font-secondary-style {
+  font-family: $ff-font--secondary;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.u-font--secondary {
+  font-family: $ff-font--secondary;
+
+  &-style {
+    @include font-secondary-style;
+  }
+}
+
+.u-font--tertiary {
+  font-family: $ff-font--tertiary;
+}
+
+
+/**
+ * Text Sizes
+ */
+.u-font--xxs {
+  font-size: $font-size-xxs;
+}
+
+.u-font--xs {
+  font-size: $font-size-xs;
+}
+
+.u-font--s {
+  font-size: $font-size-s;
+}
+
+.u-font--m {
+  font-size: $font-size-m;
+}
+
+.u-font--l {
+  font-size: $font-size-l;
+}
+
+.u-font--xl {
+  font-size: $font-size-xl;
+}
+
+.u-font--xxl {
+  font-size: $font-size-xxl;
+}
+
+/**
+ * Primary type styles
+ */
+
+/**
+ * Text Transforms
+ */
+.u-text-transform--upper {
+  text-transform: uppercase;
+}
+
+.u-text-transform--lower {
+  text-transform: lowercase;
+}
+
+/**
+ * Text Styles
+ */
+.u-text-style--italic {
+  font-style: italic;
+}
+
+.u-font-weight--normal {
+  font-weight: normal;
+}
+
+/**
+ * Text Positioning
+ */
+.u-align--center {
+  text-align: center;
+}
+
+/**
+ * Text Decorations
+ */
+.u-text-decoration--underline {
+  text-decoration: underline;
+}
+
+/**
+ * Rich text editor text
+ */
+.o-rte-text {
+  font-family: $ff-font--secondary;
+
+  // broken markup compat
+  &.c-article__body {
+    @include p;
+  }
+
+  > dl dd,
+  > dl dt,
+  > ol li,
+  > ul li,
+  > p {
+    @include p;
+  }
+
+  a {
+    border-bottom: 2px dotted $c-link-color;
+
+    &:hover {
+      color: $c-white;
+      background-color: $c-primary;
+    }
+
+    &:visited {
+      color: $c-link-color--visited;
+    }
+  }
+
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    padding-top: $space;
+    //font-weight: normal;
+  }
+
+  > h1 {
+    font-size: 34px;
+    font-weight: bold;
+    @include media('>large') {
+      font-size: 50px;
+    }
+  }
+
+  > h2 {
+    font-size: $font-size-l;
+  }
+
+  > h3 {
+    font-size: $font-size-m;
+  }
+
+  > h4 {
+    font-size: 26px; // Not in type styles
+  }
+
+  > h5, > h6 {
+    font-size: $font-size-xs;
+    @include font-secondary-style;
+  }
+
+  h2:empty,
+  h3:empty,
+  p:empty {
+    display: none;
+  }
+
+  // Heading + subheading lockup
+  > h2 + h3 {
+    margin-top: 0;
+    padding-bottom: $space-half;
+  }
+
+  > ul,
+  > ol {
+    position: relative;
+    list-style: none;
+    padding-left: 35px;
+    padding-top: $space;
+    margin-bottom: $space-double;
+
+    @include media('>large') {
+      margin-left: $space;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    li {
+      margin-bottom: $space;
+      position: relative;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+      margin-top: $space;
+      margin-bottom: $space-half;
+      padding-left: $space;
+    }
+  }
+
+  > ul {
+
+    li {
+      &:before {
+        content: "";
+        position: absolute;
+        left: -$space-and-half;
+        top: .75em;
+        width: 7px;
+        height: 7px;
+        background-color: $c-secondary;
+        border-radius: 50%;
+      }
+
+      li {
+        &:before {
+          background-color: transparent;
+          border: 2px solid $c-secondary;
+          width: 4px;
+          height: 4px;
+        }
+      }
+    }
+  }
+
+  > ol {
+    counter-reset: counter;
+
+    li {
+
+      &:before {
+        counter-increment: counter;
+        content: counter(counter);
+        color: $c-secondary;
+        font-size: $font-size-l;
+        position: absolute;
+        left: -$space-double;
+        top: -.4em;
+        font-family: $ff-font--secondary;
+      }
+
+      > ol {
+        counter-reset: counter;
+
+        > li {
+          &:before {
+            counter-increment: counter;
+            content: counters(counter);
+          }
+        }
+      }
+    }
+  }
+
+  > hr,
+  > div,
+  .o-ad {
+    margin-top: $space-and-half;
+    @include media('>large') {
+      margin-top: $space-double;
+      margin-bottom: $space-double;
+    }
+  }
+
+  code,
+  pre {
+    font-size: 125%;
+  }
+}
+
+
+/**
+ * Pullquote (beefed up blockquote)
+ */
+.o-pullquote {
+  margin: auto $space;
+  text-align: center;
+  background: none;
+
+  @include media('>medium') {
+    margin: auto ($col-width + $gutter) + px $space-triple;
+  }
+
+  p {
+    font-weight: bold;
+    font-size: $font-size-l;
+    line-height: 1.05;
+    background: none;
+    margin: $space 0 0;
+    display: inline-block;
+
+    @include media('>medium') {
+      font-size: $font-size-xl;
+    }
+
+    span {
+      quotes: "\201C""\201D""\2018""\2019";
+      background-position: bottom;
+
+      &:before,
+      &:after {
+        font-family: $ff-font--sans;
+      }
+
+      &:before {
+        content: open-quote;
+      }
+
+      &:after {
+        content: close-quote;
+      }
+    }
+  }
+
+  &__author {
+    color: $c-septenary;
+    font-size: $font-size-xs;
+    font-family: $ff-font--secondary;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+}
+
+
+/**
+ * Text background accent
+ */
+.o-bg-text-accent {
+  background-image: linear-gradient(rgba($c-septenary, .2), rgba($c-septenary, .2));
+  background-position: center bottom .2em;
+  background-size: 100% .55em;
+  background-repeat: no-repeat;
+  padding: 0 $space-half;
+  box-decoration-break: clone;
+  margin-left: -$space-half;
+
+  &--senary {
+    background-image: linear-gradient(rgba($c-senary, .2), rgba($c-senary, .2));
+  }
+}
+
+
+/**
+ * Kicker, Tags, and Breadcrumbs
+ */
+.o-tag,
+.o-kicker,
+.o-breadcrumb {
+  padding: 2px 6px 3px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: $c-senary;
+  background-color: $c-quaternary;
+  letter-spacing: 1px;
+  font-family: $ff-font--monospace;
+  font-size: $font-size-xs;
+}
+.o-tag,
+.o-kicker {
+  font-size: $font-size-xxs;
+}
+.o-tag {
+  &--sponsored {
+    color: $c-white;
+    font-weight: normal;
+    background-color: $c-sponsor-color;
+  }
+}
+
+.o-kicker--sponsored {
+  background-color: $c-sponsor-color;
+  color: $c-white;
+}
+
+a.o-kicker {
+  box-decoration-break: clone;
+  &:hover {
+    background-color: $c-primary;
+    color: $c-white;
+  }
+}
+
+.o-tag,
+a.o-breadcrumb {
+  display: inline-block;
+  &:hover {
+    background-color: $c-primary;
+    color: $c-white;
+  }
+}
+
+.o-tags {
+  .o-tag {
+    margin: 0 $space-quarter $space-half 0;
+  }
+}
+
+
+/**
+ * Caption & credit (used in leads and figures)
+ */
+.o-caption {
+  p,
+  &__text {
+    font-size: 14px; // Not in type scale
+    font-family: $ff-font--tertiary;
+    line-height: 1.5;
+  }
+
+  .o-icon--dashed-arrow {
+    margin-right: $space-half;
+    fill: $c-primary;
+    transform: translateY(1px);
+    float: left;
+  }
+
+  .o-credit:not(:first-child) {
+    margin-left: $space-half;
+  }
+}
+.o-credit {
+  font-size: $font-size-xxs;
+  line-height: 1.8;
+  margin-left: $space-quarter;
+  @include font-secondary-style;
+
+  a {
+    padding-bottom: 0;
+    display: inline;
+  }
+}
+
+
+/**
+ * Back to top of page link
+ */
+.o-to-top {
+  width: 150px;
+  margin: $space-double auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: $z-index-to-top;
+
+  // Temporary until i can get the real icon
+  .o-icon--up-arrow {
+    margin-right: $space-half;
+    fill: $c-primary;
+  }
+
+  svg {
+    transform: rotate(-90deg) translateX(4px);
+  }
+
+  &:hover {
+    color: $c-primary;
+
+    .o-icon--up-arrow {
+      animation: bounce .8s 0s ease-in-out infinite;
+    }
+  }
+}
+
+.u-truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+// truncating a flex child is weird
+// any flex items within which a truncated
+// item is nested need to have min-width: 0;
+// https://css-tricks.com/flexbox-truncated-text/
+._u-truncate--flex {
+  min-width: 0;
+}
+
+/**
+ * Back to where you came from link
+ */
+.o-back-to-link {
+  font-size: $font-size-s-m;
+  margin-left: -$space-quarter;
+  padding-left: $space-double;
+  position: relative;
+  display: block;
+
+  .o-icon--prev-caret {
+    margin: 6px $space-quarter 0 0;
+    transform: rotate(90deg);
+    min-width: 20px;
+    left: 0;
+    top: 4px;
+    position: absolute;
+  }
+
+  .u-path-fill--white {
+    svg * {
+      fill: $c-white;
+    }
+  }
+
+  .u-has-accent {
+    line-height: 1.6;
+    display: inline;
+    background-image: linear-gradient(to right, transparent 55%, $c-white 45%);
+    background-position: left bottom 2px;
+    background-repeat: repeat-x;
+    background-size: 4px 2px;
+    box-decoration-break: clone;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+/**
+ * End of content label
+ */
+.o-end-label {
+  display: block;
+  width: 34px;
+  text-align: center;
+  margin: $space auto;
+  padding: $space 0;
+
+  // Temporary until i can get the real icon
+  .o-icon--down-arrow {
+    transform: rotate(90deg);
+    fill: $c-gray;
+    margin-bottom: $space-half;
+  }
+}
+
+.c-gallery-end-label {
+  flex-basis: 100%;
+
+  > .o-icon--down-arrow {
+    display: block;
+    margin: 0 auto $space-half;
+  }
+}
+
+
+/**
+ * 3D box effect for headings
+ */
+.o-3d-heading {
+  padding: .1em .25em;
+  display: inline-block;
+  position: relative;
+  z-index: 5;
+  background-color: $c-white;
+  left: 10px;
+  margin-right: $space;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border: 3px solid $c-dark-bg;
+    background-color: $c-white;
+  }
+  &:before {
+    z-index: -2;
+    left: -10px;
+    top: 10px;
+  }
+  &:after {
+    z-index: -1;
+  }
+
+  // Quinary background color
+  &--quinary {
+    &:after {
+      background-color: $c-quinary;
+    }
+  }
+}
+
+
+/**
+ * Border accents
+ */
+.u-border-accent {
+  @include border-accent;
+}
+.u-border-accent--right {
+  @include border-accent(bottom);
+}
+.u-border-accent--left {
+  @include border-accent(bottom, left);
+}
+
+hr.u-border-accent {
+  background-color: transparent;
+}

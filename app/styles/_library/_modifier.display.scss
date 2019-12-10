@@ -1,0 +1,85 @@
+/*------------------------------------*\
+    $DISPLAY STATES
+\*------------------------------------*/
+
+/**
+ * Display Classes
+ */
+.u-display--inline-block {
+  display: inline-block;
+}
+
+.u-display--block {
+  display: block;
+}
+
+.u-flex {
+  display: flex;
+}
+
+.u-justify-content--space-between {
+  justify-content: space-between;
+}
+
+.u-justify-content--flex-end {
+  justify-content: flex-end;
+}
+
+.u-align-items--center {
+  align-items: center;
+}
+
+.u-flex-directon--column {
+  flex-direction: column;
+}
+
+
+// Specific Widths - visible greater than #
+.u-hide-until--s {
+  @include media('<=small') {
+    display: none;
+  }
+}
+
+.u-hide-until--m {
+  @include media('<=medium') {
+    display: none;
+  }
+}
+
+.u-hide-until--l {
+  @include media('<=large') {
+    display: none;
+  }
+}
+
+.u-hide-until--xl {
+  @include media('<=xlarge') {
+    display: none;
+  }
+}
+
+// Specific Widths - hide greater than #
+.u-hide-after--s {
+  @include media('>small') {
+    display: none;
+  }
+}
+
+.u-hide-after--m {
+  @include media('>medium') {
+    display: none;
+  }
+}
+
+.u-hide-after--l {
+  @include media('>large') {
+    display: none;
+  }
+}
+
+.u-hide-after--xl {
+  @include media('>xlarge') {
+    display: none;
+  }
+}

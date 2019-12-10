@@ -1,0 +1,60 @@
+/*------------------------------------*\
+    $MEDIA OBJECTS
+\*------------------------------------*/
+
+.o-figure {
+  display: block;
+}
+
+.o-figure__image {
+  margin-bottom: $space-half;
+
+  img {
+    width: 100%;
+  }
+
+  .c-lead-gallery & {
+    margin-bottom: $space;
+    cursor: pointer;
+  }
+}
+
+/*------------------------------------*\
+      Aspect Ratio Management
+\*------------------------------------*/
+
+// 3:2 ratio
+[class*=u-img-ratio] {
+  position: relative;
+  background-color: $c-gray--light;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 100%;
+  }
+
+  > img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+
+    margin: auto;
+
+    object-fit: contain;
+  }
+
+}
+
+.u-img-ratio--3x2 {
+  &:before {
+    padding-top: (2 / 3) * 100%; // height divided by width
+  }
+}

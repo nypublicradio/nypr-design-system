@@ -1,0 +1,60 @@
+/*------------------------------------*\
+    $LINKS
+\*------------------------------------*/
+
+a {
+  text-decoration: none;
+  color: $c-link-color;
+  transition: all 0.15s ease-in-out;
+  > span {
+    transition: all 0.15s ease-in-out;
+  }
+}
+
+.u-has-accent,
+.o-rte-text .u-has-accent {
+  display: inline-block;
+  padding-bottom: 2px;
+  border-bottom: 2px dotted $c-body-color;
+  box-decoration-break: clone;
+
+  &:hover {
+    color: $c-white;
+    background-color: $c-primary;
+  }
+
+  &--neutral {
+    color: $c-body-color;
+    border-bottom-color: $c-body-color;
+  }
+
+  &--primary {
+    color: $c-primary;
+    border-bottom-color: $c-primary;
+  }
+
+  &--quaternary {
+    color: $c-quaternary;
+    border-bottom-color: $c-quaternary;
+  }
+
+  &--white {
+    color: $c-white;
+    border-bottom-color: $c-white;
+  }
+
+  &--secondary {
+    color: $c-secondary;
+    border-bottom-color: $c-secondary;
+
+    &:hover {
+      path {
+        fill: $c-white;
+      }
+    }
+  }
+}
+
+.u-has-accent-inline {
+  @include inline-accent;
+}
