@@ -2,6 +2,19 @@
     $THEME OVERRIDES
 \*------------------------------------*/
 
+.o-button {
+  border-radius: 35px;
+  border: none;
+}
+
+.o-button:before {
+  border: none;
+}
+
+.o-button--c-quaternary {
+  color: white;
+}
+
 .c-main-header {
 
   // Header with full stacked logo
