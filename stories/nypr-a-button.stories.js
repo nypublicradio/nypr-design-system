@@ -7,13 +7,25 @@ export default {
   decorators: [withA11y, withKnobs],
 };
 
-export const NyprAButton = () => {
+
+export const Donate = () => {
   return {
     template: hbs`<NyprAButton>
       {{text}}
     </NyprAButton>`,
     context: {
-        text: text('text', 'Hello World'),
+        text: text('text', 'Donate'),
+    }
+  }
+};
+
+export const MoreResults = () => {
+  return {
+    template: hbs`<NyprAButton class="o-button--c-quaternary o-button--extra">
+      {{text}}
+    </NyprAButton>`,
+    context: {
+        text: text('text', 'More Results'),
     }
   }
 };
