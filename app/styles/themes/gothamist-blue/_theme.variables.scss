@@ -1,0 +1,169 @@
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+
+/**
+ * Grid & Baseline Setup
+ */
+// Global
+$max-width: 1024;
+$max-width-xl: 1130;
+$heading-height: 72;
+
+// Navigation
+$main-nav-font-size: 18;
+
+// Grid
+$grid-columns: 16;
+$col-width: 48.5;
+$gutter: 18;
+
+// Article
+$article-header-width: 764;
+$article-content-width: 634;
+
+/**
+ * Theme Colors
+ */
+$c-brick-red: #9c1e14;
+$c-WNYC-fireengine-red: #de1e3d;
+$c-reddish-orange: #de5e36;
+$c-banana-yellow: #ffc400;
+$c-taxicab-yellow: #e3d54a;
+$c-dusk-blue: #244c84;
+$c-brown-grey: #939393;
+$c-dirty-salmon: #f0eeea;
+$c-purple: #924db1;
+$c-aqua: #7FDBFF;
+$c-blue: #001f3f;
+$c-lime: #01FF70;
+
+$c-primary: $c-blue;
+$c-secondary: $c-aqua;
+$c-tertiary: $c-WNYC-fireengine-red;
+$c-quaternary: $c-lime;
+$c-quinary: $c-taxicab-yellow;
+$c-senary: $c-dusk-blue;
+$c-septenary: $c-brown-grey;
+$c-octonary: $c-dirty-salmon;
+$c-nonary: $c-purple;
+
+/**
+ * Neutral Colors
+ */
+$c-black: #000000;
+$c-gray--dark: #333333;
+$c-gray: #afafaf;
+$c-gray--light: #f3f3f3;
+$c-white: #ffffff;
+
+/**
+ * Default Colors
+ */
+$c-error: $c-brick-red;
+$c-valid: #089e00;
+$c-warning: #fff664;
+$c-information: #000db5;
+$c-overlay: rgba($c-black, 0.8);
+
+/**
+ * Style Colors
+ */
+$c-body-color: $c-gray--dark;
+$c-faux-black: $c-gray--dark;
+$c-meta-color: $c-gray--dark;
+$c-link-color: $c-secondary;
+$c-link-color--visited: $c-gray--dark;
+$c-button-color: $c-secondary;
+$c-border-color: $c-gray--dark;
+$c-body-bgcolor: $c-white;
+$c-heading-bgcolor: $c-gray--dark;
+$c-dark-bg: $c-gray--dark;
+$c-main-nav-link-color: $c-white;
+$c-sponsor-color: $c-purple;
+
+/**
+ * Typography
+ */
+$ff-font: "Helvetica Neue", Helvetica, 'Arial', sans-serif;
+$ff-font--sans: $ff-font;
+$ff-font--serif: 'Times New Roman', serif;
+$ff-font--monospace: 'B612 Mono', Menlo, Monaco, "Courier New", "Courier", monospace;
+
+// Theme typefaces
+$ff-font--primary: 'Pragati Narrow', Helvetica, sans-serif;
+$ff-font--secondary: $ff-font--monospace;
+$ff-font--tertiary: 'Barlow', Helvetica, sans-serif;
+
+// Type sizing
+$font-size-xxs: 10px;
+$font-size-xs: 12px;
+$font-size-s: 16px;
+$font-size-s-m: 22px;
+$font-size-m: 28px;
+$font-size-l: 32px;
+$font-size-xl: 44px;
+$font-size-xxl: 56px;
+
+
+/**
+ * Icons
+ */
+$icon-xsmall: 16px;
+$icon-small: 20px;
+$icon-medium: 30px;
+$icon-large: 40px;
+$icon-xlarge: 50px;
+
+
+/**
+ * Common Breakpoints
+ */
+$xsmall: 360px;
+$small: 550px;
+$medium: 768px;
+$large: 850px;
+$xlarge: 1024px;
+$xxlarge: 1200px;
+$xxxlarge: 1500px;
+
+$breakpoints: (
+  'xsmall': $xsmall,
+  'small': $small,
+  'medium': $medium,
+  'large': $large,
+  'xlarge': $xlarge,
+  'xxlarge': $xxlarge,
+  'xxxlarge': $xxxlarge
+);
+
+
+/**
+ * Animation
+ */
+$hard-ease-in: cubic-bezier(0.860, 0.000, 0.070, 1.000);
+
+
+/**
+ * Border Styles
+ */
+$border-med: 6px;
+$border-thick: 8px;
+$border-opacity: 1px solid rgba($c-white, .2);
+$border-style: 1px solid $c-border-color;
+$border-style-m: 2px solid $c-border-color;
+$border-style-thick: 3px solid $c-border-color;
+
+
+/**
+ * Default Spacing/Padding
+ * Maintain a spacing system divisible by 8
+ */
+$space:             16px;
+$space-quarter:     $space/4;   // 4
+$space-half:        $space/2;   // 8
+$space-and-half:    $space*1.5; // 24
+$space-double:      $space*2;   // 32
+$space-double-half: $space*2.5; // 40
+$space-triple:      $space*3;   // 48
+$space-quad:        $space*4;   // 64
