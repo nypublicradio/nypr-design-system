@@ -1,5 +1,12 @@
-import { configure } from '@storybook/ember';
+import { addParameters, configure } from '@storybook/ember';
+// import { addParameters } from '@storybook/ember';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 // automatically import all files ending in *.stories.js
 configure(require.context('../stories', true, /\.stories\.js$/), module);
-// configure(require.context('../addon', true, /\.stories\.js$/), module);
+
+addParameters({
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
+  },
+});
