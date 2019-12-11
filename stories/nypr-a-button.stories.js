@@ -1,10 +1,19 @@
 import hbs from 'htmlbars-inline-precompile';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { withCssResources } from '@storybook/addon-cssresources';
 import { withA11y } from '@storybook/addon-a11y';
+import { text, withKnobs } from '@storybook/addon-knobs';
 
 export default {
   title: 'nypr-a-button',
-  decorators: [withA11y, withKnobs],
+  decorators: [withA11y, withCssResources, withKnobs],
+    parameters: {
+      cssresources: [{
+          id: `Gothamist Blue`,
+          code: `<link rel="stylesheet" type="text/css" href="/assets/themes/nypr-design-system-blue.css" />`,
+          picked: false,
+        },
+      ],
+    },
 };
 
 

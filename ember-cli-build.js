@@ -16,7 +16,15 @@ module.exports = function(defaults) {
     snippetSearchPaths: ['app', 'addon', 'tests/dummy/app'],
     'component-lineage': {
       enabled: true,
-    }
+    },
+    outputPaths: {
+      app: {
+        css: {
+          'nypr-design-system': '/assets/themes/nypr-design-system.css',
+          'nypr-design-system-blue': '/assets/themes/nypr-design-system-blue.css'
+        }
+      }
+    },
   });
 
   /*
