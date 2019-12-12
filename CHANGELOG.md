@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `2.0.7`
+- [CHANGE] Updates to `<NyprMByline>`
+
 ## `2.0.6`
 - [ENHANCEMENT] add spotify links to `<NyprMShareTools>`
 
