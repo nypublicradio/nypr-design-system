@@ -1,11 +1,14 @@
 import hbs from 'htmlbars-inline-precompile';
 import { text, withKnobs } from '@storybook/addon-knobs';
+import notes from './nypr-a-button.md';
 
 export default {
   title: 'Components|Atoms/Button',
-  decorators: [withKnobs]
+  decorators: [withKnobs],
+  parameters: {
+    notes: {'markdown': notes},
+  }
 };
-
 
 export const Donate = () => {
   return {
