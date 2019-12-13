@@ -1,11 +1,9 @@
 import hbs from 'htmlbars-inline-precompile';
-import { withCssResources } from '@storybook/addon-cssresources';
-import { withA11y } from '@storybook/addon-a11y';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
 export default {
   title: 'nypr-a-button',
-  decorators: [withA11y, withCssResources, withKnobs],
+  decorators: [withKnobs],
     parameters: {
       cssresources: [{
           id: `Gothamist Blue`,
