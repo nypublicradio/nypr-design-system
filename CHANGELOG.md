@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `2.0.9`
+- [CHANGE] add optional title to `nypr-m-share-tools/link.hbs`
+
 ## `2.0.7`
 - [CHANGE] Updates to `<NyprMByline>`
 
