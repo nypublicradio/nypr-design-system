@@ -4,9 +4,6 @@ import { withA11y } from '@storybook/addon-a11y';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 addParameters({
-  options: {
-    storySort: (a, b) => {return a - b}
-  },
   viewport: {
     viewports: INITIAL_VIEWPORTS,
   },
@@ -20,5 +17,5 @@ addParameters({
 addDecorator(withA11y);
 addDecorator(withCssResources);
 
-// automatically import all files ending in *.stories.js
-configure(require.context('../stories', true, /\.stories\.js$/), module);
+configure(require.context('../stories/Docs', true, /\.stories\.js$/), module);// automatically import all files ending in *.stories.js
+configure(require.context('../stories/Components', true, /\.stories\.js$/), module);
