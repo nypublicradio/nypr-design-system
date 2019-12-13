@@ -1,6 +1,6 @@
 import hbs from 'htmlbars-inline-precompile';
 
-export default { title: 'nypr-a-kicker' };
+export default { title: 'Components|Atoms/Kicker' };
 
 export const News = () => {
   return {

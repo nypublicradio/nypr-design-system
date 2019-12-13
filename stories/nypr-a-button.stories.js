@@ -2,7 +2,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
 export default {
-  title: 'nypr-a-button',
+  title: 'Components|Atoms/Button',
   decorators: [withKnobs],
     parameters: {
       cssresources: [{

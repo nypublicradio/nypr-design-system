@@ -3,7 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { linkTo } from '@storybook/addon-links';
 
 export default {
-  title: 'Welcome',
+  title: 'Docs|Welcome',
 };
 
 export const toStorybook = () => ({

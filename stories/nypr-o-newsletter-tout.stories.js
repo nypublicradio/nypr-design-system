@@ -2,7 +2,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
 export default { 
-  title: 'nypr-o-newletter-tout',
+  title: 'Components|Organisms/Newsletter Tout',
   decorators: [withKnobs]
 };
 

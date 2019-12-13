@@ -5,7 +5,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 
 
 export default {
-  title: 'Sponsored Content',
+  title: 'Components|Organisms/Sponsored Content',
   decorators: [withKnobs]
 };
 

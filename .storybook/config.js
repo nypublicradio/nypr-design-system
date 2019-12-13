@@ -7,6 +7,11 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 configure(require.context('../stories', true, /\.stories\.js$/), module);
 
 addParameters({
+  options: {
+    storySort: (a, b) => {
+      console.log(a,b);
+    }
+  },
   viewport: {
     viewports: INITIAL_VIEWPORTS,
   },
