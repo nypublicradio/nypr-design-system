@@ -3,15 +3,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components|Atoms/Button',
-  decorators: [withKnobs],
-    parameters: {
-      cssresources: [{
-          id: `Gothamist Blue`,
-          code: `<link rel="stylesheet" type="text/css" href="/assets/themes/nypr-design-system-blue.css" />`,
-          picked: false,
-        },
-      ],
-    },
+  decorators: [withKnobs]
 };
 
 

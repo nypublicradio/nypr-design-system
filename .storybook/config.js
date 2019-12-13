@@ -3,19 +3,22 @@ import { withCssResources } from '@storybook/addon-cssresources';
 import { withA11y } from '@storybook/addon-a11y';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
-// automatically import all files ending in *.stories.js
-configure(require.context('../stories', true, /\.stories\.js$/), module);
-
 addParameters({
   options: {
-    storySort: (a, b) => {
-      console.log(a,b);
-    }
+    storySort: (a, b) => {return a - b}
   },
   viewport: {
     viewports: INITIAL_VIEWPORTS,
   },
+  cssresources: [{  
+    id: `Gothamist Blue`,
+    code: `<link rel="stylesheet" type="text/css" href="/assets/themes/nypr-design-system-blue.css" />`,
+    picked: false,
+  }]
 });
 
 addDecorator(withA11y);
 addDecorator(withCssResources);
+
+// automatically import all files ending in *.stories.js
+configure(require.context('../stories', true, /\.stories\.js$/), module);
