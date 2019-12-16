@@ -19,3 +19,4 @@ addDecorator(withCssResources);
 
 configure(require.context('../stories/Docs', true, /\.stories\.js$/), module);// automatically import all files ending in *.stories.js
 configure(require.context('../stories/Components', true, /\.stories\.js$/), module);
+configure(require.context('../stories/Pages', true, /\.stories\.js$/), module);
