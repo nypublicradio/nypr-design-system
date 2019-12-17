@@ -38,5 +38,13 @@ export default Component.extend({
 
     return `${SERVICE_MAP[service].profileBase}${username}`;
   }),
+
+  actions: {
+    handleClick() {
+      if (this.clickAction) {
+        this.clickAction();
+      }
+    },
+  }
 });
 // END-SNIPPET
