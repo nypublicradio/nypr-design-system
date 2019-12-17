@@ -1,5 +1,5 @@
 {{!-- BEGIN-SNIPPET nypr-m-share-tools-link.hbs --}}
-<a href={{or @href this.href}} class="c-share-tools__link o-icon {{@service}}" target="_blank" rel="noopener">
+<a href={{or @href this.href}} class="c-share-tools__link o-icon {{@service}}" target={{if target @target "_blank"}} rel="noopener" onclick={{if clickAction (action "handleClick")}}>
   <NyprASvg @icon={{@service}}/>
   {{#if title}}
     <div class="c-share-tools__link-title">{{@title}}</div>
