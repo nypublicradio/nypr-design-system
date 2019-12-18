@@ -66,3 +66,20 @@ export const Usage = () => {
     }
   }
 };
+
+export const Source = () => {
+  return {
+    template: hbs`
+    <div class="u-spacing--double l-container--content">
+      <h2>source</h2>
+      <h3>js</h3>
+      {{#let (get-code-snippet "nypr-a-button.js.js") as |snippet|}}
+        <pre><code class={{snippet.language}}>{{snippet.source}}</code></pre>
+      {{/let}}
+      <h3>hbs</h3>
+      {{#let (get-code-snippet "nypr-a-button.hbs.hbs") as |snippet|}}
+        <pre><code class={{snippet.language}}>{{snippet.source}}</code></pre>
+      {{/let}}
+    </div>`
+  }
+}
