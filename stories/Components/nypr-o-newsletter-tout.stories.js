@@ -3,7 +3,8 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 
 export default { 
   title: 'Components|Organisms/Newsletter Tout',
-  decorators: [withKnobs]
+  decorators: [withKnobs],
+  parameters: { lineage: {'name': 'nypr-o-newsletter-tout'} },
 };
 
 export const NyprONewsletterTout = () => {

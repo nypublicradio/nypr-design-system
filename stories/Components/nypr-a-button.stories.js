@@ -7,6 +7,7 @@ export default {
   decorators: [withKnobs],
   parameters: {
     notes: {'markdown': notes},
+    lineage: {'name': 'nypr-a-button'},
   }
 };
 

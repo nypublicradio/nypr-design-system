@@ -6,7 +6,8 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components|Organisms/Sponsored Content',
-  decorators: [withKnobs]
+  decorators: [withKnobs],
+  parameters: { lineage: {'name': 'nypr-o-sponsored-tout'} },
 };
 
 export const sponsoredContent = () => ({
