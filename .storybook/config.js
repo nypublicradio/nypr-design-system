@@ -9,7 +9,7 @@ addParameters({
     viewports: INITIAL_VIEWPORTS,
   },
   cssresources: [{  
-    id: `Gothamist Blue`,
+    id: `WQXR Blue`,
     code: `<link rel="stylesheet" type="text/css" href="/assets/themes/nypr-design-system-blue.css" />`,
     picked: false,
   }],
