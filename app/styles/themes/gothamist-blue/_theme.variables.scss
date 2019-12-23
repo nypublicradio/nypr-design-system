@@ -86,15 +86,15 @@ $c-sponsor-color: $c-purple;
 /**
  * Typography
  */
-$ff-font: "Helvetica Neue", Helvetica, 'Arial', sans-serif;
+$ff-font: "Open Sans", sans-serif;
 $ff-font--sans: $ff-font;
-$ff-font--serif: 'Times New Roman', serif;
-$ff-font--monospace: 'B612 Mono', Menlo, Monaco, "Courier New", "Courier", monospace;
+$ff-font--serif: "Open Sans", sans-serif;
+$ff-font--monospace: "Open Sans", sans-serif;
 
 // Theme typefaces
-$ff-font--primary: 'Pragati Narrow', Helvetica, sans-serif;
+$ff-font--primary: "Open Sans", sans-serif;
 $ff-font--secondary: $ff-font--monospace;
-$ff-font--tertiary: 'Barlow', Helvetica, sans-serif;
+$ff-font--tertiary: "Open Sans", sans-serif;
 
 // Type sizing
 $font-size-xxs: 10px;
