@@ -1,9 +1,9 @@
 # `nypr-design-system` changelog
 
-## `2.0.11`
+## `2.10.1`
 - [CHANGE] add optional GTM click tracking attributes to nypr-m-share-tools/link.hbs
 
-## `2.0.10`
+## `2.10.0`
 - [CHANGE] add optional target and clickAction to nypr-m-share-tools/link.hbs
 
 ## `2.0.9`
