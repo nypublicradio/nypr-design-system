@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## `2.10.2`
+- [CHANGE] replace GTM click tracking attributes added in 2.10.1 with more generic and flexible `...attributes`
+
 ## `2.10.1`
 - [CHANGE] add optional GTM click tracking attributes to nypr-m-share-tools/link.hbs
 
