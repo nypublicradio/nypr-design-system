@@ -1,10 +1,7 @@
 {{!-- BEGIN-SNIPPET nypr-m-share-tools-link.hbs --}}
 <a href={{or @href this.href}}
-   class="c-share-tools__link o-icon {{@service}} {{@class}}"
-   data-category={{@dataCategory}}
-   data-action={{@dataAction}}
-   data-label={{@dataLabel}}
-   data-value={{@dataValue}}
+   class="c-share-tools__link o-icon {{@service}}"
+   ...attributes
    target={{if target @target "_blank"}}
    rel="noopener"
    onclick={{if clickAction (action "handleClick")}}>
