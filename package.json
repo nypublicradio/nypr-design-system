@@ -18,7 +18,9 @@
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
-    "test:all": "ember try:each"
+    "test:all": "ember try:each",
+    "storybook": "start-storybook -p 6006 -s dist",
+    "build-storybook": "build-storybook -s dist"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -44,7 +46,12 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^0.6.3",
+    "@storybook/addon-actions": "^5.3.12",
+    "@storybook/addon-links": "^5.3.12",
+    "@storybook/addons": "^5.3.12",
+    "@storybook/ember": "^5.3.12",
     "@types/ember": "^3.0.27",
+    "babel-loader": "^8.0.6",
     "broccoli-asset-rev": "^2.7.0",
     "color": "^3.1.0",
     "ember-angle-bracket-invocation-polyfill": "^2.0.2",
@@ -61,6 +68,7 @@
     "ember-cli-inject-live-reload": "^1.8.2",
     "ember-cli-postcss": "^4.1.1",
     "ember-cli-sri": "^2.1.1",
+    "ember-cli-storybook": "^0.1.0",
     "ember-cli-template-lint": "^1.0.0-beta.1",
     "ember-cli-uglify": "^2.1.0",
     "ember-disable-prototype-extensions": "^1.1.3",
