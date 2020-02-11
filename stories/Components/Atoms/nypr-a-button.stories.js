@@ -2,11 +2,15 @@ import hbs from 'htmlbars-inline-precompile';
 import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'Button',
+  title: 'Components/Atoms/Button',
+  component: 'nypr-a-button'
 };
 
 export const Text = () => ({
-  template: hbs`<button {{action onClick}}>Hello Button</button>`,
+  template: hbs`
+  <NyprAButton onclick={{action onClick}} class='button--primary'>Primary Button</NyprAButton>
+  <NyprAButton onclick={{action onClick}} class='button--donate'>Donate Button</NyprAButton>
+  `,
   context: {
     onClick: action('clicked'),
   },
