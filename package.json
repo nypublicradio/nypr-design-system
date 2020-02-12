@@ -20,7 +20,8 @@
     "test": "ember test",
     "test:all": "ember try:each",
     "storybook": "start-storybook -p 6006 -s dist",
-    "build-storybook": "build-storybook -s dist"
+    "build-storybook": "build-storybook --docs -s dist -o .out",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -51,6 +52,7 @@
     "@storybook/addon-links": "5.3.9",
     "@storybook/addons": "5.3.9",
     "@storybook/ember": "5.3.9",
+    "@storybook/storybook-deployer": "^2.8.1",
     "@types/ember": "^3.0.27",
     "babel-loader": "^8.0.6",
     "broccoli-asset-rev": "^2.7.0",
