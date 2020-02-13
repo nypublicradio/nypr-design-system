@@ -90,7 +90,9 @@ jobs:
           name: Build Docs
           command: npm run build-storybook
       - persist_to_workspace:
-          root: storybook-static
+          root: .
+          paths:
+            - storybook-static
 
   deploy-storybook:
     <<: *defaults
