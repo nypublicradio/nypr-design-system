@@ -82,6 +82,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - <<: *restore_node
       - run:
           name: Build Ember
           command: ember build
