@@ -101,9 +101,11 @@ jobs:
       - attach_workspace:
           at: storybook-static
       - run:
-          name: Install and configure dependencies
+          name: Disable jekyll builds
+          command: touch storybook-static/.nojekyll
+      - run:
+          name: Configure git user
           command: |
-            npm install -g --silent gh-pages@2.2.0
             git config user.email "ci-build@nypublicradio.org"
             git config user.name "ci-build"
       - add_ssh_keys:
@@ -111,7 +113,7 @@ jobs:
             - "59:ad:fd:64:71:eb:81:01:6a:d7:1a:c9:0c:19:39:af"
       - run:
           name: Deploy docs to gh-pages branch
-          command: gh-pages --message "[skip ci] Updates" --dist storybook-static
+          command: npx gh-pages --message "[skip ci] Updates" --dist storybook-static
 
 workflows:
   version: 2
