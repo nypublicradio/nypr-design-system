@@ -113,7 +113,7 @@ jobs:
             - "59:ad:fd:64:71:eb:81:01:6a:d7:1a:c9:0c:19:39:af"
       - run:
           name: Deploy docs to gh-pages branch
-          command: npx gh-pages --message "[skip ci] Updates" --dist storybook-static
+          command: npx gh-pages --dotfiles --message "[skip ci] Updates" --dist storybook-static
 
 workflows:
   version: 2
