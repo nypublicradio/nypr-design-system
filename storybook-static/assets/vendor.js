@@ -4944,6 +4944,676 @@ var runningTests = false;
 })(this);
 ;self.EmberENV.EXTEND_PROTOTYPES = false;
 
+;/**
+ * Copyright (c) 2014, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * https://raw.github.com/facebook/regenerator/master/LICENSE file. An
+ * additional grant of patent rights can be found in the PATENTS file in
+ * the same directory.
+ */
+
+!(function(global) {
+  "use strict";
+
+  var hasOwn = Object.prototype.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  var inModule = typeof module === "object";
+  var runtime = global.regeneratorRuntime;
+  if (runtime) {
+    if (inModule) {
+      // If regeneratorRuntime is defined globally and we're in a module,
+      // make the exports object identical to regeneratorRuntime.
+      module.exports = runtime;
+    }
+    // Don't bother evaluating the rest of this file if the runtime was
+    // already defined globally.
+    return;
+  }
+
+  // Define the runtime globally (as expected by generated code) as either
+  // module.exports (if we're in a module) or a new, empty object.
+  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  runtime.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype;
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunctionPrototype[toStringTagSymbol] = GeneratorFunction.displayName = "GeneratorFunction";
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      prototype[method] = function(arg) {
+        return this._invoke(method, arg);
+      };
+    });
+  }
+
+  runtime.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  runtime.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      if (!(toStringTagSymbol in genFun)) {
+        genFun[toStringTagSymbol] = "GeneratorFunction";
+      }
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `value instanceof AwaitArgument` to determine if the yielded value is
+  // meant to be awaited. Some may consider the name of this method too
+  // cutesy, but they are curmudgeons.
+  runtime.awrap = function(arg) {
+    return new AwaitArgument(arg);
+  };
+
+  function AwaitArgument(arg) {
+    this.arg = arg;
+  }
+
+  function AsyncIterator(generator) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value instanceof AwaitArgument) {
+          return Promise.resolve(value.arg).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return Promise.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration. If the Promise is rejected, however, the
+          // result for this iteration will be rejected with the same
+          // reason. Note that rejections of yielded Promises are not
+          // thrown back into the generator function, as is the case
+          // when an awaited Promise is rejected. This difference in
+          // behavior between yield and await is important, because it
+          // allows the consumer to decide what to do with the yielded
+          // rejection (swallow it and continue, manually .throw it back
+          // into the generator, abandon iteration, whatever). With
+          // await, by contrast, there is no opportunity to examine the
+          // rejection reason outside the generator function, so the
+          // only option is to throw it from the await expression, and
+          // let the generator function handle the exception.
+          result.value = unwrapped;
+          resolve(result);
+        }, reject);
+      }
+    }
+
+    if (typeof process === "object" && process.domain) {
+      invoke = process.domain.bind(invoke);
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new Promise(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  runtime.async = function(innerFn, outerFn, self, tryLocsList) {
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList)
+    );
+
+    return runtime.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          if (method === "return" ||
+              (method === "throw" && delegate.iterator[method] === undefined)) {
+            // A return or throw (when the delegate iterator has no throw
+            // method) always terminates the yield* loop.
+            context.delegate = null;
+
+            // If the delegate iterator has a return method, give it a
+            // chance to clean up.
+            var returnMethod = delegate.iterator["return"];
+            if (returnMethod) {
+              var record = tryCatch(returnMethod, delegate.iterator, arg);
+              if (record.type === "throw") {
+                // If the return method threw an exception, let that
+                // exception prevail over the original return or throw.
+                method = "throw";
+                arg = record.arg;
+                continue;
+              }
+            }
+
+            if (method === "return") {
+              // Continue with the outer return, now that the delegate
+              // iterator has been terminated.
+              continue;
+            }
+          }
+
+          var record = tryCatch(
+            delegate.iterator[method],
+            delegate.iterator,
+            arg
+          );
+
+          if (record.type === "throw") {
+            context.delegate = null;
+
+            // Like returning generator.throw(uncaught), but without the
+            // overhead of an extra function call.
+            method = "throw";
+            arg = record.arg;
+            continue;
+          }
+
+          // Delegate generator ran and handled its own exceptions so
+          // regardless of what the method was, we continue as if it is
+          // "next" with an undefined arg.
+          method = "next";
+          arg = undefined;
+
+          var info = record.arg;
+          if (info.done) {
+            context[delegate.resultName] = info.value;
+            context.next = delegate.nextLoc;
+          } else {
+            state = GenStateSuspendedYield;
+            return info;
+          }
+
+          context.delegate = null;
+        }
+
+        if (method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = arg;
+
+        } else if (method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw arg;
+          }
+
+          if (context.dispatchException(arg)) {
+            // If the dispatched exception was caught by a catch block,
+            // then let that catch block handle the exception normally.
+            method = "next";
+            arg = undefined;
+          }
+
+        } else if (method === "return") {
+          context.abrupt("return", arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          var info = {
+            value: record.arg,
+            done: context.done
+          };
+
+          if (record.arg === ContinueSentinel) {
+            if (context.delegate && method === "next") {
+              // Deliberately forget the last sent value so that we don't
+              // accidentally pass it on to the delegate.
+              arg = undefined;
+            }
+          } else {
+            return info;
+          }
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(arg) call above.
+          method = "throw";
+          arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp[toStringTagSymbol] = "Generator";
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  runtime.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  runtime.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+        return !!caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.next = finallyEntry.finallyLoc;
+      } else {
+        this.complete(record);
+      }
+
+      return ContinueSentinel;
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = record.arg;
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      return ContinueSentinel;
+    }
+  };
+})(
+  // Among the various tricks for obtaining a reference to the global
+  // object, this seems to be the most reliable technique that does not
+  // use indirect eval (which violates Content Security Policy).
+  typeof global === "object" ? global :
+  typeof window === "object" ? window :
+  typeof self === "object" ? self : this
+);
+
 ;(function() {
 /*!
  * @overview  Ember - JavaScript Application Framework
@@ -60152,6 +60822,22 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+  function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+  function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+  function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
   /**
     Render out the component "lineage" for a given component `name`.
     The lineage is defined as the components used in the give template, i.e. `children`,
@@ -60184,13 +60870,13 @@ requireModule('ember')
        @accessor children
       @type {Array<Object{label, value}>} Array of objects that can be used to render links
     */
-    children: Ember.computed(...makeSafeLinks('manifest.children')),
-    parents: Ember.computed(...makeSafeLinks('manifest.parents'))
+    children: Ember.computed.apply(void 0, _toConsumableArray(makeSafeLinks('manifest.children'))),
+    parents: Ember.computed.apply(void 0, _toConsumableArray(makeSafeLinks('manifest.parents')))
   });
 
   _exports.default = _default;
-  const ATOMIC_REGEX = /nypr-(.)-.*/;
-  const ATOMIC_ROUTES = {
+  var ATOMIC_REGEX = /nypr-(.)-.*/;
+  var ATOMIC_ROUTES = {
     a: 'atoms',
     m: 'molecules',
     o: 'organisms'
@@ -60209,18 +60895,24 @@ requireModule('ember')
 
   function makeSafeLinks(key) {
     function safeLinks() {
-      let routes = [];
-      let templates = this.get(key) || [];
-      templates.forEach(template => {
+      var _this = this;
+
+      var routes = [];
+      var templates = this.get(key) || [];
+      templates.forEach(function (template) {
         try {
-          let route = _componentRouteOverrides.default[template];
+          var route = _componentRouteOverrides.default[template];
 
           if (!route) {
-            let [, match] = ATOMIC_REGEX.exec(template);
+            var _ATOMIC_REGEX$exec = ATOMIC_REGEX.exec(template),
+                _ATOMIC_REGEX$exec2 = _slicedToArray(_ATOMIC_REGEX$exec, 2),
+                match = _ATOMIC_REGEX$exec2[1];
+
             route = "docs.".concat(ATOMIC_ROUTES[match], ".").concat(template);
           }
 
-          this.router.urlFor(route);
+          _this.router.urlFor(route);
+
           routes.push({
             label: template,
             value: route
@@ -60260,9 +60952,25 @@ requireModule('ember')
     value: true
   });
 
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
 
-  function linkToParams(_params, { route, model, models, query }) {
-    let params = [];
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  function linkToParams(_params, _ref) {
+    var route = _ref.route,
+        model = _ref.model,
+        models = _ref.models,
+        query = _ref.query;
+
+    var params = [];
 
     if (route) {
       params.push(route);
@@ -60273,7 +60981,7 @@ requireModule('ember')
     }
 
     if (models) {
-      params.push(...models);
+      params.push.apply(params, _toConsumableArray(models));
     }
 
     if (query) {
@@ -60296,49 +61004,49 @@ requireModule('ember')
   });
   Object.defineProperty(_exports, "beginTransition", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _scheduler.beginTransition;
     }
   });
   Object.defineProperty(_exports, "endTransition", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _scheduler.endTransition;
     }
   });
   Object.defineProperty(_exports, "routeSettled", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _scheduler.routeSettled;
     }
   });
   Object.defineProperty(_exports, "setupRouter", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _scheduler.setupRouter;
     }
   });
   Object.defineProperty(_exports, "reset", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _scheduler.reset;
     }
   });
   Object.defineProperty(_exports, "didTransition", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _scheduler.didTransition;
     }
   });
   Object.defineProperty(_exports, "whenRoutePainted", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _scheduler.whenRoutePainted;
     }
   });
   Object.defineProperty(_exports, "whenRouteIdle", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _scheduler.whenRouteIdle;
     }
   });
@@ -60360,29 +61068,31 @@ requireModule('ember')
   _exports._getScheduleFn = _getScheduleFn;
   _exports._setCapabilities = _setCapabilities;
   _exports.SIMPLE_CALLBACK = _exports.USE_REQUEST_IDLE_CALLBACK = void 0;
-  const APP_SCHEDULER_LABEL = 'ember-app-scheduler';
-  const APP_SCHEDULER_HAS_SETUP = '__APP_SCHEDULER_HAS_SETUP__';
+  var APP_SCHEDULER_LABEL = 'ember-app-scheduler';
+  var APP_SCHEDULER_HAS_SETUP = '__APP_SCHEDULER_HAS_SETUP__';
 
-  let _whenRouteDidChange;
+  var _whenRouteDidChange;
 
-  let _whenRoutePainted;
+  var _whenRoutePainted;
 
-  let _whenRoutePaintedScheduleFn;
+  var _whenRoutePaintedScheduleFn;
 
-  let _whenRouteIdle;
+  var _whenRouteIdle;
 
-  let _whenRouteIdleScheduleFn;
+  var _whenRouteIdleScheduleFn;
 
-  let _activeScheduledTasks = 0;
-  const CAPABILITIES = {
+  var _activeScheduledTasks = 0;
+  var CAPABILITIES = {
     requestAnimationFrameEnabled: typeof requestAnimationFrame === 'function',
     requestIdleCallbackEnabled: typeof requestIdleCallback === 'function'
   };
-  let _capabilities = CAPABILITIES;
-  const USE_REQUEST_IDLE_CALLBACK = true;
+  var _capabilities = CAPABILITIES;
+  var USE_REQUEST_IDLE_CALLBACK = true;
   _exports.USE_REQUEST_IDLE_CALLBACK = USE_REQUEST_IDLE_CALLBACK;
 
-  const SIMPLE_CALLBACK = callback => callback();
+  var SIMPLE_CALLBACK = function SIMPLE_CALLBACK(callback) {
+    return callback();
+  };
 
   _exports.SIMPLE_CALLBACK = SIMPLE_CALLBACK;
   reset();
@@ -60390,8 +61100,12 @@ requireModule('ember')
   function beginTransition() {
     if (_whenRouteDidChange.isResolved) {
       _whenRouteDidChange = _defer(APP_SCHEDULER_LABEL);
-      _whenRoutePainted = _whenRouteDidChange.promise.then(() => _afterNextPaint(_whenRoutePaintedScheduleFn));
-      _whenRouteIdle = _whenRoutePainted.then(() => _afterNextPaint(_whenRouteIdleScheduleFn));
+      _whenRoutePainted = _whenRouteDidChange.promise.then(function () {
+        return _afterNextPaint(_whenRoutePaintedScheduleFn);
+      });
+      _whenRouteIdle = _whenRoutePainted.then(function () {
+        return _afterNextPaint(_whenRouteIdleScheduleFn);
+      });
     }
   }
 
@@ -60467,7 +61181,9 @@ requireModule('ember')
     return _whenRouteIdle;
   }
 
-  function _getScheduleFn(useRequestIdleCallback = false) {
+  function _getScheduleFn() {
+    var useRequestIdleCallback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
     if (useRequestIdleCallback && _capabilities.requestIdleCallbackEnabled) {
       return requestIdleCallback;
     } else if (_capabilities.requestAnimationFrameEnabled) {
@@ -60477,7 +61193,8 @@ requireModule('ember')
     }
   }
 
-  function _setCapabilities(newCapabilities = CAPABILITIES) {
+  function _setCapabilities() {
+    var newCapabilities = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : CAPABILITIES;
     _capabilities = newCapabilities;
   }
 
@@ -60485,14 +61202,14 @@ requireModule('ember')
   _whenRouteIdleScheduleFn = _getScheduleFn(USE_REQUEST_IDLE_CALLBACK);
 
   function _afterNextPaint(scheduleFn) {
-    let promise = new Ember.RSVP.Promise(resolve => {
+    var promise = new Ember.RSVP.Promise(function (resolve) {
       if (true
       /* DEBUG */
       ) {
         _activeScheduledTasks++;
       }
 
-      scheduleFn(() => {
+      scheduleFn(function () {
         Ember.run.later(resolve, 0);
       });
     });
@@ -60500,7 +61217,7 @@ requireModule('ember')
     if (true
     /* DEBUG */
     ) {
-      promise = promise.finally(() => {
+      promise = promise.finally(function () {
         _activeScheduledTasks--;
       });
     }
@@ -60512,18 +61229,20 @@ requireModule('ember')
   /* DEBUG */
   ) {
     // wait until no active rafs
-    Ember.Test.registerWaiter(() => _activeScheduledTasks === 0);
+    Ember.Test.registerWaiter(function () {
+      return _activeScheduledTasks === 0;
+    });
   }
 
   function _defer(label) {
-    let _isResolved = false;
+    var _isResolved = false;
 
-    let _resolve;
+    var _resolve;
 
-    let _reject;
+    var _reject;
 
-    const promise = new Ember.RSVP.Promise((resolve, reject) => {
-      _resolve = () => {
+    var promise = new Ember.RSVP.Promise(function (resolve, reject) {
+      _resolve = function _resolve() {
         _isResolved = true;
         resolve();
       };
@@ -60531,7 +61250,7 @@ requireModule('ember')
       _reject = reject;
     }, label);
     return {
-      promise,
+      promise: promise,
       resolve: _resolve,
       reject: _reject,
 
@@ -60550,18 +61269,18 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
-  const assign = Object.assign || function EmberAssign(original, ...args) {
-    for (let i = 0; i < args.length; i++) {
-      let arg = args[i];
+  var assign = Object.assign || function EmberAssign(original) {
+    for (var i = 0; i < (arguments.length <= 1 ? 0 : arguments.length - 1); i++) {
+      var arg = i + 1 < 1 || arguments.length <= i + 1 ? undefined : arguments[i + 1];
 
       if (!arg) {
         continue;
       }
 
-      let updates = Object.keys(arg);
+      var updates = Object.keys(arg);
 
-      for (let i = 0; i < updates.length; i++) {
-        let prop = updates[i];
+      for (var _i = 0; _i < updates.length; _i++) {
+        var prop = updates[_i];
         original[prop] = arg[prop];
       }
     }
@@ -60569,7 +61288,7 @@ requireModule('ember')
     return original;
   };
 
-  const ignoredStyleAttrs = ['top', 'left', 'right', 'width', 'height'];
+  var ignoredStyleAttrs = ['top', 'left', 'right', 'width', 'height'];
 
   var _default = Ember.Component.extend({
     layout: _basicDropdown.default,
@@ -60592,19 +61311,18 @@ requireModule('ember')
     width: null,
     height: null,
     otherStyles: {},
-
     // eslint-disable-line
     // Lifecycle hooks
-    init() {
+    init: function init() {
       if (this.get('renderInPlace') && this.get('tagName') === '') {
         this.set('tagName', 'div');
       }
 
-      this._super(...arguments);
+      this._super.apply(this, arguments);
 
       this.set('publicAPI', {});
       this.set('otherStyles', {});
-      let publicAPI = this.updateState({
+      var publicAPI = this.updateState({
         uniqueId: Ember.guidFor(this),
         isOpen: this.get('initiallyOpened') || false,
         disabled: this.get('disabled') || false,
@@ -60616,18 +61334,17 @@ requireModule('ember')
         }
       });
       this.dropdownId = this.dropdownId || "ember-basic-dropdown-content-".concat(publicAPI.uniqueId);
-      let onInit = this.get('onInit');
+      var onInit = this.get('onInit');
 
       if (onInit) {
         onInit(publicAPI);
       }
     },
+    didReceiveAttrs: function didReceiveAttrs() {
+      this._super.apply(this, arguments);
 
-    didReceiveAttrs() {
-      this._super(...arguments);
-
-      let oldDisabled = !!this._oldDisabled;
-      let newDisabled = !!this.get('disabled');
+      var oldDisabled = !!this._oldDisabled;
+      var newDisabled = !!this.get('disabled');
       this._oldDisabled = newDisabled;
 
       if (newDisabled && !oldDisabled) {
@@ -60636,53 +61353,47 @@ requireModule('ember')
         Ember.run.join(this, this.enable);
       }
     },
+    willDestroy: function willDestroy() {
+      this._super.apply(this, arguments);
 
-    willDestroy() {
-      this._super(...arguments);
-
-      let registerAPI = this.get('registerAPI');
+      var registerAPI = this.get('registerAPI');
 
       if (registerAPI) {
         registerAPI(null);
       }
     },
-
     // CPs
     destination: Ember.computed({
-      get() {
+      get: function get() {
         return this._getDestinationId();
       },
-
-      set(_, v) {
+      set: function set(_, v) {
         return v === undefined ? this._getDestinationId() : v;
       }
-
     }),
     // Actions
     actions: {
-      handleFocus(e) {
-        let onFocus = this.get('onFocus');
+      handleFocus: function handleFocus(e) {
+        var onFocus = this.get('onFocus');
 
         if (onFocus) {
           onFocus(this.get('publicAPI'), e);
         }
       }
-
     },
-
     // Methods
-    open(e) {
+    open: function open(e) {
       if (this.get('isDestroyed')) {
         return;
       }
 
-      let publicAPI = this.get('publicAPI');
+      var publicAPI = this.get('publicAPI');
 
       if (publicAPI.disabled || publicAPI.isOpen) {
         return;
       }
 
-      let onOpen = this.get('onOpen');
+      var onOpen = this.get('onOpen');
 
       if (onOpen && onOpen(publicAPI, e) === false) {
         return;
@@ -60692,19 +61403,18 @@ requireModule('ember')
         isOpen: true
       });
     },
-
-    close(e, skipFocus) {
+    close: function close(e, skipFocus) {
       if (this.get('isDestroyed')) {
         return;
       }
 
-      let publicAPI = this.get('publicAPI');
+      var publicAPI = this.get('publicAPI');
 
       if (publicAPI.disabled || !publicAPI.isOpen) {
         return;
       }
 
-      let onClose = this.get('onClose');
+      var onClose = this.get('onClose');
 
       if (onClose && onClose(publicAPI, e) === false) {
         return;
@@ -60732,44 +61442,41 @@ requireModule('ember')
         return;
       }
 
-      let trigger = document.querySelector("[data-ebd-id=".concat(publicAPI.uniqueId, "-trigger]"));
+      var trigger = document.querySelector("[data-ebd-id=".concat(publicAPI.uniqueId, "-trigger]"));
 
       if (trigger && trigger.tabIndex > -1) {
         trigger.focus();
       }
     },
-
-    toggle(e) {
+    toggle: function toggle(e) {
       if (this.get('publicAPI.isOpen')) {
         this.close(e);
       } else {
         this.open(e);
       }
     },
-
-    reposition() {
-      let publicAPI = this.get('publicAPI');
+    reposition: function reposition() {
+      var publicAPI = this.get('publicAPI');
 
       if (!publicAPI.isOpen) {
         return;
       }
 
-      let dropdownElement = document.getElementById(this.dropdownId);
-      let triggerElement = document.querySelector("[data-ebd-id=".concat(publicAPI.uniqueId, "-trigger]"));
+      var dropdownElement = document.getElementById(this.dropdownId);
+      var triggerElement = document.querySelector("[data-ebd-id=".concat(publicAPI.uniqueId, "-trigger]"));
 
       if (!dropdownElement || !triggerElement) {
         return;
       }
 
       this.destinationElement = this.destinationElement || document.getElementById(this.get('destination'));
-      let options = this.getProperties('horizontalPosition', 'verticalPosition', 'matchTriggerWidth', 'previousHorizontalPosition', 'previousVerticalPosition', 'renderInPlace');
+      var options = this.getProperties('horizontalPosition', 'verticalPosition', 'matchTriggerWidth', 'previousHorizontalPosition', 'previousVerticalPosition', 'renderInPlace');
       options.dropdown = this;
-      let positionData = this.get('calculatePosition')(triggerElement, dropdownElement, this.destinationElement, options);
+      var positionData = this.get('calculatePosition')(triggerElement, dropdownElement, this.destinationElement, options);
       return this.applyReposition(triggerElement, dropdownElement, positionData);
     },
-
-    applyReposition(trigger, dropdown, positions) {
-      let changes = {
+    applyReposition: function applyReposition(trigger, dropdown, positions) {
+      var changes = {
         hPosition: positions.horizontalPosition,
         vPosition: positions.verticalPosition,
         otherStyles: this.get('otherStyles')
@@ -60801,7 +61508,7 @@ requireModule('ember')
           changes.height = "".concat(positions.style.height, "px");
         }
 
-        Object.keys(positions.style).forEach(attr => {
+        Object.keys(positions.style).forEach(function (attr) {
           if (ignoredStyleAttrs.indexOf(attr) === -1) {
             if (changes[attr] !== positions.style[attr]) {
               changes.otherStyles[attr] = positions.style[attr];
@@ -60811,9 +61518,9 @@ requireModule('ember')
 
         if (this.get('top') === null) {
           // Bypass Ember on the first reposition only to avoid flickering.
-          let cssRules = [];
+          var cssRules = [];
 
-          for (let prop in positions.style) {
+          for (var prop in positions.style) {
             if (positions.style[prop] !== undefined) {
               if (typeof positions.style[prop] === 'number') {
                 cssRules.push("".concat(prop, ": ").concat(positions.style[prop], "px"));
@@ -60832,9 +61539,8 @@ requireModule('ember')
       this.previousVerticalPosition = positions.verticalPosition;
       return changes;
     },
-
-    disable() {
-      let publicAPI = this.get('publicAPI');
+    disable: function disable() {
+      var publicAPI = this.get('publicAPI');
 
       if (publicAPI.isOpen) {
         publicAPI.actions.close();
@@ -60844,16 +61550,14 @@ requireModule('ember')
         disabled: true
       });
     },
-
-    enable() {
+    enable: function enable() {
       this.updateState({
         disabled: false
       });
     },
-
-    updateState(changes) {
-      let newState = Ember.set(this, 'publicAPI', assign({}, this.get('publicAPI'), changes));
-      let registerAPI = this.get('registerAPI');
+    updateState: function updateState(changes) {
+      var newState = Ember.set(this, 'publicAPI', assign({}, this.get('publicAPI'), changes));
+      var registerAPI = this.get('registerAPI');
 
       if (registerAPI) {
         registerAPI(newState);
@@ -60861,15 +61565,14 @@ requireModule('ember')
 
       return newState;
     },
-
-    _getDestinationId() {
-      let config = Ember.getOwner(this).resolveRegistration('config:environment');
+    _getDestinationId: function _getDestinationId() {
+      var config = Ember.getOwner(this).resolveRegistration('config:environment');
 
       if (config.environment === 'test' && typeof FastBoot === 'undefined') {
         if (true
         /* DEBUG */
         ) {
-          let id, rootView;
+          var id, rootView;
 
           if (_require.default.has('@ember/test-helpers/dom/get-root-element')) {
             try {
@@ -60889,7 +61592,6 @@ requireModule('ember')
 
       return config['ember-basic-dropdown'] && config['ember-basic-dropdown'].destination || 'ember-basic-dropdown-wormhole';
     }
-
   });
 
   _exports.default = _default;
@@ -60916,6 +61618,14 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+  function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+  function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+  function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
   function closestContent(el) {
     while (el && (!el.classList || !el.classList.contains('ember-basic-dropdown-content'))) {
       el = el.parentElement;
@@ -60926,10 +61636,10 @@ requireModule('ember')
 
   function waitForAnimations(element, callback) {
     window.requestAnimationFrame(function () {
-      let computedStyle = window.getComputedStyle(element);
+      var computedStyle = window.getComputedStyle(element);
 
       if (computedStyle.animationName !== 'none' && computedStyle.animationPlayState === 'running') {
-        let eventCallback = function () {
+        var eventCallback = function eventCallback() {
           element.removeEventListener('animationend', eventCallback);
           callback();
         };
@@ -60949,11 +61659,11 @@ requireModule('ember')
 
 
   function dropdownIsValidParent(el, dropdownId) {
-    let closestDropdown = closestContent(el);
+    var closestDropdown = closestContent(el);
 
     if (closestDropdown) {
-      let trigger = document.querySelector("[aria-owns=".concat(closestDropdown.attributes.id.value, "]"));
-      let parentDropdown = closestContent(trigger);
+      var trigger = document.querySelector("[aria-owns=".concat(closestDropdown.attributes.id.value, "]"));
+      var parentDropdown = closestContent(trigger);
       return parentDropdown && parentDropdown.attributes.id.value === dropdownId || dropdownIsValidParent(parentDropdown, dropdownId);
     } else {
       return false;
@@ -60972,25 +61682,25 @@ requireModule('ember')
     // CPs
     _contentTagName: (0, _computedFallbackIfUndefined.default)('div'),
     animationEnabled: Ember.computed(function () {
-      let config = Ember.getOwner(this).resolveRegistration('config:environment');
+      var config = Ember.getOwner(this).resolveRegistration('config:environment');
       return config.environment !== 'test';
     }),
     destinationElement: Ember.computed('destination', function () {
       return document.getElementById(this.get('destination'));
     }),
     style: Ember.computed('top', 'left', 'right', 'width', 'height', 'otherStyles', function () {
-      let style = '';
-      let {
-        top,
-        left,
-        right,
-        width,
-        height,
-        otherStyles
-      } = this.getProperties('top', 'left', 'right', 'width', 'height', 'otherStyles');
+      var style = '';
+
+      var _this$getProperties = this.getProperties('top', 'left', 'right', 'width', 'height', 'otherStyles'),
+          top = _this$getProperties.top,
+          left = _this$getProperties.left,
+          right = _this$getProperties.right,
+          width = _this$getProperties.width,
+          height = _this$getProperties.height,
+          otherStyles = _this$getProperties.otherStyles;
 
       if (otherStyles) {
-        Object.keys(otherStyles).forEach(attr => {
+        Object.keys(otherStyles).forEach(function (attr) {
           style += "".concat(attr, ": ").concat(otherStyles[attr], ";");
         });
       }
@@ -61019,16 +61729,15 @@ requireModule('ember')
         return Ember.String.htmlSafe(style);
       }
     }),
-
     // Lifecycle hooks
-    init() {
-      this._super(...arguments);
+    init: function init() {
+      this._super.apply(this, arguments);
 
       this.handleRootMouseDown = this.handleRootMouseDown.bind(this);
       this.touchStartHandler = this.touchStartHandler.bind(this);
       this.touchMoveHandler = this.touchMoveHandler.bind(this);
       this.wheelHandler = this.wheelHandler.bind(this);
-      let dropdown = this.get('dropdown');
+      var dropdown = this.get('dropdown');
       this.scrollableAncestors = [];
       this.dropdownId = "ember-basic-dropdown-content-".concat(dropdown.uniqueId);
 
@@ -61040,27 +61749,24 @@ requireModule('ember')
         Ember.run.join(dropdown.actions.reposition);
       };
     },
-
-    willDestroyElement() {
-      this._super(...arguments);
+    willDestroyElement: function willDestroyElement() {
+      this._super.apply(this, arguments);
 
       this._teardown();
     },
+    didReceiveAttrs: function didReceiveAttrs() {
+      this._super.apply(this, arguments);
 
-    didReceiveAttrs() {
-      this._super(...arguments);
-
-      let oldDropdown = this.get('oldDropdown') || {};
-      let dropdown = this.get('dropdown'); // The following condition checks whether we need to open the dropdown - either because it was
+      var oldDropdown = this.get('oldDropdown') || {};
+      var dropdown = this.get('dropdown'); // The following condition checks whether we need to open the dropdown - either because it was
       // closed and is now open or because it was open and then it was closed and opened pretty much at
       // the same time, indicated by `top`, `left` and `right` being null.
 
-      let {
-        top,
-        left,
-        right,
-        renderInPlace
-      } = this.getProperties('top', 'left', 'right', 'renderInPlace');
+      var _this$getProperties2 = this.getProperties('top', 'left', 'right', 'renderInPlace'),
+          top = _this$getProperties2.top,
+          left = _this$getProperties2.left,
+          right = _this$getProperties2.right,
+          renderInPlace = _this$getProperties2.renderInPlace;
 
       if ((!oldDropdown.isOpen || top === null && left === null && right === null && renderInPlace === false) && dropdown.isOpen) {
         Ember.run.scheduleOnce('afterRender', this, this.open);
@@ -61070,13 +61776,12 @@ requireModule('ember')
 
       this.set('oldDropdown', dropdown);
     },
-
     // Methods
-    open() {
-      let dropdown = this.get('dropdown');
+    open: function open() {
+      var dropdown = this.get('dropdown');
       this.triggerElement = this.triggerElement || document.querySelector("[data-ebd-id=".concat(dropdown.uniqueId, "-trigger]"));
       this.dropdownElement = document.getElementById(this.dropdownId);
-      const rootEventType = this.get('rootEventType');
+      var rootEventType = this.get('rootEventType');
       document.addEventListener(rootEventType, this.handleRootMouseDown, true);
 
       if (this.get('isTouchDevice')) {
@@ -61084,34 +61789,44 @@ requireModule('ember')
         document.addEventListener('touchend', this.handleRootMouseDown, true);
       }
 
-      let onFocusIn = this.get('onFocusIn');
+      var onFocusIn = this.get('onFocusIn');
 
       if (onFocusIn) {
-        this.dropdownElement.addEventListener('focusin', e => onFocusIn(dropdown, e));
+        this.dropdownElement.addEventListener('focusin', function (e) {
+          return onFocusIn(dropdown, e);
+        });
       }
 
-      let onFocusOut = this.get('onFocusOut');
+      var onFocusOut = this.get('onFocusOut');
 
       if (onFocusOut) {
-        this.dropdownElement.addEventListener('focusout', e => onFocusOut(dropdown, e));
+        this.dropdownElement.addEventListener('focusout', function (e) {
+          return onFocusOut(dropdown, e);
+        });
       }
 
-      let onMouseEnter = this.get('onMouseEnter');
+      var onMouseEnter = this.get('onMouseEnter');
 
       if (onMouseEnter) {
-        this.dropdownElement.addEventListener('mouseenter', e => onMouseEnter(dropdown, e));
+        this.dropdownElement.addEventListener('mouseenter', function (e) {
+          return onMouseEnter(dropdown, e);
+        });
       }
 
-      let onMouseLeave = this.get('onMouseLeave');
+      var onMouseLeave = this.get('onMouseLeave');
 
       if (onMouseLeave) {
-        this.dropdownElement.addEventListener('mouseleave', e => onMouseLeave(dropdown, e));
+        this.dropdownElement.addEventListener('mouseleave', function (e) {
+          return onMouseLeave(dropdown, e);
+        });
       }
 
-      let onKeyDown = this.get('onKeyDown');
+      var onKeyDown = this.get('onKeyDown');
 
       if (onKeyDown) {
-        this.dropdownElement.addEventListener('keydown', e => onKeyDown(dropdown, e));
+        this.dropdownElement.addEventListener('keydown', function (e) {
+          return onKeyDown(dropdown, e);
+        });
       }
 
       dropdown.actions.reposition(); // Always wire up events, even if rendered in place.
@@ -61125,8 +61840,7 @@ requireModule('ember')
         Ember.run.scheduleOnce('afterRender', this, this.animateIn);
       }
     },
-
-    close() {
+    close: function close() {
       this._teardown();
 
       if (this.get('animationEnabled')) {
@@ -61135,9 +61849,8 @@ requireModule('ember')
 
       this.dropdownElement = null;
     },
-
     // Methods
-    handleRootMouseDown(e) {
+    handleRootMouseDown: function handleRootMouseDown(e) {
       if (this.hasMoved || this.dropdownElement.contains(e.target) || this.triggerElement && this.triggerElement.contains(e.target)) {
         this.hasMoved = false;
         return;
@@ -61150,16 +61863,16 @@ requireModule('ember')
 
       this.get('dropdown').actions.close(e, true);
     },
-
-    addGlobalEvents() {
+    addGlobalEvents: function addGlobalEvents() {
       window.addEventListener('resize', this.runloopAwareReposition);
       window.addEventListener('orientationchange', this.runloopAwareReposition);
     },
+    startObservingDomMutations: function startObservingDomMutations() {
+      var _this = this;
 
-    startObservingDomMutations() {
-      this.mutationObserver = new MutationObserver(mutations => {
+      this.mutationObserver = new MutationObserver(function (mutations) {
         if (mutations[0].addedNodes.length || mutations[0].removedNodes.length) {
-          this.runloopAwareReposition();
+          _this.runloopAwareReposition();
         }
       });
       this.mutationObserver.observe(this.dropdownElement, {
@@ -61167,61 +61880,61 @@ requireModule('ember')
         subtree: true
       });
     },
-
-    removeGlobalEvents() {
+    removeGlobalEvents: function removeGlobalEvents() {
       window.removeEventListener('resize', this.runloopAwareReposition);
       window.removeEventListener('orientationchange', this.runloopAwareReposition);
     },
-
-    stopObservingDomMutations() {
+    stopObservingDomMutations: function stopObservingDomMutations() {
       if (this.mutationObserver) {
         this.mutationObserver.disconnect();
         this.mutationObserver = null;
       }
     },
+    animateIn: function animateIn() {
+      var _this2 = this;
 
-    animateIn() {
-      waitForAnimations(this.dropdownElement, () => {
-        this.set('animationClass', this.get('transitionedInClass'));
+      waitForAnimations(this.dropdownElement, function () {
+        _this2.set('animationClass', _this2.get('transitionedInClass'));
       });
     },
+    animateOut: function animateOut(dropdownElement) {
+      var _clone$classList, _clone$classList2;
 
-    animateOut(dropdownElement) {
-      let parentElement = this.get('renderInPlace') ? dropdownElement.parentElement.parentElement : dropdownElement.parentElement;
-      let clone = dropdownElement.cloneNode(true);
+      var parentElement = this.get('renderInPlace') ? dropdownElement.parentElement.parentElement : dropdownElement.parentElement;
+      var clone = dropdownElement.cloneNode(true);
       clone.id = "".concat(clone.id, "--clone");
-      let transitioningInClass = this.get('transitioningInClass');
-      clone.classList.remove(...transitioningInClass.split(' '));
-      clone.classList.add(...this.get('transitioningOutClass').split(' '));
+      var transitioningInClass = this.get('transitioningInClass');
+
+      (_clone$classList = clone.classList).remove.apply(_clone$classList, _toConsumableArray(transitioningInClass.split(' ')));
+
+      (_clone$classList2 = clone.classList).add.apply(_clone$classList2, _toConsumableArray(this.get('transitioningOutClass').split(' ')));
+
       parentElement.appendChild(clone);
       this.set('animationClass', transitioningInClass);
       waitForAnimations(clone, function () {
         parentElement.removeChild(clone);
       });
     },
-
-    touchStartHandler() {
+    touchStartHandler: function touchStartHandler() {
       document.addEventListener('touchmove', this.touchMoveHandler, true);
     },
-
-    touchMoveHandler() {
+    touchMoveHandler: function touchMoveHandler() {
       this.hasMoved = true;
       document.removeEventListener('touchmove', this.touchMoveHandler, true);
     },
-
-    wheelHandler(event) {
-      const element = this.dropdownElement;
+    wheelHandler: function wheelHandler(event) {
+      var element = this.dropdownElement;
 
       if (element.contains(event.target) || element === event.target) {
         // Discover the amount of scrollable canvas that is within the dropdown.
-        const availableScroll = (0, _scrollHelpers.getAvailableScroll)(event.target, element); // Calculate what the event's desired change to that scrollable canvas is.
+        var availableScroll = (0, _scrollHelpers.getAvailableScroll)(event.target, element); // Calculate what the event's desired change to that scrollable canvas is.
 
-        let {
-          deltaX,
-          deltaY
-        } = (0, _scrollHelpers.getScrollDeltas)(event); // If the consequence of the wheel action would result in scrolling beyond
+        var _getScrollDeltas = (0, _scrollHelpers.getScrollDeltas)(event),
+            deltaX = _getScrollDeltas.deltaX,
+            deltaY = _getScrollDeltas.deltaY; // If the consequence of the wheel action would result in scrolling beyond
         // the scrollable canvas of the dropdown, call preventDefault() and clamp
         // the value of the delta to the available scroll size.
+
 
         if (deltaX < availableScroll.deltaXNegative) {
           deltaX = availableScroll.deltaXNegative;
@@ -61250,13 +61963,12 @@ requireModule('ember')
         event.preventDefault();
       }
     },
-
     // All ancestors with scroll (except the BODY, which is treated differently)
-    getScrollableAncestors() {
-      let scrollableAncestors = [];
+    getScrollableAncestors: function getScrollableAncestors() {
+      var scrollableAncestors = [];
 
       if (this.triggerElement) {
-        let nextScrollable = (0, _calculatePosition.getScrollParent)(this.triggerElement.parentNode);
+        var nextScrollable = (0, _calculatePosition.getScrollParent)(this.triggerElement.parentNode);
 
         while (nextScrollable && nextScrollable.tagName.toUpperCase() !== 'BODY' && nextScrollable.tagName.toUpperCase() !== 'HTML') {
           scrollableAncestors.push(nextScrollable);
@@ -61266,8 +61978,7 @@ requireModule('ember')
 
       return scrollableAncestors;
     },
-
-    addScrollHandling() {
+    addScrollHandling: function addScrollHandling() {
       if (this.get('preventScroll') === true) {
         this.addPreventScrollEvent();
         this.removeScrollHandling = this.removePreventScrollEvent;
@@ -61276,49 +61987,47 @@ requireModule('ember')
         this.removeScrollHandling = this.removeScrollEvents;
       }
     },
-
     // Assigned at runtime to ensure that changes to the `preventScroll` property
     // don't result in not cleaning up after ourselves.
-    removeScrollHandling() {},
-
+    removeScrollHandling: function removeScrollHandling() {},
     // These two functions wire up scroll handling if `preventScroll` is true.
     // These prevent all scrolling that isn't inside of the dropdown.
-    addPreventScrollEvent() {
+    addPreventScrollEvent: function addPreventScrollEvent() {
       document.addEventListener('wheel', this.wheelHandler, {
         capture: true,
         passive: false
       });
     },
-
-    removePreventScrollEvent() {
+    removePreventScrollEvent: function removePreventScrollEvent() {
       document.removeEventListener('wheel', this.wheelHandler, {
         capture: true,
         passive: false
       });
     },
-
     // These two functions wire up scroll handling if `preventScroll` is false.
     // These trigger reposition of the dropdown.
-    addScrollEvents() {
+    addScrollEvents: function addScrollEvents() {
+      var _this3 = this;
+
       window.addEventListener('scroll', this.runloopAwareReposition);
-      this.scrollableAncestors.forEach(el => {
-        el.addEventListener('scroll', this.runloopAwareReposition);
+      this.scrollableAncestors.forEach(function (el) {
+        el.addEventListener('scroll', _this3.runloopAwareReposition);
       });
     },
+    removeScrollEvents: function removeScrollEvents() {
+      var _this4 = this;
 
-    removeScrollEvents() {
       window.removeEventListener('scroll', this.runloopAwareReposition);
-      this.scrollableAncestors.forEach(el => {
-        el.removeEventListener('scroll', this.runloopAwareReposition);
+      this.scrollableAncestors.forEach(function (el) {
+        el.removeEventListener('scroll', _this4.runloopAwareReposition);
       });
     },
-
-    _teardown() {
+    _teardown: function _teardown() {
       this.removeGlobalEvents();
       this.removeScrollHandling();
       this.scrollableAncestors = [];
       this.stopObservingDomMutations();
-      const rootEventType = this.get('rootEventType');
+      var rootEventType = this.get('rootEventType');
       document.removeEventListener(rootEventType, this.handleRootMouseDown, true);
 
       if (this.get('isTouchDevice')) {
@@ -61326,7 +62035,6 @@ requireModule('ember')
         document.removeEventListener('touchend', this.handleRootMouseDown, true);
       }
     }
-
   });
 
   _exports.default = _default;
@@ -61338,7 +62046,7 @@ requireModule('ember')
     value: true
   });
   _exports.default = void 0;
-  const isTouchDevice = !!window && 'ontouchstart' in window;
+  var isTouchDevice = !!window && 'ontouchstart' in window;
 
   function trueStringIfPresent(path) {
     return Ember.computed(path, function () {
@@ -61352,7 +62060,7 @@ requireModule('ember')
 
   var _default = Ember.Component.extend({
     layout: _trigger.default,
-    isTouchDevice,
+    isTouchDevice: isTouchDevice,
     classNames: ['ember-basic-dropdown-trigger'],
     role: (0, _computedFallbackIfUndefined.default)('button'),
     // Need this intermediary property, because in older ember versions the passed in attribute would
@@ -61363,36 +62071,34 @@ requireModule('ember')
     stopPropagation: false,
     classNameBindings: ['inPlaceClass', 'hPositionClass', 'vPositionClass'],
     attributeBindings: ['ariaRole:role', 'style', 'type', 'uniqueId:data-ebd-id', 'tabIndex:tabindex', 'dropdownId:aria-owns', 'ariaLabel:aria-label', 'ariaLabelledBy:aria-labelledby', 'ariaDescribedBy:aria-describedby', 'aria-autocomplete', 'aria-activedescendant', 'aria-disabled', 'aria-expanded', 'aria-haspopup', 'aria-invalid', 'aria-pressed', 'aria-required', 'title'],
-
     // Lifecycle hooks
-    init() {
-      this._super(...arguments);
+    init: function init() {
+      var _this = this;
 
-      let dropdown = this.get('dropdown');
+      this._super.apply(this, arguments);
+
+      var dropdown = this.get('dropdown');
       this.uniqueId = "".concat(dropdown.uniqueId, "-trigger");
       this.dropdownId = this.dropdownId || "ember-basic-dropdown-content-".concat(dropdown.uniqueId);
       this._touchMoveHandler = this._touchMoveHandler.bind(this);
 
-      this._mouseupHandler = () => {
-        document.removeEventListener('mouseup', this._mouseupHandler, true);
+      this._mouseupHandler = function () {
+        document.removeEventListener('mouseup', _this._mouseupHandler, true);
         document.body.classList.remove('ember-basic-dropdown-text-select-disabled');
       };
     },
-
-    didInsertElement() {
-      this._super(...arguments);
+    didInsertElement: function didInsertElement() {
+      this._super.apply(this, arguments);
 
       this.addMandatoryHandlers();
       this.addOptionalHandlers();
     },
-
-    willDestroyElement() {
-      this._super(...arguments);
+    willDestroyElement: function willDestroyElement() {
+      this._super.apply(this, arguments);
 
       document.removeEventListener('touchmove', this._touchMoveHandler);
       document.removeEventListener('mouseup', this._mouseupHandler, true);
     },
-
     // CPs
     'aria-disabled': trueStringIfPresent('dropdown.disabled'),
     'aria-expanded': trueStringIfPresent('dropdown.isOpen'),
@@ -61400,7 +62106,7 @@ requireModule('ember')
     'aria-pressed': trueStringIfPresent('ariaPressed'),
     'aria-required': trueStringIfPresent('ariaRequired'),
     tabIndex: Ember.computed('dropdown.disabled', 'tabindex', function () {
-      let tabindex = this.get('tabindex');
+      var tabindex = this.get('tabindex');
 
       if (tabindex === false || this.get('dropdown.disabled')) {
         return undefined;
@@ -61414,14 +62120,14 @@ requireModule('ember')
       }
     }),
     hPositionClass: Ember.computed('hPosition', function () {
-      let hPosition = this.get('hPosition');
+      var hPosition = this.get('hPosition');
 
       if (hPosition) {
         return "ember-basic-dropdown-trigger--".concat(hPosition);
       }
     }),
     vPositionClass: Ember.computed('vPosition', function () {
-      let vPosition = this.get('vPosition');
+      var vPosition = this.get('vPosition');
 
       if (vPosition) {
         return "ember-basic-dropdown-trigger--".concat(vPosition);
@@ -61429,8 +62135,8 @@ requireModule('ember')
     }),
     // Actions
     actions: {
-      handleMouseDown(e) {
-        let dropdown = this.get('dropdown');
+      handleMouseDown: function handleMouseDown(e) {
+        var dropdown = this.get('dropdown');
 
         if (dropdown.disabled) {
           return;
@@ -61438,7 +62144,7 @@ requireModule('ember')
         // short-circuit default behavior if user-supplied function returns `false`
 
 
-        let onMouseDown = this.get('onMouseDown');
+        var onMouseDown = this.get('onMouseDown');
 
         if (onMouseDown && onMouseDown(dropdown, e) === false) {
           return;
@@ -61466,9 +62172,8 @@ requireModule('ember')
           dropdown.actions.toggle(e);
         }
       },
-
-      handleClick(e) {
-        let dropdown = this.get('dropdown');
+      handleClick: function handleClick(e) {
+        var dropdown = this.get('dropdown');
 
         if (!dropdown || dropdown.disabled) {
           return;
@@ -61490,10 +62195,9 @@ requireModule('ember')
           dropdown.actions.toggle(e);
         }
       },
-
-      handleTouchEnd(e) {
+      handleTouchEnd: function handleTouchEnd(e) {
         this.toggleIsBeingHandledByTouchEvents = true;
-        let dropdown = this.get('dropdown');
+        var dropdown = this.get('dropdown');
 
         if (e && e.defaultPrevented || dropdown.disabled) {
           return;
@@ -61502,7 +62206,7 @@ requireModule('ember')
         if (!this.hasMoved) {
           // execute user-supplied onTouchEnd function before default toggle action;
           // short-circuit default behavior if user-supplied function returns `false`
-          let onTouchEnd = this.get('onTouchEnd');
+          var onTouchEnd = this.get('onTouchEnd');
 
           if (onTouchEnd && onTouchEnd(dropdown, e) === false) {
             return;
@@ -61522,7 +62226,7 @@ requireModule('ember')
             return;
           }
 
-          let event;
+          var event;
 
           try {
             event = document.createEvent('MouseEvents');
@@ -61535,15 +62239,14 @@ requireModule('ember')
         }, 0);
         e.preventDefault();
       },
-
-      handleKeyDown(e) {
-        let dropdown = this.get('dropdown');
+      handleKeyDown: function handleKeyDown(e) {
+        var dropdown = this.get('dropdown');
 
         if (dropdown.disabled) {
           return;
         }
 
-        let onKeyDown = this.get('onKeyDown');
+        var onKeyDown = this.get('onKeyDown');
 
         if (onKeyDown && onKeyDown(dropdown, e) === false) {
           return;
@@ -61561,84 +62264,100 @@ requireModule('ember')
           dropdown.actions.close(e);
         }
       }
-
     },
-
     // Methods
-    _touchMoveHandler() {
+    _touchMoveHandler: function _touchMoveHandler() {
       this.hasMoved = true;
       document.removeEventListener('touchmove', this._touchMoveHandler);
     },
-
-    stopTextSelectionUntilMouseup() {
+    stopTextSelectionUntilMouseup: function stopTextSelectionUntilMouseup() {
       document.addEventListener('mouseup', this._mouseupHandler, true);
       document.body.classList.add('ember-basic-dropdown-text-select-disabled');
     },
+    addMandatoryHandlers: function addMandatoryHandlers() {
+      var _this2 = this;
 
-    addMandatoryHandlers() {
       if (this.get('isTouchDevice')) {
         // If the component opens on click there is no need of any of this, as the device will
         // take care tell apart faux clicks from scrolls.
-        this.element.addEventListener('touchstart', () => {
-          document.addEventListener('touchmove', this._touchMoveHandler);
+        this.element.addEventListener('touchstart', function () {
+          document.addEventListener('touchmove', _this2._touchMoveHandler);
         });
-        this.element.addEventListener('touchend', e => this.send('handleTouchEnd', e));
+        this.element.addEventListener('touchend', function (e) {
+          return _this2.send('handleTouchEnd', e);
+        });
       }
 
-      this.element.addEventListener('mousedown', e => this.send('handleMouseDown', e));
-      this.element.addEventListener('click', e => {
-        if (!this.get('isDestroyed')) {
-          this.send('handleClick', e);
+      this.element.addEventListener('mousedown', function (e) {
+        return _this2.send('handleMouseDown', e);
+      });
+      this.element.addEventListener('click', function (e) {
+        if (!_this2.get('isDestroyed')) {
+          _this2.send('handleClick', e);
         }
       });
-      this.element.addEventListener('keydown', e => this.send('handleKeyDown', e));
+      this.element.addEventListener('keydown', function (e) {
+        return _this2.send('handleKeyDown', e);
+      });
     },
-
-    addOptionalHandlers() {
-      let dropdown = this.get('dropdown');
-      let onMouseEnter = this.get('onMouseEnter');
+    addOptionalHandlers: function addOptionalHandlers() {
+      var dropdown = this.get('dropdown');
+      var onMouseEnter = this.get('onMouseEnter');
 
       if (onMouseEnter) {
-        this.element.addEventListener('mouseenter', e => onMouseEnter(dropdown, e));
+        this.element.addEventListener('mouseenter', function (e) {
+          return onMouseEnter(dropdown, e);
+        });
       }
 
-      let onMouseLeave = this.get('onMouseLeave');
+      var onMouseLeave = this.get('onMouseLeave');
 
       if (onMouseLeave) {
-        this.element.addEventListener('mouseleave', e => onMouseLeave(dropdown, e));
+        this.element.addEventListener('mouseleave', function (e) {
+          return onMouseLeave(dropdown, e);
+        });
       }
 
-      let onFocus = this.get('onFocus');
+      var onFocus = this.get('onFocus');
 
       if (onFocus) {
-        this.element.addEventListener('focus', e => onFocus(dropdown, e));
+        this.element.addEventListener('focus', function (e) {
+          return onFocus(dropdown, e);
+        });
       }
 
-      let onBlur = this.get('onBlur');
+      var onBlur = this.get('onBlur');
 
       if (onBlur) {
-        this.element.addEventListener('blur', e => onBlur(dropdown, e));
+        this.element.addEventListener('blur', function (e) {
+          return onBlur(dropdown, e);
+        });
       }
 
-      let onFocusIn = this.get('onFocusIn');
+      var onFocusIn = this.get('onFocusIn');
 
       if (onFocusIn) {
-        this.element.addEventListener('focusin', e => onFocusIn(dropdown, e));
+        this.element.addEventListener('focusin', function (e) {
+          return onFocusIn(dropdown, e);
+        });
       }
 
-      let onFocusOut = this.get('onFocusOut');
+      var onFocusOut = this.get('onFocusOut');
 
       if (onFocusOut) {
-        this.element.addEventListener('focusout', e => onFocusOut(dropdown, e));
+        this.element.addEventListener('focusout', function (e) {
+          return onFocusOut(dropdown, e);
+        });
       }
 
-      let onKeyUp = this.get('onKeyUp');
+      var onKeyUp = this.get('onKeyUp');
 
       if (onKeyUp) {
-        this.element.addEventListener('keyup', e => onKeyUp(dropdown, e));
+        this.element.addEventListener('keyup', function (e) {
+          return onKeyUp(dropdown, e);
+        });
       }
     }
-
   });
 
   _exports.default = _default;
@@ -61727,43 +62446,43 @@ requireModule('ember')
       - {String} verticalPosition The new vertical position.
       - {Object} CSS properties to be set on the dropdown. It supports `top`, `left`, `right` and `width`.
   */
-  function _default(_, _2, _destination, {
-    renderInPlace
-  }) {
+  function _default(_, _2, _destination, _ref) {
+    var renderInPlace = _ref.renderInPlace;
+
     if (renderInPlace) {
-      return calculateInPlacePosition(...arguments);
+      return calculateInPlacePosition.apply(void 0, arguments);
     } else {
-      return calculateWormholedPosition(...arguments);
+      return calculateWormholedPosition.apply(void 0, arguments);
     }
   }
 
-  function calculateWormholedPosition(trigger, content, destination, {
-    horizontalPosition,
-    verticalPosition,
-    matchTriggerWidth,
-    previousHorizontalPosition,
-    previousVerticalPosition
-  }) {
+  function calculateWormholedPosition(trigger, content, destination, _ref2) {
+    var horizontalPosition = _ref2.horizontalPosition,
+        verticalPosition = _ref2.verticalPosition,
+        matchTriggerWidth = _ref2.matchTriggerWidth,
+        previousHorizontalPosition = _ref2.previousHorizontalPosition,
+        previousVerticalPosition = _ref2.previousVerticalPosition;
     // Collect information about all the involved DOM elements
-    let scroll = {
+    var scroll = {
       left: window.pageXOffset,
       top: window.pageYOffset
     };
-    let {
-      left: triggerLeft,
-      top: triggerTop,
-      width: triggerWidth,
-      height: triggerHeight
-    } = trigger.getBoundingClientRect();
-    let {
-      height: dropdownHeight,
-      width: dropdownWidth
-    } = content.getBoundingClientRect();
-    let viewportWidth = document.body.clientWidth || window.innerWidth;
-    let style = {}; // Apply containers' offset
 
-    let anchorElement = destination.parentNode;
-    let anchorPosition = window.getComputedStyle(anchorElement).position;
+    var _trigger$getBoundingC = trigger.getBoundingClientRect(),
+        triggerLeft = _trigger$getBoundingC.left,
+        triggerTop = _trigger$getBoundingC.top,
+        triggerWidth = _trigger$getBoundingC.width,
+        triggerHeight = _trigger$getBoundingC.height;
+
+    var _content$getBoundingC = content.getBoundingClientRect(),
+        dropdownHeight = _content$getBoundingC.height,
+        dropdownWidth = _content$getBoundingC.width;
+
+    var viewportWidth = document.body.clientWidth || window.innerWidth;
+    var style = {}; // Apply containers' offset
+
+    var anchorElement = destination.parentNode;
+    var anchorPosition = window.getComputedStyle(anchorElement).position;
 
     while (anchorPosition !== 'relative' && anchorPosition !== 'absolute' && anchorElement.tagName.toUpperCase() !== 'BODY') {
       anchorElement = anchorElement.parentNode;
@@ -61771,12 +62490,11 @@ requireModule('ember')
     }
 
     if (anchorPosition === 'relative' || anchorPosition === 'absolute') {
-      let rect = anchorElement.getBoundingClientRect();
+      var rect = anchorElement.getBoundingClientRect();
       triggerLeft = triggerLeft - rect.left;
       triggerTop = triggerTop - rect.top;
-      let {
-        offsetParent
-      } = anchorElement;
+      var _anchorElement = anchorElement,
+          offsetParent = _anchorElement.offsetParent;
 
       if (offsetParent) {
         triggerLeft -= anchorElement.offsetParent.scrollLeft;
@@ -61792,13 +62510,13 @@ requireModule('ember')
     } // Calculate horizontal position
 
 
-    let triggerLeftWithScroll = triggerLeft + scroll.left;
+    var triggerLeftWithScroll = triggerLeft + scroll.left;
 
     if (horizontalPosition === 'auto' || horizontalPosition === 'auto-left') {
       // Calculate the number of visible horizontal pixels if we were to place the
       // dropdown on the left and right
-      let leftVisible = Math.min(viewportWidth, triggerLeft + dropdownWidth) - Math.max(0, triggerLeft);
-      let rightVisible = Math.min(viewportWidth, triggerLeft + triggerWidth) - Math.max(0, triggerLeft + triggerWidth - dropdownWidth);
+      var leftVisible = Math.min(viewportWidth, triggerLeft + dropdownWidth) - Math.max(0, triggerLeft);
+      var rightVisible = Math.min(viewportWidth, triggerLeft + triggerWidth) - Math.max(0, triggerLeft + triggerWidth - dropdownWidth);
 
       if (dropdownWidth > leftVisible && rightVisible > leftVisible) {
         // If the drop down won't fit left-aligned, and there is more space on the
@@ -61815,14 +62533,15 @@ requireModule('ember')
     } else if (horizontalPosition === 'auto-right') {
       // Calculate the number of visible horizontal pixels if we were to place the
       // dropdown on the left and right
-      let leftVisible = Math.min(viewportWidth, triggerLeft + dropdownWidth) - Math.max(0, triggerLeft);
-      let rightVisible = Math.min(viewportWidth, triggerLeft + triggerWidth) - Math.max(0, triggerLeft + triggerWidth - dropdownWidth);
+      var _leftVisible = Math.min(viewportWidth, triggerLeft + dropdownWidth) - Math.max(0, triggerLeft);
 
-      if (dropdownWidth > rightVisible && leftVisible > rightVisible) {
+      var _rightVisible = Math.min(viewportWidth, triggerLeft + triggerWidth) - Math.max(0, triggerLeft + triggerWidth - dropdownWidth);
+
+      if (dropdownWidth > _rightVisible && _leftVisible > _rightVisible) {
         // If the drop down won't fit right-aligned, and there is more space on the
         // left than on the right, then force left-aligned
         horizontalPosition = 'left';
-      } else if (dropdownWidth > leftVisible && rightVisible > leftVisible) {
+      } else if (dropdownWidth > _leftVisible && _rightVisible > _leftVisible) {
         // If the drop down won't fit left-aligned, and there is more space on
         // the right than on the left, then force right-aligned
         horizontalPosition = 'right';
@@ -61841,13 +62560,13 @@ requireModule('ember')
     } // Calculate vertical position
 
 
-    let triggerTopWithScroll = triggerTop;
+    var triggerTopWithScroll = triggerTop;
     /**
      * Fixes bug where the dropdown always stays on the same position on the screen when
      * the <body> is relatively positioned
      */
 
-    let isBodyPositionRelative = window.getComputedStyle(document.body).getPropertyValue('position') === 'relative';
+    var isBodyPositionRelative = window.getComputedStyle(document.body).getPropertyValue('position') === 'relative';
 
     if (!isBodyPositionRelative) {
       triggerTopWithScroll += scroll.top;
@@ -61858,9 +62577,9 @@ requireModule('ember')
     } else if (verticalPosition === 'below') {
       style.top = triggerTopWithScroll + triggerHeight;
     } else {
-      let viewportBottom = scroll.top + window.innerHeight;
-      let enoughRoomBelow = triggerTopWithScroll + triggerHeight + dropdownHeight < viewportBottom;
-      let enoughRoomAbove = triggerTop > dropdownHeight;
+      var viewportBottom = scroll.top + window.innerHeight;
+      var enoughRoomBelow = triggerTopWithScroll + triggerHeight + dropdownHeight < viewportBottom;
+      var enoughRoomAbove = triggerTop > dropdownHeight;
 
       if (previousVerticalPosition === 'below' && !enoughRoomBelow && enoughRoomAbove) {
         verticalPosition = 'above';
@@ -61876,40 +62595,41 @@ requireModule('ember')
     }
 
     return {
-      horizontalPosition,
-      verticalPosition,
-      style
+      horizontalPosition: horizontalPosition,
+      verticalPosition: verticalPosition,
+      style: style
     };
   }
 
-  function calculateInPlacePosition(trigger, content, destination, {
-    horizontalPosition,
-    verticalPosition
-    /*, matchTriggerWidth, previousHorizontalPosition, previousVerticalPosition */
-
-  }) {
-    let dropdownRect;
-    let positionData = {};
+  function calculateInPlacePosition(trigger, content, destination, _ref3
+  /*, matchTriggerWidth, previousHorizontalPosition, previousVerticalPosition */
+  ) {
+    var horizontalPosition = _ref3.horizontalPosition,
+        verticalPosition = _ref3.verticalPosition;
+    var dropdownRect;
+    var positionData = {};
 
     if (horizontalPosition === 'auto') {
-      let triggerRect = trigger.getBoundingClientRect();
+      var triggerRect = trigger.getBoundingClientRect();
       dropdownRect = content.getBoundingClientRect();
-      let viewportRight = window.pageXOffset + window.innerWidth;
+      var viewportRight = window.pageXOffset + window.innerWidth;
       positionData.horizontalPosition = triggerRect.left + dropdownRect.width > viewportRight ? 'right' : 'left';
     } else if (horizontalPosition === 'center') {
-      let {
-        width: triggerWidth
-      } = trigger.getBoundingClientRect();
-      let {
-        width: dropdownWidth
-      } = content.getBoundingClientRect();
+      var _trigger$getBoundingC2 = trigger.getBoundingClientRect(),
+          triggerWidth = _trigger$getBoundingC2.width;
+
+      var _content$getBoundingC2 = content.getBoundingClientRect(),
+          dropdownWidth = _content$getBoundingC2.width;
+
       positionData.style = {
         left: (triggerWidth - dropdownWidth) / 2
       };
     } else if (horizontalPosition === 'auto-right') {
-      let triggerRect = trigger.getBoundingClientRect();
-      let dropdownRect = content.getBoundingClientRect();
-      positionData.horizontalPosition = triggerRect.right > dropdownRect.width ? 'right' : 'left';
+      var _triggerRect = trigger.getBoundingClientRect();
+
+      var _dropdownRect = content.getBoundingClientRect();
+
+      positionData.horizontalPosition = _triggerRect.right > _dropdownRect.width ? 'right' : 'left';
     } else if (horizontalPosition === 'right') {
       positionData.horizontalPosition = 'right';
     }
@@ -61928,12 +62648,12 @@ requireModule('ember')
   }
 
   function getScrollParent(element) {
-    let style = window.getComputedStyle(element);
-    let excludeStaticParent = style.position === "absolute";
-    let overflowRegex = /(auto|scroll)/;
+    var style = window.getComputedStyle(element);
+    var excludeStaticParent = style.position === "absolute";
+    var overflowRegex = /(auto|scroll)/;
     if (style.position === "fixed") return document.body;
 
-    for (let parent = element; parent = parent.parentElement;) {
+    for (var parent = element; parent = parent.parentElement;) {
       style = window.getComputedStyle(parent);
 
       if (excludeStaticParent && style.position === "static") {
@@ -61958,14 +62678,12 @@ requireModule('ember')
 
   function computedFallbackIfUndefined(fallback) {
     return Ember.computed({
-      get() {
+      get: function get() {
         return fallback;
       },
-
-      set(_, v) {
+      set: function set(_, v) {
         return v === undefined ? fallback : v;
       }
-
     });
   }
 });
@@ -61986,7 +62704,7 @@ requireModule('ember')
    *
    * @property DOM_DELTA_PIXEL
    */
-  const DOM_DELTA_PIXEL = 0;
+  var DOM_DELTA_PIXEL = 0;
   /**
    * Mode that expresses the deltas in lines.
    *
@@ -61998,7 +62716,7 @@ requireModule('ember')
    */
 
   _exports.DOM_DELTA_PIXEL = DOM_DELTA_PIXEL;
-  const DOM_DELTA_LINE = 1;
+  var DOM_DELTA_LINE = 1;
   /**
    * Mode that expresses the deltas in pages.
    *
@@ -62009,7 +62727,7 @@ requireModule('ember')
    */
 
   _exports.DOM_DELTA_LINE = DOM_DELTA_LINE;
-  const DOM_DELTA_PAGE = 2;
+  var DOM_DELTA_PAGE = 2;
   /**
    * Number of lines per page considered for
    * DOM_DELTA_PAGE.
@@ -62018,7 +62736,7 @@ requireModule('ember')
    */
 
   _exports.DOM_DELTA_PAGE = DOM_DELTA_PAGE;
-  const LINES_PER_PAGE = 3;
+  var LINES_PER_PAGE = 3;
   /**
    * Returns the deltas calculated in pixels.
    *
@@ -62030,33 +62748,37 @@ requireModule('ember')
 
   _exports.LINES_PER_PAGE = LINES_PER_PAGE;
 
-  function getScrollDeltas({
-    deltaX = 0,
-    deltaY = 0,
-    deltaMode = DOM_DELTA_PIXEL
-  }) {
+  function getScrollDeltas(_ref) {
+    var _ref$deltaX = _ref.deltaX,
+        deltaX = _ref$deltaX === void 0 ? 0 : _ref$deltaX,
+        _ref$deltaY = _ref.deltaY,
+        deltaY = _ref$deltaY === void 0 ? 0 : _ref$deltaY,
+        _ref$deltaMode = _ref.deltaMode,
+        deltaMode = _ref$deltaMode === void 0 ? DOM_DELTA_PIXEL : _ref$deltaMode;
+
     if (deltaMode !== DOM_DELTA_PIXEL) {
       if (deltaMode === DOM_DELTA_PAGE) {
         deltaX *= LINES_PER_PAGE;
         deltaY *= LINES_PER_PAGE;
       }
 
-      const scrollLineHeight = getScrollLineHeight();
-      deltaX *= scrollLineHeight;
-      deltaY *= scrollLineHeight;
+      var _scrollLineHeight = getScrollLineHeight();
+
+      deltaX *= _scrollLineHeight;
+      deltaY *= _scrollLineHeight;
     }
 
     return {
-      deltaX,
-      deltaY
+      deltaX: deltaX,
+      deltaY: deltaY
     };
   }
 
-  let scrollLineHeight = null;
+  var scrollLineHeight = null;
 
   function getScrollLineHeight() {
     if (!scrollLineHeight) {
-      const iframe = document.createElement('iframe');
+      var iframe = document.createElement('iframe');
       iframe.src = '#';
       iframe.style.position = 'absolute';
       iframe.style.visibility = 'hidden';
@@ -62064,7 +62786,7 @@ requireModule('ember')
       iframe.style.height = '0px';
       iframe.style.border = 'none';
       document.body.appendChild(iframe);
-      const iframeDocument = iframe.contentWindow.document;
+      var iframeDocument = iframe.contentWindow.document;
       iframeDocument.open();
       iframeDocument.write('<!doctype html><html><head></head><body><span>X</span></body></html>');
       iframeDocument.close();
@@ -62076,13 +62798,13 @@ requireModule('ember')
   }
 
   function getAvailableScroll(element, container) {
-    const availableScroll = {
+    var availableScroll = {
       deltaXNegative: 0,
       deltaXPositive: 0,
       deltaYNegative: 0,
       deltaYPositive: 0
     };
-    let scrollLeftMax, scrollTopMax;
+    var scrollLeftMax, scrollTopMax;
 
     while (container.contains(element) || container === element) {
       scrollLeftMax = element.scrollWidth - element.clientWidth;
@@ -62108,21 +62830,22 @@ requireModule('ember')
    */
 
 
-  function calculateScrollDistribution(deltaX, deltaY, element, container, accumulator = []) {
-    const scrollInformation = {
-      element,
+  function calculateScrollDistribution(deltaX, deltaY, element, container) {
+    var accumulator = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
+    var scrollInformation = {
+      element: element,
       scrollLeft: 0,
       scrollTop: 0
     };
-    const scrollLeftMax = element.scrollWidth - element.clientWidth;
-    const scrollTopMax = element.scrollHeight - element.clientHeight;
-    const availableScroll = {
+    var scrollLeftMax = element.scrollWidth - element.clientWidth;
+    var scrollTopMax = element.scrollHeight - element.clientHeight;
+    var availableScroll = {
       deltaXNegative: -element.scrollLeft,
       deltaXPositive: scrollLeftMax - element.scrollLeft,
       deltaYNegative: -element.scrollTop,
       deltaYPositive: scrollTopMax - element.scrollTop
     };
-    const elementStyle = window.getComputedStyle(element);
+    var elementStyle = window.getComputedStyle(element);
 
     if (elementStyle.overflowX !== 'hidden') {
       // The `deltaX` can be larger than the available scroll for the element, thus overshooting.
@@ -62162,10 +62885,10 @@ requireModule('ember')
 
 
   function distributeScroll(deltaX, deltaY, element, container) {
-    const scrollInfos = calculateScrollDistribution(deltaX, deltaY, element, container);
-    let info;
+    var scrollInfos = calculateScrollDistribution(deltaX, deltaY, element, container);
+    var info;
 
-    for (let i = 0; i < scrollInfos.length; i++) {
+    for (var i = 0; i < scrollInfos.length; i++) {
       info = scrollInfos[i];
       info.element.scrollLeft = info.scrollLeft;
       info.element.scrollTop = info.scrollTop;
@@ -62180,7 +62903,10 @@ requireModule('ember')
   });
 
   exports.default = function (stringFunction) {
-    return function ([string]) {
+    return function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 1),
+          string = _ref2[0];
+
       if (Ember.String.isHTMLSafe(string)) {
         string = string.string;
       }
@@ -62189,6 +62915,44 @@ requireModule('ember')
       return stringFunction(string);
     };
   };
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
 });
 ;define('ember-cli-string-helpers/helpers/camelize', ['exports', 'ember-cli-string-helpers/-private/create-string-helper'], function (exports, _createStringHelper) {
   'use strict';
@@ -62197,7 +62961,7 @@ requireModule('ember')
     value: true
   });
   exports.camelize = undefined;
-  const camelize = exports.camelize = (0, _createStringHelper.default)(Ember.String.camelize);
+  var camelize = exports.camelize = (0, _createStringHelper.default)(Ember.String.camelize);
   exports.default = Ember.Helper.helper(camelize);
 });
 ;define('ember-cli-string-helpers/helpers/capitalize', ['exports', 'ember-cli-string-helpers/-private/create-string-helper'], function (exports, _createStringHelper) {
@@ -62207,7 +62971,7 @@ requireModule('ember')
     value: true
   });
   exports.capitalize = undefined;
-  const capitalize = exports.capitalize = (0, _createStringHelper.default)(Ember.String.capitalize);
+  var capitalize = exports.capitalize = (0, _createStringHelper.default)(Ember.String.capitalize);
   exports.default = Ember.Helper.helper(capitalize);
 });
 ;define('ember-cli-string-helpers/helpers/classify', ['exports', 'ember-cli-string-helpers/-private/create-string-helper'], function (exports, _createStringHelper) {
@@ -62217,7 +62981,7 @@ requireModule('ember')
     value: true
   });
   exports.classify = undefined;
-  const classify = exports.classify = (0, _createStringHelper.default)(Ember.String.classify);
+  var classify = exports.classify = (0, _createStringHelper.default)(Ember.String.classify);
   exports.default = Ember.Helper.helper(classify);
 });
 ;define('ember-cli-string-helpers/helpers/dasherize', ['exports', 'ember-cli-string-helpers/-private/create-string-helper'], function (exports, _createStringHelper) {
@@ -62227,7 +62991,7 @@ requireModule('ember')
     value: true
   });
   exports.dasherize = undefined;
-  const dasherize = exports.dasherize = (0, _createStringHelper.default)(Ember.String.dasherize);
+  var dasherize = exports.dasherize = (0, _createStringHelper.default)(Ember.String.dasherize);
   exports.default = Ember.Helper.helper(dasherize);
 });
 ;define('ember-cli-string-helpers/helpers/html-safe', ['exports', 'ember-cli-string-helpers/-private/create-string-helper'], function (exports, _createStringHelper) {
@@ -62237,7 +63001,7 @@ requireModule('ember')
     value: true
   });
   exports.htmlSafe = undefined;
-  const htmlSafe = exports.htmlSafe = (0, _createStringHelper.default)(Ember.String.htmlSafe);
+  var htmlSafe = exports.htmlSafe = (0, _createStringHelper.default)(Ember.String.htmlSafe);
   exports.default = Ember.Helper.helper(htmlSafe);
 });
 ;define('ember-cli-string-helpers/helpers/humanize', ['exports'], function (exports) {
@@ -62248,12 +63012,52 @@ requireModule('ember')
   });
   exports.humanize = humanize;
 
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
 
-  const regex = /_+|-+/g;
-  const replacement = ' ';
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  var regex = /_+|-+/g;
+  var replacement = ' ';
 
   // The substituted value will be contained in the result variable
-  function humanize([string]) {
+  function humanize(_ref) {
+    var _ref2 = _slicedToArray(_ref, 1),
+        string = _ref2[0];
+
     if (Ember.String.isHTMLSafe(string)) {
       string = string.string;
     }
@@ -62262,7 +63066,7 @@ requireModule('ember')
       return '';
     }
 
-    let result = string.toLowerCase().replace(regex, replacement);
+    var result = string.toLowerCase().replace(regex, replacement);
     return result.charAt(0).toUpperCase() + result.slice(1);
   }
 
@@ -62275,7 +63079,7 @@ requireModule('ember')
     value: true
   });
   exports.lowercase = undefined;
-  const lowercase = exports.lowercase = (0, _createStringHelper.default)(_lowercase.default);
+  var lowercase = exports.lowercase = (0, _createStringHelper.default)(_lowercase.default);
   exports.default = Ember.Helper.helper(lowercase);
 });
 ;define('ember-cli-string-helpers/helpers/titleize', ['exports', 'ember-cli-string-helpers/utils/titleize', 'ember-cli-string-helpers/-private/create-string-helper'], function (exports, _titleize, _createStringHelper) {
@@ -62285,7 +63089,7 @@ requireModule('ember')
     value: true
   });
   exports.titleize = undefined;
-  const titleize = exports.titleize = (0, _createStringHelper.default)(_titleize.default);
+  var titleize = exports.titleize = (0, _createStringHelper.default)(_titleize.default);
   exports.default = Ember.Helper.helper(titleize);
 });
 ;define('ember-cli-string-helpers/helpers/trim', ['exports', 'ember-cli-string-helpers/utils/trim', 'ember-cli-string-helpers/-private/create-string-helper'], function (exports, _trim, _createStringHelper) {
@@ -62295,7 +63099,7 @@ requireModule('ember')
     value: true
   });
   exports.trim = undefined;
-  const trim = exports.trim = (0, _createStringHelper.default)(_trim.default);
+  var trim = exports.trim = (0, _createStringHelper.default)(_trim.default);
   exports.default = Ember.Helper.helper(trim);
 });
 ;define('ember-cli-string-helpers/helpers/truncate', ['exports'], function (exports) {
@@ -62305,15 +63109,61 @@ requireModule('ember')
     value: true
   });
   exports.truncate = truncate;
-  function truncate([string, characterLimit = 140, useEllipsis = true]) {
-    let limit = useEllipsis ? characterLimit - 3 : characterLimit;
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  function truncate(_ref) {
+    var _ref2 = _slicedToArray(_ref, 3),
+        string = _ref2[0],
+        _ref2$ = _ref2[1],
+        characterLimit = _ref2$ === undefined ? 140 : _ref2$,
+        _ref2$2 = _ref2[2],
+        useEllipsis = _ref2$2 === undefined ? true : _ref2$2;
+
+    var limit = useEllipsis ? characterLimit - 3 : characterLimit;
 
     if (Ember.String.isHTMLSafe(string)) {
       string = string.string;
     }
 
     if (string && string.length > limit) {
-      return useEllipsis ? `${string.substring(0, limit)}...` : string.substring(0, limit);
+      return useEllipsis ? string.substring(0, limit) + '...' : string.substring(0, limit);
     } else {
       return string;
     }
@@ -62328,7 +63178,7 @@ requireModule('ember')
     value: true
   });
   exports.underscore = undefined;
-  const underscore = exports.underscore = (0, _createStringHelper.default)(Ember.String.underscore);
+  var underscore = exports.underscore = (0, _createStringHelper.default)(Ember.String.underscore);
   exports.default = Ember.Helper.helper(underscore);
 });
 ;define('ember-cli-string-helpers/helpers/uppercase', ['exports', 'ember-cli-string-helpers/utils/uppercase', 'ember-cli-string-helpers/-private/create-string-helper'], function (exports, _uppercase, _createStringHelper) {
@@ -62338,7 +63188,7 @@ requireModule('ember')
     value: true
   });
   exports.uppercase = undefined;
-  const uppercase = exports.uppercase = (0, _createStringHelper.default)(_uppercase.default);
+  var uppercase = exports.uppercase = (0, _createStringHelper.default)(_uppercase.default);
   exports.default = Ember.Helper.helper(uppercase);
 });
 ;define('ember-cli-string-helpers/helpers/w', ['exports'], function (exports) {
@@ -62348,8 +63198,16 @@ requireModule('ember')
     value: true
   });
   exports.w = w;
-  function w([...wordStrings]) {
-    return wordStrings.map(Ember.String.w).reduce((words, moreWords) => {
+
+  function _toArray(arr) {
+    return Array.isArray(arr) ? arr : Array.from(arr);
+  }
+
+  function w(_ref) {
+    var _ref2 = _toArray(_ref),
+        wordStrings = _ref2.slice(0);
+
+    return wordStrings.map(Ember.String.w).reduce(function (words, moreWords) {
       return words.concat(moreWords);
     }, []);
   }
@@ -62363,9 +63221,18 @@ requireModule('ember')
     value: true
   });
   exports.default = lowercase;
-  function lowercase(string = '') {
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  };
+
+  function lowercase() {
+    var string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
     if (typeof string !== 'string') {
-      throw new TypeError(`Expected a string, got a ${typeof string}`);
+      throw new TypeError('Expected a string, got a ' + (typeof string === 'undefined' ? 'undefined' : _typeof(string)));
     }
 
     return string.toLowerCase();
@@ -62378,9 +63245,18 @@ requireModule('ember')
     value: true
   });
   exports.default = titleize;
-  function titleize(string = '') {
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  };
+
+  function titleize() {
+    var string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
     if (typeof string !== 'string') {
-      throw new TypeError(`Expected a string, got a ${typeof string}`);
+      throw new TypeError('Expected a string, got a ' + (typeof string === 'undefined' ? 'undefined' : _typeof(string)));
     }
 
     return string.toLowerCase().replace(/(?:^|\s|-|\/)\S/g, function (m) {
@@ -62395,9 +63271,18 @@ requireModule('ember')
     value: true
   });
   exports.default = trim;
-  function trim(string = '') {
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  };
+
+  function trim() {
+    var string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
     if (typeof string !== 'string') {
-      throw new TypeError(`Expected a string, got a ${typeof string}`);
+      throw new TypeError('Expected a string, got a ' + (typeof string === 'undefined' ? 'undefined' : _typeof(string)));
     }
 
     return string.trim();
@@ -62410,9 +63295,18 @@ requireModule('ember')
     value: true
   });
   exports.default = uppercase;
-  function uppercase(string = '') {
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  };
+
+  function uppercase() {
+    var string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
     if (typeof string !== 'string') {
-      throw new TypeError(`Expected a string, got a ${typeof string}`);
+      throw new TypeError('Expected a string, got a ' + (typeof string === 'undefined' ? 'undefined' : _typeof(string)));
     }
 
     return string.toUpperCase();
@@ -62427,8 +63321,8 @@ requireModule('ember')
   exports.matches = matches;
   // https://github.com/zeppelin/ember-click-outside/issues/23
 
-  const proto = typeof Element !== 'undefined' ? Element.prototype : {};
-  const vendor = proto.matches || proto.matchesSelector || proto.webkitMatchesSelector || proto.mozMatchesSelector || proto.msMatchesSelector || proto.oMatchesSelector;
+  var proto = typeof Element !== 'undefined' ? Element.prototype : {};
+  var vendor = proto.matches || proto.matchesSelector || proto.webkitMatchesSelector || proto.mozMatchesSelector || proto.msMatchesSelector || proto.oMatchesSelector;
 
   function matches(el, selector) {
     if (!el || el.nodeType !== 1) return false;
@@ -62447,29 +63341,26 @@ requireModule('ember')
     value: true
   });
   exports.default = Ember.Component.extend(_mixin.default, {
-
-    clickOutside(e) {
+    clickOutside: function clickOutside(e) {
       if (this.isDestroying || this.isDestroyed) {
         return;
       }
 
-      const exceptSelector = Ember.get(this, 'except-selector');
+      var exceptSelector = Ember.get(this, 'except-selector');
       if (exceptSelector && (0, _utils.closest)(e.target, exceptSelector)) {
         return;
       }
 
-      let action = Ember.get(this, 'action');
+      var action = Ember.get(this, 'action');
       if (typeof action === 'function') {
         action(e);
       }
     },
-
-    didInsertElement() {
-      this._super(...arguments);
+    didInsertElement: function didInsertElement() {
+      this._super.apply(this, arguments);
       this._cancelOutsideListenerSetup = Ember.run.next(this, this.addClickOutsideListener);
     },
-
-    willDestroyElement() {
+    willDestroyElement: function willDestroyElement() {
       Ember.run.cancel(this._cancelOutsideListenerSetup);
       this.removeClickOutsideListener();
     }
@@ -62483,7 +63374,7 @@ requireModule('ember')
   });
 
 
-  (0, _utils.printConsoleMessage)(`Importing 'ember-click-outside/components/click-outside' is deprecated. Please import from 'ember-click-outside/component' instead.`);
+  (0, _utils.printConsoleMessage)('Importing \'ember-click-outside/components/click-outside\' is deprecated. Please import from \'ember-click-outside/component\' instead.');
 
   exports.default = _component.default;
 });
@@ -62495,9 +63386,9 @@ requireModule('ember')
   });
 
 
-  const bound = function (fnName) {
+  var bound = function bound(fnName) {
     return Ember.computed(fnName, function () {
-      let fn = Ember.get(this, fnName);
+      var fn = Ember.get(this, fnName);
       if (fn) {
         // https://github.com/zeppelin/ember-click-outside/issues/1
         return fn.bind(this);
@@ -62505,12 +63396,12 @@ requireModule('ember')
     });
   };
 
-  const ios = () => {
+  var ios = function ios() {
     return (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
     );
   };
 
-  const documentOrBodyContains = element => {
+  var documentOrBodyContains = function documentOrBodyContains(element) {
     // https://github.com/zeppelin/ember-click-outside/issues/30
     if (typeof document.contains === 'function') {
       return document.contains(element);
@@ -62520,11 +63411,12 @@ requireModule('ember')
   };
 
   exports.default = Ember.Mixin.create({
-    clickOutside() {},
+    clickOutside: function clickOutside() {},
+
     clickHandler: bound('outsideClickHandler'),
 
-    didInsertElement() {
-      this._super(...arguments);
+    didInsertElement: function didInsertElement() {
+      this._super.apply(this, arguments);
 
       if (!ios()) {
         return;
@@ -62532,9 +63424,8 @@ requireModule('ember')
 
       document.body.style.cursor = 'pointer';
     },
-
-    willDestroyElement() {
-      this._super(...arguments);
+    willDestroyElement: function willDestroyElement() {
+      this._super.apply(this, arguments);
 
       if (!ios()) {
         return;
@@ -62542,34 +63433,31 @@ requireModule('ember')
 
       document.body.style.cursor = '';
     },
-
-    outsideClickHandler(e) {
-      const element = Ember.get(this, 'element');
-      const path = e.path || e.composedPath && e.composedPath();
+    outsideClickHandler: function outsideClickHandler(e) {
+      var element = Ember.get(this, 'element');
+      var path = e.path || e.composedPath && e.composedPath();
 
       if (path) {
         path.includes(element) || this.clickOutside(e);
       } else {
         // Check if the click target still is in the DOM.
         // If not, there is no way to know if it was inside the element or not.
-        const isRemoved = !e.target || !documentOrBodyContains(e.target);
+        var isRemoved = !e.target || !documentOrBodyContains(e.target);
 
         // Check the element is found as a parent of the click target.
-        const isInside = element === e.target || element.contains(e.target);
+        var isInside = element === e.target || element.contains(e.target);
 
         if (!isRemoved && !isInside) {
           this.clickOutside(e);
         }
       }
     },
-
-    addClickOutsideListener() {
-      const clickHandler = Ember.get(this, 'clickHandler');
+    addClickOutsideListener: function addClickOutsideListener() {
+      var clickHandler = Ember.get(this, 'clickHandler');
       document.addEventListener('click', clickHandler);
     },
-
-    removeClickOutsideListener() {
-      const clickHandler = Ember.get(this, 'clickHandler');
+    removeClickOutsideListener: function removeClickOutsideListener() {
+      var clickHandler = Ember.get(this, 'clickHandler');
       document.removeEventListener('click', clickHandler);
     }
   });
@@ -62582,7 +63470,7 @@ requireModule('ember')
   });
 
 
-  (0, _utils.printConsoleMessage)(`Importing 'ember-click-outside/mixins/click-outside' is deprecated. Please import from 'ember-click-outside/mixin' instead.`);
+  (0, _utils.printConsoleMessage)('Importing \'ember-click-outside/mixins/click-outside\' is deprecated. Please import from \'ember-click-outside/mixin\' instead.');
 
   exports.default = _mixin.default;
 });
@@ -62650,10 +63538,8 @@ requireModule('ember')
     value: true
   });
   _exports.default = void 0;
-  const {
-    __loader
-  } = Ember;
-  let ClosureActionModule = {
+  var __loader = Ember.__loader;
+  var ClosureActionModule = {
     ACTION: null
   };
 
@@ -62674,12 +63560,31 @@ requireModule('ember')
   });
   _exports.default = _default;
 
-  const idForArray = array => "__array-".concat(Ember.guidFor(array));
+  function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+  function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+  function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+  function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  var idForArray = function idForArray(array) {
+    return "__array-".concat(Ember.guidFor(array));
+  };
 
   function _default(multiArrayComputed) {
     return Ember.Helper.extend({
-      compute([...arrays]) {
-        Ember.set(this, 'arrays', arrays.map(obj => {
+      compute: function compute(_ref) {
+        var _ref2 = _toArray(_ref),
+            arrays = _ref2.slice(0);
+
+        Ember.set(this, 'arrays', arrays.map(function (obj) {
           if (Ember.isArray(obj)) {
             return Ember.A(obj);
           }
@@ -62688,36 +63593,39 @@ requireModule('ember')
         }));
         return Ember.get(this, 'content');
       },
-
       valuesDidChange: Ember.observer('arrays.[]', function () {
         this._recomputeArrayKeys();
 
-        let arrays = Ember.get(this, 'arrays');
-        let arrayKeys = Ember.get(this, 'arrayKeys');
+        var arrays = Ember.get(this, 'arrays');
+        var arrayKeys = Ember.get(this, 'arrayKeys');
 
         if (Ember.isEmpty(arrays)) {
           Ember.defineProperty(this, 'content', []);
           return;
         }
 
-        Ember.defineProperty(this, 'content', multiArrayComputed(...arrayKeys));
+        Ember.defineProperty(this, 'content', multiArrayComputed.apply(void 0, _toConsumableArray(arrayKeys)));
       }),
       contentDidChange: Ember.observer('content.[]', function () {
         this.recompute();
       }),
+      _recomputeArrayKeys: function _recomputeArrayKeys() {
+        var _this = this;
 
-      _recomputeArrayKeys() {
-        let arrays = Ember.get(this, 'arrays');
-        let oldArrayKeys = Ember.get(this, 'arrayKeys') || [];
-        let newArrayKeys = arrays.map(idForArray);
-        let keysToRemove = oldArrayKeys.filter(key => {
+        var arrays = Ember.get(this, 'arrays');
+        var oldArrayKeys = Ember.get(this, 'arrayKeys') || [];
+        var newArrayKeys = arrays.map(idForArray);
+        var keysToRemove = oldArrayKeys.filter(function (key) {
           return newArrayKeys.indexOf(key) === -1;
         });
-        keysToRemove.forEach(key => Ember.set(this, key, null));
-        arrays.forEach(array => Ember.set(this, idForArray(array), array));
+        keysToRemove.forEach(function (key) {
+          return Ember.set(_this, key, null);
+        });
+        arrays.forEach(function (array) {
+          return Ember.set(_this, idForArray(array), array);
+        });
         Ember.set(this, 'arrayKeys', newArrayKeys);
       }
-
     });
   }
 });
@@ -62729,7 +63637,15 @@ requireModule('ember')
   });
   _exports.default = createNeedleHaystackHelper;
 
-  const K = () => {};
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  var K = function K() {};
   /**
    * Creates a generic Helper class implementation that expects a `needle` and
    * `haystack` as arguments. A `fn` function is required to be passed in
@@ -62741,16 +63657,21 @@ requireModule('ember')
    */
 
 
-  function createNeedleHaystackHelper(fn = K) {
+  function createNeedleHaystackHelper() {
+    var fn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : K;
     return Ember.Helper.extend({
       content: Ember.computed('needle.[]', 'haystack.[]', 'option', function () {
-        let needle = Ember.get(this, 'needle');
-        let haystack = Ember.get(this, 'haystack');
-        let option = Ember.get(this, 'option');
+        var needle = Ember.get(this, 'needle');
+        var haystack = Ember.get(this, 'haystack');
+        var option = Ember.get(this, 'option');
         return fn(needle, haystack, option);
       }).readOnly(),
+      compute: function compute(_ref) {
+        var _ref2 = _slicedToArray(_ref, 3),
+            needle = _ref2[0],
+            option = _ref2[1],
+            haystack = _ref2[2];
 
-      compute([needle, option, haystack]) {
         if (Ember.isEmpty(haystack)) {
           haystack = option;
           option = null;
@@ -62761,7 +63682,6 @@ requireModule('ember')
         Ember.set(this, 'option', option);
         return Ember.get(this, 'content');
       },
-
       contentDidChange: Ember.observer('content', function () {
         this.recompute();
       })
@@ -62777,18 +63697,33 @@ requireModule('ember')
   _exports.append = append;
   _exports.default = void 0;
 
-  function append(...dependentKeys) {
+  function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+  function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+  function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+  function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+  function append() {
+    for (var _len = arguments.length, dependentKeys = new Array(_len), _key = 0; _key < _len; _key++) {
+      dependentKeys[_key] = arguments[_key];
+    }
+
     dependentKeys = dependentKeys || [];
-    let arrayKeys = dependentKeys.map(dependentKey => {
+    var arrayKeys = dependentKeys.map(function (dependentKey) {
       return "".concat(dependentKey, ".[]");
     });
-    return Ember.computed(...arrayKeys, function () {
-      let array = dependentKeys.map(dependentKey => {
-        let value = Ember.get(this, dependentKey);
+    return Ember.computed.apply(void 0, _toConsumableArray(arrayKeys).concat([function () {
+      var _this = this,
+          _ref;
+
+      var array = dependentKeys.map(function (dependentKey) {
+        var value = Ember.get(_this, dependentKey);
         return Ember.isArray(value) ? value.toArray() : [value];
       });
-      return [].concat(...array);
-    });
+      return (_ref = []).concat.apply(_ref, _toConsumableArray(array));
+    }]));
   }
 
   var _default = (0, _createMultiArrayHelper.default)(append);
@@ -62804,7 +63739,8 @@ requireModule('ember')
   _exports.array = array;
   _exports.default = void 0;
 
-  function array(params = []) {
+  function array() {
+    var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     // slice params to avoid mutating the provided params
     return Ember.A(params.slice());
   }
@@ -62821,15 +63757,22 @@ requireModule('ember')
   });
   _exports.chunk = chunk;
   _exports.default = void 0;
-  const {
-    max,
-    ceil
-  } = Math;
+
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  var max = Math.max,
+      ceil = Math.ceil;
 
   function chunk(num, array) {
-    let integer = parseInt(num, 10);
-    let size = max(integer, 0);
-    let length = 0;
+    var integer = parseInt(num, 10);
+    var size = max(integer, 0);
+    var length = 0;
 
     if (Ember.isArray(array)) {
       length = Ember.get(array, 'length');
@@ -62838,9 +63781,9 @@ requireModule('ember')
     if (!length || size < 1) {
       return [];
     } else {
-      let index = 0;
-      let resultIndex = -1;
-      let result = new Array(ceil(length / size));
+      var index = 0;
+      var resultIndex = -1;
+      var result = new Array(ceil(length / size));
 
       while (index < length) {
         result[++resultIndex] = array.slice(index, index += size);
@@ -62852,17 +63795,19 @@ requireModule('ember')
 
   var _default = Ember.Helper.extend({
     content: Ember.computed('num', 'array.[]', function () {
-      let array = Ember.get(this, 'array');
-      let num = Ember.get(this, 'num');
+      var array = Ember.get(this, 'array');
+      var num = Ember.get(this, 'num');
       return chunk(num, array);
     }),
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          num = _ref2[0],
+          array = _ref2[1];
 
-    compute([num, array]) {
       Ember.set(this, 'array', array);
       Ember.set(this, 'num', num);
       return Ember.get(this, 'content');
     },
-
     contentDidChange: Ember.observer('content', function () {
       this.recompute();
     })
@@ -62878,8 +63823,19 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 1),
+          array = _ref2[0];
+
       if (!Ember.isArray(array)) {
         return Ember.A([array]);
       }
@@ -62887,7 +63843,6 @@ requireModule('ember')
       Ember.set(this, 'array', array);
       return Ember.get(this, 'content');
     },
-
     content: Ember.computed.filter('array', Ember.isPresent),
     contentDidChange: Ember.observer('content', function () {
       this.recompute();
@@ -62905,8 +63860,26 @@ requireModule('ember')
   _exports.compute = compute;
   _exports.default = void 0;
 
-  function compute([action, ...params]) {
-    return action(...params);
+  function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+  function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+  function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+  function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function compute(_ref) {
+    var _ref2 = _toArray(_ref),
+        action = _ref2[0],
+        params = _ref2.slice(1);
+
+    return action.apply(void 0, _toConsumableArray(params));
   }
 
   var _default = Ember.Helper.helper(compute);
@@ -62932,7 +63905,9 @@ requireModule('ember')
     }
 
     if (Ember.isArray(needle) && Ember.get(needle, 'length')) {
-      return needle.reduce((acc, val) => acc && _contains(val, haystack), true);
+      return needle.reduce(function (acc, val) {
+        return acc && _contains(val, haystack);
+      }, true);
     }
 
     return _contains(needle, haystack);
@@ -62951,7 +63926,19 @@ requireModule('ember')
   _exports.dec = dec;
   _exports.default = void 0;
 
-  function dec([step, val]) {
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function dec(_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        step = _ref2[0],
+        val = _ref2[1];
+
     if (Ember.isEmpty(val)) {
       val = step;
       step = undefined;
@@ -62982,12 +63969,23 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([dropAmount, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          dropAmount = _ref2[0],
+          array = _ref2[1];
+
       Ember.set(this, 'array', array);
       return array.slice(dropAmount);
     },
-
     arrayContentDidChange: Ember.observer('array.[]', function () {
       this.recompute();
     })
@@ -63003,8 +64001,21 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([byPath, value, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 3),
+          byPath = _ref2[0],
+          value = _ref2[1],
+          array = _ref2[2];
+
       if (!Ember.isArray(array) && Ember.isArray(value)) {
         array = value;
         value = undefined;
@@ -63015,29 +64026,34 @@ requireModule('ember')
       Ember.set(this, 'value', value);
       return Ember.get(this, 'content');
     },
-
     byPathDidChange: Ember.observer('byPath', 'value', function () {
-      let byPath = Ember.get(this, 'byPath');
-      let value = Ember.get(this, 'value');
+      var byPath = Ember.get(this, 'byPath');
+      var value = Ember.get(this, 'value');
 
       if (Ember.isEmpty(byPath)) {
         Ember.defineProperty(this, 'content', []);
         return;
       }
 
-      let filterFn;
+      var filterFn;
 
       if (Ember.isPresent(value)) {
         if (typeof value === 'function') {
-          filterFn = item => value(Ember.get(item, byPath));
+          filterFn = function filterFn(item) {
+            return value(Ember.get(item, byPath));
+          };
         } else {
-          filterFn = item => (0, _isEqual.default)(Ember.get(item, byPath), value);
+          filterFn = function filterFn(item) {
+            return (0, _isEqual.default)(Ember.get(item, byPath), value);
+          };
         }
       } else {
-        filterFn = item => !!Ember.get(item, byPath);
+        filterFn = function filterFn(item) {
+          return !!Ember.get(item, byPath);
+        };
       }
 
-      let cp = Ember.computed.filter("array.@each.".concat(byPath), filterFn);
+      var cp = Ember.computed.filter("array.@each.".concat(byPath), filterFn);
       Ember.defineProperty(this, 'content', cp);
     }),
     contentDidChange: Ember.observer('content', function () {
@@ -63055,22 +64071,33 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([callback, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          callback = _ref2[0],
+          array = _ref2[1];
+
       Ember.set(this, 'array', array);
       Ember.set(this, 'callback', callback);
       return Ember.get(this, 'content');
     },
-
     callbackDidChange: Ember.observer('callback', function () {
-      let callback = Ember.get(this, 'callback');
+      var callback = Ember.get(this, 'callback');
 
       if (Ember.isEmpty(callback)) {
         Ember.defineProperty(this, 'content', []);
         return;
       }
 
-      let cp = Ember.computed.filter('array', callback);
+      var cp = Ember.computed.filter('array', callback);
       Ember.defineProperty(this, 'content', cp);
     }),
     contentDidChange: Ember.observer('content', function () {
@@ -63088,16 +64115,28 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([byPath, value, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 3),
+          byPath = _ref2[0],
+          value = _ref2[1],
+          array = _ref2[2];
+
       Ember.set(this, 'array', array);
       Ember.set(this, 'byPath', byPath);
       Ember.set(this, 'value', value);
       return Ember.get(this, 'content');
     },
-
     byPathDidChange: Ember.observer('byPath', function () {
-      let byPath = Ember.get(this, 'byPath');
+      var byPath = Ember.get(this, 'byPath');
 
       if (Ember.isEmpty(byPath)) {
         Ember.defineProperty(this, 'content', []);
@@ -63105,8 +64144,8 @@ requireModule('ember')
       }
 
       Ember.defineProperty(this, 'content', Ember.computed("array.@each.".concat(byPath), 'value', function () {
-        let array = Ember.get(this, 'array');
-        let value = Ember.get(this, 'value');
+        var array = Ember.get(this, 'array');
+        var value = Ember.get(this, 'value');
         return Ember.A(array).findBy(byPath, value);
       }));
     }),
@@ -63126,22 +64165,32 @@ requireModule('ember')
   _exports.flatten = flatten;
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   function flatten(array) {
     if (!Ember.isArray(array)) {
       return array;
     }
 
-    return array.reduce((flattened, el) => {
+    return array.reduce(function (flattened, el) {
       return flattened.concat(flatten(el));
     }, []);
   }
 
   var _default = Ember.Helper.extend({
-    compute([array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 1),
+          array = _ref2[0];
+
       Ember.set(this, 'array', array);
       return flatten(array);
     },
-
     arrayContentDidChange: Ember.observer('array.[]', function () {
       this.recompute();
     })
@@ -63157,13 +64206,21 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
-  const groupFunction = function () {
-    let array = Ember.get(this, 'array');
-    let byPath = Ember.get(this, 'byPath');
-    let groups = Ember.Object.create();
-    array.forEach(item => {
-      let groupName = Ember.get(item, byPath);
-      let group = Ember.get(groups, groupName);
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  var groupFunction = function groupFunction() {
+    var array = Ember.get(this, 'array');
+    var byPath = Ember.get(this, 'byPath');
+    var groups = Ember.Object.create();
+    array.forEach(function (item) {
+      var groupName = Ember.get(item, byPath);
+      var group = Ember.get(groups, groupName);
 
       if (!Ember.isArray(group)) {
         group = Ember.A();
@@ -63176,14 +64233,17 @@ requireModule('ember')
   };
 
   var _default = Ember.Helper.extend({
-    compute([byPath, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          byPath = _ref2[0],
+          array = _ref2[1];
+
       Ember.set(this, 'array', array);
       Ember.set(this, 'byPath', byPath);
       return Ember.get(this, 'content');
     },
-
     byPathDidChange: Ember.observer('byPath', function () {
-      let byPath = Ember.get(this, 'byPath');
+      var byPath = Ember.get(this, 'byPath');
 
       if (byPath) {
         Ember.defineProperty(this, 'content', Ember.computed("array.@each.".concat(byPath), groupFunction));
@@ -63207,9 +64267,10 @@ requireModule('ember')
   _exports.hasNext = hasNext;
   _exports.default = void 0;
 
-  function hasNext(currentValue, array, useDeepEqual = false) {
-    let nextValue = (0, _next.next)(currentValue, array, useDeepEqual);
-    let isNotSameValue = !(0, _isEqual.default)(nextValue, currentValue, useDeepEqual);
+  function hasNext(currentValue, array) {
+    var useDeepEqual = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var nextValue = (0, _next.next)(currentValue, array, useDeepEqual);
+    var isNotSameValue = !(0, _isEqual.default)(nextValue, currentValue, useDeepEqual);
     return isNotSameValue && Ember.isPresent(nextValue);
   }
 
@@ -63226,9 +64287,10 @@ requireModule('ember')
   _exports.hasPrevious = hasPrevious;
   _exports.default = void 0;
 
-  function hasPrevious(currentValue, array, useDeepEqual = false) {
-    let previousValue = (0, _previous.previous)(currentValue, array, useDeepEqual);
-    let isNotSameValue = !(0, _isEqual.default)(previousValue, currentValue, useDeepEqual);
+  function hasPrevious(currentValue, array) {
+    var useDeepEqual = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var previousValue = (0, _previous.previous)(currentValue, array, useDeepEqual);
+    var isNotSameValue = !(0, _isEqual.default)(previousValue, currentValue, useDeepEqual);
     return isNotSameValue && Ember.isPresent(previousValue);
   }
 
@@ -63245,7 +64307,19 @@ requireModule('ember')
   _exports.inc = inc;
   _exports.default = void 0;
 
-  function inc([step, val]) {
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function inc(_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        step = _ref2[0],
+        val = _ref2[1];
+
     if (Ember.isEmpty(val)) {
       val = step;
       step = undefined;
@@ -63288,16 +64362,29 @@ requireModule('ember')
   });
   _exports.invoke = invoke;
   _exports.default = void 0;
-  const {
-    all
-  } = Ember.RSVP;
 
-  function invoke([methodName, ...args]) {
-    let obj = args.pop();
+  function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  var all = Ember.RSVP.all;
+
+  function invoke(_ref) {
+    var _ref2 = _toArray(_ref),
+        methodName = _ref2[0],
+        args = _ref2.slice(1);
+
+    var obj = args.pop();
 
     if (Ember.isArray(obj)) {
       return function () {
-        let promises = obj.map(item => Ember.tryInvoke(item, methodName, args));
+        var promises = obj.map(function (item) {
+          return Ember.tryInvoke(item, methodName, args);
+        });
         return all(promises);
       };
     }
@@ -63319,8 +64406,20 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([separator, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          separator = _ref2[0],
+          array = _ref2[1];
+
       if (Ember.isArray(separator)) {
         array = separator;
         separator = ',';
@@ -63329,7 +64428,6 @@ requireModule('ember')
       Ember.set(this, 'array', array);
       return array.join(separator);
     },
-
     arrayContentDidChange: Ember.observer('array.[]', function () {
       this.recompute();
     })
@@ -63345,15 +64443,26 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([byPath, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          byPath = _ref2[0],
+          array = _ref2[1];
+
       Ember.set(this, 'array', array);
       Ember.set(this, 'byPath', byPath);
       return Ember.get(this, 'content');
     },
-
     byPathDidChange: Ember.observer('byPath', function () {
-      let byPath = Ember.get(this, 'byPath');
+      var byPath = Ember.get(this, 'byPath');
 
       if (Ember.isEmpty(byPath)) {
         Ember.defineProperty(this, 'content', []);
@@ -63377,15 +64486,26 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([callback, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          callback = _ref2[0],
+          array = _ref2[1];
+
       Ember.set(this, 'array', array);
       Ember.set(this, 'callback', callback);
       return Ember.get(this, 'content');
     },
-
     byPathDidChange: Ember.observer('callback', function () {
-      let callback = Ember.get(this, 'callback');
+      var callback = Ember.get(this, 'callback');
 
       if (Ember.isEmpty(callback)) {
         Ember.defineProperty(this, 'content', []);
@@ -63410,9 +64530,10 @@ requireModule('ember')
   _exports.next = next;
   _exports.default = void 0;
 
-  function next(currentValue, array, useDeepEqual = false) {
-    let currentIndex = (0, _getIndex.default)(array, currentValue, useDeepEqual);
-    let lastIndex = Ember.get(array, 'length') - 1;
+  function next(currentValue, array) {
+    var useDeepEqual = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var currentIndex = (0, _getIndex.default)(array, currentValue, useDeepEqual);
+    var lastIndex = Ember.get(array, 'length') - 1;
 
     if (Ember.isEmpty(currentIndex)) {
       return;
@@ -63434,6 +64555,14 @@ requireModule('ember')
   _exports.objectAt = objectAt;
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   function objectAt(index, array) {
     if (!Ember.isArray(array)) {
       return undefined;
@@ -63445,17 +64574,19 @@ requireModule('ember')
 
   var _default = Ember.Helper.extend({
     content: Ember.computed('index', 'array.[]', function () {
-      let index = Ember.get(this, 'index');
-      let array = Ember.get(this, 'array');
+      var index = Ember.get(this, 'index');
+      var array = Ember.get(this, 'array');
       return objectAt(index, array);
     }),
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          index = _ref2[0],
+          array = _ref2[1];
 
-    compute([index, array]) {
       Ember.set(this, 'index', index);
       Ember.set(this, 'array', array);
       return Ember.get(this, 'content');
     },
-
     contentDidChange: Ember.observer('content', function () {
       this.recompute();
     })
@@ -63472,12 +64603,25 @@ requireModule('ember')
   _exports.optional = optional;
   _exports.default = void 0;
 
-  function optional([action]) {
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function optional(_ref) {
+    var _ref2 = _slicedToArray(_ref, 1),
+        action = _ref2[0];
+
     if (typeof action === 'function') {
       return action;
     }
 
-    return i => i;
+    return function (i) {
+      return i;
+    };
   }
 
   var _default = Ember.Helper.helper(optional);
@@ -63491,7 +64635,7 @@ requireModule('ember')
     value: true
   });
   _exports.default = void 0;
-  const closurePipe = _pipe.pipe;
+  var closurePipe = _pipe.pipe;
 
   if (_closureAction.default) {
     closurePipe[_closureAction.default] = true;
@@ -63519,11 +64663,16 @@ requireModule('ember')
     return curr(acc);
   }
 
-  function pipe(actions = []) {
-    return function (...args) {
-      return actions.reduce((acc, curr, idx) => {
+  function pipe() {
+    var actions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    return function () {
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      return actions.reduce(function (acc, curr, idx) {
         if (idx === 0) {
-          return curr(...args);
+          return curr.apply(void 0, args);
         }
 
         return invokeFunction(acc, curr);
@@ -63544,8 +64693,9 @@ requireModule('ember')
   _exports.previous = previous;
   _exports.default = void 0;
 
-  function previous(currentValue, array, useDeepEqual = false) {
-    let currentIndex = (0, _getIndex.default)(array, currentValue, useDeepEqual);
+  function previous(currentValue, array) {
+    var useDeepEqual = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var currentIndex = (0, _getIndex.default)(array, currentValue, useDeepEqual);
 
     if (Ember.isEmpty(currentIndex)) {
       return;
@@ -63567,19 +64717,26 @@ requireModule('ember')
   _exports.queue = queue;
   _exports.default = void 0;
 
-  function queue(actions = []) {
-    return function (...args) {
-      let invokeWithArgs = function (acc, curr) {
+  function queue() {
+    var actions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    return function () {
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      var invokeWithArgs = function invokeWithArgs(acc, curr) {
         if ((0, _isPromise.default)(acc)) {
-          return acc.then(() => curr(...args));
+          return acc.then(function () {
+            return curr.apply(void 0, args);
+          });
         }
 
-        return curr(...args);
+        return curr.apply(void 0, args);
       };
 
-      return actions.reduce((acc, curr, idx) => {
+      return actions.reduce(function (acc, curr, idx) {
         if (idx === 0) {
-          return curr(...args);
+          return curr.apply(void 0, args);
         }
 
         return invokeWithArgs(acc, curr);
@@ -63600,23 +64757,36 @@ requireModule('ember')
   _exports.range = range;
   _exports.default = void 0;
 
-  function range([min, max, isInclusive]) {
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function range(_ref) {
+    var _ref2 = _slicedToArray(_ref, 3),
+        min = _ref2[0],
+        max = _ref2[1],
+        isInclusive = _ref2[2];
+
     isInclusive = Ember.typeOf(isInclusive) === 'boolean' ? isInclusive : false;
-    let numbers = [];
+    var numbers = [];
 
     if (min < max) {
-      let testFn = isInclusive ? _comparison.lte : _comparison.lt;
+      var testFn = isInclusive ? _comparison.lte : _comparison.lt;
 
-      for (let i = min; testFn(i, max); i++) {
+      for (var i = min; testFn(i, max); i++) {
         numbers.push(i);
       }
     }
 
     if (min > max) {
-      let testFn = isInclusive ? _comparison.gte : _comparison.gt;
+      var _testFn = isInclusive ? _comparison.gte : _comparison.gt;
 
-      for (let i = min; testFn(i, max); i--) {
-        numbers.push(i);
+      for (var _i2 = min; _testFn(_i2, max); _i2--) {
+        numbers.push(_i2);
       }
     }
 
@@ -63639,25 +64809,39 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([callback, initialValue, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 3),
+          callback = _ref2[0],
+          initialValue = _ref2[1],
+          array = _ref2[2];
+
       Ember.set(this, 'callback', callback);
       Ember.set(this, 'array', array);
       Ember.set(this, 'initialValue', initialValue);
       return Ember.get(this, 'content');
     },
-
     callbackDidChange: Ember.observer('callback', 'initialValue', function () {
-      let callback = Ember.get(this, 'callback');
-      let initialValue = Ember.get(this, 'initialValue');
+      var _this = this;
+
+      var callback = Ember.get(this, 'callback');
+      var initialValue = Ember.get(this, 'initialValue');
 
       if (Ember.isEmpty(callback)) {
         Ember.defineProperty(this, 'content', []);
         return;
       }
 
-      let cp = Ember.computed('array.[]', () => {
-        let array = Ember.get(this, 'array');
+      var cp = Ember.computed('array.[]', function () {
+        var array = Ember.get(_this, 'array');
         return array.reduce(callback, initialValue);
       });
       Ember.defineProperty(this, 'content', cp);
@@ -63677,8 +64861,21 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([byPath, value, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 3),
+          byPath = _ref2[0],
+          value = _ref2[1],
+          array = _ref2[2];
+
       if (!Ember.isArray(array) && Ember.isArray(value)) {
         array = value;
         value = undefined;
@@ -63689,29 +64886,34 @@ requireModule('ember')
       Ember.set(this, 'value', value);
       return Ember.get(this, 'content');
     },
-
     byPathDidChange: Ember.observer('byPath', 'value', function () {
-      let byPath = Ember.get(this, 'byPath');
-      let value = Ember.get(this, 'value');
+      var byPath = Ember.get(this, 'byPath');
+      var value = Ember.get(this, 'value');
 
       if (Ember.isEmpty(byPath)) {
         Ember.defineProperty(this, 'content', []);
         return;
       }
 
-      let filterFn;
+      var filterFn;
 
       if (Ember.isPresent(value)) {
         if (typeof value === 'function') {
-          filterFn = item => !value(Ember.get(item, byPath));
+          filterFn = function filterFn(item) {
+            return !value(Ember.get(item, byPath));
+          };
         } else {
-          filterFn = item => !(0, _isEqual.default)(Ember.get(item, byPath), value);
+          filterFn = function filterFn(item) {
+            return !(0, _isEqual.default)(Ember.get(item, byPath), value);
+          };
         }
       } else {
-        filterFn = item => !Ember.get(item, byPath);
+        filterFn = function filterFn(item) {
+          return !Ember.get(item, byPath);
+        };
       }
 
-      let cp = Ember.computed.filter("array.@each.".concat(byPath), filterFn);
+      var cp = Ember.computed.filter("array.@each.".concat(byPath), filterFn);
       Ember.defineProperty(this, 'content', cp);
     }),
     contentDidChange: Ember.observer('content', function () {
@@ -63730,14 +64932,28 @@ requireModule('ember')
   _exports.repeat = repeat;
   _exports.default = void 0;
 
-  function repeat([length, value]) {
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function repeat(_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        length = _ref2[0],
+        value = _ref2[1];
+
     if (Ember.typeOf(length) !== 'number') {
       return [value];
     }
 
     return Array.apply(null, {
-      length
-    }).map(() => value); // eslint-disable-line
+      length: length
+    }).map(function () {
+      return value;
+    }); // eslint-disable-line
   }
 
   var _default = Ember.Helper.helper(repeat);
@@ -63752,8 +64968,19 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 1),
+          array = _ref2[0];
+
       if (!Ember.isArray(array)) {
         return [array];
       }
@@ -63761,7 +64988,6 @@ requireModule('ember')
       Ember.set(this, 'array', array);
       return Ember.A(array).slice(0).reverse();
     },
-
     arrayContentDidChange: Ember.observer('array.[]', function () {
       this.recompute();
     })
@@ -63778,10 +65004,18 @@ requireModule('ember')
   _exports.shuffle = shuffle;
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   function shuffle(array, randomizer) {
     array = array.slice(0);
-    let count = Ember.get(array, 'length');
-    let rand, temp;
+    var count = Ember.get(array, 'length');
+    var rand, temp;
     randomizer = Ember.typeOf(randomizer) === 'function' && randomizer || Math.random;
 
     while (count > 1) {
@@ -63795,7 +65029,11 @@ requireModule('ember')
   }
 
   var _default = Ember.Helper.extend({
-    compute([random, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          random = _ref2[0],
+          array = _ref2[1];
+
       if (array === undefined) {
         array = random;
         random = undefined;
@@ -63808,7 +65046,6 @@ requireModule('ember')
       Ember.set(this, 'array', array);
       return shuffle(array, random);
     },
-
     arrayContentDidChange: Ember.observer('array.[]', function () {
       this.recompute();
     })
@@ -63824,12 +65061,24 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([start, end, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 3),
+          start = _ref2[0],
+          end = _ref2[1],
+          array = _ref2[2];
+
       Ember.set(this, 'array', array);
       return array.slice(start, end);
     },
-
     arrayContentDidChange: Ember.observer('array.[]', function () {
       this.recompute();
     })
@@ -63845,12 +65094,23 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute(params) {
+    compute: function compute(params) {
       // slice params to avoid mutating the provided params
-      let sortProps = params.slice();
-      let array = sortProps.pop();
-      let [firstSortProp] = sortProps;
+      var sortProps = params.slice();
+      var array = sortProps.pop();
+
+      var _sortProps = sortProps,
+          _sortProps2 = _slicedToArray(_sortProps, 1),
+          firstSortProp = _sortProps2[0];
 
       if (Ember.typeOf(firstSortProp) === 'function' || Ember.isArray(firstSortProp)) {
         sortProps = firstSortProp;
@@ -63860,9 +65120,8 @@ requireModule('ember')
       Ember.set(this, 'sortProps', sortProps);
       return Ember.get(this, 'content');
     },
-
     sortPropsDidChange: Ember.observer('sortProps', function () {
-      let sortProps = Ember.get(this, 'sortProps');
+      var sortProps = Ember.get(this, 'sortProps');
 
       if (Ember.isEmpty(sortProps)) {
         Ember.defineProperty(this, 'content', []);
@@ -63889,12 +65148,23 @@ requireModule('ember')
   });
   _exports.default = void 0;
 
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   var _default = Ember.Helper.extend({
-    compute([takeAmount, array]) {
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          takeAmount = _ref2[0],
+          array = _ref2[1];
+
       Ember.set(this, 'array', array);
       return array.slice(0, takeAmount);
     },
-
     arrayContentDidChange: Ember.observer('array.[]', function () {
       this.recompute();
     })
@@ -63909,7 +65179,7 @@ requireModule('ember')
     value: true
   });
   _exports.default = void 0;
-  const closureToggle = _toggle.toggle;
+  var closureToggle = _toggle.toggle;
 
   if (_closureAction.default) {
     closureToggle[_closureAction.default] = true;
@@ -63928,6 +65198,14 @@ requireModule('ember')
   _exports.toggle = toggle;
   _exports.default = void 0;
 
+  function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   function nextIndex(length, currentIdx) {
     if (currentIdx === -1 || currentIdx + 1 === length) {
       return 0;
@@ -63936,13 +65214,18 @@ requireModule('ember')
     return currentIdx + 1;
   }
 
-  function toggle([prop, obj, ...values]) {
+  function toggle(_ref) {
+    var _ref2 = _toArray(_ref),
+        prop = _ref2[0],
+        obj = _ref2[1],
+        values = _ref2.slice(2);
+
     return function () {
-      let currentValue = Ember.get(obj, prop);
+      var currentValue = Ember.get(obj, prop);
 
       if (Ember.isPresent(values)) {
-        let currentIdx = values.indexOf(currentValue);
-        let nextIdx = nextIndex(Ember.get(values, 'length'), currentIdx);
+        var currentIdx = values.indexOf(currentValue);
+        var nextIdx = nextIndex(Ember.get(values, 'length'), currentIdx);
         return Ember.set(obj, prop, values[nextIdx]);
       }
 
@@ -63985,7 +65268,7 @@ requireModule('ember')
     }
 
     if (Ember.isArray(needle) && Ember.get(needle, 'length')) {
-      return haystack.reduce((acc, val) => {
+      return haystack.reduce(function (acc, val) {
         return contains(val, needle) ? acc : acc.concat(val);
       }, []);
     }
@@ -64005,241 +65288,241 @@ requireModule('ember')
   });
   Object.defineProperty(_exports, "AppendHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _append.default;
     }
   });
   Object.defineProperty(_exports, "ArrayHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _array.default;
     }
   });
   Object.defineProperty(_exports, "ChunkHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _chunk.default;
     }
   });
   Object.defineProperty(_exports, "CompactHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _compact.default;
     }
   });
   Object.defineProperty(_exports, "ComputeHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _compute.default;
     }
   });
   Object.defineProperty(_exports, "ContainsHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _contains.default;
     }
   });
   Object.defineProperty(_exports, "DecHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _dec.default;
     }
   });
   Object.defineProperty(_exports, "DropHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _drop.default;
     }
   });
   Object.defineProperty(_exports, "FilterByHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _filterBy.default;
     }
   });
   Object.defineProperty(_exports, "FilterHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _filter.default;
     }
   });
   Object.defineProperty(_exports, "FindByHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _findBy.default;
     }
   });
   Object.defineProperty(_exports, "GroupByHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _groupBy.default;
     }
   });
   Object.defineProperty(_exports, "IncHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _inc.default;
     }
   });
   Object.defineProperty(_exports, "IntersectHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _intersect.default;
     }
   });
   Object.defineProperty(_exports, "InvokeHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _invoke.default;
     }
   });
   Object.defineProperty(_exports, "JoinHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _join.default;
     }
   });
   Object.defineProperty(_exports, "MapByHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _mapBy.default;
     }
   });
   Object.defineProperty(_exports, "MapHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _map.default;
     }
   });
   Object.defineProperty(_exports, "OptionalHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _optional.default;
     }
   });
   Object.defineProperty(_exports, "PipeHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _pipe.default;
     }
   });
   Object.defineProperty(_exports, "PipeActionHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _pipeAction.default;
     }
   });
   Object.defineProperty(_exports, "RangeHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _range.default;
     }
   });
   Object.defineProperty(_exports, "ReduceHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _reduce.default;
     }
   });
   Object.defineProperty(_exports, "RejectByHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _rejectBy.default;
     }
   });
   Object.defineProperty(_exports, "RepeatHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _repeat.default;
     }
   });
   Object.defineProperty(_exports, "ShuffleHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _shuffle.default;
     }
   });
   Object.defineProperty(_exports, "SortByHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _sortBy.default;
     }
   });
   Object.defineProperty(_exports, "TakeHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _take.default;
     }
   });
   Object.defineProperty(_exports, "ToggleHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _toggle.default;
     }
   });
   Object.defineProperty(_exports, "ToggleActionHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _toggleAction.default;
     }
   });
   Object.defineProperty(_exports, "UnionHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _union.default;
     }
   });
   Object.defineProperty(_exports, "WithoutHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _without.default;
     }
   });
   Object.defineProperty(_exports, "FlattenHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _flatten.default;
     }
   });
   Object.defineProperty(_exports, "ObjectAtHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _objectAt.default;
     }
   });
   Object.defineProperty(_exports, "SliceHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _slice.default;
     }
   });
   Object.defineProperty(_exports, "NextHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _next.default;
     }
   });
   Object.defineProperty(_exports, "PreviousHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _previous.default;
     }
   });
   Object.defineProperty(_exports, "HasNextHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _hasNext.default;
     }
   });
   Object.defineProperty(_exports, "HasPreviousHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _hasPrevious.default;
     }
   });
   Object.defineProperty(_exports, "QueueHelper", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _queue.default;
     }
   });
@@ -64280,15 +65563,15 @@ requireModule('ember')
   _exports.default = getIndex;
 
   function getIndex(array, currentValue, useDeepEqual) {
-    let needle = currentValue;
+    var needle = currentValue;
 
     if (useDeepEqual) {
-      needle = Ember.A(array).find(object => {
+      needle = Ember.A(array).find(function (object) {
         return (0, _isEqual.default)(object, currentValue, useDeepEqual);
       });
     }
 
-    let index = Ember.A(array).indexOf(needle);
+    var index = Ember.A(array).indexOf(needle);
     return index >= 0 ? index : null;
   }
 });
@@ -64300,8 +65583,13 @@ requireModule('ember')
   });
   _exports.default = includes;
 
-  function includes(haystack, ...args) {
-    let finder = haystack.includes || haystack.contains;
+  function includes(haystack) {
+    var finder = haystack.includes || haystack.contains;
+
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
     return finder.apply(haystack, args);
   }
 });
@@ -64313,7 +65601,9 @@ requireModule('ember')
   });
   _exports.default = isEqual;
 
-  function isEqual(firstValue, secondValue, useDeepEqual = false) {
+  function isEqual(firstValue, secondValue) {
+    var useDeepEqual = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
     if (useDeepEqual) {
       return JSON.stringify(firstValue) === JSON.stringify(secondValue);
     } else {
@@ -64341,7 +65631,8 @@ requireModule('ember')
   });
   _exports.default = isPromise;
 
-  function isPromiseLike(obj = {}) {
+  function isPromiseLike() {
+    var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return Ember.typeOf(obj.then) === 'function' && Ember.typeOf(obj.catch) === 'function';
   }
 
@@ -64355,9 +65646,22 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  const saturateActiveQueue = scheduler => {
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  var saturateActiveQueue = function saturateActiveQueue(scheduler) {
     while (scheduler.activeTaskInstances.length < scheduler.maxConcurrency) {
-      let taskInstance = scheduler.queuedTaskInstances.shift();
+      var taskInstance = scheduler.queuedTaskInstances.shift();
       if (!taskInstance) {
         break;
       }
@@ -64369,52 +65673,52 @@ requireModule('ember')
     return scheduler.maxConcurrency - scheduler.queuedTaskInstances.length - scheduler.activeTaskInstances.length;
   }
 
-  const enqueueTasksPolicy = exports.enqueueTasksPolicy = {
+  var enqueueTasksPolicy = exports.enqueueTasksPolicy = {
     requiresUnboundedConcurrency: true,
-    schedule(scheduler) {
+    schedule: function schedule(scheduler) {
       // [a,b,_] [c,d,e,f] becomes
       // [a,b,c] [d,e,f]
       saturateActiveQueue(scheduler);
     },
-    getNextPerformStatus(scheduler) {
+    getNextPerformStatus: function getNextPerformStatus(scheduler) {
       return numPerformSlots(scheduler) > 0 ? 'succeed' : 'enqueue';
     }
   };
 
-  const dropQueuedTasksPolicy = exports.dropQueuedTasksPolicy = {
-    cancelReason: `it belongs to a 'drop' Task that was already running`,
-    schedule(scheduler) {
+  var dropQueuedTasksPolicy = exports.dropQueuedTasksPolicy = {
+    cancelReason: 'it belongs to a \'drop\' Task that was already running',
+    schedule: function schedule(scheduler) {
       // [a,b,_] [c,d,e,f] becomes
       // [a,b,c] []
       saturateActiveQueue(scheduler);
       scheduler.spliceTaskInstances(this.cancelReason, scheduler.queuedTaskInstances, 0, scheduler.queuedTaskInstances.length);
     },
-    getNextPerformStatus(scheduler) {
+    getNextPerformStatus: function getNextPerformStatus(scheduler) {
       return numPerformSlots(scheduler) > 0 ? 'succeed' : 'drop';
     }
   };
 
-  const cancelOngoingTasksPolicy = exports.cancelOngoingTasksPolicy = {
-    cancelReason: `it belongs to a 'restartable' Task that was .perform()ed again`,
-    schedule(scheduler) {
+  var cancelOngoingTasksPolicy = exports.cancelOngoingTasksPolicy = {
+    cancelReason: 'it belongs to a \'restartable\' Task that was .perform()ed again',
+    schedule: function schedule(scheduler) {
       // [a,b,_] [c,d,e,f] becomes
       // [d,e,f] []
-      let activeTaskInstances = scheduler.activeTaskInstances;
-      let queuedTaskInstances = scheduler.queuedTaskInstances;
-      activeTaskInstances.push(...queuedTaskInstances);
+      var activeTaskInstances = scheduler.activeTaskInstances;
+      var queuedTaskInstances = scheduler.queuedTaskInstances;
+      activeTaskInstances.push.apply(activeTaskInstances, _toConsumableArray(queuedTaskInstances));
       queuedTaskInstances.length = 0;
 
-      let numToShift = Math.max(0, activeTaskInstances.length - scheduler.maxConcurrency);
+      var numToShift = Math.max(0, activeTaskInstances.length - scheduler.maxConcurrency);
       scheduler.spliceTaskInstances(this.cancelReason, activeTaskInstances, 0, numToShift);
     },
-    getNextPerformStatus(scheduler) {
+    getNextPerformStatus: function getNextPerformStatus(scheduler) {
       return numPerformSlots(scheduler) > 0 ? 'succeed' : 'cancel_previous';
     }
   };
 
-  const dropButKeepLatestPolicy = exports.dropButKeepLatestPolicy = {
-    cancelReason: `it belongs to a 'keepLatest' Task that was already running`,
-    schedule(scheduler) {
+  var dropButKeepLatestPolicy = exports.dropButKeepLatestPolicy = {
+    cancelReason: 'it belongs to a \'keepLatest\' Task that was already running',
+    schedule: function schedule(scheduler) {
       // [a,b,_] [c,d,e,f] becomes
       // [d,e,f] []
       saturateActiveQueue(scheduler);
@@ -64430,11 +65734,23 @@ requireModule('ember')
   });
   exports.hash = exports.race = exports.allSettled = exports.all = undefined;
 
+  var _marked = regeneratorRuntime.mark(resolver);
 
-  const asyncAll = taskAwareVariantOf(Ember.RSVP.Promise, 'all', identity);
+  var asyncAll = taskAwareVariantOf(Ember.RSVP.Promise, 'all', identity);
 
-  function* resolver(value) {
-    return value;
+  function resolver(value) {
+    return regeneratorRuntime.wrap(function resolver$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            return _context.abrupt('return', value);
+
+          case 1:
+          case 'end':
+            return _context.stop();
+        }
+      }
+    }, _marked, this);
   }
 
   /**
@@ -64451,21 +65767,21 @@ requireModule('ember')
    *
    * [Check out the "Awaiting Multiple Child Tasks example"](/docs/examples/joining-tasks)
    */
-  const all = exports.all = things => {
+  var all = exports.all = function all(things) {
     if (things.length === 0) {
       return things;
     }
 
-    for (let i = 0; i < things.length; ++i) {
-      let t = things[i];
+    for (var i = 0; i < things.length; ++i) {
+      var t = things[i];
       if (!(t && t[_utils.yieldableSymbol])) {
         return asyncAll(things);
       }
     }
 
-    let isAsync = false;
-    let taskInstances = things.map(thing => {
-      let ti = _taskInstance.default.create({
+    var isAsync = false;
+    var taskInstances = things.map(function (thing) {
+      var ti = _taskInstance.default.create({
         // TODO: consider simpler iterator than full on generator fn?
         fn: resolver,
         args: [thing]
@@ -64480,7 +65796,9 @@ requireModule('ember')
     if (isAsync) {
       return asyncAll(taskInstances);
     } else {
-      return taskInstances.map(ti => ti.value);
+      return taskInstances.map(function (ti) {
+        return ti.value;
+      });
     }
   };
 
@@ -64493,7 +65811,7 @@ requireModule('ember')
    * - if the task that `yield`ed `allSettled()` is canceled, any of the
    *   {@linkcode TaskInstance}s passed in to `allSettled` will be canceled
    */
-  const allSettled = exports.allSettled = taskAwareVariantOf(Ember.RSVP, 'allSettled', identity);
+  var allSettled = exports.allSettled = taskAwareVariantOf(Ember.RSVP, 'allSettled', identity);
 
   /**
    * A cancelation-aware variant of [Promise.race](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race).
@@ -64508,7 +65826,7 @@ requireModule('ember')
    *
    * [Check out the "Awaiting Multiple Child Tasks example"](/docs/examples/joining-tasks)
    */
-  const race = exports.race = taskAwareVariantOf(Ember.RSVP.Promise, 'race', identity);
+  var race = exports.race = taskAwareVariantOf(Ember.RSVP.Promise, 'race', identity);
 
   /**
    * A cancelation-aware variant of [RSVP.hash](http://emberjs.com/api/classes/RSVP.html#hash).
@@ -64521,30 +65839,32 @@ requireModule('ember')
    * - if any of the items rejects/cancels, all other cancelable items
    *   (e.g. {@linkcode TaskInstance}s) will be canceled
    */
-  const hash = exports.hash = taskAwareVariantOf(Ember.RSVP, 'hash', getValues);
+  var hash = exports.hash = taskAwareVariantOf(Ember.RSVP, 'hash', getValues);
 
   function identity(obj) {
     return obj;
   }
 
   function getValues(obj) {
-    return Object.keys(obj).map(k => obj[k]);
+    return Object.keys(obj).map(function (k) {
+      return obj[k];
+    });
   }
 
   function taskAwareVariantOf(obj, method, getItems) {
     return function (thing) {
-      let items = getItems(thing);
-      let defer = Ember.RSVP.defer();
+      var items = getItems(thing);
+      var defer = Ember.RSVP.defer();
 
       obj[method](thing).then(defer.resolve, defer.reject);
 
-      let hasCancelled = false;
-      let cancelAll = () => {
+      var hasCancelled = false;
+      var cancelAll = function cancelAll() {
         if (hasCancelled) {
           return;
         }
         hasCancelled = true;
-        items.forEach(it => {
+        items.forEach(function (it) {
           if (it) {
             if (it instanceof _taskInstance.default) {
               it.cancel();
@@ -64555,7 +65875,7 @@ requireModule('ember')
         });
       };
 
-      let promise = defer.promise.finally(cancelAll);
+      var promise = defer.promise.finally(cancelAll);
       promise.__ec_cancel__ = cancelAll;
       return promise;
     };
@@ -64568,12 +65888,13 @@ requireModule('ember')
     value: true
   });
   exports.default = _taskInstance.default.extend({
-    _makeIterator() {
-      let perform = this.get('perform');
+    _makeIterator: function _makeIterator() {
+      var perform = this.get('perform');
       (true && !(typeof perform === 'function') && Ember.assert("The object passed to `task()` must define a `perform` generator function, e.g. `perform: function * (a,b,c) {...}`, or better yet `*perform(a,b,c) {...}`", typeof perform === 'function'));
 
       return perform.apply(this, this.args);
     },
+
 
     perform: null
   });
@@ -64585,23 +65906,40 @@ requireModule('ember')
     value: true
   });
   exports.taskHelperClosure = taskHelperClosure;
-  function taskHelperClosure(helperName, taskMethod, _args, hash) {
-    let task = _args[0];
-    let outerArgs = _args.slice(1);
 
-    return Ember.run.bind(null, function (...innerArgs) {
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  function taskHelperClosure(helperName, taskMethod, _args, hash) {
+    var task = _args[0];
+    var outerArgs = _args.slice(1);
+
+    return Ember.run.bind(null, function () {
       if (!task || typeof task[taskMethod] !== 'function') {
-        (true && !(false) && Ember.assert(`The first argument passed to the \`${helperName}\` helper should be a Task object (without quotes); you passed ${task}`, false));
+        (true && !(false) && Ember.assert('The first argument passed to the `' + helperName + '` helper should be a Task object (without quotes); you passed ' + task, false));
 
         return;
       }
 
+      for (var _len = arguments.length, innerArgs = Array(_len), _key = 0; _key < _len; _key++) {
+        innerArgs[_key] = arguments[_key];
+      }
+
       if (hash && hash.value) {
-        let event = innerArgs.pop();
+        var event = innerArgs.pop();
         innerArgs.push(Ember.get(event, hash.value));
       }
 
-      return task[taskMethod](...outerArgs, ...innerArgs);
+      return task[taskMethod].apply(task, _toConsumableArray(outerArgs).concat(innerArgs));
     });
   }
 });
@@ -64613,7 +65951,7 @@ requireModule('ember')
   });
   exports.propertyModifiers = undefined;
   exports.resolveScheduler = resolveScheduler;
-  const propertyModifiers = exports.propertyModifiers = {
+  var propertyModifiers = exports.propertyModifiers = {
     // by default, task(...) expands to task(...).enqueue().maxConcurrency(Infinity)
     _bufferPolicy: _bufferPolicy.enqueueTasksPolicy,
     _maxConcurrency: Infinity,
@@ -64622,41 +65960,34 @@ requireModule('ember')
     _hasSetBufferPolicy: false,
     _hasEnabledEvents: false,
 
-    restartable() {
+    restartable: function restartable() {
       return setBufferPolicy(this, _bufferPolicy.cancelOngoingTasksPolicy);
     },
-
-    enqueue() {
+    enqueue: function enqueue() {
       return setBufferPolicy(this, _bufferPolicy.enqueueTasksPolicy);
     },
-
-    drop() {
+    drop: function drop() {
       return setBufferPolicy(this, _bufferPolicy.dropQueuedTasksPolicy);
     },
-
-    keepLatest() {
+    keepLatest: function keepLatest() {
       return setBufferPolicy(this, _bufferPolicy.dropButKeepLatestPolicy);
     },
-
-    maxConcurrency(n) {
+    maxConcurrency: function maxConcurrency(n) {
       this._hasUsedModifier = true;
       this._maxConcurrency = n;
       assertModifiersNotMixedWithGroup(this);
       return this;
     },
-
-    group(taskGroupPath) {
+    group: function group(taskGroupPath) {
       this._taskGroupPath = taskGroupPath;
       assertModifiersNotMixedWithGroup(this);
       return this;
     },
-
-    evented() {
+    evented: function evented() {
       this._hasEnabledEvents = true;
       return this;
     },
-
-    debug() {
+    debug: function debug() {
       this._debug = true;
       return this;
     }
@@ -64676,13 +66007,13 @@ requireModule('ember')
   }
 
   function assertModifiersNotMixedWithGroup(obj) {
-    (true && !(!obj._hasUsedModifier || !obj._taskGroupPath) && Ember.assert(`ember-concurrency does not currently support using both .group() with other task modifiers (e.g. drop(), enqueue(), restartable())`, !obj._hasUsedModifier || !obj._taskGroupPath));
+    (true && !(!obj._hasUsedModifier || !obj._taskGroupPath) && Ember.assert('ember-concurrency does not currently support using both .group() with other task modifiers (e.g. drop(), enqueue(), restartable())', !obj._hasUsedModifier || !obj._taskGroupPath));
   }
 
   function resolveScheduler(propertyObj, obj, TaskGroup) {
     if (propertyObj._taskGroupPath) {
-      let taskGroup = obj.get(propertyObj._taskGroupPath);
-      (true && !(taskGroup instanceof TaskGroup) && Ember.assert(`Expected path '${propertyObj._taskGroupPath}' to resolve to a TaskGroup object, but instead was ${taskGroup}`, taskGroup instanceof TaskGroup));
+      var taskGroup = obj.get(propertyObj._taskGroupPath);
+      (true && !(taskGroup instanceof TaskGroup) && Ember.assert('Expected path \'' + propertyObj._taskGroupPath + '\' to resolve to a TaskGroup object, but instead was ' + taskGroup, taskGroup instanceof TaskGroup));
 
       return taskGroup._scheduler;
     } else {
@@ -64701,9 +66032,9 @@ requireModule('ember')
   });
 
 
-  let SEEN_INDEX = 0;
+  var SEEN_INDEX = 0;
 
-  const Scheduler = Ember.Object.extend({
+  var Scheduler = Ember.Object.extend({
     lastPerformed: null,
     lastStarted: null,
     lastRunning: null,
@@ -64717,22 +66048,20 @@ requireModule('ember')
     boundHandleFulfill: null,
     boundHandleReject: null,
 
-    init() {
-      this._super(...arguments);
+    init: function init() {
+      this._super.apply(this, arguments);
       this.activeTaskInstances = [];
       this.queuedTaskInstances = [];
     },
-
-    cancelAll(reason) {
-      let seen = [];
+    cancelAll: function cancelAll(reason) {
+      var seen = [];
       this.spliceTaskInstances(reason, this.activeTaskInstances, 0, this.activeTaskInstances.length, seen);
       this.spliceTaskInstances(reason, this.queuedTaskInstances, 0, this.queuedTaskInstances.length, seen);
       flushTaskCounts(seen);
     },
-
-    spliceTaskInstances(cancelReason, taskInstances, index, count, seen) {
-      for (let i = index; i < index + count; ++i) {
-        let taskInstance = taskInstances[i];
+    spliceTaskInstances: function spliceTaskInstances(cancelReason, taskInstances, index, count, seen) {
+      for (var i = index; i < index + count; ++i) {
+        var taskInstance = taskInstances[i];
 
         if (!taskInstance.hasStarted) {
           // This tracking logic is kinda spread all over the place...
@@ -64748,19 +66077,17 @@ requireModule('ember')
       }
       taskInstances.splice(index, count);
     },
-
-    schedule(taskInstance) {
+    schedule: function schedule(taskInstance) {
       Ember.set(this, 'lastPerformed', taskInstance);
       this.incrementProperty('performCount');
       taskInstance.task.incrementProperty('numQueued');
       this.queuedTaskInstances.push(taskInstance);
       this._flushQueues();
     },
+    _flushQueues: function _flushQueues() {
+      var seen = [];
 
-    _flushQueues() {
-      let seen = [];
-
-      for (let i = 0; i < this.activeTaskInstances.length; ++i) {
+      for (var i = 0; i < this.activeTaskInstances.length; ++i) {
         seen.push(this.activeTaskInstances[i].task);
       }
 
@@ -64769,8 +66096,8 @@ requireModule('ember')
       this.bufferPolicy.schedule(this);
 
       var lastStarted = null;
-      for (let i = 0; i < this.activeTaskInstances.length; ++i) {
-        let taskInstance = this.activeTaskInstances[i];
+      for (var _i = 0; _i < this.activeTaskInstances.length; ++_i) {
+        var taskInstance = this.activeTaskInstances[_i];
         if (!taskInstance.hasStarted) {
           this._startTaskInstance(taskInstance);
           lastStarted = taskInstance;
@@ -64783,42 +66110,43 @@ requireModule('ember')
       }
       Ember.set(this, 'lastRunning', lastStarted);
 
-      for (let i = 0; i < this.queuedTaskInstances.length; ++i) {
-        seen.push(this.queuedTaskInstances[i].task);
+      for (var _i2 = 0; _i2 < this.queuedTaskInstances.length; ++_i2) {
+        seen.push(this.queuedTaskInstances[_i2].task);
       }
 
       flushTaskCounts(seen);
       Ember.set(this, 'concurrency', this.activeTaskInstances.length);
     },
+    _startTaskInstance: function _startTaskInstance(taskInstance) {
+      var _this = this;
 
-    _startTaskInstance(taskInstance) {
-      let task = taskInstance.task;
+      var task = taskInstance.task;
       task.decrementProperty('numQueued');
       task.incrementProperty('numRunning');
 
-      taskInstance._start()._onFinalize(() => {
+      taskInstance._start()._onFinalize(function () {
         task.decrementProperty('numRunning');
         var state = taskInstance._completionState;
-        Ember.set(this, 'lastComplete', taskInstance);
+        Ember.set(_this, 'lastComplete', taskInstance);
         if (state === 1) {
-          Ember.set(this, 'lastSuccessful', taskInstance);
+          Ember.set(_this, 'lastSuccessful', taskInstance);
         } else {
           if (state === 2) {
-            Ember.set(this, 'lastErrored', taskInstance);
+            Ember.set(_this, 'lastErrored', taskInstance);
           } else if (state === 3) {
-            Ember.set(this, 'lastCanceled', taskInstance);
+            Ember.set(_this, 'lastCanceled', taskInstance);
           }
-          Ember.set(this, 'lastIncomplete', taskInstance);
+          Ember.set(_this, 'lastIncomplete', taskInstance);
         }
-        Ember.run.once(this, this._flushQueues);
+        Ember.run.once(_this, _this._flushQueues);
       });
     }
   });
 
   function flushTaskCounts(tasks) {
     SEEN_INDEX++;
-    for (let i = 0, l = tasks.length; i < l; ++i) {
-      let task = tasks[i];
+    for (var i = 0, l = tasks.length; i < l; ++i) {
+      var task = tasks[i];
       if (task._seenIndex < SEEN_INDEX) {
         task._seenIndex = SEEN_INDEX;
         updateTaskChainCounts(task);
@@ -64827,9 +66155,9 @@ requireModule('ember')
   }
 
   function updateTaskChainCounts(task) {
-    let numRunning = task.numRunning;
-    let numQueued = task.numQueued;
-    let taskGroup = task.get('group');
+    var numRunning = task.numRunning;
+    var numQueued = task.numQueued;
+    var taskGroup = task.get('group');
 
     while (taskGroup) {
       Ember.set(taskGroup, 'numRunning', numRunning);
@@ -64839,9 +66167,9 @@ requireModule('ember')
   }
 
   function filterFinished(taskInstances) {
-    let ret = [];
-    for (let i = 0, l = taskInstances.length; i < l; ++i) {
-      let taskInstance = taskInstances[i];
+    var ret = [];
+    for (var i = 0, l = taskInstances.length; i < l; ++i) {
+      var taskInstance = taskInstances[i];
       if (Ember.get(taskInstance, 'isFinished') === false) {
         ret.push(taskInstance);
       }
@@ -64858,24 +66186,68 @@ requireModule('ember')
     value: true
   });
   exports.TaskGroupProperty = exports.TaskGroup = undefined;
-  const TaskGroup = exports.TaskGroup = Ember.Object.extend(_taskStateMixin.default, {
+
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var TaskGroup = exports.TaskGroup = Ember.Object.extend(_taskStateMixin.default, {
     isTaskGroup: true,
 
-    toString() {
-      return `<TaskGroup:${this._propertyName}>`;
+    toString: function toString() {
+      return '<TaskGroup:' + this._propertyName + '>';
     },
+
 
     _numRunningOrNumQueued: Ember.computed.or('numRunning', 'numQueued'),
     isRunning: Ember.computed.bool('_numRunningOrNumQueued'),
     isQueued: false
   });
 
-  let TaskGroupProperty = exports.TaskGroupProperty = undefined;
+  var TaskGroupProperty = exports.TaskGroupProperty = void 0;
 
   if (false) {
-    exports.TaskGroupProperty = TaskGroupProperty = class {};
+    exports.TaskGroupProperty = TaskGroupProperty = function TaskGroupProperty() {
+      _classCallCheck(this, TaskGroupProperty);
+    };
   } else {
-    exports.TaskGroupProperty = TaskGroupProperty = class extends _utils._ComputedProperty {};
+    exports.TaskGroupProperty = TaskGroupProperty = function (_ComputedProperty2) {
+      _inherits(TaskGroupProperty, _ComputedProperty2);
+
+      function TaskGroupProperty() {
+        _classCallCheck(this, TaskGroupProperty);
+
+        return _possibleConstructorReturn(this, (TaskGroupProperty.__proto__ || Object.getPrototypeOf(TaskGroupProperty)).apply(this, arguments));
+      }
+
+      return TaskGroupProperty;
+    }(_utils._ComputedProperty);
   }
 
   (0, _utils.objectAssign)(TaskGroupProperty.prototype, _propertyModifiersMixin.propertyModifiers);
@@ -64892,33 +66264,44 @@ requireModule('ember')
   exports.go = go;
   exports.wrap = wrap;
 
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
 
-  const TASK_CANCELATION_NAME = 'TaskCancelation';
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
 
-  const COMPLETION_PENDING = 0;
-  const COMPLETION_SUCCESS = 1;
-  const COMPLETION_ERROR = 2;
-  const COMPLETION_CANCEL = 3;
+  var TASK_CANCELATION_NAME = 'TaskCancelation';
 
-  const GENERATOR_STATE_BEFORE_CREATE = "BEFORE_CREATE";
-  const GENERATOR_STATE_HAS_MORE_VALUES = "HAS_MORE_VALUES";
-  const GENERATOR_STATE_DONE = "DONE";
-  const GENERATOR_STATE_ERRORED = "ERRORED";
+  var COMPLETION_PENDING = 0;
+  var COMPLETION_SUCCESS = 1;
+  var COMPLETION_ERROR = 2;
+  var COMPLETION_CANCEL = 3;
 
-  const PERFORM_TYPE_DEFAULT = exports.PERFORM_TYPE_DEFAULT = "PERFORM_TYPE_DEFAULT";
-  const PERFORM_TYPE_UNLINKED = exports.PERFORM_TYPE_UNLINKED = "PERFORM_TYPE_UNLINKED";
-  const PERFORM_TYPE_LINKED = exports.PERFORM_TYPE_LINKED = "PERFORM_TYPE_LINKED";
+  var GENERATOR_STATE_BEFORE_CREATE = "BEFORE_CREATE";
+  var GENERATOR_STATE_HAS_MORE_VALUES = "HAS_MORE_VALUES";
+  var GENERATOR_STATE_DONE = "DONE";
+  var GENERATOR_STATE_ERRORED = "ERRORED";
 
-  let TASK_INSTANCE_STACK = [];
+  var PERFORM_TYPE_DEFAULT = exports.PERFORM_TYPE_DEFAULT = "PERFORM_TYPE_DEFAULT";
+  var PERFORM_TYPE_UNLINKED = exports.PERFORM_TYPE_UNLINKED = "PERFORM_TYPE_UNLINKED";
+  var PERFORM_TYPE_LINKED = exports.PERFORM_TYPE_LINKED = "PERFORM_TYPE_LINKED";
+
+  var TASK_INSTANCE_STACK = [];
 
   function getRunningInstance() {
     return TASK_INSTANCE_STACK[TASK_INSTANCE_STACK.length - 1];
   }
 
   function handleYieldedUnknownThenable(thenable, taskInstance, resumeIndex) {
-    thenable.then(value => {
+    thenable.then(function (value) {
       taskInstance.proceed(resumeIndex, _utils.YIELDABLE_CONTINUE, value);
-    }, error => {
+    }, function (error) {
       taskInstance.proceed(resumeIndex, _utils.YIELDABLE_THROW, error);
     });
   }
@@ -64947,9 +66330,11 @@ requireModule('ember')
   }
 
   function forwardToInternalPromise(method) {
-    return function (...args) {
+    return function () {
+      var _get;
+
       this._hasSubscribed = true;
-      return this.get('_promise')[method](...args);
+      return (_get = this.get('_promise'))[method].apply(_get, arguments);
     };
   }
 
@@ -64975,7 +66360,7 @@ requireModule('ember')
   
     @class TaskInstance
   */
-  let taskInstanceAttrs = {
+  var taskInstanceAttrs = {
     iterator: null,
     _disposer: null,
     _completionState: COMPLETION_PENDING,
@@ -65204,7 +66589,7 @@ requireModule('ember')
 
     _index: 1,
 
-    _start() {
+    _start: function _start() {
       if (this.hasStarted || this.isCanceling) {
         return this;
       }
@@ -65213,28 +66598,20 @@ requireModule('ember')
       this._triggerEvent('started', this);
       return this;
     },
-
-    toString() {
-      let taskString = "" + this.task;
-      return spliceSlice(taskString, -1, 0, `.perform()`);
+    toString: function toString() {
+      var taskString = "" + this.task;
+      return spliceSlice(taskString, -1, 0, '.perform()');
     },
+    cancel: function cancel() {
+      var cancelReason = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ".cancel() was explicitly called";
 
-    /**
-     * Cancels the task instance. Has no effect if the task instance has
-     * already been canceled or has already finished running.
-     *
-     * @method cancel
-     * @memberof TaskInstance
-     * @instance
-     */
-    cancel(cancelReason = ".cancel() was explicitly called") {
       if (this.isCanceling || Ember.get(this, 'isFinished')) {
         return;
       }
       Ember.set(this, 'isCanceling', true);
 
-      let name = Ember.get(this, 'task._propertyName') || "<unknown>";
-      Ember.set(this, 'cancelReason', `TaskInstance '${name}' was canceled because ${cancelReason}. For more information, see: http://ember-concurrency.com/docs/task-cancelation-help`);
+      var name = Ember.get(this, 'task._propertyName') || "<unknown>";
+      Ember.set(this, 'cancelReason', 'TaskInstance \'' + name + '\' was canceled because ' + cancelReason + '. For more information, see: http://ember-concurrency.com/docs/task-cancelation-help');
 
       if (this.hasStarted) {
         this._proceedSoon(_utils.YIELDABLE_CANCEL, null);
@@ -65243,6 +66620,7 @@ requireModule('ember')
       }
     },
 
+
     _defer: null,
     _promise: Ember.computed(function () {
       this._defer = Ember.RSVP.defer();
@@ -65250,7 +66628,7 @@ requireModule('ember')
       return this._defer.promise;
     }),
 
-    _maybeResolveDefer() {
+    _maybeResolveDefer: function _maybeResolveDefer() {
       if (!this._defer || !this._completionState) {
         return;
       }
@@ -65261,6 +66639,7 @@ requireModule('ember')
         this._defer.reject(this.error);
       }
     },
+
 
     /**
      * Returns a promise that resolves with the value returned
@@ -65291,9 +66670,9 @@ requireModule('ember')
      */
     finally: forwardToInternalPromise('finally'),
 
-    _finalize(_value, _completionState) {
-      let completionState = _completionState;
-      let value = _value;
+    _finalize: function _finalize(_value, _completionState) {
+      var completionState = _completionState;
+      var value = _value;
       this._index++;
 
       if (this.isCanceling) {
@@ -65329,8 +66708,9 @@ requireModule('ember')
       this._dispatchFinalizeEvents();
     },
 
+
     _finalizeCallbacks: null,
-    _onFinalize(callback) {
+    _onFinalize: function _onFinalize(callback) {
       if (!this._finalizeCallbacks) {
         this._finalizeCallbacks = [];
       }
@@ -65340,11 +66720,10 @@ requireModule('ember')
         this._runFinalizeCallbacks();
       }
     },
-
-    _runFinalizeCallbacks() {
+    _runFinalizeCallbacks: function _runFinalizeCallbacks() {
       this._maybeResolveDefer();
       if (this._finalizeCallbacks) {
-        for (let i = 0, l = this._finalizeCallbacks.length; i < l; ++i) {
+        for (var i = 0, l = this._finalizeCallbacks.length; i < l; ++i) {
           this._finalizeCallbacks[i]();
         }
         this._finalizeCallbacks = null;
@@ -65352,19 +66731,19 @@ requireModule('ember')
 
       this._maybeThrowUnhandledTaskErrorLater();
     },
+    _maybeThrowUnhandledTaskErrorLater: function _maybeThrowUnhandledTaskErrorLater() {
+      var _this = this;
 
-    _maybeThrowUnhandledTaskErrorLater() {
       // this backports the Ember 2.0+ RSVP _onError 'after' microtask behavior to Ember < 2.0
       if (!this._hasSubscribed && this._completionState === COMPLETION_ERROR) {
-        Ember.run.schedule(Ember.run.backburner.queueNames[Ember.run.backburner.queueNames.length - 1], () => {
-          if (!this._hasSubscribed && !didCancel(this.error)) {
-            Ember.RSVP.reject(this.error);
+        Ember.run.schedule(Ember.run.backburner.queueNames[Ember.run.backburner.queueNames.length - 1], function () {
+          if (!_this._hasSubscribed && !didCancel(_this.error)) {
+            Ember.RSVP.reject(_this.error);
           }
         });
       }
     },
-
-    _dispatchFinalizeEvents() {
+    _dispatchFinalizeEvents: function _dispatchFinalizeEvents() {
       switch (this._completionState) {
         case COMPLETION_SUCCESS:
           this._triggerEvent('succeeded', this);
@@ -65377,45 +66756,28 @@ requireModule('ember')
           break;
       }
     },
-
-    /**
-     * Runs any disposers attached to the task's most recent `yield`.
-     * For instance, when a task yields a TaskInstance, it registers that
-     * child TaskInstance's disposer, so that if the parent task is canceled,
-     * _dispose() will run that disposer and cancel the child TaskInstance.
-     *
-     * @private
-     */
-    _dispose() {
+    _dispose: function _dispose() {
       if (this._disposer) {
-        let disposer = this._disposer;
+        var disposer = this._disposer;
         this._disposer = null;
 
         // TODO: test erroring disposer
         disposer();
       }
     },
-
-    _isGeneratorDone() {
-      let state = this._generatorState;
+    _isGeneratorDone: function _isGeneratorDone() {
+      var state = this._generatorState;
       return state === GENERATOR_STATE_DONE || state === GENERATOR_STATE_ERRORED;
     },
-
-    /**
-     * Calls .next()/.throw()/.return() on the task's generator function iterator,
-     * essentially taking a single step of execution on the task function.
-     *
-     * @private
-     */
-    _resumeGenerator(nextValue, iteratorMethod) {
+    _resumeGenerator: function _resumeGenerator(nextValue, iteratorMethod) {
       (true && !(!this._isGeneratorDone()) && Ember.assert("The task generator function has already run to completion. This is probably an ember-concurrency bug.", !this._isGeneratorDone()));
 
 
       try {
         TASK_INSTANCE_STACK.push(this);
 
-        let iterator = this._getIterator();
-        let result = iterator[iteratorMethod](nextValue);
+        var iterator = this._getIterator();
+        var result = iterator[iteratorMethod](nextValue);
 
         this._generatorValue = result.value;
         if (result.done) {
@@ -65438,70 +66800,35 @@ requireModule('ember')
         TASK_INSTANCE_STACK.pop();
       }
     },
-
-    _getIterator() {
+    _getIterator: function _getIterator() {
       if (!this.iterator) {
         this.iterator = this._makeIterator();
       }
       return this.iterator;
     },
-
-    /**
-     * Returns a generator function iterator (the object with
-     * .next()/.throw()/.return() methods) using the task function
-     * supplied to `task(...)`. It uses `apply` so that the `this`
-     * context is the host object the task lives on, and passes
-     * the args passed to `perform(...args)` through to the generator
-     * function.
-     *
-     * `_makeIterator` is overridden in EncapsulatedTask to produce
-     * an iterator based on the `*perform()` function on the
-     * EncapsulatedTask definition.
-     *
-     * @private
-     */
-    _makeIterator() {
+    _makeIterator: function _makeIterator() {
       return this.fn.apply(this.context, this.args);
     },
-
-    /**
-     * The TaskInstance internally tracks an index/sequence number
-     * (the `_index` property) which gets incremented every time the
-     * task generator function iterator takes a step. When a task
-     * function is paused at a `yield`, there are two events that
-     * cause the TaskInstance to take a step: 1) the yielded value
-     * "resolves", thus resuming the TaskInstance's execution, or
-     * 2) the TaskInstance is canceled. We need some mechanism to prevent
-     * stale yielded value resolutions from resuming the TaskFunction
-     * after the TaskInstance has already moved on (either because
-     * the TaskInstance has since been canceled or because an
-     * implementation of the Yieldable API tried to resume the
-     * TaskInstance more than once). The `_index` serves as
-     * that simple mechanism: anyone resuming a TaskInstance
-     * needs to pass in the `index` they were provided that acts
-     * as a ticket to resume the TaskInstance that expires once
-     * the TaskInstance has moved on.
-     *
-     * @private
-     */
-    _advanceIndex(index) {
+    _advanceIndex: function _advanceIndex(index) {
       if (this._index === index) {
         return ++this._index;
       }
     },
+    _proceedSoon: function _proceedSoon(yieldResumeType, value) {
+      var _this2 = this;
 
-    _proceedSoon(yieldResumeType, value) {
       this._advanceIndex(this._index);
       if (this._runLoop) {
-        Ember.run.join(() => {
-          Ember.run.schedule('actions', this, this._proceed, yieldResumeType, value);
+        Ember.run.join(function () {
+          Ember.run.schedule('actions', _this2, _this2._proceed, yieldResumeType, value);
         });
       } else {
-        setTimeout(() => this._proceed(yieldResumeType, value), 1);
+        setTimeout(function () {
+          return _this2._proceed(yieldResumeType, value);
+        }, 1);
       }
     },
-
-    proceed(index, yieldResumeType, value) {
+    proceed: function proceed(index, yieldResumeType, value) {
       if (this._completionState) {
         return;
       }
@@ -65510,8 +66837,9 @@ requireModule('ember')
       }
       this._proceedSoon(yieldResumeType, value);
     },
+    _scheduleProceed: function _scheduleProceed(yieldResumeType, value) {
+      var _this3 = this;
 
-    _scheduleProceed(yieldResumeType, value) {
       if (this._completionState) {
         return;
       }
@@ -65520,14 +66848,15 @@ requireModule('ember')
         Ember.run(this, this._proceed, yieldResumeType, value);
         return;
       } else if (!this._runLoop && Ember.run.currentRunLoop) {
-        setTimeout(() => this._proceed(yieldResumeType, value), 1);
+        setTimeout(function () {
+          return _this3._proceed(yieldResumeType, value);
+        }, 1);
         return;
       } else {
         this._proceed(yieldResumeType, value);
       }
     },
-
-    _proceed(yieldResumeType, value) {
+    _proceed: function _proceed(yieldResumeType, value) {
       if (this._completionState) {
         return;
       }
@@ -65538,8 +66867,7 @@ requireModule('ember')
         this._handleResolvedContinueValue(yieldResumeType, value);
       }
     },
-
-    _handleResolvedReturnedValue(yieldResumeType, value) {
+    _handleResolvedReturnedValue: function _handleResolvedReturnedValue(yieldResumeType, value) {
       (true && !(this._completionState === COMPLETION_PENDING) && Ember.assert("expected completion state to be pending", this._completionState === COMPLETION_PENDING));
       (true && !(this._generatorState === GENERATOR_STATE_DONE) && Ember.assert("expected generator to be done", this._generatorState === GENERATOR_STATE_DONE));
 
@@ -65559,10 +66887,11 @@ requireModule('ember')
       }
     },
 
+
     _generatorState: GENERATOR_STATE_BEFORE_CREATE,
     _generatorValue: null,
-    _handleResolvedContinueValue(_yieldResumeType, resumeValue) {
-      let iteratorMethod = _yieldResumeType;
+    _handleResolvedContinueValue: function _handleResolvedContinueValue(_yieldResumeType, resumeValue) {
+      var iteratorMethod = _yieldResumeType;
       if (iteratorMethod === _utils.YIELDABLE_CANCEL) {
         Ember.set(this, 'isCanceling', true);
         iteratorMethod = _utils.YIELDABLE_RETURN;
@@ -65570,7 +66899,7 @@ requireModule('ember')
 
       this._dispose();
 
-      let beforeIndex = this._index;
+      var beforeIndex = this._index;
       this._resumeGenerator(resumeValue, iteratorMethod);
 
       if (!this._advanceIndex(beforeIndex)) {
@@ -65584,9 +66913,8 @@ requireModule('ember')
 
       this._handleYieldedValue();
     },
-
-    _handleYieldedValue() {
-      let yieldedValue = this._generatorValue;
+    _handleYieldedValue: function _handleYieldedValue() {
+      var yieldedValue = this._generatorValue;
       if (!yieldedValue) {
         this._proceedWithSimpleValue(yieldedValue);
         return;
@@ -65607,16 +66935,14 @@ requireModule('ember')
         this._proceedWithSimpleValue(yieldedValue);
       }
     },
-
-    _proceedWithSimpleValue(yieldedValue) {
+    _proceedWithSimpleValue: function _proceedWithSimpleValue(yieldedValue) {
       this.proceed(this._index, _utils.YIELDABLE_CONTINUE, yieldedValue);
     },
-
-    _addDisposer(maybeDisposer) {
+    _addDisposer: function _addDisposer(maybeDisposer) {
       if (typeof maybeDisposer === 'function') {
-        let priorDisposer = this._disposer;
+        var priorDisposer = this._disposer;
         if (priorDisposer) {
-          this._disposer = () => {
+          this._disposer = function () {
             priorDisposer();
             maybeDisposer();
           };
@@ -65625,36 +66951,38 @@ requireModule('ember')
         }
       }
     },
-
-    _invokeYieldable(yieldedValue) {
+    _invokeYieldable: function _invokeYieldable(yieldedValue) {
       try {
-        let maybeDisposer = yieldedValue[_utils.yieldableSymbol](this, this._index);
+        var maybeDisposer = yieldedValue[_utils.yieldableSymbol](this, this._index);
         this._addDisposer(maybeDisposer);
       } catch (e) {
         // TODO: handle erroneous yieldable implementation
       }
     },
-
-    _triggerEvent(eventType, ...args) {
+    _triggerEvent: function _triggerEvent(eventType) {
       if (!this._hasEnabledEvents) {
         return;
       }
 
-      let host = Ember.get(this, 'task.context');
-      let eventNamespace = Ember.get(this, 'task._propertyName');
+      var host = Ember.get(this, 'task.context');
+      var eventNamespace = Ember.get(this, 'task._propertyName');
 
       if (host && host.trigger && eventNamespace) {
-        host.trigger(`${eventNamespace}:${eventType}`, ...args);
+        for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          args[_key - 1] = arguments[_key];
+        }
+
+        host.trigger.apply(host, [eventNamespace + ':' + eventType].concat(_toConsumableArray(args)));
       }
     }
   };
 
   taskInstanceAttrs[_utils.yieldableSymbol] = function handleYieldedTaskInstance(parentTaskInstance, resumeIndex) {
-    let yieldedTaskInstance = this;
+    var yieldedTaskInstance = this;
     yieldedTaskInstance._hasSubscribed = true;
 
-    yieldedTaskInstance._onFinalize(() => {
-      let state = yieldedTaskInstance._completionState;
+    yieldedTaskInstance._onFinalize(function () {
+      var state = yieldedTaskInstance._completionState;
       if (state === COMPLETION_SUCCESS) {
         parentTaskInstance.proceed(resumeIndex, _utils.YIELDABLE_CONTINUE, yieldedTaskInstance.value);
       } else if (state === COMPLETION_ERROR) {
@@ -65667,13 +66995,13 @@ requireModule('ember')
     return function disposeYieldedTaskInstance() {
       if (yieldedTaskInstance._performType !== PERFORM_TYPE_UNLINKED) {
         if (yieldedTaskInstance._performType === PERFORM_TYPE_DEFAULT) {
-          let parentObj = Ember.get(parentTaskInstance, 'task.context');
-          let childObj = Ember.get(yieldedTaskInstance, 'task.context');
+          var parentObj = Ember.get(parentTaskInstance, 'task.context');
+          var childObj = Ember.get(yieldedTaskInstance, 'task.context');
           if (parentObj && childObj && parentObj !== childObj && parentObj.isDestroying && Ember.get(yieldedTaskInstance, 'isRunning')) {
-            let parentName = `\`${parentTaskInstance.task._propertyName}\``;
-            let childName = `\`${yieldedTaskInstance.task._propertyName}\``;
+            var parentName = '`' + parentTaskInstance.task._propertyName + '`';
+            var childName = '`' + yieldedTaskInstance.task._propertyName + '`';
             // eslint-disable-next-line no-console
-            console.warn(`ember-concurrency detected a potentially hazardous "self-cancel loop" between parent task ${parentName} and child task ${childName}. If you want child task ${childName} to be canceled when parent task ${parentName} is canceled, please change \`.perform()\` to \`.linked().perform()\`. If you want child task ${childName} to keep running after parent task ${parentName} is canceled, change it to \`.unlinked().perform()\``);
+            console.warn('ember-concurrency detected a potentially hazardous "self-cancel loop" between parent task ' + parentName + ' and child task ' + childName + '. If you want child task ' + childName + ' to be canceled when parent task ' + parentName + ' is canceled, please change `.perform()` to `.linked().perform()`. If you want child task ' + childName + ' to keep running after parent task ' + parentName + ' is canceled, change it to `.unlinked().perform()`');
           }
         }
         yieldedTaskInstance.cancel();
@@ -65681,14 +67009,22 @@ requireModule('ember')
     };
   };
 
-  let TaskInstance = Ember.Object.extend(taskInstanceAttrs);
+  var TaskInstance = Ember.Object.extend(taskInstanceAttrs);
 
-  function go(args, fn, attrs = {}) {
-    return TaskInstance.create(Object.assign({ args, fn, context: this }, attrs))._start();
+  function go(args, fn) {
+    var attrs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+    return TaskInstance.create(Object.assign({ args: args, fn: fn, context: this }, attrs))._start();
   }
 
-  function wrap(fn, attrs = {}) {
-    return function wrappedRunnerFunction(...args) {
+  function wrap(fn) {
+    var attrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    return function wrappedRunnerFunction() {
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
       return go.call(this, args, fn, attrs);
     };
   }
@@ -65703,13 +67039,122 @@ requireModule('ember')
   });
   exports.TaskProperty = exports.Task = undefined;
 
+  var _createClass = function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
 
-  const PerformProxy = Ember.Object.extend({
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+
+  var _get = function get(object, property, receiver) {
+    if (object === null) object = Function.prototype;
+    var desc = Object.getOwnPropertyDescriptor(object, property);
+
+    if (desc === undefined) {
+      var parent = Object.getPrototypeOf(object);
+
+      if (parent === null) {
+        return undefined;
+      } else {
+        return get(parent, property, receiver);
+      }
+    } else if ("value" in desc) {
+      return desc.value;
+    } else {
+      var getter = desc.get;
+
+      if (getter === undefined) {
+        return undefined;
+      }
+
+      return getter.call(receiver);
+    }
+  };
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  };
+
+  var PerformProxy = Ember.Object.extend({
     _task: null,
     _performType: null,
     _linkedObject: null,
 
-    perform(...args) {
+    perform: function perform() {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
       return this._task._performShared(args, this._performType, this._linkedObject);
     }
   });
@@ -65731,7 +67176,7 @@ requireModule('ember')
   
     @class Task
   */
-  const Task = exports.Task = Ember.Object.extend(_taskStateMixin.default, {
+  var Task = exports.Task = Ember.Object.extend(_taskStateMixin.default, _defineProperty({
     /**
      * `true` if any current task instances are running.
      *
@@ -65855,12 +67300,12 @@ requireModule('ember')
     _curryArgs: null,
     _linkedObjects: null,
 
-    init() {
-      this._super(...arguments);
+    init: function init() {
+      this._super.apply(this, arguments);
 
-      if (typeof this.fn === 'object') {
-        let owner = Ember.getOwner(this.context);
-        let ownerInjection = owner ? owner.ownerInjection() : {};
+      if (_typeof(this.fn) === 'object') {
+        var owner = Ember.getOwner(this.context);
+        var ownerInjection = owner ? owner.ownerInjection() : {};
         this._taskInstanceFactory = _encapsulatedTask.default.extend(ownerInjection, this.fn);
       }
 
@@ -65868,17 +67313,20 @@ requireModule('ember')
         reason: 'the object it lives on was destroyed or unrendered'
       });
     },
+    _curry: function _curry() {
+      var task = this._clone();
 
-    _curry(...args) {
-      let task = this._clone();
-      task._curryArgs = [...(this._curryArgs || []), ...args];
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      task._curryArgs = [].concat(_toConsumableArray(this._curryArgs || []), _toConsumableArray(args));
       return task;
     },
-
-    linked() {
-      let taskInstance = (0, _taskInstance.getRunningInstance)();
+    linked: function linked() {
+      var taskInstance = (0, _taskInstance.getRunningInstance)();
       if (!taskInstance) {
-        throw new Error(`You can only call .linked() from within a task.`);
+        throw new Error('You can only call .linked() from within a task.');
       }
 
       return PerformProxy.create({
@@ -65887,15 +67335,13 @@ requireModule('ember')
         _linkedObject: taskInstance
       });
     },
-
-    unlinked() {
+    unlinked: function unlinked() {
       return PerformProxy.create({
         _task: this,
         _performType: _taskInstance.PERFORM_TYPE_UNLINKED
       });
     },
-
-    _clone() {
+    _clone: function _clone() {
       return Task.create({
         fn: this.fn,
         context: this.context,
@@ -65905,6 +67351,7 @@ requireModule('ember')
         _propertyName: this._propertyName
       });
     },
+
 
     /**
      * This property is true if this task is NOT running, i.e. the number
@@ -66014,9 +67461,10 @@ requireModule('ember')
      * @instance
      */
 
-    toString() {
-      return `<Task:${this._propertyName}>`;
+    toString: function toString() {
+      return '<Task:' + this._propertyName + '>';
     },
+
 
     _taskInstanceFactory: _taskInstance.default,
 
@@ -66038,13 +67486,16 @@ requireModule('ember')
      * @fires TaskInstance#TASK_NAME:canceled
      *
      */
-    perform(...args) {
+    perform: function perform() {
+      for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
+      }
+
       return this._performShared(args, _taskInstance.PERFORM_TYPE_DEFAULT, null);
     },
-
-    _performShared(args, performType, linkedObject) {
-      let fullArgs = this._curryArgs ? [...this._curryArgs, ...args] : args;
-      let taskInstance = this._taskInstanceFactory.create({
+    _performShared: function _performShared(args, performType, linkedObject) {
+      var fullArgs = this._curryArgs ? [].concat(_toConsumableArray(this._curryArgs), _toConsumableArray(args)) : args;
+      var taskInstance = this._taskInstanceFactory.create({
         fn: this.fn,
         args: fullArgs,
         context: this.context,
@@ -66068,12 +67519,10 @@ requireModule('ember')
 
       this._scheduler.schedule(taskInstance);
       return taskInstance;
-    },
-
-    [_utils.INVOKE](...args) {
-      return this.perform(...args);
     }
-  });
+  }, _utils.INVOKE, function () {
+    return this.perform.apply(this, arguments);
+  }));
 
   /**
     A {@link TaskProperty} is the Computed Property-like object returned
@@ -66091,221 +67540,72 @@ requireModule('ember')
   
     @class TaskProperty
   */
-  let TaskProperty = exports.TaskProperty = undefined;
+  var TaskProperty = exports.TaskProperty = void 0;
 
   if (false) {
-    exports.TaskProperty = TaskProperty = class {};
+    exports.TaskProperty = TaskProperty = function TaskProperty() {
+      _classCallCheck(this, TaskProperty);
+    };
   } else {
     // Prior to the 3.10.0 refactors, we had to extend the _ComputedProprety class
     // for a classic decorator/descriptor to run correctly.
-    exports.TaskProperty = TaskProperty = class extends _utils._ComputedProperty {
-      callSuperSetup() {
-        if (super.setup) {
-          super.setup(...arguments);
-        }
+    exports.TaskProperty = TaskProperty = function (_ComputedProperty2) {
+      _inherits(TaskProperty, _ComputedProperty2);
+
+      function TaskProperty() {
+        _classCallCheck(this, TaskProperty);
+
+        return _possibleConstructorReturn(this, (TaskProperty.__proto__ || Object.getPrototypeOf(TaskProperty)).apply(this, arguments));
       }
-    };
+
+      _createClass(TaskProperty, [{
+        key: 'callSuperSetup',
+        value: function callSuperSetup() {
+          if (_get(TaskProperty.prototype.__proto__ || Object.getPrototypeOf(TaskProperty.prototype), 'setup', this)) {
+            _get(TaskProperty.prototype.__proto__ || Object.getPrototypeOf(TaskProperty.prototype), 'setup', this).apply(this, arguments);
+          }
+        }
+      }]);
+
+      return TaskProperty;
+    }(_utils._ComputedProperty);
   }
 
   (0, _utils.objectAssign)(TaskProperty.prototype, {
-    setup(proto, taskName) {
+    setup: function setup(proto, taskName) {
       if (this.callSuperSetup) {
-        this.callSuperSetup(...arguments);
+        this.callSuperSetup.apply(this, arguments);
       }
 
       if (this._maxConcurrency !== Infinity && !this._hasSetBufferPolicy) {
         // eslint-disable-next-line no-console
-        console.warn(`The use of maxConcurrency() without a specified task modifier is deprecated and won't be supported in future versions of ember-concurrency. Please specify a task modifier instead, e.g. \`${taskName}: task(...).enqueue().maxConcurrency(${this._maxConcurrency})\``);
+        console.warn('The use of maxConcurrency() without a specified task modifier is deprecated and won\'t be supported in future versions of ember-concurrency. Please specify a task modifier instead, e.g. `' + taskName + ': task(...).enqueue().maxConcurrency(' + this._maxConcurrency + ')`');
       }
 
       registerOnPrototype(Ember.addListener, proto, this.eventNames, taskName, 'perform', false);
       registerOnPrototype(Ember.addListener, proto, this.cancelEventNames, taskName, 'cancelAll', false);
       registerOnPrototype(Ember.addObserver, proto, this._observes, taskName, 'perform', true);
     },
-
-    /**
-     * Calling `task(...).on(eventName)` configures the task to be
-     * automatically performed when the specified events fire. In
-     * this way, it behaves like
-     * [Ember.on](http://emberjs.com/api/classes/Ember.html#method_on).
-     *
-     * You can use `task(...).on('init')` to perform the task
-     * when the host object is initialized.
-     *
-     * ```js
-     * export default Ember.Component.extend({
-     *   pollForUpdates: task(function * () {
-     *     // ... this runs when the Component is first created
-     *     // because we specified .on('init')
-     *   }).on('init'),
-     *
-     *   handleFoo: task(function * (a, b, c) {
-     *     // this gets performed automatically if the 'foo'
-     *     // event fires on this Component,
-     *     // e.g., if someone called component.trigger('foo')
-     *   }).on('foo'),
-     * });
-     * ```
-     *
-     * [See the Writing Tasks Docs for more info](/#/docs/writing-tasks)
-     *
-     * @method on
-     * @memberof TaskProperty
-     * @param {String} eventNames*
-     * @instance
-     */
-    on() {
+    on: function on() {
       this.eventNames = this.eventNames || [];
       this.eventNames.push.apply(this.eventNames, arguments);
       return this;
     },
-
-    /**
-     * This behaves like the {@linkcode TaskProperty#on task(...).on() modifier},
-     * but instead will cause the task to be canceled if any of the
-     * specified events fire on the parent object.
-     *
-     * [See the Live Example](/#/docs/examples/route-tasks/1)
-     *
-     * @method cancelOn
-     * @memberof TaskProperty
-     * @param {String} eventNames*
-     * @instance
-     */
-    cancelOn() {
+    cancelOn: function cancelOn() {
       this.cancelEventNames = this.cancelEventNames || [];
       this.cancelEventNames.push.apply(this.cancelEventNames, arguments);
       return this;
     },
+    observes: function observes() {
+      for (var _len4 = arguments.length, properties = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        properties[_key4] = arguments[_key4];
+      }
 
-    observes(...properties) {
       this._observes = properties;
       return this;
     },
-
-    /**
-     * Configures the task to cancel old currently task instances
-     * to make room for a new one to perform. Sets default
-     * maxConcurrency to 1.
-     *
-     * [See the Live Example](/#/docs/examples/route-tasks/1)
-     *
-     * @method restartable
-     * @memberof TaskProperty
-     * @instance
-     */
-
-    /**
-     * Configures the task to run task instances one-at-a-time in
-     * the order they were `.perform()`ed. Sets default
-     * maxConcurrency to 1.
-     *
-     * @method enqueue
-     * @memberof TaskProperty
-     * @instance
-     */
-
-    /**
-     * Configures the task to immediately cancel (i.e. drop) any
-     * task instances performed when the task is already running
-     * at maxConcurrency. Sets default maxConcurrency to 1.
-     *
-     * @method drop
-     * @memberof TaskProperty
-     * @instance
-     */
-
-    /**
-     * Configures the task to drop all but the most recently
-     * performed {@linkcode TaskInstance }.
-     *
-     * @method keepLatest
-     * @memberof TaskProperty
-     * @instance
-     */
-
-    /**
-     * Sets the maximum number of task instances that are allowed
-     * to run at the same time. By default, with no task modifiers
-     * applied, this number is Infinity (there is no limit
-     * to the number of tasks that can run at the same time).
-     * {@linkcode TaskProperty#restartable .restartable()},
-     * {@linkcode TaskProperty#enqueue .enqueue()}, and
-     * {@linkcode TaskProperty#drop .drop()} set the default
-     * maxConcurrency to 1, but you can override this value
-     * to set the maximum number of concurrently running tasks
-     * to a number greater than 1.
-     *
-     * [See the AJAX Throttling example](/#/docs/examples/ajax-throttling)
-     *
-     * The example below uses a task with `maxConcurrency(3)` to limit
-     * the number of concurrent AJAX requests (for anyone using this task)
-     * to 3.
-     *
-     * ```js
-     * doSomeAjax: task(function * (url) {
-     *   return Ember.$.getJSON(url).promise();
-     * }).maxConcurrency(3),
-     *
-     * elsewhere() {
-     *   this.get('doSomeAjax').perform("http://www.example.com/json");
-     * },
-     * ```
-     *
-     * @method maxConcurrency
-     * @memberof TaskProperty
-     * @param {Number} n The maximum number of concurrently running tasks
-     * @instance
-     */
-
-    /**
-     * Adds this task to a TaskGroup so that concurrency constraints
-     * can be shared between multiple tasks.
-     *
-     * [See the Task Group docs for more information](/#/docs/task-groups)
-     *
-     * @method group
-     * @memberof TaskProperty
-     * @param {String} groupPath A path to the TaskGroup property
-     * @instance
-     */
-
-    /**
-     * Activates lifecycle events, allowing Evented host objects to react to task state
-     * changes.
-     *
-     * ```js
-     *
-     * export default Component.extend({
-     *   uploadTask: task(function* (file) {
-     *     // ... file upload stuff
-     *   }).evented(),
-     *
-     *   uploadedStarted: on('uploadTask:started', function(taskInstance) {
-     *     this.get('analytics').track("User Photo: upload started");
-     *   }),
-     * });
-     * ```
-     *
-     * @method evented
-     * @memberof TaskProperty
-     * @instance
-     */
-
-    /**
-     * Logs lifecycle events to aid in debugging unexpected Task behavior.
-     * Presently only logs cancelation events and the reason for the cancelation,
-     * e.g. "TaskInstance 'doStuff' was canceled because the object it lives on was destroyed or unrendered"
-     *
-     * @method debug
-     * @memberof TaskProperty
-     * @instance
-     */
-
-    perform() {
-      (true && !(false) && Ember.deprecate(`[DEPRECATED] An ember-concurrency task property was not set on its object via 'defineProperty'.
-              You probably used 'set(obj, "myTask", task(function* () { ... }) )'.
-              Unfortunately due to this we can't tell you the name of the task.`, false, {
+    perform: function perform() {
+      (true && !(false) && Ember.deprecate('[DEPRECATED] An ember-concurrency task property was not set on its object via \'defineProperty\'.\n              You probably used \'set(obj, "myTask", task(function* () { ... }) )\'.\n              Unfortunately due to this we can\'t tell you the name of the task.', false, {
         id: 'ember-meta.descriptor-on-object',
         until: '3.5.0',
         url: 'https://emberjs.com/deprecations/v3.x#toc_use-defineProperty-to-define-computed-properties'
@@ -66319,10 +67619,10 @@ requireModule('ember')
 
   function registerOnPrototype(addListenerOrObserver, proto, names, taskName, taskMethod, once) {
     if (names) {
-      for (let i = 0; i < names.length; ++i) {
-        let name = names[i];
+      for (var i = 0; i < names.length; ++i) {
+        var name = names[i];
 
-        let handlerName = `__ember_concurrency_handler_${handlerCounter++}`;
+        var handlerName = '__ember_concurrency_handler_' + handlerCounter++;
         proto[handlerName] = makeTaskCallback(taskName, taskMethod, once);
         addListenerOrObserver(proto, name, null, handlerName);
       }
@@ -66331,17 +67631,17 @@ requireModule('ember')
 
   function makeTaskCallback(taskName, method, once) {
     return function () {
-      let task = this.get(taskName);
+      var task = this.get(taskName);
 
       if (once) {
-        Ember.run.scheduleOnce('actions', task, method, ...arguments);
+        Ember.run.scheduleOnce.apply(undefined, ['actions', task, method].concat(Array.prototype.slice.call(arguments)));
       } else {
         task[method].apply(task, arguments);
       }
     };
   }
 
-  let handlerCounter = 0;
+  var handlerCounter = 0;
 });
 ;define('ember-concurrency/-task-state-mixin', ['exports'], function (exports) {
   'use strict';
@@ -66349,10 +67649,7 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-
-  const { alias } = Ember.computed;
-
-  // this is a mixin of properties/methods shared between Tasks and TaskGroups
+  var alias = Ember.computed.alias;
   exports.default = Ember.Mixin.create({
     isRunning: Ember.computed.gt('numRunning', 0),
     isQueued: Ember.computed.gt('numQueued', 0),
@@ -66389,8 +67686,11 @@ requireModule('ember')
     numQueued: 0,
     _seenIndex: 0,
 
-    cancelAll(options) {
-      let { reason, resetState } = options || {};
+    cancelAll: function cancelAll(options) {
+      var _ref = options || {},
+          reason = _ref.reason,
+          resetState = _ref.resetState;
+
       reason = reason || ".cancelAll() was explicitly called on the Task";
 
       this._scheduler.cancelAll(reason);
@@ -66400,13 +67700,14 @@ requireModule('ember')
       }
     },
 
+
     group: Ember.computed(function () {
       return this._taskGroupPath && this.context.get(this._taskGroupPath);
     }),
 
     _scheduler: null,
 
-    _resetState() {
+    _resetState: function _resetState() {
       this.setProperties({
         'last': null,
         'lastRunning': null,
@@ -66432,98 +67733,197 @@ requireModule('ember')
   exports.waitForEvent = waitForEvent;
   exports.waitForProperty = waitForProperty;
 
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
 
-  class WaitFor {
-    then(...args) {
-      return (0, _utils.yieldableToPromise)(this).then(...args);
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
     }
   }
 
-  class WaitForQueueYieldable extends WaitFor {
-    constructor(queueName) {
-      super();
-      this.queueName = queueName;
-    }
-
-    [_utils.yieldableSymbol](taskInstance, resumeIndex) {
-      Ember.run.schedule(this.queueName, () => {
-        taskInstance.proceed(resumeIndex, _utils.YIELDABLE_CONTINUE, null);
-      });
-    }
-  }
-
-  class WaitForEventYieldable extends WaitFor {
-    constructor(object, eventName) {
-      super();
-      this.object = object;
-      this.eventName = eventName;
-    }
-
-    [_utils.yieldableSymbol](taskInstance, resumeIndex) {
-      let unbind = () => {};
-      let didFinish = false;
-      let fn = event => {
-        didFinish = true;
-        unbind();
-        taskInstance.proceed(resumeIndex, _utils.YIELDABLE_CONTINUE, event);
-      };
-
-      if (typeof this.object.addEventListener === 'function') {
-        // assume that we're dealing with a DOM `EventTarget`.
-        this.object.addEventListener(this.eventName, fn);
-
-        // unfortunately this is required, because IE 11 does not support the
-        // `once` option: https://caniuse.com/#feat=once-event-listener
-        unbind = () => {
-          this.object.removeEventListener(this.eventName, fn);
-        };
-
-        return unbind;
-      } else {
-        // assume that we're dealing with either `Ember.Evented` or a compatible
-        // interface, like jQuery.
-        this.object.one(this.eventName, fn);
-
-        return () => {
-          if (!didFinish) {
-            this.object.off(this.eventName, fn);
-          }
-        };
+  var _createClass = function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
       }
     }
-  }
 
-  class WaitForPropertyYieldable extends WaitFor {
-    constructor(object, key, predicateCallback = Boolean) {
-      super();
-      this.object = object;
-      this.key = key;
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+
+  var WaitFor = function () {
+    function WaitFor() {
+      _classCallCheck(this, WaitFor);
+    }
+
+    _createClass(WaitFor, [{
+      key: 'then',
+      value: function then() {
+        var _yieldableToPromise;
+
+        return (_yieldableToPromise = (0, _utils.yieldableToPromise)(this)).then.apply(_yieldableToPromise, arguments);
+      }
+    }]);
+
+    return WaitFor;
+  }();
+
+  var WaitForQueueYieldable = function (_WaitFor) {
+    _inherits(WaitForQueueYieldable, _WaitFor);
+
+    function WaitForQueueYieldable(queueName) {
+      _classCallCheck(this, WaitForQueueYieldable);
+
+      var _this = _possibleConstructorReturn(this, (WaitForQueueYieldable.__proto__ || Object.getPrototypeOf(WaitForQueueYieldable)).call(this));
+
+      _this.queueName = queueName;
+      return _this;
+    }
+
+    _createClass(WaitForQueueYieldable, [{
+      key: _utils.yieldableSymbol,
+      value: function value(taskInstance, resumeIndex) {
+        Ember.run.schedule(this.queueName, function () {
+          taskInstance.proceed(resumeIndex, _utils.YIELDABLE_CONTINUE, null);
+        });
+      }
+    }]);
+
+    return WaitForQueueYieldable;
+  }(WaitFor);
+
+  var WaitForEventYieldable = function (_WaitFor2) {
+    _inherits(WaitForEventYieldable, _WaitFor2);
+
+    function WaitForEventYieldable(object, eventName) {
+      _classCallCheck(this, WaitForEventYieldable);
+
+      var _this2 = _possibleConstructorReturn(this, (WaitForEventYieldable.__proto__ || Object.getPrototypeOf(WaitForEventYieldable)).call(this));
+
+      _this2.object = object;
+      _this2.eventName = eventName;
+      return _this2;
+    }
+
+    _createClass(WaitForEventYieldable, [{
+      key: _utils.yieldableSymbol,
+      value: function value(taskInstance, resumeIndex) {
+        var _this3 = this;
+
+        var unbind = function unbind() {};
+        var didFinish = false;
+        var fn = function fn(event) {
+          didFinish = true;
+          unbind();
+          taskInstance.proceed(resumeIndex, _utils.YIELDABLE_CONTINUE, event);
+        };
+
+        if (typeof this.object.addEventListener === 'function') {
+          // assume that we're dealing with a DOM `EventTarget`.
+          this.object.addEventListener(this.eventName, fn);
+
+          // unfortunately this is required, because IE 11 does not support the
+          // `once` option: https://caniuse.com/#feat=once-event-listener
+          unbind = function unbind() {
+            _this3.object.removeEventListener(_this3.eventName, fn);
+          };
+
+          return unbind;
+        } else {
+          // assume that we're dealing with either `Ember.Evented` or a compatible
+          // interface, like jQuery.
+          this.object.one(this.eventName, fn);
+
+          return function () {
+            if (!didFinish) {
+              _this3.object.off(_this3.eventName, fn);
+            }
+          };
+        }
+      }
+    }]);
+
+    return WaitForEventYieldable;
+  }(WaitFor);
+
+  var WaitForPropertyYieldable = function (_WaitFor3) {
+    _inherits(WaitForPropertyYieldable, _WaitFor3);
+
+    function WaitForPropertyYieldable(object, key) {
+      var predicateCallback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Boolean;
+
+      _classCallCheck(this, WaitForPropertyYieldable);
+
+      var _this4 = _possibleConstructorReturn(this, (WaitForPropertyYieldable.__proto__ || Object.getPrototypeOf(WaitForPropertyYieldable)).call(this));
+
+      _this4.object = object;
+      _this4.key = key;
 
       if (typeof predicateCallback === 'function') {
-        this.predicateCallback = predicateCallback;
+        _this4.predicateCallback = predicateCallback;
       } else {
-        this.predicateCallback = v => v === predicateCallback;
-      }
-    }
-
-    [_utils.yieldableSymbol](taskInstance, resumeIndex) {
-      let observerFn = () => {
-        let value = Ember.get(this.object, this.key);
-        let predicateValue = this.predicateCallback(value);
-        if (predicateValue) {
-          taskInstance.proceed(resumeIndex, _utils.YIELDABLE_CONTINUE, value);
-          return true;
-        }
-      };
-
-      if (!observerFn()) {
-        this.object.addObserver(this.key, null, observerFn);
-        return () => {
-          this.object.removeObserver(this.key, null, observerFn);
+        _this4.predicateCallback = function (v) {
+          return v === predicateCallback;
         };
       }
+      return _this4;
     }
-  }
+
+    _createClass(WaitForPropertyYieldable, [{
+      key: _utils.yieldableSymbol,
+      value: function value(taskInstance, resumeIndex) {
+        var _this5 = this;
+
+        var observerFn = function observerFn() {
+          var value = Ember.get(_this5.object, _this5.key);
+          var predicateValue = _this5.predicateCallback(value);
+          if (predicateValue) {
+            taskInstance.proceed(resumeIndex, _utils.YIELDABLE_CONTINUE, value);
+            return true;
+          }
+        };
+
+        if (!observerFn()) {
+          this.object.addObserver(this.key, null, observerFn);
+          return function () {
+            _this5.object.removeObserver(_this5.key, null, observerFn);
+          };
+        }
+      }
+    }]);
+
+    return WaitForPropertyYieldable;
+  }(WaitFor);
 
   /**
    * Use `waitForQueue` to pause the task until a certain run loop queue is reached.
@@ -66570,7 +67970,7 @@ requireModule('ember')
    * @param {function} eventName the name of the event to wait for
    */
   function waitForEvent(object, eventName) {
-    (true && !((0, _utils.isEventedObject)(object)) && Ember.assert(`${object} must include Ember.Evented (or support \`.one()\` and \`.off()\`) or DOM EventTarget (or support \`addEventListener\` and  \`removeEventListener\`) to be able to use \`waitForEvent\``, (0, _utils.isEventedObject)(object)));
+    (true && !((0, _utils.isEventedObject)(object)) && Ember.assert(object + ' must include Ember.Evented (or support `.one()` and `.off()`) or DOM EventTarget (or support `addEventListener` and  `removeEventListener`) to be able to use `waitForEvent`', (0, _utils.isEventedObject)(object)));
 
     return new WaitForEventYieldable(object, eventName);
   }
@@ -66631,12 +68031,12 @@ requireModule('ember')
   exports.cancelHelper = cancelHelper;
 
 
-  const CANCEL_REASON = "the 'cancel-all' template helper was invoked";
+  var CANCEL_REASON = "the 'cancel-all' template helper was invoked";
 
   function cancelHelper(args) {
-    let cancelable = args[0];
+    var cancelable = args[0];
     if (!cancelable || typeof cancelable.cancelAll !== 'function') {
-      (true && !(false) && Ember.assert(`The first argument passed to the \`cancel-all\` helper should be a Task or TaskGroup (without quotes); you passed ${cancelable}`, false));
+      (true && !(false) && Ember.assert('The first argument passed to the `cancel-all` helper should be a Task or TaskGroup (without quotes); you passed ' + cancelable, false));
     }
 
     return (0, _helpers.taskHelperClosure)('cancel-all', 'cancelAll', [cancelable, { reason: CANCEL_REASON }]);
@@ -66664,9 +68064,28 @@ requireModule('ember')
     value: true
   });
 
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
 
-  function taskHelper([task, ...args]) {
-    return task._curry(...args);
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  function _toArray(arr) {
+    return Array.isArray(arr) ? arr : Array.from(arr);
+  }
+
+  function taskHelper(_ref) {
+    var _ref2 = _toArray(_ref),
+        task = _ref2[0],
+        args = _ref2.slice(1);
+
+    return task._curry.apply(task, _toConsumableArray(args));
   }
 
   exports.default = Ember.Helper.helper(taskHelper);
@@ -66684,12 +68103,12 @@ requireModule('ember')
 
   function _computed(fn) {
     if (false) {
-      let cp = function (proto, key) {
+      var cp = function cp(proto, key) {
         if (cp.setup !== undefined) {
           cp.setup(proto, key);
         }
 
-        return Ember.computed(fn)(...arguments);
+        return Ember.computed(fn).apply(undefined, arguments);
       };
 
       Ember._setComputedDecorator(cp);
@@ -66746,15 +68165,15 @@ requireModule('ember')
    * @returns {TaskProperty}
    */
   function task(taskFn) {
-    let tp = _computed(function (_propertyName) {
-      tp.taskFn.displayName = `${_propertyName} (task)`;
+    var tp = _computed(function (_propertyName) {
+      tp.taskFn.displayName = _propertyName + ' (task)';
       return _taskProperty.Task.create({
         fn: tp.taskFn,
         context: this,
         _origin: this,
         _taskGroupPath: tp._taskGroupPath,
         _scheduler: (0, _propertyModifiersMixin.resolveScheduler)(tp, this, _taskGroup.TaskGroup),
-        _propertyName,
+        _propertyName: _propertyName,
         _debug: tp._debug,
         _hasEnabledEvents: tp._hasEnabledEvents
       });
@@ -66789,14 +68208,14 @@ requireModule('ember')
    * @returns {TaskGroup}
    */
   function taskGroup(taskFn) {
-    let tp = _computed(function (_propertyName) {
+    var tp = _computed(function (_propertyName) {
       return _taskGroup.TaskGroup.create({
         fn: tp.taskFn,
         context: this,
         _origin: this,
         _taskGroupPath: tp._taskGroupPath,
         _scheduler: (0, _propertyModifiersMixin.resolveScheduler)(tp, this, _taskGroup.TaskGroup),
-        _propertyName
+        _propertyName: _propertyName
       });
     });
 
@@ -66826,7 +68245,7 @@ requireModule('ember')
   });
   exports.default = {
     name: 'ember-concurrency',
-    initialize: function () {}
+    initialize: function initialize() {}
   };
 });
 ;define('ember-concurrency/utils', ['exports'], function (exports) {
@@ -66843,6 +68262,22 @@ requireModule('ember')
   exports.raw = raw;
   exports.rawTimeout = rawTimeout;
   exports.yieldableToPromise = yieldableToPromise;
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
   function isEventedObject(c) {
     return c && (typeof c.one === 'function' && typeof c.off === 'function' || typeof c.addEventListener === 'function' && typeof c.removeEventListener === 'function');
   }
@@ -66858,7 +68293,7 @@ requireModule('ember')
     }
   };
 
-  let objectAssign = exports.objectAssign = Object.assign || function objectAssign(target) {
+  var objectAssign = exports.objectAssign = Object.assign || function objectAssign(target) {
     'use strict';
 
     if (target == null) {
@@ -66879,7 +68314,11 @@ requireModule('ember')
     return target;
   };
 
-  function _cleanupOnDestroy(owner, object, cleanupMethodName, ...args) {
+  function _cleanupOnDestroy(owner, object, cleanupMethodName) {
+    for (var _len = arguments.length, args = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+      args[_key - 3] = arguments[_key];
+    }
+
     // TODO: find a non-mutate-y, non-hacky way of doing this.
 
     if (!owner.willDestroy) {
@@ -66888,11 +68327,11 @@ requireModule('ember')
     }
 
     if (!owner.willDestroy.__ember_processes_destroyers__) {
-      let oldWillDestroy = owner.willDestroy;
-      let disposers = [];
+      var oldWillDestroy = owner.willDestroy;
+      var disposers = [];
 
       owner.willDestroy = function () {
-        for (let i = 0, l = disposers.length; i < l; i++) {
+        for (var i = 0, l = disposers.length; i < l; i++) {
           disposers[i]();
         }
         oldWillDestroy.apply(owner, arguments);
@@ -66900,16 +68339,16 @@ requireModule('ember')
       owner.willDestroy.__ember_processes_destroyers__ = disposers;
     }
 
-    owner.willDestroy.__ember_processes_destroyers__.push(() => {
-      object[cleanupMethodName](...args);
+    owner.willDestroy.__ember_processes_destroyers__.push(function () {
+      object[cleanupMethodName].apply(object, args);
     });
   }
 
-  let INVOKE = exports.INVOKE = "__invoke_symbol__";
+  var INVOKE = exports.INVOKE = "__invoke_symbol__";
 
-  let locations = ['ember-glimmer/helpers/action', 'ember-routing-htmlbars/keywords/closure-action', 'ember-routing/keywords/closure-action'];
+  var locations = ['ember-glimmer/helpers/action', 'ember-routing-htmlbars/keywords/closure-action', 'ember-routing/keywords/closure-action'];
 
-  for (let i = 0; i < locations.length; i++) {
+  for (var i = 0; i < locations.length; i++) {
     if (locations[i] in Ember.__loader.registry) {
       exports.INVOKE = INVOKE = Ember.__loader.require(locations[i])['INVOKE'];
       break;
@@ -66917,13 +68356,13 @@ requireModule('ember')
   }
 
   // TODO: Symbol polyfill?
-  const yieldableSymbol = exports.yieldableSymbol = "__ec_yieldable__";
-  const YIELDABLE_CONTINUE = exports.YIELDABLE_CONTINUE = "next";
-  const YIELDABLE_THROW = exports.YIELDABLE_THROW = "throw";
-  const YIELDABLE_RETURN = exports.YIELDABLE_RETURN = "return";
-  const YIELDABLE_CANCEL = exports.YIELDABLE_CANCEL = "cancel";
+  var yieldableSymbol = exports.yieldableSymbol = "__ec_yieldable__";
+  var YIELDABLE_CONTINUE = exports.YIELDABLE_CONTINUE = "next";
+  var YIELDABLE_THROW = exports.YIELDABLE_THROW = "throw";
+  var YIELDABLE_RETURN = exports.YIELDABLE_RETURN = "return";
+  var YIELDABLE_CANCEL = exports.YIELDABLE_CANCEL = "cancel";
 
-  const _ComputedProperty = exports._ComputedProperty = Ember.ComputedProperty;
+  var _ComputedProperty = exports._ComputedProperty = Ember.ComputedProperty;
 
   /**
    *
@@ -66948,11 +68387,11 @@ requireModule('ember')
    *   the task, in milliseconds
    */
   function timeout(ms) {
-    let timerId;
-    let promise = new Ember.RSVP.Promise(r => {
+    var timerId = void 0;
+    var promise = new Ember.RSVP.Promise(function (r) {
       timerId = Ember.run.later(r, ms);
     });
-    promise.__ec_cancel__ = () => {
+    promise.__ec_cancel__ = function () {
       Ember.run.cancel(timerId);
     };
     return promise;
@@ -66989,9 +68428,7 @@ requireModule('ember')
    * });
    * ```
    */
-  const forever = exports.forever = {
-    [yieldableSymbol]() {}
-  };
+  var forever = exports.forever = _defineProperty({}, yieldableSymbol, function () {});
 
   function RawValue(value) {
     this.value = value;
@@ -67002,23 +68439,23 @@ requireModule('ember')
   }
 
   function rawTimeout(ms) {
-    return {
-      [yieldableSymbol](taskInstance, resumeIndex) {
-        let timerId = setTimeout(() => {
-          taskInstance.proceed(resumeIndex, YIELDABLE_CONTINUE, this._result);
-        }, ms);
-        return () => {
-          window.clearInterval(timerId);
-        };
-      }
-    };
+    return _defineProperty({}, yieldableSymbol, function (taskInstance, resumeIndex) {
+      var _this = this;
+
+      var timerId = setTimeout(function () {
+        taskInstance.proceed(resumeIndex, YIELDABLE_CONTINUE, _this._result);
+      }, ms);
+      return function () {
+        window.clearInterval(timerId);
+      };
+    });
   }
 
   function yieldableToPromise(yieldable) {
-    let def = Ember.RSVP.defer();
+    var def = Ember.RSVP.defer();
 
     def.promise.__ec_cancel__ = yieldable[yieldableSymbol]({
-      proceed(_index, resumeType, value) {
+      proceed: function proceed(_index, resumeType, value) {
         if (resumeType == YIELDABLE_CONTINUE || resumeType == YIELDABLE_RETURN) {
           def.resolve(value);
         } else {
@@ -67097,15 +68534,28 @@ requireModule('ember')
     value: true
   });
 
-  exports.default = function ({ collapseKeys, getValue, flattenKeys, isLazy }) {
-    return function (...args) {
-      let { keys, callback: incomingCallback } = parseComputedArgs(args);
+  exports.default = function (_ref2) {
+    var collapseKeys = _ref2.collapseKeys,
+        getValue = _ref2.getValue,
+        flattenKeys = _ref2.flattenKeys,
+        isLazy = _ref2.isLazy;
 
-      let collapsedKeys = collapseKeys(keys);
+    return function () {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      var _parseComputedArgs = parseComputedArgs(args),
+          keys = _parseComputedArgs.keys,
+          incomingCallback = _parseComputedArgs.callback;
+
+      var collapsedKeys = collapseKeys(keys);
 
       function createArgs(context, key) {
-        let bundledKeys = collapsedKeys.map(macro => ({ context, macro, key }));
-        let values;
+        var bundledKeys = collapsedKeys.map(function (macro) {
+          return { context: context, macro: macro, key: key };
+        });
+        var values = void 0;
         if (isLazy) {
           values = bundledKeys.slice();
           values.splice(0, 0, getValue);
@@ -67115,14 +68565,25 @@ requireModule('ember')
         return values;
       }
 
-      let newCallback = buildCallback({ incomingCallback, createArgs });
+      var newCallback = buildCallback({ incomingCallback: incomingCallback, createArgs: createArgs });
 
-      return Ember.computed(...flattenKeys(keys), newCallback);
+      return Ember.computed.apply(undefined, _toConsumableArray(flattenKeys(keys)).concat([newCallback]));
     };
   };
 
   exports.buildCurriedComputed = buildCurriedComputed;
 
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
 
   function parseComputedArgs(args) {
     return {
@@ -67131,11 +68592,14 @@ requireModule('ember')
     };
   }
 
-  function buildCallback({ incomingCallback, createArgs }) {
-    let newCallback;
+  function buildCallback(_ref) {
+    var incomingCallback = _ref.incomingCallback,
+        createArgs = _ref.createArgs;
+
+    var newCallback = void 0;
 
     if (typeof incomingCallback === 'function') {
-      newCallback = function (key) {
+      newCallback = function newCallback(key) {
         return incomingCallback.apply(this, createArgs(this, key));
       };
     } else {
@@ -67147,7 +68611,9 @@ requireModule('ember')
       }
       if (incomingCallback.set) {
         newCallback.set = function (key, value) {
-          return incomingCallback.set.call(this, value, ...createArgs(this, key));
+          var _incomingCallback$set;
+
+          return (_incomingCallback$set = incomingCallback.set).call.apply(_incomingCallback$set, [this, value].concat(_toConsumableArray(createArgs(this, key))));
         };
       }
     }
@@ -67158,7 +68624,7 @@ requireModule('ember')
   function buildCurriedComputed(computed) {
     return function (callback) {
       return function () {
-        return computed(...arguments, callback);
+        return computed.apply(undefined, Array.prototype.slice.call(arguments).concat([callback]));
       };
     };
   }
@@ -67169,8 +68635,8 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  const ARRAY_EACH = exports.ARRAY_EACH = '@each.';
-  const ARRAY_LENGTH = exports.ARRAY_LENGTH = '[]';
+  var ARRAY_EACH = exports.ARRAY_EACH = '@each.';
+  var ARRAY_LENGTH = exports.ARRAY_LENGTH = '[]';
 });
 ;define('ember-macro-helpers/collapse-key', ['exports', 'ember-macro-helpers/expand-property', 'ember-macro-helpers/-constants'], function (exports, _expandProperty, _constants) {
   'use strict';
@@ -67182,8 +68648,8 @@ requireModule('ember')
 
 
   function collapseAndPruneDuplicates(expandedProperties) {
-    return expandedProperties.map(collapseKey).reduce((properties, collapsedProperties) => {
-      let uniqueProperties = collapsedProperties.filter(collapsedProperty => {
+    return expandedProperties.map(collapseKey).reduce(function (properties, collapsedProperties) {
+      var uniqueProperties = collapsedProperties.filter(function (collapsedProperty) {
         return properties.indexOf(collapsedProperty) === -1;
       });
       return properties.concat(uniqueProperties);
@@ -67195,12 +68661,12 @@ requireModule('ember')
       return [property];
     }
 
-    let expandedProperties = (0, _expandProperty.default)(property);
+    var expandedProperties = (0, _expandProperty.default)(property);
     if (expandedProperties.length > 1) {
       return collapseAndPruneDuplicates(expandedProperties);
     }
 
-    let arrayIndex = property.indexOf(_constants.ARRAY_EACH);
+    var arrayIndex = property.indexOf(_constants.ARRAY_EACH);
     if (arrayIndex === -1) {
       arrayIndex = property.indexOf(_constants.ARRAY_LENGTH);
     }
@@ -67229,26 +68695,28 @@ requireModule('ember')
   };
 
   function collapseKeysWithMap(keys) {
-    let collapsedKeys = [];
-    let keyMap = [];
+    var collapsedKeys = [];
+    var keyMap = [];
 
-    keys.forEach(key => {
-      let array = (0, _collapseKey.default)(key);
+    keys.forEach(function (key) {
+      var array = (0, _collapseKey.default)(key);
 
       collapsedKeys = collapsedKeys.concat(array);
 
-      let i;
+      var i = void 0;
       if (keyMap.length) {
         i = keyMap[keyMap.length - 1] + 1;
       } else {
         i = 0;
       }
-      keyMap = keyMap.concat(array.map(() => i));
+      keyMap = keyMap.concat(array.map(function () {
+        return i;
+      }));
     });
 
     return {
-      collapsedKeys,
-      keyMap
+      collapsedKeys: collapsedKeys,
+      keyMap: keyMap
     };
   }
 });
@@ -67260,9 +68728,11 @@ requireModule('ember')
   });
 
 
-  const collapseKeys = keys => keys;
+  var collapseKeys = function collapseKeys(keys) {
+    return keys;
+  };
 
-  exports.default = (0, _buildComputed.default)({ collapseKeys, getValue: _getValueUnsafe.default, flattenKeys: _flattenKeysUnsafe.default });
+  exports.default = (0, _buildComputed.default)({ collapseKeys: collapseKeys, getValue: _getValueUnsafe.default, flattenKeys: _flattenKeysUnsafe.default });
 });
 ;define('ember-macro-helpers/computed', ['exports', 'ember-macro-helpers/-build-computed', 'ember-macro-helpers/collapse-keys', 'ember-macro-helpers/get-value', 'ember-macro-helpers/flatten-keys'], function (exports, _buildComputed, _collapseKeys, _getValue, _flattenKeys) {
   'use strict';
@@ -67280,12 +68750,18 @@ requireModule('ember')
   });
 
   exports.default = function (observerBools, macroGenerator) {
-    return function (...keys) {
-      let { collapsedKeys, keyMap } = (0, _collapseKeys.collapseKeysWithMap)(keys);
+    return function () {
+      for (var _len = arguments.length, keys = Array(_len), _key = 0; _key < _len; _key++) {
+        keys[_key] = arguments[_key];
+      }
+
+      var _collapseKeysWithMap = (0, _collapseKeys.collapseKeysWithMap)(keys),
+          collapsedKeys = _collapseKeysWithMap.collapsedKeys,
+          keyMap = _collapseKeysWithMap.keyMap;
 
       function getOriginalArrayDecorator(key, i) {
         if (typeof key === 'string') {
-          let originalKey = keys[keyMap[i]];
+          var originalKey = keys[keyMap[i]];
           if (originalKey.indexOf(_constants.ARRAY_EACH) !== -1 || originalKey.indexOf(_constants.ARRAY_LENGTH) !== -1) {
             return originalKey;
           }
@@ -67293,39 +68769,41 @@ requireModule('ember')
         return key;
       }
 
-      let mappedKeys = [];
+      var mappedKeys = [];
 
       function rewriteComputed(obj, key) {
-        let mappedWithResolvedOberverKeys = mappedKeys.map((macro, i) => {
-          let shouldObserve = observerBools[i];
+        var _this = this;
+
+        var mappedWithResolvedOberverKeys = mappedKeys.map(function (macro, i) {
+          var shouldObserve = observerBools[i];
           if (shouldObserve) {
-            macro = (0, _getValue.default)({ context: this, macro, key });
+            macro = (0, _getValue.default)({ context: _this, macro: macro, key: key });
           }
           return macro;
         });
 
-        let cp = macroGenerator.apply(this, mappedWithResolvedOberverKeys);
+        var cp = macroGenerator.apply(this, mappedWithResolvedOberverKeys);
         Ember.defineProperty(this, 'computed', cp);
       }
 
-      let classProperties = {};
+      var classProperties = {};
 
-      collapsedKeys.forEach((key, i) => {
-        let shouldObserve = observerBools[i];
+      collapsedKeys.forEach(function (key, i) {
+        var shouldObserve = observerBools[i];
         if (!shouldObserve) {
           key = getOriginalArrayDecorator(key, i);
         }
 
-        let mappedKey = resolveMappedLocation(key, i);
+        var mappedKey = resolveMappedLocation(key, i);
 
         mappedKeys.push(mappedKey);
         if (shouldObserve) {
           // eslint-disable-next-line ember/no-observers
-          classProperties[`key${i}DidChange`] = Ember.observer(mappedKey, rewriteComputed);
+          classProperties['key' + i + 'DidChange'] = Ember.observer(mappedKey, rewriteComputed);
         }
       });
 
-      let ObserverClass = BaseClass.extend(classProperties, {
+      var ObserverClass = BaseClass.extend(classProperties, {
         // can't use rewriteComputed directly, maybe a bug
         // https://github.com/emberjs/ember.js/issues/15246
         onInit: Ember.on('init', function () {
@@ -67333,12 +68811,14 @@ requireModule('ember')
         })
       });
 
-      let cp = Ember.computed(...(0, _flattenKeys.default)(keys), function (key) {
-        let propertyInstance = findOrCreatePropertyInstance(this, ObserverClass, key, cp);
+      var cp = Ember.computed.apply(undefined, _toConsumableArray((0, _flattenKeys.default)(keys)).concat([function (key) {
+        var _this2 = this;
 
-        let properties = collapsedKeys.reduce((properties, macro, i) => {
+        var propertyInstance = findOrCreatePropertyInstance(this, ObserverClass, key, cp);
+
+        var properties = collapsedKeys.reduce(function (properties, macro, i) {
           if (typeof macro !== 'string') {
-            properties[i.toString()] = (0, _getValue.default)({ context: this, macro, key });
+            properties[i.toString()] = (0, _getValue.default)({ context: _this2, macro: macro, key: key });
           }
           return properties;
         }, {});
@@ -67353,42 +68833,52 @@ requireModule('ember')
         Ember.set(propertyInstance, 'preventDoubleRender', false);
 
         return Ember.get(propertyInstance, 'computed');
-      }).readOnly();
+      }])).readOnly();
 
       return cp;
     };
   };
 
-  // import { getOwner } from '@ember/application';
-  const {
-    WeakMap
-  } = Ember;
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
 
-  const PROPERTIES = new WeakMap();
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  var WeakMap = Ember.WeakMap;
+
+
+  var PROPERTIES = new WeakMap();
 
   function findOrCreatePropertyInstance(context, propertyClass, key, cp) {
-    let propertiesForContext = PROPERTIES.get(context);
+    var propertiesForContext = PROPERTIES.get(context);
     if (!propertiesForContext) {
       propertiesForContext = new WeakMap();
       PROPERTIES.set(context, propertiesForContext);
     }
 
-    let property = propertiesForContext.get(cp);
+    var property = propertiesForContext.get(cp);
     if (property) {
       return property;
     }
 
     // let owner = getOwner(context);
     property = propertyClass.create( /* owner.ownerInjection(), */{
-      key,
-      context,
+      key: key,
+      context: context,
       nonStrings: Ember.Object.create()
     });
 
     propertiesForContext.set(cp, property);
 
     if (context instanceof Ember.Component) {
-      context.one('willDestroyElement', () => {
+      context.one('willDestroyElement', function () {
         property.destroy();
       });
     }
@@ -67396,14 +68886,13 @@ requireModule('ember')
     return property;
   }
 
-  const BaseClass = Ember.Object.extend({
+  var BaseClass = Ember.Object.extend({
     // eslint-disable-next-line ember/no-observers
     computedDidChange: Ember.observer('computed', function () {
-      let {
-        context,
-        key,
-        preventDoubleRender
-      } = this;
+      var context = this.context,
+          key = this.key,
+          preventDoubleRender = this.preventDoubleRender;
+
 
       if (context.isDestroying) {
         // controllers can get into this state
@@ -67422,9 +68911,9 @@ requireModule('ember')
 
   function resolveMappedLocation(key, i) {
     if (typeof key === 'string') {
-      return `context.${key}`;
+      return 'context.' + key;
     } else {
-      return `nonStrings.${i}`;
+      return 'nonStrings.' + i;
     }
   }
 });
@@ -67444,7 +68933,7 @@ requireModule('ember')
   });
 
   exports.default = function (propertyList) {
-    return propertyList.reduce((newPropertyList, property) => {
+    return propertyList.reduce(function (newPropertyList, property) {
       return newPropertyList.concat((0, _expandProperty.default)(property));
     }, []);
   };
@@ -67457,8 +68946,8 @@ requireModule('ember')
   });
 
   exports.default = function (property) {
-    let newPropertyList = [];
-    Ember.expandProperties(property, expandedProperties => {
+    var newPropertyList = [];
+    Ember.expandProperties(property, function (expandedProperties) {
       newPropertyList = newPropertyList.concat(expandedProperties);
     });
     return newPropertyList;
@@ -67472,12 +68961,12 @@ requireModule('ember')
   });
 
   exports.default = function (keys) {
-    let flattenedKeys = (0, _flattenKeys.default)(keys);
+    var flattenedKeys = (0, _flattenKeys.default)(keys);
 
-    return flattenedKeys.reduce((flattenedKeys, key) => {
+    return flattenedKeys.reduce(function (flattenedKeys, key) {
       // keys with spaces throw an exception
       // treat as a literal and ignore
-      let hasSpaces = key.indexOf(' ') !== -1;
+      var hasSpaces = key.indexOf(' ') !== -1;
       if (!hasSpaces) {
         flattenedKeys.push(key);
       }
@@ -67493,11 +68982,11 @@ requireModule('ember')
   });
 
   exports.default = function (keys) {
-    let flattenedKeys = [];
+    var flattenedKeys = [];
     _flattenKeys(keys.slice(0, -1), flattenedKeys);
-    let lastKey = keys[keys.length - 1];
+    var lastKey = keys[keys.length - 1];
     if (lastKey) {
-      let lastValue = flattenKey(lastKey, flattenedKeys);
+      var lastValue = flattenKey(lastKey, flattenedKeys);
       if (lastValue) {
         if (lastValue.get) {
           flattenKey(lastValue.get, flattenedKeys);
@@ -67512,7 +69001,7 @@ requireModule('ember')
 
   function flattenKey(key, flattenedKeys) {
     if ((0, _isComputed.default)(key)) {
-      let dependentKeys = key._dependentKeys;
+      var dependentKeys = key._dependentKeys;
       if (dependentKeys === undefined) {
         // when there are no keys (raw)
         return;
@@ -67529,7 +69018,7 @@ requireModule('ember')
   }
 
   function _flattenKeys(keys, flattenedKeys) {
-    keys.forEach(key => {
+    keys.forEach(function (key) {
       flattenKey(key, flattenedKeys);
     });
   }
@@ -67541,8 +69030,10 @@ requireModule('ember')
     value: true
   });
 
-  exports.default = function (options = {}) {
-    let value = (0, _getValue.default)(options);
+  exports.default = function () {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    var value = (0, _getValue.default)(options);
     if (value !== undefined) {
       return value;
     }
@@ -67557,7 +69048,12 @@ requireModule('ember')
     value: true
   });
 
-  exports.default = function ({ context, macro, key } = {}) {
+  exports.default = function () {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        context = _ref.context,
+        macro = _ref.macro,
+        key = _ref.key;
+
     if ((0, _isComputed.default)(macro)) {
       return macro._getter.call(context, key);
     }
@@ -67683,19 +69179,21 @@ requireModule('ember')
     value: true
   });
 
-  exports.default = function (array, keys = []) {
+  exports.default = function (array) {
+    var keys = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
     // this macro support should be extracted out
     // we should only deal with string keys in here
     if (typeof array !== 'string') {
       return array;
     }
 
-    let props;
+    var props = void 0;
 
-    let i = array.indexOf(_constants.ARRAY_EACH);
+    var i = array.indexOf(_constants.ARRAY_EACH);
     if (i !== -1) {
-      let chain = array.split('.');
-      let end = chain[chain.length - 1];
+      var chain = array.split('.');
+      var end = chain[chain.length - 1];
       if (end.indexOf('{') === 0) {
         props = end.substring(1, end.length - 1).split(',');
       } else {
@@ -67714,7 +69212,7 @@ requireModule('ember')
       array = array.slice(0, i - 1);
     }
 
-    keys.forEach(key => {
+    keys.forEach(function (key) {
       // key could be a promise proxy and not resolved yet
       if (key === undefined) {
         return;
@@ -67725,7 +69223,7 @@ requireModule('ember')
       }
     });
 
-    let suffix;
+    var suffix = void 0;
     if (props.length === 0) {
       suffix = _constants.ARRAY_LENGTH;
     } else {
@@ -67733,11 +69231,11 @@ requireModule('ember')
       if (props.length === 1) {
         suffix += props[0];
       } else {
-        suffix += `{${props.join(',')}}`;
+        suffix += '{' + props.join(',') + '}';
       }
     }
 
-    return Ember.isBlank(array) ? suffix : `${array}.${suffix}`;
+    return Ember.isBlank(array) ? suffix : array + '.' + suffix;
   };
 });
 ;define('ember-macro-helpers/raw', ['exports'], function (exports) {
@@ -67748,7 +69246,9 @@ requireModule('ember')
   });
 
   exports.default = function (key) {
-    return Ember.computed(() => key).readOnly();
+    return Ember.computed(function () {
+      return key;
+    }).readOnly();
   };
 });
 ;define('ember-macro-helpers/reads', ['exports', 'ember-macro-helpers/writable'], function (exports, _writable) {
@@ -67772,14 +69272,14 @@ requireModule('ember')
   });
 
   exports.default = function (getter, setterCallback) {
-    let newCallback = {
-      get(val) {
+    var newCallback = {
+      get: function get(val) {
         return val;
       }
     };
 
     if (setterCallback) {
-      if (typeof setterCallback === 'object' && setterCallback.set) {
+      if ((typeof setterCallback === 'undefined' ? 'undefined' : _typeof(setterCallback)) === 'object' && setterCallback.set) {
         newCallback.set = setterCallback.set;
       } else {
         newCallback.set = function () {
@@ -67790,6 +69290,12 @@ requireModule('ember')
 
     return (0, _computed.default)(getter, newCallback);
   };
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  };
 });
 ;define('ember-moment/computeds/-base', ['exports', 'ember-macro-helpers/computed-unsafe'], function (exports, _computedUnsafe) {
   'use strict';
@@ -67799,10 +69305,18 @@ requireModule('ember')
   });
   exports.default = computedFactory;
   function computedFactory(fn) {
-    return function (...args) {
-      return (0, _computedUnsafe.default)(...args, function (...vals) {
+    return function () {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      return _computedUnsafe.default.apply(undefined, args.concat([function () {
+        for (var _len2 = arguments.length, vals = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          vals[_key2] = arguments[_key2];
+        }
+
         return fn.call(this, vals);
-      });
+      }]));
     };
   }
 });
@@ -67812,14 +69326,59 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = (0, _base.default)(function calendarComputed(params, formatHash = {}) {
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  exports.default = (0, _base.default)(function calendarComputed(params) {
+    var formatHash = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     if (!params || params && params.length > 3) {
       throw new TypeError('ember-moment: Invalid Number of arguments, at most 3');
     }
 
-    const [date, referenceTime, formats] = params;
-    const clone = Object.create(formatHash);
-    const mergedFormats = Ember.merge(clone, formats);
+    var _params = _slicedToArray(params, 3),
+        date = _params[0],
+        referenceTime = _params[1],
+        formats = _params[2];
+
+    var clone = Object.create(formatHash);
+    var mergedFormats = Ember.merge(clone, formats);
 
     return (0, _moment.default)(date).calendar(referenceTime, mergedFormats);
   });
@@ -67830,8 +69389,21 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
   exports.default = (0, _base.default)(function durationComputed(params) {
-    return _moment.default.duration(...params);
+    return _moment.default.duration.apply(_moment.default, _toConsumableArray(params));
   });
 });
 ;define('ember-moment/computeds/format', ['exports', 'moment', 'ember-moment/computeds/-base'], function (exports, _moment, _base) {
@@ -67841,15 +69413,56 @@ requireModule('ember')
     value: true
   });
 
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
 
-  const CONFIG_KEY = 'config:environment';
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
 
-  exports.default = (0, _base.default)(function formatComputed([value, optionalFormat]) {
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  var CONFIG_KEY = 'config:environment';
+
+  exports.default = (0, _base.default)(function formatComputed(_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        value = _ref2[0],
+        optionalFormat = _ref2[1];
+
     if (!optionalFormat) {
-      const owner = Ember.getOwner(this);
+      var owner = Ember.getOwner(this);
 
       if (owner && owner.hasRegistration && owner.hasRegistration(CONFIG_KEY)) {
-        const config = owner.resolveRegistration(CONFIG_KEY);
+        var config = owner.resolveRegistration(CONFIG_KEY);
 
         if (config) {
           optionalFormat = Ember.get(config, 'moment.outputFormat');
@@ -67866,14 +69479,27 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
   exports.default = (0, _base.default)(function fromNowComputed(params) {
-    let maybeHideSuffix;
+    var maybeHideSuffix = void 0;
 
     if (params.length > 1) {
       maybeHideSuffix = params.pop();
     }
 
-    return (0, _moment.default)(...params).fromNow(maybeHideSuffix);
+    return _moment.default.apply(undefined, _toConsumableArray(params)).fromNow(maybeHideSuffix);
   });
 });
 ;define('ember-moment/computeds/humanize', ['exports', 'moment', 'ember-moment/computeds/-base'], function (exports, _moment, _base) {
@@ -67882,7 +69508,50 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = (0, _base.default)(function humanizeComputed([duration, suffixless]) {
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  exports.default = (0, _base.default)(function humanizeComputed(_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        duration = _ref2[0],
+        suffixless = _ref2[1];
+
     if (!_moment.default.isDuration(duration)) {
       duration = _moment.default.duration(duration);
     }
@@ -67896,7 +69565,50 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = (0, _base.default)(function localeComputed([date, locale]) {
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  exports.default = (0, _base.default)(function localeComputed(_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        date = _ref2[0],
+        locale = _ref2[1];
+
     if (!_moment.default.isDuration(date)) {
       date = (0, _moment.default)(date);
     }
@@ -67910,8 +69622,21 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
   exports.default = (0, _base.default)(function momentComputed(params) {
-    return (0, _moment.default)(...params);
+    return _moment.default.apply(undefined, _toConsumableArray(params));
   });
 });
 ;define('ember-moment/computeds/to-now', ['exports', 'moment', 'ember-moment/computeds/-base'], function (exports, _moment, _base) {
@@ -67920,14 +69645,27 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
   exports.default = (0, _base.default)(function toNowComputed(params) {
-    let maybeHidePrefix;
+    var maybeHidePrefix = void 0;
 
     if (params.length > 1) {
       maybeHidePrefix = params.pop();
     }
 
-    return (0, _moment.default)(...params).toNow(maybeHidePrefix);
+    return _moment.default.apply(undefined, _toConsumableArray(params)).toNow(maybeHidePrefix);
   });
 });
 ;define('ember-moment/computeds/tz', ['exports', 'moment', 'ember-moment/computeds/-base'], function (exports, _moment, _base) {
@@ -67936,7 +69674,50 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = (0, _base.default)(function tzComputed([date, tz]) {
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  exports.default = (0, _base.default)(function tzComputed(_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        date = _ref2[0],
+        tz = _ref2[1];
+
     return (0, _moment.default)(date).tz(tz);
   });
 });
@@ -67946,8 +69727,21 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
   exports.default = (0, _base.default)(function utcComputed(params) {
-    return _moment.default.utc(...params);
+    return _moment.default.utc.apply(_moment.default, _toConsumableArray(params));
   });
 });
 ;define('ember-moment/helpers/-base', ['exports'], function (exports) {
@@ -67965,7 +69759,11 @@ requireModule('ember')
       this.recompute();
     }),
 
-    compute(value, { interval }) {
+    compute: function compute(value, _ref) {
+      var _this = this;
+
+      var interval = _ref.interval;
+
       if (Ember.get(this, 'disableInterval')) {
         return;
       }
@@ -67978,14 +69776,18 @@ requireModule('ember')
          * as the run loop queue is never clear so tests will stay locked waiting
          * for queue to clear.
          */
-        this.intervalTimer = setTimeout(() => {
-          Ember.run(() => this.recompute());
+        this.intervalTimer = setTimeout(function () {
+          Ember.run(function () {
+            return _this.recompute();
+          });
         }, parseInt(interval, 10));
       }
     },
+    morphMoment: function morphMoment(time, _ref2) {
+      var locale = _ref2.locale,
+          timeZone = _ref2.timeZone;
 
-    morphMoment(time, { locale, timeZone }) {
-      const momentService = Ember.get(this, 'moment');
+      var momentService = Ember.get(this, 'moment');
 
       locale = locale || Ember.get(momentService, 'locale');
       timeZone = timeZone || Ember.get(momentService, 'timeZone');
@@ -68000,14 +69802,12 @@ requireModule('ember')
 
       return time;
     },
-
-    clearTimer() {
+    clearTimer: function clearTimer() {
       clearTimeout(this.intervalTimer);
     },
-
-    destroy() {
+    destroy: function destroy() {
       this.clearTimer();
-      this._super(...arguments);
+      this._super.apply(this, arguments);
     }
   });
 });
@@ -68018,13 +69818,20 @@ requireModule('ember')
     value: true
   });
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { precision, locale, timeZone }) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var _morphMoment;
 
-      const moment = Ember.get(this, 'moment');
-      const { length } = params;
-      const args = [];
-      const comparisonArgs = [];
+      var precision = _ref.precision,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+      var length = params.length;
+
+      var args = [];
+      var comparisonArgs = [];
 
       if (length === 1) {
         comparisonArgs.push(params[0]);
@@ -68033,7 +69840,7 @@ requireModule('ember')
         comparisonArgs.push(params[1]);
       }
 
-      return this.morphMoment(moment.moment(...args), { locale, timeZone }).isAfter(...comparisonArgs, precision);
+      return (_morphMoment = this.morphMoment(moment.moment.apply(moment, args), { locale: locale, timeZone: timeZone })).isAfter.apply(_morphMoment, comparisonArgs.concat([precision]));
     })
   });
 });
@@ -68044,13 +69851,20 @@ requireModule('ember')
     value: true
   });
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { precision, locale, timeZone }) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var _morphMoment;
 
-      const moment = Ember.get(this, 'moment');
-      const { length } = params;
-      const args = [];
-      const comparisonArgs = [];
+      var precision = _ref.precision,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+      var length = params.length;
+
+      var args = [];
+      var comparisonArgs = [];
 
       if (length === 1) {
         comparisonArgs.push(params[0]);
@@ -68059,7 +69873,7 @@ requireModule('ember')
         comparisonArgs.push(params[1]);
       }
 
-      return this.morphMoment(moment.moment(...args), { locale, timeZone }).isBefore(...comparisonArgs, precision);
+      return (_morphMoment = this.morphMoment(moment.moment.apply(moment, args), { locale: locale, timeZone: timeZone })).isBefore.apply(_morphMoment, comparisonArgs.concat([precision]));
     })
   });
 });
@@ -68069,25 +69883,46 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { precision, inclusivity, locale, timeZone }) {
-      this._super(...arguments);
 
-      const moment = Ember.get(this, 'moment');
-      const _params = [].concat(params);
-      const { length } = params;
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  exports.default = _base.default.extend({
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var _morphMoment;
+
+      var precision = _ref.precision,
+          inclusivity = _ref.inclusivity,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+      var _params = [].concat(params);
+      var length = params.length;
+
 
       if (length < 2 || length > 3) {
         throw new TypeError('ember-moment: Invalid Number of arguments, expected 2 or 3');
       }
 
-      const args = [];
+      var args = [];
 
       if (length > 2) {
         args.push(_params.shift());
       }
 
-      return this.morphMoment(moment.moment(...args), { locale, timeZone }).isBetween(..._params, precision, inclusivity);
+      return (_morphMoment = this.morphMoment(moment.moment.apply(moment, args), { locale: locale, timeZone: timeZone })).isBetween.apply(_morphMoment, _toConsumableArray(_params).concat([precision, inclusivity]));
     })
   });
 });
@@ -68098,13 +69933,20 @@ requireModule('ember')
     value: true
   });
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { precision, locale, timeZone }) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var _morphMoment;
 
-      const moment = Ember.get(this, 'moment');
-      const { length } = params;
-      const args = [];
-      const comparisonArgs = [];
+      var precision = _ref.precision,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+      var length = params.length;
+
+      var args = [];
+      var comparisonArgs = [];
 
       if (length === 1) {
         comparisonArgs.push(params[0]);
@@ -68113,7 +69955,7 @@ requireModule('ember')
         comparisonArgs.push(params[1]);
       }
 
-      return this.morphMoment(moment.moment(...args), { locale, timeZone }).isSameOrAfter(...comparisonArgs, precision);
+      return (_morphMoment = this.morphMoment(moment.moment.apply(moment, args), { locale: locale, timeZone: timeZone })).isSameOrAfter.apply(_morphMoment, comparisonArgs.concat([precision]));
     })
   });
 });
@@ -68124,13 +69966,20 @@ requireModule('ember')
     value: true
   });
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { precision, locale, timeZone }) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var _morphMoment;
 
-      const moment = Ember.get(this, 'moment');
-      const { length } = params;
-      const args = [];
-      const comparisonArgs = [];
+      var precision = _ref.precision,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+      var length = params.length;
+
+      var args = [];
+      var comparisonArgs = [];
 
       if (length === 1) {
         comparisonArgs.push(params[0]);
@@ -68139,7 +69988,7 @@ requireModule('ember')
         comparisonArgs.push(params[1]);
       }
 
-      return this.morphMoment(moment.moment(...args), { locale, timeZone }).isSameOrBefore(...comparisonArgs, precision);
+      return (_morphMoment = this.morphMoment(moment.moment.apply(moment, args), { locale: locale, timeZone: timeZone })).isSameOrBefore.apply(_morphMoment, comparisonArgs.concat([precision]));
     })
   });
 });
@@ -68150,13 +69999,20 @@ requireModule('ember')
     value: true
   });
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { precision, locale, timeZone }) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var _morphMoment;
 
-      const moment = Ember.get(this, 'moment');
-      const { length } = params;
-      const args = [];
-      const comparisonArgs = [];
+      var precision = _ref.precision,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+      var length = params.length;
+
+      var args = [];
+      var comparisonArgs = [];
 
       if (length === 1) {
         comparisonArgs.push(params[0]);
@@ -68165,7 +70021,7 @@ requireModule('ember')
         comparisonArgs.push(params[1]);
       }
 
-      return this.morphMoment(moment.moment(...args), { locale, timeZone }).isSame(...comparisonArgs, precision);
+      return (_morphMoment = this.morphMoment(moment.moment.apply(moment, args), { locale: locale, timeZone: timeZone })).isSame.apply(_morphMoment, comparisonArgs.concat([precision]));
     })
   });
 });
@@ -68175,25 +70031,45 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { precision, locale, timeZone }) {
-      this._super(...arguments);
 
-      const moment = Ember.get(this, 'moment');
-      const { length } = params;
-      const args = [];
-      const additionArgs = [];
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  exports.default = _base.default.extend({
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var _morphMoment;
+
+      var precision = _ref.precision,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+      var length = params.length;
+
+      var args = [];
+      var additionArgs = [];
 
       if (length === 1) {
         additionArgs.push(params[0]);
       } else if (length === 2 && Ember.typeOf(params[0]) === 'number' && Ember.typeOf(params[1]) === 'string') {
-        additionArgs.push(...params);
+        additionArgs.push.apply(additionArgs, _toConsumableArray(params));
       } else {
         args.push(params[0]);
-        additionArgs.push(...params.slice(1));
+        additionArgs.push.apply(additionArgs, _toConsumableArray(params.slice(1)));
       }
 
-      return this.morphMoment(moment.moment(...args), { locale, timeZone }).add(...additionArgs, precision);
+      return (_morphMoment = this.morphMoment(moment.moment.apply(moment, args), { locale: locale, timeZone: timeZone })).add.apply(_morphMoment, additionArgs.concat([precision]));
     })
   });
 });
@@ -68203,25 +70079,72 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, formatHash = {}) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (params) {
+      var formatHash = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      this._super.apply(this, arguments);
 
       if (!params || params && params.length > 3) {
         throw new TypeError('ember-moment: Invalid Number of arguments, at most 3');
       }
 
-      const moment = Ember.get(this, 'moment');
-      const { locale, timeZone } = formatHash;
-      const [date, referenceTime, formats] = params;
-      const clone = Object.create(formatHash);
+      var moment = Ember.get(this, 'moment');
+      var locale = formatHash.locale,
+          timeZone = formatHash.timeZone;
+
+      var _params = _slicedToArray(params, 3),
+          date = _params[0],
+          referenceTime = _params[1],
+          formats = _params[2];
+
+      var clone = Object.create(formatHash);
 
       delete clone.locale;
       delete clone.timeZone;
 
-      const mergedFormats = Ember.assign(clone, formats);
+      var mergedFormats = Ember.assign(clone, formats);
 
-      return this.morphMoment(moment.moment(date), { locale, timeZone }).calendar(referenceTime, mergedFormats);
+      return this.morphMoment(moment.moment(date), { locale: locale, timeZone: timeZone }).calendar(referenceTime, mergedFormats);
     })
   });
 });
@@ -68231,18 +70154,65 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { precision, float, locale, timeZone }) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var precision = _ref.precision,
+          float = _ref.float,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
 
       if (!params || params && params.length !== 2) {
         throw new TypeError('ember-moment: Invalid Number of arguments, must be 2');
       }
 
-      const moment = Ember.get(this, 'moment');
-      const [dateA, dateB] = params;
+      var moment = Ember.get(this, 'moment');
 
-      return this.morphMoment(moment.moment(dateB), { locale, timeZone }).diff(dateA, precision, float);
+      var _params = _slicedToArray(params, 2),
+          dateA = _params[0],
+          dateB = _params[1];
+
+      return this.morphMoment(moment.moment(dateB), { locale: locale, timeZone: timeZone }).diff(dateA, precision, float);
     })
   });
 });
@@ -68252,18 +70222,34 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
   exports.default = _base.default.extend({
-    compute(params, { locale, timeZone }) {
-      this._super(...arguments);
-      const momentService = Ember.get(this, 'moment');
+    compute: function compute(params, _ref) {
+      var locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
+      var momentService = Ember.get(this, 'moment');
 
       if (!params || params && params.length > 2) {
         throw new TypeError('ember-moment: Invalid Number of arguments, at most 2');
       }
 
-      const result = momentService.moment(_moment.default.duration(...params));
+      var result = momentService.moment(_moment.default.duration.apply(_moment.default, _toConsumableArray(params)));
 
-      return this.morphMoment(result._i, { locale, timeZone }).humanize();
+      return this.morphMoment(result._i, { locale: locale, timeZone: timeZone }).humanize();
     }
   });
 });
@@ -68278,19 +70264,25 @@ requireModule('ember')
       this.recompute();
     }),
 
-    compute: (0, _helperCompute.default)(function (params, { locale, timeZone }) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var _morphMoment;
 
-      const moment = Ember.get(this, 'moment');
-      const { length } = params;
+      var locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+      var length = params.length;
+
 
       if (length > 3) {
         throw new TypeError('ember-moment: Invalid number of arguments, expected at most 3');
       }
 
-      const args = [];
-      const formatArgs = [];
-      const defaultFormat = Ember.get(this, 'moment.defaultFormat');
+      var args = [];
+      var formatArgs = [];
+      var defaultFormat = Ember.get(this, 'moment.defaultFormat');
 
       args.push(params[0]);
 
@@ -68303,7 +70295,7 @@ requireModule('ember')
         formatArgs.push(params[1]);
       }
 
-      return this.morphMoment(moment.moment(...args), { locale, timeZone }).format(...formatArgs);
+      return (_morphMoment = this.morphMoment(moment.moment.apply(moment, args), { locale: locale, timeZone: timeZone })).format.apply(_morphMoment, formatArgs);
     })
   });
 });
@@ -68313,16 +70305,34 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { hideSuffix, hideAffix, locale, timeZone }) {
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var hideSuffix = _ref.hideSuffix,
+          hideAffix = _ref.hideAffix,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
       Ember.deprecate('hideSuffix is deprecated in favour of hideAffix', hideSuffix === undefined, // display if this is false
       { id: 'ember-moment.addon.helpers.moment-from-now', until: '8.0.0' });
 
-      this._super(...arguments);
+      this._super.apply(this, arguments);
 
-      const moment = Ember.get(this, 'moment');
-      const hide = hideSuffix || hideAffix;
-      return this.morphMoment(moment.moment(...params), { locale, timeZone }).fromNow(hide);
+      var moment = Ember.get(this, 'moment');
+      var hide = hideSuffix || hideAffix;
+      return this.morphMoment(moment.moment.apply(moment, _toConsumableArray(params)), { locale: locale, timeZone: timeZone }).fromNow(hide);
     })
   });
 });
@@ -68332,13 +70342,40 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  function _toArray(arr) {
+    return Array.isArray(arr) ? arr : Array.from(arr);
+  }
+
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function ([datetime, ...params], { hideAffix, locale, timeZone }) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (_ref, _ref2) {
+      var _morphMoment;
 
-      const moment = Ember.get(this, 'moment');
+      var _ref3 = _toArray(_ref),
+          datetime = _ref3[0],
+          params = _ref3.slice(1);
 
-      return this.morphMoment(moment.moment(datetime), { locale, timeZone }).from(...params, hideAffix);
+      var hideAffix = _ref2.hideAffix,
+          locale = _ref2.locale,
+          timeZone = _ref2.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+
+      return (_morphMoment = this.morphMoment(moment.moment(datetime), { locale: locale, timeZone: timeZone })).from.apply(_morphMoment, _toConsumableArray(params).concat([hideAffix]));
     })
   });
 });
@@ -68348,25 +70385,45 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { precision, locale, timeZone }) {
-      this._super(...arguments);
 
-      const moment = Ember.get(this, 'moment');
-      const { length } = params;
-      const args = [];
-      const subtractionArgs = [];
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  exports.default = _base.default.extend({
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var _morphMoment;
+
+      var precision = _ref.precision,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+      var length = params.length;
+
+      var args = [];
+      var subtractionArgs = [];
 
       if (length === 1) {
         subtractionArgs.push(params[0]);
       } else if (length === 2 && Ember.typeOf(params[0]) === 'number' && Ember.typeOf(params[1]) === 'string') {
-        subtractionArgs.push(...params);
+        subtractionArgs.push.apply(subtractionArgs, _toConsumableArray(params));
       } else {
         args.push(params[0]);
-        subtractionArgs.push(...params.slice(1));
+        subtractionArgs.push.apply(subtractionArgs, _toConsumableArray(params.slice(1)));
       }
 
-      return this.morphMoment(moment.moment(...args), { locale, timeZone }).subtract(...subtractionArgs, precision);
+      return (_morphMoment = this.morphMoment(moment.moment.apply(moment, args), { locale: locale, timeZone: timeZone })).subtract.apply(_morphMoment, subtractionArgs.concat([precision]));
     })
   });
 });
@@ -68376,13 +70433,32 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { hidePrefix, locale, timeZone }) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var _morphMoment;
 
-      const moment = Ember.get(this, 'moment');
+      var hidePrefix = _ref.hidePrefix,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
 
-      return this.morphMoment(moment.moment(), { locale, timeZone }).to(...params, hidePrefix);
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+
+      return (_morphMoment = this.morphMoment(moment.moment(), { locale: locale, timeZone: timeZone })).to.apply(_morphMoment, _toConsumableArray(params).concat([hidePrefix]));
     })
   });
 });
@@ -68392,16 +70468,34 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function (params, { hidePrefix, hideAffix, locale, timeZone }) {
+    compute: (0, _helperCompute.default)(function (params, _ref) {
+      var hidePrefix = _ref.hidePrefix,
+          hideAffix = _ref.hideAffix,
+          locale = _ref.locale,
+          timeZone = _ref.timeZone;
+
       Ember.deprecate('hidePrefix is deprecated in favour of hideAffix', hidePrefix === undefined, // display if this is false
       { id: 'ember-moment.addon.helpers.moment-to-now', until: '8.0.0' });
 
-      this._super(...arguments);
+      this._super.apply(this, arguments);
 
-      const moment = Ember.get(this, 'moment');
-      const hide = hidePrefix || hideAffix;
-      return this.morphMoment(moment.moment(...params), { locale, timeZone }).toNow(hide);
+      var moment = Ember.get(this, 'moment');
+      var hide = hidePrefix || hideAffix;
+      return this.morphMoment(moment.moment.apply(moment, _toConsumableArray(params)), { locale: locale, timeZone: timeZone }).toNow(hide);
     })
   });
 });
@@ -68411,13 +70505,40 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  function _toArray(arr) {
+    return Array.isArray(arr) ? arr : Array.from(arr);
+  }
+
   exports.default = _base.default.extend({
-    compute: (0, _helperCompute.default)(function ([datetime, ...params], { hideAffix, locale, timeZone }) {
-      this._super(...arguments);
+    compute: (0, _helperCompute.default)(function (_ref, _ref2) {
+      var _morphMoment;
 
-      const moment = Ember.get(this, 'moment');
+      var _ref3 = _toArray(_ref),
+          datetime = _ref3[0],
+          params = _ref3.slice(1);
 
-      return this.morphMoment(moment.moment(datetime), { locale, timeZone }).to(...params, hideAffix);
+      var hideAffix = _ref2.hideAffix,
+          locale = _ref2.locale,
+          timeZone = _ref2.timeZone;
+
+      this._super.apply(this, arguments);
+
+      var moment = Ember.get(this, 'moment');
+
+      return (_morphMoment = this.morphMoment(moment.moment(datetime), { locale: locale, timeZone: timeZone })).to.apply(_morphMoment, _toConsumableArray(params).concat([hideAffix]));
     })
   });
 });
@@ -68427,13 +70548,29 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
   exports.default = _base.default.extend({
-    compute(params, { locale, timeZone }) {
-      this._super(...arguments);
+    compute: function compute(params, _ref) {
+      var locale = _ref.locale,
+          timeZone = _ref.timeZone;
 
-      const moment = Ember.get(this, 'moment');
+      this._super.apply(this, arguments);
 
-      return this.morphMoment(moment.moment(...params), { locale, timeZone });
+      var moment = Ember.get(this, 'moment');
+
+      return this.morphMoment(moment.moment.apply(moment, _toConsumableArray(params)), { locale: locale, timeZone: timeZone });
     }
   });
 });
@@ -68444,10 +70581,10 @@ requireModule('ember')
     value: true
   });
   exports.default = _base.default.extend({
-    compute() {
-      this._super(...arguments);
+    compute: function compute() {
+      this._super.apply(this, arguments);
 
-      const momentService = Ember.get(this, 'moment');
+      var momentService = Ember.get(this, 'moment');
 
       return momentService.moment(_moment.default.now());
     }
@@ -68459,9 +70596,51 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
   exports.default = _base.default.extend({
-    compute([unixTimeStamp]) {
-      this._super(...arguments);
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 1),
+          unixTimeStamp = _ref2[0];
+
+      this._super.apply(this, arguments);
 
       return Ember.get(this, 'moment').moment(_moment.default.unix(unixTimeStamp));
     }
@@ -68473,15 +70652,58 @@ requireModule('ember')
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
   exports.default = _base.default.extend({
-    compute([utcTime, format]) {
-      this._super(...arguments);
+    compute: function compute(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          utcTime = _ref2[0],
+          format = _ref2[1];
+
+      this._super.apply(this, arguments);
 
       return Ember.get(this, 'moment').utc(_moment.default.utc(utcTime, format));
     }
   });
 });
-;define('ember-moment/services/moment', ['exports', 'moment'], function (exports, _moment) {
+;define('ember-moment/services/moment', ['exports', 'moment'], function (exports, _moment2) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -68495,18 +70717,17 @@ requireModule('ember')
     defaultFormat: null,
 
     __config__: Ember.computed(function () {
-      let config = Ember.getOwner(this).factoryFor('config:environment').class || {};
+      var config = Ember.getOwner(this).factoryFor('config:environment').class || {};
 
       return Ember.get(config, 'moment') || {};
     }).readOnly(),
 
     timeZone: Ember.computed('_timeZone', {
-      get() {
+      get: function get() {
         return Ember.get(this, '_timeZone');
       },
-
-      set(propertyKey, timeZone) {
-        if (!_moment.default.tz) {
+      set: function set(propertyKey, timeZone) {
+        if (!_moment2.default.tz) {
           /* eslint-disable no-console */
           console.warn('[ember-moment] attempted to set timezone, but moment-timezone is not setup.');
           return;
@@ -68518,39 +70739,40 @@ requireModule('ember')
       }
     }),
 
-    setLocale(locale) {
+    setLocale: function setLocale(locale) {
       this.changeLocale(locale);
     },
+    updateLocale: function updateLocale(locale) {
+      var localeOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    updateLocale(locale, localeOptions = {}) {
       this.changeLocale(locale, localeOptions);
     },
+    changeLocale: function changeLocale(locale) {
+      var localeOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    changeLocale(locale, localeOptions = {}) {
       Ember.setProperties(this, {
-        locale,
-        localeOptions
+        locale: locale,
+        localeOptions: localeOptions
       });
-      _moment.default.updateLocale(locale, localeOptions);
+      _moment2.default.updateLocale(locale, localeOptions);
       this.trigger('localeChanged', locale);
     },
-
-    setTimeZone(timeZone) {
+    setTimeZone: function setTimeZone(timeZone) {
       this.changeTimeZone(timeZone);
     },
-
-    changeTimeZone(timeZone) {
+    changeTimeZone: function changeTimeZone(timeZone) {
       Ember.set(this, 'timeZone', timeZone);
       this.trigger('timeZoneChanged', timeZone);
     },
-
-    isMoment(obj) {
-      return _moment.default.isMoment(obj);
+    isMoment: function isMoment(obj) {
+      return _moment2.default.isMoment(obj);
     },
+    moment: function moment() {
+      var momentObj = _moment2.default.apply(undefined, arguments);
 
-    moment() {
-      let momentObj = (0, _moment.default)(...arguments);
-      let { locale, timeZone } = Ember.getProperties(this, 'locale', 'timeZone');
+      var _EmberGetProperties = Ember.getProperties(this, 'locale', 'timeZone'),
+          locale = _EmberGetProperties.locale,
+          timeZone = _EmberGetProperties.timeZone;
 
       if (locale && momentObj.locale) {
         momentObj = momentObj.locale(locale);
@@ -68562,11 +70784,11 @@ requireModule('ember')
 
       return momentObj;
     },
+    utc: function utc() {
+      var momentObj = _moment2.default.utc.apply(_moment2.default, arguments);
 
-    utc() {
-      let momentObj = _moment.default.utc(...arguments);
-
-      let { locale } = Ember.getProperties(this, 'locale');
+      var _EmberGetProperties2 = Ember.getProperties(this, 'locale'),
+          locale = _EmberGetProperties2.locale;
 
       if (locale && momentObj.locale) {
         momentObj = momentObj.locale(locale);
@@ -68589,9 +70811,9 @@ requireModule('ember')
         throw new TypeError('ember-moment: Invalid Number of arguments, expected at least 1');
       }
 
-      const datetime = params[0];
+      var datetime = params[0];
 
-      let allowEmpty = hash.allowEmpty || hash['allow-empty'];
+      var allowEmpty = hash.allowEmpty || hash['allow-empty'];
 
       if (allowEmpty === undefined || allowEmpty === null) {
         allowEmpty = Ember.get(this, 'globalAllowEmpty');
@@ -68603,7 +70825,7 @@ requireModule('ember')
         }
 
         /* eslint-disable no-console */
-        console.warn(`ember-moment: an empty value (null, undefined, or "") was passed to ember-moment helper`);
+        console.warn('ember-moment: an empty value (null, undefined, or "") was passed to ember-moment helper');
       }
 
       return cb.apply(this, arguments);
@@ -68653,7 +70875,7 @@ define("ember-resolver/features", [], function () {
 
 
   function getPod(type, key, prefix) {
-    let match = key.match(new RegExp('^/?' + prefix + '/(.+)/' + type + '$'));
+    var match = key.match(new RegExp('^/?' + prefix + '/(.+)/' + type + '$'));
     if (match !== null) {
       return match[1];
     }
@@ -68667,13 +70889,14 @@ define("ember-resolver/features", [], function () {
   exports.default = Ember.ContainerDebugAdapter.extend({
     _moduleRegistry: null,
 
-    init() {
-      this._super(...arguments);
+    init: function init() {
+      this._super.apply(this, arguments);
 
       if (!this._moduleRegistry) {
         this._moduleRegistry = new _index.ModuleRegistry();
       }
     },
+
 
     /**
         The container of the application being debugged.
@@ -68698,12 +70921,13 @@ define("ember-resolver/features", [], function () {
         @param {string} type The type. e.g. "model", "controller", "route"
         @return {boolean} whether a list is available for this type.
         */
-    canCatalogEntriesByType(type) {
+    canCatalogEntriesByType: function canCatalogEntriesByType(type) {
       if (type === 'model') {
         return true;
       }
-      return this._super(...arguments);
+      return this._super.apply(this, arguments);
     },
+
 
     /**
         Returns the available classes a given type.
@@ -68711,18 +70935,18 @@ define("ember-resolver/features", [], function () {
         @param {string} type The type. e.g. "model", "controller", "route"
         @return {Array} An array of classes.
         */
-    catalogEntriesByType(type) {
-      let moduleNames = this._moduleRegistry.moduleNames();
-      let types = Ember.A();
+    catalogEntriesByType: function catalogEntriesByType(type) {
+      var moduleNames = this._moduleRegistry.moduleNames();
+      var types = Ember.A();
 
-      let prefix = this.namespace.modulePrefix;
+      var prefix = this.namespace.modulePrefix;
 
-      for (let i = 0, l = moduleNames.length; i < l; i++) {
-        let key = moduleNames[i];
+      for (var i = 0, l = moduleNames.length; i < l; i++) {
+        var key = moduleNames[i];
 
         if (key.indexOf(type) !== -1) {
           // Check if it's a pod module
-          let name = getPod(type, key, this.namespace.podModulePrefix || prefix);
+          var name = getPod(type, key, this.namespace.podModulePrefix || prefix);
           if (!name) {
             // Not pod
             name = key.split(type + 's/').pop();
@@ -68752,27 +70976,38 @@ define("ember-resolver/features", [], function () {
   });
   exports.ModuleRegistry = undefined;
 
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
 
   if (typeof requirejs.entries === 'undefined') {
     requirejs.entries = requirejs._eak_seen;
   }
 
-  class ModuleRegistry {
-    constructor(entries) {
+  var ModuleRegistry = exports.ModuleRegistry = function () {
+    function ModuleRegistry(entries) {
+      _classCallCheck(this, ModuleRegistry);
+
       this._entries = entries || requirejs.entries;
     }
-    moduleNames() {
-      return Object.keys(this._entries);
-    }
-    has(moduleName) {
-      return moduleName in this._entries;
-    }
-    get(moduleName) {
-      return require(moduleName);
-    }
-  }
 
-  exports.ModuleRegistry = ModuleRegistry;
+    ModuleRegistry.prototype.moduleNames = function moduleNames() {
+      return Object.keys(this._entries);
+    };
+
+    ModuleRegistry.prototype.has = function has(moduleName) {
+      return moduleName in this._entries;
+    };
+
+    ModuleRegistry.prototype.get = function get(moduleName) {
+      return require(moduleName);
+    };
+
+    return ModuleRegistry;
+  }();
+
   /**
    * This module defines a subclass of Ember.DefaultResolver that adds two
    * important features:
@@ -68790,23 +71025,25 @@ define("ember-resolver/features", [], function () {
       return fullName;
     }
 
-    let prefix, type, name;
-    let fullNameParts = fullName.split('@');
+    var prefix = void 0,
+        type = void 0,
+        name = void 0;
+    var fullNameParts = fullName.split('@');
 
     if (fullNameParts.length === 2) {
-      let prefixParts = fullNameParts[0].split(':');
+      var prefixParts = fullNameParts[0].split(':');
 
       if (prefixParts.length === 2) {
         if (prefixParts[1].length === 0) {
           type = prefixParts[0];
-          name = `@${fullNameParts[1]}`;
+          name = '@' + fullNameParts[1];
         } else {
           prefix = prefixParts[1];
           type = prefixParts[0];
           name = fullNameParts[1];
         }
       } else {
-        let nameParts = fullNameParts[1].split(':');
+        var nameParts = fullNameParts[1].split(':');
 
         prefix = fullNameParts[0];
         type = nameParts[0];
@@ -68814,7 +71051,7 @@ define("ember-resolver/features", [], function () {
       }
 
       if (type === 'template' && prefix.lastIndexOf('components/', 0) === 0) {
-        name = `components/${name}`;
+        name = 'components/' + name;
         prefix = prefix.slice(11);
       }
     } else {
@@ -68823,9 +71060,9 @@ define("ember-resolver/features", [], function () {
       name = fullNameParts[1];
     }
 
-    let fullNameWithoutType = name;
-    let namespace = Ember.get(this, 'namespace');
-    let root = namespace;
+    var fullNameWithoutType = name;
+    var namespace = Ember.get(this, 'namespace');
+    var root = namespace;
 
     return {
       parsedName: true,
@@ -68843,13 +71080,13 @@ define("ember-resolver/features", [], function () {
     (true && !(this.namespace.modulePrefix) && Ember.assert('`modulePrefix` must be defined', this.namespace.modulePrefix));
 
 
-    let normalizedModuleName = this.findModuleName(parsedName);
+    var normalizedModuleName = this.findModuleName(parsedName);
 
     if (normalizedModuleName) {
-      let defaultExport = this._extractDefaultExport(normalizedModuleName, parsedName);
+      var defaultExport = this._extractDefaultExport(normalizedModuleName, parsedName);
 
       if (defaultExport === undefined) {
-        throw new Error(` Expected to find: '${parsedName.fullName}' within '${normalizedModuleName}' but got 'undefined'. Did you forget to 'export default' within '${normalizedModuleName}'?`);
+        throw new Error(' Expected to find: \'' + parsedName.fullName + '\' within \'' + normalizedModuleName + '\' but got \'undefined\'. Did you forget to \'export default\' within \'' + normalizedModuleName + '\'?');
       }
 
       if (this.shouldWrapInClassFactory(defaultExport, parsedName)) {
@@ -68860,21 +71097,19 @@ define("ember-resolver/features", [], function () {
     }
   }
 
-  const Resolver = Ember.Object.extend({
-    resolveOther,
-    parseName,
+  var Resolver = Ember.Object.extend({
+    resolveOther: resolveOther,
+    parseName: parseName,
     pluralizedTypes: null,
     moduleRegistry: null,
 
-    makeToString(factory, fullName) {
+    makeToString: function makeToString(factory, fullName) {
       return '' + this.namespace.modulePrefix + '@' + fullName + ':';
     },
-
-    shouldWrapInClassFactory() /* module, parsedName */{
+    shouldWrapInClassFactory: function shouldWrapInClassFactory() /* module, parsedName */{
       return false;
     },
-
-    init() {
+    init: function init() {
       this._super();
       this.moduleBasedResolver = true;
 
@@ -68891,15 +71126,13 @@ define("ember-resolver/features", [], function () {
       }
       this._deprecatedPodModulePrefix = false;
     },
-
-    normalize(fullName) {
+    normalize: function normalize(fullName) {
       return this._normalizeCache[fullName] || (this._normalizeCache[fullName] = this._normalize(fullName));
     },
-
-    resolve(fullName) {
-      let parsedName = this.parseName(fullName);
-      let resolveMethodName = parsedName.resolveMethodName;
-      let resolved;
+    resolve: function resolve(fullName) {
+      var parsedName = this.parseName(fullName);
+      var resolveMethodName = parsedName.resolveMethodName;
+      var resolved = void 0;
 
       if (typeof this[resolveMethodName] === 'function') {
         resolved = this[resolveMethodName](parsedName);
@@ -68911,8 +71144,7 @@ define("ember-resolver/features", [], function () {
 
       return resolved;
     },
-
-    _normalize(fullName) {
+    _normalize: function _normalize(fullName) {
       // A) Convert underscores to dashes
       // B) Convert camelCase to dash-case, except for helpers where we want to avoid shadowing camelCase expressions
       // C) replace `.` with `/` in order to make nested controllers work in the following cases
@@ -68920,7 +71152,7 @@ define("ember-resolver/features", [], function () {
       //      2. `{{render "posts/post"}}`
       //      3. `this.render('posts/post')` from Route
 
-      let split = fullName.split(':');
+      var split = fullName.split(':');
       if (split.length > 1) {
         if (split[0] === 'helper') {
           return split[0] + ':' + split[1].replace(/_/g, '-');
@@ -68931,13 +71163,11 @@ define("ember-resolver/features", [], function () {
         return fullName;
       }
     },
-
-    pluralize(type) {
+    pluralize: function pluralize(type) {
       return this.pluralizedTypes[type] || (this.pluralizedTypes[type] = type + 's');
     },
-
-    podBasedLookupWithPrefix(podPrefix, parsedName) {
-      let fullNameWithoutType = parsedName.fullNameWithoutType;
+    podBasedLookupWithPrefix: function podBasedLookupWithPrefix(podPrefix, parsedName) {
+      var fullNameWithoutType = parsedName.fullNameWithoutType;
 
       if (parsedName.type === 'template') {
         fullNameWithoutType = fullNameWithoutType.replace(/^components\//, '');
@@ -68945,66 +71175,58 @@ define("ember-resolver/features", [], function () {
 
       return podPrefix + '/' + fullNameWithoutType + '/' + parsedName.type;
     },
-
-    podBasedModuleName(parsedName) {
-      let podPrefix = this.namespace.podModulePrefix || this.namespace.modulePrefix;
+    podBasedModuleName: function podBasedModuleName(parsedName) {
+      var podPrefix = this.namespace.podModulePrefix || this.namespace.modulePrefix;
 
       return this.podBasedLookupWithPrefix(podPrefix, parsedName);
     },
-
-    podBasedComponentsInSubdir(parsedName) {
-      let podPrefix = this.namespace.podModulePrefix || this.namespace.modulePrefix;
+    podBasedComponentsInSubdir: function podBasedComponentsInSubdir(parsedName) {
+      var podPrefix = this.namespace.podModulePrefix || this.namespace.modulePrefix;
       podPrefix = podPrefix + '/components';
 
       if (parsedName.type === 'component' || /^components/.test(parsedName.fullNameWithoutType)) {
         return this.podBasedLookupWithPrefix(podPrefix, parsedName);
       }
     },
-
-    resolveEngine(parsedName) {
-      let engineName = parsedName.fullNameWithoutType;
-      let engineModule = engineName + '/engine';
+    resolveEngine: function resolveEngine(parsedName) {
+      var engineName = parsedName.fullNameWithoutType;
+      var engineModule = engineName + '/engine';
 
       if (this._moduleRegistry.has(engineModule)) {
         return this._extractDefaultExport(engineModule);
       }
     },
-
-    resolveRouteMap(parsedName) {
-      let engineName = parsedName.fullNameWithoutType;
-      let engineRoutesModule = engineName + '/routes';
+    resolveRouteMap: function resolveRouteMap(parsedName) {
+      var engineName = parsedName.fullNameWithoutType;
+      var engineRoutesModule = engineName + '/routes';
 
       if (this._moduleRegistry.has(engineRoutesModule)) {
-        let routeMap = this._extractDefaultExport(engineRoutesModule);
+        var routeMap = this._extractDefaultExport(engineRoutesModule);
 
-        (true && !(routeMap.isRouteMap) && Ember.assert(`The route map for ${engineName} should be wrapped by 'buildRoutes' before exporting.`, routeMap.isRouteMap));
+        (true && !(routeMap.isRouteMap) && Ember.assert('The route map for ' + engineName + ' should be wrapped by \'buildRoutes\' before exporting.', routeMap.isRouteMap));
 
 
         return routeMap;
       }
     },
-
-    resolveTemplate(parsedName) {
-      let resolved = this.resolveOther(parsedName);
+    resolveTemplate: function resolveTemplate(parsedName) {
+      var resolved = this.resolveOther(parsedName);
       if (resolved == null) {
         resolved = Ember.TEMPLATES[parsedName.fullNameWithoutType];
       }
       return resolved;
     },
-
-    mainModuleName(parsedName) {
+    mainModuleName: function mainModuleName(parsedName) {
       if (parsedName.fullNameWithoutType === 'main') {
         // if router:main or adapter:main look for a module with just the type first
         return parsedName.prefix + '/' + parsedName.type;
       }
     },
-
-    defaultModuleName(parsedName) {
+    defaultModuleName: function defaultModuleName(parsedName) {
       return parsedName.prefix + '/' + this.pluralize(parsedName.type) + '/' + parsedName.fullNameWithoutType;
     },
-
-    prefix(parsedName) {
-      let tmpPrefix = this.namespace.modulePrefix;
+    prefix: function prefix(parsedName) {
+      var tmpPrefix = this.namespace.modulePrefix;
 
       if (this.namespace[parsedName.type + 'Prefix']) {
         tmpPrefix = this.namespace[parsedName.type + 'Prefix'];
@@ -69012,6 +71234,7 @@ define("ember-resolver/features", [], function () {
 
       return tmpPrefix;
     },
+
 
     /**
       A listing of functions to test for moduleName's based on the provided
@@ -69024,14 +71247,14 @@ define("ember-resolver/features", [], function () {
       return [this.podBasedModuleName, this.podBasedComponentsInSubdir, this.mainModuleName, this.defaultModuleName];
     }).readOnly(),
 
-    findModuleName(parsedName, loggingDisabled) {
-      let moduleNameLookupPatterns = this.get('moduleNameLookupPatterns');
-      let moduleName;
+    findModuleName: function findModuleName(parsedName, loggingDisabled) {
+      var moduleNameLookupPatterns = this.get('moduleNameLookupPatterns');
+      var moduleName = void 0;
 
-      for (let index = 0, length = moduleNameLookupPatterns.length; index < length; index++) {
-        let item = moduleNameLookupPatterns[index];
+      for (var index = 0, length = moduleNameLookupPatterns.length; index < length; index++) {
+        var item = moduleNameLookupPatterns[index];
 
-        let tmpModuleName = item.call(this, parsedName);
+        var tmpModuleName = item.call(this, parsedName);
 
         // allow treat all dashed and all underscored as the same thing
         // supports components with dashes and other stuff with underscores.
@@ -69052,12 +71275,11 @@ define("ember-resolver/features", [], function () {
         }
       }
     },
-
-    chooseModuleName(moduleName, parsedName) {
-      let underscoredModuleName = Ember.String.underscore(moduleName);
+    chooseModuleName: function chooseModuleName(moduleName, parsedName) {
+      var underscoredModuleName = Ember.String.underscore(moduleName);
 
       if (moduleName !== underscoredModuleName && this._moduleRegistry.has(moduleName) && this._moduleRegistry.has(underscoredModuleName)) {
-        throw new TypeError(`Ambiguous module names: '${moduleName}' and '${underscoredModuleName}'`);
+        throw new TypeError('Ambiguous module names: \'' + moduleName + '\' and \'' + underscoredModuleName + '\'');
       }
 
       if (this._moduleRegistry.has(moduleName)) {
@@ -69067,7 +71289,7 @@ define("ember-resolver/features", [], function () {
       }
       // workaround for dasherized partials:
       // something/something/-something => something/something/_something
-      let partializedModuleName = moduleName.replace(/\/-([^/]*)$/, '/_$1');
+      var partializedModuleName = moduleName.replace(/\/-([^/]*)$/, '/_$1');
 
       if (this._moduleRegistry.has(partializedModuleName)) {
         (true && !(false) && Ember.deprecate('Modules should not contain underscores. ' + 'Attempted to lookup "' + moduleName + '" which ' + 'was not found. Please rename "' + partializedModuleName + '" ' + 'to "' + moduleName + '" instead.', false, { id: 'ember-resolver.underscored-modules', until: '3.0.0' }));
@@ -69077,10 +71299,10 @@ define("ember-resolver/features", [], function () {
       }
 
       if (true) {
-        let isCamelCaseHelper = parsedName.type === 'helper' && /[a-z]+[A-Z]+/.test(moduleName);
+        var isCamelCaseHelper = parsedName.type === 'helper' && /[a-z]+[A-Z]+/.test(moduleName);
         if (isCamelCaseHelper) {
           this._camelCaseHelperWarnedNames = this._camelCaseHelperWarnedNames || [];
-          let alreadyWarned = this._camelCaseHelperWarnedNames.indexOf(parsedName.fullName) > -1;
+          var alreadyWarned = this._camelCaseHelperWarnedNames.indexOf(parsedName.fullName) > -1;
           if (!alreadyWarned && this._moduleRegistry.has(Ember.String.dasherize(moduleName))) {
             this._camelCaseHelperWarnedNames.push(parsedName.fullName);
             (true && Ember.warn('Attempted to lookup "' + parsedName.fullName + '" which ' + 'was not found. In previous versions of ember-resolver, a bug would have ' + 'caused the module at "' + Ember.String.dasherize(moduleName) + '" to be ' + 'returned for this camel case helper name. This has been fixed. ' + 'Use the dasherized name to resolve the module that would have been ' + 'returned in previous versions.', false, { id: 'ember-resolver.camelcase-helper-names', until: '3.0.0' }));
@@ -69088,24 +71310,20 @@ define("ember-resolver/features", [], function () {
         }
       }
     },
+    lookupDescription: function lookupDescription(fullName) {
+      var parsedName = this.parseName(fullName);
 
-    // used by Ember.DefaultResolver.prototype._logLookup
-    lookupDescription(fullName) {
-      let parsedName = this.parseName(fullName);
-
-      let moduleName = this.findModuleName(parsedName, true);
+      var moduleName = this.findModuleName(parsedName, true);
 
       return moduleName;
     },
-
-    // only needed until 1.6.0-beta.2 can be required
-    _logLookup(found, parsedName, description) {
+    _logLookup: function _logLookup(found, parsedName, description) {
       if (!Ember.ENV.LOG_MODULE_RESOLVER && !parsedName.root.LOG_RESOLVER) {
         return;
       }
 
-      let padding;
-      let symbol = found ? '[✓]' : '[ ]';
+      var padding = void 0;
+      var symbol = found ? '[✓]' : '[ ]';
 
       if (parsedName.fullName.length > 60) {
         padding = '.';
@@ -69122,14 +71340,13 @@ define("ember-resolver/features", [], function () {
         console.info(symbol, parsedName.fullName, padding, description);
       }
     },
+    knownForType: function knownForType(type) {
+      var moduleKeys = this._moduleRegistry.moduleNames();
 
-    knownForType(type) {
-      let moduleKeys = this._moduleRegistry.moduleNames();
-
-      let items = (0, _makeDictionary.default)();
-      for (let index = 0, length = moduleKeys.length; index < length; index++) {
-        let moduleName = moduleKeys[index];
-        let fullname = this.translateToContainerFullname(type, moduleName);
+      var items = (0, _makeDictionary.default)();
+      for (var index = 0, length = moduleKeys.length; index < length; index++) {
+        var moduleName = moduleKeys[index];
+        var fullname = this.translateToContainerFullname(type, moduleName);
 
         if (fullname) {
           items[fullname] = true;
@@ -69138,17 +71355,16 @@ define("ember-resolver/features", [], function () {
 
       return items;
     },
-
-    translateToContainerFullname(type, moduleName) {
-      let prefix = this.prefix({ type });
+    translateToContainerFullname: function translateToContainerFullname(type, moduleName) {
+      var prefix = this.prefix({ type: type });
 
       // Note: using string manipulation here rather than regexes for better performance.
       // pod modules
       // '^' + prefix + '/(.+)/' + type + '$'
-      let podPrefix = prefix + '/';
-      let podSuffix = '/' + type;
-      let start = moduleName.indexOf(podPrefix);
-      let end = moduleName.indexOf(podSuffix);
+      var podPrefix = prefix + '/';
+      var podSuffix = '/' + type;
+      var start = moduleName.indexOf(podPrefix);
+      var end = moduleName.indexOf(podSuffix);
 
       if (start === 0 && end === moduleName.length - podSuffix.length && moduleName.length > podPrefix.length + podSuffix.length) {
         return type + ':' + moduleName.slice(start + podPrefix.length, end);
@@ -69156,16 +71372,15 @@ define("ember-resolver/features", [], function () {
 
       // non-pod modules
       // '^' + prefix + '/' + pluralizedType + '/(.+)$'
-      let pluralizedType = this.pluralize(type);
-      let nonPodPrefix = prefix + '/' + pluralizedType + '/';
+      var pluralizedType = this.pluralize(type);
+      var nonPodPrefix = prefix + '/' + pluralizedType + '/';
 
       if (moduleName.indexOf(nonPodPrefix) === 0 && moduleName.length > nonPodPrefix.length) {
         return type + ':' + moduleName.slice(nonPodPrefix.length);
       }
     },
-
-    _extractDefaultExport(normalizedModuleName) {
-      let module = require(normalizedModuleName, null, null, true /* force sync */);
+    _extractDefaultExport: function _extractDefaultExport(normalizedModuleName) {
+      var module = require(normalizedModuleName, null, null, true /* force sync */);
 
       if (module && module['default']) {
         module = module['default'];
@@ -69190,7 +71405,7 @@ define("ember-resolver/features", [], function () {
   exports.default = classFactory;
   function classFactory(klass) {
     return {
-      create(injections) {
+      create: function create(injections) {
         if (typeof klass.extend === 'function') {
           return klass.extend(injections);
         } else {
@@ -69208,7 +71423,7 @@ define("ember-resolver/features", [], function () {
   });
   exports.default = makeDictionary;
   function makeDictionary() {
-    let cache = Object.create(null);
+    var cache = Object.create(null);
     cache['_dict'] = null;
     delete cache['_dict'];
     return cache;
@@ -69221,32 +71436,32 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   _exports.default = void 0;
-  let RouterScrollMixin = Ember.Mixin.create({
+  var RouterScrollMixin = Ember.Mixin.create({
     service: Ember.inject.service('router-scroll'),
     isFastBoot: Ember.computed(function () {
-      const fastboot = Ember.getOwner(this).lookup('service:fastboot');
+      var fastboot = Ember.getOwner(this).lookup('service:fastboot');
       return fastboot ? fastboot.get('isFastBoot') : false;
     }),
+    init: function init() {
+      var _this = this;
 
-    init() {
-      this._super(...arguments);
+      this._super.apply(this, arguments);
 
       (0, _emberAppScheduler.setupRouter)(this);
 
       if (true) {
-        this.on('routeWillChange', () => {
-          this._routeWillChange();
+        this.on('routeWillChange', function () {
+          _this._routeWillChange();
         });
-        this.on('routeDidChange', transition => {
-          this._routeDidChange(transition);
+        this.on('routeDidChange', function (transition) {
+          _this._routeDidChange(transition);
         });
       }
     },
-
-    destroy() {
+    destroy: function destroy() {
       (0, _emberAppScheduler.reset)();
 
-      this._super(...arguments);
+      this._super.apply(this, arguments);
     },
 
     /**
@@ -69254,16 +71469,16 @@ define("ember-resolver/features", [], function () {
      * @param {transition|transition[]} transition If before Ember 3.6, this will be an array of transitions, otherwise
      * it will be a single transition
      */
-    updateScrollPosition(transition) {
-      const url = Ember.get(this, 'currentURL');
-      const hashElement = url ? document.getElementById(url.split('#').pop()) : null;
+    updateScrollPosition: function updateScrollPosition(transition) {
+      var url = Ember.get(this, 'currentURL');
+      var hashElement = url ? document.getElementById(url.split('#').pop()) : null;
 
       if (Ember.get(this, 'service.isFirstLoad')) {
         Ember.get(this, 'service').unsetFirstLoad();
         return;
       }
 
-      let scrollPosition;
+      var scrollPosition;
 
       if (url && url.indexOf('#') > -1 && hashElement) {
         scrollPosition = {
@@ -69274,24 +71489,26 @@ define("ember-resolver/features", [], function () {
         scrollPosition = Ember.get(this, 'service.position');
       }
 
-      let preserveScrollPosition;
+      var preserveScrollPosition;
 
       if (true) {
         preserveScrollPosition = Ember.get(transition, 'handler.controller.preserveScrollPosition');
       } else {
-        preserveScrollPosition = transition.some(t => Ember.get(t, 'handler.controller.preserveScrollPosition'));
+        preserveScrollPosition = transition.some(function (t) {
+          return Ember.get(t, 'handler.controller.preserveScrollPosition');
+        });
       }
 
       if (!preserveScrollPosition) {
-        const scrollElement = Ember.get(this, 'service.scrollElement');
-        const targetElement = Ember.get(this, 'service.targetElement');
+        var scrollElement = Ember.get(this, 'service.scrollElement');
+        var targetElement = Ember.get(this, 'service.targetElement');
 
         if (targetElement) {
           window.scrollTo(scrollPosition.x, scrollPosition.y);
         } else if ('window' === scrollElement) {
           window.scrollTo(scrollPosition.x, scrollPosition.y);
         } else if ('#' === scrollElement.charAt(0)) {
-          const element = document.getElementById(scrollElement.substring(1));
+          var element = document.getElementById(scrollElement.substring(1));
 
           if (element) {
             element.scrollLeft = scrollPosition.x;
@@ -69300,49 +71517,52 @@ define("ember-resolver/features", [], function () {
         }
       }
     },
-
-    _routeWillChange() {
+    _routeWillChange: function _routeWillChange() {
       if (Ember.get(this, 'isFastBoot')) {
         return;
       }
 
       Ember.get(this, 'service').update();
     },
+    _routeDidChange: function _routeDidChange(transition) {
+      var _this2 = this;
 
-    _routeDidChange(transition) {
       if (Ember.get(this, 'isFastBoot')) {
         return;
       }
 
-      const delayScrollTop = Ember.get(this, 'service.delayScrollTop');
+      var delayScrollTop = Ember.get(this, 'service.delayScrollTop');
 
       if (!delayScrollTop) {
-        Ember.run.scheduleOnce('render', this, () => this.updateScrollPosition(transition));
+        Ember.run.scheduleOnce('render', this, function () {
+          return _this2.updateScrollPosition(transition);
+        });
       } else {
         // as described in ember-app-scheduler, this addon can be used to delay rendering until after First Meaningful Paint.
         // If you loading your routes progressively, this may be a good option to delay scrollTop until the remaining DOM elements are painted.
-        (0, _emberAppScheduler.whenRouteIdle)().then(() => {
-          this.updateScrollPosition(transition);
+        (0, _emberAppScheduler.whenRouteIdle)().then(function () {
+          _this2.updateScrollPosition(transition);
         });
       }
     }
-
   });
 
   if (!true) {
     RouterScrollMixin = Ember.Mixin.create(RouterScrollMixin, {
-      willTransition(...args) {
-        this._super(...args);
+      willTransition: function willTransition() {
+        this._super.apply(this, arguments);
 
         this._routeWillChange();
       },
+      didTransition: function didTransition(transitions) {
+        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          args[_key - 1] = arguments[_key];
+        }
 
-      didTransition(transitions, ...args) {
-        this._super(transitions, ...args);
+        this._super.apply(this, [transitions].concat(args));
 
         this._routeDidChange(transitions);
       }
-
     });
   }
 
@@ -69357,31 +71577,31 @@ define("ember-resolver/features", [], function () {
   });
   _exports.default = void 0;
 
-  const uuid = () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-    const r = Math.random() * 16 | 0;
-    const v = c === 'x' ? r : r & 3 | 8;
-    return v.toString(16);
-  });
+  var uuid = function uuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0;
+      var v = c === 'x' ? r : r & 3 | 8;
+      return v.toString(16);
+    });
+  };
 
   var _default = Ember.HistoryLocation.extend({
-    pushState(path) {
-      const state = {
-        path,
+    pushState: function pushState(path) {
+      var state = {
+        path: path,
         uuid: uuid()
       };
       Ember.get(this, 'history').pushState(state, null, path);
       Ember.set(this, '_previousURL', this.getURL());
     },
-
-    replaceState(path) {
-      const state = {
-        path,
+    replaceState: function replaceState(path) {
+      var state = {
+        path: path,
         uuid: uuid()
       };
       Ember.get(this, 'history').replaceState(state, null, path);
       Ember.set(this, '_previousURL', this.getURL());
     }
-
   });
 
   _exports.default = _default;
@@ -69396,7 +71616,7 @@ define("ember-resolver/features", [], function () {
 
   var _default = Ember.Service.extend({
     isFastBoot: Ember.computed(function () {
-      const fastboot = Ember.getOwner(this).lookup('service:fastboot');
+      var fastboot = Ember.getOwner(this).lookup('service:fastboot');
       return fastboot ? fastboot.get('isFastBoot') : false;
     }),
     key: null,
@@ -69404,9 +71624,8 @@ define("ember-resolver/features", [], function () {
     targetElement: null,
     delayScrollTop: false,
     isFirstLoad: true,
-
-    init(...args) {
-      this._super(...args);
+    init: function init() {
+      this._super.apply(this, arguments);
 
       this._loadConfig();
 
@@ -69417,25 +71636,23 @@ define("ember-resolver/features", [], function () {
         }
       });
     },
-
-    unsetFirstLoad() {
+    unsetFirstLoad: function unsetFirstLoad() {
       Ember.set(this, 'isFirstLoad', false);
     },
-
-    update() {
+    update: function update() {
       if (Ember.get(this, 'isFastBoot') || Ember.get(this, 'isFirstLoad')) {
         return;
       }
 
-      const scrollElement = Ember.get(this, 'scrollElement');
-      const targetElement = Ember.get(this, 'targetElement');
-      const scrollMap = Ember.get(this, 'scrollMap');
-      const key = Ember.get(this, 'key');
-      let x;
-      let y;
+      var scrollElement = Ember.get(this, 'scrollElement');
+      var targetElement = Ember.get(this, 'targetElement');
+      var scrollMap = Ember.get(this, 'scrollMap');
+      var key = Ember.get(this, 'key');
+      var x;
+      var y;
 
       if (targetElement) {
-        let element = document.querySelector(targetElement);
+        var element = document.querySelector(targetElement);
 
         if (element) {
           x = element.offsetLeft;
@@ -69443,46 +71660,44 @@ define("ember-resolver/features", [], function () {
           // of the targetElement on screen
 
           Ember.set(scrollMap, 'default', {
-            x,
-            y
+            x: x,
+            y: y
           });
         }
       } else if ('window' === scrollElement) {
         x = window.scrollX;
         y = window.scrollY;
       } else if ('#' === scrollElement.charAt(0)) {
-        let element = document.getElementById(scrollElement.substring(1));
+        var _element = document.getElementById(scrollElement.substring(1));
 
-        if (element) {
-          x = element.scrollLeft;
-          y = element.scrollTop;
+        if (_element) {
+          x = _element.scrollLeft;
+          y = _element.scrollTop;
         }
       } // only a `key` present after first load
 
 
       if (key && 'number' === Ember.typeOf(x) && 'number' === Ember.typeOf(y)) {
         Ember.set(scrollMap, key, {
-          x,
-          y
+          x: x,
+          y: y
         });
       }
     },
-
     position: Ember.computed(function position() {
-      const scrollMap = Ember.get(this, 'scrollMap');
-      const stateUuid = Ember.get(window, 'history.state.uuid');
+      var scrollMap = Ember.get(this, 'scrollMap');
+      var stateUuid = Ember.get(window, 'history.state.uuid');
       Ember.set(this, 'key', stateUuid); // eslint-disable-line ember/no-side-effects
 
-      const key = Ember.getWithDefault(this, 'key', '-1');
+      var key = Ember.getWithDefault(this, 'key', '-1');
       return Ember.getWithDefault(scrollMap, key, scrollMap.default);
     }).volatile(),
-
-    _loadConfig() {
-      const config = Ember.getOwner(this).resolveRegistration('config:environment');
+    _loadConfig: function _loadConfig() {
+      var config = Ember.getOwner(this).resolveRegistration('config:environment');
 
       if (config && config.routerScroll) {
-        const scrollElement = config.routerScroll.scrollElement;
-        const targetElement = config.routerScroll.targetElement;
+        var scrollElement = config.routerScroll.scrollElement;
+        var targetElement = config.routerScroll.targetElement;
         (true && !(!(scrollElement && targetElement)) && Ember.assert('You defined both scrollElement and targetElement in your config. We currently only support definining one of them', !(scrollElement && targetElement)));
 
         if ('string' === Ember.typeOf(scrollElement)) {
@@ -69493,14 +71708,13 @@ define("ember-resolver/features", [], function () {
           Ember.set(this, 'targetElement', targetElement);
         }
 
-        const delayScrollTop = config.routerScroll.delayScrollTop;
+        var delayScrollTop = config.routerScroll.delayScrollTop;
 
         if (delayScrollTop === true) {
           Ember.set(this, 'delayScrollTop', true);
         }
       }
     }
-
   });
 
   _exports.default = _default;
@@ -69513,7 +71727,7 @@ define("ember-resolver/features", [], function () {
   });
   exports.and = and;
   function and(params) {
-    for (let i = 0, len = params.length; i < len; i++) {
+    for (var i = 0, len = params.length; i < len; i++) {
       if ((0, _truthConvert.default)(params[i]) === false) {
         return params[i];
       }
@@ -69543,7 +71757,50 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   exports.gt = gt;
-  function gt([left, right], hash) {
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  function gt(_ref, hash) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        left = _ref2[0],
+        right = _ref2[1];
+
     if (hash.forceNumber) {
       if (typeof left !== 'number') {
         left = Number(left);
@@ -69564,7 +71821,50 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   exports.gte = gte;
-  function gte([left, right], hash) {
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  function gte(_ref, hash) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        left = _ref2[0],
+        right = _ref2[1];
+
     if (hash.forceNumber) {
       if (typeof left !== 'number') {
         left = Number(left);
@@ -69586,7 +71886,7 @@ define("ember-resolver/features", [], function () {
   });
   exports.isArray = isArray;
   function isArray(params) {
-    for (let i = 0, len = params.length; i < len; i++) {
+    for (var i = 0, len = params.length; i < len; i++) {
       if (Ember.isArray(params[i]) === false) {
         return false;
       }
@@ -69602,7 +71902,49 @@ define("ember-resolver/features", [], function () {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.Helper.helper(function ([obj]) {
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  exports.default = Ember.Helper.helper(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 1),
+        obj = _ref2[0];
+
     return Ember.isEmpty(obj);
   });
 });
@@ -69613,7 +71955,50 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   exports.isEqual = isEqual;
-  function isEqual([a, b]) {
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  function isEqual(_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        a = _ref2[0],
+        b = _ref2[1];
+
     return Ember.isEqual(a, b);
   }
 
@@ -69626,7 +72011,50 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   exports.lt = lt;
-  function lt([left, right], hash) {
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  function lt(_ref, hash) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        left = _ref2[0],
+        right = _ref2[1];
+
     if (hash.forceNumber) {
       if (typeof left !== 'number') {
         left = Number(left);
@@ -69647,7 +72075,50 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   exports.lte = lte;
-  function lte([left, right], hash) {
+
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
+  function lte(_ref, hash) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        left = _ref2[0],
+        right = _ref2[1];
+
     if (hash.forceNumber) {
       if (typeof left !== 'number') {
         left = Number(left);
@@ -69682,7 +72153,7 @@ define("ember-resolver/features", [], function () {
   });
   exports.not = not;
   function not(params) {
-    for (let i = 0, len = params.length; i < len; i++) {
+    for (var i = 0, len = params.length; i < len; i++) {
       if ((0, _truthConvert.default)(params[i]) === true) {
         return false;
       }
@@ -69700,7 +72171,7 @@ define("ember-resolver/features", [], function () {
   });
   exports.or = or;
   function or(params) {
-    for (let i = 0, len = params.length; i < len; i++) {
+    for (var i = 0, len = params.length; i < len; i++) {
       if ((0, _truthConvert.default)(params[i]) === true) {
         return params[i];
       }
@@ -69731,7 +72202,7 @@ define("ember-resolver/features", [], function () {
   });
   exports.default = truthConvert;
   function truthConvert(result) {
-    const truthy = result && Ember.get(result, 'isTruthy');
+    var truthy = result && Ember.get(result, 'isTruthy');
     if (typeof truthy === 'boolean') {
       return truthy;
     }
@@ -70200,7 +72671,9 @@ define("ember-resolver/features", [], function () {
   });
   _exports.default = void 0;
 
-  const msg = icon => "Could not find an icon in nypr-design-system/app/templates/components/nypr-a-svg named ".concat(icon);
+  var msg = function msg(icon) {
+    return "Could not find an icon in nypr-design-system/app/templates/components/nypr-a-svg named ".concat(icon);
+  };
   /**
     A component that will safely render any svg icon found in the `app/templates/components/nypr-a-svg` tree.
   
@@ -70230,8 +72703,8 @@ define("ember-resolver/features", [], function () {
        @accessor svgPartial
     */
     svgPartial: Ember.computed(function () {
-      let owner = Ember.getOwner(this);
-      let templateExists = Boolean(owner.lookup("templates/component:nypr-a-svg/".concat(this.icon)));
+      var owner = Ember.getOwner(this);
+      var templateExists = Boolean(owner.lookup("templates/component:nypr-a-svg/".concat(this.icon)));
 
       if (templateExists) {
         return "components/nypr-a-svg/".concat(this.icon);
@@ -70924,7 +73397,7 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   _exports.default = void 0;
-  const NAV_ITEMS = [{
+  var NAV_ITEMS = [{
     url: 'https://www.wnyc.org',
     title: 'WNYC'
   }, {
@@ -70970,29 +73443,33 @@ define("ember-resolver/features", [], function () {
       @type {String}
     */
     items: Ember.computed('navItems', 'exclude', function () {
-      let {
-        navItems,
-        exclude
-      } = this;
+      var navItems = this.navItems,
+          exclude = this.exclude;
 
       if (!navItems || navItems.length === 0) {
         return [];
       }
 
       if (exclude && typeof exclude === 'string') {
-        return navItems.filter(item => item.title.toLowerCase() !== exclude.toLowerCase());
+        return navItems.filter(function (item) {
+          return item.title.toLowerCase() !== exclude.toLowerCase();
+        });
       } else if (Array.isArray(exclude)) {
-        exclude = exclude.map(e => typeof e === 'string' && e.toLowerCase()).filter(e => !!e);
-        return navItems.filter(item => !exclude.includes(item.title.toLowerCase()));
+        exclude = exclude.map(function (e) {
+          return typeof e === 'string' && e.toLowerCase();
+        }).filter(function (e) {
+          return !!e;
+        });
+        return navItems.filter(function (item) {
+          return !exclude.includes(item.title.toLowerCase());
+        });
       } else {
         return navItems;
       }
     }),
-
-    calculatePosition(trigger, content) {
+    calculatePosition: function calculatePosition(trigger, content) {
       return (0, _toggleBoxPositions.positionBottomCenter)(trigger, content, 15);
     }
-
   }); // END-SNIPPET
 
 
@@ -71243,16 +73720,14 @@ define("ember-resolver/features", [], function () {
       }
     }),
     actions: {
-      setCurrent(index) {
+      setCurrent: function setCurrent(index) {
         this.set('currentIndex', index);
       },
-
-      goToSlide() {
+      goToSlide: function goToSlide() {
         if (this.goToSlide) {
           this.goToSlide(this.currentIndex);
         }
       }
-
     }
     /**
       Handler for "View All" button
@@ -71345,9 +73820,8 @@ define("ember-resolver/features", [], function () {
     ariaHidden: Ember.computed('isOpen', function () {
       return this.get('isOpen') ? "false" : "true";
     }),
-
-    init() {
-      this._super(...arguments); // shadow passed in value
+    init: function init() {
+      this._super.apply(this, arguments); // shadow passed in value
       // but don't bind to it
 
 
@@ -71355,36 +73829,31 @@ define("ember-resolver/features", [], function () {
         this.set('value', this.query);
       }
     },
-
-    didUpdateAttrs() {
-      this._super(...arguments); // update local value if passed in query is updated
+    didUpdateAttrs: function didUpdateAttrs() {
+      this._super.apply(this, arguments); // update local value if passed in query is updated
 
 
       this.set('value', this.query);
     },
-
-    didInsertElement() {
-      this._super(...arguments);
+    didInsertElement: function didInsertElement() {
+      this._super.apply(this, arguments);
 
       this.addClickOutsideListener();
       this._boundTransitionHandler = Ember.run.bind(this, 'focusInput');
       this.element.addEventListener('transitionend', Ember.run.bind(this, 'focusInput'));
     },
-
-    willDestroyElement() {
+    willDestroyElement: function willDestroyElement() {
       this.removeClickOutsideListener();
       this.element.removeEventListener('transitionend', this._boundTransitionHandler);
     },
-
-    focusInput(e) {
-      let input = this.element.querySelector('.c-search__input');
+    focusInput: function focusInput(e) {
+      var input = this.element.querySelector('.c-search__input');
 
       if (e.target === input && this.isOpen) {
         input.focus();
       }
     },
-
-    submit(e) {
+    submit: function submit(e) {
       e.preventDefault();
 
       if (this.value) {
@@ -71405,7 +73874,7 @@ define("ember-resolver/features", [], function () {
       @param {Event} e
       @return {void}
     */
-    clickOutside(e) {
+    clickOutside: function clickOutside(e) {
       if (!(0, _utils.closest)(e.target, '.c-search') && !(0, _utils.closest)(e.target, '.c-search-toggle')) {
         this.doClose();
       }
@@ -71416,14 +73885,13 @@ define("ember-resolver/features", [], function () {
        @method doClose
       @return {void}
     */
-    doClose() {
+    doClose: function doClose() {
       if (this.close) {
         this.set('value', null); // clear the input value on close
 
         this.close();
       }
     }
-
   }); // END-SNIPPET
 
 
@@ -71494,11 +73962,18 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   _exports.default = _exports.DEFAULT_LABEL = _exports.DEFAULT_SUBSCRIBED_MESSAGE = _exports.DEFAULT_LEGAL = void 0;
-  const DEFAULT_LEGAL = "By submitting your information, you're agreeing to receive communications from New York Public Radio in accordance with our Terms.";
+
+  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  var DEFAULT_LEGAL = "By submitting your information, you're agreeing to receive communications from New York Public Radio in accordance with our Terms.";
   _exports.DEFAULT_LEGAL = DEFAULT_LEGAL;
-  const DEFAULT_SUBSCRIBED_MESSAGE = "Thanks for signing up!";
+  var DEFAULT_SUBSCRIBED_MESSAGE = "Thanks for signing up!";
   _exports.DEFAULT_SUBSCRIBED_MESSAGE = DEFAULT_SUBSCRIBED_MESSAGE;
-  const DEFAULT_LABEL = 'Newsletter signup';
+  var DEFAULT_LABEL = 'Newsletter signup';
   /**
     Newsletter sign up form
   
@@ -71517,12 +73992,10 @@ define("ember-resolver/features", [], function () {
     classNames: ['c-newsletter-form__concrete'],
     classNameBindings: ['submitState'],
     defaultLegal: DEFAULT_LEGAL,
-
-    submit(e) {
+    submit: function submit(e) {
       e.preventDefault();
       this.onSubmit.perform(this.email);
     },
-
     legalChecked: true,
 
     /**
@@ -71552,27 +74025,45 @@ define("ember-resolver/features", [], function () {
       @param {String} email
       @return {String} task value for success or error state
     */
-    onSubmit: (0, _emberConcurrency.task)(function* (email) {
-      (true && !('Please pass in the opt in endpoint') && Ember.assert(this.endpiont, 'Please pass in the opt in endpoint'));
-      let params = this.params || {};
+    onSubmit: (0, _emberConcurrency.task)(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee(email) {
+      var params, response, detail;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              (true && !('Please pass in the opt in endpoint') && Ember.assert(this.endpiont, 'Please pass in the opt in endpoint'));
+              params = this.params || {};
+              _context.prev = 2;
+              _context.next = 5;
+              return (0, _fetch.default)(this.endpoint, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(_objectSpread({}, params, {
+                  email: email
+                }))
+              }).then(checkResponse);
 
-      try {
-        let response = yield (0, _fetch.default)(this.endpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ ...params,
-            email
-          })
-        }).then(checkResponse);
-        return this.getMessage(response);
-      } catch ({
-        detail
-      }) {
-        return detail;
-      }
-    }),
+            case 5:
+              response = _context.sent;
+              return _context.abrupt("return", this.getMessage(response));
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](2);
+              detail = _context.t0.detail;
+              return _context.abrupt("return", detail);
+
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this, [[2, 9]]);
+    })),
 
     /**
       Extracts corresponding message based on success status key
@@ -71580,9 +74071,9 @@ define("ember-resolver/features", [], function () {
       @param {Object} response Payload. Expected to have a `status` key
       @return {String}
     */
-    getMessage({
-      status
-    }) {
+    getMessage: function getMessage(_ref2) {
+      var status = _ref2.status;
+
       switch (status) {
         case "subscribed":
           return this.subscribedMessage;
@@ -71591,15 +74082,12 @@ define("ember-resolver/features", [], function () {
           return "No message set for ".concat(status);
       }
     },
-
     submitState: Ember.computed('onSubmit.last.isSuccessful', function () {
       if (!this.onSubmit.last) {
         return;
       }
 
-      let {
-        isSuccessful
-      } = this.onSubmit.last;
+      var isSuccessful = this.onSubmit.last.isSuccessful;
       return isSuccessful ? 'is-success' : 'is-error';
     })
   });
@@ -71608,7 +74096,9 @@ define("ember-resolver/features", [], function () {
 
   function checkResponse(res) {
     if (res.status >= 400) {
-      return res.json().then(j => Promise.reject(j));
+      return res.json().then(function (j) {
+        return Promise.reject(j);
+      });
     } else {
       return res.json();
     }
@@ -71675,7 +74165,7 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   _exports.default = void 0;
-  const DEBOUNCE_TIMER = 75;
+  var DEBOUNCE_TIMER = 75;
   /**
     Progress bar to display how much of `document.body` has been scrolled.
   
@@ -71697,9 +74187,8 @@ define("ember-resolver/features", [], function () {
       @type {Number}
     */
     progress: 0,
-
-    didInsertElement() {
-      this._super(...arguments);
+    didInsertElement: function didInsertElement() {
+      this._super.apply(this, arguments);
 
       this._boundListener = Ember.run.bind(this, '_measure');
       window.addEventListener('scroll', this._boundListener);
@@ -71707,9 +74196,8 @@ define("ember-resolver/features", [], function () {
 
       this._measure();
     },
-
-    willDestroyElement() {
-      this._super(...arguments);
+    willDestroyElement: function willDestroyElement() {
+      this._super.apply(this, arguments);
 
       window.removeEventListener('scroll', this._boundListener);
       window.removeEventListener('resize', this._boundListener);
@@ -71720,33 +74208,35 @@ define("ember-resolver/features", [], function () {
        @method _measure
       @return {void}
     */
-    _measure() {
-      Ember.run.debounce(this, () => {
-        if (this.isDestroyed || this.isDestroying) {
+    _measure: function _measure() {
+      var _this = this;
+
+      Ember.run.debounce(this, function () {
+        if (_this.isDestroyed || _this.isDestroying) {
           return;
         }
 
-        let target = document.querySelector("".concat(this.target));
+        var target = document.querySelector("".concat(_this.target));
 
         if (!target) {
           target = document.body;
         }
 
-        let distanceToTargetBottom = target.offsetHeight + target.offsetTop;
-        let parent = target.offsetParent;
+        var distanceToTargetBottom = target.offsetHeight + target.offsetTop;
+        var parent = target.offsetParent;
 
         while (parent) {
           distanceToTargetBottom += parent.offsetTop;
           parent = parent.offsetParent;
         }
 
-        let scrolled = window.pageYOffset;
-        let windowHeight = window.innerHeight;
-        let progress = scrolled / (distanceToTargetBottom - windowHeight);
-        this.set('progress', isNaN(progress) ? 0 : progress);
+        var scrolled = window.pageYOffset;
+        var windowHeight = window.innerHeight;
+        var progress = scrolled / (distanceToTargetBottom - windowHeight);
+
+        _this.set('progress', isNaN(progress) ? 0 : progress);
       }, DEBOUNCE_TIMER);
     }
-
   }); // END-SNIPPET
 
 
@@ -71839,6 +74329,12 @@ define("ember-resolver/features", [], function () {
   });
   _exports.SERVICE_MAP = _exports.default = void 0;
 
+  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
   var _default = Ember.Component.extend({
     layout: _nyprMShareTools.default,
     classNames: ['c-share-tools'],
@@ -71861,51 +74357,61 @@ define("ember-resolver/features", [], function () {
 
   _exports.default = _default;
 
-  const filter = params => Object.keys(params).filter(key => params[key]).map(key => "".concat(key, "=").concat(params[key])).join('&'); // BEGIN-SNIPPET share-tools-services.js
+  var filter = function filter(params) {
+    return Object.keys(params).filter(function (key) {
+      return params[key];
+    }).map(function (key) {
+      return "".concat(key, "=").concat(params[key]);
+    }).join('&');
+  }; // BEGIN-SNIPPET share-tools-services.js
 
 
-  const SERVICE_MAP = {
+  var SERVICE_MAP = {
     spotify: {
       profileBase: 'https://open.spotify.com/playlist/',
-
-      getParams() {}
-
+      getParams: function getParams() {}
     },
     facebook: {
       profileBase: 'https://www.facebook.com/',
       shareBase: 'https://www.facebook.com/sharer.php',
-      getParams: url => "u=".concat(url)
+      getParams: function getParams(url) {
+        return "u=".concat(url);
+      }
     },
     twitter: {
       profileBase: 'https://twitter.com/',
       shareBase: 'https://twitter.com/intent/tweet',
-      getParams: (url, params = {}) => filter({ ...params,
-        url
-      })
+      getParams: function getParams(url) {
+        var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        return filter(_objectSpread({}, params, {
+          url: url
+        }));
+      }
     },
     reddit: {
       shareBase: 'https://www.reddit.com/submit',
-      getParams: (url, params = {}) => filter({ ...params,
-        url
-      })
+      getParams: function getParams(url) {
+        var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        return filter(_objectSpread({}, params, {
+          url: url
+        }));
+      }
     },
     instagram: {
       profileBase: 'https://www.instagram.com/',
       shareBase: '',
-
-      getParams() {}
-
+      getParams: function getParams() {}
     },
     youtube: {
       profileBase: 'https://www.youtube.com/channel/',
-
-      getParams() {}
-
+      getParams: function getParams() {}
     },
     email: {
       shareBase: 'mailto:',
       profileBase: 'mailto:',
-      getParams: (url, params = {}) => {
+      getParams: function getParams(url) {
+        var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
         if (typeof params.subject === 'string') {
           params.subject = params.subject.replace('{{URL}}', url);
         }
@@ -71952,10 +74458,8 @@ define("ember-resolver/features", [], function () {
       @type {String}
     */
     href: Ember.computed('service', 'username', function () {
-      let {
-        username,
-        service
-      } = this;
+      var username = this.username,
+          service = this.service;
 
       if (!_nyprMShareTools.SERVICE_MAP[service]) {
         return;
@@ -71964,12 +74468,11 @@ define("ember-resolver/features", [], function () {
       return "".concat(_nyprMShareTools.SERVICE_MAP[service].profileBase).concat(username);
     }),
     actions: {
-      handleClick() {
+      handleClick: function handleClick() {
         if (this.clickAction) {
           this.clickAction();
         }
       }
-
     }
   }); // END-SNIPPET
 
@@ -71984,10 +74487,11 @@ define("ember-resolver/features", [], function () {
   });
   _exports.default = void 0;
 
-  const windowString = ({
-    top,
-    left
-  }) => "location=no,toolbar=no,menubar=no,scrollbars=no,status=no,width=550,height=600,top=".concat(top, ",left=").concat(left);
+  var windowString = function windowString(_ref) {
+    var top = _ref.top,
+        left = _ref.left;
+    return "location=no,toolbar=no,menubar=no,scrollbars=no,status=no,width=550,height=600,top=".concat(top, ",left=").concat(left);
+  };
   /**
     Share Tools Share Button
   
@@ -72022,13 +74526,13 @@ define("ember-resolver/features", [], function () {
        @method getPopupPosition
       @return {Object} positions
     */
-    getPopupPosition() {
-      const dualScreenLeft = screen.availLeft;
-      const dualScreenTop = screen.availTop;
-      const windowWidth = screen.availWidth;
-      const windowheight = screen.availHeight;
-      const left = windowWidth / 2 - 600 / 2 + dualScreenLeft;
-      const top = windowheight / 2 - 600 / 2 + dualScreenTop;
+    getPopupPosition: function getPopupPosition() {
+      var dualScreenLeft = screen.availLeft;
+      var dualScreenTop = screen.availTop;
+      var windowWidth = screen.availWidth;
+      var windowheight = screen.availHeight;
+      var left = windowWidth / 2 - 600 / 2 + dualScreenLeft;
+      var top = windowheight / 2 - 600 / 2 + dualScreenTop;
       return {
         left: left,
         top: top
@@ -72041,19 +74545,22 @@ define("ember-resolver/features", [], function () {
       @param {String} override
       @return {String} url
     */
-    getURL(override) {
+    getURL: function getURL(override) {
+      var _this = this;
+
       if (!_nyprMShareTools.SERVICE_MAP[this.service]) {
         return;
       }
 
-      let {
-        shareBase,
-        getParams
-      } = _nyprMShareTools.SERVICE_MAP[this.service];
-      let url = override || window.location.toString();
+      var _SERVICE_MAP$this$ser = _nyprMShareTools.SERVICE_MAP[this.service],
+          shareBase = _SERVICE_MAP$this$ser.shareBase,
+          getParams = _SERVICE_MAP$this$ser.getParams;
+      var url = override || window.location.toString();
 
       if (this.utm) {
-        let utmParams = Object.keys(this.utm).map(key => "utm_".concat(key, "=").concat(this.utm[key])).join('&');
+        var utmParams = Object.keys(this.utm).map(function (key) {
+          return "utm_".concat(key, "=").concat(_this.utm[key]);
+        }).join('&');
 
         if (url.indexOf('?') > -1) {
           url += "&".concat(utmParams);
@@ -72073,21 +74580,20 @@ define("ember-resolver/features", [], function () {
       @return {void}
     */
     actions: {
-      openShare() {
+      openShare: function openShare() {
         if (!this.service) {
           return;
         }
 
-        let urlOverride = this.url;
-        let url = this.getURL(urlOverride);
-        let popupPosition = this.getPopupPosition();
+        var urlOverride = this.url;
+        var url = this.getURL(urlOverride);
+        var popupPosition = this.getPopupPosition();
         var newWindow = window.open(url, 'share window', windowString(popupPosition)); // make sure it actually opened and bring it to the front
 
         if (typeof newWindow !== 'undefined' && newWindow !== null && newWindow.focus) {
           newWindow.focus();
         }
       }
-
     }
   }); // END-SNIPPET
 
@@ -72236,10 +74742,10 @@ define("ember-resolver/features", [], function () {
        @method toTop
       @return {Void}
     */
-    toTop() {
-      let offset = this.offset;
-      let target = document.querySelector(this.selector);
-      let y = target ? target.offsetTop - (target.offsetHeight + offset) : 0;
+    toTop: function toTop() {
+      var offset = this.offset;
+      var target = document.querySelector(this.selector);
+      var y = target ? target.offsetTop - (target.offsetHeight + offset) : 0;
       window.scrollTo({
         top: y,
         behavior: 'smooth'
@@ -72252,15 +74758,14 @@ define("ember-resolver/features", [], function () {
        @method focusOnTop
       @return {Void}
     */
-    focusOnTop() {
-      let header = document.getElementsByTagName("header")[0];
+    focusOnTop: function focusOnTop() {
+      var header = document.getElementsByTagName("header")[0];
 
       if (header) {
         header.setAttribute('tabIndex', -1);
         header.focus();
       }
     }
-
   }); // END-SNIPPET
 
 
@@ -72298,9 +74803,8 @@ define("ember-resolver/features", [], function () {
       @type {String}
     */
     body: null,
-
-    didRender() {
-      Ember.run.schedule('afterRender', () => {
+    didRender: function didRender() {
+      Ember.run.schedule('afterRender', function () {
         // instagram embeds need a manual push after rehydration
         // ember will re-render a fastboot DOM tree,
         // but the IG embed script will only operate once
@@ -72312,7 +74816,9 @@ define("ember-resolver/features", [], function () {
 
 
         if (typeof twttr !== 'undefined') {
-          twttr.ready(() => twttr.widgets.load());
+          twttr.ready(function () {
+            return twttr.widgets.load();
+          });
         } // parse any facebook embeds
 
 
@@ -72321,7 +74827,6 @@ define("ember-resolver/features", [], function () {
         }
       });
     }
-
   }); // END-SNIPPET
 
 
@@ -72367,16 +74872,14 @@ define("ember-resolver/features", [], function () {
   var _default = Ember.Component.extend({
     layout: _nyprOArticleFooter.default,
     classNames: ['c-article__footer', 'u-section-spacing'],
-
-    didInsertElement() {
-      this._super(...arguments);
+    didInsertElement: function didInsertElement() {
+      this._super.apply(this, arguments);
 
       this._boundListener = Ember.run.bind(this, '_watchForTout');
       window.addEventListener('scroll', this._boundListener);
     },
-
-    willDestroyElement() {
-      this._super(...arguments);
+    willDestroyElement: function willDestroyElement() {
+      this._super.apply(this, arguments);
 
       window.removeEventListener('scroll', this._boundListener);
     },
@@ -72394,25 +74897,29 @@ define("ember-resolver/features", [], function () {
       @param {EventObject} event
       @return {void}
     */
-    _watchForTout()
+    _watchForTout: function _watchForTout()
     /* e */
     {
-      Ember.run.debounce(this, () => {
-        if (this.isDestroyed || this.isDestroying) {
+      var _this = this;
+
+      Ember.run.debounce(this, function () {
+        if (_this.isDestroyed || _this.isDestroying) {
           return; // JIC
         }
 
-        let toutInDom = this.element.querySelector('.c-donate-tout');
-        let windowCenter = document.documentElement.clientHeight / 2;
-        let footerTopEdge = this.element.getBoundingClientRect().top;
+        var toutInDom = _this.element.querySelector('.c-donate-tout');
+
+        var windowCenter = document.documentElement.clientHeight / 2;
+
+        var footerTopEdge = _this.element.getBoundingClientRect().top;
 
         if (toutInDom && footerTopEdge - windowCenter < 0) {
-          this.set('inViewport', true);
-          window.removeEventListener('scroll', this._watchForTout);
+          _this.set('inViewport', true);
+
+          window.removeEventListener('scroll', _this._watchForTout);
         }
       }, 150);
     }
-
   }); // END-SNIPPET
 
 
@@ -72548,9 +75055,8 @@ define("ember-resolver/features", [], function () {
     classNames: ['c-block-group', 'o-section'],
     classNameBindings: ['isSingleColumn:c-block-group--single-col', 'layoutClass'],
     tagName: 'section',
-
-    init() {
-      this._super(...arguments);
+    init: function init() {
+      this._super.apply(this, arguments);
 
       this.set('columns', Ember.A([]));
     },
@@ -72567,7 +75073,7 @@ define("ember-resolver/features", [], function () {
        @method addColumn
       @param {Component} column component
     */
-    addColumn(component) {
+    addColumn: function addColumn(component) {
       this.columns.pushObject(component);
     },
 
@@ -72576,7 +75082,7 @@ define("ember-resolver/features", [], function () {
        @method removeColumn
       @param {Component} column component
     */
-    removeColumn(component) {
+    removeColumn: function removeColumn(component) {
       this.columns.removeObject(component);
     },
 
@@ -72640,15 +75146,12 @@ define("ember-resolver/features", [], function () {
   var _default = Ember.Component.extend({
     layout: _column.default,
     classNames: ['c-block-group__col', 'u-spacing--and-half'],
-
-    didInsertElement() {
+    didInsertElement: function didInsertElement() {
       this.onRender(this);
     },
-
-    willDestroy() {
+    willDestroy: function willDestroy() {
       this.onDestroy(this);
     }
-
   });
 
   _exports.default = _default;
@@ -72831,14 +75334,12 @@ define("ember-resolver/features", [], function () {
     classNameBindings: ['takeover::c-article__gallery--static'],
     attributeBindings: ['data-test-gallery-overlay'],
     'data-test-gallery-overlay': true,
-
-    init() {
-      this._super(...arguments);
+    init: function init() {
+      this._super.apply(this, arguments);
 
       this.set('slideEls', Ember.A([]));
     },
-
-    didInsertElement() {
+    didInsertElement: function didInsertElement() {
       // make sure the body height matches the gallery height for scroll measure purposes
       if (this.takeover) {
         this._boundResizeListener = Ember.run.bind(this, '_setBodyHeight');
@@ -72854,12 +75355,12 @@ define("ember-resolver/features", [], function () {
       this.element.classList.add('gallery-is-active'); // scroll to an image if its index is passed in
 
       if (this.slideForInit) {
-        let index = this.slideForInit;
-        let slideToScrollTo = this.slideEls[index]; // wait for all slides to load so scroll position is correct
+        var index = this.slideForInit;
+        var slideToScrollTo = this.slideEls[index]; // wait for all slides to load so scroll position is correct
 
-        (0, _imagesloaded.default)(this.element.querySelectorAll('.c-slide'), () => {
+        (0, _imagesloaded.default)(this.element.querySelectorAll('.c-slide'), function () {
           // const HEADER_OFFSET = 80;
-          let image = slideToScrollTo.querySelector('img'); // let { top, height:imageHeight } = image.getBoundingClientRect();
+          var image = slideToScrollTo.querySelector('img'); // let { top, height:imageHeight } = image.getBoundingClientRect();
           //
           // let imageAtTopOfWindow = top + window.scrollY;
           // let diff = Math.abs(window.innerHeight - imageHeight);
@@ -72874,9 +75375,8 @@ define("ember-resolver/features", [], function () {
         });
       }
     },
-
-    willDestroy() {
-      this._super(...arguments);
+    willDestroy: function willDestroy() {
+      this._super.apply(this, arguments);
 
       if (typeof FastBoot === 'undefined') {
         // clear watchers for body height and currently viewed slide
@@ -72941,7 +75441,7 @@ define("ember-resolver/features", [], function () {
        @argument viewedSlide
       @type {Function}
     */
-    viewedSlide() {},
+    viewedSlide: function viewedSlide() {},
 
     /**
       Current slide's index. Updated directly by scroll handler.
@@ -72969,7 +75469,7 @@ define("ember-resolver/features", [], function () {
       @param {HTMLElement} slideEl
       @return {void}
     */
-    registerSlide(slideEl) {
+    registerSlide: function registerSlide(slideEl) {
       this.slideEls.pushObject(slideEl);
     },
 
@@ -72981,21 +75481,23 @@ define("ember-resolver/features", [], function () {
       @param {EventObject} event
       @return {void}
     */
-    _currentSlideWatcher()
+    _currentSlideWatcher: function _currentSlideWatcher()
     /* e */
     {
+      var _this = this;
+
       if (this.slideForInit) {
         this.slideForInit = null;
         return;
       }
 
-      Ember.run.throttle(this, () => {
-        let i;
-        let currentEl;
-        let els = this.slideEls;
+      Ember.run.throttle(this, function () {
+        var i;
+        var currentEl;
+        var els = _this.slideEls;
 
         for (i = 0; i < els.length; i++) {
-          let slide = els[i];
+          var slide = els[i];
 
           if ((0, _inViewport.inViewport)(slide, {
             offset: {
@@ -73008,7 +75510,7 @@ define("ember-resolver/features", [], function () {
         }
 
         if (currentEl) {
-          this.viewedSlide(this.slides[i], currentEl, i);
+          _this.viewedSlide(_this.slides[i], currentEl, i);
         }
       }, 100);
     },
@@ -73019,13 +75521,15 @@ define("ember-resolver/features", [], function () {
       @param {EventObject} event
       @return {void}
     */
-    _setBodyHeight()
+    _setBodyHeight: function _setBodyHeight()
     /* e */
     {
-      Ember.run.debounce(this, () => {
-        let {
-          height
-        } = this.element.getBoundingClientRect();
+      var _this2 = this;
+
+      Ember.run.debounce(this, function () {
+        var _this2$element$getBou = _this2.element.getBoundingClientRect(),
+            height = _this2$element$getBou.height;
+
         height = "".concat(height, "px");
 
         if (document.body.style.height !== height) {
@@ -73033,7 +75537,6 @@ define("ember-resolver/features", [], function () {
         }
       }, 100);
     }
-
   }); // END-SNIPPET
 
 
@@ -73074,9 +75577,8 @@ define("ember-resolver/features", [], function () {
     classNames: ['c-slide', 'u-spacing--and-half'],
     attributeBindings: ['data-test-gallery-slide'],
     'data-test-gallery-slide': Ember.computed.reads('index'),
-
-    didInsertElement() {
-      this._super(...arguments);
+    didInsertElement: function didInsertElement() {
+      this._super.apply(this, arguments);
 
       this.register(this.element);
     },
@@ -73125,27 +75627,26 @@ define("ember-resolver/features", [], function () {
       @type {String}
     */
     shareURL: Ember.computed('index', function () {
-      let {
-        protocol,
-        host,
-        pathname
-      } = window.location;
+      var _window$location = window.location,
+          protocol = _window$location.protocol,
+          host = _window$location.host,
+          pathname = _window$location.pathname;
       return "".concat(protocol, "//").concat(host).concat(pathname, "?image=").concat(this.index);
     }),
-
-    calculatePosition(trigger, content
+    calculatePosition: function calculatePosition(trigger, content
     /*, wormhole, options*/
     ) {
-      const BUFFER = 10;
-      let {
-        height,
-        right
-      } = trigger.getBoundingClientRect();
-      let {
-        padding
-      } = window.getComputedStyle(content);
+      var BUFFER = 10;
+
+      var _trigger$getBoundingC = trigger.getBoundingClientRect(),
+          height = _trigger$getBoundingC.height,
+          right = _trigger$getBoundingC.right;
+
+      var _window$getComputedSt = window.getComputedStyle(content),
+          padding = _window$getComputedSt.padding;
+
       padding = parseInt(padding, 10);
-      let distanceFromEdge = Math.abs(right - document.documentElement.clientWidth);
+      var distanceFromEdge = Math.abs(right - document.documentElement.clientWidth);
       return {
         style: {
           right: distanceFromEdge < padding + BUFFER ? -5 : -padding * 2,
@@ -73153,7 +75654,6 @@ define("ember-resolver/features", [], function () {
         }
       };
     }
-
   }); // END-SNIPPET
 
 
@@ -73166,9 +75666,9 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   _exports.default = void 0;
-  const DEBOUNCE_TIMER = 75;
-  const DOWN = 'down';
-  const UP = 'up';
+  var DEBOUNCE_TIMER = 75;
+  var DOWN = 'down';
+  var UP = 'up';
   /**
    Site header
   
@@ -73221,21 +75721,19 @@ define("ember-resolver/features", [], function () {
        @argument floatLandmark
       @type {String}
     */
-    init() {
-      this._super(...arguments);
+    init: function init() {
+      this._super.apply(this, arguments);
 
       this.headerService.register(this);
     },
-
-    didInsertElement() {
-      this._super(...arguments);
+    didInsertElement: function didInsertElement() {
+      this._super.apply(this, arguments);
 
       this._boundListener = Ember.run.bind(this, '_scrollListener');
       window.addEventListener('scroll', this._boundListener);
     },
-
-    willDestroyElement() {
-      this._super(...arguments);
+    willDestroyElement: function willDestroyElement() {
+      this._super.apply(this, arguments);
 
       window.removeEventListener('scroll', this._boundListener); // test cleanup
 
@@ -73250,12 +75748,12 @@ define("ember-resolver/features", [], function () {
      @type {String}
     */
     spacerHeight: Ember.computed('outOfViewport', function () {
-      let style = '';
+      var style = '';
 
       if (typeof FastBoot === 'undefined' && this.outOfViewport) {
-        let {
-          height
-        } = this.element.getBoundingClientRect();
+        var _this$element$getBoun = this.element.getBoundingClientRect(),
+            height = _this$element$getBoun.height;
+
         style = "height: ".concat(height, "px;");
       }
 
@@ -73269,7 +75767,7 @@ define("ember-resolver/features", [], function () {
      @param {Event} e click event
      @return {void}
     */
-    toggleMenu(force, _e) {
+    toggleMenu: function toggleMenu(force, _e) {
       // eslint-disable-line no-unused-vars
       // arg order can change depending where it's called
       if (force instanceof Event) {
@@ -73296,8 +75794,8 @@ define("ember-resolver/features", [], function () {
        @method focusMenu
       @return {void}
     */
-    focusMenu() {
-      let menu = this.element.querySelector(".c-side-menu__aria-begin");
+    focusMenu: function focusMenu() {
+      var menu = this.element.querySelector(".c-side-menu__aria-begin");
       menu.setAttribute('tabIndex', -1);
       menu.focus();
     },
@@ -73308,44 +75806,46 @@ define("ember-resolver/features", [], function () {
       @param {EventObject} event
       @return {void}
     */
-    _scrollListener()
+    _scrollListener: function _scrollListener()
     /* e */
     {
-      let direction;
-      let lastScroll = window.pageYOffset;
-      Ember.run.debounce(this, () => {
+      var _this = this;
+
+      var direction;
+      var lastScroll = window.pageYOffset;
+      Ember.run.debounce(this, function () {
         if (lastScroll < window.pageYOffset) {
-          direction = this._lastDirection = DOWN;
+          direction = _this._lastDirection = DOWN;
         } else if (lastScroll > window.pageYOffset) {
-          direction = this._lastDirection = UP;
+          direction = _this._lastDirection = UP;
         } else {
-          direction = this._lastDirection;
+          direction = _this._lastDirection;
         }
 
-        let el;
+        var el;
 
-        if (this.floatLandmark) {
-          el = document.querySelector(this.floatLandmark);
+        if (_this.floatLandmark) {
+          el = document.querySelector(_this.floatLandmark);
         }
 
-        if (!el && this.element) {
-          el = this.element;
+        if (!el && _this.element) {
+          el = _this.element;
         } else if (!el) {
           return;
         }
 
-        let {
-          top,
-          height
-        } = el.getBoundingClientRect();
-        let {
-          paddingBottom
-        } = window.getComputedStyle(el);
-        let threshold = direction === DOWN ? 0 : height - parseInt(paddingBottom, 10);
-        this.set('outOfViewport', top + height < threshold);
+        var _el$getBoundingClient = el.getBoundingClientRect(),
+            top = _el$getBoundingClient.top,
+            height = _el$getBoundingClient.height;
+
+        var _window$getComputedSt = window.getComputedStyle(el),
+            paddingBottom = _window$getComputedSt.paddingBottom;
+
+        var threshold = direction === DOWN ? 0 : height - parseInt(paddingBottom, 10);
+
+        _this.set('outOfViewport', top + height < threshold);
       }, DEBOUNCE_TIMER);
     }
-
   }); // END-SNIPPET
 
 
@@ -73453,25 +75953,22 @@ define("ember-resolver/features", [], function () {
       @param {Event} e
       @return {void}
     */
-    clickOutside(e) {
+    clickOutside: function clickOutside(e) {
       if (!(0, _utils.closest)(e.target, '.c-menu-toggle') && this.isOpen) {
         this.close();
       }
     },
-
-    didInsertElement() {
-      this._super(...arguments);
+    didInsertElement: function didInsertElement() {
+      this._super.apply(this, arguments);
 
       this.addClickOutsideListener();
       this.router.on('routeDidChange', this.close);
     },
-
-    willDestroyElement() {
-      this._super(...arguments);
+    willDestroyElement: function willDestroyElement() {
+      this._super.apply(this, arguments);
 
       this.removeClickOutsideListener();
     }
-
   }); // END-SNIPPET
 
 
@@ -73612,9 +76109,21 @@ define("ember-resolver/features", [], function () {
   _exports.cast = cast;
   _exports.default = void 0;
 
-  function cast([value, type]
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function cast(_ref
   /*, hash*/
   ) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        value = _ref2[0],
+        type = _ref2[1];
+
     switch (type) {
       case 'number':
       case 'Number':
@@ -73638,38 +76147,44 @@ define("ember-resolver/features", [], function () {
   });
   _exports.inViewport = inViewport;
   _exports.default = void 0;
-  const DEFAULT_OPTIONS = {
+
+  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  var DEFAULT_OPTIONS = {
     threshold: 0
   };
-  const DEFAULT_OFFSET = {
+  var DEFAULT_OFFSET = {
     top: 0,
     left: 0,
     right: 0,
     bottom: 0
   };
 
-  function inViewport(element, options = {}) {
-    options = { ...DEFAULT_OPTIONS,
-      ...options,
-      offset: { ...DEFAULT_OFFSET,
-        ...options.offset
-      }
-    };
-    const {
-      top,
-      right,
-      bottom,
-      left,
-      width,
-      height
-    } = element.getBoundingClientRect();
-    const intersection = {
+  function inViewport(element) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    options = _objectSpread({}, DEFAULT_OPTIONS, {}, options, {
+      offset: _objectSpread({}, DEFAULT_OFFSET, {}, options.offset)
+    });
+
+    var _element$getBoundingC = element.getBoundingClientRect(),
+        top = _element$getBoundingC.top,
+        right = _element$getBoundingC.right,
+        bottom = _element$getBoundingC.bottom,
+        left = _element$getBoundingC.left,
+        width = _element$getBoundingC.width,
+        height = _element$getBoundingC.height;
+
+    var intersection = {
       t: bottom,
       r: window.innerWidth - left,
       b: window.innerHeight - top,
       l: right
     };
-    const threshold = {
+    var threshold = {
       x: options.threshold * width,
       y: options.threshold * height
     };
@@ -73691,6 +76206,12 @@ define("ember-resolver/features", [], function () {
     value: true
   });
   _exports.default = void 0;
+
+  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
   /**
     Backing service for arbitrary variables based on UI state of the `nypr-o-header` component.
@@ -73725,9 +76246,8 @@ define("ember-resolver/features", [], function () {
   */
   var _default = Ember.Service.extend({
     router: Ember.inject.service(),
-
-    init() {
-      this._super(...arguments);
+    init: function init() {
+      this._super.apply(this, arguments);
 
       this.set('rulesets', {});
     },
@@ -73744,7 +76264,7 @@ define("ember-resolver/features", [], function () {
       @param {Component} component
       @return {void}
     */
-    register(component) {
+    register: function register(component) {
       this.set('component', component);
     },
 
@@ -73755,7 +76275,9 @@ define("ember-resolver/features", [], function () {
       @param {Object} ruleset Hash of values to be applied to the header when the given route is entered, e.g. `{floating: { foo: true }, resting: {bar: true}, all: {baz: true}}`. `floating` and `resting` keys are required
       @return {void}
     */
-    addRule(route, ruleset = {}) {
+    addRule: function addRule(route) {
+      var ruleset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
       if (!ruleset.resting) {
         ruleset.resting = {};
       }
@@ -73768,7 +76290,6 @@ define("ember-resolver/features", [], function () {
 
       this._updateRules();
     },
-
     // eslint-disable-next-line ember/no-observers
     observer: Ember.observer('component.outOfViewport', 'router.currentRouteName', function () {
       this._updateRules();
@@ -73779,32 +76300,25 @@ define("ember-resolver/features", [], function () {
        @method _updateRules
       @return {void}
     */
-    _updateRules() {
+    _updateRules: function _updateRules() {
       if (!this.component) {
         return;
       }
 
-      let {
-        currentRouteName: route
-      } = this.router;
-      let {
-        outOfViewport: isFloating
-      } = this.component;
-      let ruleset = this.rulesets[route];
+      var route = this.router.currentRouteName;
+      var isFloating = this.component.outOfViewport;
+      var ruleset = this.rulesets[route];
 
       if (ruleset) {
-        let rules = ruleset[isFloating ? 'floating' : 'resting']; // include any `all` rules no matter the state
+        var rules = ruleset[isFloating ? 'floating' : 'resting']; // include any `all` rules no matter the state
 
-        rules = { ...rules,
-          ...ruleset.all
-        }; // replace rules wholesale to keep rule management sane and "truty only"
+        rules = _objectSpread({}, rules, {}, ruleset.all); // replace rules wholesale to keep rule management sane and "truty only"
 
         this.component.setProperties({
-          rules
+          rules: rules
         });
       }
     }
-
   });
 
   _exports.default = _default;
@@ -75303,26 +77817,28 @@ define("ember-resolver/features", [], function () {
     @param {HTMLElement} content
     @param {Number} rightOffset Specify an optional offset from the right edge
   */
-  function positionRightCenter(trigger, content, rightOffset = 0) {
+  function positionRightCenter(trigger, content) {
+    var rightOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
     if (typeof rightOffset !== 'number') {
       rightOffset = 0;
     }
 
-    let {
-      top,
-      left,
-      width,
-      height
-    } = trigger.getBoundingClientRect();
-    let {
-      height: contentHeight
-    } = content.getBoundingClientRect();
-    let style = {
+    var _trigger$getBoundingC = trigger.getBoundingClientRect(),
+        top = _trigger$getBoundingC.top,
+        left = _trigger$getBoundingC.left,
+        width = _trigger$getBoundingC.width,
+        height = _trigger$getBoundingC.height;
+
+    var _content$getBoundingC = content.getBoundingClientRect(),
+        contentHeight = _content$getBoundingC.height;
+
+    var style = {
       left: left + width + rightOffset,
       top: top + window.pageYOffset + height / 2 - contentHeight / 2
     };
     return {
-      style
+      style: style
     };
   }
   /**
@@ -75335,27 +77851,29 @@ define("ember-resolver/features", [], function () {
   */
 
 
-  function positionTopCenter(trigger, content, topOffset = 0) {
+  function positionTopCenter(trigger, content) {
+    var topOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
     if (typeof topOffset !== 'number') {
       topOffset = 0;
     }
 
-    let {
-      top,
-      left: triggerLeft,
-      width: triggerWidth
-    } = trigger.getBoundingClientRect();
-    let {
-      height: contentHeight,
-      width: contentWidth
-    } = content.getBoundingClientRect();
-    let offset = Math.abs(triggerWidth - contentWidth) / 2;
-    let style = {
+    var _trigger$getBoundingC2 = trigger.getBoundingClientRect(),
+        top = _trigger$getBoundingC2.top,
+        triggerLeft = _trigger$getBoundingC2.left,
+        triggerWidth = _trigger$getBoundingC2.width;
+
+    var _content$getBoundingC2 = content.getBoundingClientRect(),
+        contentHeight = _content$getBoundingC2.height,
+        contentWidth = _content$getBoundingC2.width;
+
+    var offset = Math.abs(triggerWidth - contentWidth) / 2;
+    var style = {
       left: contentWidth > triggerWidth ? triggerLeft - offset : triggerLeft + offset,
       top: top + window.pageYOffset - contentHeight - topOffset
     };
     return {
-      style
+      style: style
     };
   }
   /**
@@ -75368,32 +77886,162 @@ define("ember-resolver/features", [], function () {
   */
 
 
-  function positionBottomCenter(trigger, content, bottomOffset = 0) {
+  function positionBottomCenter(trigger, content) {
+    var bottomOffset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
     if (typeof bottomOffset !== 'number') {
       bottomOffset = 0;
     }
 
-    let {
-      top,
-      left: triggerLeft,
-      width: triggerWidth,
-      height: triggerHeight
-    } = trigger.getBoundingClientRect();
-    let {
-      width: contentWidth
-    } = content.getBoundingClientRect();
-    let offset = Math.abs(triggerWidth - contentWidth) / 2;
-    let style = {
+    var _trigger$getBoundingC3 = trigger.getBoundingClientRect(),
+        top = _trigger$getBoundingC3.top,
+        triggerLeft = _trigger$getBoundingC3.left,
+        triggerWidth = _trigger$getBoundingC3.width,
+        triggerHeight = _trigger$getBoundingC3.height;
+
+    var _content$getBoundingC3 = content.getBoundingClientRect(),
+        contentWidth = _content$getBoundingC3.width;
+
+    var offset = Math.abs(triggerWidth - contentWidth) / 2;
+    var style = {
       left: contentWidth > triggerWidth ? triggerLeft - offset : triggerLeft + offset,
       top: top + window.pageYOffset + triggerHeight + bottomOffset
     };
     return {
-      style
+      style: style
     };
   }
 });
 ;
 ;
+(window["webpackJsonp_ember_auto_import_"] = window["webpackJsonp_ember_auto_import_"] || []).push([["vendors~app"],{
+
+/***/ "./node_modules/color-convert/conversions.js":
+/*!***************************************************!*\
+  !*** ./node_modules/color-convert/conversions.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("/* MIT license */\nvar cssKeywords = __webpack_require__(/*! color-name */ \"./node_modules/color-convert/node_modules/color-name/index.js\"); // NOTE: conversions should only return primitive values (i.e. arrays, or\n//       values that give correct `typeof` results).\n//       do not use box values types (i.e. Number(), String(), etc.)\n\n\nvar reverseKeywords = {};\n\nfor (var key in cssKeywords) {\n  if (cssKeywords.hasOwnProperty(key)) {\n    reverseKeywords[cssKeywords[key]] = key;\n  }\n}\n\nvar convert = module.exports = {\n  rgb: {\n    channels: 3,\n    labels: 'rgb'\n  },\n  hsl: {\n    channels: 3,\n    labels: 'hsl'\n  },\n  hsv: {\n    channels: 3,\n    labels: 'hsv'\n  },\n  hwb: {\n    channels: 3,\n    labels: 'hwb'\n  },\n  cmyk: {\n    channels: 4,\n    labels: 'cmyk'\n  },\n  xyz: {\n    channels: 3,\n    labels: 'xyz'\n  },\n  lab: {\n    channels: 3,\n    labels: 'lab'\n  },\n  lch: {\n    channels: 3,\n    labels: 'lch'\n  },\n  hex: {\n    channels: 1,\n    labels: ['hex']\n  },\n  keyword: {\n    channels: 1,\n    labels: ['keyword']\n  },\n  ansi16: {\n    channels: 1,\n    labels: ['ansi16']\n  },\n  ansi256: {\n    channels: 1,\n    labels: ['ansi256']\n  },\n  hcg: {\n    channels: 3,\n    labels: ['h', 'c', 'g']\n  },\n  apple: {\n    channels: 3,\n    labels: ['r16', 'g16', 'b16']\n  },\n  gray: {\n    channels: 1,\n    labels: ['gray']\n  }\n}; // hide .channels and .labels properties\n\nfor (var model in convert) {\n  if (convert.hasOwnProperty(model)) {\n    if (!('channels' in convert[model])) {\n      throw new Error('missing channels property: ' + model);\n    }\n\n    if (!('labels' in convert[model])) {\n      throw new Error('missing channel labels property: ' + model);\n    }\n\n    if (convert[model].labels.length !== convert[model].channels) {\n      throw new Error('channel and label counts mismatch: ' + model);\n    }\n\n    var channels = convert[model].channels;\n    var labels = convert[model].labels;\n    delete convert[model].channels;\n    delete convert[model].labels;\n    Object.defineProperty(convert[model], 'channels', {\n      value: channels\n    });\n    Object.defineProperty(convert[model], 'labels', {\n      value: labels\n    });\n  }\n}\n\nconvert.rgb.hsl = function (rgb) {\n  var r = rgb[0] / 255;\n  var g = rgb[1] / 255;\n  var b = rgb[2] / 255;\n  var min = Math.min(r, g, b);\n  var max = Math.max(r, g, b);\n  var delta = max - min;\n  var h;\n  var s;\n  var l;\n\n  if (max === min) {\n    h = 0;\n  } else if (r === max) {\n    h = (g - b) / delta;\n  } else if (g === max) {\n    h = 2 + (b - r) / delta;\n  } else if (b === max) {\n    h = 4 + (r - g) / delta;\n  }\n\n  h = Math.min(h * 60, 360);\n\n  if (h < 0) {\n    h += 360;\n  }\n\n  l = (min + max) / 2;\n\n  if (max === min) {\n    s = 0;\n  } else if (l <= 0.5) {\n    s = delta / (max + min);\n  } else {\n    s = delta / (2 - max - min);\n  }\n\n  return [h, s * 100, l * 100];\n};\n\nconvert.rgb.hsv = function (rgb) {\n  var rdif;\n  var gdif;\n  var bdif;\n  var h;\n  var s;\n  var r = rgb[0] / 255;\n  var g = rgb[1] / 255;\n  var b = rgb[2] / 255;\n  var v = Math.max(r, g, b);\n  var diff = v - Math.min(r, g, b);\n\n  var diffc = function diffc(c) {\n    return (v - c) / 6 / diff + 1 / 2;\n  };\n\n  if (diff === 0) {\n    h = s = 0;\n  } else {\n    s = diff / v;\n    rdif = diffc(r);\n    gdif = diffc(g);\n    bdif = diffc(b);\n\n    if (r === v) {\n      h = bdif - gdif;\n    } else if (g === v) {\n      h = 1 / 3 + rdif - bdif;\n    } else if (b === v) {\n      h = 2 / 3 + gdif - rdif;\n    }\n\n    if (h < 0) {\n      h += 1;\n    } else if (h > 1) {\n      h -= 1;\n    }\n  }\n\n  return [h * 360, s * 100, v * 100];\n};\n\nconvert.rgb.hwb = function (rgb) {\n  var r = rgb[0];\n  var g = rgb[1];\n  var b = rgb[2];\n  var h = convert.rgb.hsl(rgb)[0];\n  var w = 1 / 255 * Math.min(r, Math.min(g, b));\n  b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));\n  return [h, w * 100, b * 100];\n};\n\nconvert.rgb.cmyk = function (rgb) {\n  var r = rgb[0] / 255;\n  var g = rgb[1] / 255;\n  var b = rgb[2] / 255;\n  var c;\n  var m;\n  var y;\n  var k;\n  k = Math.min(1 - r, 1 - g, 1 - b);\n  c = (1 - r - k) / (1 - k) || 0;\n  m = (1 - g - k) / (1 - k) || 0;\n  y = (1 - b - k) / (1 - k) || 0;\n  return [c * 100, m * 100, y * 100, k * 100];\n};\n/**\n * See https://en.m.wikipedia.org/wiki/Euclidean_distance#Squared_Euclidean_distance\n * */\n\n\nfunction comparativeDistance(x, y) {\n  return Math.pow(x[0] - y[0], 2) + Math.pow(x[1] - y[1], 2) + Math.pow(x[2] - y[2], 2);\n}\n\nconvert.rgb.keyword = function (rgb) {\n  var reversed = reverseKeywords[rgb];\n\n  if (reversed) {\n    return reversed;\n  }\n\n  var currentClosestDistance = Infinity;\n  var currentClosestKeyword;\n\n  for (var keyword in cssKeywords) {\n    if (cssKeywords.hasOwnProperty(keyword)) {\n      var value = cssKeywords[keyword]; // Compute comparative distance\n\n      var distance = comparativeDistance(rgb, value); // Check if its less, if so set as closest\n\n      if (distance < currentClosestDistance) {\n        currentClosestDistance = distance;\n        currentClosestKeyword = keyword;\n      }\n    }\n  }\n\n  return currentClosestKeyword;\n};\n\nconvert.keyword.rgb = function (keyword) {\n  return cssKeywords[keyword];\n};\n\nconvert.rgb.xyz = function (rgb) {\n  var r = rgb[0] / 255;\n  var g = rgb[1] / 255;\n  var b = rgb[2] / 255; // assume sRGB\n\n  r = r > 0.04045 ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;\n  g = g > 0.04045 ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;\n  b = b > 0.04045 ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;\n  var x = r * 0.4124 + g * 0.3576 + b * 0.1805;\n  var y = r * 0.2126 + g * 0.7152 + b * 0.0722;\n  var z = r * 0.0193 + g * 0.1192 + b * 0.9505;\n  return [x * 100, y * 100, z * 100];\n};\n\nconvert.rgb.lab = function (rgb) {\n  var xyz = convert.rgb.xyz(rgb);\n  var x = xyz[0];\n  var y = xyz[1];\n  var z = xyz[2];\n  var l;\n  var a;\n  var b;\n  x /= 95.047;\n  y /= 100;\n  z /= 108.883;\n  x = x > 0.008856 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116;\n  y = y > 0.008856 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;\n  z = z > 0.008856 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116;\n  l = 116 * y - 16;\n  a = 500 * (x - y);\n  b = 200 * (y - z);\n  return [l, a, b];\n};\n\nconvert.hsl.rgb = function (hsl) {\n  var h = hsl[0] / 360;\n  var s = hsl[1] / 100;\n  var l = hsl[2] / 100;\n  var t1;\n  var t2;\n  var t3;\n  var rgb;\n  var val;\n\n  if (s === 0) {\n    val = l * 255;\n    return [val, val, val];\n  }\n\n  if (l < 0.5) {\n    t2 = l * (1 + s);\n  } else {\n    t2 = l + s - l * s;\n  }\n\n  t1 = 2 * l - t2;\n  rgb = [0, 0, 0];\n\n  for (var i = 0; i < 3; i++) {\n    t3 = h + 1 / 3 * -(i - 1);\n\n    if (t3 < 0) {\n      t3++;\n    }\n\n    if (t3 > 1) {\n      t3--;\n    }\n\n    if (6 * t3 < 1) {\n      val = t1 + (t2 - t1) * 6 * t3;\n    } else if (2 * t3 < 1) {\n      val = t2;\n    } else if (3 * t3 < 2) {\n      val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;\n    } else {\n      val = t1;\n    }\n\n    rgb[i] = val * 255;\n  }\n\n  return rgb;\n};\n\nconvert.hsl.hsv = function (hsl) {\n  var h = hsl[0];\n  var s = hsl[1] / 100;\n  var l = hsl[2] / 100;\n  var smin = s;\n  var lmin = Math.max(l, 0.01);\n  var sv;\n  var v;\n  l *= 2;\n  s *= l <= 1 ? l : 2 - l;\n  smin *= lmin <= 1 ? lmin : 2 - lmin;\n  v = (l + s) / 2;\n  sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);\n  return [h, sv * 100, v * 100];\n};\n\nconvert.hsv.rgb = function (hsv) {\n  var h = hsv[0] / 60;\n  var s = hsv[1] / 100;\n  var v = hsv[2] / 100;\n  var hi = Math.floor(h) % 6;\n  var f = h - Math.floor(h);\n  var p = 255 * v * (1 - s);\n  var q = 255 * v * (1 - s * f);\n  var t = 255 * v * (1 - s * (1 - f));\n  v *= 255;\n\n  switch (hi) {\n    case 0:\n      return [v, t, p];\n\n    case 1:\n      return [q, v, p];\n\n    case 2:\n      return [p, v, t];\n\n    case 3:\n      return [p, q, v];\n\n    case 4:\n      return [t, p, v];\n\n    case 5:\n      return [v, p, q];\n  }\n};\n\nconvert.hsv.hsl = function (hsv) {\n  var h = hsv[0];\n  var s = hsv[1] / 100;\n  var v = hsv[2] / 100;\n  var vmin = Math.max(v, 0.01);\n  var lmin;\n  var sl;\n  var l;\n  l = (2 - s) * v;\n  lmin = (2 - s) * vmin;\n  sl = s * vmin;\n  sl /= lmin <= 1 ? lmin : 2 - lmin;\n  sl = sl || 0;\n  l /= 2;\n  return [h, sl * 100, l * 100];\n}; // http://dev.w3.org/csswg/css-color/#hwb-to-rgb\n\n\nconvert.hwb.rgb = function (hwb) {\n  var h = hwb[0] / 360;\n  var wh = hwb[1] / 100;\n  var bl = hwb[2] / 100;\n  var ratio = wh + bl;\n  var i;\n  var v;\n  var f;\n  var n; // wh + bl cant be > 1\n\n  if (ratio > 1) {\n    wh /= ratio;\n    bl /= ratio;\n  }\n\n  i = Math.floor(6 * h);\n  v = 1 - bl;\n  f = 6 * h - i;\n\n  if ((i & 0x01) !== 0) {\n    f = 1 - f;\n  }\n\n  n = wh + f * (v - wh); // linear interpolation\n\n  var r;\n  var g;\n  var b;\n\n  switch (i) {\n    default:\n    case 6:\n    case 0:\n      r = v;\n      g = n;\n      b = wh;\n      break;\n\n    case 1:\n      r = n;\n      g = v;\n      b = wh;\n      break;\n\n    case 2:\n      r = wh;\n      g = v;\n      b = n;\n      break;\n\n    case 3:\n      r = wh;\n      g = n;\n      b = v;\n      break;\n\n    case 4:\n      r = n;\n      g = wh;\n      b = v;\n      break;\n\n    case 5:\n      r = v;\n      g = wh;\n      b = n;\n      break;\n  }\n\n  return [r * 255, g * 255, b * 255];\n};\n\nconvert.cmyk.rgb = function (cmyk) {\n  var c = cmyk[0] / 100;\n  var m = cmyk[1] / 100;\n  var y = cmyk[2] / 100;\n  var k = cmyk[3] / 100;\n  var r;\n  var g;\n  var b;\n  r = 1 - Math.min(1, c * (1 - k) + k);\n  g = 1 - Math.min(1, m * (1 - k) + k);\n  b = 1 - Math.min(1, y * (1 - k) + k);\n  return [r * 255, g * 255, b * 255];\n};\n\nconvert.xyz.rgb = function (xyz) {\n  var x = xyz[0] / 100;\n  var y = xyz[1] / 100;\n  var z = xyz[2] / 100;\n  var r;\n  var g;\n  var b;\n  r = x * 3.2406 + y * -1.5372 + z * -0.4986;\n  g = x * -0.9689 + y * 1.8758 + z * 0.0415;\n  b = x * 0.0557 + y * -0.2040 + z * 1.0570; // assume sRGB\n\n  r = r > 0.0031308 ? 1.055 * Math.pow(r, 1.0 / 2.4) - 0.055 : r * 12.92;\n  g = g > 0.0031308 ? 1.055 * Math.pow(g, 1.0 / 2.4) - 0.055 : g * 12.92;\n  b = b > 0.0031308 ? 1.055 * Math.pow(b, 1.0 / 2.4) - 0.055 : b * 12.92;\n  r = Math.min(Math.max(0, r), 1);\n  g = Math.min(Math.max(0, g), 1);\n  b = Math.min(Math.max(0, b), 1);\n  return [r * 255, g * 255, b * 255];\n};\n\nconvert.xyz.lab = function (xyz) {\n  var x = xyz[0];\n  var y = xyz[1];\n  var z = xyz[2];\n  var l;\n  var a;\n  var b;\n  x /= 95.047;\n  y /= 100;\n  z /= 108.883;\n  x = x > 0.008856 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116;\n  y = y > 0.008856 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;\n  z = z > 0.008856 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116;\n  l = 116 * y - 16;\n  a = 500 * (x - y);\n  b = 200 * (y - z);\n  return [l, a, b];\n};\n\nconvert.lab.xyz = function (lab) {\n  var l = lab[0];\n  var a = lab[1];\n  var b = lab[2];\n  var x;\n  var y;\n  var z;\n  y = (l + 16) / 116;\n  x = a / 500 + y;\n  z = y - b / 200;\n  var y2 = Math.pow(y, 3);\n  var x2 = Math.pow(x, 3);\n  var z2 = Math.pow(z, 3);\n  y = y2 > 0.008856 ? y2 : (y - 16 / 116) / 7.787;\n  x = x2 > 0.008856 ? x2 : (x - 16 / 116) / 7.787;\n  z = z2 > 0.008856 ? z2 : (z - 16 / 116) / 7.787;\n  x *= 95.047;\n  y *= 100;\n  z *= 108.883;\n  return [x, y, z];\n};\n\nconvert.lab.lch = function (lab) {\n  var l = lab[0];\n  var a = lab[1];\n  var b = lab[2];\n  var hr;\n  var h;\n  var c;\n  hr = Math.atan2(b, a);\n  h = hr * 360 / 2 / Math.PI;\n\n  if (h < 0) {\n    h += 360;\n  }\n\n  c = Math.sqrt(a * a + b * b);\n  return [l, c, h];\n};\n\nconvert.lch.lab = function (lch) {\n  var l = lch[0];\n  var c = lch[1];\n  var h = lch[2];\n  var a;\n  var b;\n  var hr;\n  hr = h / 360 * 2 * Math.PI;\n  a = c * Math.cos(hr);\n  b = c * Math.sin(hr);\n  return [l, a, b];\n};\n\nconvert.rgb.ansi16 = function (args) {\n  var r = args[0];\n  var g = args[1];\n  var b = args[2];\n  var value = 1 in arguments ? arguments[1] : convert.rgb.hsv(args)[2]; // hsv -> ansi16 optimization\n\n  value = Math.round(value / 50);\n\n  if (value === 0) {\n    return 30;\n  }\n\n  var ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));\n\n  if (value === 2) {\n    ansi += 60;\n  }\n\n  return ansi;\n};\n\nconvert.hsv.ansi16 = function (args) {\n  // optimization here; we already know the value and don't need to get\n  // it converted for us.\n  return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);\n};\n\nconvert.rgb.ansi256 = function (args) {\n  var r = args[0];\n  var g = args[1];\n  var b = args[2]; // we use the extended greyscale palette here, with the exception of\n  // black and white. normal palette only has 4 greyscale shades.\n\n  if (r === g && g === b) {\n    if (r < 8) {\n      return 16;\n    }\n\n    if (r > 248) {\n      return 231;\n    }\n\n    return Math.round((r - 8) / 247 * 24) + 232;\n  }\n\n  var ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);\n  return ansi;\n};\n\nconvert.ansi16.rgb = function (args) {\n  var color = args % 10; // handle greyscale\n\n  if (color === 0 || color === 7) {\n    if (args > 50) {\n      color += 3.5;\n    }\n\n    color = color / 10.5 * 255;\n    return [color, color, color];\n  }\n\n  var mult = (~~(args > 50) + 1) * 0.5;\n  var r = (color & 1) * mult * 255;\n  var g = (color >> 1 & 1) * mult * 255;\n  var b = (color >> 2 & 1) * mult * 255;\n  return [r, g, b];\n};\n\nconvert.ansi256.rgb = function (args) {\n  // handle greyscale\n  if (args >= 232) {\n    var c = (args - 232) * 10 + 8;\n    return [c, c, c];\n  }\n\n  args -= 16;\n  var rem;\n  var r = Math.floor(args / 36) / 5 * 255;\n  var g = Math.floor((rem = args % 36) / 6) / 5 * 255;\n  var b = rem % 6 / 5 * 255;\n  return [r, g, b];\n};\n\nconvert.rgb.hex = function (args) {\n  var integer = ((Math.round(args[0]) & 0xFF) << 16) + ((Math.round(args[1]) & 0xFF) << 8) + (Math.round(args[2]) & 0xFF);\n  var string = integer.toString(16).toUpperCase();\n  return '000000'.substring(string.length) + string;\n};\n\nconvert.hex.rgb = function (args) {\n  var match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);\n\n  if (!match) {\n    return [0, 0, 0];\n  }\n\n  var colorString = match[0];\n\n  if (match[0].length === 3) {\n    colorString = colorString.split('').map(function (char) {\n      return char + char;\n    }).join('');\n  }\n\n  var integer = parseInt(colorString, 16);\n  var r = integer >> 16 & 0xFF;\n  var g = integer >> 8 & 0xFF;\n  var b = integer & 0xFF;\n  return [r, g, b];\n};\n\nconvert.rgb.hcg = function (rgb) {\n  var r = rgb[0] / 255;\n  var g = rgb[1] / 255;\n  var b = rgb[2] / 255;\n  var max = Math.max(Math.max(r, g), b);\n  var min = Math.min(Math.min(r, g), b);\n  var chroma = max - min;\n  var grayscale;\n  var hue;\n\n  if (chroma < 1) {\n    grayscale = min / (1 - chroma);\n  } else {\n    grayscale = 0;\n  }\n\n  if (chroma <= 0) {\n    hue = 0;\n  } else if (max === r) {\n    hue = (g - b) / chroma % 6;\n  } else if (max === g) {\n    hue = 2 + (b - r) / chroma;\n  } else {\n    hue = 4 + (r - g) / chroma + 4;\n  }\n\n  hue /= 6;\n  hue %= 1;\n  return [hue * 360, chroma * 100, grayscale * 100];\n};\n\nconvert.hsl.hcg = function (hsl) {\n  var s = hsl[1] / 100;\n  var l = hsl[2] / 100;\n  var c = 1;\n  var f = 0;\n\n  if (l < 0.5) {\n    c = 2.0 * s * l;\n  } else {\n    c = 2.0 * s * (1.0 - l);\n  }\n\n  if (c < 1.0) {\n    f = (l - 0.5 * c) / (1.0 - c);\n  }\n\n  return [hsl[0], c * 100, f * 100];\n};\n\nconvert.hsv.hcg = function (hsv) {\n  var s = hsv[1] / 100;\n  var v = hsv[2] / 100;\n  var c = s * v;\n  var f = 0;\n\n  if (c < 1.0) {\n    f = (v - c) / (1 - c);\n  }\n\n  return [hsv[0], c * 100, f * 100];\n};\n\nconvert.hcg.rgb = function (hcg) {\n  var h = hcg[0] / 360;\n  var c = hcg[1] / 100;\n  var g = hcg[2] / 100;\n\n  if (c === 0.0) {\n    return [g * 255, g * 255, g * 255];\n  }\n\n  var pure = [0, 0, 0];\n  var hi = h % 1 * 6;\n  var v = hi % 1;\n  var w = 1 - v;\n  var mg = 0;\n\n  switch (Math.floor(hi)) {\n    case 0:\n      pure[0] = 1;\n      pure[1] = v;\n      pure[2] = 0;\n      break;\n\n    case 1:\n      pure[0] = w;\n      pure[1] = 1;\n      pure[2] = 0;\n      break;\n\n    case 2:\n      pure[0] = 0;\n      pure[1] = 1;\n      pure[2] = v;\n      break;\n\n    case 3:\n      pure[0] = 0;\n      pure[1] = w;\n      pure[2] = 1;\n      break;\n\n    case 4:\n      pure[0] = v;\n      pure[1] = 0;\n      pure[2] = 1;\n      break;\n\n    default:\n      pure[0] = 1;\n      pure[1] = 0;\n      pure[2] = w;\n  }\n\n  mg = (1.0 - c) * g;\n  return [(c * pure[0] + mg) * 255, (c * pure[1] + mg) * 255, (c * pure[2] + mg) * 255];\n};\n\nconvert.hcg.hsv = function (hcg) {\n  var c = hcg[1] / 100;\n  var g = hcg[2] / 100;\n  var v = c + g * (1.0 - c);\n  var f = 0;\n\n  if (v > 0.0) {\n    f = c / v;\n  }\n\n  return [hcg[0], f * 100, v * 100];\n};\n\nconvert.hcg.hsl = function (hcg) {\n  var c = hcg[1] / 100;\n  var g = hcg[2] / 100;\n  var l = g * (1.0 - c) + 0.5 * c;\n  var s = 0;\n\n  if (l > 0.0 && l < 0.5) {\n    s = c / (2 * l);\n  } else if (l >= 0.5 && l < 1.0) {\n    s = c / (2 * (1 - l));\n  }\n\n  return [hcg[0], s * 100, l * 100];\n};\n\nconvert.hcg.hwb = function (hcg) {\n  var c = hcg[1] / 100;\n  var g = hcg[2] / 100;\n  var v = c + g * (1.0 - c);\n  return [hcg[0], (v - c) * 100, (1 - v) * 100];\n};\n\nconvert.hwb.hcg = function (hwb) {\n  var w = hwb[1] / 100;\n  var b = hwb[2] / 100;\n  var v = 1 - b;\n  var c = v - w;\n  var g = 0;\n\n  if (c < 1) {\n    g = (v - c) / (1 - c);\n  }\n\n  return [hwb[0], c * 100, g * 100];\n};\n\nconvert.apple.rgb = function (apple) {\n  return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];\n};\n\nconvert.rgb.apple = function (rgb) {\n  return [rgb[0] / 255 * 65535, rgb[1] / 255 * 65535, rgb[2] / 255 * 65535];\n};\n\nconvert.gray.rgb = function (args) {\n  return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];\n};\n\nconvert.gray.hsl = convert.gray.hsv = function (args) {\n  return [0, 0, args[0]];\n};\n\nconvert.gray.hwb = function (gray) {\n  return [0, 100, gray[0]];\n};\n\nconvert.gray.cmyk = function (gray) {\n  return [0, 0, 0, gray[0]];\n};\n\nconvert.gray.lab = function (gray) {\n  return [gray[0], 0, 0];\n};\n\nconvert.gray.hex = function (gray) {\n  var val = Math.round(gray[0] / 100 * 255) & 0xFF;\n  var integer = (val << 16) + (val << 8) + val;\n  var string = integer.toString(16).toUpperCase();\n  return '000000'.substring(string.length) + string;\n};\n\nconvert.rgb.gray = function (rgb) {\n  var val = (rgb[0] + rgb[1] + rgb[2]) / 3;\n  return [val / 255 * 100];\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-convert/conversions.js?");
+
+/***/ }),
+
+/***/ "./node_modules/color-convert/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/color-convert/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("function _typeof(obj) { if (typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\nvar conversions = __webpack_require__(/*! ./conversions */ \"./node_modules/color-convert/conversions.js\");\n\nvar route = __webpack_require__(/*! ./route */ \"./node_modules/color-convert/route.js\");\n\nvar convert = {};\nvar models = Object.keys(conversions);\n\nfunction wrapRaw(fn) {\n  var wrappedFn = function wrappedFn(args) {\n    if (args === undefined || args === null) {\n      return args;\n    }\n\n    if (arguments.length > 1) {\n      args = Array.prototype.slice.call(arguments);\n    }\n\n    return fn(args);\n  }; // preserve .conversion property if there is one\n\n\n  if ('conversion' in fn) {\n    wrappedFn.conversion = fn.conversion;\n  }\n\n  return wrappedFn;\n}\n\nfunction wrapRounded(fn) {\n  var wrappedFn = function wrappedFn(args) {\n    if (args === undefined || args === null) {\n      return args;\n    }\n\n    if (arguments.length > 1) {\n      args = Array.prototype.slice.call(arguments);\n    }\n\n    var result = fn(args); // we're assuming the result is an array here.\n    // see notice in conversions.js; don't use box types\n    // in conversion functions.\n\n    if (_typeof(result) === 'object') {\n      for (var len = result.length, i = 0; i < len; i++) {\n        result[i] = Math.round(result[i]);\n      }\n    }\n\n    return result;\n  }; // preserve .conversion property if there is one\n\n\n  if ('conversion' in fn) {\n    wrappedFn.conversion = fn.conversion;\n  }\n\n  return wrappedFn;\n}\n\nmodels.forEach(function (fromModel) {\n  convert[fromModel] = {};\n  Object.defineProperty(convert[fromModel], 'channels', {\n    value: conversions[fromModel].channels\n  });\n  Object.defineProperty(convert[fromModel], 'labels', {\n    value: conversions[fromModel].labels\n  });\n  var routes = route(fromModel);\n  var routeModels = Object.keys(routes);\n  routeModels.forEach(function (toModel) {\n    var fn = routes[toModel];\n    convert[fromModel][toModel] = wrapRounded(fn);\n    convert[fromModel][toModel].raw = wrapRaw(fn);\n  });\n});\nmodule.exports = convert;\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-convert/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/color-convert/node_modules/color-name/index.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/color-convert/node_modules/color-name/index.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = {\n  \"aliceblue\": [240, 248, 255],\n  \"antiquewhite\": [250, 235, 215],\n  \"aqua\": [0, 255, 255],\n  \"aquamarine\": [127, 255, 212],\n  \"azure\": [240, 255, 255],\n  \"beige\": [245, 245, 220],\n  \"bisque\": [255, 228, 196],\n  \"black\": [0, 0, 0],\n  \"blanchedalmond\": [255, 235, 205],\n  \"blue\": [0, 0, 255],\n  \"blueviolet\": [138, 43, 226],\n  \"brown\": [165, 42, 42],\n  \"burlywood\": [222, 184, 135],\n  \"cadetblue\": [95, 158, 160],\n  \"chartreuse\": [127, 255, 0],\n  \"chocolate\": [210, 105, 30],\n  \"coral\": [255, 127, 80],\n  \"cornflowerblue\": [100, 149, 237],\n  \"cornsilk\": [255, 248, 220],\n  \"crimson\": [220, 20, 60],\n  \"cyan\": [0, 255, 255],\n  \"darkblue\": [0, 0, 139],\n  \"darkcyan\": [0, 139, 139],\n  \"darkgoldenrod\": [184, 134, 11],\n  \"darkgray\": [169, 169, 169],\n  \"darkgreen\": [0, 100, 0],\n  \"darkgrey\": [169, 169, 169],\n  \"darkkhaki\": [189, 183, 107],\n  \"darkmagenta\": [139, 0, 139],\n  \"darkolivegreen\": [85, 107, 47],\n  \"darkorange\": [255, 140, 0],\n  \"darkorchid\": [153, 50, 204],\n  \"darkred\": [139, 0, 0],\n  \"darksalmon\": [233, 150, 122],\n  \"darkseagreen\": [143, 188, 143],\n  \"darkslateblue\": [72, 61, 139],\n  \"darkslategray\": [47, 79, 79],\n  \"darkslategrey\": [47, 79, 79],\n  \"darkturquoise\": [0, 206, 209],\n  \"darkviolet\": [148, 0, 211],\n  \"deeppink\": [255, 20, 147],\n  \"deepskyblue\": [0, 191, 255],\n  \"dimgray\": [105, 105, 105],\n  \"dimgrey\": [105, 105, 105],\n  \"dodgerblue\": [30, 144, 255],\n  \"firebrick\": [178, 34, 34],\n  \"floralwhite\": [255, 250, 240],\n  \"forestgreen\": [34, 139, 34],\n  \"fuchsia\": [255, 0, 255],\n  \"gainsboro\": [220, 220, 220],\n  \"ghostwhite\": [248, 248, 255],\n  \"gold\": [255, 215, 0],\n  \"goldenrod\": [218, 165, 32],\n  \"gray\": [128, 128, 128],\n  \"green\": [0, 128, 0],\n  \"greenyellow\": [173, 255, 47],\n  \"grey\": [128, 128, 128],\n  \"honeydew\": [240, 255, 240],\n  \"hotpink\": [255, 105, 180],\n  \"indianred\": [205, 92, 92],\n  \"indigo\": [75, 0, 130],\n  \"ivory\": [255, 255, 240],\n  \"khaki\": [240, 230, 140],\n  \"lavender\": [230, 230, 250],\n  \"lavenderblush\": [255, 240, 245],\n  \"lawngreen\": [124, 252, 0],\n  \"lemonchiffon\": [255, 250, 205],\n  \"lightblue\": [173, 216, 230],\n  \"lightcoral\": [240, 128, 128],\n  \"lightcyan\": [224, 255, 255],\n  \"lightgoldenrodyellow\": [250, 250, 210],\n  \"lightgray\": [211, 211, 211],\n  \"lightgreen\": [144, 238, 144],\n  \"lightgrey\": [211, 211, 211],\n  \"lightpink\": [255, 182, 193],\n  \"lightsalmon\": [255, 160, 122],\n  \"lightseagreen\": [32, 178, 170],\n  \"lightskyblue\": [135, 206, 250],\n  \"lightslategray\": [119, 136, 153],\n  \"lightslategrey\": [119, 136, 153],\n  \"lightsteelblue\": [176, 196, 222],\n  \"lightyellow\": [255, 255, 224],\n  \"lime\": [0, 255, 0],\n  \"limegreen\": [50, 205, 50],\n  \"linen\": [250, 240, 230],\n  \"magenta\": [255, 0, 255],\n  \"maroon\": [128, 0, 0],\n  \"mediumaquamarine\": [102, 205, 170],\n  \"mediumblue\": [0, 0, 205],\n  \"mediumorchid\": [186, 85, 211],\n  \"mediumpurple\": [147, 112, 219],\n  \"mediumseagreen\": [60, 179, 113],\n  \"mediumslateblue\": [123, 104, 238],\n  \"mediumspringgreen\": [0, 250, 154],\n  \"mediumturquoise\": [72, 209, 204],\n  \"mediumvioletred\": [199, 21, 133],\n  \"midnightblue\": [25, 25, 112],\n  \"mintcream\": [245, 255, 250],\n  \"mistyrose\": [255, 228, 225],\n  \"moccasin\": [255, 228, 181],\n  \"navajowhite\": [255, 222, 173],\n  \"navy\": [0, 0, 128],\n  \"oldlace\": [253, 245, 230],\n  \"olive\": [128, 128, 0],\n  \"olivedrab\": [107, 142, 35],\n  \"orange\": [255, 165, 0],\n  \"orangered\": [255, 69, 0],\n  \"orchid\": [218, 112, 214],\n  \"palegoldenrod\": [238, 232, 170],\n  \"palegreen\": [152, 251, 152],\n  \"paleturquoise\": [175, 238, 238],\n  \"palevioletred\": [219, 112, 147],\n  \"papayawhip\": [255, 239, 213],\n  \"peachpuff\": [255, 218, 185],\n  \"peru\": [205, 133, 63],\n  \"pink\": [255, 192, 203],\n  \"plum\": [221, 160, 221],\n  \"powderblue\": [176, 224, 230],\n  \"purple\": [128, 0, 128],\n  \"rebeccapurple\": [102, 51, 153],\n  \"red\": [255, 0, 0],\n  \"rosybrown\": [188, 143, 143],\n  \"royalblue\": [65, 105, 225],\n  \"saddlebrown\": [139, 69, 19],\n  \"salmon\": [250, 128, 114],\n  \"sandybrown\": [244, 164, 96],\n  \"seagreen\": [46, 139, 87],\n  \"seashell\": [255, 245, 238],\n  \"sienna\": [160, 82, 45],\n  \"silver\": [192, 192, 192],\n  \"skyblue\": [135, 206, 235],\n  \"slateblue\": [106, 90, 205],\n  \"slategray\": [112, 128, 144],\n  \"slategrey\": [112, 128, 144],\n  \"snow\": [255, 250, 250],\n  \"springgreen\": [0, 255, 127],\n  \"steelblue\": [70, 130, 180],\n  \"tan\": [210, 180, 140],\n  \"teal\": [0, 128, 128],\n  \"thistle\": [216, 191, 216],\n  \"tomato\": [255, 99, 71],\n  \"turquoise\": [64, 224, 208],\n  \"violet\": [238, 130, 238],\n  \"wheat\": [245, 222, 179],\n  \"white\": [255, 255, 255],\n  \"whitesmoke\": [245, 245, 245],\n  \"yellow\": [255, 255, 0],\n  \"yellowgreen\": [154, 205, 50]\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-convert/node_modules/color-name/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/color-convert/route.js":
+/*!*********************************************!*\
+  !*** ./node_modules/color-convert/route.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var conversions = __webpack_require__(/*! ./conversions */ \"./node_modules/color-convert/conversions.js\");\n/*\n\tthis function routes a model to all other models.\n\n\tall functions that are routed have a property `.conversion` attached\n\tto the returned synthetic function. This property is an array\n\tof strings, each with the steps in between the 'from' and 'to'\n\tcolor models (inclusive).\n\n\tconversions that are not possible simply are not included.\n*/\n\n\nfunction buildGraph() {\n  var graph = {}; // https://jsperf.com/object-keys-vs-for-in-with-closure/3\n\n  var models = Object.keys(conversions);\n\n  for (var len = models.length, i = 0; i < len; i++) {\n    graph[models[i]] = {\n      // http://jsperf.com/1-vs-infinity\n      // micro-opt, but this is simple.\n      distance: -1,\n      parent: null\n    };\n  }\n\n  return graph;\n} // https://en.wikipedia.org/wiki/Breadth-first_search\n\n\nfunction deriveBFS(fromModel) {\n  var graph = buildGraph();\n  var queue = [fromModel]; // unshift -> queue -> pop\n\n  graph[fromModel].distance = 0;\n\n  while (queue.length) {\n    var current = queue.pop();\n    var adjacents = Object.keys(conversions[current]);\n\n    for (var len = adjacents.length, i = 0; i < len; i++) {\n      var adjacent = adjacents[i];\n      var node = graph[adjacent];\n\n      if (node.distance === -1) {\n        node.distance = graph[current].distance + 1;\n        node.parent = current;\n        queue.unshift(adjacent);\n      }\n    }\n  }\n\n  return graph;\n}\n\nfunction link(from, to) {\n  return function (args) {\n    return to(from(args));\n  };\n}\n\nfunction wrapConversion(toModel, graph) {\n  var path = [graph[toModel].parent, toModel];\n  var fn = conversions[graph[toModel].parent][toModel];\n  var cur = graph[toModel].parent;\n\n  while (graph[cur].parent) {\n    path.unshift(graph[cur].parent);\n    fn = link(conversions[graph[cur].parent][cur], fn);\n    cur = graph[cur].parent;\n  }\n\n  fn.conversion = path;\n  return fn;\n}\n\nmodule.exports = function (fromModel) {\n  var graph = deriveBFS(fromModel);\n  var conversion = {};\n  var models = Object.keys(graph);\n\n  for (var len = models.length, i = 0; i < len; i++) {\n    var toModel = models[i];\n    var node = graph[toModel];\n\n    if (node.parent === null) {\n      // no possible conversion, or this node is the source model.\n      continue;\n    }\n\n    conversion[toModel] = wrapConversion(toModel, graph);\n  }\n\n  return conversion;\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-convert/route.js?");
+
+/***/ }),
+
+/***/ "./node_modules/color-name/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/color-name/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = {\n  \"aliceblue\": [240, 248, 255],\n  \"antiquewhite\": [250, 235, 215],\n  \"aqua\": [0, 255, 255],\n  \"aquamarine\": [127, 255, 212],\n  \"azure\": [240, 255, 255],\n  \"beige\": [245, 245, 220],\n  \"bisque\": [255, 228, 196],\n  \"black\": [0, 0, 0],\n  \"blanchedalmond\": [255, 235, 205],\n  \"blue\": [0, 0, 255],\n  \"blueviolet\": [138, 43, 226],\n  \"brown\": [165, 42, 42],\n  \"burlywood\": [222, 184, 135],\n  \"cadetblue\": [95, 158, 160],\n  \"chartreuse\": [127, 255, 0],\n  \"chocolate\": [210, 105, 30],\n  \"coral\": [255, 127, 80],\n  \"cornflowerblue\": [100, 149, 237],\n  \"cornsilk\": [255, 248, 220],\n  \"crimson\": [220, 20, 60],\n  \"cyan\": [0, 255, 255],\n  \"darkblue\": [0, 0, 139],\n  \"darkcyan\": [0, 139, 139],\n  \"darkgoldenrod\": [184, 134, 11],\n  \"darkgray\": [169, 169, 169],\n  \"darkgreen\": [0, 100, 0],\n  \"darkgrey\": [169, 169, 169],\n  \"darkkhaki\": [189, 183, 107],\n  \"darkmagenta\": [139, 0, 139],\n  \"darkolivegreen\": [85, 107, 47],\n  \"darkorange\": [255, 140, 0],\n  \"darkorchid\": [153, 50, 204],\n  \"darkred\": [139, 0, 0],\n  \"darksalmon\": [233, 150, 122],\n  \"darkseagreen\": [143, 188, 143],\n  \"darkslateblue\": [72, 61, 139],\n  \"darkslategray\": [47, 79, 79],\n  \"darkslategrey\": [47, 79, 79],\n  \"darkturquoise\": [0, 206, 209],\n  \"darkviolet\": [148, 0, 211],\n  \"deeppink\": [255, 20, 147],\n  \"deepskyblue\": [0, 191, 255],\n  \"dimgray\": [105, 105, 105],\n  \"dimgrey\": [105, 105, 105],\n  \"dodgerblue\": [30, 144, 255],\n  \"firebrick\": [178, 34, 34],\n  \"floralwhite\": [255, 250, 240],\n  \"forestgreen\": [34, 139, 34],\n  \"fuchsia\": [255, 0, 255],\n  \"gainsboro\": [220, 220, 220],\n  \"ghostwhite\": [248, 248, 255],\n  \"gold\": [255, 215, 0],\n  \"goldenrod\": [218, 165, 32],\n  \"gray\": [128, 128, 128],\n  \"green\": [0, 128, 0],\n  \"greenyellow\": [173, 255, 47],\n  \"grey\": [128, 128, 128],\n  \"honeydew\": [240, 255, 240],\n  \"hotpink\": [255, 105, 180],\n  \"indianred\": [205, 92, 92],\n  \"indigo\": [75, 0, 130],\n  \"ivory\": [255, 255, 240],\n  \"khaki\": [240, 230, 140],\n  \"lavender\": [230, 230, 250],\n  \"lavenderblush\": [255, 240, 245],\n  \"lawngreen\": [124, 252, 0],\n  \"lemonchiffon\": [255, 250, 205],\n  \"lightblue\": [173, 216, 230],\n  \"lightcoral\": [240, 128, 128],\n  \"lightcyan\": [224, 255, 255],\n  \"lightgoldenrodyellow\": [250, 250, 210],\n  \"lightgray\": [211, 211, 211],\n  \"lightgreen\": [144, 238, 144],\n  \"lightgrey\": [211, 211, 211],\n  \"lightpink\": [255, 182, 193],\n  \"lightsalmon\": [255, 160, 122],\n  \"lightseagreen\": [32, 178, 170],\n  \"lightskyblue\": [135, 206, 250],\n  \"lightslategray\": [119, 136, 153],\n  \"lightslategrey\": [119, 136, 153],\n  \"lightsteelblue\": [176, 196, 222],\n  \"lightyellow\": [255, 255, 224],\n  \"lime\": [0, 255, 0],\n  \"limegreen\": [50, 205, 50],\n  \"linen\": [250, 240, 230],\n  \"magenta\": [255, 0, 255],\n  \"maroon\": [128, 0, 0],\n  \"mediumaquamarine\": [102, 205, 170],\n  \"mediumblue\": [0, 0, 205],\n  \"mediumorchid\": [186, 85, 211],\n  \"mediumpurple\": [147, 112, 219],\n  \"mediumseagreen\": [60, 179, 113],\n  \"mediumslateblue\": [123, 104, 238],\n  \"mediumspringgreen\": [0, 250, 154],\n  \"mediumturquoise\": [72, 209, 204],\n  \"mediumvioletred\": [199, 21, 133],\n  \"midnightblue\": [25, 25, 112],\n  \"mintcream\": [245, 255, 250],\n  \"mistyrose\": [255, 228, 225],\n  \"moccasin\": [255, 228, 181],\n  \"navajowhite\": [255, 222, 173],\n  \"navy\": [0, 0, 128],\n  \"oldlace\": [253, 245, 230],\n  \"olive\": [128, 128, 0],\n  \"olivedrab\": [107, 142, 35],\n  \"orange\": [255, 165, 0],\n  \"orangered\": [255, 69, 0],\n  \"orchid\": [218, 112, 214],\n  \"palegoldenrod\": [238, 232, 170],\n  \"palegreen\": [152, 251, 152],\n  \"paleturquoise\": [175, 238, 238],\n  \"palevioletred\": [219, 112, 147],\n  \"papayawhip\": [255, 239, 213],\n  \"peachpuff\": [255, 218, 185],\n  \"peru\": [205, 133, 63],\n  \"pink\": [255, 192, 203],\n  \"plum\": [221, 160, 221],\n  \"powderblue\": [176, 224, 230],\n  \"purple\": [128, 0, 128],\n  \"rebeccapurple\": [102, 51, 153],\n  \"red\": [255, 0, 0],\n  \"rosybrown\": [188, 143, 143],\n  \"royalblue\": [65, 105, 225],\n  \"saddlebrown\": [139, 69, 19],\n  \"salmon\": [250, 128, 114],\n  \"sandybrown\": [244, 164, 96],\n  \"seagreen\": [46, 139, 87],\n  \"seashell\": [255, 245, 238],\n  \"sienna\": [160, 82, 45],\n  \"silver\": [192, 192, 192],\n  \"skyblue\": [135, 206, 235],\n  \"slateblue\": [106, 90, 205],\n  \"slategray\": [112, 128, 144],\n  \"slategrey\": [112, 128, 144],\n  \"snow\": [255, 250, 250],\n  \"springgreen\": [0, 255, 127],\n  \"steelblue\": [70, 130, 180],\n  \"tan\": [210, 180, 140],\n  \"teal\": [0, 128, 128],\n  \"thistle\": [216, 191, 216],\n  \"tomato\": [255, 99, 71],\n  \"turquoise\": [64, 224, 208],\n  \"violet\": [238, 130, 238],\n  \"wheat\": [245, 222, 179],\n  \"white\": [255, 255, 255],\n  \"whitesmoke\": [245, 245, 245],\n  \"yellow\": [255, 255, 0],\n  \"yellowgreen\": [154, 205, 50]\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-name/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/color-string/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/color-string/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("/* MIT license */\nvar colorNames = __webpack_require__(/*! color-name */ \"./node_modules/color-name/index.js\");\n\nvar swizzle = __webpack_require__(/*! simple-swizzle */ \"./node_modules/simple-swizzle/index.js\");\n\nvar reverseNames = {}; // create a list of reverse color names\n\nfor (var name in colorNames) {\n  if (colorNames.hasOwnProperty(name)) {\n    reverseNames[colorNames[name]] = name;\n  }\n}\n\nvar cs = module.exports = {\n  to: {},\n  get: {}\n};\n\ncs.get = function (string) {\n  var prefix = string.substring(0, 3).toLowerCase();\n  var val;\n  var model;\n\n  switch (prefix) {\n    case 'hsl':\n      val = cs.get.hsl(string);\n      model = 'hsl';\n      break;\n\n    case 'hwb':\n      val = cs.get.hwb(string);\n      model = 'hwb';\n      break;\n\n    default:\n      val = cs.get.rgb(string);\n      model = 'rgb';\n      break;\n  }\n\n  if (!val) {\n    return null;\n  }\n\n  return {\n    model: model,\n    value: val\n  };\n};\n\ncs.get.rgb = function (string) {\n  if (!string) {\n    return null;\n  }\n\n  var abbr = /^#([a-f0-9]{3,4})$/i;\n  var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;\n  var rgba = /^rgba?\\(\\s*([+-]?\\d+)\\s*,\\s*([+-]?\\d+)\\s*,\\s*([+-]?\\d+)\\s*(?:,\\s*([+-]?[\\d\\.]+)\\s*)?\\)$/;\n  var per = /^rgba?\\(\\s*([+-]?[\\d\\.]+)\\%\\s*,\\s*([+-]?[\\d\\.]+)\\%\\s*,\\s*([+-]?[\\d\\.]+)\\%\\s*(?:,\\s*([+-]?[\\d\\.]+)\\s*)?\\)$/;\n  var keyword = /(\\D+)/;\n  var rgb = [0, 0, 0, 1];\n  var match;\n  var i;\n  var hexAlpha;\n\n  if (match = string.match(hex)) {\n    hexAlpha = match[2];\n    match = match[1];\n\n    for (i = 0; i < 3; i++) {\n      // https://jsperf.com/slice-vs-substr-vs-substring-methods-long-string/19\n      var i2 = i * 2;\n      rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);\n    }\n\n    if (hexAlpha) {\n      rgb[3] = Math.round(parseInt(hexAlpha, 16) / 255 * 100) / 100;\n    }\n  } else if (match = string.match(abbr)) {\n    match = match[1];\n    hexAlpha = match[3];\n\n    for (i = 0; i < 3; i++) {\n      rgb[i] = parseInt(match[i] + match[i], 16);\n    }\n\n    if (hexAlpha) {\n      rgb[3] = Math.round(parseInt(hexAlpha + hexAlpha, 16) / 255 * 100) / 100;\n    }\n  } else if (match = string.match(rgba)) {\n    for (i = 0; i < 3; i++) {\n      rgb[i] = parseInt(match[i + 1], 0);\n    }\n\n    if (match[4]) {\n      rgb[3] = parseFloat(match[4]);\n    }\n  } else if (match = string.match(per)) {\n    for (i = 0; i < 3; i++) {\n      rgb[i] = Math.round(parseFloat(match[i + 1]) * 2.55);\n    }\n\n    if (match[4]) {\n      rgb[3] = parseFloat(match[4]);\n    }\n  } else if (match = string.match(keyword)) {\n    if (match[1] === 'transparent') {\n      return [0, 0, 0, 0];\n    }\n\n    rgb = colorNames[match[1]];\n\n    if (!rgb) {\n      return null;\n    }\n\n    rgb[3] = 1;\n    return rgb;\n  } else {\n    return null;\n  }\n\n  for (i = 0; i < 3; i++) {\n    rgb[i] = clamp(rgb[i], 0, 255);\n  }\n\n  rgb[3] = clamp(rgb[3], 0, 1);\n  return rgb;\n};\n\ncs.get.hsl = function (string) {\n  if (!string) {\n    return null;\n  }\n\n  var hsl = /^hsla?\\(\\s*([+-]?(?:\\d*\\.)?\\d+)(?:deg)?\\s*,\\s*([+-]?[\\d\\.]+)%\\s*,\\s*([+-]?[\\d\\.]+)%\\s*(?:,\\s*([+-]?[\\d\\.]+)\\s*)?\\)$/;\n  var match = string.match(hsl);\n\n  if (match) {\n    var alpha = parseFloat(match[4]);\n    var h = (parseFloat(match[1]) + 360) % 360;\n    var s = clamp(parseFloat(match[2]), 0, 100);\n    var l = clamp(parseFloat(match[3]), 0, 100);\n    var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);\n    return [h, s, l, a];\n  }\n\n  return null;\n};\n\ncs.get.hwb = function (string) {\n  if (!string) {\n    return null;\n  }\n\n  var hwb = /^hwb\\(\\s*([+-]?\\d*[\\.]?\\d+)(?:deg)?\\s*,\\s*([+-]?[\\d\\.]+)%\\s*,\\s*([+-]?[\\d\\.]+)%\\s*(?:,\\s*([+-]?[\\d\\.]+)\\s*)?\\)$/;\n  var match = string.match(hwb);\n\n  if (match) {\n    var alpha = parseFloat(match[4]);\n    var h = (parseFloat(match[1]) % 360 + 360) % 360;\n    var w = clamp(parseFloat(match[2]), 0, 100);\n    var b = clamp(parseFloat(match[3]), 0, 100);\n    var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);\n    return [h, w, b, a];\n  }\n\n  return null;\n};\n\ncs.to.hex = function () {\n  var rgba = swizzle(arguments);\n  return '#' + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + (rgba[3] < 1 ? hexDouble(Math.round(rgba[3] * 255)) : '');\n};\n\ncs.to.rgb = function () {\n  var rgba = swizzle(arguments);\n  return rgba.length < 4 || rgba[3] === 1 ? 'rgb(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ')' : 'rgba(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ', ' + rgba[3] + ')';\n};\n\ncs.to.rgb.percent = function () {\n  var rgba = swizzle(arguments);\n  var r = Math.round(rgba[0] / 255 * 100);\n  var g = Math.round(rgba[1] / 255 * 100);\n  var b = Math.round(rgba[2] / 255 * 100);\n  return rgba.length < 4 || rgba[3] === 1 ? 'rgb(' + r + '%, ' + g + '%, ' + b + '%)' : 'rgba(' + r + '%, ' + g + '%, ' + b + '%, ' + rgba[3] + ')';\n};\n\ncs.to.hsl = function () {\n  var hsla = swizzle(arguments);\n  return hsla.length < 4 || hsla[3] === 1 ? 'hsl(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%)' : 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + hsla[3] + ')';\n}; // hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax\n// (hwb have alpha optional & 1 is default value)\n\n\ncs.to.hwb = function () {\n  var hwba = swizzle(arguments);\n  var a = '';\n\n  if (hwba.length >= 4 && hwba[3] !== 1) {\n    a = ', ' + hwba[3];\n  }\n\n  return 'hwb(' + hwba[0] + ', ' + hwba[1] + '%, ' + hwba[2] + '%' + a + ')';\n};\n\ncs.to.keyword = function (rgb) {\n  return reverseNames[rgb.slice(0, 3)];\n}; // helpers\n\n\nfunction clamp(num, min, max) {\n  return Math.min(Math.max(min, num), max);\n}\n\nfunction hexDouble(num) {\n  var str = num.toString(16).toUpperCase();\n  return str.length < 2 ? '0' + str : str;\n}\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-string/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/color/index.js":
+/*!*************************************!*\
+  !*** ./node_modules/color/index.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar colorString = __webpack_require__(/*! color-string */ \"./node_modules/color-string/index.js\");\n\nvar convert = __webpack_require__(/*! color-convert */ \"./node_modules/color-convert/index.js\");\n\nvar _slice = [].slice;\nvar skippedModels = [// to be honest, I don't really feel like keyword belongs in color convert, but eh.\n'keyword', // gray conflicts with some method names, and has its own method defined.\n'gray', // shouldn't really be in color-convert either...\n'hex'];\nvar hashedModelKeys = {};\nObject.keys(convert).forEach(function (model) {\n  hashedModelKeys[_slice.call(convert[model].labels).sort().join('')] = model;\n});\nvar limiters = {};\n\nfunction Color(obj, model) {\n  if (!(this instanceof Color)) {\n    return new Color(obj, model);\n  }\n\n  if (model && model in skippedModels) {\n    model = null;\n  }\n\n  if (model && !(model in convert)) {\n    throw new Error('Unknown model: ' + model);\n  }\n\n  var i;\n  var channels;\n\n  if (typeof obj === 'undefined') {\n    this.model = 'rgb';\n    this.color = [0, 0, 0];\n    this.valpha = 1;\n  } else if (obj instanceof Color) {\n    this.model = obj.model;\n    this.color = obj.color.slice();\n    this.valpha = obj.valpha;\n  } else if (typeof obj === 'string') {\n    var result = colorString.get(obj);\n\n    if (result === null) {\n      throw new Error('Unable to parse color from string: ' + obj);\n    }\n\n    this.model = result.model;\n    channels = convert[this.model].channels;\n    this.color = result.value.slice(0, channels);\n    this.valpha = typeof result.value[channels] === 'number' ? result.value[channels] : 1;\n  } else if (obj.length) {\n    this.model = model || 'rgb';\n    channels = convert[this.model].channels;\n\n    var newArr = _slice.call(obj, 0, channels);\n\n    this.color = zeroArray(newArr, channels);\n    this.valpha = typeof obj[channels] === 'number' ? obj[channels] : 1;\n  } else if (typeof obj === 'number') {\n    // this is always RGB - can be converted later on.\n    obj &= 0xFFFFFF;\n    this.model = 'rgb';\n    this.color = [obj >> 16 & 0xFF, obj >> 8 & 0xFF, obj & 0xFF];\n    this.valpha = 1;\n  } else {\n    this.valpha = 1;\n    var keys = Object.keys(obj);\n\n    if ('alpha' in obj) {\n      keys.splice(keys.indexOf('alpha'), 1);\n      this.valpha = typeof obj.alpha === 'number' ? obj.alpha : 0;\n    }\n\n    var hashedKeys = keys.sort().join('');\n\n    if (!(hashedKeys in hashedModelKeys)) {\n      throw new Error('Unable to parse color from object: ' + JSON.stringify(obj));\n    }\n\n    this.model = hashedModelKeys[hashedKeys];\n    var labels = convert[this.model].labels;\n    var color = [];\n\n    for (i = 0; i < labels.length; i++) {\n      color.push(obj[labels[i]]);\n    }\n\n    this.color = zeroArray(color);\n  } // perform limitations (clamping, etc.)\n\n\n  if (limiters[this.model]) {\n    channels = convert[this.model].channels;\n\n    for (i = 0; i < channels; i++) {\n      var limit = limiters[this.model][i];\n\n      if (limit) {\n        this.color[i] = limit(this.color[i]);\n      }\n    }\n  }\n\n  this.valpha = Math.max(0, Math.min(1, this.valpha));\n\n  if (Object.freeze) {\n    Object.freeze(this);\n  }\n}\n\nColor.prototype = {\n  toString: function toString() {\n    return this.string();\n  },\n  toJSON: function toJSON() {\n    return this[this.model]();\n  },\n  string: function string(places) {\n    var self = this.model in colorString.to ? this : this.rgb();\n    self = self.round(typeof places === 'number' ? places : 1);\n    var args = self.valpha === 1 ? self.color : self.color.concat(this.valpha);\n    return colorString.to[self.model](args);\n  },\n  percentString: function percentString(places) {\n    var self = this.rgb().round(typeof places === 'number' ? places : 1);\n    var args = self.valpha === 1 ? self.color : self.color.concat(this.valpha);\n    return colorString.to.rgb.percent(args);\n  },\n  array: function array() {\n    return this.valpha === 1 ? this.color.slice() : this.color.concat(this.valpha);\n  },\n  object: function object() {\n    var result = {};\n    var channels = convert[this.model].channels;\n    var labels = convert[this.model].labels;\n\n    for (var i = 0; i < channels; i++) {\n      result[labels[i]] = this.color[i];\n    }\n\n    if (this.valpha !== 1) {\n      result.alpha = this.valpha;\n    }\n\n    return result;\n  },\n  unitArray: function unitArray() {\n    var rgb = this.rgb().color;\n    rgb[0] /= 255;\n    rgb[1] /= 255;\n    rgb[2] /= 255;\n\n    if (this.valpha !== 1) {\n      rgb.push(this.valpha);\n    }\n\n    return rgb;\n  },\n  unitObject: function unitObject() {\n    var rgb = this.rgb().object();\n    rgb.r /= 255;\n    rgb.g /= 255;\n    rgb.b /= 255;\n\n    if (this.valpha !== 1) {\n      rgb.alpha = this.valpha;\n    }\n\n    return rgb;\n  },\n  round: function round(places) {\n    places = Math.max(places || 0, 0);\n    return new Color(this.color.map(roundToPlace(places)).concat(this.valpha), this.model);\n  },\n  alpha: function alpha(val) {\n    if (arguments.length) {\n      return new Color(this.color.concat(Math.max(0, Math.min(1, val))), this.model);\n    }\n\n    return this.valpha;\n  },\n  // rgb\n  red: getset('rgb', 0, maxfn(255)),\n  green: getset('rgb', 1, maxfn(255)),\n  blue: getset('rgb', 2, maxfn(255)),\n  hue: getset(['hsl', 'hsv', 'hsl', 'hwb', 'hcg'], 0, function (val) {\n    return (val % 360 + 360) % 360;\n  }),\n  // eslint-disable-line brace-style\n  saturationl: getset('hsl', 1, maxfn(100)),\n  lightness: getset('hsl', 2, maxfn(100)),\n  saturationv: getset('hsv', 1, maxfn(100)),\n  value: getset('hsv', 2, maxfn(100)),\n  chroma: getset('hcg', 1, maxfn(100)),\n  gray: getset('hcg', 2, maxfn(100)),\n  white: getset('hwb', 1, maxfn(100)),\n  wblack: getset('hwb', 2, maxfn(100)),\n  cyan: getset('cmyk', 0, maxfn(100)),\n  magenta: getset('cmyk', 1, maxfn(100)),\n  yellow: getset('cmyk', 2, maxfn(100)),\n  black: getset('cmyk', 3, maxfn(100)),\n  x: getset('xyz', 0, maxfn(100)),\n  y: getset('xyz', 1, maxfn(100)),\n  z: getset('xyz', 2, maxfn(100)),\n  l: getset('lab', 0, maxfn(100)),\n  a: getset('lab', 1),\n  b: getset('lab', 2),\n  keyword: function keyword(val) {\n    if (arguments.length) {\n      return new Color(val);\n    }\n\n    return convert[this.model].keyword(this.color);\n  },\n  hex: function hex(val) {\n    if (arguments.length) {\n      return new Color(val);\n    }\n\n    return colorString.to.hex(this.rgb().round().color);\n  },\n  rgbNumber: function rgbNumber() {\n    var rgb = this.rgb().color;\n    return (rgb[0] & 0xFF) << 16 | (rgb[1] & 0xFF) << 8 | rgb[2] & 0xFF;\n  },\n  luminosity: function luminosity() {\n    // http://www.w3.org/TR/WCAG20/#relativeluminancedef\n    var rgb = this.rgb().color;\n    var lum = [];\n\n    for (var i = 0; i < rgb.length; i++) {\n      var chan = rgb[i] / 255;\n      lum[i] = chan <= 0.03928 ? chan / 12.92 : Math.pow((chan + 0.055) / 1.055, 2.4);\n    }\n\n    return 0.2126 * lum[0] + 0.7152 * lum[1] + 0.0722 * lum[2];\n  },\n  contrast: function contrast(color2) {\n    // http://www.w3.org/TR/WCAG20/#contrast-ratiodef\n    var lum1 = this.luminosity();\n    var lum2 = color2.luminosity();\n\n    if (lum1 > lum2) {\n      return (lum1 + 0.05) / (lum2 + 0.05);\n    }\n\n    return (lum2 + 0.05) / (lum1 + 0.05);\n  },\n  level: function level(color2) {\n    var contrastRatio = this.contrast(color2);\n\n    if (contrastRatio >= 7.1) {\n      return 'AAA';\n    }\n\n    return contrastRatio >= 4.5 ? 'AA' : '';\n  },\n  isDark: function isDark() {\n    // YIQ equation from http://24ways.org/2010/calculating-color-contrast\n    var rgb = this.rgb().color;\n    var yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;\n    return yiq < 128;\n  },\n  isLight: function isLight() {\n    return !this.isDark();\n  },\n  negate: function negate() {\n    var rgb = this.rgb();\n\n    for (var i = 0; i < 3; i++) {\n      rgb.color[i] = 255 - rgb.color[i];\n    }\n\n    return rgb;\n  },\n  lighten: function lighten(ratio) {\n    var hsl = this.hsl();\n    hsl.color[2] += hsl.color[2] * ratio;\n    return hsl;\n  },\n  darken: function darken(ratio) {\n    var hsl = this.hsl();\n    hsl.color[2] -= hsl.color[2] * ratio;\n    return hsl;\n  },\n  saturate: function saturate(ratio) {\n    var hsl = this.hsl();\n    hsl.color[1] += hsl.color[1] * ratio;\n    return hsl;\n  },\n  desaturate: function desaturate(ratio) {\n    var hsl = this.hsl();\n    hsl.color[1] -= hsl.color[1] * ratio;\n    return hsl;\n  },\n  whiten: function whiten(ratio) {\n    var hwb = this.hwb();\n    hwb.color[1] += hwb.color[1] * ratio;\n    return hwb;\n  },\n  blacken: function blacken(ratio) {\n    var hwb = this.hwb();\n    hwb.color[2] += hwb.color[2] * ratio;\n    return hwb;\n  },\n  grayscale: function grayscale() {\n    // http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale\n    var rgb = this.rgb().color;\n    var val = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;\n    return Color.rgb(val, val, val);\n  },\n  fade: function fade(ratio) {\n    return this.alpha(this.valpha - this.valpha * ratio);\n  },\n  opaquer: function opaquer(ratio) {\n    return this.alpha(this.valpha + this.valpha * ratio);\n  },\n  rotate: function rotate(degrees) {\n    var hsl = this.hsl();\n    var hue = hsl.color[0];\n    hue = (hue + degrees) % 360;\n    hue = hue < 0 ? 360 + hue : hue;\n    hsl.color[0] = hue;\n    return hsl;\n  },\n  mix: function mix(mixinColor, weight) {\n    // ported from sass implementation in C\n    // https://github.com/sass/libsass/blob/0e6b4a2850092356aa3ece07c6b249f0221caced/functions.cpp#L209\n    var color1 = mixinColor.rgb();\n    var color2 = this.rgb();\n    var p = weight === undefined ? 0.5 : weight;\n    var w = 2 * p - 1;\n    var a = color1.alpha() - color2.alpha();\n    var w1 = ((w * a === -1 ? w : (w + a) / (1 + w * a)) + 1) / 2.0;\n    var w2 = 1 - w1;\n    return Color.rgb(w1 * color1.red() + w2 * color2.red(), w1 * color1.green() + w2 * color2.green(), w1 * color1.blue() + w2 * color2.blue(), color1.alpha() * p + color2.alpha() * (1 - p));\n  }\n}; // model conversion methods and static constructors\n\nObject.keys(convert).forEach(function (model) {\n  if (skippedModels.indexOf(model) !== -1) {\n    return;\n  }\n\n  var channels = convert[model].channels; // conversion methods\n\n  Color.prototype[model] = function () {\n    if (this.model === model) {\n      return new Color(this);\n    }\n\n    if (arguments.length) {\n      return new Color(arguments, model);\n    }\n\n    var newAlpha = typeof arguments[channels] === 'number' ? channels : this.valpha;\n    return new Color(assertArray(convert[this.model][model].raw(this.color)).concat(newAlpha), model);\n  }; // 'static' construction methods\n\n\n  Color[model] = function (color) {\n    if (typeof color === 'number') {\n      color = zeroArray(_slice.call(arguments), channels);\n    }\n\n    return new Color(color, model);\n  };\n});\n\nfunction roundTo(num, places) {\n  return Number(num.toFixed(places));\n}\n\nfunction roundToPlace(places) {\n  return function (num) {\n    return roundTo(num, places);\n  };\n}\n\nfunction getset(model, channel, modifier) {\n  model = Array.isArray(model) ? model : [model];\n  model.forEach(function (m) {\n    (limiters[m] || (limiters[m] = []))[channel] = modifier;\n  });\n  model = model[0];\n  return function (val) {\n    var result;\n\n    if (arguments.length) {\n      if (modifier) {\n        val = modifier(val);\n      }\n\n      result = this[model]();\n      result.color[channel] = val;\n      return result;\n    }\n\n    result = this[model]().color[channel];\n\n    if (modifier) {\n      result = modifier(result);\n    }\n\n    return result;\n  };\n}\n\nfunction maxfn(max) {\n  return function (v) {\n    return Math.max(0, Math.min(max, v));\n  };\n}\n\nfunction assertArray(val) {\n  return Array.isArray(val) ? val : [val];\n}\n\nfunction zeroArray(arr, length) {\n  for (var i = 0; i < length; i++) {\n    if (typeof arr[i] !== 'number') {\n      arr[i] = 0;\n    }\n  }\n\n  return arr;\n}\n\nmodule.exports = Color;\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/ev-emitter/ev-emitter.js":
+/*!***********************************************!*\
+  !*** ./node_modules/ev-emitter/ev-emitter.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { if (typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\n/**\n * EvEmitter v1.1.0\n * Lil' event emitter\n * MIT License\n */\n\n/* jshint unused: true, undef: true, strict: true */\n(function (global, factory) {\n  // universal module definition\n\n  /* jshint strict: false */\n\n  /* globals define, module, window */\n  if (true) {\n    // AMD - RequireJS\n    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),\n\t\t\t\t__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?\n\t\t\t\t(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :\n\t\t\t\t__WEBPACK_AMD_DEFINE_FACTORY__),\n\t\t\t\t__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));\n  } else {}\n})(typeof window != 'undefined' ? window : this, function () {\n  \"use strict\";\n\n  function EvEmitter() {}\n\n  var proto = EvEmitter.prototype;\n\n  proto.on = function (eventName, listener) {\n    if (!eventName || !listener) {\n      return;\n    } // set events hash\n\n\n    var events = this._events = this._events || {}; // set listeners array\n\n    var listeners = events[eventName] = events[eventName] || []; // only add once\n\n    if (listeners.indexOf(listener) == -1) {\n      listeners.push(listener);\n    }\n\n    return this;\n  };\n\n  proto.once = function (eventName, listener) {\n    if (!eventName || !listener) {\n      return;\n    } // add event\n\n\n    this.on(eventName, listener); // set once flag\n    // set onceEvents hash\n\n    var onceEvents = this._onceEvents = this._onceEvents || {}; // set onceListeners object\n\n    var onceListeners = onceEvents[eventName] = onceEvents[eventName] || {}; // set flag\n\n    onceListeners[listener] = true;\n    return this;\n  };\n\n  proto.off = function (eventName, listener) {\n    var listeners = this._events && this._events[eventName];\n\n    if (!listeners || !listeners.length) {\n      return;\n    }\n\n    var index = listeners.indexOf(listener);\n\n    if (index != -1) {\n      listeners.splice(index, 1);\n    }\n\n    return this;\n  };\n\n  proto.emitEvent = function (eventName, args) {\n    var listeners = this._events && this._events[eventName];\n\n    if (!listeners || !listeners.length) {\n      return;\n    } // copy over to avoid interference if .off() in listener\n\n\n    listeners = listeners.slice(0);\n    args = args || []; // once stuff\n\n    var onceListeners = this._onceEvents && this._onceEvents[eventName];\n\n    for (var i = 0; i < listeners.length; i++) {\n      var listener = listeners[i];\n      var isOnce = onceListeners && onceListeners[listener];\n\n      if (isOnce) {\n        // remove listener\n        // remove before trigger to prevent recursion\n        this.off(eventName, listener); // unset once flag\n\n        delete onceListeners[listener];\n      } // trigger listener\n\n\n      listener.apply(this, args);\n    }\n\n    return this;\n  };\n\n  proto.allOff = function () {\n    delete this._events;\n    delete this._onceEvents;\n  };\n\n  return EvEmitter;\n});\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/ev-emitter/ev-emitter.js?");
+
+/***/ }),
+
+/***/ "./node_modules/imagesloaded/imagesloaded.js":
+/*!***************************************************!*\
+  !*** ./node_modules/imagesloaded/imagesloaded.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { if (typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\n/*!\n * imagesLoaded v4.1.4\n * JavaScript is all like \"You images are done yet or what?\"\n * MIT License\n */\n(function (window, factory) {\n  'use strict'; // universal module definition\n\n  /*global define: false, module: false, require: false */\n\n  if (true) {\n    // AMD\n    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! ev-emitter/ev-emitter */ \"./node_modules/ev-emitter/ev-emitter.js\")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (EvEmitter) {\n      return factory(window, EvEmitter);\n    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),\n\t\t\t\t__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));\n  } else {}\n})(typeof window !== 'undefined' ? window : this, // --------------------------  factory -------------------------- //\nfunction factory(window, EvEmitter) {\n  'use strict';\n\n  var $ = window.jQuery;\n  var console = window.console; // -------------------------- helpers -------------------------- //\n  // extend objects\n\n  function extend(a, b) {\n    for (var prop in b) {\n      a[prop] = b[prop];\n    }\n\n    return a;\n  }\n\n  var arraySlice = Array.prototype.slice; // turn element or nodeList into an array\n\n  function makeArray(obj) {\n    if (Array.isArray(obj)) {\n      // use object if already an array\n      return obj;\n    }\n\n    var isArrayLike = _typeof(obj) == 'object' && typeof obj.length == 'number';\n\n    if (isArrayLike) {\n      // convert nodeList to array\n      return arraySlice.call(obj);\n    } // array of single index\n\n\n    return [obj];\n  } // -------------------------- imagesLoaded -------------------------- //\n\n  /**\n   * @param {Array, Element, NodeList, String} elem\n   * @param {Object or Function} options - if function, use as callback\n   * @param {Function} onAlways - callback function\n   */\n\n\n  function ImagesLoaded(elem, options, onAlways) {\n    // coerce ImagesLoaded() without new, to be new ImagesLoaded()\n    if (!(this instanceof ImagesLoaded)) {\n      return new ImagesLoaded(elem, options, onAlways);\n    } // use elem as selector string\n\n\n    var queryElem = elem;\n\n    if (typeof elem == 'string') {\n      queryElem = document.querySelectorAll(elem);\n    } // bail if bad element\n\n\n    if (!queryElem) {\n      console.error('Bad element for imagesLoaded ' + (queryElem || elem));\n      return;\n    }\n\n    this.elements = makeArray(queryElem);\n    this.options = extend({}, this.options); // shift arguments if no options set\n\n    if (typeof options == 'function') {\n      onAlways = options;\n    } else {\n      extend(this.options, options);\n    }\n\n    if (onAlways) {\n      this.on('always', onAlways);\n    }\n\n    this.getImages();\n\n    if ($) {\n      // add jQuery Deferred object\n      this.jqDeferred = new $.Deferred();\n    } // HACK check async to allow time to bind listeners\n\n\n    setTimeout(this.check.bind(this));\n  }\n\n  ImagesLoaded.prototype = Object.create(EvEmitter.prototype);\n  ImagesLoaded.prototype.options = {};\n\n  ImagesLoaded.prototype.getImages = function () {\n    this.images = []; // filter & find items if we have an item selector\n\n    this.elements.forEach(this.addElementImages, this);\n  };\n  /**\n   * @param {Node} element\n   */\n\n\n  ImagesLoaded.prototype.addElementImages = function (elem) {\n    // filter siblings\n    if (elem.nodeName == 'IMG') {\n      this.addImage(elem);\n    } // get background image on element\n\n\n    if (this.options.background === true) {\n      this.addElementBackgroundImages(elem);\n    } // find children\n    // no non-element nodes, #143\n\n\n    var nodeType = elem.nodeType;\n\n    if (!nodeType || !elementNodeTypes[nodeType]) {\n      return;\n    }\n\n    var childImgs = elem.querySelectorAll('img'); // concat childElems to filterFound array\n\n    for (var i = 0; i < childImgs.length; i++) {\n      var img = childImgs[i];\n      this.addImage(img);\n    } // get child background images\n\n\n    if (typeof this.options.background == 'string') {\n      var children = elem.querySelectorAll(this.options.background);\n\n      for (i = 0; i < children.length; i++) {\n        var child = children[i];\n        this.addElementBackgroundImages(child);\n      }\n    }\n  };\n\n  var elementNodeTypes = {\n    1: true,\n    9: true,\n    11: true\n  };\n\n  ImagesLoaded.prototype.addElementBackgroundImages = function (elem) {\n    var style = getComputedStyle(elem);\n\n    if (!style) {\n      // Firefox returns null if in a hidden iframe https://bugzil.la/548397\n      return;\n    } // get url inside url(\"...\")\n\n\n    var reURL = /url\\((['\"])?(.*?)\\1\\)/gi;\n    var matches = reURL.exec(style.backgroundImage);\n\n    while (matches !== null) {\n      var url = matches && matches[2];\n\n      if (url) {\n        this.addBackground(url, elem);\n      }\n\n      matches = reURL.exec(style.backgroundImage);\n    }\n  };\n  /**\n   * @param {Image} img\n   */\n\n\n  ImagesLoaded.prototype.addImage = function (img) {\n    var loadingImage = new LoadingImage(img);\n    this.images.push(loadingImage);\n  };\n\n  ImagesLoaded.prototype.addBackground = function (url, elem) {\n    var background = new Background(url, elem);\n    this.images.push(background);\n  };\n\n  ImagesLoaded.prototype.check = function () {\n    var _this = this;\n\n    this.progressedCount = 0;\n    this.hasAnyBroken = false; // complete if no images\n\n    if (!this.images.length) {\n      this.complete();\n      return;\n    }\n\n    function onProgress(image, elem, message) {\n      // HACK - Chrome triggers event before object properties have changed. #83\n      setTimeout(function () {\n        _this.progress(image, elem, message);\n      });\n    }\n\n    this.images.forEach(function (loadingImage) {\n      loadingImage.once('progress', onProgress);\n      loadingImage.check();\n    });\n  };\n\n  ImagesLoaded.prototype.progress = function (image, elem, message) {\n    this.progressedCount++;\n    this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded; // progress event\n\n    this.emitEvent('progress', [this, image, elem]);\n\n    if (this.jqDeferred && this.jqDeferred.notify) {\n      this.jqDeferred.notify(this, image);\n    } // check if completed\n\n\n    if (this.progressedCount == this.images.length) {\n      this.complete();\n    }\n\n    if (this.options.debug && console) {\n      console.log('progress: ' + message, image, elem);\n    }\n  };\n\n  ImagesLoaded.prototype.complete = function () {\n    var eventName = this.hasAnyBroken ? 'fail' : 'done';\n    this.isComplete = true;\n    this.emitEvent(eventName, [this]);\n    this.emitEvent('always', [this]);\n\n    if (this.jqDeferred) {\n      var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';\n      this.jqDeferred[jqMethod](this);\n    }\n  }; // --------------------------  -------------------------- //\n\n\n  function LoadingImage(img) {\n    this.img = img;\n  }\n\n  LoadingImage.prototype = Object.create(EvEmitter.prototype);\n\n  LoadingImage.prototype.check = function () {\n    // If complete is true and browser supports natural sizes,\n    // try to check for image status manually.\n    var isComplete = this.getIsImageComplete();\n\n    if (isComplete) {\n      // report based on naturalWidth\n      this.confirm(this.img.naturalWidth !== 0, 'naturalWidth');\n      return;\n    } // If none of the checks above matched, simulate loading on detached element.\n\n\n    this.proxyImage = new Image();\n    this.proxyImage.addEventListener('load', this);\n    this.proxyImage.addEventListener('error', this); // bind to image as well for Firefox. #191\n\n    this.img.addEventListener('load', this);\n    this.img.addEventListener('error', this);\n    this.proxyImage.src = this.img.src;\n  };\n\n  LoadingImage.prototype.getIsImageComplete = function () {\n    // check for non-zero, non-undefined naturalWidth\n    // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671\n    return this.img.complete && this.img.naturalWidth;\n  };\n\n  LoadingImage.prototype.confirm = function (isLoaded, message) {\n    this.isLoaded = isLoaded;\n    this.emitEvent('progress', [this, this.img, message]);\n  }; // ----- events ----- //\n  // trigger specified handler for event type\n\n\n  LoadingImage.prototype.handleEvent = function (event) {\n    var method = 'on' + event.type;\n\n    if (this[method]) {\n      this[method](event);\n    }\n  };\n\n  LoadingImage.prototype.onload = function () {\n    this.confirm(true, 'onload');\n    this.unbindEvents();\n  };\n\n  LoadingImage.prototype.onerror = function () {\n    this.confirm(false, 'onerror');\n    this.unbindEvents();\n  };\n\n  LoadingImage.prototype.unbindEvents = function () {\n    this.proxyImage.removeEventListener('load', this);\n    this.proxyImage.removeEventListener('error', this);\n    this.img.removeEventListener('load', this);\n    this.img.removeEventListener('error', this);\n  }; // -------------------------- Background -------------------------- //\n\n\n  function Background(url, element) {\n    this.url = url;\n    this.element = element;\n    this.img = new Image();\n  } // inherit LoadingImage prototype\n\n\n  Background.prototype = Object.create(LoadingImage.prototype);\n\n  Background.prototype.check = function () {\n    this.img.addEventListener('load', this);\n    this.img.addEventListener('error', this);\n    this.img.src = this.url; // check if image is already complete\n\n    var isComplete = this.getIsImageComplete();\n\n    if (isComplete) {\n      this.confirm(this.img.naturalWidth !== 0, 'naturalWidth');\n      this.unbindEvents();\n    }\n  };\n\n  Background.prototype.unbindEvents = function () {\n    this.img.removeEventListener('load', this);\n    this.img.removeEventListener('error', this);\n  };\n\n  Background.prototype.confirm = function (isLoaded, message) {\n    this.isLoaded = isLoaded;\n    this.emitEvent('progress', [this, this.element, message]);\n  }; // -------------------------- jQuery -------------------------- //\n\n\n  ImagesLoaded.makeJQueryPlugin = function (jQuery) {\n    jQuery = jQuery || window.jQuery;\n\n    if (!jQuery) {\n      return;\n    } // set local variable\n\n\n    $ = jQuery; // $().imagesLoaded()\n\n    $.fn.imagesLoaded = function (options, callback) {\n      var instance = new ImagesLoaded(this, options, callback);\n      return instance.jqDeferred.promise($(this));\n    };\n  }; // try making plugin\n\n\n  ImagesLoaded.makeJQueryPlugin(); // --------------------------  -------------------------- //\n\n  return ImagesLoaded;\n});\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/imagesloaded/imagesloaded.js?");
+
+/***/ }),
+
+/***/ "./node_modules/simple-swizzle/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/simple-swizzle/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isArrayish = __webpack_require__(/*! is-arrayish */ \"./node_modules/simple-swizzle/node_modules/is-arrayish/index.js\");\n\nvar concat = Array.prototype.concat;\nvar slice = Array.prototype.slice;\n\nvar swizzle = module.exports = function swizzle(args) {\n  var results = [];\n\n  for (var i = 0, len = args.length; i < len; i++) {\n    var arg = args[i];\n\n    if (isArrayish(arg)) {\n      // http://jsperf.com/javascript-array-concat-vs-push/98\n      results = concat.call(results, slice.call(arg));\n    } else {\n      results.push(arg);\n    }\n  }\n\n  return results;\n};\n\nswizzle.wrap = function (fn) {\n  return function () {\n    return fn(swizzle(arguments));\n  };\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/simple-swizzle/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/simple-swizzle/node_modules/is-arrayish/index.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/simple-swizzle/node_modules/is-arrayish/index.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = function isArrayish(obj) {\n  if (!obj || typeof obj === 'string') {\n    return false;\n  }\n\n  return obj instanceof Array || Array.isArray(obj) || obj.length >= 0 && (obj.splice instanceof Function || Object.getOwnPropertyDescriptor(obj, obj.length - 1) && obj.constructor.name !== 'String');\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/simple-swizzle/node_modules/is-arrayish/index.js?");
+
+/***/ })
+
+}]);;
 var __ember_auto_import__ =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
@@ -75551,165 +78199,37 @@ var __ember_auto_import__ =
 /************************************************************************/
 /******/ ({
 
-/***/ "../../../../private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/app.js":
-/*!****************************************************************************************************************************!*\
-  !*** /private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/app.js ***!
-  \****************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("\nif (typeof document !== 'undefined') {\n  __webpack_require__.p = (function(){\n    var scripts = document.querySelectorAll('script');\n    return scripts[scripts.length - 1].src.replace(/\\/[^/]*$/, '/');\n  })();\n}\n\nmodule.exports = (function(){\n  var d = _eai_d;\n  var r = _eai_r;\n  window.emberAutoImportDynamic = function(specifier) {\n    return r('_eai_dyn_' + specifier);\n  };\n    d('color', [], function() { return __webpack_require__(/*! ./node_modules/color/index.js */ \"./node_modules/color/index.js\"); });\n    d('imagesloaded', [], function() { return __webpack_require__(/*! ./node_modules/imagesloaded/imagesloaded.js */ \"./node_modules/imagesloaded/imagesloaded.js\"); });\n})();\n\n\n//# sourceURL=webpack://__ember_auto_import__//private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/app.js?");
-
-/***/ }),
-
-/***/ "../../../../private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/l.js":
-/*!**************************************************************************************************************************!*\
-  !*** /private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/l.js ***!
-  \**************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("\nwindow._eai_r = require;\nwindow._eai_d = define;\n\n\n//# sourceURL=webpack://__ember_auto_import__//private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/l.js?");
-
-/***/ }),
-
-/***/ 0:
-/*!*****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi /private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/l.js /private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/app.js ***!
-  \*****************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("__webpack_require__(/*! /private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/l.js */\"../../../../private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/l.js\");\nmodule.exports = __webpack_require__(/*! /private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/app.js */\"../../../../private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/app.js\");\n\n\n//# sourceURL=webpack://__ember_auto_import__/multi_/private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/l.js_/private/var/folders/sv/3lgnwgld1jz_jk_2vdk1lrkw0000gq/T/broccoli-42159X6rdbslhM3hk/cache-325-bundler/staging/app.js?");
-
-/***/ })
-
-/******/ });;
-(window["webpackJsonp_ember_auto_import_"] = window["webpackJsonp_ember_auto_import_"] || []).push([["vendors~app"],{
-
-/***/ "./node_modules/color-convert/conversions.js":
-/*!***************************************************!*\
-  !*** ./node_modules/color-convert/conversions.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("/* MIT license */\nvar cssKeywords = __webpack_require__(/*! color-name */ \"./node_modules/color-convert/node_modules/color-name/index.js\"); // NOTE: conversions should only return primitive values (i.e. arrays, or\n//       values that give correct `typeof` results).\n//       do not use box values types (i.e. Number(), String(), etc.)\n\n\nvar reverseKeywords = {};\n\nfor (var key in cssKeywords) {\n  if (cssKeywords.hasOwnProperty(key)) {\n    reverseKeywords[cssKeywords[key]] = key;\n  }\n}\n\nvar convert = module.exports = {\n  rgb: {\n    channels: 3,\n    labels: 'rgb'\n  },\n  hsl: {\n    channels: 3,\n    labels: 'hsl'\n  },\n  hsv: {\n    channels: 3,\n    labels: 'hsv'\n  },\n  hwb: {\n    channels: 3,\n    labels: 'hwb'\n  },\n  cmyk: {\n    channels: 4,\n    labels: 'cmyk'\n  },\n  xyz: {\n    channels: 3,\n    labels: 'xyz'\n  },\n  lab: {\n    channels: 3,\n    labels: 'lab'\n  },\n  lch: {\n    channels: 3,\n    labels: 'lch'\n  },\n  hex: {\n    channels: 1,\n    labels: ['hex']\n  },\n  keyword: {\n    channels: 1,\n    labels: ['keyword']\n  },\n  ansi16: {\n    channels: 1,\n    labels: ['ansi16']\n  },\n  ansi256: {\n    channels: 1,\n    labels: ['ansi256']\n  },\n  hcg: {\n    channels: 3,\n    labels: ['h', 'c', 'g']\n  },\n  apple: {\n    channels: 3,\n    labels: ['r16', 'g16', 'b16']\n  },\n  gray: {\n    channels: 1,\n    labels: ['gray']\n  }\n}; // hide .channels and .labels properties\n\nfor (var model in convert) {\n  if (convert.hasOwnProperty(model)) {\n    if (!('channels' in convert[model])) {\n      throw new Error('missing channels property: ' + model);\n    }\n\n    if (!('labels' in convert[model])) {\n      throw new Error('missing channel labels property: ' + model);\n    }\n\n    if (convert[model].labels.length !== convert[model].channels) {\n      throw new Error('channel and label counts mismatch: ' + model);\n    }\n\n    var channels = convert[model].channels;\n    var labels = convert[model].labels;\n    delete convert[model].channels;\n    delete convert[model].labels;\n    Object.defineProperty(convert[model], 'channels', {\n      value: channels\n    });\n    Object.defineProperty(convert[model], 'labels', {\n      value: labels\n    });\n  }\n}\n\nconvert.rgb.hsl = function (rgb) {\n  var r = rgb[0] / 255;\n  var g = rgb[1] / 255;\n  var b = rgb[2] / 255;\n  var min = Math.min(r, g, b);\n  var max = Math.max(r, g, b);\n  var delta = max - min;\n  var h;\n  var s;\n  var l;\n\n  if (max === min) {\n    h = 0;\n  } else if (r === max) {\n    h = (g - b) / delta;\n  } else if (g === max) {\n    h = 2 + (b - r) / delta;\n  } else if (b === max) {\n    h = 4 + (r - g) / delta;\n  }\n\n  h = Math.min(h * 60, 360);\n\n  if (h < 0) {\n    h += 360;\n  }\n\n  l = (min + max) / 2;\n\n  if (max === min) {\n    s = 0;\n  } else if (l <= 0.5) {\n    s = delta / (max + min);\n  } else {\n    s = delta / (2 - max - min);\n  }\n\n  return [h, s * 100, l * 100];\n};\n\nconvert.rgb.hsv = function (rgb) {\n  var rdif;\n  var gdif;\n  var bdif;\n  var h;\n  var s;\n  var r = rgb[0] / 255;\n  var g = rgb[1] / 255;\n  var b = rgb[2] / 255;\n  var v = Math.max(r, g, b);\n  var diff = v - Math.min(r, g, b);\n\n  var diffc = function (c) {\n    return (v - c) / 6 / diff + 1 / 2;\n  };\n\n  if (diff === 0) {\n    h = s = 0;\n  } else {\n    s = diff / v;\n    rdif = diffc(r);\n    gdif = diffc(g);\n    bdif = diffc(b);\n\n    if (r === v) {\n      h = bdif - gdif;\n    } else if (g === v) {\n      h = 1 / 3 + rdif - bdif;\n    } else if (b === v) {\n      h = 2 / 3 + gdif - rdif;\n    }\n\n    if (h < 0) {\n      h += 1;\n    } else if (h > 1) {\n      h -= 1;\n    }\n  }\n\n  return [h * 360, s * 100, v * 100];\n};\n\nconvert.rgb.hwb = function (rgb) {\n  var r = rgb[0];\n  var g = rgb[1];\n  var b = rgb[2];\n  var h = convert.rgb.hsl(rgb)[0];\n  var w = 1 / 255 * Math.min(r, Math.min(g, b));\n  b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));\n  return [h, w * 100, b * 100];\n};\n\nconvert.rgb.cmyk = function (rgb) {\n  var r = rgb[0] / 255;\n  var g = rgb[1] / 255;\n  var b = rgb[2] / 255;\n  var c;\n  var m;\n  var y;\n  var k;\n  k = Math.min(1 - r, 1 - g, 1 - b);\n  c = (1 - r - k) / (1 - k) || 0;\n  m = (1 - g - k) / (1 - k) || 0;\n  y = (1 - b - k) / (1 - k) || 0;\n  return [c * 100, m * 100, y * 100, k * 100];\n};\n/**\n * See https://en.m.wikipedia.org/wiki/Euclidean_distance#Squared_Euclidean_distance\n * */\n\n\nfunction comparativeDistance(x, y) {\n  return Math.pow(x[0] - y[0], 2) + Math.pow(x[1] - y[1], 2) + Math.pow(x[2] - y[2], 2);\n}\n\nconvert.rgb.keyword = function (rgb) {\n  var reversed = reverseKeywords[rgb];\n\n  if (reversed) {\n    return reversed;\n  }\n\n  var currentClosestDistance = Infinity;\n  var currentClosestKeyword;\n\n  for (var keyword in cssKeywords) {\n    if (cssKeywords.hasOwnProperty(keyword)) {\n      var value = cssKeywords[keyword]; // Compute comparative distance\n\n      var distance = comparativeDistance(rgb, value); // Check if its less, if so set as closest\n\n      if (distance < currentClosestDistance) {\n        currentClosestDistance = distance;\n        currentClosestKeyword = keyword;\n      }\n    }\n  }\n\n  return currentClosestKeyword;\n};\n\nconvert.keyword.rgb = function (keyword) {\n  return cssKeywords[keyword];\n};\n\nconvert.rgb.xyz = function (rgb) {\n  var r = rgb[0] / 255;\n  var g = rgb[1] / 255;\n  var b = rgb[2] / 255; // assume sRGB\n\n  r = r > 0.04045 ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;\n  g = g > 0.04045 ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;\n  b = b > 0.04045 ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;\n  var x = r * 0.4124 + g * 0.3576 + b * 0.1805;\n  var y = r * 0.2126 + g * 0.7152 + b * 0.0722;\n  var z = r * 0.0193 + g * 0.1192 + b * 0.9505;\n  return [x * 100, y * 100, z * 100];\n};\n\nconvert.rgb.lab = function (rgb) {\n  var xyz = convert.rgb.xyz(rgb);\n  var x = xyz[0];\n  var y = xyz[1];\n  var z = xyz[2];\n  var l;\n  var a;\n  var b;\n  x /= 95.047;\n  y /= 100;\n  z /= 108.883;\n  x = x > 0.008856 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116;\n  y = y > 0.008856 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;\n  z = z > 0.008856 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116;\n  l = 116 * y - 16;\n  a = 500 * (x - y);\n  b = 200 * (y - z);\n  return [l, a, b];\n};\n\nconvert.hsl.rgb = function (hsl) {\n  var h = hsl[0] / 360;\n  var s = hsl[1] / 100;\n  var l = hsl[2] / 100;\n  var t1;\n  var t2;\n  var t3;\n  var rgb;\n  var val;\n\n  if (s === 0) {\n    val = l * 255;\n    return [val, val, val];\n  }\n\n  if (l < 0.5) {\n    t2 = l * (1 + s);\n  } else {\n    t2 = l + s - l * s;\n  }\n\n  t1 = 2 * l - t2;\n  rgb = [0, 0, 0];\n\n  for (var i = 0; i < 3; i++) {\n    t3 = h + 1 / 3 * -(i - 1);\n\n    if (t3 < 0) {\n      t3++;\n    }\n\n    if (t3 > 1) {\n      t3--;\n    }\n\n    if (6 * t3 < 1) {\n      val = t1 + (t2 - t1) * 6 * t3;\n    } else if (2 * t3 < 1) {\n      val = t2;\n    } else if (3 * t3 < 2) {\n      val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;\n    } else {\n      val = t1;\n    }\n\n    rgb[i] = val * 255;\n  }\n\n  return rgb;\n};\n\nconvert.hsl.hsv = function (hsl) {\n  var h = hsl[0];\n  var s = hsl[1] / 100;\n  var l = hsl[2] / 100;\n  var smin = s;\n  var lmin = Math.max(l, 0.01);\n  var sv;\n  var v;\n  l *= 2;\n  s *= l <= 1 ? l : 2 - l;\n  smin *= lmin <= 1 ? lmin : 2 - lmin;\n  v = (l + s) / 2;\n  sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);\n  return [h, sv * 100, v * 100];\n};\n\nconvert.hsv.rgb = function (hsv) {\n  var h = hsv[0] / 60;\n  var s = hsv[1] / 100;\n  var v = hsv[2] / 100;\n  var hi = Math.floor(h) % 6;\n  var f = h - Math.floor(h);\n  var p = 255 * v * (1 - s);\n  var q = 255 * v * (1 - s * f);\n  var t = 255 * v * (1 - s * (1 - f));\n  v *= 255;\n\n  switch (hi) {\n    case 0:\n      return [v, t, p];\n\n    case 1:\n      return [q, v, p];\n\n    case 2:\n      return [p, v, t];\n\n    case 3:\n      return [p, q, v];\n\n    case 4:\n      return [t, p, v];\n\n    case 5:\n      return [v, p, q];\n  }\n};\n\nconvert.hsv.hsl = function (hsv) {\n  var h = hsv[0];\n  var s = hsv[1] / 100;\n  var v = hsv[2] / 100;\n  var vmin = Math.max(v, 0.01);\n  var lmin;\n  var sl;\n  var l;\n  l = (2 - s) * v;\n  lmin = (2 - s) * vmin;\n  sl = s * vmin;\n  sl /= lmin <= 1 ? lmin : 2 - lmin;\n  sl = sl || 0;\n  l /= 2;\n  return [h, sl * 100, l * 100];\n}; // http://dev.w3.org/csswg/css-color/#hwb-to-rgb\n\n\nconvert.hwb.rgb = function (hwb) {\n  var h = hwb[0] / 360;\n  var wh = hwb[1] / 100;\n  var bl = hwb[2] / 100;\n  var ratio = wh + bl;\n  var i;\n  var v;\n  var f;\n  var n; // wh + bl cant be > 1\n\n  if (ratio > 1) {\n    wh /= ratio;\n    bl /= ratio;\n  }\n\n  i = Math.floor(6 * h);\n  v = 1 - bl;\n  f = 6 * h - i;\n\n  if ((i & 0x01) !== 0) {\n    f = 1 - f;\n  }\n\n  n = wh + f * (v - wh); // linear interpolation\n\n  var r;\n  var g;\n  var b;\n\n  switch (i) {\n    default:\n    case 6:\n    case 0:\n      r = v;\n      g = n;\n      b = wh;\n      break;\n\n    case 1:\n      r = n;\n      g = v;\n      b = wh;\n      break;\n\n    case 2:\n      r = wh;\n      g = v;\n      b = n;\n      break;\n\n    case 3:\n      r = wh;\n      g = n;\n      b = v;\n      break;\n\n    case 4:\n      r = n;\n      g = wh;\n      b = v;\n      break;\n\n    case 5:\n      r = v;\n      g = wh;\n      b = n;\n      break;\n  }\n\n  return [r * 255, g * 255, b * 255];\n};\n\nconvert.cmyk.rgb = function (cmyk) {\n  var c = cmyk[0] / 100;\n  var m = cmyk[1] / 100;\n  var y = cmyk[2] / 100;\n  var k = cmyk[3] / 100;\n  var r;\n  var g;\n  var b;\n  r = 1 - Math.min(1, c * (1 - k) + k);\n  g = 1 - Math.min(1, m * (1 - k) + k);\n  b = 1 - Math.min(1, y * (1 - k) + k);\n  return [r * 255, g * 255, b * 255];\n};\n\nconvert.xyz.rgb = function (xyz) {\n  var x = xyz[0] / 100;\n  var y = xyz[1] / 100;\n  var z = xyz[2] / 100;\n  var r;\n  var g;\n  var b;\n  r = x * 3.2406 + y * -1.5372 + z * -0.4986;\n  g = x * -0.9689 + y * 1.8758 + z * 0.0415;\n  b = x * 0.0557 + y * -0.2040 + z * 1.0570; // assume sRGB\n\n  r = r > 0.0031308 ? 1.055 * Math.pow(r, 1.0 / 2.4) - 0.055 : r * 12.92;\n  g = g > 0.0031308 ? 1.055 * Math.pow(g, 1.0 / 2.4) - 0.055 : g * 12.92;\n  b = b > 0.0031308 ? 1.055 * Math.pow(b, 1.0 / 2.4) - 0.055 : b * 12.92;\n  r = Math.min(Math.max(0, r), 1);\n  g = Math.min(Math.max(0, g), 1);\n  b = Math.min(Math.max(0, b), 1);\n  return [r * 255, g * 255, b * 255];\n};\n\nconvert.xyz.lab = function (xyz) {\n  var x = xyz[0];\n  var y = xyz[1];\n  var z = xyz[2];\n  var l;\n  var a;\n  var b;\n  x /= 95.047;\n  y /= 100;\n  z /= 108.883;\n  x = x > 0.008856 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116;\n  y = y > 0.008856 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;\n  z = z > 0.008856 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116;\n  l = 116 * y - 16;\n  a = 500 * (x - y);\n  b = 200 * (y - z);\n  return [l, a, b];\n};\n\nconvert.lab.xyz = function (lab) {\n  var l = lab[0];\n  var a = lab[1];\n  var b = lab[2];\n  var x;\n  var y;\n  var z;\n  y = (l + 16) / 116;\n  x = a / 500 + y;\n  z = y - b / 200;\n  var y2 = Math.pow(y, 3);\n  var x2 = Math.pow(x, 3);\n  var z2 = Math.pow(z, 3);\n  y = y2 > 0.008856 ? y2 : (y - 16 / 116) / 7.787;\n  x = x2 > 0.008856 ? x2 : (x - 16 / 116) / 7.787;\n  z = z2 > 0.008856 ? z2 : (z - 16 / 116) / 7.787;\n  x *= 95.047;\n  y *= 100;\n  z *= 108.883;\n  return [x, y, z];\n};\n\nconvert.lab.lch = function (lab) {\n  var l = lab[0];\n  var a = lab[1];\n  var b = lab[2];\n  var hr;\n  var h;\n  var c;\n  hr = Math.atan2(b, a);\n  h = hr * 360 / 2 / Math.PI;\n\n  if (h < 0) {\n    h += 360;\n  }\n\n  c = Math.sqrt(a * a + b * b);\n  return [l, c, h];\n};\n\nconvert.lch.lab = function (lch) {\n  var l = lch[0];\n  var c = lch[1];\n  var h = lch[2];\n  var a;\n  var b;\n  var hr;\n  hr = h / 360 * 2 * Math.PI;\n  a = c * Math.cos(hr);\n  b = c * Math.sin(hr);\n  return [l, a, b];\n};\n\nconvert.rgb.ansi16 = function (args) {\n  var r = args[0];\n  var g = args[1];\n  var b = args[2];\n  var value = 1 in arguments ? arguments[1] : convert.rgb.hsv(args)[2]; // hsv -> ansi16 optimization\n\n  value = Math.round(value / 50);\n\n  if (value === 0) {\n    return 30;\n  }\n\n  var ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));\n\n  if (value === 2) {\n    ansi += 60;\n  }\n\n  return ansi;\n};\n\nconvert.hsv.ansi16 = function (args) {\n  // optimization here; we already know the value and don't need to get\n  // it converted for us.\n  return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);\n};\n\nconvert.rgb.ansi256 = function (args) {\n  var r = args[0];\n  var g = args[1];\n  var b = args[2]; // we use the extended greyscale palette here, with the exception of\n  // black and white. normal palette only has 4 greyscale shades.\n\n  if (r === g && g === b) {\n    if (r < 8) {\n      return 16;\n    }\n\n    if (r > 248) {\n      return 231;\n    }\n\n    return Math.round((r - 8) / 247 * 24) + 232;\n  }\n\n  var ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);\n  return ansi;\n};\n\nconvert.ansi16.rgb = function (args) {\n  var color = args % 10; // handle greyscale\n\n  if (color === 0 || color === 7) {\n    if (args > 50) {\n      color += 3.5;\n    }\n\n    color = color / 10.5 * 255;\n    return [color, color, color];\n  }\n\n  var mult = (~~(args > 50) + 1) * 0.5;\n  var r = (color & 1) * mult * 255;\n  var g = (color >> 1 & 1) * mult * 255;\n  var b = (color >> 2 & 1) * mult * 255;\n  return [r, g, b];\n};\n\nconvert.ansi256.rgb = function (args) {\n  // handle greyscale\n  if (args >= 232) {\n    var c = (args - 232) * 10 + 8;\n    return [c, c, c];\n  }\n\n  args -= 16;\n  var rem;\n  var r = Math.floor(args / 36) / 5 * 255;\n  var g = Math.floor((rem = args % 36) / 6) / 5 * 255;\n  var b = rem % 6 / 5 * 255;\n  return [r, g, b];\n};\n\nconvert.rgb.hex = function (args) {\n  var integer = ((Math.round(args[0]) & 0xFF) << 16) + ((Math.round(args[1]) & 0xFF) << 8) + (Math.round(args[2]) & 0xFF);\n  var string = integer.toString(16).toUpperCase();\n  return '000000'.substring(string.length) + string;\n};\n\nconvert.hex.rgb = function (args) {\n  var match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);\n\n  if (!match) {\n    return [0, 0, 0];\n  }\n\n  var colorString = match[0];\n\n  if (match[0].length === 3) {\n    colorString = colorString.split('').map(function (char) {\n      return char + char;\n    }).join('');\n  }\n\n  var integer = parseInt(colorString, 16);\n  var r = integer >> 16 & 0xFF;\n  var g = integer >> 8 & 0xFF;\n  var b = integer & 0xFF;\n  return [r, g, b];\n};\n\nconvert.rgb.hcg = function (rgb) {\n  var r = rgb[0] / 255;\n  var g = rgb[1] / 255;\n  var b = rgb[2] / 255;\n  var max = Math.max(Math.max(r, g), b);\n  var min = Math.min(Math.min(r, g), b);\n  var chroma = max - min;\n  var grayscale;\n  var hue;\n\n  if (chroma < 1) {\n    grayscale = min / (1 - chroma);\n  } else {\n    grayscale = 0;\n  }\n\n  if (chroma <= 0) {\n    hue = 0;\n  } else if (max === r) {\n    hue = (g - b) / chroma % 6;\n  } else if (max === g) {\n    hue = 2 + (b - r) / chroma;\n  } else {\n    hue = 4 + (r - g) / chroma + 4;\n  }\n\n  hue /= 6;\n  hue %= 1;\n  return [hue * 360, chroma * 100, grayscale * 100];\n};\n\nconvert.hsl.hcg = function (hsl) {\n  var s = hsl[1] / 100;\n  var l = hsl[2] / 100;\n  var c = 1;\n  var f = 0;\n\n  if (l < 0.5) {\n    c = 2.0 * s * l;\n  } else {\n    c = 2.0 * s * (1.0 - l);\n  }\n\n  if (c < 1.0) {\n    f = (l - 0.5 * c) / (1.0 - c);\n  }\n\n  return [hsl[0], c * 100, f * 100];\n};\n\nconvert.hsv.hcg = function (hsv) {\n  var s = hsv[1] / 100;\n  var v = hsv[2] / 100;\n  var c = s * v;\n  var f = 0;\n\n  if (c < 1.0) {\n    f = (v - c) / (1 - c);\n  }\n\n  return [hsv[0], c * 100, f * 100];\n};\n\nconvert.hcg.rgb = function (hcg) {\n  var h = hcg[0] / 360;\n  var c = hcg[1] / 100;\n  var g = hcg[2] / 100;\n\n  if (c === 0.0) {\n    return [g * 255, g * 255, g * 255];\n  }\n\n  var pure = [0, 0, 0];\n  var hi = h % 1 * 6;\n  var v = hi % 1;\n  var w = 1 - v;\n  var mg = 0;\n\n  switch (Math.floor(hi)) {\n    case 0:\n      pure[0] = 1;\n      pure[1] = v;\n      pure[2] = 0;\n      break;\n\n    case 1:\n      pure[0] = w;\n      pure[1] = 1;\n      pure[2] = 0;\n      break;\n\n    case 2:\n      pure[0] = 0;\n      pure[1] = 1;\n      pure[2] = v;\n      break;\n\n    case 3:\n      pure[0] = 0;\n      pure[1] = w;\n      pure[2] = 1;\n      break;\n\n    case 4:\n      pure[0] = v;\n      pure[1] = 0;\n      pure[2] = 1;\n      break;\n\n    default:\n      pure[0] = 1;\n      pure[1] = 0;\n      pure[2] = w;\n  }\n\n  mg = (1.0 - c) * g;\n  return [(c * pure[0] + mg) * 255, (c * pure[1] + mg) * 255, (c * pure[2] + mg) * 255];\n};\n\nconvert.hcg.hsv = function (hcg) {\n  var c = hcg[1] / 100;\n  var g = hcg[2] / 100;\n  var v = c + g * (1.0 - c);\n  var f = 0;\n\n  if (v > 0.0) {\n    f = c / v;\n  }\n\n  return [hcg[0], f * 100, v * 100];\n};\n\nconvert.hcg.hsl = function (hcg) {\n  var c = hcg[1] / 100;\n  var g = hcg[2] / 100;\n  var l = g * (1.0 - c) + 0.5 * c;\n  var s = 0;\n\n  if (l > 0.0 && l < 0.5) {\n    s = c / (2 * l);\n  } else if (l >= 0.5 && l < 1.0) {\n    s = c / (2 * (1 - l));\n  }\n\n  return [hcg[0], s * 100, l * 100];\n};\n\nconvert.hcg.hwb = function (hcg) {\n  var c = hcg[1] / 100;\n  var g = hcg[2] / 100;\n  var v = c + g * (1.0 - c);\n  return [hcg[0], (v - c) * 100, (1 - v) * 100];\n};\n\nconvert.hwb.hcg = function (hwb) {\n  var w = hwb[1] / 100;\n  var b = hwb[2] / 100;\n  var v = 1 - b;\n  var c = v - w;\n  var g = 0;\n\n  if (c < 1) {\n    g = (v - c) / (1 - c);\n  }\n\n  return [hwb[0], c * 100, g * 100];\n};\n\nconvert.apple.rgb = function (apple) {\n  return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];\n};\n\nconvert.rgb.apple = function (rgb) {\n  return [rgb[0] / 255 * 65535, rgb[1] / 255 * 65535, rgb[2] / 255 * 65535];\n};\n\nconvert.gray.rgb = function (args) {\n  return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];\n};\n\nconvert.gray.hsl = convert.gray.hsv = function (args) {\n  return [0, 0, args[0]];\n};\n\nconvert.gray.hwb = function (gray) {\n  return [0, 100, gray[0]];\n};\n\nconvert.gray.cmyk = function (gray) {\n  return [0, 0, 0, gray[0]];\n};\n\nconvert.gray.lab = function (gray) {\n  return [gray[0], 0, 0];\n};\n\nconvert.gray.hex = function (gray) {\n  var val = Math.round(gray[0] / 100 * 255) & 0xFF;\n  var integer = (val << 16) + (val << 8) + val;\n  var string = integer.toString(16).toUpperCase();\n  return '000000'.substring(string.length) + string;\n};\n\nconvert.rgb.gray = function (rgb) {\n  var val = (rgb[0] + rgb[1] + rgb[2]) / 3;\n  return [val / 255 * 100];\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-convert/conversions.js?");
-
-/***/ }),
-
-/***/ "./node_modules/color-convert/index.js":
-/*!*********************************************!*\
-  !*** ./node_modules/color-convert/index.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var conversions = __webpack_require__(/*! ./conversions */ \"./node_modules/color-convert/conversions.js\");\n\nvar route = __webpack_require__(/*! ./route */ \"./node_modules/color-convert/route.js\");\n\nvar convert = {};\nvar models = Object.keys(conversions);\n\nfunction wrapRaw(fn) {\n  var wrappedFn = function (args) {\n    if (args === undefined || args === null) {\n      return args;\n    }\n\n    if (arguments.length > 1) {\n      args = Array.prototype.slice.call(arguments);\n    }\n\n    return fn(args);\n  }; // preserve .conversion property if there is one\n\n\n  if ('conversion' in fn) {\n    wrappedFn.conversion = fn.conversion;\n  }\n\n  return wrappedFn;\n}\n\nfunction wrapRounded(fn) {\n  var wrappedFn = function (args) {\n    if (args === undefined || args === null) {\n      return args;\n    }\n\n    if (arguments.length > 1) {\n      args = Array.prototype.slice.call(arguments);\n    }\n\n    var result = fn(args); // we're assuming the result is an array here.\n    // see notice in conversions.js; don't use box types\n    // in conversion functions.\n\n    if (typeof result === 'object') {\n      for (var len = result.length, i = 0; i < len; i++) {\n        result[i] = Math.round(result[i]);\n      }\n    }\n\n    return result;\n  }; // preserve .conversion property if there is one\n\n\n  if ('conversion' in fn) {\n    wrappedFn.conversion = fn.conversion;\n  }\n\n  return wrappedFn;\n}\n\nmodels.forEach(function (fromModel) {\n  convert[fromModel] = {};\n  Object.defineProperty(convert[fromModel], 'channels', {\n    value: conversions[fromModel].channels\n  });\n  Object.defineProperty(convert[fromModel], 'labels', {\n    value: conversions[fromModel].labels\n  });\n  var routes = route(fromModel);\n  var routeModels = Object.keys(routes);\n  routeModels.forEach(function (toModel) {\n    var fn = routes[toModel];\n    convert[fromModel][toModel] = wrapRounded(fn);\n    convert[fromModel][toModel].raw = wrapRaw(fn);\n  });\n});\nmodule.exports = convert;\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-convert/index.js?");
-
-/***/ }),
-
-/***/ "./node_modules/color-convert/node_modules/color-name/index.js":
+/***/ "../../../tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/app.js":
 /*!*********************************************************************!*\
-  !*** ./node_modules/color-convert/node_modules/color-name/index.js ***!
+  !*** /tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/app.js ***!
   \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-eval("\n\nmodule.exports = {\n  \"aliceblue\": [240, 248, 255],\n  \"antiquewhite\": [250, 235, 215],\n  \"aqua\": [0, 255, 255],\n  \"aquamarine\": [127, 255, 212],\n  \"azure\": [240, 255, 255],\n  \"beige\": [245, 245, 220],\n  \"bisque\": [255, 228, 196],\n  \"black\": [0, 0, 0],\n  \"blanchedalmond\": [255, 235, 205],\n  \"blue\": [0, 0, 255],\n  \"blueviolet\": [138, 43, 226],\n  \"brown\": [165, 42, 42],\n  \"burlywood\": [222, 184, 135],\n  \"cadetblue\": [95, 158, 160],\n  \"chartreuse\": [127, 255, 0],\n  \"chocolate\": [210, 105, 30],\n  \"coral\": [255, 127, 80],\n  \"cornflowerblue\": [100, 149, 237],\n  \"cornsilk\": [255, 248, 220],\n  \"crimson\": [220, 20, 60],\n  \"cyan\": [0, 255, 255],\n  \"darkblue\": [0, 0, 139],\n  \"darkcyan\": [0, 139, 139],\n  \"darkgoldenrod\": [184, 134, 11],\n  \"darkgray\": [169, 169, 169],\n  \"darkgreen\": [0, 100, 0],\n  \"darkgrey\": [169, 169, 169],\n  \"darkkhaki\": [189, 183, 107],\n  \"darkmagenta\": [139, 0, 139],\n  \"darkolivegreen\": [85, 107, 47],\n  \"darkorange\": [255, 140, 0],\n  \"darkorchid\": [153, 50, 204],\n  \"darkred\": [139, 0, 0],\n  \"darksalmon\": [233, 150, 122],\n  \"darkseagreen\": [143, 188, 143],\n  \"darkslateblue\": [72, 61, 139],\n  \"darkslategray\": [47, 79, 79],\n  \"darkslategrey\": [47, 79, 79],\n  \"darkturquoise\": [0, 206, 209],\n  \"darkviolet\": [148, 0, 211],\n  \"deeppink\": [255, 20, 147],\n  \"deepskyblue\": [0, 191, 255],\n  \"dimgray\": [105, 105, 105],\n  \"dimgrey\": [105, 105, 105],\n  \"dodgerblue\": [30, 144, 255],\n  \"firebrick\": [178, 34, 34],\n  \"floralwhite\": [255, 250, 240],\n  \"forestgreen\": [34, 139, 34],\n  \"fuchsia\": [255, 0, 255],\n  \"gainsboro\": [220, 220, 220],\n  \"ghostwhite\": [248, 248, 255],\n  \"gold\": [255, 215, 0],\n  \"goldenrod\": [218, 165, 32],\n  \"gray\": [128, 128, 128],\n  \"green\": [0, 128, 0],\n  \"greenyellow\": [173, 255, 47],\n  \"grey\": [128, 128, 128],\n  \"honeydew\": [240, 255, 240],\n  \"hotpink\": [255, 105, 180],\n  \"indianred\": [205, 92, 92],\n  \"indigo\": [75, 0, 130],\n  \"ivory\": [255, 255, 240],\n  \"khaki\": [240, 230, 140],\n  \"lavender\": [230, 230, 250],\n  \"lavenderblush\": [255, 240, 245],\n  \"lawngreen\": [124, 252, 0],\n  \"lemonchiffon\": [255, 250, 205],\n  \"lightblue\": [173, 216, 230],\n  \"lightcoral\": [240, 128, 128],\n  \"lightcyan\": [224, 255, 255],\n  \"lightgoldenrodyellow\": [250, 250, 210],\n  \"lightgray\": [211, 211, 211],\n  \"lightgreen\": [144, 238, 144],\n  \"lightgrey\": [211, 211, 211],\n  \"lightpink\": [255, 182, 193],\n  \"lightsalmon\": [255, 160, 122],\n  \"lightseagreen\": [32, 178, 170],\n  \"lightskyblue\": [135, 206, 250],\n  \"lightslategray\": [119, 136, 153],\n  \"lightslategrey\": [119, 136, 153],\n  \"lightsteelblue\": [176, 196, 222],\n  \"lightyellow\": [255, 255, 224],\n  \"lime\": [0, 255, 0],\n  \"limegreen\": [50, 205, 50],\n  \"linen\": [250, 240, 230],\n  \"magenta\": [255, 0, 255],\n  \"maroon\": [128, 0, 0],\n  \"mediumaquamarine\": [102, 205, 170],\n  \"mediumblue\": [0, 0, 205],\n  \"mediumorchid\": [186, 85, 211],\n  \"mediumpurple\": [147, 112, 219],\n  \"mediumseagreen\": [60, 179, 113],\n  \"mediumslateblue\": [123, 104, 238],\n  \"mediumspringgreen\": [0, 250, 154],\n  \"mediumturquoise\": [72, 209, 204],\n  \"mediumvioletred\": [199, 21, 133],\n  \"midnightblue\": [25, 25, 112],\n  \"mintcream\": [245, 255, 250],\n  \"mistyrose\": [255, 228, 225],\n  \"moccasin\": [255, 228, 181],\n  \"navajowhite\": [255, 222, 173],\n  \"navy\": [0, 0, 128],\n  \"oldlace\": [253, 245, 230],\n  \"olive\": [128, 128, 0],\n  \"olivedrab\": [107, 142, 35],\n  \"orange\": [255, 165, 0],\n  \"orangered\": [255, 69, 0],\n  \"orchid\": [218, 112, 214],\n  \"palegoldenrod\": [238, 232, 170],\n  \"palegreen\": [152, 251, 152],\n  \"paleturquoise\": [175, 238, 238],\n  \"palevioletred\": [219, 112, 147],\n  \"papayawhip\": [255, 239, 213],\n  \"peachpuff\": [255, 218, 185],\n  \"peru\": [205, 133, 63],\n  \"pink\": [255, 192, 203],\n  \"plum\": [221, 160, 221],\n  \"powderblue\": [176, 224, 230],\n  \"purple\": [128, 0, 128],\n  \"rebeccapurple\": [102, 51, 153],\n  \"red\": [255, 0, 0],\n  \"rosybrown\": [188, 143, 143],\n  \"royalblue\": [65, 105, 225],\n  \"saddlebrown\": [139, 69, 19],\n  \"salmon\": [250, 128, 114],\n  \"sandybrown\": [244, 164, 96],\n  \"seagreen\": [46, 139, 87],\n  \"seashell\": [255, 245, 238],\n  \"sienna\": [160, 82, 45],\n  \"silver\": [192, 192, 192],\n  \"skyblue\": [135, 206, 235],\n  \"slateblue\": [106, 90, 205],\n  \"slategray\": [112, 128, 144],\n  \"slategrey\": [112, 128, 144],\n  \"snow\": [255, 250, 250],\n  \"springgreen\": [0, 255, 127],\n  \"steelblue\": [70, 130, 180],\n  \"tan\": [210, 180, 140],\n  \"teal\": [0, 128, 128],\n  \"thistle\": [216, 191, 216],\n  \"tomato\": [255, 99, 71],\n  \"turquoise\": [64, 224, 208],\n  \"violet\": [238, 130, 238],\n  \"wheat\": [245, 222, 179],\n  \"white\": [255, 255, 255],\n  \"whitesmoke\": [245, 245, 245],\n  \"yellow\": [255, 255, 0],\n  \"yellowgreen\": [154, 205, 50]\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-convert/node_modules/color-name/index.js?");
+eval("\nif (typeof document !== 'undefined') {\n  __webpack_require__.p = (function(){\n    var scripts = document.querySelectorAll('script');\n    return scripts[scripts.length - 1].src.replace(/\\/[^/]*$/, '/');\n  })();\n}\n\nmodule.exports = (function(){\n  var d = _eai_d;\n  var r = _eai_r;\n  window.emberAutoImportDynamic = function(specifier) {\n    return r('_eai_dyn_' + specifier);\n  };\n    d('color', [], function() { return __webpack_require__(/*! ./node_modules/color/index.js */ \"./node_modules/color/index.js\"); });\n    d('imagesloaded', [], function() { return __webpack_require__(/*! ./node_modules/imagesloaded/imagesloaded.js */ \"./node_modules/imagesloaded/imagesloaded.js\"); });\n})();\n\n\n//# sourceURL=webpack://__ember_auto_import__//tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/app.js?");
 
 /***/ }),
 
-/***/ "./node_modules/color-convert/route.js":
-/*!*********************************************!*\
-  !*** ./node_modules/color-convert/route.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var conversions = __webpack_require__(/*! ./conversions */ \"./node_modules/color-convert/conversions.js\");\n/*\n\tthis function routes a model to all other models.\n\n\tall functions that are routed have a property `.conversion` attached\n\tto the returned synthetic function. This property is an array\n\tof strings, each with the steps in between the 'from' and 'to'\n\tcolor models (inclusive).\n\n\tconversions that are not possible simply are not included.\n*/\n\n\nfunction buildGraph() {\n  var graph = {}; // https://jsperf.com/object-keys-vs-for-in-with-closure/3\n\n  var models = Object.keys(conversions);\n\n  for (var len = models.length, i = 0; i < len; i++) {\n    graph[models[i]] = {\n      // http://jsperf.com/1-vs-infinity\n      // micro-opt, but this is simple.\n      distance: -1,\n      parent: null\n    };\n  }\n\n  return graph;\n} // https://en.wikipedia.org/wiki/Breadth-first_search\n\n\nfunction deriveBFS(fromModel) {\n  var graph = buildGraph();\n  var queue = [fromModel]; // unshift -> queue -> pop\n\n  graph[fromModel].distance = 0;\n\n  while (queue.length) {\n    var current = queue.pop();\n    var adjacents = Object.keys(conversions[current]);\n\n    for (var len = adjacents.length, i = 0; i < len; i++) {\n      var adjacent = adjacents[i];\n      var node = graph[adjacent];\n\n      if (node.distance === -1) {\n        node.distance = graph[current].distance + 1;\n        node.parent = current;\n        queue.unshift(adjacent);\n      }\n    }\n  }\n\n  return graph;\n}\n\nfunction link(from, to) {\n  return function (args) {\n    return to(from(args));\n  };\n}\n\nfunction wrapConversion(toModel, graph) {\n  var path = [graph[toModel].parent, toModel];\n  var fn = conversions[graph[toModel].parent][toModel];\n  var cur = graph[toModel].parent;\n\n  while (graph[cur].parent) {\n    path.unshift(graph[cur].parent);\n    fn = link(conversions[graph[cur].parent][cur], fn);\n    cur = graph[cur].parent;\n  }\n\n  fn.conversion = path;\n  return fn;\n}\n\nmodule.exports = function (fromModel) {\n  var graph = deriveBFS(fromModel);\n  var conversion = {};\n  var models = Object.keys(graph);\n\n  for (var len = models.length, i = 0; i < len; i++) {\n    var toModel = models[i];\n    var node = graph[toModel];\n\n    if (node.parent === null) {\n      // no possible conversion, or this node is the source model.\n      continue;\n    }\n\n    conversion[toModel] = wrapConversion(toModel, graph);\n  }\n\n  return conversion;\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-convert/route.js?");
-
-/***/ }),
-
-/***/ "./node_modules/color-name/index.js":
-/*!******************************************!*\
-  !*** ./node_modules/color-name/index.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nmodule.exports = {\n  \"aliceblue\": [240, 248, 255],\n  \"antiquewhite\": [250, 235, 215],\n  \"aqua\": [0, 255, 255],\n  \"aquamarine\": [127, 255, 212],\n  \"azure\": [240, 255, 255],\n  \"beige\": [245, 245, 220],\n  \"bisque\": [255, 228, 196],\n  \"black\": [0, 0, 0],\n  \"blanchedalmond\": [255, 235, 205],\n  \"blue\": [0, 0, 255],\n  \"blueviolet\": [138, 43, 226],\n  \"brown\": [165, 42, 42],\n  \"burlywood\": [222, 184, 135],\n  \"cadetblue\": [95, 158, 160],\n  \"chartreuse\": [127, 255, 0],\n  \"chocolate\": [210, 105, 30],\n  \"coral\": [255, 127, 80],\n  \"cornflowerblue\": [100, 149, 237],\n  \"cornsilk\": [255, 248, 220],\n  \"crimson\": [220, 20, 60],\n  \"cyan\": [0, 255, 255],\n  \"darkblue\": [0, 0, 139],\n  \"darkcyan\": [0, 139, 139],\n  \"darkgoldenrod\": [184, 134, 11],\n  \"darkgray\": [169, 169, 169],\n  \"darkgreen\": [0, 100, 0],\n  \"darkgrey\": [169, 169, 169],\n  \"darkkhaki\": [189, 183, 107],\n  \"darkmagenta\": [139, 0, 139],\n  \"darkolivegreen\": [85, 107, 47],\n  \"darkorange\": [255, 140, 0],\n  \"darkorchid\": [153, 50, 204],\n  \"darkred\": [139, 0, 0],\n  \"darksalmon\": [233, 150, 122],\n  \"darkseagreen\": [143, 188, 143],\n  \"darkslateblue\": [72, 61, 139],\n  \"darkslategray\": [47, 79, 79],\n  \"darkslategrey\": [47, 79, 79],\n  \"darkturquoise\": [0, 206, 209],\n  \"darkviolet\": [148, 0, 211],\n  \"deeppink\": [255, 20, 147],\n  \"deepskyblue\": [0, 191, 255],\n  \"dimgray\": [105, 105, 105],\n  \"dimgrey\": [105, 105, 105],\n  \"dodgerblue\": [30, 144, 255],\n  \"firebrick\": [178, 34, 34],\n  \"floralwhite\": [255, 250, 240],\n  \"forestgreen\": [34, 139, 34],\n  \"fuchsia\": [255, 0, 255],\n  \"gainsboro\": [220, 220, 220],\n  \"ghostwhite\": [248, 248, 255],\n  \"gold\": [255, 215, 0],\n  \"goldenrod\": [218, 165, 32],\n  \"gray\": [128, 128, 128],\n  \"green\": [0, 128, 0],\n  \"greenyellow\": [173, 255, 47],\n  \"grey\": [128, 128, 128],\n  \"honeydew\": [240, 255, 240],\n  \"hotpink\": [255, 105, 180],\n  \"indianred\": [205, 92, 92],\n  \"indigo\": [75, 0, 130],\n  \"ivory\": [255, 255, 240],\n  \"khaki\": [240, 230, 140],\n  \"lavender\": [230, 230, 250],\n  \"lavenderblush\": [255, 240, 245],\n  \"lawngreen\": [124, 252, 0],\n  \"lemonchiffon\": [255, 250, 205],\n  \"lightblue\": [173, 216, 230],\n  \"lightcoral\": [240, 128, 128],\n  \"lightcyan\": [224, 255, 255],\n  \"lightgoldenrodyellow\": [250, 250, 210],\n  \"lightgray\": [211, 211, 211],\n  \"lightgreen\": [144, 238, 144],\n  \"lightgrey\": [211, 211, 211],\n  \"lightpink\": [255, 182, 193],\n  \"lightsalmon\": [255, 160, 122],\n  \"lightseagreen\": [32, 178, 170],\n  \"lightskyblue\": [135, 206, 250],\n  \"lightslategray\": [119, 136, 153],\n  \"lightslategrey\": [119, 136, 153],\n  \"lightsteelblue\": [176, 196, 222],\n  \"lightyellow\": [255, 255, 224],\n  \"lime\": [0, 255, 0],\n  \"limegreen\": [50, 205, 50],\n  \"linen\": [250, 240, 230],\n  \"magenta\": [255, 0, 255],\n  \"maroon\": [128, 0, 0],\n  \"mediumaquamarine\": [102, 205, 170],\n  \"mediumblue\": [0, 0, 205],\n  \"mediumorchid\": [186, 85, 211],\n  \"mediumpurple\": [147, 112, 219],\n  \"mediumseagreen\": [60, 179, 113],\n  \"mediumslateblue\": [123, 104, 238],\n  \"mediumspringgreen\": [0, 250, 154],\n  \"mediumturquoise\": [72, 209, 204],\n  \"mediumvioletred\": [199, 21, 133],\n  \"midnightblue\": [25, 25, 112],\n  \"mintcream\": [245, 255, 250],\n  \"mistyrose\": [255, 228, 225],\n  \"moccasin\": [255, 228, 181],\n  \"navajowhite\": [255, 222, 173],\n  \"navy\": [0, 0, 128],\n  \"oldlace\": [253, 245, 230],\n  \"olive\": [128, 128, 0],\n  \"olivedrab\": [107, 142, 35],\n  \"orange\": [255, 165, 0],\n  \"orangered\": [255, 69, 0],\n  \"orchid\": [218, 112, 214],\n  \"palegoldenrod\": [238, 232, 170],\n  \"palegreen\": [152, 251, 152],\n  \"paleturquoise\": [175, 238, 238],\n  \"palevioletred\": [219, 112, 147],\n  \"papayawhip\": [255, 239, 213],\n  \"peachpuff\": [255, 218, 185],\n  \"peru\": [205, 133, 63],\n  \"pink\": [255, 192, 203],\n  \"plum\": [221, 160, 221],\n  \"powderblue\": [176, 224, 230],\n  \"purple\": [128, 0, 128],\n  \"rebeccapurple\": [102, 51, 153],\n  \"red\": [255, 0, 0],\n  \"rosybrown\": [188, 143, 143],\n  \"royalblue\": [65, 105, 225],\n  \"saddlebrown\": [139, 69, 19],\n  \"salmon\": [250, 128, 114],\n  \"sandybrown\": [244, 164, 96],\n  \"seagreen\": [46, 139, 87],\n  \"seashell\": [255, 245, 238],\n  \"sienna\": [160, 82, 45],\n  \"silver\": [192, 192, 192],\n  \"skyblue\": [135, 206, 235],\n  \"slateblue\": [106, 90, 205],\n  \"slategray\": [112, 128, 144],\n  \"slategrey\": [112, 128, 144],\n  \"snow\": [255, 250, 250],\n  \"springgreen\": [0, 255, 127],\n  \"steelblue\": [70, 130, 180],\n  \"tan\": [210, 180, 140],\n  \"teal\": [0, 128, 128],\n  \"thistle\": [216, 191, 216],\n  \"tomato\": [255, 99, 71],\n  \"turquoise\": [64, 224, 208],\n  \"violet\": [238, 130, 238],\n  \"wheat\": [245, 222, 179],\n  \"white\": [255, 255, 255],\n  \"whitesmoke\": [245, 245, 245],\n  \"yellow\": [255, 255, 0],\n  \"yellowgreen\": [154, 205, 50]\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-name/index.js?");
-
-/***/ }),
-
-/***/ "./node_modules/color-string/index.js":
-/*!********************************************!*\
-  !*** ./node_modules/color-string/index.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("/* MIT license */\nvar colorNames = __webpack_require__(/*! color-name */ \"./node_modules/color-name/index.js\");\n\nvar swizzle = __webpack_require__(/*! simple-swizzle */ \"./node_modules/simple-swizzle/index.js\");\n\nvar reverseNames = {}; // create a list of reverse color names\n\nfor (var name in colorNames) {\n  if (colorNames.hasOwnProperty(name)) {\n    reverseNames[colorNames[name]] = name;\n  }\n}\n\nvar cs = module.exports = {\n  to: {},\n  get: {}\n};\n\ncs.get = function (string) {\n  var prefix = string.substring(0, 3).toLowerCase();\n  var val;\n  var model;\n\n  switch (prefix) {\n    case 'hsl':\n      val = cs.get.hsl(string);\n      model = 'hsl';\n      break;\n\n    case 'hwb':\n      val = cs.get.hwb(string);\n      model = 'hwb';\n      break;\n\n    default:\n      val = cs.get.rgb(string);\n      model = 'rgb';\n      break;\n  }\n\n  if (!val) {\n    return null;\n  }\n\n  return {\n    model: model,\n    value: val\n  };\n};\n\ncs.get.rgb = function (string) {\n  if (!string) {\n    return null;\n  }\n\n  var abbr = /^#([a-f0-9]{3,4})$/i;\n  var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;\n  var rgba = /^rgba?\\(\\s*([+-]?\\d+)\\s*,\\s*([+-]?\\d+)\\s*,\\s*([+-]?\\d+)\\s*(?:,\\s*([+-]?[\\d\\.]+)\\s*)?\\)$/;\n  var per = /^rgba?\\(\\s*([+-]?[\\d\\.]+)\\%\\s*,\\s*([+-]?[\\d\\.]+)\\%\\s*,\\s*([+-]?[\\d\\.]+)\\%\\s*(?:,\\s*([+-]?[\\d\\.]+)\\s*)?\\)$/;\n  var keyword = /(\\D+)/;\n  var rgb = [0, 0, 0, 1];\n  var match;\n  var i;\n  var hexAlpha;\n\n  if (match = string.match(hex)) {\n    hexAlpha = match[2];\n    match = match[1];\n\n    for (i = 0; i < 3; i++) {\n      // https://jsperf.com/slice-vs-substr-vs-substring-methods-long-string/19\n      var i2 = i * 2;\n      rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);\n    }\n\n    if (hexAlpha) {\n      rgb[3] = Math.round(parseInt(hexAlpha, 16) / 255 * 100) / 100;\n    }\n  } else if (match = string.match(abbr)) {\n    match = match[1];\n    hexAlpha = match[3];\n\n    for (i = 0; i < 3; i++) {\n      rgb[i] = parseInt(match[i] + match[i], 16);\n    }\n\n    if (hexAlpha) {\n      rgb[3] = Math.round(parseInt(hexAlpha + hexAlpha, 16) / 255 * 100) / 100;\n    }\n  } else if (match = string.match(rgba)) {\n    for (i = 0; i < 3; i++) {\n      rgb[i] = parseInt(match[i + 1], 0);\n    }\n\n    if (match[4]) {\n      rgb[3] = parseFloat(match[4]);\n    }\n  } else if (match = string.match(per)) {\n    for (i = 0; i < 3; i++) {\n      rgb[i] = Math.round(parseFloat(match[i + 1]) * 2.55);\n    }\n\n    if (match[4]) {\n      rgb[3] = parseFloat(match[4]);\n    }\n  } else if (match = string.match(keyword)) {\n    if (match[1] === 'transparent') {\n      return [0, 0, 0, 0];\n    }\n\n    rgb = colorNames[match[1]];\n\n    if (!rgb) {\n      return null;\n    }\n\n    rgb[3] = 1;\n    return rgb;\n  } else {\n    return null;\n  }\n\n  for (i = 0; i < 3; i++) {\n    rgb[i] = clamp(rgb[i], 0, 255);\n  }\n\n  rgb[3] = clamp(rgb[3], 0, 1);\n  return rgb;\n};\n\ncs.get.hsl = function (string) {\n  if (!string) {\n    return null;\n  }\n\n  var hsl = /^hsla?\\(\\s*([+-]?(?:\\d*\\.)?\\d+)(?:deg)?\\s*,\\s*([+-]?[\\d\\.]+)%\\s*,\\s*([+-]?[\\d\\.]+)%\\s*(?:,\\s*([+-]?[\\d\\.]+)\\s*)?\\)$/;\n  var match = string.match(hsl);\n\n  if (match) {\n    var alpha = parseFloat(match[4]);\n    var h = (parseFloat(match[1]) + 360) % 360;\n    var s = clamp(parseFloat(match[2]), 0, 100);\n    var l = clamp(parseFloat(match[3]), 0, 100);\n    var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);\n    return [h, s, l, a];\n  }\n\n  return null;\n};\n\ncs.get.hwb = function (string) {\n  if (!string) {\n    return null;\n  }\n\n  var hwb = /^hwb\\(\\s*([+-]?\\d*[\\.]?\\d+)(?:deg)?\\s*,\\s*([+-]?[\\d\\.]+)%\\s*,\\s*([+-]?[\\d\\.]+)%\\s*(?:,\\s*([+-]?[\\d\\.]+)\\s*)?\\)$/;\n  var match = string.match(hwb);\n\n  if (match) {\n    var alpha = parseFloat(match[4]);\n    var h = (parseFloat(match[1]) % 360 + 360) % 360;\n    var w = clamp(parseFloat(match[2]), 0, 100);\n    var b = clamp(parseFloat(match[3]), 0, 100);\n    var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);\n    return [h, w, b, a];\n  }\n\n  return null;\n};\n\ncs.to.hex = function () {\n  var rgba = swizzle(arguments);\n  return '#' + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + (rgba[3] < 1 ? hexDouble(Math.round(rgba[3] * 255)) : '');\n};\n\ncs.to.rgb = function () {\n  var rgba = swizzle(arguments);\n  return rgba.length < 4 || rgba[3] === 1 ? 'rgb(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ')' : 'rgba(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ', ' + rgba[3] + ')';\n};\n\ncs.to.rgb.percent = function () {\n  var rgba = swizzle(arguments);\n  var r = Math.round(rgba[0] / 255 * 100);\n  var g = Math.round(rgba[1] / 255 * 100);\n  var b = Math.round(rgba[2] / 255 * 100);\n  return rgba.length < 4 || rgba[3] === 1 ? 'rgb(' + r + '%, ' + g + '%, ' + b + '%)' : 'rgba(' + r + '%, ' + g + '%, ' + b + '%, ' + rgba[3] + ')';\n};\n\ncs.to.hsl = function () {\n  var hsla = swizzle(arguments);\n  return hsla.length < 4 || hsla[3] === 1 ? 'hsl(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%)' : 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + hsla[3] + ')';\n}; // hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax\n// (hwb have alpha optional & 1 is default value)\n\n\ncs.to.hwb = function () {\n  var hwba = swizzle(arguments);\n  var a = '';\n\n  if (hwba.length >= 4 && hwba[3] !== 1) {\n    a = ', ' + hwba[3];\n  }\n\n  return 'hwb(' + hwba[0] + ', ' + hwba[1] + '%, ' + hwba[2] + '%' + a + ')';\n};\n\ncs.to.keyword = function (rgb) {\n  return reverseNames[rgb.slice(0, 3)];\n}; // helpers\n\n\nfunction clamp(num, min, max) {\n  return Math.min(Math.max(min, num), max);\n}\n\nfunction hexDouble(num) {\n  var str = num.toString(16).toUpperCase();\n  return str.length < 2 ? '0' + str : str;\n}\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color-string/index.js?");
-
-/***/ }),
-
-/***/ "./node_modules/color/index.js":
-/*!*************************************!*\
-  !*** ./node_modules/color/index.js ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nvar colorString = __webpack_require__(/*! color-string */ \"./node_modules/color-string/index.js\");\n\nvar convert = __webpack_require__(/*! color-convert */ \"./node_modules/color-convert/index.js\");\n\nvar _slice = [].slice;\nvar skippedModels = [// to be honest, I don't really feel like keyword belongs in color convert, but eh.\n'keyword', // gray conflicts with some method names, and has its own method defined.\n'gray', // shouldn't really be in color-convert either...\n'hex'];\nvar hashedModelKeys = {};\nObject.keys(convert).forEach(function (model) {\n  hashedModelKeys[_slice.call(convert[model].labels).sort().join('')] = model;\n});\nvar limiters = {};\n\nfunction Color(obj, model) {\n  if (!(this instanceof Color)) {\n    return new Color(obj, model);\n  }\n\n  if (model && model in skippedModels) {\n    model = null;\n  }\n\n  if (model && !(model in convert)) {\n    throw new Error('Unknown model: ' + model);\n  }\n\n  var i;\n  var channels;\n\n  if (typeof obj === 'undefined') {\n    this.model = 'rgb';\n    this.color = [0, 0, 0];\n    this.valpha = 1;\n  } else if (obj instanceof Color) {\n    this.model = obj.model;\n    this.color = obj.color.slice();\n    this.valpha = obj.valpha;\n  } else if (typeof obj === 'string') {\n    var result = colorString.get(obj);\n\n    if (result === null) {\n      throw new Error('Unable to parse color from string: ' + obj);\n    }\n\n    this.model = result.model;\n    channels = convert[this.model].channels;\n    this.color = result.value.slice(0, channels);\n    this.valpha = typeof result.value[channels] === 'number' ? result.value[channels] : 1;\n  } else if (obj.length) {\n    this.model = model || 'rgb';\n    channels = convert[this.model].channels;\n\n    var newArr = _slice.call(obj, 0, channels);\n\n    this.color = zeroArray(newArr, channels);\n    this.valpha = typeof obj[channels] === 'number' ? obj[channels] : 1;\n  } else if (typeof obj === 'number') {\n    // this is always RGB - can be converted later on.\n    obj &= 0xFFFFFF;\n    this.model = 'rgb';\n    this.color = [obj >> 16 & 0xFF, obj >> 8 & 0xFF, obj & 0xFF];\n    this.valpha = 1;\n  } else {\n    this.valpha = 1;\n    var keys = Object.keys(obj);\n\n    if ('alpha' in obj) {\n      keys.splice(keys.indexOf('alpha'), 1);\n      this.valpha = typeof obj.alpha === 'number' ? obj.alpha : 0;\n    }\n\n    var hashedKeys = keys.sort().join('');\n\n    if (!(hashedKeys in hashedModelKeys)) {\n      throw new Error('Unable to parse color from object: ' + JSON.stringify(obj));\n    }\n\n    this.model = hashedModelKeys[hashedKeys];\n    var labels = convert[this.model].labels;\n    var color = [];\n\n    for (i = 0; i < labels.length; i++) {\n      color.push(obj[labels[i]]);\n    }\n\n    this.color = zeroArray(color);\n  } // perform limitations (clamping, etc.)\n\n\n  if (limiters[this.model]) {\n    channels = convert[this.model].channels;\n\n    for (i = 0; i < channels; i++) {\n      var limit = limiters[this.model][i];\n\n      if (limit) {\n        this.color[i] = limit(this.color[i]);\n      }\n    }\n  }\n\n  this.valpha = Math.max(0, Math.min(1, this.valpha));\n\n  if (Object.freeze) {\n    Object.freeze(this);\n  }\n}\n\nColor.prototype = {\n  toString: function () {\n    return this.string();\n  },\n  toJSON: function () {\n    return this[this.model]();\n  },\n  string: function (places) {\n    var self = this.model in colorString.to ? this : this.rgb();\n    self = self.round(typeof places === 'number' ? places : 1);\n    var args = self.valpha === 1 ? self.color : self.color.concat(this.valpha);\n    return colorString.to[self.model](args);\n  },\n  percentString: function (places) {\n    var self = this.rgb().round(typeof places === 'number' ? places : 1);\n    var args = self.valpha === 1 ? self.color : self.color.concat(this.valpha);\n    return colorString.to.rgb.percent(args);\n  },\n  array: function () {\n    return this.valpha === 1 ? this.color.slice() : this.color.concat(this.valpha);\n  },\n  object: function () {\n    var result = {};\n    var channels = convert[this.model].channels;\n    var labels = convert[this.model].labels;\n\n    for (var i = 0; i < channels; i++) {\n      result[labels[i]] = this.color[i];\n    }\n\n    if (this.valpha !== 1) {\n      result.alpha = this.valpha;\n    }\n\n    return result;\n  },\n  unitArray: function () {\n    var rgb = this.rgb().color;\n    rgb[0] /= 255;\n    rgb[1] /= 255;\n    rgb[2] /= 255;\n\n    if (this.valpha !== 1) {\n      rgb.push(this.valpha);\n    }\n\n    return rgb;\n  },\n  unitObject: function () {\n    var rgb = this.rgb().object();\n    rgb.r /= 255;\n    rgb.g /= 255;\n    rgb.b /= 255;\n\n    if (this.valpha !== 1) {\n      rgb.alpha = this.valpha;\n    }\n\n    return rgb;\n  },\n  round: function (places) {\n    places = Math.max(places || 0, 0);\n    return new Color(this.color.map(roundToPlace(places)).concat(this.valpha), this.model);\n  },\n  alpha: function (val) {\n    if (arguments.length) {\n      return new Color(this.color.concat(Math.max(0, Math.min(1, val))), this.model);\n    }\n\n    return this.valpha;\n  },\n  // rgb\n  red: getset('rgb', 0, maxfn(255)),\n  green: getset('rgb', 1, maxfn(255)),\n  blue: getset('rgb', 2, maxfn(255)),\n  hue: getset(['hsl', 'hsv', 'hsl', 'hwb', 'hcg'], 0, function (val) {\n    return (val % 360 + 360) % 360;\n  }),\n  // eslint-disable-line brace-style\n  saturationl: getset('hsl', 1, maxfn(100)),\n  lightness: getset('hsl', 2, maxfn(100)),\n  saturationv: getset('hsv', 1, maxfn(100)),\n  value: getset('hsv', 2, maxfn(100)),\n  chroma: getset('hcg', 1, maxfn(100)),\n  gray: getset('hcg', 2, maxfn(100)),\n  white: getset('hwb', 1, maxfn(100)),\n  wblack: getset('hwb', 2, maxfn(100)),\n  cyan: getset('cmyk', 0, maxfn(100)),\n  magenta: getset('cmyk', 1, maxfn(100)),\n  yellow: getset('cmyk', 2, maxfn(100)),\n  black: getset('cmyk', 3, maxfn(100)),\n  x: getset('xyz', 0, maxfn(100)),\n  y: getset('xyz', 1, maxfn(100)),\n  z: getset('xyz', 2, maxfn(100)),\n  l: getset('lab', 0, maxfn(100)),\n  a: getset('lab', 1),\n  b: getset('lab', 2),\n  keyword: function (val) {\n    if (arguments.length) {\n      return new Color(val);\n    }\n\n    return convert[this.model].keyword(this.color);\n  },\n  hex: function (val) {\n    if (arguments.length) {\n      return new Color(val);\n    }\n\n    return colorString.to.hex(this.rgb().round().color);\n  },\n  rgbNumber: function () {\n    var rgb = this.rgb().color;\n    return (rgb[0] & 0xFF) << 16 | (rgb[1] & 0xFF) << 8 | rgb[2] & 0xFF;\n  },\n  luminosity: function () {\n    // http://www.w3.org/TR/WCAG20/#relativeluminancedef\n    var rgb = this.rgb().color;\n    var lum = [];\n\n    for (var i = 0; i < rgb.length; i++) {\n      var chan = rgb[i] / 255;\n      lum[i] = chan <= 0.03928 ? chan / 12.92 : Math.pow((chan + 0.055) / 1.055, 2.4);\n    }\n\n    return 0.2126 * lum[0] + 0.7152 * lum[1] + 0.0722 * lum[2];\n  },\n  contrast: function (color2) {\n    // http://www.w3.org/TR/WCAG20/#contrast-ratiodef\n    var lum1 = this.luminosity();\n    var lum2 = color2.luminosity();\n\n    if (lum1 > lum2) {\n      return (lum1 + 0.05) / (lum2 + 0.05);\n    }\n\n    return (lum2 + 0.05) / (lum1 + 0.05);\n  },\n  level: function (color2) {\n    var contrastRatio = this.contrast(color2);\n\n    if (contrastRatio >= 7.1) {\n      return 'AAA';\n    }\n\n    return contrastRatio >= 4.5 ? 'AA' : '';\n  },\n  isDark: function () {\n    // YIQ equation from http://24ways.org/2010/calculating-color-contrast\n    var rgb = this.rgb().color;\n    var yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;\n    return yiq < 128;\n  },\n  isLight: function () {\n    return !this.isDark();\n  },\n  negate: function () {\n    var rgb = this.rgb();\n\n    for (var i = 0; i < 3; i++) {\n      rgb.color[i] = 255 - rgb.color[i];\n    }\n\n    return rgb;\n  },\n  lighten: function (ratio) {\n    var hsl = this.hsl();\n    hsl.color[2] += hsl.color[2] * ratio;\n    return hsl;\n  },\n  darken: function (ratio) {\n    var hsl = this.hsl();\n    hsl.color[2] -= hsl.color[2] * ratio;\n    return hsl;\n  },\n  saturate: function (ratio) {\n    var hsl = this.hsl();\n    hsl.color[1] += hsl.color[1] * ratio;\n    return hsl;\n  },\n  desaturate: function (ratio) {\n    var hsl = this.hsl();\n    hsl.color[1] -= hsl.color[1] * ratio;\n    return hsl;\n  },\n  whiten: function (ratio) {\n    var hwb = this.hwb();\n    hwb.color[1] += hwb.color[1] * ratio;\n    return hwb;\n  },\n  blacken: function (ratio) {\n    var hwb = this.hwb();\n    hwb.color[2] += hwb.color[2] * ratio;\n    return hwb;\n  },\n  grayscale: function () {\n    // http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale\n    var rgb = this.rgb().color;\n    var val = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;\n    return Color.rgb(val, val, val);\n  },\n  fade: function (ratio) {\n    return this.alpha(this.valpha - this.valpha * ratio);\n  },\n  opaquer: function (ratio) {\n    return this.alpha(this.valpha + this.valpha * ratio);\n  },\n  rotate: function (degrees) {\n    var hsl = this.hsl();\n    var hue = hsl.color[0];\n    hue = (hue + degrees) % 360;\n    hue = hue < 0 ? 360 + hue : hue;\n    hsl.color[0] = hue;\n    return hsl;\n  },\n  mix: function (mixinColor, weight) {\n    // ported from sass implementation in C\n    // https://github.com/sass/libsass/blob/0e6b4a2850092356aa3ece07c6b249f0221caced/functions.cpp#L209\n    var color1 = mixinColor.rgb();\n    var color2 = this.rgb();\n    var p = weight === undefined ? 0.5 : weight;\n    var w = 2 * p - 1;\n    var a = color1.alpha() - color2.alpha();\n    var w1 = ((w * a === -1 ? w : (w + a) / (1 + w * a)) + 1) / 2.0;\n    var w2 = 1 - w1;\n    return Color.rgb(w1 * color1.red() + w2 * color2.red(), w1 * color1.green() + w2 * color2.green(), w1 * color1.blue() + w2 * color2.blue(), color1.alpha() * p + color2.alpha() * (1 - p));\n  }\n}; // model conversion methods and static constructors\n\nObject.keys(convert).forEach(function (model) {\n  if (skippedModels.indexOf(model) !== -1) {\n    return;\n  }\n\n  var channels = convert[model].channels; // conversion methods\n\n  Color.prototype[model] = function () {\n    if (this.model === model) {\n      return new Color(this);\n    }\n\n    if (arguments.length) {\n      return new Color(arguments, model);\n    }\n\n    var newAlpha = typeof arguments[channels] === 'number' ? channels : this.valpha;\n    return new Color(assertArray(convert[this.model][model].raw(this.color)).concat(newAlpha), model);\n  }; // 'static' construction methods\n\n\n  Color[model] = function (color) {\n    if (typeof color === 'number') {\n      color = zeroArray(_slice.call(arguments), channels);\n    }\n\n    return new Color(color, model);\n  };\n});\n\nfunction roundTo(num, places) {\n  return Number(num.toFixed(places));\n}\n\nfunction roundToPlace(places) {\n  return function (num) {\n    return roundTo(num, places);\n  };\n}\n\nfunction getset(model, channel, modifier) {\n  model = Array.isArray(model) ? model : [model];\n  model.forEach(function (m) {\n    (limiters[m] || (limiters[m] = []))[channel] = modifier;\n  });\n  model = model[0];\n  return function (val) {\n    var result;\n\n    if (arguments.length) {\n      if (modifier) {\n        val = modifier(val);\n      }\n\n      result = this[model]();\n      result.color[channel] = val;\n      return result;\n    }\n\n    result = this[model]().color[channel];\n\n    if (modifier) {\n      result = modifier(result);\n    }\n\n    return result;\n  };\n}\n\nfunction maxfn(max) {\n  return function (v) {\n    return Math.max(0, Math.min(max, v));\n  };\n}\n\nfunction assertArray(val) {\n  return Array.isArray(val) ? val : [val];\n}\n\nfunction zeroArray(arr, length) {\n  for (var i = 0; i < length; i++) {\n    if (typeof arr[i] !== 'number') {\n      arr[i] = 0;\n    }\n  }\n\n  return arr;\n}\n\nmodule.exports = Color;\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/color/index.js?");
-
-/***/ }),
-
-/***/ "./node_modules/ev-emitter/ev-emitter.js":
-/*!***********************************************!*\
-  !*** ./node_modules/ev-emitter/ev-emitter.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**\n * EvEmitter v1.1.0\n * Lil' event emitter\n * MIT License\n */\n\n/* jshint unused: true, undef: true, strict: true */\n(function (global, factory) {\n  // universal module definition\n\n  /* jshint strict: false */\n\n  /* globals define, module, window */\n  if (true) {\n    // AMD - RequireJS\n    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),\n\t\t\t\t__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?\n\t\t\t\t(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :\n\t\t\t\t__WEBPACK_AMD_DEFINE_FACTORY__),\n\t\t\t\t__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));\n  } else {}\n})(typeof window != 'undefined' ? window : this, function () {\n  \"use strict\";\n\n  function EvEmitter() {}\n\n  var proto = EvEmitter.prototype;\n\n  proto.on = function (eventName, listener) {\n    if (!eventName || !listener) {\n      return;\n    } // set events hash\n\n\n    var events = this._events = this._events || {}; // set listeners array\n\n    var listeners = events[eventName] = events[eventName] || []; // only add once\n\n    if (listeners.indexOf(listener) == -1) {\n      listeners.push(listener);\n    }\n\n    return this;\n  };\n\n  proto.once = function (eventName, listener) {\n    if (!eventName || !listener) {\n      return;\n    } // add event\n\n\n    this.on(eventName, listener); // set once flag\n    // set onceEvents hash\n\n    var onceEvents = this._onceEvents = this._onceEvents || {}; // set onceListeners object\n\n    var onceListeners = onceEvents[eventName] = onceEvents[eventName] || {}; // set flag\n\n    onceListeners[listener] = true;\n    return this;\n  };\n\n  proto.off = function (eventName, listener) {\n    var listeners = this._events && this._events[eventName];\n\n    if (!listeners || !listeners.length) {\n      return;\n    }\n\n    var index = listeners.indexOf(listener);\n\n    if (index != -1) {\n      listeners.splice(index, 1);\n    }\n\n    return this;\n  };\n\n  proto.emitEvent = function (eventName, args) {\n    var listeners = this._events && this._events[eventName];\n\n    if (!listeners || !listeners.length) {\n      return;\n    } // copy over to avoid interference if .off() in listener\n\n\n    listeners = listeners.slice(0);\n    args = args || []; // once stuff\n\n    var onceListeners = this._onceEvents && this._onceEvents[eventName];\n\n    for (var i = 0; i < listeners.length; i++) {\n      var listener = listeners[i];\n      var isOnce = onceListeners && onceListeners[listener];\n\n      if (isOnce) {\n        // remove listener\n        // remove before trigger to prevent recursion\n        this.off(eventName, listener); // unset once flag\n\n        delete onceListeners[listener];\n      } // trigger listener\n\n\n      listener.apply(this, args);\n    }\n\n    return this;\n  };\n\n  proto.allOff = function () {\n    delete this._events;\n    delete this._onceEvents;\n  };\n\n  return EvEmitter;\n});\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/ev-emitter/ev-emitter.js?");
-
-/***/ }),
-
-/***/ "./node_modules/imagesloaded/imagesloaded.js":
-/*!***************************************************!*\
-  !*** ./node_modules/imagesloaded/imagesloaded.js ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!\n * imagesLoaded v4.1.4\n * JavaScript is all like \"You images are done yet or what?\"\n * MIT License\n */\n(function (window, factory) {\n  'use strict'; // universal module definition\n\n  /*global define: false, module: false, require: false */\n\n  if (true) {\n    // AMD\n    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! ev-emitter/ev-emitter */ \"./node_modules/ev-emitter/ev-emitter.js\")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (EvEmitter) {\n      return factory(window, EvEmitter);\n    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),\n\t\t\t\t__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));\n  } else {}\n})(typeof window !== 'undefined' ? window : this, // --------------------------  factory -------------------------- //\nfunction factory(window, EvEmitter) {\n  'use strict';\n\n  var $ = window.jQuery;\n  var console = window.console; // -------------------------- helpers -------------------------- //\n  // extend objects\n\n  function extend(a, b) {\n    for (var prop in b) {\n      a[prop] = b[prop];\n    }\n\n    return a;\n  }\n\n  var arraySlice = Array.prototype.slice; // turn element or nodeList into an array\n\n  function makeArray(obj) {\n    if (Array.isArray(obj)) {\n      // use object if already an array\n      return obj;\n    }\n\n    var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';\n\n    if (isArrayLike) {\n      // convert nodeList to array\n      return arraySlice.call(obj);\n    } // array of single index\n\n\n    return [obj];\n  } // -------------------------- imagesLoaded -------------------------- //\n\n  /**\n   * @param {Array, Element, NodeList, String} elem\n   * @param {Object or Function} options - if function, use as callback\n   * @param {Function} onAlways - callback function\n   */\n\n\n  function ImagesLoaded(elem, options, onAlways) {\n    // coerce ImagesLoaded() without new, to be new ImagesLoaded()\n    if (!(this instanceof ImagesLoaded)) {\n      return new ImagesLoaded(elem, options, onAlways);\n    } // use elem as selector string\n\n\n    var queryElem = elem;\n\n    if (typeof elem == 'string') {\n      queryElem = document.querySelectorAll(elem);\n    } // bail if bad element\n\n\n    if (!queryElem) {\n      console.error('Bad element for imagesLoaded ' + (queryElem || elem));\n      return;\n    }\n\n    this.elements = makeArray(queryElem);\n    this.options = extend({}, this.options); // shift arguments if no options set\n\n    if (typeof options == 'function') {\n      onAlways = options;\n    } else {\n      extend(this.options, options);\n    }\n\n    if (onAlways) {\n      this.on('always', onAlways);\n    }\n\n    this.getImages();\n\n    if ($) {\n      // add jQuery Deferred object\n      this.jqDeferred = new $.Deferred();\n    } // HACK check async to allow time to bind listeners\n\n\n    setTimeout(this.check.bind(this));\n  }\n\n  ImagesLoaded.prototype = Object.create(EvEmitter.prototype);\n  ImagesLoaded.prototype.options = {};\n\n  ImagesLoaded.prototype.getImages = function () {\n    this.images = []; // filter & find items if we have an item selector\n\n    this.elements.forEach(this.addElementImages, this);\n  };\n  /**\n   * @param {Node} element\n   */\n\n\n  ImagesLoaded.prototype.addElementImages = function (elem) {\n    // filter siblings\n    if (elem.nodeName == 'IMG') {\n      this.addImage(elem);\n    } // get background image on element\n\n\n    if (this.options.background === true) {\n      this.addElementBackgroundImages(elem);\n    } // find children\n    // no non-element nodes, #143\n\n\n    var nodeType = elem.nodeType;\n\n    if (!nodeType || !elementNodeTypes[nodeType]) {\n      return;\n    }\n\n    var childImgs = elem.querySelectorAll('img'); // concat childElems to filterFound array\n\n    for (var i = 0; i < childImgs.length; i++) {\n      var img = childImgs[i];\n      this.addImage(img);\n    } // get child background images\n\n\n    if (typeof this.options.background == 'string') {\n      var children = elem.querySelectorAll(this.options.background);\n\n      for (i = 0; i < children.length; i++) {\n        var child = children[i];\n        this.addElementBackgroundImages(child);\n      }\n    }\n  };\n\n  var elementNodeTypes = {\n    1: true,\n    9: true,\n    11: true\n  };\n\n  ImagesLoaded.prototype.addElementBackgroundImages = function (elem) {\n    var style = getComputedStyle(elem);\n\n    if (!style) {\n      // Firefox returns null if in a hidden iframe https://bugzil.la/548397\n      return;\n    } // get url inside url(\"...\")\n\n\n    var reURL = /url\\((['\"])?(.*?)\\1\\)/gi;\n    var matches = reURL.exec(style.backgroundImage);\n\n    while (matches !== null) {\n      var url = matches && matches[2];\n\n      if (url) {\n        this.addBackground(url, elem);\n      }\n\n      matches = reURL.exec(style.backgroundImage);\n    }\n  };\n  /**\n   * @param {Image} img\n   */\n\n\n  ImagesLoaded.prototype.addImage = function (img) {\n    var loadingImage = new LoadingImage(img);\n    this.images.push(loadingImage);\n  };\n\n  ImagesLoaded.prototype.addBackground = function (url, elem) {\n    var background = new Background(url, elem);\n    this.images.push(background);\n  };\n\n  ImagesLoaded.prototype.check = function () {\n    var _this = this;\n\n    this.progressedCount = 0;\n    this.hasAnyBroken = false; // complete if no images\n\n    if (!this.images.length) {\n      this.complete();\n      return;\n    }\n\n    function onProgress(image, elem, message) {\n      // HACK - Chrome triggers event before object properties have changed. #83\n      setTimeout(function () {\n        _this.progress(image, elem, message);\n      });\n    }\n\n    this.images.forEach(function (loadingImage) {\n      loadingImage.once('progress', onProgress);\n      loadingImage.check();\n    });\n  };\n\n  ImagesLoaded.prototype.progress = function (image, elem, message) {\n    this.progressedCount++;\n    this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded; // progress event\n\n    this.emitEvent('progress', [this, image, elem]);\n\n    if (this.jqDeferred && this.jqDeferred.notify) {\n      this.jqDeferred.notify(this, image);\n    } // check if completed\n\n\n    if (this.progressedCount == this.images.length) {\n      this.complete();\n    }\n\n    if (this.options.debug && console) {\n      console.log('progress: ' + message, image, elem);\n    }\n  };\n\n  ImagesLoaded.prototype.complete = function () {\n    var eventName = this.hasAnyBroken ? 'fail' : 'done';\n    this.isComplete = true;\n    this.emitEvent(eventName, [this]);\n    this.emitEvent('always', [this]);\n\n    if (this.jqDeferred) {\n      var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';\n      this.jqDeferred[jqMethod](this);\n    }\n  }; // --------------------------  -------------------------- //\n\n\n  function LoadingImage(img) {\n    this.img = img;\n  }\n\n  LoadingImage.prototype = Object.create(EvEmitter.prototype);\n\n  LoadingImage.prototype.check = function () {\n    // If complete is true and browser supports natural sizes,\n    // try to check for image status manually.\n    var isComplete = this.getIsImageComplete();\n\n    if (isComplete) {\n      // report based on naturalWidth\n      this.confirm(this.img.naturalWidth !== 0, 'naturalWidth');\n      return;\n    } // If none of the checks above matched, simulate loading on detached element.\n\n\n    this.proxyImage = new Image();\n    this.proxyImage.addEventListener('load', this);\n    this.proxyImage.addEventListener('error', this); // bind to image as well for Firefox. #191\n\n    this.img.addEventListener('load', this);\n    this.img.addEventListener('error', this);\n    this.proxyImage.src = this.img.src;\n  };\n\n  LoadingImage.prototype.getIsImageComplete = function () {\n    // check for non-zero, non-undefined naturalWidth\n    // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671\n    return this.img.complete && this.img.naturalWidth;\n  };\n\n  LoadingImage.prototype.confirm = function (isLoaded, message) {\n    this.isLoaded = isLoaded;\n    this.emitEvent('progress', [this, this.img, message]);\n  }; // ----- events ----- //\n  // trigger specified handler for event type\n\n\n  LoadingImage.prototype.handleEvent = function (event) {\n    var method = 'on' + event.type;\n\n    if (this[method]) {\n      this[method](event);\n    }\n  };\n\n  LoadingImage.prototype.onload = function () {\n    this.confirm(true, 'onload');\n    this.unbindEvents();\n  };\n\n  LoadingImage.prototype.onerror = function () {\n    this.confirm(false, 'onerror');\n    this.unbindEvents();\n  };\n\n  LoadingImage.prototype.unbindEvents = function () {\n    this.proxyImage.removeEventListener('load', this);\n    this.proxyImage.removeEventListener('error', this);\n    this.img.removeEventListener('load', this);\n    this.img.removeEventListener('error', this);\n  }; // -------------------------- Background -------------------------- //\n\n\n  function Background(url, element) {\n    this.url = url;\n    this.element = element;\n    this.img = new Image();\n  } // inherit LoadingImage prototype\n\n\n  Background.prototype = Object.create(LoadingImage.prototype);\n\n  Background.prototype.check = function () {\n    this.img.addEventListener('load', this);\n    this.img.addEventListener('error', this);\n    this.img.src = this.url; // check if image is already complete\n\n    var isComplete = this.getIsImageComplete();\n\n    if (isComplete) {\n      this.confirm(this.img.naturalWidth !== 0, 'naturalWidth');\n      this.unbindEvents();\n    }\n  };\n\n  Background.prototype.unbindEvents = function () {\n    this.img.removeEventListener('load', this);\n    this.img.removeEventListener('error', this);\n  };\n\n  Background.prototype.confirm = function (isLoaded, message) {\n    this.isLoaded = isLoaded;\n    this.emitEvent('progress', [this, this.element, message]);\n  }; // -------------------------- jQuery -------------------------- //\n\n\n  ImagesLoaded.makeJQueryPlugin = function (jQuery) {\n    jQuery = jQuery || window.jQuery;\n\n    if (!jQuery) {\n      return;\n    } // set local variable\n\n\n    $ = jQuery; // $().imagesLoaded()\n\n    $.fn.imagesLoaded = function (options, callback) {\n      var instance = new ImagesLoaded(this, options, callback);\n      return instance.jqDeferred.promise($(this));\n    };\n  }; // try making plugin\n\n\n  ImagesLoaded.makeJQueryPlugin(); // --------------------------  -------------------------- //\n\n  return ImagesLoaded;\n});\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/imagesloaded/imagesloaded.js?");
-
-/***/ }),
-
-/***/ "./node_modules/simple-swizzle/index.js":
-/*!**********************************************!*\
-  !*** ./node_modules/simple-swizzle/index.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nvar isArrayish = __webpack_require__(/*! is-arrayish */ \"./node_modules/simple-swizzle/node_modules/is-arrayish/index.js\");\n\nvar concat = Array.prototype.concat;\nvar slice = Array.prototype.slice;\n\nvar swizzle = module.exports = function swizzle(args) {\n  var results = [];\n\n  for (var i = 0, len = args.length; i < len; i++) {\n    var arg = args[i];\n\n    if (isArrayish(arg)) {\n      // http://jsperf.com/javascript-array-concat-vs-push/98\n      results = concat.call(results, slice.call(arg));\n    } else {\n      results.push(arg);\n    }\n  }\n\n  return results;\n};\n\nswizzle.wrap = function (fn) {\n  return function () {\n    return fn(swizzle(arguments));\n  };\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/simple-swizzle/index.js?");
-
-/***/ }),
-
-/***/ "./node_modules/simple-swizzle/node_modules/is-arrayish/index.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/simple-swizzle/node_modules/is-arrayish/index.js ***!
-  \***********************************************************************/
+/***/ "../../../tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/l.js":
+/*!*******************************************************************!*\
+  !*** /tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/l.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = function isArrayish(obj) {\n  if (!obj || typeof obj === 'string') {\n    return false;\n  }\n\n  return obj instanceof Array || Array.isArray(obj) || obj.length >= 0 && (obj.splice instanceof Function || Object.getOwnPropertyDescriptor(obj, obj.length - 1) && obj.constructor.name !== 'String');\n};\n\n//# sourceURL=webpack://__ember_auto_import__/./node_modules/simple-swizzle/node_modules/is-arrayish/index.js?");
+eval("\nwindow._eai_r = require;\nwindow._eai_d = define;\n\n\n//# sourceURL=webpack://__ember_auto_import__//tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/l.js?");
+
+/***/ }),
+
+/***/ 0:
+/*!***************************************************************************************************************************************!*\
+  !*** multi /tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/l.js /tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/app.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("__webpack_require__(/*! /tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/l.js */\"../../../tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/l.js\");\nmodule.exports = __webpack_require__(/*! /tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/app.js */\"../../../tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/app.js\");\n\n\n//# sourceURL=webpack://__ember_auto_import__/multi_/tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/l.js_/tmp/broccoli-90bS1aGPwcijC7/cache-325-bundler/staging/app.js?");
 
 /***/ })
 
-}]);//# sourceMappingURL=vendor.map
+/******/ });//# sourceMappingURL=vendor.map

@@ -9,7 +9,7 @@
     value: true
   });
   _exports.default = void 0;
-  const App = Ember.Application.extend({
+  var App = Ember.Application.extend({
     modulePrefix: _environment.default.modulePrefix,
     podModulePrefix: _environment.default.podModulePrefix,
     Resolver: _resolver.default
@@ -494,7 +494,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _basicDropdown.default;
     }
   });
@@ -508,7 +508,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _contentElement.default;
     }
   });
@@ -522,7 +522,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _content.default;
     }
   });
@@ -536,7 +536,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _trigger.default;
     }
   });
@@ -550,7 +550,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _component.default;
     }
   });
@@ -617,7 +617,7 @@
     layout: _swatch.default,
     attributeBindings: ['style'],
     style: Ember.computed('color', function () {
-      let style = '';
+      var style = '';
 
       if (this.color) {
         style = "background-color: ".concat(this.color);
@@ -638,7 +638,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _componentLineage.default;
     }
   });
@@ -652,7 +652,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _linkTo.default;
     }
   });
@@ -666,7 +666,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprAAdLabel.default;
     }
   });
@@ -680,7 +680,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprAButton.default;
     }
   });
@@ -694,7 +694,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprAKicker.default;
     }
   });
@@ -708,7 +708,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprAMediaObject.default;
     }
   });
@@ -722,7 +722,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprAPicture.default;
     }
   });
@@ -736,7 +736,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprASectionHeading.default;
     }
   });
@@ -750,7 +750,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprAStoryHeadline.default;
     }
   });
@@ -764,7 +764,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprASvg.default;
     }
   });
@@ -778,7 +778,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprATag.default;
     }
   });
@@ -792,7 +792,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprAToggleBox.default;
     }
   });
@@ -806,7 +806,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _trigger.default;
     }
   });
@@ -820,7 +820,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMAuthorBlock.default;
     }
   });
@@ -834,7 +834,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMBlockList.default;
     }
   });
@@ -848,7 +848,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMBlockMeta.default;
     }
   });
@@ -862,7 +862,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMBlock.default;
     }
   });
@@ -876,7 +876,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _body.default;
     }
   });
@@ -890,7 +890,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _eyebrow.default;
     }
   });
@@ -904,7 +904,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _media.default;
     }
   });
@@ -918,7 +918,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _object.default;
     }
   });
@@ -932,7 +932,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _text.default;
     }
   });
@@ -946,7 +946,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _titleLayout.default;
     }
   });
@@ -960,7 +960,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _title.default;
     }
   });
@@ -974,7 +974,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMBoxBanner.default;
     }
   });
@@ -988,7 +988,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _body.default;
     }
   });
@@ -1002,7 +1002,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _cta.default;
     }
   });
@@ -1016,7 +1016,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _dek.default;
     }
   });
@@ -1030,7 +1030,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _title.default;
     }
   });
@@ -1044,7 +1044,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMBrandsLinkroll.default;
     }
   });
@@ -1058,7 +1058,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMBreadcrumb.default;
     }
   });
@@ -1072,7 +1072,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMByline.default;
     }
   });
@@ -1086,7 +1086,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMFigcaption.default;
     }
   });
@@ -1100,7 +1100,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _caption.default;
     }
   });
@@ -1114,7 +1114,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _credit.default;
     }
   });
@@ -1128,7 +1128,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMFigure.default;
     }
   });
@@ -1142,7 +1142,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _image.default;
     }
   });
@@ -1156,7 +1156,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMGalleryLead.default;
     }
   });
@@ -1170,7 +1170,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMInlineSearch.default;
     }
   });
@@ -1184,7 +1184,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _form.default;
     }
   });
@@ -1198,7 +1198,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _open.default;
     }
   });
@@ -1212,7 +1212,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMNavReadMore.default;
     }
   });
@@ -1226,7 +1226,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMNewsletterForm.default;
     }
   });
@@ -1240,7 +1240,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _button.default;
     }
   });
@@ -1254,7 +1254,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _input.default;
     }
   });
@@ -1268,19 +1268,19 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMNewsletter.default;
     }
   });
   Object.defineProperty(_exports, "DEFAULT_LEGAL", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMNewsletter.DEFAULT_LEGAL;
     }
   });
   Object.defineProperty(_exports, "DEFAULT_SUBSCRIBED_MESSAGE", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMNewsletter.DEFAULT_SUBSCRIBED_MESSAGE;
     }
   });
@@ -1294,7 +1294,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMProgressBar.default;
     }
   });
@@ -1308,7 +1308,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMPullquote.default;
     }
   });
@@ -1322,7 +1322,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _attribution.default;
     }
   });
@@ -1336,7 +1336,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _quote.default;
     }
   });
@@ -1350,7 +1350,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMSecondaryNav.default;
     }
   });
@@ -1364,7 +1364,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMShareTools.default;
     }
   });
@@ -1378,7 +1378,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _link.default;
     }
   });
@@ -1392,7 +1392,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _share.default;
     }
   });
@@ -1406,7 +1406,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMTags.default;
     }
   });
@@ -1420,7 +1420,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMTextBanner.default;
     }
   });
@@ -1434,7 +1434,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprMToTop.default;
     }
   });
@@ -1448,7 +1448,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOArticleBody.default;
     }
   });
@@ -1462,7 +1462,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOArticleFooter.default;
     }
   });
@@ -1476,7 +1476,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOArticleHeader.default;
     }
   });
@@ -1490,7 +1490,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _lead.default;
     }
   });
@@ -1504,7 +1504,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _meta.default;
     }
   });
@@ -1518,7 +1518,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _publishDate.default;
     }
   });
@@ -1532,7 +1532,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _top.default;
     }
   });
@@ -1546,7 +1546,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOBlockListGroup.default;
     }
   });
@@ -1560,7 +1560,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _ad.default;
     }
   });
@@ -1574,7 +1574,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _column.default;
     }
   });
@@ -1588,7 +1588,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOContact.default;
     }
   });
@@ -1602,7 +1602,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprODonate.default;
     }
   });
@@ -1616,7 +1616,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOFeaturedBlockList.default;
     }
   });
@@ -1630,7 +1630,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _heading.default;
     }
   });
@@ -1644,7 +1644,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOFooter.default;
     }
   });
@@ -1658,7 +1658,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOGalleryOverlay.default;
     }
   });
@@ -1672,7 +1672,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _billboard.default;
     }
   });
@@ -1686,7 +1686,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _slide.default;
     }
   });
@@ -1700,7 +1700,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOHeader.default;
     }
   });
@@ -1714,7 +1714,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _headline.default;
     }
   });
@@ -1728,7 +1728,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _leaderboard.default;
     }
   });
@@ -1742,7 +1742,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _left.default;
     }
   });
@@ -1756,7 +1756,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _menu.default;
     }
   });
@@ -1770,7 +1770,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nav.default;
     }
   });
@@ -1784,7 +1784,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _right.default;
     }
   });
@@ -1798,7 +1798,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _share.default;
     }
   });
@@ -1812,7 +1812,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprONewsletterTout.default;
     }
   });
@@ -1826,7 +1826,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprORelatedContent.default;
     }
   });
@@ -1840,7 +1840,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOSponsoredTout.default;
     }
   });
@@ -1853,7 +1853,7 @@
     value: true
   });
   _exports.default = void 0;
-  const THEMES = ['nypr', 'wnyc', 'gothamist', 'wqxr', 'new-sounds', 'greene-space'];
+  var THEMES = ['nypr', 'wnyc', 'gothamist', 'wqxr', 'new-sounds', 'greene-space'];
 
   var _default = Ember.Component.extend({
     layout: _themeChooser.default,
@@ -1886,14 +1886,14 @@
     value: true
   });
   _exports.default = void 0;
-  const POSITIONS = {
+  var POSITIONS = {
     positionRightCenter: _toggleBoxPositions.positionRightCenter,
     positionTopCenter: _toggleBoxPositions.positionTopCenter,
     positionBottomCenter: _toggleBoxPositions.positionBottomCenter
   };
 
   var _default = Ember.Controller.extend({
-    POSITIONS
+    POSITIONS: POSITIONS
   });
 
   _exports.default = _default;
@@ -1906,7 +1906,7 @@
     value: true
   });
   _exports.default = void 0;
-  const BLOCKS = [{
+  var BLOCKS = [{
     title: 'Mayor Gives Press Conference',
     thumbnail: 'https://picsum.photos/id/237/600/400',
     section: 'News',
@@ -1930,7 +1930,7 @@
   }];
 
   var _default = Ember.Controller.extend({
-    BLOCKS
+    BLOCKS: BLOCKS
   });
 
   _exports.default = _default;
@@ -1946,16 +1946,19 @@
 
   var _default = Ember.Controller.extend({
     actions: {
-      toggleCloseFn() {
+      toggleCloseFn: function toggleCloseFn() {
+        var _this = this;
+
         if (this.close) {
           // clearing the checkbox
           this.set('close', null);
         } else {
           // setting a close function to be passed into the box banner component
-          this.set('close', () => this.set('close', null));
+          this.set('close', function () {
+            return _this.set('close', null);
+          });
         }
       }
-
     }
   });
 
@@ -1970,7 +1973,7 @@
   });
   _exports.default = void 0;
   // BEGIN-SNIPPET breadcrumb-definition.js
-  const BREADCRUMBS = [{
+  var BREADCRUMBS = [{
     label: 'News',
     url: '/tags/news'
   }, {
@@ -1978,7 +1981,7 @@
   }]; // END-SNIPPET  
 
   var _default = Ember.Controller.extend({
-    BREADCRUMBS
+    BREADCRUMBS: BREADCRUMBS
   });
 
   _exports.default = _default;
@@ -1991,8 +1994,17 @@
     value: true
   });
   _exports.default = void 0;
+
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   // BEGIN-SNIPPET byline-choices.js
-  const IN_HOUSE = [{
+  var IN_HOUSE = [{
     name: 'Jen Chung',
     url: '/authors/jen-chung'
   }, {
@@ -2005,7 +2017,7 @@
     name: 'Nancy Solomon',
     url: '/authors/nancy-solomon'
   }];
-  const CONTRIBUTORS = [{
+  var CONTRIBUTORS = [{
     name: 'Andrea Bernstein',
     url: '/authors/andrea-bernstein',
     org: {
@@ -2034,24 +2046,26 @@
       url: 'gothamist.com'
     }
   }];
-  const SPONSOR = {
+  var SPONSOR = {
     name: 'BMW',
     url: 'https://example.com/bmw'
   }; // END-SNIPPET
 
   var _default = Ember.Controller.extend({
-    IN_HOUSE,
-    CONTRIBUTORS,
-    SPONSOR,
+    IN_HOUSE: IN_HOUSE,
+    CONTRIBUTORS: CONTRIBUTORS,
+    SPONSOR: SPONSOR,
     authors: IN_HOUSE,
     actions: {
-      setAuthors({
-        target: {
-          value
-        }
-      }) {
-        let authors;
-        let [, type, amt] = value.match(/([^-]+)-(\d)/);
+      setAuthors: function setAuthors(_ref) {
+        var value = _ref.target.value;
+        var authors;
+
+        var _value$match = value.match(/([^-]+)-(\d)/),
+            _value$match2 = _slicedToArray(_value$match, 3),
+            type = _value$match2[1],
+            amt = _value$match2[2];
+
         amt = Number(amt);
 
         switch (type) {
@@ -2065,18 +2079,16 @@
         }
 
         this.setProperties({
-          authors,
+          authors: authors,
           sponsor: null
         });
       },
-
-      chooseSponsor() {
+      chooseSponsor: function chooseSponsor() {
         this.setProperties({
           sponsor: SPONSOR,
           authors: null
         });
       }
-
     }
   });
 
@@ -2091,7 +2103,7 @@
   });
   _exports.default = _exports.GALLERY = void 0;
   // BEGIN-SNIPPET sample-gallery.js
-  const GALLERY = [{
+  var GALLERY = [{
     caption: 'This is a slide caption',
     credit: 'Getty',
     src: 'https://picsum.photos/600/300?random',
@@ -2115,7 +2127,7 @@
   _exports.GALLERY = GALLERY;
 
   var _default = Ember.Controller.extend({
-    GALLERY
+    GALLERY: GALLERY
   });
 
   _exports.default = _default;
@@ -2145,7 +2157,7 @@
     value: true
   });
   _exports.default = void 0;
-  const STORY = {
+  var STORY = {
     breadcrumbs: [{
       label: 'News'
     }],
@@ -2168,16 +2180,15 @@
   };
 
   var _default = Ember.Controller.extend({
-    STORY,
+    STORY: STORY,
     actions: {
-      toggleLede() {
+      toggleLede: function toggleLede() {
         if (STORY.gallery) {
           Ember.set(STORY, 'gallery', null);
         } else {
           Ember.set(STORY, 'gallery', _nyprOGalleryOverlay.GALLERY);
         }
       }
-
     }
   });
 
@@ -2206,8 +2217,8 @@
     value: true
   });
   _exports.default = void 0;
-  const DONATE_URL = "https://pledge3.wnyc.org/donate/gothamist/onestep/?utm_medium=partnersite&utm_source=gothamist&utm_campaign=brandheader";
-  const PRIMARY_NAV_ITEMS = [{
+  var DONATE_URL = "https://pledge3.wnyc.org/donate/gothamist/onestep/?utm_medium=partnersite&utm_source=gothamist&utm_campaign=brandheader";
+  var PRIMARY_NAV_ITEMS = [{
     text: 'News',
     url: '/news'
   }, {
@@ -2220,7 +2231,7 @@
     text: 'Popular',
     url: '/popular'
   }];
-  const SECONDARY_NAV_ITEMS = [{
+  var SECONDARY_NAV_ITEMS = [{
     text: 'Advertising',
     url: '/advertising'
   }, {
@@ -2236,21 +2247,21 @@
     text: 'Staff',
     url: '/staff'
   }];
-  const STORY = {
+  var STORY = {
     title: 'Mega-Guide: All The Food And Drink At The Huge Hudson Yards Mall'
   };
-  const GALLERY = {};
+  var GALLERY = {};
 
   var _default = Ember.Controller.extend({
-    DONATE_URL,
-    PRIMARY_NAV_ITEMS,
-    SECONDARY_NAV_ITEMS,
+    DONATE_URL: DONATE_URL,
+    PRIMARY_NAV_ITEMS: PRIMARY_NAV_ITEMS,
+    SECONDARY_NAV_ITEMS: SECONDARY_NAV_ITEMS,
     actions: {
-      setHeader(val) {
+      setHeader: function setHeader(val) {
         switch (val) {
           case 'A':
             this.setProperties({
-              STORY,
+              STORY: STORY,
               GALLERY: null
             });
             break;
@@ -2258,7 +2269,7 @@
           case 'G':
             this.setProperties({
               STORY: null,
-              GALLERY
+              GALLERY: GALLERY
             });
             break;
 
@@ -2269,7 +2280,6 @@
             });
         }
       }
-
     }
   });
 
@@ -2283,7 +2293,7 @@
     value: true
   });
   _exports.default = _exports.ITEMS = void 0;
-  const ITEMS = [{
+  var ITEMS = [{
     title: 'Another Story',
     url: '/story/another-story'
   }, {
@@ -2296,7 +2306,7 @@
   _exports.ITEMS = ITEMS;
 
   var _default = Ember.Controller.extend({
-    ITEMS
+    ITEMS: ITEMS
   });
 
   _exports.default = _default;
@@ -2310,7 +2320,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _linkToParams.default;
     }
   });
@@ -2324,13 +2334,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _and.default;
     }
   });
   Object.defineProperty(_exports, "and", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _and.and;
     }
   });
@@ -2344,13 +2354,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _append.default;
     }
   });
   Object.defineProperty(_exports, "append", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _append.append;
     }
   });
@@ -2364,13 +2374,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _array.default;
     }
   });
   Object.defineProperty(_exports, "array", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _array.array;
     }
   });
@@ -2384,13 +2394,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _camelize.default;
     }
   });
   Object.defineProperty(_exports, "camelize", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _camelize.camelize;
     }
   });
@@ -2404,7 +2414,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _cancelAll.default;
     }
   });
@@ -2418,13 +2428,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _capitalize.default;
     }
   });
   Object.defineProperty(_exports, "capitalize", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _capitalize.capitalize;
     }
   });
@@ -2438,13 +2448,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _cast.default;
     }
   });
   Object.defineProperty(_exports, "cast", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _cast.cast;
     }
   });
@@ -2458,13 +2468,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _chunk.default;
     }
   });
   Object.defineProperty(_exports, "chunk", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _chunk.chunk;
     }
   });
@@ -2478,13 +2488,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _classify.default;
     }
   });
   Object.defineProperty(_exports, "classify", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _classify.classify;
     }
   });
@@ -2499,13 +2509,32 @@
   _exports.colorFn = colorFn;
   _exports.default = void 0;
 
-  function colorFn([hex, method, ...args]
+  function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+  function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+  function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+  function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function colorFn(_ref
   /*, hash*/
   ) {
-    const color = (0, _color.default)(hex);
+    var _ref2 = _toArray(_ref),
+        hex = _ref2[0],
+        method = _ref2[1],
+        args = _ref2.slice(2);
+
+    var color = (0, _color.default)(hex);
 
     if (color[method]) {
-      return color[method](...args);
+      return color[method].apply(color, _toConsumableArray(args));
     } else {
       return hex;
     }
@@ -2524,7 +2553,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _compact.default;
     }
   });
@@ -2538,13 +2567,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _compute.default;
     }
   });
   Object.defineProperty(_exports, "compute", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _compute.compute;
     }
   });
@@ -2558,13 +2587,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _contains.default;
     }
   });
   Object.defineProperty(_exports, "contains", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _contains.contains;
     }
   });
@@ -2578,13 +2607,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _dasherize.default;
     }
   });
   Object.defineProperty(_exports, "dasherize", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _dasherize.dasherize;
     }
   });
@@ -2598,13 +2627,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _dec.default;
     }
   });
   Object.defineProperty(_exports, "dec", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _dec.dec;
     }
   });
@@ -2618,7 +2647,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _drop.default;
     }
   });
@@ -2632,13 +2661,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _equal.default;
     }
   });
   Object.defineProperty(_exports, "equal", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _equal.equal;
     }
   });
@@ -2652,7 +2681,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _filterBy.default;
     }
   });
@@ -2666,7 +2695,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _filter.default;
     }
   });
@@ -2680,7 +2709,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _findBy.default;
     }
   });
@@ -2694,13 +2723,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _flatten.default;
     }
   });
   Object.defineProperty(_exports, "flatten", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _flatten.flatten;
     }
   });
@@ -2714,7 +2743,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _groupBy.default;
     }
   });
@@ -2728,13 +2757,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _gt.default;
     }
   });
   Object.defineProperty(_exports, "gt", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _gt.gt;
     }
   });
@@ -2748,13 +2777,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _gte.default;
     }
   });
   Object.defineProperty(_exports, "gte", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _gte.gte;
     }
   });
@@ -2768,13 +2797,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _hasNext.default;
     }
   });
   Object.defineProperty(_exports, "hasNext", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _hasNext.hasNext;
     }
   });
@@ -2788,13 +2817,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _hasPrevious.default;
     }
   });
   Object.defineProperty(_exports, "hasPrevious", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _hasPrevious.hasPrevious;
     }
   });
@@ -2808,13 +2837,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _htmlSafe.default;
     }
   });
   Object.defineProperty(_exports, "htmlSafe", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _htmlSafe.htmlSafe;
     }
   });
@@ -2828,13 +2857,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _humanize.default;
     }
   });
   Object.defineProperty(_exports, "humanize", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _humanize.humanize;
     }
   });
@@ -2848,13 +2877,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _inViewport.default;
     }
   });
   Object.defineProperty(_exports, "inViewport", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _inViewport.inViewport;
     }
   });
@@ -2868,13 +2897,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _inc.default;
     }
   });
   Object.defineProperty(_exports, "inc", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _inc.inc;
     }
   });
@@ -2888,7 +2917,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _intersect.default;
     }
   });
@@ -2902,13 +2931,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _invoke.default;
     }
   });
   Object.defineProperty(_exports, "invoke", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _invoke.invoke;
     }
   });
@@ -2922,7 +2951,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isAfter.default;
     }
   });
@@ -2936,13 +2965,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isArray.default;
     }
   });
   Object.defineProperty(_exports, "isArray", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isArray.isArray;
     }
   });
@@ -2956,7 +2985,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isBefore.default;
     }
   });
@@ -2970,7 +2999,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isBetween.default;
     }
   });
@@ -2984,7 +3013,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isEmpty.default;
     }
   });
@@ -2998,13 +3027,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isEqual.default;
     }
   });
   Object.defineProperty(_exports, "isEqual", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isEqual.isEqual;
     }
   });
@@ -3018,7 +3047,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isSameOrAfter.default;
     }
   });
@@ -3032,7 +3061,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isSameOrBefore.default;
     }
   });
@@ -3046,7 +3075,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _isSame.default;
     }
   });
@@ -3060,7 +3089,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _join.default;
     }
   });
@@ -3074,13 +3103,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _lowercase.default;
     }
   });
   Object.defineProperty(_exports, "lowercase", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _lowercase.lowercase;
     }
   });
@@ -3094,13 +3123,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _lt.default;
     }
   });
   Object.defineProperty(_exports, "lt", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _lt.lt;
     }
   });
@@ -3114,13 +3143,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _lte.default;
     }
   });
   Object.defineProperty(_exports, "lte", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _lte.lte;
     }
   });
@@ -3134,7 +3163,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _mapBy.default;
     }
   });
@@ -3148,7 +3177,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _map.default;
     }
   });
@@ -3162,7 +3191,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentAdd.default;
     }
   });
@@ -3176,7 +3205,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentCalendar.default;
     }
   });
@@ -3190,7 +3219,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentDiff.default;
     }
   });
@@ -3204,7 +3233,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentDuration.default;
     }
   });
@@ -3218,7 +3247,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentFormat.default;
     }
   });
@@ -3232,7 +3261,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentFromNow.default;
     }
   });
@@ -3246,7 +3275,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentFrom.default;
     }
   });
@@ -3260,7 +3289,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentSubtract.default;
     }
   });
@@ -3274,7 +3303,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentToDate.default;
     }
   });
@@ -3288,7 +3317,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentToNow.default;
     }
   });
@@ -3302,7 +3331,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _momentTo.default;
     }
   });
@@ -3316,7 +3345,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _unix.default;
     }
   });
@@ -3330,7 +3359,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _moment.default;
     }
   });
@@ -3344,13 +3373,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _next.default;
     }
   });
   Object.defineProperty(_exports, "next", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _next.next;
     }
   });
@@ -3364,13 +3393,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _notEqual.default;
     }
   });
   Object.defineProperty(_exports, "notEq", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _notEqual.notEq;
     }
   });
@@ -3384,13 +3413,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _not.default;
     }
   });
   Object.defineProperty(_exports, "not", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _not.not;
     }
   });
@@ -3404,7 +3433,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _now.default;
     }
   });
@@ -3418,13 +3447,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _objectAt.default;
     }
   });
   Object.defineProperty(_exports, "objectAt", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _objectAt.objectAt;
     }
   });
@@ -3438,13 +3467,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _optional.default;
     }
   });
   Object.defineProperty(_exports, "optional", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _optional.optional;
     }
   });
@@ -3458,13 +3487,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _or.default;
     }
   });
   Object.defineProperty(_exports, "or", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _or.or;
     }
   });
@@ -3478,7 +3507,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _perform.default;
     }
   });
@@ -3492,7 +3521,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _pipeAction.default;
     }
   });
@@ -3506,13 +3535,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _pipe.default;
     }
   });
   Object.defineProperty(_exports, "pipe", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _pipe.pipe;
     }
   });
@@ -3526,13 +3555,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _previous.default;
     }
   });
   Object.defineProperty(_exports, "previous", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _previous.previous;
     }
   });
@@ -3546,13 +3575,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _queue.default;
     }
   });
   Object.defineProperty(_exports, "queue", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _queue.queue;
     }
   });
@@ -3566,13 +3595,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _range.default;
     }
   });
   Object.defineProperty(_exports, "range", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _range.range;
     }
   });
@@ -3586,7 +3615,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _reduce.default;
     }
   });
@@ -3600,7 +3629,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _rejectBy.default;
     }
   });
@@ -3614,13 +3643,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _repeat.default;
     }
   });
   Object.defineProperty(_exports, "repeat", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _repeat.repeat;
     }
   });
@@ -3634,7 +3663,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _reverse.default;
     }
   });
@@ -3648,13 +3677,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _shuffle.default;
     }
   });
   Object.defineProperty(_exports, "shuffle", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _shuffle.shuffle;
     }
   });
@@ -3668,7 +3697,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _slice.default;
     }
   });
@@ -3682,7 +3711,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _sortBy.default;
     }
   });
@@ -3696,7 +3725,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _take.default;
     }
   });
@@ -3710,7 +3739,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _task.default;
     }
   });
@@ -3724,13 +3753,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _titleize.default;
     }
   });
   Object.defineProperty(_exports, "titleize", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _titleize.titleize;
     }
   });
@@ -3745,10 +3774,22 @@
   _exports.toColor = toColor;
   _exports.default = void 0;
 
-  function toColor([hex, type]
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  function toColor(_ref
   /*, hash*/
   ) {
-    const color = (0, _color.default)(hex);
+    var _ref2 = _slicedToArray(_ref, 2),
+        hex = _ref2[0],
+        type = _ref2[1];
+
+    var color = (0, _color.default)(hex);
 
     switch (type) {
       case 'rgb':
@@ -3775,7 +3816,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _toggleAction.default;
     }
   });
@@ -3789,13 +3830,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _toggle.default;
     }
   });
   Object.defineProperty(_exports, "toggle", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _toggle.toggle;
     }
   });
@@ -3809,13 +3850,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _trim.default;
     }
   });
   Object.defineProperty(_exports, "trim", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _trim.trim;
     }
   });
@@ -3829,13 +3870,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _truncate.default;
     }
   });
   Object.defineProperty(_exports, "truncate", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _truncate.truncate;
     }
   });
@@ -3849,13 +3890,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _underscore.default;
     }
   });
   Object.defineProperty(_exports, "underscore", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _underscore.underscore;
     }
   });
@@ -3869,7 +3910,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _union.default;
     }
   });
@@ -3883,7 +3924,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _unix.default;
     }
   });
@@ -3897,13 +3938,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _uppercase.default;
     }
   });
   Object.defineProperty(_exports, "uppercase", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _uppercase.uppercase;
     }
   });
@@ -3917,13 +3958,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _utc.default;
     }
   });
   Object.defineProperty(_exports, "utc", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _utc.utc;
     }
   });
@@ -3937,13 +3978,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _w.default;
     }
   });
   Object.defineProperty(_exports, "w", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _w.w;
     }
   });
@@ -3957,13 +3998,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _without.default;
     }
   });
   Object.defineProperty(_exports, "without", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _without.without;
     }
   });
@@ -3977,13 +4018,13 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _xor.default;
     }
   });
   Object.defineProperty(_exports, "xor", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _xor.xor;
     }
   });
@@ -3998,13 +4039,11 @@
   _exports.default = void 0;
   var _default = {
     name: 'container-debug-adapter',
-
-    initialize() {
-      let app = arguments[1] || arguments[0];
+    initialize: function initialize() {
+      var app = arguments[1] || arguments[0];
       app.register('container-debug-adapter:main', _containerDebugAdapter.default);
       app.inject('container-debug-adapter:main', 'namespace', 'application:main');
     }
-
   };
   _exports.default = _default;
 });
@@ -4017,7 +4056,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _emberConcurrency.default;
     }
   });
@@ -4061,7 +4100,7 @@
       if (!theGlobal[globalName]) {
         theGlobal[globalName] = application;
         application.reopen({
-          willDestroy: function () {
+          willDestroy: function willDestroy() {
             this._super.apply(this, arguments);
 
             delete theGlobal[globalName];
@@ -4086,7 +4125,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _routerScroll.default;
     }
   });
@@ -4100,7 +4139,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _mixin.default;
     }
   });
@@ -5192,7 +5231,7 @@
     value: true
   });
   _exports.default = void 0;
-  const Router = Ember.Router.extend({
+  var Router = Ember.Router.extend({
     rootURL: _environment.default.rootURL
   });
   Router.map(function () {
@@ -5211,9 +5250,7 @@
     value: true
   });
   _exports.default = void 0;
-  const {
-    get
-  } = Ember;
+  var get = Ember.get;
 
   var _default = _moment.default.extend({
     defaultFormat: get(_environment.default, 'moment.outputFormat')
@@ -5230,7 +5267,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _nyprOHeader.default;
     }
   });
@@ -5244,7 +5281,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _routerScroll.default;
     }
   });
@@ -5991,51 +6028,6 @@
   _exports.default = _default;
 });
 
-;define("dummy/utils/sass-vars/colors", ["exports"], function (_exports) {
-  "use strict";
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
-
-  /* eslint-disable */
-  var _default = {
-    "black": "#333"
-  };
-  _exports.default = _default;
-});
-
-;define("dummy/utils/sass-vars/gothamist-colors", ["exports"], function (_exports) {
-  "use strict";
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
-
-  /* eslint-disable */
-  var _default = {
-    "gothamist-black": "#333232"
-  };
-  _exports.default = _default;
-});
-
-;define("dummy/utils/sass-vars/wnyc-colors", ["exports"], function (_exports) {
-  "use strict";
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
-
-  /* eslint-disable */
-  var _default = {
-    "wnyc-red": "#DE1E3D"
-  };
-  _exports.default = _default;
-});
-
 ;define("dummy/utils/titleize", ["exports", "ember-cli-string-helpers/utils/titleize"], function (_exports, _titleize) {
   "use strict";
 
@@ -6044,7 +6036,7 @@
   });
   Object.defineProperty(_exports, "default", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _titleize.default;
     }
   });
@@ -6058,19 +6050,19 @@
   });
   Object.defineProperty(_exports, "positionRightCenter", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _toggleBoxPositions.positionRightCenter;
     }
   });
   Object.defineProperty(_exports, "positionTopCenter", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _toggleBoxPositions.positionTopCenter;
     }
   });
   Object.defineProperty(_exports, "positionBottomCenter", {
     enumerable: true,
-    get: function () {
+    get: function get() {
       return _toggleBoxPositions.positionBottomCenter;
     }
   });
