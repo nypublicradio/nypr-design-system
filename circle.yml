@@ -110,7 +110,7 @@ jobs:
             git config user.name "ci-build"
       - add_ssh_keys:
           fingerprints:
-            - "59:ad:fd:64:71:eb:81:01:6a:d7:1a:c9:0c:19:39:af"
+            - "ab:f0:e6:36:b3:6d:67:77:fe:fc:b3:22:23:59:a2:c6"
       - run:
           name: Deploy docs to gh-pages branch
           command: npx gh-pages --dotfiles --message "[skip ci] Updates" --dist storybook-static
