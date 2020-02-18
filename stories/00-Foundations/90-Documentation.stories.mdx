@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Documentation" />
+
+# About MDX
+
+MDX is a documentation format that lets us write markdown documents but also include live code examples and other components to help make our documentation dynamic. In storybook all our documentation files are named with a `.stories.mdx` extension. The files are included in the document tree in alphabetical order, file and folder names are prefixed with numbers to give us manual control over this sort order. (e.g. `10-Typography.stories.mdx`)
+
+MDX files have a bit of boilerplate code at the top that looks like something this.
+
+```
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Foundations/Typography">
+```
+
+Storybook needs this code to recognize documents and include them in the sidebar.
+
+# Titles
+
+Titles control what a page is called in the storybook sidebar as well as where in the documentation hierarchy it is put. A title of "Foundations/Typography" will create an item called "Typography" in the "Foundations" folder. 
+
+# Editing Pages in Github
+
+[Edit Documentation Here](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories)
+
+# Adding A Page
+
+# Adding A Folder
+
+When you go to add a page in github, you can add a `/` slash to the name, github will add that folder.
+
