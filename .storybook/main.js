@@ -1,7 +1,6 @@
 module.exports = {
   stories: [
-    '../stories/Foundations/**/*.stories.(js|mdx)',
-    '../stories/Components/**/*.stories.(js|mdx)'
+    '../stories/**/*.stories.(js|mdx)',
   ],
   addons: [
     '@storybook/addon-actions',

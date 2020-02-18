@@ -1,0 +1,120 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="For Developers/Best Practices" />
+
+# Best Practices
+
+## Creating Flexibile but Focused Components
+
+Here are several patterns for making your components adaptable, while keeping them easy to use.
+
+### Components should adapt to their inputs.
+
+Missing a title property? The component should display without it's title block. No author property? Hide the author area. etc. Using a component with no properties shouldn't cause any console errors. This lets components provide flexibility without extra configuration.
+
+```html
+{{#if @title}}
+	<h2>@title<@h2>
+{{/if}}
+```
+
+### Vary presentation using CSS classes
+
+Provide CSS variants of components to allow for visual differences when possible.
+
+```
+.a-button {
+	border: none;
+	color: var(--c-text-inverse);
+	padding: var(--s-space3);
+	font-size: var(--f-size4);
+	background-color: var(--c-primary);
+}
+
+.a-button--secondary {
+	background-color: var(--c-secondary);
+}
+
+.a-button--large {
+	padding: var(--s-space4);
+	font-size: var(--f-size5);
+}
+```
+
+### Use Caution with higher-order components
+
+[Higher order components]() let you build components in a very flexible and is handy when you want components that can handle a wide variety of use cases. For example, you could make a card component that lets you have multiple images or reverse the order of the title and the image.
+
+```html
+<SimpleCard as |card|>
+	<card.title>{{@article.title}}</card.title>
+	<card.image><img src="{{@article.img}}" alt="@article.alt"></card.image>
+	<card.desc>@article.caption</card.desc>
+</SimpleCard>
+```
+
+However, this API also makes these components more cumbersome to use and can bloat templates. Therefore, it's recommended to at least include a sensible defaults when there's no block provided (i.e. when the tag is empty).
+
+```html
+<SimpleCard @article={{article}} / >
+
+<SimpleCard
+	@title={{article.title}}
+	@img={{article.img}}
+	@alt={{article.alt}}
+	@desc={{article.desc}}
+/>
+```
+Furthermore, this level of flexibility is often overkill, especially for components in a design system, which should be a little bit prescriptive about how a component is presented.  Think about, and talk with a designer about the variations you really want to allow, and see if you can provide for them in a more simple way, like a CSS variant class (e.g. `<SimpleCard class="card--minimal" />`) or a toggle property ()
+
+## Handling our Content
+
+### Accept standard content objects
+
+Components should accept objects straight from our most common APIs. Our APIs may change over time, but right now articles should match Wagtail articles. This makes components easier to use in our clients and also makes it easier to handle list components.
+
+If a component is meant for more than just that object type (e.g. a card might display articles, but also authors), also accepting individual properties is great.
+
+```html
+<SimpleCard @item={{wagtailArticle}} />
+
+<SimpleCard
+	@title={{article.title}}
+	@img={{article.img}}
+	@alt={{article.alt}}
+	@desc={{article.desc}}
+/>
+```
+
+Client applications can build template helpers to handle special cases.
+
+```html
+<SimpleCard @item={{legacy-article-card-adapter legacyArticle}} />
+<SimpleCard @item={{author-card-adapter wagtailAuthor}} />
+```
+
+Sample code for one of these "adapter" helpers...
+```js
+//TODO
+```
+
+## Other Patterns
+
+### Interactive components should expose appropriate events as part of their public interface.
+
+For example, forms should have `onSubmit` and `onError` properties. Other components with interactive behaviours should expose events as appropriate. This allows us to hook up things like analytics more easily.
+
+### Handle links with the 'link helper'
+
+This doesn't exist yet. This lets you automatically treat both internal ember routes (i.e. An array of routing parameters, ['tags', 'mta']) and external urls appropriately, without a lot of extra logic in the clients or components.
+
+```html
+<!-- my-component.hbs -->
+<h1>{{link @link @linktext}}</h1>
+```
+
+## Testing
+TODO
+
+## Accessibility
+TODO

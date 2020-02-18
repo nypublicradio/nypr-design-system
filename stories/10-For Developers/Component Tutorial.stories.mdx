@@ -1,0 +1,85 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="For Developers/Component Tutorial" />
+
+# Step by Step Example
+
+Lets create a 'tag' component. This is basically a link with some special styling.
+
+## Name the Component
+
+Radial uses three atomic prefixes for components:
+
+  The categories are a bit fuzzy, especially molecules and organisms, but here are some rules of thumb.
+
+- `nypr-a-` for atoms. These are the base unit of component. They shouldn't contain other components.
+- `nypr-m-` for molecules. These are components built out of mutliple atoms.
+- `nypr-o-` for organisms. These are components built by combining molecules or organisms with other components.
+
+  Our 'tag' component isn't build out of any other components so we'll consider it an atom so we'll call it `nypr-a-tag`.
+
+## Create the ember component
+	Run the command `ember generate component nypr-a-tag`
+	This will create a js and hbs template for your component.
+
+
+
+## Create a basic story file
+
+A *story* is a specific example of how to use a component.
+
+A *story file* is a file with a `.stories.js` extension where one or more stories are defined.
+
+Let's add a story file for our tag component to the `/stories/Components/Atoms` folder
+
+**/stories/Components/Atoms/nypr-a-button.js**
+```js
+import hbs from 'htmlbars-inline-precompile';
+
+// The default export should be a js object defining metadata about your component.
+export default {
+    title: 'Components/Atoms/Tag',
+    component: 'nypr-a-tag'
+};
+
+// A *story* is a function that returns a js object.
+// This object should at minimum include a value for `template`.
+// For more details see "Documenting Your Component"
+export const Tag = () => ({
+    template: hbs`
+    <NyprATag class='tag--primary'>Primary Tag</NyprATag>
+    `,
+});
+```
+
+## Start Ember & Storybook
+
+Start the ember server: `ember s`
+While ember is still running, start storybook: `yarn storybook`
+
+This should open a browser window with storybook in it.
+
+## Build your component
+
+Now you can edit your component and storybook will automatically update to show the current state of your component.
+
+## Add CSS
+
+Add an scss file in the `styles/components` folder with the same name as your component. 
+
+
+**styles/components/_nypr-a-tag.scss**
+```css
+.nypr-a-tag {
+    background-color: var(--c-brand1)
+    color: var(--c-text)
+}
+```
+
+Include this file in `styles/components/_config.imports.scss`
+
+**/app/styles/components/_config.imports.scss`**
+```scss
+@import "components/nypr-a-tag";
+```
+

@@ -27,21 +27,6 @@ container_defaults: &defaults
       environment:
         JOBS: 2
 
-deploy: &deploy
-  <<: *defaults
-  steps:
-    - checkout
-    - <<: *restore_node
-    - add_ssh_keys:
-        fingerprints:
-          - "ab:f0:e6:36:b3:6d:67:77:fe:fc:b3:22:23:59:a2:c6"
-    - deploy:
-        name: Deploy to GitHub pages
-        command: |
-          env | sed -n "s/^${ENV}_//p" >> .env
-          # unignore generated sass vars for deployments
-          npx ember deploy "$(echo $ENV | awk '{print tolower($0)}')" --verbose
-
 jobs:
   install:
     <<: *defaults
@@ -67,16 +52,6 @@ jobs:
 
       - store_test_results:
           path: test-results/
-
-  deploy_demo:
-    environment:
-      ENV: DEMO
-    <<: *deploy
-
-  deploy_prod:
-    environment:
-      ENV: PROD
-    <<: *deploy
 
   build-storybook:
     <<: *defaults
@@ -113,7 +88,7 @@ jobs:
             - "ab:f0:e6:36:b3:6d:67:77:fe:fc:b3:22:23:59:a2:c6"
       - run:
           name: Deploy docs to gh-pages branch
-          command: npx gh-pages --dotfiles --message "[skip ci] Updates" --dist storybook-static
+          command: npx gh-pages --dotfiles --message "[skip ci] Publish Docs" --dist storybook-static
 
 workflows:
   version: 2
@@ -122,44 +97,10 @@ workflows:
       - install:
           filters:
             branches:
-              ignore: master
+              ignore: radial
       - test:
           requires:
             - install
-
-  deploy-demo:
-    jobs:
-      - install:
-          filters:
-            branches:
-              only: master
-      - test:
-          requires:
-            - install
-      - deploy_demo:
-          requires:
-            - test
-
-  deploy-prod:
-    jobs:
-      - install:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
-      - test:
-          filters:
-            tags:
-              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
-          requires:
-            - install
-      - deploy_prod:
-          filters:
-            tags:
-              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
-          requires:
-            - test
 
   deploy-storybook:
     jobs:
