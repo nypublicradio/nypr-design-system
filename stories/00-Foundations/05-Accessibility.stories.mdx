@@ -1,0 +1,108 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Accessibility" />
+
+
+# Design System Accessibility 
+
+Helpful guidelines/links for accessibility compliance.
+
+TBD Table of Contents
+----------
+## Accessibility Best Practices, Process and Policy
+
+### Policy
+
+The NYPR digital team designs and builds websites and applications with accessibility best practices in mind, using a variety of tools to test compliance in all stages of the design and development process. Our goal is for all new products to be [WCAG 2.0 AA Compliant](https://www.w3.org/TR/WCAG20/).
+
+-   [Official NYPR policy](https://media.wnyc.org/media/resources/2019/Mar/11/NYPR_Web_Accessibility_Policy_2019.pdf)
+    
+
+### Process
+
+-   Digital team uses a variety of tools to check compliance in all stages of the software development process: from UI/Wireframes creation to design, development and QA. For the full list, see the Tools section.
+    
+-   Test cases contain accessibility requirements in the acceptance criteria
+    
+-   QA team conducts a combination of manual and automated tests for accessibility per requirements, using a combination of the above tools.
+    
+-   Coordinate a special user testing group for accessibility based on the list from Listener Services.
+    
+-   Team shares articles and industry news/best practices in #accessibility slack channel
+    
+
+### Design
+
+-   Accessibility optimization should start as early as possible, in the visual design/UI process. See the [infographic below](https://webaim.org/resources/designers/) for detail.
+    
+-   Use this [modern color contract checking tool](https://abc.useallfive.com), or this [color contrast checker](https://webaim.org/resources/contrastchecker/) on all new projects
+    
+-   See more on [design best practices from all team presentation](https://docs.google.com/presentation/d/1qCg2VjLrr6iuD6qxTU_8rYLA5vaR_OY6WHjCf9P00Xk/edit#slide=id.g527df266b9_0_0) 3/28
+    
+
+### Code
+
+-   See [code best practices from all team presentation](https://docs.google.com/presentation/d/1qCg2VjLrr6iuD6qxTU_8rYLA5vaR_OY6WHjCf9P00Xk/edit#slide=id.g527df266b9_0_0https://docs.google.com/presentation/d/1qCg2VjLrr6iuD6qxTU_8rYLA5vaR_OY6WHjCf9P00Xk/edit#slide=id.g548c7760e3_1_41) 3/28
+    
+
+## Minimum requirements
+
+### Design
+
+Accessibility in design [infographic](https://webaim.org/resources/designers/).
+
+-   Plan Heading Structure Early
+    
+
+-   Make sure H1-H6 tags have hierarchy and tell the page information in logical order
+    
+
+-   Use landmark roles for major sections
+    
+-   Reading Order
+    
+
+-   The reading order should be the same as the visual order of elements
+    
+
+## Tools & Resources
+
+-   Compliance Sheriff- [notes from legal](http://wiki.nypr.digital/display/DT/Compliance+Sheriff)
+    
+-   Compliance Sheriff- [video of basic training session w/QA team](https://cyxtera.webex.com/cyxtera/ldr.php?RCID=8397887afe50bd07630404f7a974e2f2)
+    
+-   Google [Lighthouse Chrome Tool](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=en)
+    
+-   [WCAG 2.1 guidelines](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=en)
+    
+-   [AXE evaluation tools](https://www.deque.com/axe/) from Deque
+    
+-   WCAG design patternsBest practices you can and should follow for trickier custom elements. Say you need to build a custom dropdown and make sure it's just as accessible as the native <select> element. "Design Patterns & Widgets" section of this document to the rescue: [https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex](https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex)
+    
+-   Voiceover Built-in on Apple products. Go to Settings > General > Accessibility > Voiceover or toggle on / off with ⌘ + F5. Everyone needs to hear what websites sounds like in a screen reader! It's eye-opening.
+    
+-   NVDA Free and open-source screen reader for Windows
+    
+-   HeadingsMap-  A chrome extension that lets you see how the headings would be organized for assistive tech users. See [https://bit.ly/2ER31Nf](https://bit.ly/2ER31Nf)
+    
+-   Voiceover Web Rotor: This is a great way to check out the DOM structure of your page from the front end. Open with CTRL + OPTION + U. See [https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts#id386_the_rotor](https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts#id386_the_rotor)
+    
+-   Ember Tools
+    
+
+-   Ember-a11y- manage focus on route changes
+    
+-   a11y-announcer: Announce route changes
+    
+-   Ember-template-lint- can be annoying but automatically catches some common errors
+    
+-   ember-a11y-testing- automated testing
+    
+
+-   [Alt Text](https://axesslab.com/alt-texts): the Ultimate Guide
+    
+-   Video from Smashing magazine: [How A Screen Reader User Accesses The Web](https://www.smashingmagazine.com/2019/02/accessibility-webinar/)
+    
+-   [Global Accessibility Awareness Day: 10 stories worth sharing](https://uxdesign.cc/global-accessibility-awareness-day-10-stories-worth-sharing-f58adb4426e1)
+    
+-   [Tips for Designing Accessibility in Voice User Interfaces](https://uxdesign.cc/tips-for-accessibility-in-conversational-interfaces-8e11c58b31f6) (fyi [Erin Ozmat](http://wiki.nypr.digital/display/~eozmat))
