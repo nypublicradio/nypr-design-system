@@ -65,7 +65,7 @@ jobs:
           name: Build Docs
           command: npm run build-storybook
       - persist_to_workspace:
-          root: .
+          root: ~/
           paths:
             - storybook-static
 
@@ -74,7 +74,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: storybook-static
+          at: ~/
       - run:
           name: Disable jekyll builds
           command: touch storybook-static/.nojekyll
@@ -108,9 +108,6 @@ workflows:
           filters:
             branches:
               only: radial
-      - test:
-          requires:
-            - install
       - build-storybook:
           requires:
             - install
