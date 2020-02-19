@@ -1,12 +1,21 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Foundations/Documentation" />
+<Meta title="Foundations/Writing Documentation" />
 
-# About MDX
+# Writing Documentation
 
-MDX is a documentation format that lets us write markdown documents but also include live code examples and other components to help make our documentation dynamic. In storybook all our documentation files are named with a `.stories.mdx` extension. The files are included in the document tree in alphabetical order, file and folder names are prefixed with numbers to give us manual control over this sort order. (e.g. `10-Typography.stories.mdx`)
+## Quick Links
+- [Our stories folder on GitHub](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories)
+- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+- [Github Help: Managing Files on GitHub](https://help.github.com/en/github/managing-files-in-a-repository/managing-files-on-github)
+- [StackEdit](https://stackedit.io/)
 
-MDX files have a bit of boilerplate code at the top that looks like something this.
+
+## About MDX
+
+Storybook documentation is written in MDX. MDX is a documentation format that lets us write [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) documents but also include live code examples and other components to help make our documentation dynamic. In storybook all our documentation files are named with a `.stories.mdx` extension. The files are included in the document tree in alphabetical order, file and folder names are prefixed with numbers to give us manual control over this sort order. (e.g. `10-Typography.stories.mdx`)
+
+MDX files have a bit of code at the top that looks like something this.
 
 ```
 import { Meta } from '@storybook/blocks'
@@ -16,17 +25,36 @@ import { Meta } from '@storybook/blocks'
 
 Storybook needs this code to recognize documents and include them in the sidebar.
 
-# Titles
+## About Titles
 
-Titles control what a page is called in the storybook sidebar as well as where in the documentation hierarchy it is put. A title of "Foundations/Typography" will create an item called "Typography" in the "Foundations" folder. 
+Titles control what a page is called in the Storybook sidebar as well as where in the documentation hierarchy it is located. A title of "Foundations/Typography" will create an item called "Typography" in the "Foundations" folder. 
 
-# Editing Pages in Github
+## Editing Pages in GitHub
 
-[Edit Documentation Here](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories)
+When viewing any of the pages within the [stories folder](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories) on GitHub, you can click the pencil icon to edit the file. 
 
-# Adding A Page
+This will bring up an editor where you can make changes to the file.  The documentations files use [Markdown formatting](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). There's a Preview Changes tab in this view that will let you check how your Markdown will be rendered.
 
-# Adding A Folder
+[More detailed guide to the GitHub editor.](https://help.github.com/en/github/managing-files-in-a-repository/editing-files-in-your-repository)
 
-When you go to add a page in github, you can add a `/` slash to the name, github will add that folder.
+## Adding Pages in GitHub
 
+From the [stories folder](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories) in GitHub you can click the "Create New File" button to add a new file in any of the folders.
+
+It's fine to copy the markdown from an existing page and base your new page on it.
+
+The file name has to end in `.stories.mdx` or Storybook will ignore it.
+
+We can use filenames to control the order of files in the storybook sidebar. Files are loaded in alphabetical order, so a file named `10-Intro...` will appear above a file named `90-Special Thanks...`.
+
+## Adding A Folder, Renaming Files, Deleting Files
+
+See the [GitHub help page on managing files](https://help.github.com/en/github/managing-files-in-a-repository/managing-files-on-github) for more details.
+
+## StackEdit
+
+If you want to prepare documentation outside of GitHub, [StackEdit](https://stackedit.io/) is a browser-base Markdown editor with a realtime preview, and some other handy buttons to make working in Markdown nicer. 
+
+If you prefer to work in Google Docs, you can copy and paste your from you Google Doc into StackEdit and it will convert it into Markdown. 
+
+When you're ready to add to Storybook, you can copy and paste the Markdown text from StackEdit into GitHub.
