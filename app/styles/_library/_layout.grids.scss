@@ -1,0 +1,140 @@
+/* ------------------------------------*\
+    $GRIDS
+\*------------------------------------ */
+
+.l-grid {
+  display: grid;
+  grid-template-rows: auto;
+  grid-column-gap: $space;
+  grid-row-gap: $space;
+
+  @include media('>large') {
+    grid-column-gap: $space-and-half;
+    grid-row-gap: $space-and-half;
+  }
+
+  @media all and (-ms-high-contrast:none) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: -20px;
+    margin-right: -20px;
+
+    > * {
+      margin: 20px;
+    }
+  }
+
+  &-item {
+    position: relative;
+  }
+
+  &--large-gutters {
+    grid-column-gap: $space*4;
+    grid-row-gap: $space*4;
+  }
+
+  &--2up {
+    align-items: center;
+
+    @include media('>medium') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media all and (-ms-high-contrast:none) {
+      > * {
+        width: calc(50% - 40px);
+      }
+    }
+
+    &--flex {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 calc(20px * -1); // $space
+
+      @include media('>xxlarge') {
+        margin: 0 calc((20px * 1.5) * -1); // $space
+      }
+
+      > * {
+        width: 100%;
+        padding-left: $space;
+        padding-right: $space;
+        margin-top: $space*2;
+
+        @include media('>small') {
+          width: 50%;
+        }
+
+        @include media('>xxlarge') {
+          padding-left: $space*1.5;
+          padding-right: $space*1.5;
+          margin-top: $space*3;
+        }
+      }
+    }
+  }
+
+  &--3up {
+    @include media('>medium') {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media all and (-ms-high-contrast:none) {
+      > * {
+        width: calc(33.333% - 40px);
+      }
+    }
+  }
+
+  &--4up {
+    grid-template-columns: repeat(minmax(200px, 1fr));
+
+    @include media('>xsmall') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media('>large') {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media all and (-ms-high-contrast:none) {
+      > * {
+        width: calc(25% - 40px);
+      }
+    }
+  }
+
+  &--4up--at-medium {
+    grid-template-columns: repeat(2, 1fr);
+
+    @include media('>small') {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media('>medium') {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media all and (-ms-high-contrast:none) {
+      > * {
+        width: calc(25% - 40px);
+      }
+    }
+  }
+
+  &--5up {
+    grid-row-gap: $space*2;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+
+    @include media('>large') {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    @media all and (-ms-high-contrast:none) {
+      > * {
+        width: calc(20% - 40px);
+      }
+    }
+  }
+}

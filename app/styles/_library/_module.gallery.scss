@@ -1,0 +1,119 @@
+/*------------------------------------*\
+    $GALLERY
+\*------------------------------------*/
+
+.c-gallery-overlay {
+  padding: $space-double 0 $space-quad;
+  color: $c-white;
+  background-color: $c-dark-bg;
+
+  .o-credit {
+    a {
+      color: $c-white;
+      border-bottom: 2px dotted $c-white;
+
+      &:hover {
+        color: $c-white;
+        background-color: $c-primary;
+      }
+    }
+  }
+
+  .o-rte-text {
+    a:visited {
+      color: $c-white;
+    }
+  }
+
+  .o-ad__label {
+    color: $c-octonary;
+  }
+
+  .l-wrap {
+    @include media('>medium') {
+      padding: 0;
+    }
+  }
+}
+
+.c-slides {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: hidden;
+}
+.c-slide {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.5s $hard-ease-in .2s;
+  position: relative;
+  z-index: $z-index-article-gallery-slide;
+  pointer-events: none;
+  padding-bottom: $space-half;
+
+  &__header,
+  &__content {
+    pointer-events: auto;
+  }
+
+  &__header.l-container--content,
+  &__meta.l-container--content {
+    max-width: none;
+    @include media('<=xxlarge') {
+      padding-left: $space;
+      padding-right: $space;
+    }
+  }
+
+  @for $i from 1 through 5 {
+    &:nth-child(#{$i}) {
+      transition-delay: #{$i * 4 + "00"}ms;
+    }
+  }
+
+  &:nth-child(1) {
+    transition-delay: .15s;
+  }
+
+  &__image img {
+    height: initial; // allows images with height attributes to occupy vertical space while loading
+    max-height: 733px;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .c-toggle-box .c-toggle-box__content {
+      @include media('<=xxlarge') {
+        left: $space;
+      }
+    }
+  }
+}
+
+// Gallery is active
+.gallery-is-active {
+
+  &.c-main {
+    position: relative;
+  }
+
+  // Hide the article floating header when in the gallery overlay
+  .c-main-header--article {
+    display: none;
+  }
+
+  .c-main-header--gallery {
+    display: block;
+  }
+
+  .c-slide {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

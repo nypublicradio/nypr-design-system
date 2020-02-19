@@ -19,6 +19,14 @@ module.exports = function(defaults) {
         enabled: false,
       },
     },
+    outputPaths: {
+      app: {
+        css: {
+          'white-label': '/assets/themes/white-label.css',
+          'gothamist': '/assets/themes/gothamist.css'
+        }
+      }
+    },
     'component-lineage': {
       enabled: true,
     },

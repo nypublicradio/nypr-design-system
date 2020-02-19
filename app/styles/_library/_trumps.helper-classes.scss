@@ -1,0 +1,107 @@
+/*------------------------------------*\
+    $HELPER/TRUMP CLASSES
+\*------------------------------------*/
+
+/**
+ * Completely remove from the flow but leave available to screen readers.
+ */
+.is-vishidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/**
+ * Hide elements only present and necessary for js enabled browsers.
+ */
+.no-js .no-js-hide {
+  display: none;
+}
+
+.u-full-width {
+  width: 100%;
+}
+
+
+/**
+ * Reversed out content
+ */
+.u-reversed-out {
+  background-color: $c-dark-bg;
+  @include reversed-out-text;
+
+  &:after {
+    background-color: $c-dark-bg;
+  }
+
+  input[type=radio]:checked,
+  input[type=checkbox]:checked {
+    border-color: rgba($c-gray, .3);
+  }
+}
+
+.u-align-center {
+  text-align: center;
+}
+
+
+/**
+ * Remove all margins/padding
+ */
+.u-no-spacing {
+  padding: 0;
+  margin: 0;
+}
+
+/**
+ * Rotation
+ */
+.u-rotate--180 {
+  transform: rotate(180deg);
+}
+
+
+/**
+ * Active on/off states
+ */
+.u-active--off {
+  display: none;
+}
+[class*="-is-active"].js-toggle-parent,
+[class*="-is-active"].js-toggle {
+  .u-active--on {
+    display: none;
+  }
+  .u-active--off {
+    display: block;
+  }
+}
+[class*="-is-active"] {
+  .u-hide-on-active {
+    display: none;
+  }
+}
+
+/**
+ * Breakout content
+ */
+.u-breakout {
+  @include media('<=medium') {
+    margin-right: -$space;
+    margin-left: -$space;
+  }
+}
+
+/**
+ * Inserting this collapsed row between two flex items will make
+ * the flex item that comes after it break to a new row
+ */
+.u-flex-wrap-break {
+  flex-basis: 100%;
+  height: 0;
+  margin: 0 !important;
+}

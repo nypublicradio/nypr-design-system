@@ -1,0 +1,79 @@
+/*------------------------------------*\
+    $BUTTONS
+\*------------------------------------*/
+
+button,
+input[type="submit"] {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0;
+}
+
+.o-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px $space-and-half 18px;
+  line-height: 22px;
+  color: $c-white;
+  cursor: pointer;
+  transition: all 0.3s $hard-ease-in;
+  font-family: $ff-font--monospace;
+  text-transform: uppercase;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+  background-color: $c-primary;
+  position: relative;
+
+  @include media('>small') {
+    padding-left: $space-double;
+    padding-right: $space-double;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: $z-index-button-outline;
+    width: 100%;
+    height: 100%;
+    border: 3px solid $c-primary;
+    transform: translate(0, 0);
+    transition: all 0.3s $hard-ease-in;
+  }
+
+  &:hover {
+    transform: translate(10px, -10px);
+
+    &:before {
+      transform: translate(-10px, 10px);
+    }
+  }
+
+  // Types/Styles
+  &--c-quaternary {
+    color: $c-body-color;
+    background-color: $c-quaternary;
+
+    &:before {
+      border-color: $c-quaternary;
+    }
+  }
+
+  // Sizes
+  &--sm {
+    font-size: 14px;
+    padding: 11px 50px 10px;
+  }
+
+  &--extra {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}

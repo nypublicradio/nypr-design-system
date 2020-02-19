@@ -1,0 +1,48 @@
+/*------------------------------------*\
+    $ICONS
+\*------------------------------------*/
+
+/**
+ * Icon Sizing
+ */
+.o-icon {
+  display: inline-block;
+
+  svg,
+  path {
+    fill: inherit;
+  }
+}
+
+.o-text-with-icon {
+  display: inline-flex;
+  align-items: center;
+  > *:last-child {
+    margin-left: $space-half;
+  }
+}
+
+.u-icon--xs {
+  width: $icon-xsmall;
+  height: $icon-xsmall;
+}
+
+.u-icon--s {
+  width: $icon-small;
+  height: $icon-small;
+}
+
+.u-icon--m {
+  width: $icon-medium;
+  height: $icon-medium;
+}
+
+.u-icon--l {
+  width: $icon-large;
+  height: $icon-large;
+}
+
+.u-icon--xl {
+  width: $icon-xlarge;
+  height: $icon-xlarge;
+}

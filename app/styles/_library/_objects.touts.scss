@@ -1,0 +1,304 @@
+/*------------------------------------*\
+    $TOUTS
+\*------------------------------------*/
+
+
+/**
+ * Contact/sent tip
+ */
+.c-contact-tout {
+  padding: $space-and-half;
+  width: 100%;
+}
+
+
+/**
+ * Donate bar
+ */
+.c-donate-tout {
+  padding: $space-double;
+  background-color: $c-quinary;
+  position: relative;
+  width: 100%;
+  max-width: ($col-width * 14) + ($gutter * 12) + px;
+  margin: 70px 0 0 auto;
+  position: fixed;
+  z-index: $z-index-donate-tout;
+  right: -#{($col-width * 15) + ($gutter * 13) + px};
+  bottom: 50px;
+  transform: translateX(0);
+  transition: transform .2s $hard-ease-in;
+  box-shadow: 0 0 10px rgba($c-black, .2);
+  border: 3px solid $c-black;
+
+  &:before {
+    content: "";
+    position: absolute;
+    background-color: $c-quinary;
+    left: -3px;
+    top: -3px;
+    width: 120px;
+    height: 90px;
+
+    @include media('>xlarge') {
+      height: 120px;
+    }
+  }
+
+  &.is-active {
+    transform: translateX(-#{($col-width * 15) + ($gutter * 13) + $space});
+  }
+
+  @include media('<=xlarge') {
+    max-width: 270px;
+    right: -#{($col-width * 6) + ($gutter * 4) + px};
+
+    &.is-active {
+      transform: translateX(-#{($col-width * 6) + ($gutter * 5) + px});
+    }
+  }
+
+  &__inner {
+
+    @include media('>xlarge') {
+      padding: 0 $space 0 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    p {
+      position: relative;
+      @include media('>xlarge') {
+        width: calc(65% - #{$space});
+      }
+    }
+
+    .o-button {
+      width: 100%;
+      margin-top: $space;
+      @include media('>xlarge') {
+        margin-top: 0;
+        width: 35%;
+      }
+    }
+  }
+
+  &__graphic {
+    width: 120px;
+    height: 133px;
+    position: relative;
+    margin-left: -55px;
+    margin-top: -95px;
+    margin-right: $space-half;
+    float: left;
+    path {
+      fill: $c-senary;
+    }
+
+    @include media('>xlarge') {
+      float: none;
+      margin: 0;
+      position: absolute;
+      left: -$space;
+      top: -$space;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  // Non-fly-in version
+  &--static {
+    box-shadow: none;
+    max-width: none;
+    position: static;
+    max-width: none;
+    border-left: none;
+    border-right: none;
+
+    &:before {
+      display: none;
+    }
+
+    @include media('>xlarge') {
+      margin-top: 0;
+    }
+
+    .c-donate-tout__inner {
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      max-width: 700px;
+
+      @include media('>xlarge') {
+        max-width: ($col-width * 14) + ($gutter * 12) + px;
+      }
+    }
+
+    .c-donate-tout__graphic {
+      margin-top: -105px;
+      margin-left: -30px;
+
+      &:before {
+        content: "";
+        position: absolute;
+        background-color: $c-quinary;
+        left: -3px;
+        top: 70px;
+        width: 120px;
+        height: 10px;
+        z-index: -1;
+      }
+
+      @include media('>xlarge') {
+        margin-top: -40px;
+
+        &:before {
+          top: 21px;
+          width: 87px;
+          left: 26px;
+        }
+      }
+    }
+
+    .c-donate-tout__close {
+      display: none;
+    }
+
+    .o-button {
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+  }
+}
+
+
+/**
+ * Sponsored tout
+ */
+.c-sponsored-tout {
+  width: 100%;
+  padding: $space-triple $space-quad;
+  background-color: $c-octonary;
+  position: relative;
+
+  @include media('<=medium') {
+    padding: $space-triple $space;
+    width: calc(100vw + 4px);
+    left: -2px;
+  }
+
+  &__heading {
+    position: absolute;
+    top: -.6em;
+    font-size: $font-size-l;
+    left: $space-quad;
+    background-color: $c-white;
+    padding: 0 $space-half;
+
+    @include media('<=medium') {
+      left: $space;
+    }
+  }
+
+  .c-block {
+    @include media('>medium') {
+      display: flex;
+      align-items: flex-start;
+    }
+  }
+
+  .o-kicker {
+    background-color: $c-sponsor-color;
+    color: $c-white;
+  }
+
+  .c-block__media {
+    width: 100%;
+
+    @include media('>small', '<=medium') {
+      margin-bottom: $space;
+      max-width: 360px;
+    }
+
+    @include media('>medium') {
+      max-width: 328px;
+      margin-right: $space-and-half;
+    }
+  }
+}
+
+
+/**
+ * Newsletter signup tout
+ */
+.c-newsletter-tout {
+  padding: $space-triple $space-quad;
+  position: relative;
+  // Adjusted vertical spacing because of the 10px shadow border.
+  margin-bottom: $space-triple + 10px;
+
+  @include media('<=medium') {
+    padding: $space-and-half;
+    margin-left: -2px;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 11px;
+    border: 3px solid $c-dark-bg;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  &__inner {
+    position: relative; // re establish stacking order above pseudo element
+
+    @include media('<=medium') {
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @include media('>medium') {
+      display: flex;
+    }
+  }
+
+  &__media {
+    padding: $space;
+
+    @include media('>small', '<=medium') {
+      padding: 0;
+      margin-bottom: $space;
+      max-width: 360px;
+    }
+
+    @include media('>medium') {
+      padding: 0;
+      margin-right: $space-and-half;
+    }
+
+    @include media('>xlarge') {
+      max-width: 250px;
+      min-width: 250px;
+    }
+  }
+
+  &__text {
+    @include media('>medium') {
+      padding-top: $space;
+    }
+  }
+}
