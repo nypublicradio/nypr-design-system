@@ -12,4 +12,14 @@ module.exports = {
     
     this._super.included.apply(this, arguments);
   },
+  options: {
+    outputPaths: {
+      app: {
+        css: {
+          'white-label': '/assets/themes/white-label.css',
+          'gothamist': '/assets/themes/gothamist.css'
+        }
+      }
+    },
+  }
 };
