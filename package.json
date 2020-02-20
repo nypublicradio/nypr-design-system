@@ -19,8 +19,8 @@
     "start": "ember serve",
     "test": "ember test",
     "test:all": "ember try:each",
-    "storybook": "start-storybook -p 6006 -s dist",
-    "build-storybook": "build-storybook --docs -s dist -o storybook-static"
+    "storybook": "start-storybook -p 6006 -s dist,stories/assets",
+    "build-storybook": "build-storybook -s dist,stories/assets -o storybook-static"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
