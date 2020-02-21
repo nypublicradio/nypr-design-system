@@ -2,14 +2,26 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="For Developers/Intro" />
 
-# The NYPR Design System
+# Radial
 
-TODO
+Radial is a living design system.  It's a shared reference for our team to use.  It pulls styles and components from our actual codebase to stay as up to date as possible.
 
 # Storybook
 
-TODO
+Storybook is a tool for documenting our design system. It contains both our style guide and UI component library. It's also a sandbox for developing components in isolation. You can easily set up multiple states and variants to preview as you develop a component.
+
+# nypr-design-system
+
+`nypr-design-system` is the ember addon that lets you use the components in ember apps.
+
+`ember install nypr-design-system` to pull them in.
+
+*TODO: One sentence version of how to configure your app to load the css for a theme.*
 
 # Theming and Tokens
 
-TODO
+Radial uses CSS variables that we call "tokens" to allow us to style components in a way that's consistent, but also flexible across themes.
+
+These values are implemented with [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*). This lets us access their values programatically within the design system so we can use the CSS itself as the source of truth. In production we can transpile these values for wider compatibility.
+
+Tokens allow us to give our CSS properties semantic values based on their roles. For example, instead of setting the `background-color of` a button to `#ff0000` or even `var(--c-red)` we can use `var(--c-primary)`.  There are tokens for colors, fonts, spacing, and more. These allow use to re-theme the design system by changing the token values.

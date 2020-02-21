@@ -10,7 +10,6 @@ import { Meta } from '@storybook/addon-docs/blocks';
 - [Github Help: Managing Files on GitHub](https://help.github.com/en/github/managing-files-in-a-repository/managing-files-on-github)
 - [StackEdit](https://stackedit.io/)
 
-
 ## About MDX
 
 Storybook documentation is written in MDX. MDX is a documentation format that lets us write [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) documents but also include live code examples and other components to help make our documentation dynamic. In storybook all our documentation files are named with a `.stories.mdx` extension. The files are included in the document tree in alphabetical order, file and folder names are prefixed with numbers to give us manual control over this sort order. (e.g. `10-Typography.stories.mdx`)
@@ -31,7 +30,7 @@ Titles control what a page is called in the Storybook sidebar as well as where i
 
 ## Editing Pages in GitHub
 
-When viewing any of the pages within the [stories folder](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories) on GitHub, you can click the pencil icon to edit the file. 
+When viewing any of the pages within the [/stories](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories) folder on GitHub, you can click the pencil icon to edit the file.
 
 This will bring up an editor where you can make changes to the file.  The documentations files use [Markdown formatting](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). There's a Preview Changes tab in this view that will let you check how your Markdown will be rendered.
 
@@ -39,7 +38,7 @@ This will bring up an editor where you can make changes to the file.  The docume
 
 ## Adding Pages in GitHub
 
-From the [stories folder](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories) in GitHub you can click the "Create New File" button to add a new file in any of the folders.
+From the [/stories](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories) folder in GitHub you can click the "Create New File" button to add a new file in any of the folders.
 
 It's fine to copy the markdown from an existing page and base your new page on it.
 
@@ -53,9 +52,13 @@ See the [GitHub help page on managing files](https://help.github.com/en/github/m
 
 ## Including Images
 
-Add your image to the [`/stories/assets/images/`](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories/assets/images) folder.
+Add your image to the [/stories/assets/images/](https://github.com/nypublicradio/nypr-design-system/tree/radial/stories/assets/images) folder.
 
-Include the image your Markdown like this `![alt text](/images/my-image.png)`.
+Include the image your Markdown like this:
+`![alt text](/images/my-image.png)`
+
+If you need to set the size you can use HTML:
+`<img alt="alt text" src="/images/my-image.png" width="200">`
 
 ## StackEdit
 
