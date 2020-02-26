@@ -4,6 +4,7 @@
 /dist/
 /storybook-static/
 /tmp/
+.storybook/preview-head.html
 
 # dependencies
 /bower_components/
