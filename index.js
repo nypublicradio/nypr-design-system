@@ -10,16 +10,14 @@ module.exports = {
     sassOptions.includePaths.push('node_modules/ember-basic-dropdown/app/styles');
     app.options.sassOptions = sassOptions;
     
+    if (! app.options.outputPaths.app.css) {
+      app.options.outputPaths.app.css = {};
+    }
+    app.options.outputPaths.app.css['white-label'] = '/assets/themes/white-label.css';
+    app.options.outputPaths.app.css['gothamist'] = '/assets/themes/gothamist.css';
+
     this._super.included.apply(this, arguments);
   },
   options: {
-    outputPaths: {
-      app: {
-        css: {
-          'white-label': '/assets/themes/white-label.css',
-          'gothamist': '/assets/themes/gothamist.css'
-        }
-      }
-    },
   }
 };
