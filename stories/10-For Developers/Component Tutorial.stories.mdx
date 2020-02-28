@@ -32,7 +32,12 @@ A *story file* is a file with a `.stories.js` extension where one or more storie
 
 Let's add a story file for our tag component to the `/stories/Components/Atoms` folder
 
-**/stories/Components/Atoms/nypr-a-button.js**
+on the console, type
+```bash
+ember g stories nypr-a-tag
+```
+
+**/stories/Components/Atoms/nypr-a-tag.js**
 ```js
 import hbs from 'htmlbars-inline-precompile';
 
@@ -45,7 +50,7 @@ export default {
 // A *story* is a function that returns a js object.
 // This object should at minimum include a value for `template`.
 // For more details see "Documenting Your Component"
-export const Tag = () => ({
+export const all = () => ({
     template: hbs`
     <NyprATag class='tag--primary'>Primary Tag</NyprATag>
     `,
