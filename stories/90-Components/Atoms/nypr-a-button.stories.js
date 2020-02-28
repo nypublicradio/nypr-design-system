@@ -1,30 +1,36 @@
 import hbs from 'htmlbars-inline-precompile';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Components/Atoms/Button',
-  component: 'nypr-a-button'
+  component: 'nypr-a-button',
 };
 
-export const Text = () => ({
+export const main = () => ({
   template: hbs`
-  <NyprAButton onclick={{action onClick}} class='button--primary'>Primary Button</NyprAButton>
-  <NyprAButton onclick={{action onClick}} class='button--donate'>Donate Button</NyprAButton>
-  `,
-  context: {
-    onClick: action('clicked'),
-  },
+  <NyprAButton>Primary Button</NyprAButton>
+  <NyprAButton @blank={{true}}>Text Button</NyprAButton>
+  <NyprAButton class='o-button--c-quaternary'>Secondary Button</NyprAButton>
+  <NyprAButton class='o-button--sm'>Small Button</NyprAButton>
+  <NyprAButton class='o-button--extra'>Extra Button</NyprAButton>
+  `
 });
 
-export const Emoji = () => ({
-  template: hbs`
-    <button {{action onClick}}>
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯
-      </span>
-    </button>
-  `,
-  context: {
-    onClick: action('clicked'),
-  },
+export const primary = () => ({
+  template: hbs`<NyprAButton>Primary Button</NyprAButton>`,
+});
+
+export const secondary = () => ({
+  template: hbs`<NyprAButton class='o-button--c-quaternary'>Secondary Button</NyprAButton>`,
+});
+
+export const text = () => ({
+  template: hbs`<NyprAButton @blank={{true}}>Text Button</NyprAButton>`,
+})
+
+export const small = () => ({
+  template: hbs`<NyprAButton class='o-button--sm'>Small Button</NyprAButton>`,
+});
+
+export const extra = () => ({
+  template: hbs`<NyprAButton class='o-button--extra'>Extra Button</NyprAButton>`,
 });
