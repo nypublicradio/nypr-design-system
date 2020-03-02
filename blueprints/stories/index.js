@@ -29,7 +29,7 @@ module.exports = {
         title: getTitle(name) || name,
       };
     },
-    
+
     fileMapTokens() {
       return {
         __type__(options) {
@@ -38,4 +38,3 @@ module.exports = {
       }
     },
   };
-  
