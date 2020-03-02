@@ -1,6 +1,5 @@
 import hbs from 'htmlbars-inline-precompile';
 import { Meta, Title, Subtitle, Description, Props, Preview, Story, Heading } from '@storybook/addon-docs/blocks';
-import test from './test.md';
 const component = 'nypr-a-button';
 
 <Meta title="Components/Atoms/Button" component={component} />
@@ -9,65 +8,58 @@ const component = 'nypr-a-button';
 
 <Subtitle />
 
-<Heading>Product Notes</Heading>
+<Description of={component} />
 
-<Description markdown={test} />
-
-<Preview isExpanded={true} withToolbar={true}>
-  <Story name="all" height="00px">{{
+<Preview>
+  <Story name="all" height="80px">{{
     template: hbs`
-    <NyprAButton>{{title}}</NyprAButton>
+    <NyprAButton>Primary Button</NyprAButton>
     <NyprAButton @blank={{true}}>Text Button</NyprAButton>
     <NyprAButton class='o-button--c-quaternary'>Secondary Button</NyprAButton>
     <NyprAButton class='o-button--sm'>Small Button</NyprAButton>
     <NyprAButton class='o-button--extra'>Extra Button</NyprAButton>
-    `,
-    context: {
-      title: "button"
-    }
+    `
   }}</Story>
-
 </Preview>
 
 <Props of={component} />
 
 <Heading>Primary</Heading>
 
-<Preview isExpanded={true} withToolbar={true}>
-  <Story name="primary">{{
+<Preview withToolbar={true}>
+  <Story name="primary" height="80px">{{
     template: hbs`<NyprAButton>Primary Button</NyprAButton>`
   }}</Story>
 </Preview>
 
 <Heading>Text</Heading>
 
-<Preview isExpanded={true} withToolbar={true}>
-  <Story name="text">{{
+<Preview withToolbar={true}>
+  <Story name="text" height="80px">{{
     template: hbs`<NyprAButton @blank={{true}}>Text Button</NyprAButton>`
   }}</Story>
 </Preview>
 
 <Heading>Secondary</Heading>
 
-<Preview isExpanded={true} withToolbar={true}>
-  <Story name="secondary">{{
-    template: hbs`
-    <NyprAButton class='o-button--c-quaternary'>Secondary Button</NyprAButton>`
+<Preview withToolbar={true}>
+  <Story name="secondary" height="80px">{{
+    template: hbs`<NyprAButton class='o-button--c-quaternary'>Secondary Button</NyprAButton>`
   }}</Story>
 </Preview>
 
 <Heading>Small</Heading>
 
-<Preview isExpanded={true} withToolbar={true}>
-  <Story name="small">{{
+<Preview withToolbar={true}>
+  <Story name="small" height="80px">{{
     template: hbs`<NyprAButton class='o-button--sm'>Small Button</NyprAButton>`
   }}</Story>
 </Preview>
 
 <Heading>Extra</Heading>
 
-<Preview isExpanded={true} withToolbar={true}>
-  <Story name="extra">{{
+<Preview withToolbar={true}>
+  <Story name="extra" height="80px">{{
     template: hbs`<NyprAButton class='o-button--extra'>Extra Button</NyprAButton>`
   }}</Story>
 </Preview>
