@@ -29,7 +29,6 @@ const SwatchSquare = styled.div({
 
 // TEST SWATCH RED ONLY
 export function ColorSwatch(props) { 
-  const {name, token}
   return <div>
     <SwatchSquare style={{backgroundColor: 'red'}} /> 
     <SwatchLabel>RED</SwatchLabel>
