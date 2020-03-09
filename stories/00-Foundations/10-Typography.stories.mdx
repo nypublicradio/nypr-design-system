@@ -1,6 +1,36 @@
 import { Meta } from '@storybook/addon-docs/blocks';
+import { FontSamples } from '../../.storybook/custom/components/Swatches'
 
 <Meta title="Foundations/Typography" />
 
 # Typography
 
+<FontSamples samples={[
+  { // We can probably import this from an external file
+    text: 'Header 10',
+    styles: {
+      fontSize: 'var(--font-size_header-10)',
+      fontFamily: 'var(--font-family_header)',
+      fontWeight: 'var(--font-weight_header)',
+      letterSpacing: 'var(--letter-spacing_header)',
+    }
+  },
+  {
+    text: 'Header 9',
+    styles: {
+      fontSize: 'var(--font-size_header-9)',
+      fontFamily: 'var(--font-family-header)',
+      fontWeight: 'var(--font-weight_header)',
+      letterSpacing: 'var(--letter-spacing_header)',
+    }
+  },
+  {
+    text: 'Header 8',
+    styles: {
+      fontSize: 'var(--font-size_header-8)',
+      fontFamily: 'var(--font-family-header)',
+      fontWeight: 'var(--font-weight_header)',
+      letterSpacing: 'var(--letter-spacing_header)',
+    }
+  },
+]} />
