@@ -4066,82 +4066,6 @@ define("dummy/tests/lint/app.lint-test", [], function () {
     assert.expect(1);
     assert.ok(true, 'app.js should pass ESLint\n\n');
   });
-  QUnit.test('components/color-showcase.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'components/color-showcase.js should pass ESLint\n\n');
-  });
-  QUnit.test('components/color-showcase/gradient.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'components/color-showcase/gradient.js should pass ESLint\n\n');
-  });
-  QUnit.test('components/color-showcase/row.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'components/color-showcase/row.js should pass ESLint\n\n');
-  });
-  QUnit.test('components/color-showcase/swatch.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'components/color-showcase/swatch.js should pass ESLint\n\n');
-  });
-  QUnit.test('components/theme-chooser.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'components/theme-chooser.js should pass ESLint\n\n');
-  });
-  QUnit.test('components/theme-chooser/item.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'components/theme-chooser/item.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/atoms/nypr-a-toggle-box.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/atoms/nypr-a-toggle-box.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/molecules/blocks.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/molecules/blocks.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/molecules/nypr-m-box-banner.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/molecules/nypr-m-box-banner.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/molecules/nypr-m-breadcrumb.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/molecules/nypr-m-breadcrumb.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/molecules/nypr-m-byline.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/molecules/nypr-m-byline.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/molecules/nypr-m-gallery-lead.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/molecules/nypr-m-gallery-lead.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/molecules/nypr-m-newsletter-form.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/molecules/nypr-m-newsletter-form.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/organisms/nypr-o-article-header.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/organisms/nypr-o-article-header.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/organisms/nypr-o-gallery-overlay.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/organisms/nypr-o-gallery-overlay.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/organisms/nypr-o-header.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/organisms/nypr-o-header.js should pass ESLint\n\n');
-  });
-  QUnit.test('controllers/docs/organisms/nypr-o-related-content.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'controllers/docs/organisms/nypr-o-related-content.js should pass ESLint\n\n');
-  });
-  QUnit.test('helpers/color-fn.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'helpers/color-fn.js should pass ESLint\n\n');
-  });
-  QUnit.test('helpers/to-color.js', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'helpers/to-color.js should pass ESLint\n\n');
-  });
   QUnit.test('resolver.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'resolver.js should pass ESLint\n\n');
@@ -4159,34 +4083,6 @@ define("dummy/tests/lint/templates.template.lint-test", [], function () {
   QUnit.test('dummy/templates/application.hbs', function (assert) {
     assert.expect(1);
     assert.ok(true, 'dummy/templates/application.hbs should pass TemplateLint.\n\n');
-  });
-  QUnit.test('dummy/templates/components/color-showcase.hbs', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'dummy/templates/components/color-showcase.hbs should pass TemplateLint.\n\n');
-  });
-  QUnit.test('dummy/templates/components/color-showcase/gradient.hbs', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'dummy/templates/components/color-showcase/gradient.hbs should pass TemplateLint.\n\n');
-  });
-  QUnit.test('dummy/templates/components/color-showcase/row.hbs', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'dummy/templates/components/color-showcase/row.hbs should pass TemplateLint.\n\n');
-  });
-  QUnit.test('dummy/templates/components/color-showcase/swatch.hbs', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'dummy/templates/components/color-showcase/swatch.hbs should pass TemplateLint.\n\n');
-  });
-  QUnit.test('dummy/templates/components/theme-chooser.hbs', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'dummy/templates/components/theme-chooser.hbs should pass TemplateLint.\n\n');
-  });
-  QUnit.test('dummy/templates/components/theme-chooser/item.hbs', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'dummy/templates/components/theme-chooser/item.hbs should pass TemplateLint.\n\n');
-  });
-  QUnit.test('dummy/templates/docs.hbs', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'dummy/templates/docs.hbs should pass TemplateLint.\n\n');
   });
   QUnit.test('dummy/templates/index.hbs', function (assert) {
     assert.expect(1);

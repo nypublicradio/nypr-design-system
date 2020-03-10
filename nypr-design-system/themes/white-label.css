@@ -5,6 +5,14 @@
 /*------------------------------------*\
     $VARIABLES
 \*------------------------------------*/
+@import url("https://fonts.googleapis.com/css?family=Pragati+Narrow:400,700|B612+Mono:400,700|Barlow:400,400i,700,700i&display=swap");
+:root {
+  --font-face-header: "Courier", monospace;
+  --font-size-16: 40px;
+  --font-size-15: 30px;
+  --font-size-14: 20px;
+}
+
 /**
  * Grid & Baseline Setup
  */
@@ -54,7 +62,6 @@
 /*------------------------------------*\
     $THEME FONTS
 \*------------------------------------*/
-@import url("https://fonts.googleapis.com/css?family=Pragati+Narrow:400,700|B612+Mono:400,700|Barlow:400,400i,700,700i&display=swap");
 /**
  * CONTENTS
  *
