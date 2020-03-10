@@ -25,7 +25,10 @@ module.exports = function(defaults) {
     'ember-cli-storybook': {
       enableAddonDocsIntegration: true,
       componentFilePathPatterns: ['addon/components/*.js']
-    }
+    },
+    // 'nypr-design-system': {
+    //   theme: 'gothamist'
+    // },
   });
 
   /*

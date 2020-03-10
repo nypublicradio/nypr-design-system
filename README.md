@@ -19,9 +19,21 @@ ember install nypr-design-system
 ```
 
 ### Configuration
-_(Add the following code to choose a theme in your Ember app:)_
+This app will automatically import the css for your chosen theme in head of your application template (using the contentfor 'head-footer' hook).
 
-*tktk*
+You can select a theme to build by adding a theme name to the options in your app's `ember-cli-build.js` file
+
+```js
+let app = new EmberAddon(defaults, {
+  //...
+  'nypr-design-system': {
+    theme: 'gothamist'
+  },
+  //...
+});
+```
+
+If you want to disable this behavior for some reason, add `theme: 'none'`.
 
 ## Storybook
 The following folders contain files for storybook:
