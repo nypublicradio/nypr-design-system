@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Foundations/Animation" />
+
+# Animation
+
+Radial uses animation to convey utility and express brand. Used selectively, animation brings a page to life, helping users focus and navigate UI.
+
+## Usage
+
+Animation is currently used around buttons and interactive items. They can be as simple as a hover effect, or as nuanced as a loading animation. Animations should only be used if they add something to the user experience, don’t include animations solely to be flashy.
+
+## Easing and Timing
+
+Easing is a control for the velocity of an animation over it’s duration. Timing relates to how long that animation lasts. These two variables make up web animation control in radial. Currently, there are three tokens in Radial for easing, outlined below.
+
+  ### Outgoing
+   Elements exiting a view use Outgoing easing, starting at rest and ending at peak velocity.  
+
+    cubic-bezier(0.4, 0.0, 1, 1);
+![outgoing easing example](/images/outgoing-animation.png)
+
+  
+
+  
+  ### Incoming 
+  Elements entering a view use Incoming easing, in which transitions begin at peak velocity and end at rest.  
+
+    cubic-bezier(0.0, 0.0, 0.2, 1);
+
+  
+![incoming easing example](/images/incoming-animation.png)
+  
+
+
+ ### Standard 
+ Standard easing brings attention to the end of an animation by taking more time to decelerate than accelerate. This is the most common form of easing.  
+  
+
+    cubic-bezier(0.4, 0.0, 0.2, 1);
+
+  
+![standard easing example](/images/standard-animation.png)
+
+
+  
+
+## Accessibility
+
+If building new/custom animations become necessary keep the following in mind:
+
+  
+
+### Screen reader performance
+Animations can affect the way screen-readers convey information; messing up order, causing delays, or skipping information entirely. When building new animations, test accessibility for screen reading.
+
+### Vestibular Disorders
+Users with vestibular disorders might experience heavy motion on a page to be unpleasant, disorienting, or ever nauseating. If an experience demonstrates intense movement or full-page animation, please give due notice in the form of a banner or notification.
