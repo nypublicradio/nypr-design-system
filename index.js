@@ -18,7 +18,7 @@ module.exports = {
     //build themes
     this.theme = app.options['nypr-design-system'] && app.options['nypr-design-system'].theme || defaultTheme
     if (this.theme  !== "none") {
-      app.options.outputPaths.app.css[this.theme] = `/nypr-design-system/themes/${this.theme }.css`;
+      app.options.outputPaths.app.css[this.theme] = `/assets/nypr-design-system/themes/${this.theme}.css`;
     }
 
     this._super.included.apply(this, arguments);
