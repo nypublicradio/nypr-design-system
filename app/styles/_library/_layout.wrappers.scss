@@ -23,11 +23,11 @@
   margin-left: auto;
   margin-right: auto;
   position: relative;
+}
 
-  &--xl {
+.l-container--xl {
     max-width: ($max-width-xl + $space-double);
   }
-}
 
 .l-container--content {
   max-width: $article-content-width + px;

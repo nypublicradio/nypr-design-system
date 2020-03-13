@@ -7,11 +7,11 @@
  */
 .c-toggle-box {
   position: relative;
-
-  &__label {
+}
+.c-toggle-box__label {
     position: relative;
-
-    &:before {
+  }
+.c-toggle-box__label:before {
       content: "";
       bottom: -22px;
       right: 0;
@@ -23,13 +23,10 @@
       width: 0;
       height: 0;
     }
-  }
-
-  &__label {
+.c-toggle-box__label {
     @include font-secondary-style;
   }
-
-  &__content {
+.c-toggle-box__content {
     position: absolute;
     width: 100%;
     right: -$space-half;
@@ -48,27 +45,21 @@
       transform: scale(.85) translate(-50%);
     }
   }
-
-  .c-toggle-box__label {
+.c-toggle-box .c-toggle-box__label {
     color: $c-white;
   }
-
-  .o-icon--caret path {
+.c-toggle-box .o-icon--caret path {
     fill: $c-white;
   }
-}
-// Open
-.c-toggle-box.this-is-active {
-
-  .c-toggle-box__label:before {
+/* Open*/
+.c-toggle-box.this-is-active .c-toggle-box__label:before {
     opacity: 1;
     transform: translateY(0) rotate(-45deg);
     transition: transform .1s ease-out .15s, opacity .15s ease-out .15s;
     width: 15px;
     height: 15px;
   }
-
-  .c-toggle-box__content {
+.c-toggle-box.this-is-active .c-toggle-box__content {
     opacity: 1;
     transform: scale(1);
     z-index: $z-index-toggle-box-content;
@@ -77,37 +68,29 @@
       transform: scale(1) translate(-50%);
     }
   }
-}
 
 /**
  * Share toggle box
  */
-.c-toggle-box--share {
-
-  .c-toggle-box__content {
+.c-toggle-box--share .c-toggle-box__content {
     width: 115px;
   }
-
-  .c-share-tools__group {
+.c-toggle-box--share .c-share-tools__group {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
   }
-
-  .c-share-tools__link {
+.c-toggle-box--share .c-share-tools__link {
     width: 40%;
-
-    &:nth-child(1),
-    &:nth-child(2) {
+  }
+.c-toggle-box--share .c-share-tools__link:nth-child(1),
+    .c-toggle-box--share .c-share-tools__link:nth-child(2) {
       margin-bottom: $space-half;
     }
-  }
-
-  .c-share-tools__label {
+.c-toggle-box--share .c-share-tools__label {
     font-size: $font-size-xs;
   }
-}
 
 
 /**
@@ -124,32 +107,59 @@
   background-color: $c-gray--light;
   color: $c-quaternary;
   z-index: $z-index-progress-bar;
-
-  &::-webkit-progress-bar {
+}
+.o-progress::-webkit-progress-bar {
     background-color: $c-gray--light;
   }
-  &::-webkit-progress-value {
+.o-progress::-webkit-progress-value {
     background-color: $c-quaternary;
   }
-  &::-moz-progress-bar {
+.o-progress::-moz-progress-bar {
     background-color: $c-quaternary;
   }
-}
 
 .c-share-tools {
   display: flex;
   align-items: center;
 
-  &__label {
+  @include media('<=small') {
+    flex-wrap: wrap;
+  }
+}
+
+@include media('<=small') {
+  .c-share-tools__label {
+    flex-basis: 100%;
+    margin: 0 0 2px 0;
+
+    + .c-share-tools__group > .c-share-tools__link:first-of-type {
+      margin-left: -5px; /* align first icon with label if present*/
+    }
+  }
+
+  .c-share-tools__link {
+    margin: 0;
+  }
+
+  .c-share-tools__group {
+    flex-wrap: wrap;
+  }
+
+  .c-share-tools__group > * + * {
+    margin: 0 0 0 $space-quarter;
+  }
+}
+
+.c-share-tools__label {
     margin-right: $space-half;
   }
 
-  &__group {
+.c-share-tools__group {
     display: flex;
     align-items: center;
   }
 
-  &__link {
+.c-share-tools__link {
     width: 30px;
     height: 30px;
     padding: 5px;
@@ -158,53 +168,26 @@
     @include media('>small') {
       width: 40px;
     }
+  }
 
-    path {
+.c-share-tools__link path {
       transition: all 0.25s ease-in-out;
     }
 
-    &:hover {
-      path {
+.c-share-tools__link:hover path {
         fill: $c-primary;
       }
-    }
-  }
 
-  @include media('<=small') {
-    flex-wrap: wrap;
-
-    &__label {
-      flex-basis: 100%;
-      margin: 0 0 2px 0;
-
-      + .c-share-tools__group > .c-share-tools__link:first-of-type {
-        margin-left: -5px; // align first icon with label if present
-      }
-    }
-
-    &__link {
-      margin: 0;
-    }
-
-    &__group {
+.c-share-tools--vertical .c-share-tools__group {
       flex-wrap: wrap;
     }
 
-    &__group > * + * {
-      margin: 0 0 0 $space-quarter;
-    }
-  }
-
-  &--vertical {
-    .c-share-tools__group {
-      flex-wrap: wrap;
-    }
-
-    .c-share-tools__link {
+.c-share-tools--vertical .c-share-tools__link {
       flex-basis: 100%;
       margin: 4px 0;
+    }
 
-      &--print {
+.c-share-tools--vertical .c-share-tools__link--print {
 
         @include media('>medium') {
           margin-bottom: 10px;
@@ -213,11 +196,8 @@
           background-size: 16px 1px;
           background-repeat: repeat-x;
         }
+      }
 
-        svg {
+.c-share-tools--vertical .c-share-tools__link--print svg {
           margin-top: 10px;
         }
-      }
-    }
-  }
-}

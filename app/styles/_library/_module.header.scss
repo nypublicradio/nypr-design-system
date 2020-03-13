@@ -7,28 +7,29 @@
   position: relative;
   z-index: $z-index-header;
   font-family: $ff-font--primary;
+}
 
-  svg {
+.c-main-header svg {
     fill: white;
   }
 
-  &__ad-unit {
+.c-main-header__ad-unit {
     position: relative;
     background-color: $c-dark-bg;
     text-align: center;
-
-    img {
-      margin: 0 auto;
-    }
   }
 
-  .o-ad--leaderboard {
+.c-main-header__ad-unit img {
+      margin: 0 auto;
+    }
+
+.c-main-header .o-ad--leaderboard {
     display: inline-block;
     position: static;
     transform: none;
   }
 
-  .o-ad__label {
+.c-main-header .o-ad__label {
     color: $c-gray--light;
 
     @include media('<=small') {
@@ -36,7 +37,7 @@
     }
   }
 
-  &__inner {
+.c-main-header__inner {
     background-color: $c-heading-bgcolor;
     padding: $space-half $space-half $space-half $space-double;
     display: flex;
@@ -50,8 +51,8 @@
     }
   }
 
-  &__branding {
-    flex-shrink: 0; // prevent from shrinking in flex container
+.c-main-header__branding {
+    flex-shrink: 0; /* prevent from shrinking in flex container*/
     width: 120px;
 
     @include media('>xsmall') {
@@ -59,12 +60,12 @@
     }
   }
 
-  &__left {
+.c-main-header__left {
     display: flex;
     align-items: flex-end;
   }
 
-  &__right {
+.c-main-header__right {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -72,7 +73,7 @@
     height: 100%;
   }
 
-  &__donate {
+.c-main-header__donate {
     margin-right: $space;
 
     @include media('<=small') {
@@ -86,13 +87,13 @@
     }
   }
 
-  &__close {
+.c-main-header__close {
     width: 17px;
     height: 17px;
     fill: white;
   }
 
-  &__title {
+.c-main-header__title {
     font-size: $font-size-s-m;
     color: $c-white;
     font-weight: normal;
@@ -114,7 +115,7 @@
     }
   }
 
-  &__share {
+.c-main-header__share {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -127,74 +128,71 @@
     @include media('>small') {
       width: 230px;
     }
+  }
 
-    > span {
+.c-main-header__share > span {
       @include media('<=small') {
         display: none;
       }
     }
 
-    .c-share-tools {
+.c-main-header__share .c-share-tools {
       width: 100%;
     }
 
-    .c-share-tools__group {
+.c-main-header__share .c-share-tools__group {
       display: flex;
       justify-content: space-between;
       width: 100%;
       padding: 0 $space-half 0 $space-half;
     }
 
-    .c-share-tools__link {
+.c-main-header__share .c-share-tools__link {
       margin: 0;
-
-      &:hover {
-        path {
-          fill: $c-primary;
-        }
-      }
 
       @include media('<=small') {
         width: $space-double;
       }
-      path {
+    }
+
+.c-main-header__share .c-share-tools__link:hover path {
+          fill: $c-primary;
+        }
+
+.c-main-header__share .c-share-tools__link path {
         fill: $c-white;
       }
-    }
-  }
 
-  // Gallery and Article floating header specific styles
-  &--article,
-  &--gallery {
+/* Gallery and Article floating header specific styles*/
 
-    .c-main-header__branding path {
+.c-main-header--article .c-main-header__branding path, .c-main-header--gallery .c-main-header__branding path {
       @include media('<=medium') {
         display: none;
       }
     }
 
-    .c-share-tools__label,
-    .c-search-toggle {
+.c-main-header--article .c-share-tools__label,
+    .c-main-header--article .c-search-toggle,
+    .c-main-header--gallery .c-share-tools__label,
+    .c-main-header--gallery .c-search-toggle {
       @include media('<=small') {
         display: none;
       }
     }
-  }
 
-  // Article overlay header type
-  &--article {
-    .c-main-header__branding {
+/* Article overlay header type*/
+
+.c-main-header--article .c-main-header__branding {
       @include media('<=small') {
         display: none;
       }
     }
-  }
 
-  // Gallery overlay header type
-  &--gallery {
+/* Gallery overlay header type*/
+
+.c-main-header--gallery {
     display: none;
   }
-}
 
 /**
  * Floating headers
@@ -207,11 +205,10 @@
   z-index: $z-index-floating-header;
   transform: translateY(0);
   transition: transform .25s $hard-ease-in;
-
-  &.is-visible {
+}
+.c-floating-header.is-visible {
     transform: translateY(#{$heading-height + $space-half});
   }
-}
 
 
 .c-search-toggle {
@@ -219,23 +216,21 @@
   height: 40px;
   transform: translate(-5px, 2px);
 
-  &:hover {
-    path {
-      fill: $c-primary;
-    }
-  }
-
   @include media('<=small') {
     display: none;
   }
+}
 
-  &__icon {
-    path {
+
+.c-search-toggle:hover path {
+      fill: $c-primary;
+    }
+
+
+.c-search-toggle__icon path {
       fill: $c-white;
       transition: all 0.25s ease-in-out;
     }
-  }
-}
 
 .c-content-overlay {
   position: fixed;
@@ -249,14 +244,12 @@
   transform: translateX(0);
   transition: opacity .3s ease-out, transform .3s ease-out .4s;
 }
-// side menu is open
-.c-main-header.side-menu-is-active {
-  .c-content-overlay {
+/* side menu is open*/
+.c-main-header.side-menu-is-active .c-content-overlay {
     opacity: .5;
     transform: translateX(100vw);
     transition: opacity .2s ease-in;
   }
-}
 
 
 /**
@@ -283,133 +276,99 @@
     max-width: 500px;
     left: -500px;
   }
-
-
-  .c-menu-toggle {
+}
+.c-side-menu .c-menu-toggle {
     display: none;
-    + * {
+  }
+.c-side-menu .c-menu-toggle + * {
       margin-left: 0;
     }
-  }
-
-  &__group {
+.c-side-menu__group {
     padding: $space-and-half;
-
-    &:not(:last-child) {
-      @include border-accent(right, center, rgba($c-gray, .2));
-    }
 
     @include media('>medium') {
       padding-left: 75px;
       padding-right: 75px;
     }
   }
-
-  &__branding {
+.c-side-menu__group:not(:last-child) {
+      @include border-accent(right, center, rgba($c-gray, .2));
+    }
+.c-side-menu__branding {
     width: 180px;
     margin: $space-half auto $space;
   }
-
-  &__social {
-    .c-share-tools {
+.c-side-menu__social .c-share-tools {
       fill: white;
       justify-content: center;
     }
-  }
-
-  &__secondary-nav {
-
-    .c-secondary-nav {
+.c-side-menu__secondary-nav .c-secondary-nav {
       margin-bottom: $space;
-
-      &__list {
+    }
+.c-side-menu__secondary-nav .c-secondary-nav__list {
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
         align-items: flex-start;
       }
-
-      &__item {
+.c-side-menu__secondary-nav .c-secondary-nav__item {
         margin-bottom: $space-and-half;
       }
-
-      &__link {
+.c-side-menu__secondary-nav .c-secondary-nav__link {
         margin: 0 $space;
 
         @include media('>medium') {
           margin: 0 $space-and-half;
         }
       }
-    }
-  }
-
-  &__donate {
+.c-side-menu__donate {
     width: 100%;
     margin-bottom: $space;
   }
-
-  &__donate,
-  .c-side-menu__send-story,
-  .c-search--side {
+.c-side-menu__donate,
+  .c-side-menu .c-side-menu__send-story,
+  .c-side-menu .c-search--side {
     max-width: 310px;
     margin-left: auto;
     margin-right: auto;
   }
-
-  &__send-story {
+.c-side-menu__send-story {
     @include media('<=xsmall') {
       font-size: 14px;
     }
   }
-
-  &__nypr-logo {
+.c-side-menu__nypr-logo {
     width: 120px;
     margin: $space-double auto $space;
-    path,
-    polygon {
+  }
+.c-side-menu__nypr-logo path,
+    .c-side-menu__nypr-logo polygon {
       fill: $c-white;
     }
-  }
-
-  .c-nypr-nav {
-
-    &__list {
+.c-side-menu .c-nypr-nav__list {
       width: calc(100% + #{$space-double});
     }
-  }
-
-  &__nypr-linkroll {
-
-    .c-toggle-box__label {
+.c-side-menu__nypr-linkroll .c-toggle-box__label {
       font-size: 12px;
     }
-  }
-
-  &__copyright {
-    p {
+.c-side-menu__copyright p {
       line-height: 2.5;
     }
-  }
-
-  &__terms-links {
+.c-side-menu__terms-links {
     display: flex;
     justify-content: space-between;
-    a {
+  }
+.c-side-menu__terms-links a {
       color: $c-quaternary;
       padding: 8px 0;
-
-      &:hover {
+    }
+.c-side-menu__terms-links a:hover {
         background-color: $c-primary;
         color: $c-white;
       }
-    }
-  }
-}
 
-// Side menu is active
-.c-main-header.side-menu-is-active {
-
-  .c-side-menu {
+/* Side menu is active*/
+.c-main-header.side-menu-is-active .c-side-menu {
     transform: translateX(100%);
 
     @include media('>small') {
@@ -420,4 +379,3 @@
       transform: translateX(500px);
     }
   }
-}

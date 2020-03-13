@@ -2,69 +2,48 @@
     $LEADS/HEROS
 \*------------------------------------*/
 
-.c-lead {
-
-  .o-caption {
+.c-lead .o-caption {
     @include media('<=medium') {
       padding-left: $space;
       padding-right: $space;
     }
   }
-}
 
 /**
  * Gallery version of a lead
  */
-.c-lead-gallery {
-
-  &__top {
+.c-lead-gallery__top {
     margin-bottom: $space;
   }
-
-  &__image {
-    img {
+.c-lead-gallery__image img {
       cursor: pointer;
     }
-  }
-
-  .o-figure {
+.c-lead-gallery .o-figure {
     background-color: $c-octonary;
   }
-
-  .o-caption {
+.c-lead-gallery .o-caption {
     padding: 0 $space $space;
-
-    // ember compat
-    > .o-credit {
+  }
+/* ember compat*/
+.c-lead-gallery .o-caption > .o-credit {
       padding: 0;
       display: block;
     }
-  }
-
-  &__title {
+.c-lead-gallery__title {
     font-size: $font-size-m;
   }
-
-  &__caption {
-    p {
+.c-lead-gallery__caption p {
       font-size: $font-size-s;
     }
-  }
-
-  &__thumbs {
+.c-lead-gallery__thumbs {
     display: flex;
     justify-content: space-between;
   }
-
-  &__thumbs-thumb {
+.c-lead-gallery__thumbs-thumb {
     display: inline-block;
     max-width: calc(20% - #{$space});
     min-width: calc(20% - #{$space});
     border: $border-style-m;
-
-    &.is-active {
-      border-color: $c-primary;
-    }
 
     @include media('<=medium') {
       max-width: calc(25% - #{$space});
@@ -81,16 +60,17 @@
         display: none;
       }
     }
-
-    img {
+  }
+.c-lead-gallery__thumbs-thumb.is-active {
+      border-color: $c-primary;
+    }
+.c-lead-gallery__thumbs-thumb img {
       display: block;
       object-fit: cover;
       width: 100%;
       height: 100%;
     }
-  }
-
-  &__thumbs-thumb-text {
+.c-lead-gallery__thumbs-thumb-text {
     padding: $space $space-half $space-half;
     background-color: $c-dark-bg;
     display: flex;
@@ -99,16 +79,13 @@
     justify-content: center;
     color: $c-white;
     white-space: nowrap;
-
-    &:hover {
+  }
+.c-lead-gallery__thumbs-thumb-text:hover {
       background-color: $c-primary;
     }
-
-    span {
+.c-lead-gallery__thumbs-thumb-text span {
       display: block;
       font-size: $font-size-l;
       width: 100%;
       text-align: center;
     }
-  }
-}

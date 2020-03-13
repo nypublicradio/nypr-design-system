@@ -33,22 +33,6 @@ td {
   padding: 0;
   width: 100%;
 
-  tr {
-    border: 1px solid $c-border-color;
-    background-color: $c-gray--light;
-  }
-
-  th,
-  td {
-    padding: $space / 2;
-  }
-
-  th {
-    font-size: var(--font-size-xs);
-    text-transform: uppercase;
-    border-bottom: 1px solid $c-border-color;
-  }
-
   @include media("<=medium") {
     border: 0;
 
@@ -111,3 +95,19 @@ td {
     }
   }
 }
+
+.c-table--responsive tr {
+    border: 1px solid $c-border-color;
+    background-color: $c-gray--light;
+  }
+
+.c-table--responsive th,
+  .c-table--responsive td {
+    padding: $space / 2;
+  }
+
+.c-table--responsive th {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    border-bottom: 1px solid $c-border-color;
+  }

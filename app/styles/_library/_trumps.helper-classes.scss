@@ -33,16 +33,14 @@
 .u-reversed-out {
   background-color: $c-dark-bg;
   @include reversed-out-text;
-
-  &:after {
+}
+.u-reversed-out:after {
     background-color: $c-dark-bg;
   }
-
-  input[type=radio]:checked,
-  input[type=checkbox]:checked {
+.u-reversed-out input[type=radio]:checked,
+  .u-reversed-out input[type=checkbox]:checked {
     border-color: rgba($c-gray, .3);
   }
-}
 
 .u-align-center {
   text-align: center;
@@ -71,20 +69,15 @@
 .u-active--off {
   display: none;
 }
-[class*="-is-active"].js-toggle-parent,
-[class*="-is-active"].js-toggle {
-  .u-active--on {
+[class*="-is-active"].js-toggle-parent .u-active--on, [class*="-is-active"].js-toggle .u-active--on {
     display: none;
   }
-  .u-active--off {
+[class*="-is-active"].js-toggle-parent .u-active--off, [class*="-is-active"].js-toggle .u-active--off {
     display: block;
   }
-}
-[class*="-is-active"] {
-  .u-hide-on-active {
+[class*="-is-active"] .u-hide-on-active {
     display: none;
   }
-}
 
 /**
  * Breakout content
