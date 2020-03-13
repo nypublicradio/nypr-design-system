@@ -19,7 +19,7 @@
   background-repeat: no-repeat;
   padding: $space;
 
-  &__logo {
+  .c-welcome-page__logo {
     max-width: 500px;
     max-height: 500px;
     min-width: 430px;
@@ -28,7 +28,7 @@
     height: 100%;
   }
 
-  &__start {
+  .c-welcome-page__start {
     display: block;
     width: 40px;
     transform: translateY(0) rotate(90deg);
@@ -55,7 +55,7 @@
   left: 50%;
   transform: translateX(-50%);
 
-  &__label {
+  .o-ad__label {
     margin-top: $space-half;
     display: block;
     text-align: right;
@@ -64,13 +64,13 @@
   }
 
   // Standard 300x250
-  &--300x250,
-  &--300x600-flex {
+  .o-ad--300x250,
+  .o-ad--300x600-flex {
     width: 300px;
   }
 
   // Billboard progression
-  &--billboard {
+  .o-ad--billboard {
     width: 320px;
 
     @include media('>750px') {
@@ -83,7 +83,7 @@
   }
 
   // Sponsored ad
-  &-sponsored {
+  .o-ad-sponsored {
 
     .o-ad__label {
       display: block;
@@ -95,7 +95,7 @@
       }
     }
 
-    &__unit {
+    .o-ad__unit {
       display: inline-block;
       margin-right: $space-and-half;
       margin-bottom: $space;
@@ -107,7 +107,7 @@
       }
     }
 
-    &--inline {
+    .o-ad-sponsored--inline {
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -148,7 +148,7 @@
 }
 
 .o-sg-section {
-  &__content {
+  .o-sg-section__content {
     p {
       font-size: $font-size-s;
     }
@@ -158,25 +158,25 @@
 .c-swatch {
   border: $border-style-thick;
 
-  &__color {
+  .c-swatch__color {
     height: 150px;
     position: relative;
   }
 
-  &-a11y {
+  .c-swatch-a11y {
     position: absolute;
     right: 0;
     bottom: 0;
     padding: 5px 7px 2px 0;
     display: flex;
 
-    &__item {
+    .c-swatch-a11y__item {
       margin-left: $space-quarter;
       text-align: center;
       width: 25px;
     }
 
-    &__letter {
+    .c-swatch-a11y__letter {
       text-transform: uppercase;
       font-size: $font-size-l;
       display: inline-block;
@@ -184,12 +184,12 @@
       line-height: 1;
       color: $c-white;
 
-      &--bg {
+      .c-swatch-a11y__letter--bg {
         background-color: $c-white;
       }
     }
 
-    &__check {
+    .c-swatch-a11y__check {
       background-color: $c-white;
       display: inline-block;
       width: 12px;
@@ -208,7 +208,7 @@
     }
   }
 
-  &__details {
+  .c-swatch__details {
     padding: $space;
   }
 }
@@ -226,25 +226,25 @@
 .c-font-block {
   width: 100%;
 
-  &__inner {
+  .c-font-block__inner {
     padding: $space;
     display: flex;
     height: 100%;
   }
 
-  &__content {
+  .c-font-block__content {
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
   }
 
-  &__free-type {
+  .c-font-block__free-type {
     font-size: $font-size-xxl;
     line-height: 1;
     margin-bottom: $space-double;
   }
 
-  &__letter {
+  .c-font-block__letter {
     font-size: 117px;
     line-height: .8;
     align-self: flex-end;

@@ -12,7 +12,7 @@
     fill: white;
   }
 
-  &__ad-unit {
+  .c-main-header__ad-unit {
     position: relative;
     background-color: $c-dark-bg;
     text-align: center;
@@ -36,7 +36,7 @@
     }
   }
 
-  &__inner {
+  .c-main-header__inner {
     background-color: $c-heading-bgcolor;
     padding: $space-half $space-half $space-half $space-double;
     display: flex;
@@ -50,7 +50,7 @@
     }
   }
 
-  &__branding {
+  .c-main-header__branding {
     flex-shrink: 0; // prevent from shrinking in flex container
     width: 120px;
 
@@ -59,12 +59,12 @@
     }
   }
 
-  &__left {
+  .c-main-header__left {
     display: flex;
     align-items: flex-end;
   }
 
-  &__right {
+  .c-main-header__right {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -72,7 +72,7 @@
     height: 100%;
   }
 
-  &__donate {
+  .c-main-header__donate {
     margin-right: $space;
 
     @include media('<=small') {
@@ -86,13 +86,13 @@
     }
   }
 
-  &__close {
+  .c-main-header__close {
     width: 17px;
     height: 17px;
     fill: white;
   }
 
-  &__title {
+  .c-main-header__title {
     font-size: $font-size-s-m;
     color: $c-white;
     font-weight: normal;
@@ -114,7 +114,7 @@
     }
   }
 
-  &__share {
+  .c-main-header__share {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -229,7 +229,7 @@
     display: none;
   }
 
-  &__icon {
+  .c-search-toggle__icon {
     path {
       fill: $c-white;
       transition: all 0.25s ease-in-out;
@@ -292,7 +292,7 @@
     }
   }
 
-  &__group {
+  .c-side-menu__group {
     padding: $space-and-half;
 
     &:not(:last-child) {
@@ -305,35 +305,35 @@
     }
   }
 
-  &__branding {
+  .c-side-menu__branding {
     width: 180px;
     margin: $space-half auto $space;
   }
 
-  &__social {
+  .c-side-menu__social {
     .c-share-tools {
       fill: white;
       justify-content: center;
     }
   }
 
-  &__secondary-nav {
+  .c-side-menu__secondary-nav {
 
     .c-secondary-nav {
       margin-bottom: $space;
 
-      &__list {
+      .c-secondary-nav__list {
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
         align-items: flex-start;
       }
 
-      &__item {
+      .c-secondary-nav__item {
         margin-bottom: $space-and-half;
       }
 
-      &__link {
+      .c-secondary-nav__link {
         margin: 0 $space;
 
         @include media('>medium') {
@@ -343,12 +343,12 @@
     }
   }
 
-  &__donate {
+  .c-side-menu__donate {
     width: 100%;
     margin-bottom: $space;
   }
 
-  &__donate,
+  .c-side-menu__donate,
   .c-side-menu__send-story,
   .c-search--side {
     max-width: 310px;
@@ -356,13 +356,13 @@
     margin-right: auto;
   }
 
-  &__send-story {
+  .c-side-menu__send-story {
     @include media('<=xsmall') {
       font-size: 14px;
     }
   }
 
-  &__nypr-logo {
+  .c-side-menu__nypr-logo {
     width: 120px;
     margin: $space-double auto $space;
     path,
@@ -373,25 +373,25 @@
 
   .c-nypr-nav {
 
-    &__list {
+    .c-side-menu__list {
       width: calc(100% + #{$space-double});
     }
   }
 
-  &__nypr-linkroll {
+  .c-side-menu__nypr-linkroll {
 
     .c-toggle-box__label {
       font-size: 12px;
     }
   }
 
-  &__copyright {
+  .c-side-menu__copyright {
     p {
       line-height: 2.5;
     }
   }
 
-  &__terms-links {
+  .c-side-menu__terms-links {
     display: flex;
     justify-content: space-between;
     a {

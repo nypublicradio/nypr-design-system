@@ -20,7 +20,7 @@
   text-align: center;
   display: block;
 
-  &__inner {
+  .o-box-banner__inner {
     @include media('>large') {
       display: flex;
       justify-content: center;
@@ -32,13 +32,13 @@
     display: none;
   }
 
-  &__close {
+  .o-box-banner__close {
     position: absolute;
     right: $space-half;
     top: $space-half;
   }
 
-  &__title {
+  .o-box-banner__title {
     font-weight: bold;
     font-size: $font-size-s-m;
 
@@ -48,13 +48,13 @@
     }
   }
 
-  &__title > a,
-  &__title-link {
+  .o-box-banner__title > a,
+  .o-box-banner__title-link {
     @include inline-accent($c-body-color, $c-body-color, $c-primary, false, $c-tertiary);
     transition: none;
   }
 
-  &__group {
+  .o-box-banner__group {
     @include media('>large') {
       min-width: 73%;
       padding-left: $space-triple;
@@ -62,7 +62,7 @@
     }
   }
 
-  &__dek {
+  .o-box-banner__dek {
     p {
       line-height: 1.45;
 
@@ -83,7 +83,7 @@
     }
   }
 
-  &--no-desc {
+  .o-box-banner--no-desc {
     .o-box-banner__title {
       margin-bottom: $space;
 
@@ -104,7 +104,7 @@
     }
   }
 
-  &--sticky {
+  .o-box-banner--sticky {
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -116,7 +116,7 @@
     }
   }
 
-  &--senary {
+  .o-box-banner--senary {
     background-color: $c-senary;
     @include reversed-out-text;
 

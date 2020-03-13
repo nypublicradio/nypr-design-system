@@ -332,7 +332,7 @@
     }
   }
 
-  &__author {
+  .o-pullquote__author {
     color: $c-septenary;
     font-size: $font-size-xs;
     font-family: $ff-font--secondary;
@@ -380,7 +380,7 @@
   font-size: $font-size-xxs;
 }
 .o-tag {
-  &--sponsored {
+  .o-tag--sponsored {
     color: $c-white;
     font-weight: normal;
     background-color: $c-sponsor-color;
@@ -421,7 +421,7 @@ a.o-breadcrumb {
  */
 .o-caption {
   p,
-  &__text {
+  .o-caption__text {
     font-size: 14px; // Not in type scale
     font-family: $ff-font--tertiary;
     line-height: 1.5;
@@ -593,7 +593,7 @@ a.o-breadcrumb {
   }
 
   // Quinary background color
-  &--quinary {
+  .o-3d-heading--quinary {
     &:after {
       background-color: $c-quinary;
     }

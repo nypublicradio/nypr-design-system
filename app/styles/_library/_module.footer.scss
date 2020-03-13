@@ -8,7 +8,7 @@
   background-position: 100% 142px;
   background-repeat: repeat-x;
 
-  &__inner {
+  .c-main-footer__inner {
 
     @include media('>xlarge') {
       margin-top: 0;
@@ -18,14 +18,14 @@
     }
   }
 
-  &__col1 {
+  .c-main-footer__col1 {
     width: 100%;
     max-width: 570px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  &__branding {
+  .c-main-footer__branding {
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -39,7 +39,7 @@
     }
   }
 
-  &__logo {
+  .c-main-footer__logo {
     min-width: 150px;
     max-width: 150px;
     margin-right: $space-and-half;
@@ -49,27 +49,27 @@
     }
   }
 
-  &__send-story {
+  .c-main-footer__send-story {
     display: inline-block;
     color: $c-body-color;
     padding: $space 0;
     margin-bottom: $space;
   }
 
-  &__utility {
+  .c-main-footer__utility {
     @include media('<=small') {
       margin-bottom: -18px;
     }
   }
 
-  &__slogan {
+  .c-main-footer__slogan {
     p {
       color: $c-white;
       font-size: 14px; // Not in the type scale
     }
   }
 
-  &__nav {
+  .c-main-footer__nav {
 
     @include media('<=xlarge') {
       text-align: center;
@@ -95,7 +95,7 @@
     }
   }
 
-  &__nypr-logo {
+  .c-main-footer__nypr-logo {
     width: 120px;
     margin: 0 auto $space;
 
@@ -109,7 +109,7 @@
     }
   }
 
-  &__brand-group {
+  .c-main-footer__brand-group {
     text-align: center;
 
     @include media('>xlarge') {
@@ -125,7 +125,7 @@
     width: 100%;
   }
 
-  &__bottom {
+  .c-main-footer__bottom {
     border-top: 1px dashed rgba($c-white, .5);
     padding: $space-and-half $space;
     text-align: center;
@@ -143,7 +143,7 @@
     }
   }
 
-  &__terms-links {
+  .c-main-footer__terms-links {
 
     @include media('<=large') {
       margin-top: $space-double;

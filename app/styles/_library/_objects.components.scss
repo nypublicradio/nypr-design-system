@@ -8,7 +8,7 @@
 .c-toggle-box {
   position: relative;
 
-  &__label {
+  .c-toggle-box__label {
     position: relative;
 
     &:before {
@@ -25,11 +25,11 @@
     }
   }
 
-  &__label {
+  .c-toggle-box__label {
     @include font-secondary-style;
   }
 
-  &__content {
+  .c-toggle-box__content {
     position: absolute;
     width: 100%;
     right: -$space-half;
@@ -140,16 +140,16 @@
   display: flex;
   align-items: center;
 
-  &__label {
+  .c-share-tools__label {
     margin-right: $space-half;
   }
 
-  &__group {
+  .c-share-tools__group {
     display: flex;
     align-items: center;
   }
 
-  &__link {
+  .c-share-tools__link {
     width: 30px;
     height: 30px;
     padding: 5px;
@@ -173,7 +173,7 @@
   @include media('<=small') {
     flex-wrap: wrap;
 
-    &__label {
+    .c-share-tools__label {
       flex-basis: 100%;
       margin: 0 0 2px 0;
 
@@ -182,20 +182,20 @@
       }
     }
 
-    &__link {
+    .c-share-tools__link {
       margin: 0;
     }
 
-    &__group {
+    .c-share-tools__group {
       flex-wrap: wrap;
     }
 
-    &__group > * + * {
+    .c-share-tools__group > * + * {
       margin: 0 0 0 $space-quarter;
     }
   }
 
-  &--vertical {
+  .c-share-tools--vertical {
     .c-share-tools__group {
       flex-wrap: wrap;
     }
@@ -204,7 +204,7 @@
       flex-basis: 100%;
       margin: 4px 0;
 
-      &--print {
+      .c-share-tools__link--print {
 
         @include media('>medium') {
           margin-bottom: 10px;

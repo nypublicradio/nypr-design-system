@@ -57,7 +57,7 @@ input[type="submit"] {
   }
 
   // Types/Styles
-  &--c-quaternary {
+  .o-button--c-quaternary {
     color: $c-body-color;
     background-color: $c-quaternary;
 
@@ -67,12 +67,12 @@ input[type="submit"] {
   }
 
   // Sizes
-  &--sm {
+  .o-button--sm {
     font-size: 14px;
     padding: 11px 50px 10px;
   }
 
-  &--extra {
+  .o-button--extra {
     padding-left: 80px;
     padding-right: 80px;
   }

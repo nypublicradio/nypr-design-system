@@ -17,11 +17,11 @@
  */
 .c-lead-gallery {
 
-  &__top {
+  .c-lead-gallery__top {
     margin-bottom: $space;
   }
 
-  &__image {
+  .c-lead-gallery__image {
     img {
       cursor: pointer;
     }
@@ -41,22 +41,22 @@
     }
   }
 
-  &__title {
+  .c-lead-gallery__title {
     font-size: $font-size-m;
   }
 
-  &__caption {
+  .c-lead-gallery__caption {
     p {
       font-size: $font-size-s;
     }
   }
 
-  &__thumbs {
+  .c-lead-gallery__thumbs {
     display: flex;
     justify-content: space-between;
   }
 
-  &__thumbs-thumb {
+  .c-lead-gallery__thumbs-thumb {
     display: inline-block;
     max-width: calc(20% - #{$space});
     min-width: calc(20% - #{$space});
@@ -90,7 +90,7 @@
     }
   }
 
-  &__thumbs-thumb-text {
+  .c-lead-gallery__thumbs-thumb-text {
     padding: $space $space-half $space-half;
     background-color: $c-dark-bg;
     display: flex;

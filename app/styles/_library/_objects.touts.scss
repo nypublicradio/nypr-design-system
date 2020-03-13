@@ -58,7 +58,7 @@
     }
   }
 
-  &__inner {
+  .c-donate-tout__inner {
 
     @include media('>xlarge') {
       padding: 0 $space 0 100px;
@@ -84,7 +84,7 @@
     }
   }
 
-  &__graphic {
+  .c-donate-tout__graphic {
     width: 120px;
     height: 133px;
     position: relative;
@@ -105,7 +105,7 @@
     }
   }
 
-  &__close {
+  .c-donate-tout__close {
     position: absolute;
     top: 0;
     right: 0;
@@ -114,7 +114,7 @@
   }
 
   // Non-fly-in version
-  &--static {
+  .c-donate-tout--static {
     box-shadow: none;
     max-width: none;
     position: static;
@@ -196,7 +196,7 @@
     left: -2px;
   }
 
-  &__heading {
+  .c-sponsored-tout__heading {
     position: absolute;
     top: -.6em;
     font-size: $font-size-l;
@@ -262,7 +262,7 @@
     z-index: 0;
   }
 
-  &__inner {
+  .c-newsletter-tout__inner {
     position: relative; // re establish stacking order above pseudo element
 
     @include media('<=medium') {
@@ -276,7 +276,7 @@
     }
   }
 
-  &__media {
+  .c-newsletter-tout__media {
     padding: $space;
 
     @include media('>small', '<=medium') {
@@ -296,7 +296,7 @@
     }
   }
 
-  &__text {
+  .c-newsletter-tout__text {
     @include media('>medium') {
       padding-top: $space;
     }
