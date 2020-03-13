@@ -51,13 +51,13 @@
   pointer-events: none;
   padding-bottom: $space-half;
 
-  .c-slide__header,
-  .c-slide__content {
+  &__header,
+  &__content {
     pointer-events: auto;
   }
 
-  .c-slide__header.l-container--content,
-  .c-slide__meta.l-container--content {
+  &__header.l-container--content,
+  &__meta.l-container--content {
     max-width: none;
     @include media('<=xxlarge') {
       padding-left: $space;
@@ -75,7 +75,7 @@
     transition-delay: .15s;
   }
 
-  .c-slide__image img {
+  &__image img {
     height: initial; // allows images with height attributes to occupy vertical space while loading
     max-height: 733px;
     margin-left: auto;
@@ -83,7 +83,7 @@
     object-fit: contain;
   }
 
-  .c-slide__meta {
+  &__meta {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;

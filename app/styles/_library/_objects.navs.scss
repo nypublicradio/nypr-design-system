@@ -10,9 +10,9 @@
   width: 40px;
   height: 40px;
 
-  .o-menu-toggle__line,
-  .o-menu-toggle__line:before,
-  .o-menu-toggle__line:after {
+  &__line,
+  &__line:before,
+  &__line:after {
     position: absolute;
     background-color: $c-white;
     height: 2px;
@@ -22,18 +22,18 @@
     transform: translateX(-50%);
   }
 
-  .o-menu-toggle__line:before,
-  .o-menu-toggle__line:after {
+  &__line:before,
+  &__line:after {
     content: "";
     transform-origin: center;
     transition: transform .1s ease-out;
   }
 
-  .o-menu-toggle__line:before {
+  &__line:before {
     transform: translate(-50%, -6px);
   }
 
-  .o-menu-toggle__line:after {
+  &__line:after {
     transform: translate(-50%, 6px);
   }
 
@@ -187,17 +187,17 @@
   // ember compat
   max-width: 380px;
 
-  .c-nypr-nav__list {
+  &__list {
     display: flex;
     flex-wrap: wrap;
   }
 
-  .c-nypr-nav__item {
+  &__item {
     width: 50%;
     text-align: left;
   }
 
-  .c-nypr-nav__link {
+  &__link {
     font-size: 18px;
     margin-bottom: $space-half;
     line-height: 1;
@@ -258,7 +258,7 @@
   border-top: 2px dashed $c-gray;
   border-bottom: 2px dashed $c-gray;
 
-  .c-read-more-nav__wrap {
+  &__wrap {
     overflow: hidden;
     position: relative;
   }
@@ -275,7 +275,7 @@
     border: 2px dashed $c-gray;
   }
 
-  .c-read-more-nav__label {
+  &__label {
     display: inline-block;
     margin-right: $space;
 
@@ -293,7 +293,7 @@
     justify-content: space-around;
   }
 
-  .c-read-more-nav__item {
+  &__item {
     display: inline-block;
     margin-bottom: $space-half;
     flex-grow: 1;
@@ -314,7 +314,7 @@
     }
   }
 
-  .c-read-more-nav__link {
+  &__link {
     font-size: $font-size-s-m;
     font-weight: 600;
     padding-bottom: 0;

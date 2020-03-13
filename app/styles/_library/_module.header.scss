@@ -12,7 +12,7 @@
     fill: white;
   }
 
-  .c-main-header__ad-unit {
+  &__ad-unit {
     position: relative;
     background-color: $c-dark-bg;
     text-align: center;
@@ -36,7 +36,7 @@
     }
   }
 
-  .c-main-header__inner {
+  &__inner {
     background-color: $c-heading-bgcolor;
     padding: $space-half $space-half $space-half $space-double;
     display: flex;
@@ -50,7 +50,7 @@
     }
   }
 
-  .c-main-header__branding {
+  &__branding {
     flex-shrink: 0; // prevent from shrinking in flex container
     width: 120px;
 
@@ -59,12 +59,12 @@
     }
   }
 
-  .c-main-header__left {
+  &__left {
     display: flex;
     align-items: flex-end;
   }
 
-  .c-main-header__right {
+  &__right {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -72,7 +72,7 @@
     height: 100%;
   }
 
-  .c-main-header__donate {
+  &__donate {
     margin-right: $space;
 
     @include media('<=small') {
@@ -86,13 +86,13 @@
     }
   }
 
-  .c-main-header__close {
+  &__close {
     width: 17px;
     height: 17px;
     fill: white;
   }
 
-  .c-main-header__title {
+  &__title {
     font-size: $font-size-s-m;
     color: $c-white;
     font-weight: normal;
@@ -114,7 +114,7 @@
     }
   }
 
-  .c-main-header__share {
+  &__share {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -229,7 +229,7 @@
     display: none;
   }
 
-  .c-search-toggle__icon {
+  &__icon {
     path {
       fill: $c-white;
       transition: all 0.25s ease-in-out;
@@ -292,7 +292,7 @@
     }
   }
 
-  .c-side-menu__group {
+  &__group {
     padding: $space-and-half;
 
     &:not(:last-child) {
@@ -305,35 +305,35 @@
     }
   }
 
-  .c-side-menu__branding {
+  &__branding {
     width: 180px;
     margin: $space-half auto $space;
   }
 
-  .c-side-menu__social {
+  &__social {
     .c-share-tools {
       fill: white;
       justify-content: center;
     }
   }
 
-  .c-side-menu__secondary-nav {
+  &__secondary-nav {
 
     .c-secondary-nav {
       margin-bottom: $space;
 
-      .c-secondary-nav__list {
+      &__list {
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
         align-items: flex-start;
       }
 
-      .c-secondary-nav__item {
+      &__item {
         margin-bottom: $space-and-half;
       }
 
-      .c-secondary-nav__link {
+      &__link {
         margin: 0 $space;
 
         @include media('>medium') {
@@ -343,12 +343,12 @@
     }
   }
 
-  .c-side-menu__donate {
+  &__donate {
     width: 100%;
     margin-bottom: $space;
   }
 
-  .c-side-menu__donate,
+  &__donate,
   .c-side-menu__send-story,
   .c-search--side {
     max-width: 310px;
@@ -356,13 +356,13 @@
     margin-right: auto;
   }
 
-  .c-side-menu__send-story {
+  &__send-story {
     @include media('<=xsmall') {
       font-size: 14px;
     }
   }
 
-  .c-side-menu__nypr-logo {
+  &__nypr-logo {
     width: 120px;
     margin: $space-double auto $space;
     path,
@@ -373,25 +373,25 @@
 
   .c-nypr-nav {
 
-    .c-side-menu__list {
+    &__list {
       width: calc(100% + #{$space-double});
     }
   }
 
-  .c-side-menu__nypr-linkroll {
+  &__nypr-linkroll {
 
     .c-toggle-box__label {
       font-size: 12px;
     }
   }
 
-  .c-side-menu__copyright {
+  &__copyright {
     p {
       line-height: 2.5;
     }
   }
 
-  .c-side-menu__terms-links {
+  &__terms-links {
     display: flex;
     justify-content: space-between;
     a {

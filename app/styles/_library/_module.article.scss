@@ -5,10 +5,10 @@
 .c-article {
   height: 100%;
 
-  .c-article__header .u-has-accent,
-  .c-article__body a,
-  .c-article__body .u-has-accent,
-  .c-article__footer .o-rte-text a {
+  &__header .u-has-accent,
+  &__body a,
+  &__body .u-has-accent,
+  &__footer .o-rte-text a {
     text-decoration: underline;
     text-underline-position: under;
     border-bottom: none;
@@ -18,7 +18,7 @@
     }
   }
 
-  .c-article__header {
+  &__header {
     padding-top: $space-double;
 
     @include media('<=large') {
@@ -26,7 +26,7 @@
     }
   }
 
-  .c-article__meta-group {
+  &__meta-group {
     > * {
       display: inline-block;
     }
@@ -36,7 +36,7 @@
     }
   }
 
-  .c-article__lead {
+  &__lead {
     position: relative;
 
     .o-figure {
@@ -47,13 +47,13 @@
     }
   }
 
-  .c-article__body {
+  &__body {
     .twitter-tweet p {
       word-break: break-word;
     }
   }
 
-  .c-article__read-more {
+  &__read-more {
     padding-top: $space;
 
     @include media('>medium') {
