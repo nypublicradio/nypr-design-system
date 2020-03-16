@@ -24,7 +24,7 @@ This app will automatically import the css for your chosen theme in head of your
 You can select a theme to build by adding a theme name to the options in your app's `ember-cli-build.js` file
 
 ```js
-let app = new EmberAddon(defaults, {
+let app = new EmberApp(defaults, {
   //...
   'nypr-design-system': {
     theme: 'gothamist'
