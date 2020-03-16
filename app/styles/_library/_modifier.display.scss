@@ -34,7 +34,7 @@
 }
 
 
-// Specific Widths - visible greater than #
+/* Specific Widths - visible greater than #*/
 .u-hide-until--s {
   @include media('<=small') {
     display: none;
@@ -59,7 +59,7 @@
   }
 }
 
-// Specific Widths - hide greater than #
+/* Specific Widths - hide greater than #*/
 .u-hide-after--s {
   @include media('>small') {
     display: none;

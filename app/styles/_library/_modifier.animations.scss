@@ -36,7 +36,7 @@
   opacity: 1;
 }
 
-// Fade image in after load.
+/* Fade image in after load.*/
 .lazyload,
 .lazyloading {
   opacity: 0;
@@ -49,7 +49,7 @@
   transition: opacity 300ms;
 }
 
-// Bounce up and down.
+/* Bounce up and down.*/
 @keyframes bounce {
   0%, 100% {
     transform: translateY(0);
@@ -62,7 +62,7 @@
   }
 }
 
-// Bounce left to right.
+/* Bounce left to right.*/
 @keyframes bounce-horiz {
   0%, 100% {
     transform: translateX(0);
@@ -75,7 +75,7 @@
   }
 }
 
-// Slide in from bottom.
+/* Slide in from bottom.*/
 @keyframes slide-in-bottom {
   0% {
     transform: translateY(1000px);
@@ -87,7 +87,7 @@
   }
 }
 
-// Slide out from bottom.
+/* Slide out from bottom.*/
 @keyframes slide-out-bottom {
   0% {
     transform: translateY(0);

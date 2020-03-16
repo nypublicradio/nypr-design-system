@@ -108,11 +108,11 @@ select {
   background: url("../images/icons/icon-arrow-down.svg") center left ($space / 2) no-repeat;
   background-size: calc(20px - 5px) calc(20px - 5px);
   padding-left: calc((20px * 2) - 5px);
+}
 
-  &::-ms-expand {
+select::-ms-expand {
     display: none;
   }
-}
 
 ::placeholder {
   color: $c-brown-grey;
@@ -120,16 +120,11 @@ select {
 }
 
 
-// don't apply hover effects to form buttons
-form {
-  .o-button {
-
-    &:before {
+/* don't apply hover effects to form buttons*/
+form .o-button:before {
       display: none;
     }
-    &:hover {
+form .o-button:hover {
       transform: none;
       background-color: $c-primary;
     }
-  }
-}

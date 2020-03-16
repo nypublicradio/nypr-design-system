@@ -24,8 +24,7 @@ dd {
   margin-left: 0;
 }
 
-.o-list {
-  li {
+.o-list li {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -33,24 +32,25 @@ dd {
     @include p;
   }
 
-  .u-icon {
+.o-list .u-icon {
     display: flex;
     margin-right: $space/2;
+  }
 
-    svg {
+.o-list .u-icon svg {
       width: 25px;
       height: 25px;
     }
-  }
-}
 
 .o-list--numbered {
   counter-reset: item;
+}
 
-  li {
+.o-list--numbered li {
     display: block;
+  }
 
-    &::before {
+.o-list--numbered li::before {
       content: counter(item);
       counter-increment: item;
 
@@ -63,16 +63,14 @@ dd {
       float: left;
     }
 
-    > * {
+.o-list--numbered li > * {
       overflow: hidden;
     }
 
-    li {
+.o-list--numbered li li {
       counter-reset: item;
+    }
 
-      &::before {
+.o-list--numbered li li::before {
         content: "\002010";
       }
-    }
-  }
-}

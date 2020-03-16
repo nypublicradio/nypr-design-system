@@ -34,8 +34,9 @@ input[type="submit"] {
     padding-left: $space-double;
     padding-right: $space-double;
   }
+}
 
-  &:before {
+.o-button:before {
     content: "";
     position: absolute;
     left: 0;
@@ -48,32 +49,33 @@ input[type="submit"] {
     transition: all 0.3s $hard-ease-in;
   }
 
-  &:hover {
+.o-button:hover {
     transform: translate(10px, -10px);
+  }
 
-    &:before {
+.o-button:hover:before {
       transform: translate(-10px, 10px);
     }
-  }
 
-  // Types/Styles
-  &--c-quaternary {
+/* Types/Styles*/
+
+.o-button--c-quaternary {
     color: $c-body-color;
     background-color: $c-quaternary;
-
-    &:before {
-      border-color: $c-quaternary;
-    }
   }
 
-  // Sizes
-  &--sm {
+.o-button--c-quaternary:before {
+      border-color: $c-quaternary;
+    }
+
+/* Sizes*/
+
+.o-button--sm {
     font-size: 14px;
     padding: 11px 50px 10px;
   }
 
-  &--extra {
+.o-button--extra {
     padding-left: 80px;
     padding-right: 80px;
   }
-}

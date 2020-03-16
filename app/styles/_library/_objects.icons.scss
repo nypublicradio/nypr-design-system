@@ -7,20 +7,20 @@
  */
 .o-icon {
   display: inline-block;
-
-  svg,
-  path {
+}
+.o-icon svg,
+  .o-icon path {
     fill: inherit;
   }
-}
 
 .o-text-with-icon {
   display: inline-flex;
   align-items: center;
-  > *:last-child {
+}
+
+.o-text-with-icon > *:last-child {
     margin-left: $space-half;
   }
-}
 
 .u-icon--xs {
   width: $icon-xsmall;

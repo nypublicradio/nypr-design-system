@@ -27,11 +27,11 @@ b {
 blockquote {
   margin-left: $space-double;
   @include border-accent(bottom, left);
-  p {
+}
+blockquote p {
     margin: $space-double 0;
     padding: $space-half $space-and-half;
   }
-}
 
 /**
  * Horizontal Rule

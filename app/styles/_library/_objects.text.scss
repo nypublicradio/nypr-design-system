@@ -20,11 +20,10 @@
 }
 .u-font--secondary {
   font-family: $ff-font--secondary;
-
-  &-style {
+}
+.u-font--secondary-style {
     @include font-secondary-style;
   }
-}
 
 .u-font--tertiary {
   font-family: $ff-font--tertiary;
@@ -107,82 +106,69 @@
  */
 .o-rte-text {
   font-family: $ff-font--secondary;
-
-  // broken markup compat
-  &.c-article__body {
+}
+/* broken markup compat*/
+.o-rte-text.c-article__body {
     @include p;
   }
-
-  > dl dd,
-  > dl dt,
-  > ol li,
-  > ul li,
-  > p {
+.o-rte-text > dl dd,
+  .o-rte-text > dl dt,
+  .o-rte-text > ol li,
+  .o-rte-text > ul li,
+  .o-rte-text > p {
     @include p;
   }
-
-  a {
+.o-rte-text a {
     border-bottom: 2px dotted $c-link-color;
-
-    &:hover {
+  }
+.o-rte-text a:hover {
       color: $c-white;
       background-color: $c-primary;
     }
-
-    &:visited {
+.o-rte-text a:visited {
       color: $c-link-color--visited;
     }
-  }
-
-  > h1,
-  > h2,
-  > h3,
-  > h4,
-  > h5,
-  > h6 {
+.o-rte-text > h1,
+  .o-rte-text > h2,
+  .o-rte-text > h3,
+  .o-rte-text > h4,
+  .o-rte-text > h5,
+  .o-rte-text > h6 {
     padding-top: $space;
-    //font-weight: normal;
+    /*font-weight: normal;*/
   }
-
-  > h1 {
+.o-rte-text > h1 {
     font-size: 34px;
     font-weight: bold;
     @include media('>large') {
       font-size: 50px;
     }
   }
-
-  > h2 {
+.o-rte-text > h2 {
     font-size: $font-size-l;
   }
-
-  > h3 {
+.o-rte-text > h3 {
     font-size: $font-size-m;
   }
-
-  > h4 {
-    font-size: 26px; // Not in type styles
+.o-rte-text > h4 {
+    font-size: 26px; /* Not in type styles*/
   }
-
-  > h5, > h6 {
+.o-rte-text > h5, .o-rte-text > h6 {
     font-size: $font-size-xs;
     @include font-secondary-style;
   }
-
-  h2:empty,
-  h3:empty,
-  p:empty {
+.o-rte-text h2:empty,
+  .o-rte-text h3:empty,
+  .o-rte-text p:empty {
     display: none;
   }
-
-  // Heading + subheading lockup
-  > h2 + h3 {
+/* Heading + subheading lockup*/
+.o-rte-text > h2 + h3 {
     margin-top: 0;
     padding-bottom: $space-half;
   }
-
-  > ul,
-  > ol {
+.o-rte-text > ul,
+  .o-rte-text > ol {
     position: relative;
     list-style: none;
     padding-left: 35px;
@@ -192,29 +178,24 @@
     @include media('>large') {
       margin-left: $space;
     }
-
-    &:last-child {
+  }
+.o-rte-text > ul:last-child, .o-rte-text > ol:last-child {
       margin-bottom: 0;
     }
-
-    li {
+.o-rte-text > ul li, .o-rte-text > ol li {
       margin-bottom: $space;
       position: relative;
     }
-
-    ul,
-    ol {
+.o-rte-text > ul ul,
+    .o-rte-text > ul ol,
+    .o-rte-text > ol ul,
+    .o-rte-text > ol ol {
       list-style: none;
       margin-top: $space;
       margin-bottom: $space-half;
       padding-left: $space;
     }
-  }
-
-  > ul {
-
-    li {
-      &:before {
+.o-rte-text > ul li:before {
         content: "";
         position: absolute;
         left: -$space-and-half;
@@ -224,24 +205,16 @@
         background-color: $c-secondary;
         border-radius: 50%;
       }
-
-      li {
-        &:before {
+.o-rte-text > ul li li:before {
           background-color: transparent;
           border: 2px solid $c-secondary;
           width: 4px;
           height: 4px;
         }
-      }
-    }
-  }
-
-  > ol {
+.o-rte-text > ol {
     counter-reset: counter;
-
-    li {
-
-      &:before {
+  }
+.o-rte-text > ol li:before {
         counter-increment: counter;
         content: counter(counter);
         color: $c-secondary;
@@ -258,35 +231,26 @@
           top: -.3em;
         }
       }
-
-      > ol {
+.o-rte-text > ol li > ol {
         counter-reset: counter;
-
-        > li {
-          &:before {
+      }
+.o-rte-text > ol li > ol > li:before {
             counter-increment: counter;
             content: counters(counter);
           }
-        }
-      }
-    }
-  }
-
-  > hr,
-  > div,
-  .o-ad {
+.o-rte-text > hr,
+  .o-rte-text > div,
+  .o-rte-text .o-ad {
     margin-top: $space-and-half;
     @include media('>large') {
       margin-top: $space-double;
       margin-bottom: $space-double;
     }
   }
-
-  code,
-  pre {
+.o-rte-text code,
+  .o-rte-text pre {
     font-size: 125%;
   }
-}
 
 
 /**
@@ -300,8 +264,8 @@
   @include media('>medium') {
     margin: auto ($col-width + $gutter) + px $space-triple;
   }
-
-  p {
+}
+.o-pullquote p {
     font-weight: bold;
     font-size: $font-size-l;
     line-height: 1.05;
@@ -312,34 +276,28 @@
     @include media('>medium') {
       font-size: $font-size-xl;
     }
-
-    span {
+  }
+.o-pullquote p span {
       quotes: "\201C""\201D""\2018""\2019";
       background-position: bottom;
-
-      &:before,
-      &:after {
+    }
+.o-pullquote p span:before,
+      .o-pullquote p span:after {
         font-family: $ff-font--sans;
       }
-
-      &:before {
+.o-pullquote p span:before {
         content: open-quote;
       }
-
-      &:after {
+.o-pullquote p span:after {
         content: close-quote;
       }
-    }
-  }
-
-  &__author {
+.o-pullquote__author {
     color: $c-septenary;
     font-size: $font-size-xs;
     font-family: $ff-font--secondary;
     letter-spacing: 1px;
     text-transform: uppercase;
   }
-}
 
 
 /**
@@ -353,11 +311,10 @@
   padding: 0 $space-half;
   box-decoration-break: clone;
   margin-left: -$space-half;
-
-  &--senary {
+}
+.o-bg-text-accent--senary {
     background-image: linear-gradient(rgba($c-senary, .2), rgba($c-senary, .2));
   }
-}
 
 
 /**
@@ -379,13 +336,11 @@
 .o-kicker {
   font-size: $font-size-xxs;
 }
-.o-tag {
-  &--sponsored {
+.o-tag--sponsored {
     color: $c-white;
     font-weight: normal;
     background-color: $c-sponsor-color;
   }
-}
 
 .o-kicker--sponsored {
   background-color: $c-sponsor-color;
@@ -394,61 +349,56 @@
 
 a.o-kicker {
   box-decoration-break: clone;
-  &:hover {
+}
+
+a.o-kicker:hover {
     background-color: $c-primary;
     color: $c-white;
   }
-}
 
 .o-tag,
 a.o-breadcrumb {
   display: inline-block;
-  &:hover {
+}
+
+.o-tag:hover, a.o-breadcrumb:hover {
     background-color: $c-primary;
     color: $c-white;
   }
-}
 
-.o-tags {
-  .o-tag {
+.o-tags .o-tag {
     margin: 0 $space-quarter $space-half 0;
   }
-}
 
 
 /**
  * Caption & credit (used in leads and figures)
  */
-.o-caption {
-  p,
-  &__text {
-    font-size: 14px; // Not in type scale
+.o-caption p,
+  .o-caption__text {
+    font-size: 14px; /* Not in type scale*/
     font-family: $ff-font--tertiary;
     line-height: 1.5;
   }
-
-  .o-icon--dashed-arrow {
+.o-caption .o-icon--dashed-arrow {
     margin-right: $space-half;
     fill: $c-primary;
     transform: translateY(1px);
     float: left;
   }
-
-  .o-credit:not(:first-child) {
+.o-caption .o-credit:not(:first-child) {
     margin-left: $space-half;
   }
-}
 .o-credit {
   font-size: $font-size-xxs;
   line-height: 1.8;
   margin-left: $space-quarter;
   @include font-secondary-style;
-
-  a {
+}
+.o-credit a {
     padding-bottom: 0;
     display: inline;
   }
-}
 
 
 /**
@@ -461,35 +411,31 @@ a.o-breadcrumb {
   align-items: center;
   position: relative;
   z-index: $z-index-to-top;
-
-  // Temporary until i can get the real icon
-  .o-icon--up-arrow {
+}
+/* Temporary until i can get the real icon*/
+.o-to-top .o-icon--up-arrow {
     margin-right: $space-half;
     fill: $c-primary;
   }
-
-  svg {
+.o-to-top svg {
     transform: rotate(-90deg) translateX(4px);
   }
-
-  &:hover {
+.o-to-top:hover {
     color: $c-primary;
-
-    .o-icon--up-arrow {
+  }
+.o-to-top:hover .o-icon--up-arrow {
       animation: bounce .8s 0s ease-in-out infinite;
     }
-  }
-}
 
 .u-truncate {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-// truncating a flex child is weird
-// any flex items within which a truncated
-// item is nested need to have min-width: 0;
-// https://css-tricks.com/flexbox-truncated-text/
+/* truncating a flex child is weird*/
+/* any flex items within which a truncated*/
+/* item is nested need to have min-width: 0;*/
+/* https://css-tricks.com/flexbox-truncated-text/*/
 ._u-truncate--flex {
   min-width: 0;
 }
@@ -503,8 +449,8 @@ a.o-breadcrumb {
   padding-left: $space-double;
   position: relative;
   display: block;
-
-  .o-icon--prev-caret {
+}
+.o-back-to-link .o-icon--prev-caret {
     margin: 6px $space-quarter 0 0;
     transform: rotate(90deg);
     min-width: 20px;
@@ -512,14 +458,10 @@ a.o-breadcrumb {
     top: 4px;
     position: absolute;
   }
-
-  .u-path-fill--white {
-    svg * {
+.o-back-to-link .u-path-fill--white svg * {
       fill: $c-white;
     }
-  }
-
-  .u-has-accent {
+.o-back-to-link .u-has-accent {
     line-height: 1.6;
     display: inline;
     background-image: linear-gradient(to right, transparent 55%, $c-white 45%);
@@ -530,7 +472,6 @@ a.o-breadcrumb {
     padding-bottom: 0;
     border-bottom: none;
   }
-}
 
 /**
  * End of content label
@@ -541,23 +482,22 @@ a.o-breadcrumb {
   text-align: center;
   margin: $space auto;
   padding: $space 0;
-
-  // Temporary until i can get the real icon
-  .o-icon--down-arrow {
+}
+/* Temporary until i can get the real icon*/
+.o-end-label .o-icon--down-arrow {
     transform: rotate(90deg);
     fill: $c-gray;
     margin-bottom: $space-half;
   }
-}
 
 .c-gallery-end-label {
   flex-basis: 100%;
+}
 
-  > .o-icon--down-arrow {
+.c-gallery-end-label > .o-icon--down-arrow {
     display: block;
     margin: 0 auto $space-half;
   }
-}
 
 
 /**
@@ -571,9 +511,9 @@ a.o-breadcrumb {
   background-color: $c-white;
   left: 10px;
   margin-right: $space;
-
-  &:before,
-  &:after {
+}
+.o-3d-heading:before,
+  .o-3d-heading:after {
     content: "";
     position: absolute;
     width: 100%;
@@ -583,22 +523,18 @@ a.o-breadcrumb {
     border: 3px solid $c-dark-bg;
     background-color: $c-white;
   }
-  &:before {
+.o-3d-heading:before {
     z-index: -2;
     left: -10px;
     top: 10px;
   }
-  &:after {
+.o-3d-heading:after {
     z-index: -1;
   }
-
-  // Quinary background color
-  &--quinary {
-    &:after {
+/* Quinary background color*/
+.o-3d-heading--quinary:after {
       background-color: $c-quinary;
     }
-  }
-}
 
 
 /**

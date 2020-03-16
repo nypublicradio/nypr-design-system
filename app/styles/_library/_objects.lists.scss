@@ -8,12 +8,10 @@
 .o-bullet-list {
   list-style-type: disc;
   padding-left: $space;
-
-  li {
+}
+.o-bullet-list li {
     overflow: visible;
-
-    &:last-child {
+  }
+.o-bullet-list li:last-child {
       margin-bottom: 0;
     }
-  }
-}

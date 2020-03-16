@@ -94,38 +94,26 @@
 /**
  * SVG Fill Colors
  */
-.u-path-fill--black {
-  * {
+.u-path-fill--black * {
     fill: $c-black;
   }
-}
 
-.u-path-fill--gray {
-  * {
+.u-path-fill--gray * {
     fill: $c-gray;
   }
-}
 
-.u-path-fill--white {
-  * {
+.u-path-fill--white * {
     fill: $c-white;
   }
-}
 
-.u-path-fill--primary {
-  * {
+.u-path-fill--primary * {
     fill: $c-primary;
   }
-}
 
-.u-path-fill--secondary {
-  * {
+.u-path-fill--secondary * {
     fill: $c-secondary;
   }
-}
 
-.u-path-fill--quaternary {
-  * {
+.u-path-fill--quaternary * {
     fill: $c-quaternary;
   }
-}

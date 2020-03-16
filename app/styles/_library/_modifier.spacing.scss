@@ -7,11 +7,9 @@ $sizes: ("": $space, --quarter: $space / 4, --half: $space / 2, --and-half: $spa
 $sides: ("": "", --top: "-top", --bottom: "-bottom", --left: "-left", --right: "-right");
 
 @each $size_key, $size_value in $sizes {
-  .u-spacing#{$size_key} {
-    & > * + * {
+    .u-spacing#{$size_key} > * + * {
       margin-top: #{$size_value};
     }
-  }
 
   @each $side_key, $side_value in $sides {
     .u-padding#{$size_key}#{$side_key} {
@@ -24,41 +22,33 @@ $sides: ("": "", --top: "-top", --bottom: "-bottom", --left: "-left", --right: "
   }
 }
 
-.u-spacing--left {
-  & > * + * {
+.u-spacing--left > * + * {
     margin-left: $space;
 
     @include media(">large") {
       margin-left: $space * 2;
     }
   }
-}
 
-.u-spacing--half--left {
-  & > * + * {
+.u-spacing--half--left > * + * {
     margin-left: $space;
   }
-}
 
 
 /**
  * Spacing between sections
  */
-.u-section-spacing {
-  & > * + * {
+.u-section-spacing > * + * {
     margin-top: 30px;
 
     @include media('>medium') {
       margin-top: 40px;
     }
   }
-}
-.u-section-spacing--wide {
-  & > * + * {
+.u-section-spacing--wide > * + * {
     margin-top: 40px;
 
     @include media('>medium') {
       margin-top: 50px;
     }
   }
-}
