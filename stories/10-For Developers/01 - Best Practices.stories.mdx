@@ -6,9 +6,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ## Creating Flexibile but Focused Components
 
-Here are several patterns for making your components adaptable, while keeping them easy to use.
+We want to make components adaptable, while keeping them easy to use.
 
-### Components should adapt to their inputs.
+### Components should adapt to their data.
 
 Missing a title property? The component should display without it's title block. No author property? Hide the author area. And so on. Using a component with no properties shouldn't cause any console errors. This lets components provide flexibility without extra variants or properties.
 
@@ -18,34 +18,44 @@ Missing a title property? The component should display without it's title block.
 {{/if}}
 ```
 
+Sometimes you might need to provide
+
+```html
+<div class="card {{#unless @image mod-no-image}}">
+  {{!-- ... --}}
+</div>
+```
+
 ### Provide presentation options using modifier classes
 
-Use modifier classes to provide styling options for components. The M in BEM, `--modifier`, lets you provide
+Use modifier classes to provide styling options for components.
 
 Here's a example of a button that has `secondary` and `large` variants.
 
 ```css
-.a-button {
+.button {
 	border: none;
-	color: var(--c-text-inverse);
-	padding: var(--s-space3);
-	font-size: var(--f-size4);
-	background-color: var(--c-primary);
+	color: var(--color-text-inverse);
+	padding: var(--space-3);
+	font-size: var--font-size-body-1);
+	background-color: var(--color-primary);
 }
 
-.a-button--secondary {
-	background-color: var(--c-secondary);
+.button.mod-secondary {
+	background-color: var(--color-secondary);
 }
 
-.a-button--large {
-	padding: var(--s-space4);
-	font-size: var(--f-size5);
+.button.mod-large {
+	padding: var(--space-4);
+	font-size: var(--font-size-header-2);
 }
 ```
 
+Don't forget to document these classes with stories.
+
 ### Use Caution with higher-order components
 
-[Higher order components]() is a powerful pattern that let you build components that can be invoked in a very flexible way. It's handy when you want components that can handle a wide variety of use cases. 
+[Higher order components]() are a powerful pattern that let you build components that can be invoked in a very flexible way. It's handy when you want components that can handle a wide variety of use cases. 
 
 For example, you could make a card component that lets you have multiple images or reverse the order of the title and the image.
 
@@ -60,7 +70,7 @@ For example, you could make a card component that lets you have multiple images 
 However, this API also makes these components more cumbersome to use and can bloat templates. Therefore, it's recommended to always include sensible defaults when there's no block provided (i.e. when the tag is empty).
 
 ```html
-/* Ideal form of the most common use case */
+/* Simple form to handle the most common use case */
 <SimpleCard @article={{article}} / >
 
 /* A more complex use case */
@@ -70,32 +80,37 @@ However, this API also makes these components more cumbersome to use and can blo
 	@isCollapsed={{true}}
 />
 ```
-Furthermore, this level of flexibility is often overkill, especially for components in a design system, which should be a little bit prescriptive about how a component is presented.  Think about, and talk with a designer about the variations you really want to allow, and see if you can provide for them in a more simple way, like a CSS variant class (e.g. `<SimpleCard class="card--minimal" />`) or a toggle property ()
+
+Furthermore, this level of flexibility is often overkill, especially for components in a design system, which should be a little bit prescriptive about how a component is presented.  Think about, and talk with a designer about the variations you really want to allow, and see if you can provide for them in a more simple way, like a CSS variant class (e.g. `<SimpleCard class="simple-card mod-minimal" />`) or a toggle property `(`@showCloseButton={{true}}`)
+
+### Further reading
+
+[pattern variations](https://bradfrost.com/blog/post/pattern-variations/)
 
 ## Handling our Content
 
-### Accept standard content objects
+### Use adapter helpers to make handling data easier
 
-Radial is designed to serve our content. So it should be easy to use components with our content straight out of the API. Components should accept objects straight from our most common APIs. Our APIs may change over time, but right now articles should match Wagtail articles. This makes components easier to use in our clients and also makes it easier to handle list components.
+Radial is designed to serve our content. So it should be easy to use components with our content straight out of the API.  We can use helper functions to make using data straight from the API easier without having to handpick each property
 
-If a component is meant for more than just that object type (e.g. a card might display articles, but also authors), also accepting individual properties is great.
+If a component has more than three or four properties that represent data, (title, description, image, etc.), 
+
+title
+description
+link
+url
 
 ```html
-<SimpleCard @item={{wagtailArticle}} />
-
 <SimpleCard
-	@title={{article.title}}
-	@img={{article.img}}
-	@alt={{article.alt}}
-	@desc={{article.desc}}
+	@title={{@article.title}}
+	@title={{@article.author}}
+	@img={{@article.img}}
+	@alt={{@article.alt}}
+	@desc={{@article.desc}}
+	@desc={{@article.credits}}
 />
-```
 
-Client applications can build template helpers to handle special cases.
-
-```html
-<SimpleCard @item={{legacy-article-card-adapter legacyArticle}} />
-<SimpleCard @item={{author-card-adapter wagtailAuthor}} />
+<SimpleCard @data={{wagtail-adapter wagtailArticle}} />
 ```
 
 Sample code for one of these "adapter" helpers...

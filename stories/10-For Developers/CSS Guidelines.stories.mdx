@@ -28,14 +28,14 @@ The [Sass parent selector](https://sass-lang.com/documentation/style-rules/paren
 /* BAD */
 .o-my-component {
     &__message {
-        color: var(--c-alert);
+        color: var(--color-alert);
     }
 }
 
 /* GOOD */
 .o-my-component {
     .o-my-component__message {
-        color: var(--c-alert);
+        color: var(--color-alert);
     }
 }
 ```
