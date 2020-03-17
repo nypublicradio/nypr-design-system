@@ -60,25 +60,17 @@ Don't forget to document these classes with stories.
 For example, you could make a card component that lets you have multiple images or reverse the order of the title and the image.
 
 ```html
-<SimpleCard as |card|>
+<Card as |card|>
 	<card.title>{{@article.title}}</card.title>
 	<card.image><img src="{{@article.img}}" alt="@article.alt"></card.image>
 	<card.desc>@article.caption</card.desc>
-</SimpleCard>
+</Card>
 ```
 
 However, this API also makes these components more cumbersome to use and can bloat templates. Therefore, it's recommended to always include sensible defaults when there's no block provided (i.e. when the tag is empty).
 
 ```html
-/* Simple form to handle the most common use case */
-<SimpleCard @article={{article}} / >
-
-/* A more complex use case */
-<SimpleCard
-	class="o-card--mini"
-	@article={{article}}
-	@isCollapsed={{true}}
-/>
+<Card @data={{article}} />
 ```
 
 Furthermore, this level of flexibility is often overkill, especially for components in a design system, which should be a little bit prescriptive about how a component is presented.  Think about, and talk with a designer about the variations you really want to allow, and see if you can provide for them in a more simple way, like a CSS variant class (e.g. `<SimpleCard class="simple-card mod-minimal" />`) or a toggle property `(`@showCloseButton={{true}}`)
@@ -95,29 +87,39 @@ Radial is designed to serve our content. So it should be easy to use components 
 
 If a component has more than three or four properties that represent data, (title, description, image, etc.), 
 
-title
-description
-link
-url
-
 ```html
-<SimpleCard
+<Card
+	@image={{@article.leadImage}}
+	@tags={{@article.displayTags}}
 	@title={{@article.title}}
-	@title={{@article.author}}
-	@img={{@article.img}}
-	@alt={{@article.alt}}
-	@desc={{@article.desc}}
-	@desc={{@article.credits}}
+	@authors={{@article.authors}}
+	@body={{or @article.listingSummary @article.description}}
 />
 
-<SimpleCard @data={{wagtail-adapter wagtailArticle}} />
+Using an adapter helper, we can declutter long templates.
+
+```html
+<Card @data={{wagtail-article-adapter wagtailArticle}} />
 ```
 
-Sample code for one of these "adapter" helpers...
-```js
-// TODO
+Provide support for the `@data` property with something like `{{or @title @data.title}}` in the template for your card component.
 
-// An ember helper that maps one object to another
+And a sample adapter helper might look like this:
+
+```js
+import { helper } from '@ember/component/helper';
+
+export function wagtailArticleAdapter([article]) {
+  return {
+	  image: article.leadImage,
+	  tags: article.displayTags,
+	  title: article.title,
+	  authors: article.authors,
+	  body: article.listingSummary || article.description,
+  }
+}
+
+export default helper(wagtailArticleAdapter);
 ```
 
 ## Other Patterns
