@@ -5,7 +5,11 @@
 /**
  * Flexible Media
  */
-img, video, object, svg, iframe {
+img,
+video,
+object,
+svg,
+iframe {
   max-width: 100%;
   border: none;
   display: block;
@@ -35,8 +39,8 @@ figure {
 }
 
 figcaption a {
-    display: block;
-  }
+  display: block;
+}
 
 /*------------------------------------*\
     $PRINT STYLES

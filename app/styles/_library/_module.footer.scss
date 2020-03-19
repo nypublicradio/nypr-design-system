@@ -7,160 +7,156 @@
   background-image: linear-gradient(to bottom, white 0, $c-dark-bg 0%);
   background-position: 100% 142px;
   background-repeat: repeat-x;
-
 }
 
 .c-main-footer__inner {
-
-    @include media('>xlarge') {
-      margin-top: 0;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
+  @include media(">xlarge") {
+    margin-top: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
   }
+}
 
 .c-main-footer__col1 {
-    width: 100%;
-    max-width: 570px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  width: 100%;
+  max-width: 570px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .c-main-footer__branding {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 
-    @include media('>xlarge') {
-      justify-content: flex-start;
-    }
+  @include media(">xlarge") {
+    justify-content: flex-start;
   }
+}
 
 .c-main-footer__branding .c-share-tools {
-      fill: white;
-    }
+  fill: white;
+}
 
 .c-main-footer__logo {
-    min-width: 150px;
-    max-width: 150px;
-    margin-right: $space-and-half;
+  min-width: 150px;
+  max-width: 150px;
+  margin-right: $space-and-half;
 
-    @include media('>small') {
-      margin-right: $space-triple;
-    }
+  @include media(">small") {
+    margin-right: $space-triple;
   }
+}
 
 .c-main-footer__send-story {
-    display: inline-block;
-    color: $c-body-color;
-    padding: $space 0;
-    margin-bottom: $space;
-  }
+  display: inline-block;
+  color: $c-body-color;
+  padding: $space 0;
+  margin-bottom: $space;
+}
 
 .c-main-footer__utility {
-    @include media('<=small') {
-      margin-bottom: -18px;
-    }
+  @include media("<=small") {
+    margin-bottom: -18px;
   }
+}
 
 .c-main-footer__slogan p {
-      color: $c-white;
-      font-size: 14px; /* Not in the type scale*/
-    }
+  color: $c-white;
+  font-size: var(--font-size-small-4); /* Not in the type scale*/
+}
 
 .c-main-footer__nav {
-
-    @include media('<=xlarge') {
-      text-align: center;
-      padding-bottom: $space-double;
-    }
+  @include media("<=xlarge") {
+    text-align: center;
+    padding-bottom: $space-double;
   }
+}
 
 .c-main-footer__nav .c-secondary-nav__item {
-      display: inline-block;
+  display: inline-block;
 
-      @include media('<=xlarge') {
-        margin: 0 $space $space-and-half;
-      }
-    }
+  @include media("<=xlarge") {
+    margin: 0 $space $space-and-half;
+  }
+}
 
 .c-main-footer__nav .c-secondary-nav__item:not(:last-child) {
-        @include media('>xlarge') {
-          margin-right: $space-double;
-        }
-      }
+  @include media(">xlarge") {
+    margin-right: $space-double;
+  }
+}
 
 .c-main-footer__nav .c-secondary-nav__link {
-      padding: $space-half 0;
-    }
+  padding: $space-half 0;
+}
 
 .c-main-footer__nypr-logo {
-    width: 120px;
-    margin: 0 auto $space;
+  width: 120px;
+  margin: 0 auto $space;
 
-    @include media('>xlarge') {
-      margin: 0 $space-double 0 0;
-    }
+  @include media(">xlarge") {
+    margin: 0 $space-double 0 0;
   }
+}
 
 .c-main-footer__nypr-logo path,
-    .c-main-footer__nypr-logo polygon {
-      fill: $c-white;
-    }
+.c-main-footer__nypr-logo polygon {
+  fill: $c-white;
+}
 
 .c-main-footer__brand-group {
-    text-align: center;
+  text-align: center;
 
-    @include media('>xlarge') {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-    }
+  @include media(">xlarge") {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
+}
 
 .c-main-footer .c-toggle-box__content {
-    min-width: 320px;
-    max-width: 400px;
-    width: 100%;
-  }
+  min-width: 320px;
+  max-width: 400px;
+  width: 100%;
+}
 
 .c-main-footer__bottom {
-    border-top: 1px dashed rgba($c-white, .5);
-    padding: $space-and-half $space;
-    text-align: center;
-    margin-left: -$space;
-    margin-right: -$space;
+  border-top: 1px dashed rgba($c-white, 0.5);
+  padding: $space-and-half $space;
+  text-align: center;
+  margin-left: -$space;
+  margin-right: -$space;
 
-    @include media('>xlarge') {
-      margin-left: 0;
-      margin-right: 0;
-      padding-left: 0;
-      padding-right: 0;
-      text-align: left;
-      display: flex;
-      justify-content: space-between;
-    }
+  @include media(">xlarge") {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
   }
+}
 
 .c-main-footer__terms-links {
-
-    @include media('<=large') {
-      margin-top: $space-double;
-    }
+  @include media("<=large") {
+    margin-top: $space-double;
   }
+}
 
 .c-main-footer__terms-links a {
-      margin: 0 $space;
-      padding: 8px 0;
-      color: $c-quaternary;
+  margin: 0 $space;
+  padding: 8px 0;
+  color: $c-quaternary;
 
-      @include media('>large') {
-        margin: 0 $space-double 0 0;
-      }
-    }
+  @include media(">large") {
+    margin: 0 $space-double 0 0;
+  }
+}
 
 .c-main-footer__terms-links a:hover {
-        background-color: $c-primary;
-        color: $c-white;
-      }
+  background-color: $c-primary;
+  color: $c-white;
+}

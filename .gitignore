@@ -28,3 +28,6 @@
 
 # importable sass variables
 /tests/dummy/app/utils/sass-vars
+
+/.yalc/
+yalc.lock

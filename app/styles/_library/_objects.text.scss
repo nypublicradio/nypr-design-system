@@ -13,17 +13,15 @@
   font-family: $ff-font--primary;
 }
 
-@mixin font-secondary-style {
+.u-font--secondary {
+  font-family: $ff-font--secondary;
+}
+
+.u-font--secondary-style {
   font-family: $ff-font--secondary;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-.u-font--secondary {
-  font-family: $ff-font--secondary;
-}
-.u-font--secondary-style {
-    @include font-secondary-style;
-  }
 
 .u-font--tertiary {
   font-family: $ff-font--tertiary;
@@ -31,34 +29,22 @@
 
 
 /**
- * Text Sizes
+ * Text Sizes // Deprecated, don't use these
  */
 .u-font--xxs {
-  font-size: $font-size-xxs;
+  font-size: var(--font-size-small-1);
 }
 
 .u-font--xs {
-  font-size: $font-size-xs;
+  font-size: var(--font-size-small-3);
 }
 
 .u-font--s {
-  font-size: $font-size-s;
-}
-
-.u-font--m {
-  font-size: $font-size-m;
+  font-size: var(--font-size-body-1);
 }
 
 .u-font--l {
-  font-size: $font-size-l;
-}
-
-.u-font--xl {
-  font-size: $font-size-xl;
-}
-
-.u-font--xxl {
-  font-size: $font-size-xxl;
+  font-size: var(--font-size-header-5);
 }
 
 /**
@@ -100,7 +86,6 @@
 .u-text-decoration--underline {
   text-decoration: underline;
 }
-
 /**
  * Rich text editor text
  */
@@ -109,54 +94,56 @@
 }
 /* broken markup compat*/
 .o-rte-text.c-article__body {
-    @include p;
-  }
+  @include p;
+}
 .o-rte-text > dl dd,
-  .o-rte-text > dl dt,
-  .o-rte-text > ol li,
-  .o-rte-text > ul li,
-  .o-rte-text > p {
-    @include p;
-  }
+.o-rte-text > dl dt,
+.o-rte-text > ol li,
+.o-rte-text > ul li,
+.o-rte-text > p {
+  @include p;
+}
 .o-rte-text a {
-    border-bottom: 2px dotted $c-link-color;
-  }
+  border-bottom: 2px dotted $c-link-color;
+}
 .o-rte-text a:hover {
-      color: $c-white;
-      background-color: $c-primary;
-    }
+  color: $c-white;
+  background-color: $c-primary;
+}
 .o-rte-text a:visited {
-      color: $c-link-color--visited;
-    }
+  color: $c-link-color--visited;
+}
 .o-rte-text > h1,
-  .o-rte-text > h2,
-  .o-rte-text > h3,
-  .o-rte-text > h4,
-  .o-rte-text > h5,
-  .o-rte-text > h6 {
-    padding-top: $space;
-    /*font-weight: normal;*/
-  }
+.o-rte-text > h2,
+.o-rte-text > h3,
+.o-rte-text > h4,
+.o-rte-text > h5,
+.o-rte-text > h6 {
+  padding-top: $space;
+  /*font-weight: normal;*/
+}
 .o-rte-text > h1 {
-    font-size: 34px;
-    font-weight: bold;
-    @include media('>large') {
-      font-size: 50px;
-    }
+  @include typeface(header, 5);
+  @include media(">large") {
+    @include typeface(header, 9);
   }
+}
 .o-rte-text > h2 {
-    font-size: $font-size-l;
-  }
+  @include typeface(header, 5);
+}
 .o-rte-text > h3 {
-    font-size: $font-size-m;
-  }
+  @include typeface(header, 4);
+}
 .o-rte-text > h4 {
-    font-size: 26px; /* Not in type styles*/
-  }
-.o-rte-text > h5, .o-rte-text > h6 {
-    font-size: $font-size-xs;
-    @include font-secondary-style;
-  }
+  @include typeface(header, 2);
+}
+.o-rte-text > h5,
+.o-rte-text > h6 {
+  @include typeface(small, 4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 .o-rte-text h2:empty,
   .o-rte-text h3:empty,
   .o-rte-text p:empty {
@@ -218,16 +205,16 @@
         counter-increment: counter;
         content: counter(counter);
         color: $c-secondary;
-        font-size: $font-size-l;
+        font-size: var(--font-size-header-5);
         position: absolute;
         left: -58px;
         top: -.4em;
-        font-family: $ff-font--secondary;
+        font-family: var(--font-family-small);
         width: 50px;
         text-align: right;
 
         @include media('<=large') {
-          font-size: $font-size-m;
+          font-size: var(--font-size-header-4);
           top: -.3em;
         }
       }
@@ -267,14 +254,14 @@
 }
 .o-pullquote p {
     font-weight: bold;
-    font-size: $font-size-l;
+    font-size: var(--font-size-header-5);
     line-height: 1.05;
     background: none;
     margin: $space 0 0;
     display: inline-block;
 
     @include media('>medium') {
-      font-size: $font-size-xl;
+      font-size: var(--font-size-header-8);
     }
   }
 .o-pullquote p span {
@@ -293,8 +280,7 @@
       }
 .o-pullquote__author {
     color: $c-septenary;
-    font-size: $font-size-xs;
-    font-family: $ff-font--secondary;
+    @include typeface(small, 3);
     letter-spacing: 1px;
     text-transform: uppercase;
   }
@@ -329,12 +315,11 @@
   color: $c-senary;
   background-color: $c-quaternary;
   letter-spacing: 1px;
-  font-family: $ff-font--monospace;
-  font-size: $font-size-xs;
+  @include typeface(small, 3);
 }
 .o-tag,
 .o-kicker {
-  font-size: $font-size-xxs;
+  font-size: var(--font-size-small-1);
 }
 .o-tag--sponsored {
     color: $c-white;
@@ -376,7 +361,7 @@ a.o-breadcrumb {
  */
 .o-caption p,
   .o-caption__text {
-    font-size: 14px; /* Not in type scale*/
+    font-size: var(--font-size-small-4); /* Not in type scale*/
     font-family: $ff-font--tertiary;
     line-height: 1.5;
   }
@@ -390,10 +375,11 @@ a.o-breadcrumb {
     margin-left: $space-half;
   }
 .o-credit {
-  font-size: $font-size-xxs;
+  @include typeface(small, 1);
   line-height: 1.8;
   margin-left: $space-quarter;
-  @include font-secondary-style;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 .o-credit a {
     padding-bottom: 0;
@@ -444,7 +430,7 @@ a.o-breadcrumb {
  * Back to where you came from link
  */
 .o-back-to-link {
-  font-size: $font-size-s-m;
+  font-size: var(--font-size-header-2);
   margin-left: -$space-quarter;
   padding-left: $space-double;
   position: relative;

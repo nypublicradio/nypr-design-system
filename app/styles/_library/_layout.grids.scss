@@ -8,136 +8,135 @@
   grid-column-gap: $space;
   grid-row-gap: $space;
 
-  @include media('>large') {
+  @include media(">large") {
     grid-column-gap: $space-and-half;
     grid-row-gap: $space-and-half;
   }
 }
 
-@media all and (-ms-high-contrast:none) {
-
-.l-grid {
+@media all and (-ms-high-contrast: none) {
+  .l-grid {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-left: -20px;
-    margin-right: -20px
+    margin-right: -20px;
+  }
+
+  .l-grid > * {
+    margin: 20px;
+  }
 }
 
-    .l-grid > * {
-      margin: 20px;
-    }
-  }
-
 .l-grid-item {
-    position: relative;
-  }
+  position: relative;
+}
 
 .l-grid--large-gutters {
-    grid-column-gap: $space*4;
-    grid-row-gap: $space*4;
-  }
+  grid-column-gap: $space * 4;
+  grid-row-gap: $space * 4;
+}
 
 .l-grid--2up {
-    align-items: center;
+  align-items: center;
 
-    @include media('>medium') {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  @include media(">medium") {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-@media all and (-ms-high-contrast:none) {
-      .l-grid--2up > * {
-        width: calc(50% - 40px);
-      }
-    }
+@media all and (-ms-high-contrast: none) {
+  .l-grid--2up > * {
+    width: calc(50% - 40px);
+  }
+}
 
 .l-grid--2up--flex {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0 calc(20px * -1); /* $space*/
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 calc(20px * -1); /* $space*/
 
-      @include media('>xxlarge') {
-        margin: 0 calc((20px * 1.5) * -1); /* $space*/
-      }
-    }
+  @include media(">xxlarge") {
+    margin: 0 calc((20px * 1.5) * -1); /* $space*/
+  }
+}
 
 .l-grid--2up--flex > * {
-        width: 100%;
-        padding-left: $space;
-        padding-right: $space;
-        margin-top: $space*2;
+  width: 100%;
+  padding-left: $space;
+  padding-right: $space;
+  margin-top: $space * 2;
 
-        @include media('>small') {
-          width: 50%;
-        }
+  @include media(">small") {
+    width: 50%;
+  }
 
-        @include media('>xxlarge') {
-          padding-left: $space*1.5;
-          padding-right: $space*1.5;
-          margin-top: $space*3;
-        }
-      }
+  @include media(">xxlarge") {
+    padding-left: $space * 1.5;
+    padding-right: $space * 1.5;
+    margin-top: $space * 3;
+  }
+}
 
 .l-grid--3up {
-    @include media('>medium') {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  @include media(">medium") {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
 
-@media all and (-ms-high-contrast:none) {
-      .l-grid--3up > * {
-        width: calc(33.333% - 40px);
-      }
-    }
+@media all and (-ms-high-contrast: none) {
+  .l-grid--3up > * {
+    width: calc(33.333% - 40px);
+  }
+}
 
 .l-grid--4up {
-    grid-template-columns: repeat(minmax(200px, 1fr));
+  grid-template-columns: repeat(minmax(200px, 1fr));
 
-    @include media('>xsmall') {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include media('>large') {
-      grid-template-columns: repeat(4, 1fr);
-    }
+  @include media(">xsmall") {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-@media all and (-ms-high-contrast:none) {
-      .l-grid--4up > * {
-        width: calc(25% - 40px);
-      }
-    }
+  @include media(">large") {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media all and (-ms-high-contrast: none) {
+  .l-grid--4up > * {
+    width: calc(25% - 40px);
+  }
+}
 
 .l-grid--4up--at-medium {
-    grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 
-    @include media('>small') {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @include media('>medium') {
-      grid-template-columns: repeat(4, 1fr);
-    }
+  @include media(">small") {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-@media all and (-ms-high-contrast:none) {
-      .l-grid--4up--at-medium > * {
-        width: calc(25% - 40px);
-      }
-    }
+  @include media(">medium") {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media all and (-ms-high-contrast: none) {
+  .l-grid--4up--at-medium > * {
+    width: calc(25% - 40px);
+  }
+}
 
 .l-grid--5up {
-    grid-row-gap: $space*2;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  grid-row-gap: $space * 2;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
 
-    @include media('>large') {
-      grid-template-columns: repeat(5, 1fr);
-    }
+  @include media(">large") {
+    grid-template-columns: repeat(5, 1fr);
   }
+}
 
-@media all and (-ms-high-contrast:none) {
-      .l-grid--5up > * {
-        width: calc(20% - 40px);
-      }
-    }
+@media all and (-ms-high-contrast: none) {
+  .l-grid--5up > * {
+    width: calc(20% - 40px);
+  }
+}

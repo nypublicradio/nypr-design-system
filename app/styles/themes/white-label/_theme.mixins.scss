@@ -15,7 +15,7 @@
   }
 
   @media print {
-    font-size: 12px;
+    font-size: var(--font-size-small-3);
     line-height: 1.3;
   }
 }

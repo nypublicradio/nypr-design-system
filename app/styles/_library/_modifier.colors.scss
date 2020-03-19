@@ -54,7 +54,6 @@
   color: $c-septenary;
 }
 
-
 /**
  * Background Colors
  */
@@ -90,30 +89,29 @@
   background-color: $c-quinary;
 }
 
-
 /**
  * SVG Fill Colors
  */
 .u-path-fill--black * {
-    fill: $c-black;
-  }
+  fill: $c-black;
+}
 
 .u-path-fill--gray * {
-    fill: $c-gray;
-  }
+  fill: $c-gray;
+}
 
 .u-path-fill--white * {
-    fill: $c-white;
-  }
+  fill: $c-white;
+}
 
 .u-path-fill--primary * {
-    fill: $c-primary;
-  }
+  fill: $c-primary;
+}
 
 .u-path-fill--secondary * {
-    fill: $c-secondary;
-  }
+  fill: $c-secondary;
+}
 
 .u-path-fill--quaternary * {
-    fill: $c-quaternary;
-  }
+  fill: $c-quaternary;
+}

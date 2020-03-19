@@ -33,9 +33,9 @@ input[type=password],
 input[type=email],
 input[type=search],
 input[type=tel] {
-  font-size: 18px;
+  font-size: var(--font-size-body-2);
   padding: $space;
-  font-family: $ff-font--monospace;
+  font-family: var(--font-family-small);
   box-shadow: none;
   border-radius: 0;
 }
