@@ -5,7 +5,7 @@ nypr-design-system
 
 Home of the Radial Design system.
 
-This repo contains an Ember addon, `nypr-design-system` and the files to 
+This repo contains an Ember addon, `nypr-design-system` and the files to
 power Storybook.
 
 
@@ -19,21 +19,23 @@ ember install nypr-design-system
 ```
 
 ### Configuration
-This app will automatically import the css for your chosen theme in head of your application template (using the contentfor 'head-footer' hook).
+This app will automatically import the css for your chosen theme in head of your application template (using the content for 'head-footer' hook).
 
-You can select a theme to build by adding a theme name to the options in your app's `ember-cli-build.js` file
+You can select which themes to build (usually just one) by adding a list of theme names to the options in your app's `ember-cli-build.js` file.
 
 ```js
 let app = new EmberApp(defaults, {
   //...
   'nypr-design-system': {
-    theme: 'gothamist'
+    themes: ['gothamist']
   },
   //...
 });
 ```
+If you don't specify a `themes` option, it will default to only the white label (`[white-label]`).
+If you don't want any themes, use `themes: []`.
 
-If you want to disable this behavior for some reason, add `theme: 'none'`.
+Additional themes beyond the first one will be added as [alternate stylesheets](https://developer.mozilla.org/en-US/docs/Web/CSS/Alternative_style_sheets). This is useful within storybook itself and also when debugging themes in clients.
 
 ## Storybook
 The following folders contain files for storybook:

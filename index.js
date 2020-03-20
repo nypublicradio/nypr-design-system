@@ -5,6 +5,8 @@ const defaultTheme = 'white-label';
 module.exports = {
   name: require('./package').name,
   included: function(app) {
+    // include styles for ember-basic-dropdown.
+    // used for the toggle-box component
     let { sassOptions = {} } = app.options;
     if (!sassOptions.includePaths) {
       sassOptions.includePaths = [];
@@ -12,20 +14,38 @@ module.exports = {
     sassOptions.includePaths.push('node_modules/ember-basic-dropdown/app/styles');
     app.options.sassOptions = sassOptions;
 
+
+    // read theme settings (or use default)
+    this.themes = app.options['nypr-design-system'] && app.options['nypr-design-system'].themes || [defaultTheme];
+    // wrap strings in an array
+    if (typeof this.themes === 'string') {
+      this.themes = [this.themes]
+    }
+
+    //build themes
     if (! app.options.outputPaths.app.css) {
       app.options.outputPaths.app.css = {};
     }
-    //build themes
-    this.theme = app.options['nypr-design-system'] && app.options['nypr-design-system'].theme || defaultTheme
-    if (this.theme  !== "none") {
-      app.options.outputPaths.app.css[this.theme] = `/assets/nypr-design-system/themes/${this.theme}.css`;
-    }
+    
+    this.themes.forEach(themeName => {
+      app.options.outputPaths.app.css[themeName] = `/assets/nypr-design-system/themes/${themeName}.css`;
+    });
 
     this._super.included.apply(this, arguments);
   },
   contentFor(type, config) {
-    if (type === 'head-footer' && this.theme  !== "none") {
-      return `<link integrity="" rel="stylesheet" href="${config.rootURL}assets/nypr-design-system/themes/${this.theme}.css" />`;
+    const titleize = function(name) {
+      return name.split('-')
+        .map(word => word[0].toUpperCase() + word.slice(1))
+        .join(' ');
+    };
+
+    if (type === 'head-footer') {
+      return this.themes
+      .map((themeName, index) => {
+        return `<link integrity="" rel="${index > 0 ? 'alternate ' : ''}stylesheet" href="${config.rootURL}assets/nypr-design-system/themes/${themeName}.css" title="${titleize(themeName)}" />`
+      })
+      .join('\n    ');
     }
   }
 };

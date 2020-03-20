@@ -26,9 +26,9 @@ module.exports = function(defaults) {
       enableAddonDocsIntegration: true,
       componentFilePathPatterns: ['addon/components/*.js']
     },
-    // 'nypr-design-system': {
-    //   theme: 'gothamist'
-    // },
+    'nypr-design-system': {
+      themes: ['white-label', 'gothamist']
+    },
   });
 
   /*
