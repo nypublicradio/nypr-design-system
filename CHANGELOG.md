@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## `2.10.3`
+- [CHANGE] Update NyprODonate to accept an icon name as a parameter.
+- [ENHANCEMENT] Add a new icon `nyc-love`, depicting a heart over a city skyline.
+
 ## `2.10.2`
 - [CHANGE] replace GTM click tracking attributes added in 2.10.1 with more generic and flexible `...attributes`
 
