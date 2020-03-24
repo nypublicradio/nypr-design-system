@@ -116,7 +116,7 @@ select::-ms-expand {
 
 ::placeholder {
   color: $c-brown-grey;
-  font-family: $ff-font--monospace;
+  font-family: var(--font-family-small);
 }
 
 

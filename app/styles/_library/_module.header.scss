@@ -6,7 +6,7 @@
   text-align: center;
   position: relative;
   z-index: $z-index-header;
-  font-family: $ff-font--primary;
+  font-family: var(--font-family-header);
 }
 
 .c-main-header svg {

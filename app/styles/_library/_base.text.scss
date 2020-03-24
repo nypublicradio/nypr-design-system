@@ -6,7 +6,7 @@
  * Text-Related Elements
  */
 p {
-  @include p;
+  @include typeface(body, 2);
 }
 
 small {

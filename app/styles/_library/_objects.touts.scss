@@ -270,6 +270,10 @@
     min-width: 250px;
   }
 }
+.c-newsletter-tout__heading {
+  @include typeface(header, 5);
+}
+
 .c-newsletter-tout__text {
   @include media(">medium") {
     padding-top: $space;

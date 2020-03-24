@@ -93,7 +93,7 @@
 }
 
 .c-article__related a {
-  font-family: $ff-font--primary;
+  font-family: var(--font-family-header);
   display: inline;
   line-height: 1.35;
 }
