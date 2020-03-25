@@ -54,6 +54,8 @@
   color: $c-body-color;
   padding: $space 0;
   margin-bottom: $space;
+  @include typeface(small, 3);
+  text-transform: uppercase;
 }
 
 .c-main-footer__utility {
@@ -72,6 +74,15 @@
     text-align: center;
     padding-bottom: $space-double;
   }
+}
+
+c-main-footer__copyright-text {
+  @include typeface(small, 3);
+}
+
+.c-secondary-nav__link {
+  @include typeface(small, 3);
+  text-transform: uppercase;
 }
 
 .c-main-footer__nav .c-secondary-nav__item {
@@ -141,6 +152,10 @@
 }
 
 .c-main-footer__terms-links {
+  @include typeface(subheader, 3);
+  font-weight: normal;
+  font-size: var(--font-size-body-3);
+
   @include media("<=large") {
     margin-top: $space-double;
   }
@@ -150,6 +165,9 @@
   margin: 0 $space;
   padding: 8px 0;
   color: $c-quaternary;
+  @include typeface(subheader, 3);
+  font-weight: normal;
+  font-size: var(--font-size-body-3);
 
   @include media(">large") {
     margin: 0 $space-double 0 0;

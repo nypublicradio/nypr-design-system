@@ -149,7 +149,7 @@
 .c-featured-blocks__heading {
   position: absolute;
   top: -0.6em;
-  font-size: var(--font-size-header-5);
+  @include typeface(header, 5);
   right: $space-quad;
   background-color: $c-white;
   padding: 0 $space-half;
@@ -249,13 +249,15 @@
   }
 }
 .c-section__heading {
-  font-weight: normal;
   @include typeface(header, 4);
+  font-weight: normal;
   letter-spacing: 3px;
 
   @include media(">medium") {
     @include typeface(header, 8);
+    font-weight: normal;
   }
+
 }
 
 /**
@@ -327,6 +329,14 @@
   text-transform: uppercase;
 }
 
+.c-search-results__result-number {
+  @include typeface(small, 4)
+}
+
+  .c-listing__sections-title {
+    @include typeface(header, 5)
+  }
+
 /**
  * Author listing pages
  */
@@ -348,10 +358,6 @@
 /**
  * Basic "flat" pages
  */
-.c-basic__header {
-  padding: $space 0;
-  position: relative;
-}
 .c-basic__header:before {
   content: "";
   position: absolute;
@@ -360,10 +366,16 @@
   height: 1px;
   @include border-accent;
 }
-.c-basic__heading {
+.c-basic__header {
+  padding: $space 0;
+  position: relative;
   @include typeface(header, 10);
 
   @include media("<=medium") {
     @include typeface(header, 8);
   }
+}
+
+.c-basic__header-kicker {
+  @include typeface(small, 3);
 }

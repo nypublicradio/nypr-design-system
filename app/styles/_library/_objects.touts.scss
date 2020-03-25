@@ -179,9 +179,9 @@
   }
 }
 .c-sponsored-tout__heading {
+  @include typeface(header, 5);
   position: absolute;
   top: -0.6em;
-  font-size: var(--font-size-header-5);
   left: $space-quad;
   background-color: $c-white;
   padding: 0 $space-half;
@@ -269,6 +269,12 @@
     max-width: 250px;
     min-width: 250px;
   }
+}
+.c-newsletter-tout__dek {
+  @include typeface(subheader, 1);
+
+  font-size: var(--font-size-body-1);
+  font-weight: normal;
 }
 .c-newsletter-tout__heading {
   @include typeface(header, 5);

@@ -65,6 +65,10 @@
     padding-right: $space;
   }
 }
+.c-slide__heading {
+  font-size: var(--font-size-header-5);
+}
+
 .c-slide:nth-child(1) {
   transition-delay: 0.15s;
 }
@@ -80,6 +84,10 @@
   justify-content: space-between;
   align-items: flex-start;
 }
+.c-slice__count {
+  @include typeface(small, 3);
+}
+
 .c-slide__meta .c-toggle-box .c-toggle-box__content {
   @include media("<=xxlarge") {
     left: $space;

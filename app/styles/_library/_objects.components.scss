@@ -152,6 +152,9 @@
 }
 
 .c-share-tools__label {
+  font-family: var(--font-family-subheader);
+  font-size: var(--font-size-body-1);
+
   margin-right: $space-half;
 }
 

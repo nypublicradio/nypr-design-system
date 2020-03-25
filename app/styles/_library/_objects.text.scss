@@ -3,43 +3,6 @@
 \*------------------------------------*/
 
 /**
- * Font Families
- */
-.u-font {
-  font-family: var(--font-family-body);
-}
-
-.u-font--primary {
-  font-family: var(--font-family-header);
-}
-
-.u-font--secondary {
-  font-family: var(--font-family-small);
-}
-
-.u-font--secondary-style {
-  font-family: var(--font-family-small);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.u-font--xxs {
-  font-size: var(--font-size-small-1);
-}
-
-.u-font--xs {
-  font-size: var(--font-size-small-3);
-}
-
-.u-font--s {
-  font-size: var(--font-size-body-1);
-}
-
-.u-font--l {
-  font-size: var(--font-size-header-5);
-}
-
-/**
  * Primary type styles
  */
 
@@ -301,13 +264,13 @@
 .o-tag,
 .o-kicker,
 .o-breadcrumb {
+  @include typeface(small, 3);
   padding: 2px 6px 3px;
   text-transform: uppercase;
   font-weight: bold;
   color: $c-senary;
   background-color: $c-quaternary;
   letter-spacing: 1px;
-  @include typeface(small, 3);
 }
 .o-tag,
 .o-kicker {
@@ -354,6 +317,7 @@ a.o-breadcrumb {
 .o-caption p,
   .o-caption__text {
     @include typeface(small, 4);
+    font-family: var(--font-family-body);
   }
 .o-caption .o-icon--dashed-arrow {
     margin-right: $space-half;
@@ -387,6 +351,8 @@ a.o-breadcrumb {
   align-items: center;
   position: relative;
   z-index: $z-index-to-top;
+  @include typeface(small, 3);
+  text-transform: uppercase;
 }
 /* Temporary until i can get the real icon*/
 .o-to-top .o-icon--up-arrow {
@@ -468,6 +434,7 @@ a.o-breadcrumb {
 
 .c-gallery-end-label {
   flex-basis: 100%;
+  @include typeface(small, 3);
 }
 
 .c-gallery-end-label > .o-icon--down-arrow {

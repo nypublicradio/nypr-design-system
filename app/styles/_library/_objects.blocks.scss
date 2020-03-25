@@ -162,14 +162,22 @@
 .c-block-meta > * + *:before {
   @include dot-divider;
 }
-.c-block-meta__timestamp,
-.c-block-meta__comments {
+.c-block-meta__timestamp {
+  @include typeface(small, 1);
+  text-transform: uppercase;
+  font-weight: normal;
   vertical-align: middle;
 }
+.c-block-meta__author {
+  @include typeface(small, 1);
+}
 .c-block-meta__comments {
+  vertical-align: middle;
   display: inline-flex;
   align-items: center;
   margin-left: $space-half;
+  @include typeface(small, 2);
+  font-weight: normal;
 }
 .c-block-meta__comments:hover {
   color: $c-primary;
@@ -227,6 +235,10 @@ $author-media-width-l: 360;
     bottom: $space-half;
   }
 }
+
+.c-author-block__details-link {
+  @include typeface(small, 3);
+}
 .c-author-block__details:before {
   @include media(">small") {
     @include dot-divider($font-size: 24px);
@@ -245,6 +257,10 @@ $author-media-width-l: 360;
   @include media(">large") {
     max-width: $author-media-width-l + px;
   }
+}
+
+.c-author-block__role  {
+  @include typeface(small, 3);
 }
 .c-author-block__meta,
 .c-author-block__object {

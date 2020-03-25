@@ -61,6 +61,8 @@
   text-align: right;
   width: 100%;
   color: $c-gray--dark;
+
+  @include typeface(small, 1);
 }
 /* Standard 300x250*/
 .o-ad--300x250,

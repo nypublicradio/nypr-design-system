@@ -350,6 +350,7 @@
 }
 .c-side-menu__copyright p {
   line-height: 2.5;
+  @include typeface(small, 3);
 }
 .c-side-menu__terms-links {
   display: flex;
@@ -358,6 +359,7 @@
 .c-side-menu__terms-links a {
   color: $c-quaternary;
   padding: 8px 0;
+  @include typeface(small, 3);
 }
 .c-side-menu__terms-links a:hover {
   background-color: $c-primary;
