@@ -1,6 +1,9 @@
 'use strict';
 
 const defaultTheme = 'white-label';
+var glob = require('glob');
+const writeFile = require('broccoli-file-creator');
+const MergeTrees = require('broccoli-merge-trees');
 
 module.exports = {
   name: require('./package').name,
@@ -26,13 +29,27 @@ module.exports = {
     if (! app.options.outputPaths.app.css) {
       app.options.outputPaths.app.css = {};
     }
-    
+
     this.themes.forEach(themeName => {
       app.options.outputPaths.app.css[themeName] = `/assets/nypr-design-system/themes/${themeName}.css`;
     });
 
     this._super.included.apply(this, arguments);
   },
+  treeForStyles() {
+   let tree = this._super.treeForStyles.apply(this, arguments);
+
+   let target = this._findHost();
+
+   let { env } = target;
+
+   let sassEnvironmentFile = writeFile(
+     '/app/styles/current-environment.scss',
+     `$environment: "${env}"`
+   );
+
+   return new MergeTrees([sassEnvironmentFile, tree]);
+ },
   contentFor(type, config) {
     const titleize = function(name) {
       return name.split('-')
