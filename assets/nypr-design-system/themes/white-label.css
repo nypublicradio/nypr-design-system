@@ -7923,4 +7923,16 @@ c-main-footer__copyright-text {
   background-size: 18px 2px, 18px 2px, 2px 18px, 2px 18px;
 }
 
+body:before {
+  opacity: 0.5;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  content: "white-label (radial)";
+  padding: 5px;
+  border: 1px dotted #000;
+  color: #000;
+}
+
 /*# sourceMappingURL=white-label.css.map */

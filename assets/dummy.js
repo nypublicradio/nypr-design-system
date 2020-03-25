@@ -2800,6 +2800,26 @@
   });
 });
 
+;define("dummy/helpers/noop", ["exports", "ember-composable-helpers/helpers/noop"], function (_exports, _noop) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(_exports, "default", {
+    enumerable: true,
+    get: function get() {
+      return _noop.default;
+    }
+  });
+  Object.defineProperty(_exports, "noop", {
+    enumerable: true,
+    get: function get() {
+      return _noop.noop;
+    }
+  });
+});
+
 ;define("dummy/helpers/not-eq", ["exports", "ember-truth-helpers/helpers/not-equal"], function (_exports, _notEqual) {
   "use strict";
 
@@ -3513,6 +3533,20 @@
     enumerable: true,
     get: function get() {
       return _mixin.default;
+    }
+  });
+});
+
+;define("dummy/modifiers/on-click-outside", ["exports", "ember-click-outside/modifier"], function (_exports, _modifier) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(_exports, "default", {
+    enumerable: true,
+    get: function get() {
+      return _modifier.default;
     }
   });
 });
@@ -4369,7 +4403,7 @@
   });
   QUnit.test('addon/templates/components/nypr-m-byline.hbs', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'addon/templates/components/nypr-m-byline.hbs should pass TemplateLint.\n\n');
+    assert.ok(false, 'addon/templates/components/nypr-m-byline.hbs should pass TemplateLint.\n\naddon/templates/components/nypr-m-byline.hbs\n  6:5  error  Incorrect indentation for `&nbsp;and&nbsp;\n    ` beginning at L6:C5. Expected `&nbsp;and&nbsp;\n    ` to be at an indentation of 6 but was found at 5.  block-indentation\n');
   });
   QUnit.test('addon/templates/components/nypr-m-figcaption.hbs', function (assert) {
     assert.expect(1);

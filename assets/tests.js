@@ -9,12 +9,8 @@ define("dummy/tests/integration/components/nypr-a-ad-label-test", ["qunit", "emb
 
   (0, _qunit.module)('Integration | Component | nypr-a-ad-label', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -53,12 +49,8 @@ define("dummy/tests/integration/components/nypr-a-button-test", ["qunit", "ember
 
   (0, _qunit.module)('Integration | Component | nypr-a-button', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -100,12 +92,8 @@ define("dummy/tests/integration/components/nypr-a-button-test", ["qunit", "ember
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('alternate forms',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('alternate forms', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -143,12 +131,8 @@ define("dummy/tests/integration/components/nypr-a-button-test", ["qunit", "ember
         return _ref3.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('classes can be added via component helper form',
-    /*#__PURE__*/
-    function () {
-      var _ref4 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(assert) {
+    (0, _qunit.test)('classes can be added via component helper form', /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(assert) {
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -187,12 +171,8 @@ define("dummy/tests/integration/components/nypr-a-kicker-test", ["qunit", "ember
 
   (0, _qunit.module)('Integration | Component | nypr-a-kicker', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -241,12 +221,8 @@ define("dummy/tests/integration/components/nypr-a-media-object-test", ["qunit", 
 
   (0, _qunit.module)('Integration | Component | nypr-a-media-object', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -285,12 +261,8 @@ define("dummy/tests/integration/components/nypr-a-picture-test", ["qunit", "embe
 
   (0, _qunit.module)('Integration | Component | nypr-a-picture', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var IMG;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -333,12 +305,8 @@ define("dummy/tests/integration/components/nypr-a-section-heading-test", ["qunit
 
   (0, _qunit.module)('Integration | Component | nypr-a-section-heading', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -387,12 +355,8 @@ define("dummy/tests/integration/components/nypr-a-story-headline-test", ["qunit"
 
   (0, _qunit.module)('Integration | Component | nypr-a-story-headline', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -441,12 +405,8 @@ define("dummy/tests/integration/components/nypr-a-svg-test", ["qunit", "ember-qu
 
   (0, _qunit.module)('Integration | Component | nypr-a-svg', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -494,12 +454,8 @@ define("dummy/tests/integration/components/nypr-a-tag-test", ["qunit", "ember-qu
 
   (0, _qunit.module)('Integration | Component | nypr-a-tag', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -556,12 +512,8 @@ define("dummy/tests/integration/components/nypr-a-toggle-box-test", ["qunit", "e
 
   (0, _qunit.module)('Integration | Component | nypr-a-toggle-box', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -606,12 +558,8 @@ define("dummy/tests/integration/components/nypr-m-author-block-test", ["qunit", 
 
   (0, _qunit.module)('Integration | Component | nypr-m-author-block', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var AUTHOR;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -665,12 +613,8 @@ define("dummy/tests/integration/components/nypr-m-block-list-test", ["qunit", "e
 
   (0, _qunit.module)('Integration | Component | nypr-m-block-list', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -713,12 +657,8 @@ define("dummy/tests/integration/components/nypr-m-block-meta-test", ["qunit", "e
 
   (0, _qunit.module)('Integration | Component | nypr-m-block-meta', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -757,12 +697,8 @@ define("dummy/tests/integration/components/nypr-m-block-test", ["qunit", "ember-
 
   (0, _qunit.module)('Integration | Component | nypr-m-block', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -816,12 +752,8 @@ define("dummy/tests/integration/components/nypr-m-block-test", ["qunit", "ember-
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('icons',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('icons', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -897,12 +829,8 @@ define("dummy/tests/integration/components/nypr-m-box-banner-test", ["qunit", "e
 
   (0, _qunit.module)('Integration | Component | nypr-m-box-banner', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _test.default)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _test.default)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -941,12 +869,8 @@ define("dummy/tests/integration/components/nypr-m-box-banner-test", ["qunit", "e
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _test.default)('it calls the @close action when close is clicked',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _test.default)('it calls the @close action when close is clicked', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -996,12 +920,8 @@ define("dummy/tests/integration/components/nypr-m-brands-linkroll-test", ["qunit
 
   (0, _qunit.module)('Integration | Component | nypr-m-brands-linkroll', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1028,12 +948,8 @@ define("dummy/tests/integration/components/nypr-m-brands-linkroll-test", ["qunit
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('can choose a site to exclude',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('can choose a site to exclude', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -1065,12 +981,8 @@ define("dummy/tests/integration/components/nypr-m-brands-linkroll-test", ["qunit
         return _ref3.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('can exclude multiple sites',
-    /*#__PURE__*/
-    function () {
-      var _ref4 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(assert) {
+    (0, _qunit.test)('can exclude multiple sites', /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(assert) {
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -1115,12 +1027,8 @@ define("dummy/tests/integration/components/nypr-m-breadcrumb-test", ["qunit", "e
 
   (0, _qunit.module)('Integration | Component | nypr-m-breadcrumb', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1202,12 +1110,8 @@ define("dummy/tests/integration/components/nypr-m-byline-test", ["qunit", "ember
       }
     }];
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1234,12 +1138,8 @@ define("dummy/tests/integration/components/nypr-m-byline-test", ["qunit", "ember
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('1 to n in house authors',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('1 to n in house authors', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -1290,12 +1190,8 @@ define("dummy/tests/integration/components/nypr-m-byline-test", ["qunit", "ember
         return _ref3.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('1 to n authors from contributing orgs, no in house authors',
-    /*#__PURE__*/
-    function () {
-      var _ref4 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(assert) {
+    (0, _qunit.test)('1 to n authors from contributing orgs, no in house authors', /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(assert) {
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -1355,12 +1251,8 @@ define("dummy/tests/integration/components/nypr-m-byline-test", ["qunit", "ember
         return _ref4.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('1 to n in-house authors with 1 to n authors from contributing orgs',
-    /*#__PURE__*/
-    function () {
-      var _ref5 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee4(assert) {
+    (0, _qunit.test)('1 to n in-house authors with 1 to n authors from contributing orgs', /*#__PURE__*/function () {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(assert) {
         var ALL, JUST_TWO;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -1423,12 +1315,8 @@ define("dummy/tests/integration/components/nypr-m-byline-test", ["qunit", "ember
         return _ref5.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('sponsored',
-    /*#__PURE__*/
-    function () {
-      var _ref6 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee5(assert) {
+    (0, _qunit.test)('sponsored', /*#__PURE__*/function () {
+      var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(assert) {
         var SPONSOR;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
@@ -1476,12 +1364,8 @@ define("dummy/tests/integration/components/nypr-m-figcaption-test", ["qunit", "e
 
   (0, _qunit.module)('Integration | Component | nypr-m-figcaption', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var CAPTION, CREDIT;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -1517,12 +1401,8 @@ define("dummy/tests/integration/components/nypr-m-figcaption-test", ["qunit", "e
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('the many variations of figcaptions',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('the many variations of figcaptions', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         var CAPTION, CREDIT;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -1613,12 +1493,8 @@ define("dummy/tests/integration/components/nypr-m-figure-test", ["qunit", "ember
 
   (0, _qunit.module)('Integration | Component | nypr-m-figure', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1677,12 +1553,8 @@ define("dummy/tests/integration/components/nypr-m-gallery-lead-test", ["qunit", 
   }];
   (0, _qunit.module)('Integration | Component | nypr-m-gallery-lead', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _test.default)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _test.default)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1735,12 +1607,8 @@ define("dummy/tests/integration/components/nypr-m-inline-search-test", ["qunit",
 
   (0, _qunit.module)('Integration | Component | nypr-m-inline-search', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _test.default)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _test.default)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1777,12 +1645,8 @@ define("dummy/tests/integration/components/nypr-m-inline-search-test", ["qunit",
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _test.default)('interactivity',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _test.default)('interactivity', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         var QUERY, SEARCH;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -1874,12 +1738,8 @@ define("dummy/tests/integration/components/nypr-m-inline-search-test", ["qunit",
         return _ref3.apply(this, arguments);
       };
     }());
-    (0, _test.default)('can init with a query value',
-    /*#__PURE__*/
-    function () {
-      var _ref4 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(assert) {
+    (0, _test.default)('can init with a query value', /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(assert) {
         var QUERY;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -1911,12 +1771,8 @@ define("dummy/tests/integration/components/nypr-m-inline-search-test", ["qunit",
         return _ref4.apply(this, arguments);
       };
     }());
-    (0, _test.default)('can update search value from outer context',
-    /*#__PURE__*/
-    function () {
-      var _ref5 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee4(assert) {
+    (0, _test.default)('can update search value from outer context', /*#__PURE__*/function () {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(assert) {
         var SEARCH, QUERY;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -1972,12 +1828,8 @@ define("dummy/tests/integration/components/nypr-m-nav-read-more-test", ["qunit",
 
   (0, _qunit.module)('Integration | Component | nypr-m-nav-read-more', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2016,7 +1868,7 @@ define("dummy/tests/integration/components/nypr-m-newsletter-form-test", ["qunit
 
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -2026,12 +1878,8 @@ define("dummy/tests/integration/components/nypr-m-newsletter-form-test", ["qunit
 
   (0, _qunit.module)('Integration | Component | nypr-m-newsletter-form', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _test.default)('it handles successful submissions',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _test.default)('it handles successful submissions', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var ENDPOINT, EMAIL, OTHER_PARAMS, SUCCESS_RESPONSE;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -2090,12 +1938,8 @@ define("dummy/tests/integration/components/nypr-m-newsletter-form-test", ["qunit
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _test.default)('it handles error responses',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _test.default)('it handles error responses', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         var EMAIL, ENDPOINT, ERROR_MESSAGE, ERROR_RESPONSE;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2163,12 +2007,8 @@ define("dummy/tests/integration/components/nypr-m-newsletter-test", ["qunit", "e
 
   (0, _qunit.module)('Integration | Component | nypr-m-newsletter', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var BLURB, OTHER_LEGAL;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -2225,12 +2065,8 @@ define("dummy/tests/integration/components/nypr-m-progress-bar-test", ["qunit", 
 
   (0, _qunit.module)('Integration | Component | nypr-m-progress-bar', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2257,12 +2093,8 @@ define("dummy/tests/integration/components/nypr-m-progress-bar-test", ["qunit", 
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('it updates as you scroll',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('it updates as you scroll', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         var reset;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2309,12 +2141,8 @@ define("dummy/tests/integration/components/nypr-m-pullquote-test", ["qunit", "em
 
   (0, _qunit.module)('Integration | Component | nypr-m-pullquote', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var QUOTE, AUTHOR;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -2381,12 +2209,8 @@ define("dummy/tests/integration/components/nypr-m-secondary-nav-test", ["qunit",
 
   (0, _qunit.module)('Integration | Component | nypr-m-secondary-nav', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2425,12 +2249,8 @@ define("dummy/tests/integration/components/nypr-m-share-tools-test", ["qunit", "
 
   (0, _qunit.module)('Integration | Component | nypr-m-share-tools', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _test.default)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _test.default)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2462,11 +2282,7 @@ define("dummy/tests/integration/components/nypr-m-share-tools-test", ["qunit", "
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _test.default)('it opens a popup to facebook',
-    /*#__PURE__*/
-    _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee2() {
+    (0, _test.default)('it opens a popup to facebook', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
       var URL;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
@@ -2492,11 +2308,7 @@ define("dummy/tests/integration/components/nypr-m-share-tools-test", ["qunit", "
         }
       }, _callee2, this);
     })));
-    (0, _test.default)('it opens a popup to twitter',
-    /*#__PURE__*/
-    _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee3() {
+    (0, _test.default)('it opens a popup to twitter', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
       var URL, TEXT, VIA;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
@@ -2528,11 +2340,7 @@ define("dummy/tests/integration/components/nypr-m-share-tools-test", ["qunit", "
         }
       }, _callee3, this);
     })));
-    (0, _test.default)('it can override the derived share url',
-    /*#__PURE__*/
-    _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee4() {
+    (0, _test.default)('it can override the derived share url', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
       var URL, TEXT, VIA;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
@@ -2565,11 +2373,7 @@ define("dummy/tests/integration/components/nypr-m-share-tools-test", ["qunit", "
         }
       }, _callee4, this);
     })));
-    (0, _test.default)('it can substitute a variable for the derived URL',
-    /*#__PURE__*/
-    _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee5() {
+    (0, _test.default)('it can substitute a variable for the derived URL', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
       var BODY;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
@@ -2610,12 +2414,8 @@ define("dummy/tests/integration/components/nypr-m-tags-test", ["qunit", "ember-q
 
   (0, _qunit.module)('Integration | Component | nypr-m-tags', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2681,12 +2481,8 @@ define("dummy/tests/integration/components/nypr-m-text-banner-test", ["qunit", "
 
   (0, _qunit.module)('Integration | Component | nypr-m-text-banner', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2713,12 +2509,8 @@ define("dummy/tests/integration/components/nypr-m-text-banner-test", ["qunit", "
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('it renders properties',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('it renders properties', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         var CATEGORY, TITLE, URL, TIMESTAMP, DESCRIPTION;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2774,12 +2566,8 @@ define("dummy/tests/integration/components/nypr-m-to-top-test", ["qunit", "ember
 
   (0, _qunit.module)('Integration | Component | nypr-m-to-top', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _test.default)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _test.default)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2806,11 +2594,7 @@ define("dummy/tests/integration/components/nypr-m-to-top-test", ["qunit", "ember
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _test.default)('it scrolls to the top of the window',
-    /*#__PURE__*/
-    _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee2() {
+    (0, _test.default)('it scrolls to the top of the window', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -2837,11 +2621,7 @@ define("dummy/tests/integration/components/nypr-m-to-top-test", ["qunit", "ember
         }
       }, _callee2, this);
     })));
-    (0, _test.default)('it scrolls to a given target',
-    /*#__PURE__*/
-    _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee3() {
+    (0, _test.default)('it scrolls to a given target', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
       var target, y;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
@@ -2871,11 +2651,7 @@ define("dummy/tests/integration/components/nypr-m-to-top-test", ["qunit", "ember
         }
       }, _callee3, this);
     })));
-    (0, _test.default)('it scrolls to a given offset',
-    /*#__PURE__*/
-    _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee4() {
+    (0, _test.default)('it scrolls to a given offset', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
       var OFFSET, target, y;
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
@@ -2919,12 +2695,8 @@ define("dummy/tests/integration/components/nypr-o-article-body-test", ["qunit", 
 
   (0, _qunit.module)('Integration | Component | nypr-o-article-body', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2973,12 +2745,8 @@ define("dummy/tests/integration/components/nypr-o-article-footer-test", ["qunit"
 
   (0, _qunit.module)('Integration | Component | nypr-o-article-footer', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var TAGS, CONTACT, DONATE_MESSAGE, DONATE_CTA;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -3042,12 +2810,8 @@ define("dummy/tests/integration/components/nypr-o-article-header-test", ["qunit"
 
   (0, _qunit.module)('Integration | Component | nypr-o-article-header', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3086,12 +2850,8 @@ define("dummy/tests/integration/components/nypr-o-block-list-group-test", ["quni
 
   (0, _qunit.module)('Integration | Component | nypr-o-block-list-group', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders columns',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders columns', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3119,12 +2879,8 @@ define("dummy/tests/integration/components/nypr-o-block-list-group-test", ["quni
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('it tracks how many columns are rendered',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('it tracks how many columns are rendered', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -3151,12 +2907,8 @@ define("dummy/tests/integration/components/nypr-o-block-list-group-test", ["quni
         return _ref3.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('the ad unit renders',
-    /*#__PURE__*/
-    function () {
-      var _ref4 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(assert) {
+    (0, _qunit.test)('the ad unit renders', /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(assert) {
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -3195,12 +2947,8 @@ define("dummy/tests/integration/components/nypr-o-contact-test", ["qunit", "embe
 
   (0, _qunit.module)('Integration | Component | nypr-o-contact', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3248,12 +2996,8 @@ define("dummy/tests/integration/components/nypr-o-donate-test", ["qunit", "ember
 
   (0, _qunit.module)('Integration | Component | nypr-o-donate', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3289,12 +3033,8 @@ define("dummy/tests/integration/components/nypr-o-donate-test", ["qunit", "ember
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('yields a block for the "message" area',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('yields a block for the "message" area', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         var TEXT, URL;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -3343,12 +3083,8 @@ define("dummy/tests/integration/components/nypr-o-featured-block-list-test", ["q
 
   (0, _qunit.module)('Integration | Component | nypr-o-featured-block-list', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3390,12 +3126,8 @@ define("dummy/tests/integration/components/nypr-o-footer-test", ["qunit", "ember
 
   (0, _qunit.module)('Integration | Component | nypr-o-footer', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3434,12 +3166,8 @@ define("dummy/tests/integration/components/nypr-o-gallery-overlay-test", ["qunit
 
   (0, _qunit.module)('Integration | Component | nypr-o-gallery-overlay', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var TITLE, AD_TEXT, gallery, galleryHeight;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -3481,12 +3209,8 @@ define("dummy/tests/integration/components/nypr-o-gallery-overlay-test", ["qunit
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('it scrolls to a slide at the specified zero-based index on render',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('it scrolls to a slide at the specified zero-based index on render', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         var TITLE, SLIDE_FOR_INIT, slideForInit;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -3534,12 +3258,8 @@ define("dummy/tests/integration/components/nypr-o-gallery-overlay-test", ["qunit
         return _ref3.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('slides call the gallery `registerSlide` method on insert',
-    /*#__PURE__*/
-    function () {
-      var _ref4 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(assert) {
+    (0, _qunit.test)('slides call the gallery `registerSlide` method on insert', /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(assert) {
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -3582,12 +3302,8 @@ define("dummy/tests/integration/components/nypr-o-header-test", ["qunit", "ember
 
   (0, _qunit.module)('Integration | Component | nypr-o-header', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var LEADERBOARD, BRANDING, PRIMARY_NAV, SECONDARY_NAV, HEADLINE, RIGHT_SIDE;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -3661,12 +3377,8 @@ define("dummy/tests/integration/components/nypr-o-header-test", ["qunit", "ember
         return _ref2.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('interactivity',
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(assert) {
+    (0, _qunit.test)('interactivity', /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(assert) {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -3698,12 +3410,8 @@ define("dummy/tests/integration/components/nypr-o-header-test", ["qunit", "ember
         return _ref3.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('floating header',
-    /*#__PURE__*/
-    function () {
-      var _ref4 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(assert) {
+    (0, _qunit.test)('floating header', /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(assert) {
         var reset, _this$element$querySe, HEADER_HEIGHT, header;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -3742,18 +3450,14 @@ define("dummy/tests/integration/components/nypr-o-header-test", ["qunit", "ember
         return _ref4.apply(this, arguments);
       };
     }());
-    (0, _qunit.test)('yields active rules',
-    /*#__PURE__*/
-    function () {
-      var _ref5 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee4(assert) {
+    (0, _qunit.test)('yields active rules', /*#__PURE__*/function () {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(assert) {
         var service, headerIsFloating, reset;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                headerIsFloating = function _ref6(owner) {
+                headerIsFloating = function _headerIsFloating(owner) {
                   return owner.element.querySelector('.c-floating-header');
                 };
 
@@ -3807,12 +3511,8 @@ define("dummy/tests/integration/components/nypr-o-newsletter-tout-test", ["qunit
 
   (0, _qunit.module)('Integration | Component | nypr-o-newsletter-tout', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3853,12 +3553,8 @@ define("dummy/tests/integration/components/nypr-o-related-content-test", ["qunit
 
   (0, _qunit.module)('Integration | Component | nypr-o-related-content', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3916,12 +3612,8 @@ define("dummy/tests/integration/components/nypr-o-sponsored-tout-test", ["qunit"
 
   (0, _qunit.module)('Integration | Component | nypr-o-sponsored-tout', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -3970,12 +3662,8 @@ define("dummy/tests/integration/helpers/cast-test", ["qunit", "ember-qunit", "du
   (0, _qunit.module)('Integration | Helper | cast', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks); // Replace this with your real tests.
 
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -4010,12 +3698,8 @@ define("dummy/tests/integration/helpers/in-viewport-test", ["qunit", "ember-quni
   (0, _qunit.module)('Integration | Helper | in-viewport', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks); // Replace this with your real tests.
 
-    (0, _qunit.test)('it renders',
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _qunit.test)('it renders', /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var HEIGHT, testingContainer, OLD_POSITION, target;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -4362,12 +4046,8 @@ define("dummy/tests/unit/services/nypr-o-header-test", ["qunit", "ember-qunit", 
       assert.notOk(header.rules.baz);
       assert.ok(header.rules.foo, 'foo should be true');
     });
-    (0, _test.default)('all key is not required',
-    /*#__PURE__*/
-    function () {
-      var _ref = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(assert) {
+    (0, _test.default)('all key is not required', /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(assert) {
         var header, service;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
