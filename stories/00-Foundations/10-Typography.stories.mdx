@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import { FontSamples } from '../../.storybook/custom/components/Swatches'
+import fontStyles from './font-styles.js'
 
 <Meta title="Foundations/Typography" />
-
 
 ## Typography
 
@@ -18,7 +18,8 @@ Each of our brand themes determines its modular scale by setting these Font Leve
   --font-ratio: 1.25;
 ```
 
-**[ADD MODULAR SCALE HERE]**
+
+<FontSamples samples={fontStyles}/>
 
 **Line Heights**
 Default line heights are determined based on the hierarchical name of the size. Read Display Styles **[ADD LINK]** if this next part doesn’t make sense.
