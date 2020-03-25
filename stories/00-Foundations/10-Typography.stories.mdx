@@ -3,24 +3,32 @@ import { FontSamples } from '../../.storybook/custom/components/Swatches'
 
 <Meta title="Foundations/Typography" />
 
-# Typography
+
+## Typography
 
 *Radial provides a wide range of type options to adapt to all our brands while maintaining a clear hierarchy and good page load performance. These guidelines help designers and developers work freely with good type practices in mind.*
+
 **Type Scale**
 Radial uses a [modular scale](https://www.modularscale.com/?18&px&1.125) to give our type purposeful sizing and visual harmony. Using our base body text size of **18px**, a ratio of **8:9** (known as a major second or numerically as **1.125**) is applied to determine the rest of [our scale](https://www.modularscale.com/?18&px&1.125).
+
 Each of our brand themes determines its modular scale by setting these Font Levers:
 ```css
   /* Font Levers */
   --font-base: 18px;
   --font-ratio: 1.25;
 ```
+
 **[ADD MODULAR SCALE HERE]**
+
 **Line Heights**
-Default line heights are determined based on the hierarchical name of the size. Read Display Styles **[ADD LINK]** if this next part doesn't make sense.
+Default line heights are determined based on the hierarchical name of the size. Read Display Styles **[ADD LINK]** if this next part doesn’t make sense.
+
 - Line heights for **headers** are **1.5x** their font size.
 - Line heights for **body** text are **1.8x** their font size.
 - Line heights for **small text** are **1.4x** their font size.
-*For the future; rounding the line heights to the nearest multiple of 8 using the currently in development CSS "line-height-step"*
+
+*For the future; rounding the line heights to the nearest multiple of 8 using the currently in development CSS “line-height-step”*
+
 | Size name    | Font size: desktop | Line height: desktop | Font size: mobile | Line height: mobile |
 | ------------ | ------------------ | -------------------- | ----------------- | ------------------- |
 | Font size 16 | 58.45              | 87.7                 | 46.18             | 69.27               |
@@ -39,18 +47,26 @@ Default line heights are determined based on the hierarchical name of the size. 
 | Font size 3  | 12.642             | 17.7                 |                   |                     |
 | Font size 2  | 11.237             | 15.73                |                   |                     |
 | Font size 1  | 9.989              | 13                   |                   |                     |
+
+
 **Type Components**
 To create some naming hierarchy around our font scale sizes, we've established some name ranges to make things easier.
+
  - Anything larger than the scale's base font size (18px) is considered a **Header**
  - **Sub-header?**
  - Our base font size and one below are both considered **Body Text**
  - Sizes below the body text are **Small Text**
+
 **Fonts Used - Whitelabel**
 Our Whitelabel uses two typefaces to show a clear hierarchy and to display style variation/font flexibility within a given theme.   **[Libre Baskerville](https://fonts.google.com/specimen/Libre+Baskerville?selection.family=Libre%20Baskerville)** is used as the primary font for headlines and titles.  **[Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro)** is used as our default secondary and tertiary font for body text as well as small headers and info text. The fonts are open source and are freely available for download from [Google Fonts](https://fonts.google.com/).
+
 **Fonts Used - [MOVE TO GOTHAMIST TYPE MD]**
 Gothamist uses three typefaces for its brand, creating a clear and expressive hierarchy while maintaining readability. These typefaces complement each other, while also performing well in their assigned hierarchy. **[Pragati Narrow](https://fonts.google.com/specimen/Pragati+Narrow)** is used as the primary font for headlines and titles. **[Barlow](https://fonts.google.com/specimen/Barlow)** is used as a secondary font for body text. **[B612 Mono](https://fonts.google.com/specimen/B612+Mono)** is used as a tertiary font for small headers and info text. The fonts are open source and are freely available for download from [Google Fonts](https://fonts.google.com/).
+
 ### Theme Typefaces
+
 Radial allows for themes to have a maximum of four typefaces. This keeps loading speeds faster and content more digestible. Typefaces can occupy one of 4 slots:
+
 Font Family Header
 ```css
 --font-family-header: 'Libre Baskerville', 'Times New Roman', serif;
@@ -72,6 +88,7 @@ Font Family Body
   --letter-spacing-body: normal;
   --font-weight-body: 400;
 ```
+
 Font Family Small
 ```css
   --font-family-small: 'Source Sans Pro', Helvetica, Arial, sans-serif;
@@ -79,3 +96,4 @@ Font Family Small
   --letter-spacing-small: 1px;
   --font-weight-small: 400;
 ```
+
