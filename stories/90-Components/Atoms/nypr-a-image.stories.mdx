@@ -6,18 +6,28 @@ import { Meta } from '@storybook/addon-docs/blocks';
 Below are a few examples of image dimensions that we’re currently using on the whitelabel. All images should be associated with appropriate alt tags. For images that are embedded within an article, caption and credits are available for use. 
 
 ## Current Ratios In Use 
-TBD
 
 | Ratio | Image Size Examples | Usage Examples |
 | -- | -- | -- |
 | 1:1 | 100x100 | Card Thumbnail (Horizontal, S) |
-| 4:3 | 100x64, 328x220, 360x234, 634x412 | Card Thumbnail (Horizontal and Verticle), Lead Image, Embedded Images, Gallery Thumbnails |
-| Variable | 1100x714 (max-width: , max-height: ) | Gallery Slide |
+| 4:3 | 100x64, 328x220, 360x234, 634x412 | Card Thumbnail (Horizontal and Vertical), Gallery Thumbnails |
+| Variable | 1100x714 (min-width: 634px , max-height: 733px ) | Gallery Slide, Lead Image, Embedded Images |
 
 ## Default Images
 Default images are shown whenever there is no image available to pull from the CMS. 
 
-EXAMPLE OF DEFAULT IMAGES
+| Use | Example |
+| -- | -- |
+| Whitelabel Default | IMG |
+| Gothamist Default | IMG |
+| Gothamist Food | IMG |
+| Gothamist Arts & Entertainment | IMG |
+| Gothamist News | IMG |
+
+## Cropped Images
+Images uploaded should always adhere to the image ratios for the corresponding component. If they do not, images will appear cropped in certain components. The CMS can help specify how the cropped image will appear, but otherwise, try to make sure images abide by the current rules that are set. 
+
+EXAMPLE OF CROPPED IMAGE
 
 ## Examples of Images with Descriptions
 TBD
@@ -29,4 +39,8 @@ TBD
 ## Progressive Loading
 For users with slow connections, progressively loading images reduces the bounce rate and creates a more seamless transition between the unloaded and loaded pages. It helps our users understand that the page is still loading. This feature is most important to users on mobile devices or accessing our sites from older devices. 
 
-TBD EXAMPLE
+| State | Example |
+| -- | -- |
+| Initial Page Load Placeholder | IMG |
+| Low Res Photo Loaded & Blurred | IMG |
+| Final Loaded Image | IMG |
