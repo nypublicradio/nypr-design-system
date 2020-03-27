@@ -1,0 +1,57 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Organisms/Sidebar" />
+
+## Side Menus
+
+### Overview
+
+A side menu spans the full length of a given screen, used primarily to contain navigation elements. Side menus are typically hidden until triggered by a user action (i.e. clicking a hamburger menu).
+
+### Use Cases
+
+-   Used to hold navigation options that don’t need to be visible to the user all of the time.
+    
+-   Used to hide navigation options from the main view, keeping a page simpler.
+    
+-   Used as an alternative primary navigation on mobile
+    
+
+### What’s Inside
+
+At the minimum, a side menu should contain a series of navigational links to the rest of the site. Side menus navigations should contain top-level links, serving the purpose of any other primary navigation.
+
+  
+
+Radial’s default side menu includes placeholders for branding, primary CTA, primary/secondary navigation, and social links. It also contains an area for additional components to be dropped in as needed. In the case of Gothamist (below), much of what can be found in the site’s footer can also be found in its side menu including a donate CTA, primary nav links, social links, and more.
+ 
+<img alt="card anatomy" src="./images/Organisms-Sidebar-Gothamist-Sidebar.png" width="300" />
+
+  
+
+### Behavior
+
+Side menus should close on the following actions:
+
+-   Background click (i.e. clicking off the menu)
+    
+-   Close icon button click
+    
+-   Escape key
+    
+-   The close function being called
+    
+
+  
+
+By default, side menus use our standard Outgoing and Incoming [animation curves](https://nypublicradio.github.io/nypr-design-system/?path=/docs/foundations-animation--page#easing-and-timing) for entering and exiting.
+
+  
+
+Side menus should always be kept on the same side as the objects that triggered them, it’s best practice to have side menus on the left side.
+
+  
+
+### Mobile
+
+On mobile side menus expand to cover 100% of the width of the screen when opened.
