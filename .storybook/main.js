@@ -7,6 +7,7 @@ module.exports = {
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-links',
+    '@storybook/addon-a11y/register',
     {
       name: '@storybook/addon-docs',
       options: {

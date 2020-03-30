@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^0.6.3",
+    "@storybook/addon-a11y": "^5.3.17",
     "@storybook/addon-actions": "5.3.9",
     "@storybook/addon-docs": "5.3.9",
     "@storybook/addon-links": "5.3.9",
