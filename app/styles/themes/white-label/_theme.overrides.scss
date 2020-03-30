@@ -16,7 +16,7 @@
 .c-main-header--emphasis {
 
   .c-main-header__ad-unit {
-    padding-bottom: $space-half;
+    padding-bottom: var(--space-2);
 
     @include media('>medium') {
       padding-bottom: 30px;
@@ -32,27 +32,27 @@
   &:not(.out-of-viewport) .c-main-header__branding {
     width: 110px;
     position: relative;
-    bottom: -$space;
+    bottom: calc(var(--space-3) * -1);
     align-self: flex-bottom;
     z-index: $z-index-heading-logo;
-    left: $space-half;
+    left: var(--space-2);
     opacity: 1;
     transition: opacity .15s $hard-ease-in;
 
     @include media('>medium') {
       width: 135px;
-      bottom: -$space-half;
+      bottom: calc(var(--space-2) * -1);
     }
 
     @include media('>xlarge') {
-      left: $col-width + $gutter + px;
+      left: calc(col-width + var(--gutter));
     }
 
-    $xl-container: ($max-width-xl + $space-double);
+    --xl-container: calc(var(--max-width-xl) + var(--space-5));
     @include media('>xxlarge') {
       position: absolute;
       bottom: -43px;
-      left: calc(50% - #{$xl-container} / 2 + #{$space-double});
+      left: calc(50% - var(--xl-container) / 2 + var(--space-5));
     }
   }
 

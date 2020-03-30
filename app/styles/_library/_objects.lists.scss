@@ -7,7 +7,7 @@
  */
 .o-bullet-list {
   list-style-type: disc;
-  padding-left: $space;
+  padding-left: var(--space-3);
 }
 .o-bullet-list li {
   overflow: visible;

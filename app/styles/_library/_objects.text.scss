@@ -74,7 +74,7 @@
 .o-rte-text > h4,
 .o-rte-text > h5,
 .o-rte-text > h6 {
-  padding-top: $space;
+  padding-top: var(--space-3);
   /*font-weight: normal;*/
 }
 .o-rte-text > h1 {
@@ -107,25 +107,25 @@
 /* Heading + subheading lockup*/
 .o-rte-text > h2 + h3 {
     margin-top: 0;
-    padding-bottom: $space-half;
+    padding-bottom: var(--space-2);
   }
 .o-rte-text > ul,
   .o-rte-text > ol {
     position: relative;
     list-style: none;
     padding-left: 35px;
-    padding-top: $space;
-    margin-bottom: $space-double;
+    padding-top: var(--space-3);
+    margin-bottom: var(--space-5);
 
     @include media('>large') {
-      margin-left: $space;
+      margin-left: var(--space-3);
     }
   }
 .o-rte-text > ul:last-child, .o-rte-text > ol:last-child {
       margin-bottom: 0;
     }
 .o-rte-text > ul li, .o-rte-text > ol li {
-      margin-bottom: $space;
+      margin-bottom: var(--space-3);
       position: relative;
     }
 .o-rte-text > ul ul,
@@ -133,14 +133,14 @@
     .o-rte-text > ol ul,
     .o-rte-text > ol ol {
       list-style: none;
-      margin-top: $space;
-      margin-bottom: $space-half;
-      padding-left: $space;
+      margin-top: var(--space-3);
+      margin-bottom: var(--space-2);
+      padding-left: var(--space-3);
     }
 .o-rte-text > ul li:before {
         content: "";
         position: absolute;
-        left: -$space-and-half;
+        left: calc(var(--space-4));
         top: .75em;
         width: 7px;
         height: 7px;
@@ -183,10 +183,10 @@
 .o-rte-text > hr,
   .o-rte-text > div,
   .o-rte-text .o-ad {
-    margin-top: $space-and-half;
+    margin-top: var(--space-4);
     @include media('>large') {
-      margin-top: $space-double;
-      margin-bottom: $space-double;
+      margin-top: var(--space-5);
+      margin-bottom: var(--space-5);
     }
   }
 .o-rte-text code,
@@ -199,12 +199,12 @@
  * Pullquote (beefed up blockquote)
  */
 .o-pullquote {
-  margin: auto $space;
+  margin: auto var(--space-3);
   text-align: center;
   background: none;
 
   @include media('>medium') {
-    margin: auto ($col-width + $gutter) + px $space-triple;
+    margin: auto calc(var(--col-width) + var(--gutter)) var(--space-7);
   }
 }
 .o-pullquote p {
@@ -212,7 +212,7 @@
     font-size: var(--font-size-header-5);
     line-height: 1.05;
     background: none;
-    margin: $space 0 0;
+    margin: var(--space-3) 0 0;
     display: inline-block;
 
     @include media('>medium') {
@@ -249,9 +249,9 @@
   background-position: center bottom .2em;
   background-size: 100% .55em;
   background-repeat: no-repeat;
-  padding: 0 $space-half;
+  padding: 0 var(--space-2);
   box-decoration-break: clone;
-  margin-left: -$space-half;
+  margin-left: calc(var(--space-2) * -1);
 }
 .o-bg-text-accent--senary {
     background-image: linear-gradient(rgba($c-senary, .2), rgba($c-senary, .2));
@@ -307,7 +307,7 @@ a.o-breadcrumb {
   }
 
 .o-tags .o-tag {
-    margin: 0 $space-quarter $space-half 0;
+    margin: 0 var(--space-1) var(--space-2) 0;
   }
 
 
@@ -320,18 +320,18 @@ a.o-breadcrumb {
     font-family: var(--font-family-body);
   }
 .o-caption .o-icon--dashed-arrow {
-    margin-right: $space-half;
+    margin-right: var(--space-2);
     fill: $c-primary;
     transform: translateY(1px);
     float: left;
   }
 .o-caption .o-credit:not(:first-child) {
-    margin-left: $space-half;
+    margin-left: var(--space-2);
   }
 .o-credit {
   @include typeface(small, 1);
   line-height: 1.8;
-  margin-left: $space-quarter;
+  margin-left: var(--space-1);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -346,7 +346,7 @@ a.o-breadcrumb {
  */
 .o-to-top {
   width: 150px;
-  margin: $space-double auto;
+  margin: var(--space-5) auto;
   display: flex;
   align-items: center;
   position: relative;
@@ -356,7 +356,7 @@ a.o-breadcrumb {
 }
 /* Temporary until i can get the real icon*/
 .o-to-top .o-icon--up-arrow {
-    margin-right: $space-half;
+    margin-right: var(--space-2);
     fill: $c-primary;
   }
 .o-to-top svg {
@@ -387,13 +387,13 @@ a.o-breadcrumb {
  */
 .o-back-to-link {
   font-size: var(--font-size-header-2);
-  margin-left: -$space-quarter;
-  padding-left: $space-double;
+  margin-left: calc(var(--space-1) * -1);
+  padding-left: var(--space-5);
   position: relative;
   display: block;
 }
 .o-back-to-link .o-icon--prev-caret {
-    margin: 6px $space-quarter 0 0;
+    margin: 6px var(--space-1) 0 0;
     transform: rotate(90deg);
     min-width: 20px;
     left: 0;
@@ -422,14 +422,14 @@ a.o-breadcrumb {
   display: block;
   width: 34px;
   text-align: center;
-  margin: $space auto;
-  padding: $space 0;
+  margin: var(--space-3) auto;
+  padding: var(--space-3) 0;
 }
 /* Temporary until i can get the real icon*/
 .o-end-label .o-icon--down-arrow {
     transform: rotate(90deg);
     fill: $c-gray;
-    margin-bottom: $space-half;
+    margin-bottom: var(--space-2);
   }
 
 .c-gallery-end-label {
@@ -439,7 +439,7 @@ a.o-breadcrumb {
 
 .c-gallery-end-label > .o-icon--down-arrow {
     display: block;
-    margin: 0 auto $space-half;
+    margin: 0 auto var(--space-2);
   }
 
 
@@ -453,7 +453,7 @@ a.o-breadcrumb {
   z-index: 5;
   background-color: $c-white;
   left: 10px;
-  margin-right: $space;
+  margin-right: var(--space-3);
 }
 .o-3d-heading:before,
   .o-3d-heading:after {

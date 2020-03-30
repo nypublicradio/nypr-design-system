@@ -19,7 +19,7 @@
 }
 
 .o-text-with-icon > *:last-child {
-    margin-left: $space-half;
+    margin-left: var(--space-2);
   }
 
 .u-icon--xs {

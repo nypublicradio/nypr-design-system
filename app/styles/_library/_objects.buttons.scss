@@ -15,7 +15,7 @@ input[type="submit"] {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 20px $space-and-half 18px;
+  padding: 20px var(--space-4) 18px;
   line-height: 22px;
   color: $c-white;
   cursor: pointer;
@@ -31,8 +31,8 @@ input[type="submit"] {
   position: relative;
 
   @include media(">small") {
-    padding-left: $space-double;
-    padding-right: $space-double;
+    padding-left: var(--space-5);
+    padding-right: var(--space-5);
   }
 }
 

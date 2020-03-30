@@ -84,8 +84,8 @@
  */
 .u-breakout {
   @include media('<=medium') {
-    margin-right: -$space;
-    margin-left: -$space;
+    margin-right: calc(var(--space-3) * -1);
+    margin-left: calc(var(--space-3) * -1);
   }
 }
 

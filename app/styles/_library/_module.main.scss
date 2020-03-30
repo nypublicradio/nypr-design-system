@@ -3,8 +3,8 @@
 \*------------------------------------*/
 
 .c-main {
-  padding-top: $space-double;
-  padding-bottom: $space-double;
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
 }
 
 .c-welcome-page {
@@ -17,7 +17,7 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  padding: $space;
+  padding: var(--space-3);
 }
 
 .c-welcome-page__logo {
@@ -33,7 +33,7 @@
   display: block;
   width: 40px;
   transform: translateY(0) rotate(90deg);
-  bottom: $space-double;
+  bottom: var(--space-5);
   left: calc(50% - 10px);
   fill: $c-white;
   position: absolute;
@@ -56,7 +56,7 @@
   transform: translateX(-50%);
 }
 .o-ad__label {
-  margin-top: $space-half;
+  margin-top: var(--space-2);
   display: block;
   text-align: right;
   width: 100%;
@@ -85,28 +85,28 @@
 .o-ad-sponsored .o-ad__label {
   display: block;
   text-align: left;
-  margin-bottom: $space-half;
+  margin-bottom: var(--space-2);
 
   @include media(">medium") {
-    margin-bottom: $space;
+    margin-bottom: var(--space-3);
   }
 }
 .o-ad-sponsored__unit {
   display: inline-block;
-  margin-right: $space-and-half;
-  margin-bottom: $space;
+  margin-right: var(--space-4);
+  margin-bottom: var(--space-3);
   vertical-align: middle;
   max-width: 160px;
 
   @include media(">medium") {
-    margin-right: $space-double;
+    margin-right: var(--space-5);
   }
 }
 .o-ad-sponsored--inline {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: $space;
+  margin-bottom: var(--space-3);
 }
 .o-ad-sponsored--inline .o-ad-sponsored__unit {
   margin: 0;
@@ -134,7 +134,7 @@
  * Style Guide
  */
 .c-style-guide {
-  padding: $space-quad 0;
+  padding: var(--space-9) 0;
 }
 
 .o-sg-section__content p {
@@ -159,7 +159,7 @@
 }
 
 .c-swatch-a11y__item {
-  margin-left: $space-quarter;
+  margin-left: var(--space-1);
   text-align: center;
   width: 25px;
 }
@@ -196,14 +196,14 @@
 }
 
 .c-swatch__details {
-  padding: $space;
+  padding: var(--space-3);
 }
 
 .c-color-bars {
   border: $border-style-thick;
 }
 .c-color-bar {
-  padding: $space;
+  padding: var(--space-3);
   display: flex;
   justify-content: space-between;
 }
@@ -213,7 +213,7 @@
   width: 100%;
 }
 .c-font-block__inner {
-  padding: $space;
+  padding: var(--space-3);
   display: flex;
   height: 100%;
 }
@@ -225,7 +225,7 @@
 .c-font-block__free-type {
   @include typeface(header, 10);
   font-weight: inherit;
-  margin-bottom: $space-double;
+  margin-bottom: var(--space-5);
 }
 .c-font-block__letter {
   font-size: 117px;

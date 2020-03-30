@@ -4,8 +4,8 @@
 
 .c-lead .o-caption {
   @include media("<=medium") {
-    padding-left: $space;
-    padding-right: $space;
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
   }
 }
 
@@ -13,7 +13,7 @@
  * Gallery version of a lead
  */
 .c-lead-gallery__top {
-  margin-bottom: $space;
+  margin-bottom: var(--space-3);
 }
 .c-lead-gallery__image img {
   cursor: pointer;
@@ -22,7 +22,7 @@
   background-color: $c-octonary;
 }
 .c-lead-gallery .o-caption {
-  padding: 0 $space $space;
+  padding: 0 var(--space-3) var(--space-3);
 }
 /* ember compat*/
 .c-lead-gallery .o-caption > .o-credit {
@@ -41,22 +41,22 @@
 }
 .c-lead-gallery__thumbs-thumb {
   display: inline-block;
-  max-width: calc(20% - #{$space});
-  min-width: calc(20% - #{$space});
+  max-width: calc(20% - var(--space-3));
+  min-width: calc(20% - var(--space-3));
   border: $border-style-m;
   @include typeface(small, 3);
 
   @include media("<=medium") {
-    max-width: calc(25% - #{$space});
-    min-width: calc(25% - #{$space});
+    max-width: calc(25% - var(--space-3));
+    min-width: calc(25% - var(--space-3));
     &:nth-child(4) {
       display: none;
     }
   }
 
   @include media("<=small") {
-    max-width: calc(33.3333% - #{$space-half});
-    min-width: calc(33.3333% - #{$space-half});
+    max-width: calc(33.3333% - var(--space-2));
+    min-width: calc(33.3333% - var(--space-2));
     &:nth-child(3) {
       display: none;
     }
@@ -72,7 +72,7 @@
   height: 100%;
 }
 .c-lead-gallery__thumbs-thumb-text {
-  padding: $space $space-half $space-half;
+  padding: var(--space-3) var(--space-2) var(--space-2);
   background-color: $c-dark-bg;
   display: flex;
   align-items: center;

@@ -7,8 +7,8 @@
  */
 .l-wrap {
   margin: 0 auto;
-  padding-left: $space;
-  padding-right: $space;
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
   width: 100%;
   position: relative;
 }
@@ -19,18 +19,18 @@
  */
 
 .l-container {
-  max-width: ($max-width + $space-double);
+  max-width: calc(var(--max-width) + var(--space-5));
   margin-left: auto;
   margin-right: auto;
   position: relative;
 }
 
 .l-container--xl {
-    max-width: ($max-width-xl + $space-double);
+    max-width: calc(var(--max-width-xl) + var(--space-5));
   }
 
 .l-container--content {
-  max-width: $article-content-width + px;
+  max-width: var(--article-content-width);
   margin-left: auto;
   margin-right: auto;
 }
@@ -41,13 +41,13 @@
 @for $i from 1 through $grid-columns {
   .l-container--#{$i}col {
     @if $i == 1 {
-      max-width: ($col-width * $i) + ($gutter * $i) + px;
+      max-width: calc((var(--col-width) * #{$i}) + (var(--gutter) * #{$i}));
     }
     @else if $i == 2 {
-      max-width: ($col-width * $i) + ($gutter * 1) + px;
+      max-width: calc((var(--col-width) * #{$i}) + (var(--gutter) * 1));
     }
     @else {
-      max-width: ($col-width * $i) + ($gutter * ($i - 2)) + px;
+      max-width: calc((var(--col-width) * #{$i}) + (var(--gutter) * (#{$i} - 2)));
     }
   }
 }

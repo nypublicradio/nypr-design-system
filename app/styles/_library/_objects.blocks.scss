@@ -6,7 +6,7 @@
  * Standard block
  */
 .c-block__media {
-  margin-bottom: $space-half;
+  margin-bottom: var(--space-2);
   text-align: right;
 }
 .c-block__media:hover + .c-block__object .c-block__title-link,
@@ -38,7 +38,7 @@
   display: inline-block;
   width: $icon-small;
   height: $icon-small;
-  margin-left: $space-half;
+  margin-left: var(--space-2);
   margin-bottom: 0.2em;
   vertical-align: middle;
 }
@@ -60,7 +60,7 @@
   margin-bottom: 0.3em;
 }
 .c-block__object {
-  padding-top: $space-half;
+  padding-top: var(--space-2);
 }
 .c-block__dek p {
   line-height: 1.45;
@@ -99,7 +99,7 @@
   display: inline;
 }
 .c-block--urgent .c-block-meta__timestamp {
-  margin-right: $space-half;
+  margin-right: var(--space-2);
   color: $c-secondary;
   display: inline-block;
   margin-bottom: -5px;
@@ -127,7 +127,7 @@
   @include typeface(header, 2);
 }
 .c-block--horizontal .c-block__object {
-  padding: 0 0 0 $space;
+  padding: 0 0 0 var(--space-3);
   width: 100%;
 }
 /* Larger versions of horizontal blocks*/
@@ -149,7 +149,7 @@
 }
 .c-block--horizontal--large .c-block__object {
   @include media(">medium") {
-    padding-left: $space-and-half;
+    padding-left: var(--space-4);
   }
 }
 
@@ -175,7 +175,7 @@
   vertical-align: middle;
   display: inline-flex;
   align-items: center;
-  margin-left: $space-half;
+  margin-left: var(--space-2);
   @include typeface(small, 2);
   font-weight: normal;
 }
@@ -186,7 +186,7 @@
   fill: $c-primary;
 }
 .c-block-meta__comments .o-icon--comment {
-  margin-right: $space-quarter;
+  margin-right: var(--space-1);
   fill: $c-body-color;
 
   width: 13px;
@@ -203,10 +203,10 @@ $author-media-width-l: 360;
 }
 .c-author-block__meta {
   position: relative;
-  margin-bottom: $space-half;
+  margin-bottom: var(--space-2);
 
   @include media(">small") {
-    margin-top: $space-half;
+    margin-top: var(--space-2);
   }
 }
 .c-author-block__title {
@@ -215,24 +215,24 @@ $author-media-width-l: 360;
   }
 }
 .c-author-block__social {
-  padding-top: $space-half;
+  padding-top: var(--space-2);
 
   @include media(">small") {
-    margin-left: -$space-half;
-    margin-bottom: $space-half;
+    margin-left: -var(--space-2);
+    margin-bottom: var(--space-2);
   }
 }
 .c-author-block__social .c-share-tools__link {
-  margin-right: $space-half;
+  margin-right: var(--space-2);
 }
 .c-author-block__social .c-share-tools__text-link {
-  margin: 0 $space-half;
+  margin: 0 var(--space-2);
 }
 .c-author-block__details {
   @include media("<=small") {
     position: absolute;
     right: 0;
-    bottom: $space-half;
+    bottom: var(--space-2);
   }
 }
 
@@ -243,11 +243,11 @@ $author-media-width-l: 360;
   @include media(">small") {
     @include dot-divider($font-size: 24px);
     line-height: 1;
-    margin: 0 $space-half;
+    margin: 0 var(--space-2);
   }
 }
 .c-author-block__media {
-  margin-bottom: $space-half;
+  margin-bottom: var(--space-2);
 
   @include media(">small") {
     max-width: $author-media-width-s + px;
@@ -265,12 +265,12 @@ $author-media-width-l: 360;
 .c-author-block__meta,
 .c-author-block__object {
   @include media(">small") {
-    width: calc(100% - #{$author-media-width-s}px - #{$space});
+    width: calc(100% - #{$author-media-width-s}px - #{var(--space-3)});
     float: right;
   }
 
   @include media(">large") {
-    width: calc(100% - #{$author-media-width-l}px - #{$space});
+    width: calc(100% - #{$author-media-width-l}px - #{var(--space-3)});
   }
 }
 .c-author-block__dek p {
@@ -302,13 +302,13 @@ $author-media-width-l: 360;
 /* Mini version (user on Author listing pages)*/
 .c-author-block--mini {
   overflow: visible;
-  padding: $space-and-half $space;
+  padding: var(--space-4) var(--space-3);
   display: flex;
   flex-wrap: wrap;
   flex-direction: column-reverse;
 
   @include media(">small") {
-    padding: $space-double $space-and-half;
+    padding: var(--space-5) var(--space-4);
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row-reverse;
@@ -328,7 +328,7 @@ $author-media-width-l: 360;
     max-width: 120px;
     min-height: 120px;
     max-height: 120px;
-    margin-right: $space-and-half;
+    margin-right: var(--space-4);
   }
 }
 .c-author-block--mini .c-author-block__meta {
@@ -346,9 +346,9 @@ $author-media-width-l: 360;
 
   @include media("<=small") {
     position: absolute;
-    right: $space;
-    top: $space-double;
-    width: calc(100% - 70px - #{$space-triple});
+    right: var(--space-3);
+    top: var(--space-5);
+    width: calc(100% - 70px - var(--space-7));
   }
 
   @include media(">small") {

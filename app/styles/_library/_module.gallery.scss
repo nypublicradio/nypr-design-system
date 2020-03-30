@@ -3,7 +3,7 @@
 \*------------------------------------*/
 
 .c-gallery-overlay {
-  padding: $space-double 0 $space-quad;
+  padding: var(--space-5) 0 var(--space-9);
   color: $c-white;
   background-color: $c-dark-bg;
 }
@@ -45,7 +45,7 @@
   position: relative;
   z-index: $z-index-article-gallery-slide;
   pointer-events: none;
-  padding-bottom: $space-half;
+  padding-bottom: var(--space-2);
 
   @for $i from 1 through 5 {
     &:nth-child(#{$i}) {
@@ -61,8 +61,8 @@
 .c-slide__meta.l-container--content {
   max-width: none;
   @include media("<=xxlarge") {
-    padding-left: $space;
-    padding-right: $space;
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
   }
 }
 .c-slide__heading {
@@ -90,7 +90,7 @@
 
 .c-slide__meta .c-toggle-box .c-toggle-box__content {
   @include media("<=xxlarge") {
-    left: $space;
+    left: var(--space-3);
   }
 }
 

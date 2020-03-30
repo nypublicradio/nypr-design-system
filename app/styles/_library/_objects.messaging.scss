@@ -7,7 +7,7 @@
  */
 .o-text-banner {
   @include media(">large") {
-    padding-top: $space;
+    padding-top: var(--space-3);
   }
 }
 
@@ -15,7 +15,7 @@
  * Boxed in banner
  */
 .o-box-banner {
-  padding: $space $space-and-half $space-and-half;
+  padding: var(--space-3) var(--space-4) var(--space-4);
   text-align: center;
   display: block;
 }
@@ -31,8 +31,8 @@
 }
 .o-box-banner__close {
   position: absolute;
-  right: $space-half;
-  top: $space-half;
+  right: var(--space-2);
+  top: var(--space-2);
 }
 .o-box-banner__title {
   font-weight: bold;
@@ -57,7 +57,7 @@
 .o-box-banner__group {
   @include media(">large") {
     min-width: 73%;
-    padding-left: $space-triple;
+    padding-left: var(--space-7);
     text-align: left;
   }
 }
@@ -78,10 +78,10 @@
   border-bottom-color: $c-tertiary;
 }
 .o-box-banner--no-desc .o-box-banner__title {
-  margin-bottom: $space;
+  margin-bottom: var(--space-3);
 
   @include media(">large") {
-    padding-right: $space-triple;
+    padding-right: var(--space-7);
     text-align: right;
     margin-top: -4px;
     margin-bottom: 0;

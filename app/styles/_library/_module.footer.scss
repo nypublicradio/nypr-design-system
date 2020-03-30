@@ -3,7 +3,7 @@
 \*------------------------------------*/
 
 .c-main-footer {
-  padding: $space-double 0;
+  padding: var(--space-5) 0;
   background-image: linear-gradient(to bottom, white 0, $c-dark-bg 0%);
   background-position: 100% 142px;
   background-repeat: repeat-x;
@@ -42,18 +42,18 @@
 .c-main-footer__logo {
   min-width: 150px;
   max-width: 150px;
-  margin-right: $space-and-half;
+  margin-right: var(--space-4);
 
   @include media(">small") {
-    margin-right: $space-triple;
+    margin-right: var(--space-7);
   }
 }
 
 .c-main-footer__send-story {
   display: inline-block;
   color: $c-body-color;
-  padding: $space 0;
-  margin-bottom: $space;
+  padding: var(--space-3) 0;
+  margin-bottom: var(--space-3);
   @include typeface(small, 3);
   text-transform: uppercase;
 }
@@ -72,7 +72,7 @@
 .c-main-footer__nav {
   @include media("<=xlarge") {
     text-align: center;
-    padding-bottom: $space-double;
+    padding-bottom: var(--space-5);
   }
 }
 
@@ -89,26 +89,26 @@ c-main-footer__copyright-text {
   display: inline-block;
 
   @include media("<=xlarge") {
-    margin: 0 $space $space-and-half;
+    margin: 0 var(--space-3) var(--space-4);
   }
 }
 
 .c-main-footer__nav .c-secondary-nav__item:not(:last-child) {
   @include media(">xlarge") {
-    margin-right: $space-double;
+    margin-right: var(--space-5);
   }
 }
 
 .c-main-footer__nav .c-secondary-nav__link {
-  padding: $space-half 0;
+  padding: var(--space-2) 0;
 }
 
 .c-main-footer__nypr-logo {
   width: 120px;
-  margin: 0 auto $space;
+  margin: 0 auto var(--space-3);
 
   @include media(">xlarge") {
-    margin: 0 $space-double 0 0;
+    margin: 0 var(--space-5) 0 0;
   }
 }
 
@@ -135,10 +135,10 @@ c-main-footer__copyright-text {
 
 .c-main-footer__bottom {
   border-top: 1px dashed rgba($c-white, 0.5);
-  padding: $space-and-half $space;
+  padding: var(--space-4) var(--space-3);
   text-align: center;
-  margin-left: -$space;
-  margin-right: -$space;
+  margin-left: calc(var(--space-3) * -1);
+  margin-right: calc(var(--space-3) * -1);
 
   @include media(">xlarge") {
     margin-left: 0;
@@ -157,12 +157,12 @@ c-main-footer__copyright-text {
   font-size: var(--font-size-body-3);
 
   @include media("<=large") {
-    margin-top: $space-double;
+    margin-top: var(--space-5);
   }
 }
 
 .c-main-footer__terms-links a {
-  margin: 0 $space;
+  margin: 0 var(--space-3);
   padding: 8px 0;
   color: $c-quaternary;
   @include typeface(subheader, 3);
@@ -170,7 +170,7 @@ c-main-footer__copyright-text {
   font-size: var(--font-size-body-3);
 
   @include media(">large") {
-    margin: 0 $space-double 0 0;
+    margin: 0 var(--space-5) 0 0;
   }
 }
 

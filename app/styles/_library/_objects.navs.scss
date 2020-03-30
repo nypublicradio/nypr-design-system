@@ -50,11 +50,11 @@
   left: 5px;
   display: flex;
   align-items: center;
-  left: $space;
+  left: var(--space-3);
 }
 
 .c-menu-toggle + * {
-  margin-left: $space-double;
+  margin-left: var(--space-5);
 }
 
 /* Side menu is active*/
@@ -82,8 +82,8 @@
 .side-menu-is-active .c-side-menu .c-menu-toggle {
   display: block;
   position: absolute;
-  right: $space-quarter;
-  top: $space-quarter;
+  right: var(--space-1);
+  top: var(--space-1);
   bottom: auto;
   left: auto;
 }
@@ -119,9 +119,9 @@
 }
 .c-primary-nav--top .c-primary-nav__link {
   display: inline-block;
-  padding: 0 $space;
+  padding: 0 var(--space-3);
   color: $c-main-nav-link-color;
-  font-size: $main-nav-font-size + px;
+  font-size: var(--font-size-body-2);
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -133,11 +133,11 @@
  * Primary navigation (side)
  */
 .c-primary-nav--side {
-  padding-top: $space-half;
-  margin-bottom: $space-triple;
+  padding-top: var(--space-2);
+  margin-bottom: var(--space-7);
 }
 .c-primary-nav--side .c-primary-nav__item {
-  margin-top: $space-and-half;
+  margin-top: var(--space-4);
 }
 .c-primary-nav--side .c-primary-nav__link {
   font-size: 28px;
@@ -166,9 +166,9 @@
 }
 .c-nypr-nav__link {
   font-size: 18px;
-  margin-bottom: $space-half;
+  margin-bottom: var(--space-2);
   line-height: 1;
-  padding-bottom: $space-quarter;
+  padding-bottom: var(--space-1);
 }
 
 /**
@@ -193,7 +193,7 @@
   z-index: $z-index-breadcrumb;
 }
 .o-breadcrumb + * {
-  margin-left: $space;
+  margin-left: var(--space-3);
 }
 .o-breadcrumb.o-tag--sponsored {
   margin-left: auto;
@@ -203,20 +203,20 @@
  * Tags navigation
  */
 .o-tags .o-kicker + * {
-  margin-left: $space-half;
+  margin-left: var(--space-2);
 }
 
 /**
  * Read More navigation
  */
 .c-read-more-nav {
-  padding: $space-and-half $space;
+  padding: var(--space-4) var(--space-3);
   text-align: center;
   border-top: 2px dashed $c-gray;
   border-bottom: 2px dashed $c-gray;
 
   @include media("<=medium") {
-    padding: $space-and-half $space-double;
+    padding: var(--space-4) var(--space-5);
   }
 
   @include media(">medium") {
@@ -233,14 +233,14 @@
 }
 .c-read-more-nav__label {
   display: inline-block;
-  margin-right: $space;
+  margin-right: var(--space-3);
 
   @include typeface(subheader, 3);
   font-size: var(--font-size-body-1);
   font-weight: var(--font-weight-body);
 
   @include media("<=medium") {
-    margin-bottom: $space-half;
+    margin-bottom: var(--space-2);
     margin-right: 0;
   }
 }
@@ -253,7 +253,7 @@
 }
 .c-read-more-nav__item {
   display: inline-block;
-  margin-bottom: $space-half;
+  margin-bottom: var(--space-2);
   flex-grow: 1;
   flex-basis: auto;
   position: relative;
@@ -276,6 +276,6 @@
   padding-bottom: 0;
 
   @include media("<=medium") {
-    margin-bottom: $space-half;
+    margin-bottom: var(--space-2);
   }
 }

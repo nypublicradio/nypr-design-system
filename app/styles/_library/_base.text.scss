@@ -25,12 +25,12 @@ b {
  * Blockquote
  */
 blockquote {
-  margin-left: $space-double;
+  margin-left: var(--space-5);
   @include border-accent(bottom, left);
 }
 blockquote p {
-    margin: $space-double 0;
-    padding: $space-half $space-and-half;
+    margin: var(--space-5) 0;
+    padding: var(--space-2) var(--space-4);
   }
 
 /**

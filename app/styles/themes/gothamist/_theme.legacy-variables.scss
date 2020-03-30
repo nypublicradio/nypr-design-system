@@ -6,27 +6,6 @@
   color: red;
 }
 
-
-/**
- * Grid & Baseline Setup
- */
-// Global
-$max-width: 1024;
-$max-width-xl: 1130;
-$heading-height: 72;
-
-// Navigation
-$main-nav-font-size: 18;
-
-// Grid
-$grid-columns: 16;
-$col-width: 48.5;
-$gutter: 18;
-
-// Article
-$article-header-width: 764;
-$article-content-width: 634;
-
 /**
  * Theme Colors
  */
@@ -131,17 +110,3 @@ $border-opacity: 1px solid rgba($c-white, .2);
 $border-style: 1px solid $c-border-color;
 $border-style-m: 2px solid $c-border-color;
 $border-style-thick: 3px solid $c-border-color;
-
-
-/**
- * Default Spacing/Padding
- * Maintain a spacing system divisible by 8
- */
-$space:             16px;
-$space-quarter:     $space/4;   // 4
-$space-half:        $space/2;   // 8
-$space-and-half:    $space*1.5; // 24
-$space-double:      $space*2;   // 32
-$space-double-half: $space*2.5; // 40
-$space-triple:      $space*3;   // 48
-$space-quad:        $space*4;   // 64

@@ -6,7 +6,7 @@
  * Contact/sent tip
  */
 .c-contact-tout {
-  padding: $space-and-half;
+  padding: var(--space-4);
   width: 100%;
 }
 
@@ -14,15 +14,15 @@
  * Donate bar
  */
 .c-donate-tout {
-  padding: $space-double;
+  padding: var(--space-5);
   background-color: $c-quinary;
   position: relative;
   width: 100%;
-  max-width: ($col-width * 14) + ($gutter * 12) + px;
+  max-width: calc((var(--col-width) * 14) + (var(--gutter) * 12));
   margin: 70px 0 0 auto;
   position: fixed;
   z-index: $z-index-donate-tout;
-  right: -#{($col-width * 15) + ($gutter * 13) + px};
+  right: calc(-(var(--col-width) * 15) + (var(--gutter) * 13));
   bottom: 50px;
   transform: translateX(0);
   transition: transform 0.2s $hard-ease-in;
@@ -31,11 +31,12 @@
 
   @include media("<=xlarge") {
     max-width: 270px;
-    right: -#{($col-width * 6) + ($gutter * 4) + px};
+    right: calc(-(var(--col-width) * 6) + (var(--gutter) * 4));
 
     &.is-active {
-      transform: translateX(-#{($col-width * 6) + ($gutter * 5) + px});
+      transform: translateX(calc(-(var(--col-width) * 6) + (var(--gutter) * 5)));
     }
+
   }
 }
 .c-donate-tout:before {
@@ -52,11 +53,11 @@
   }
 }
 .c-donate-tout.is-active {
-  transform: translateX(-#{($col-width * 15) + ($gutter * 13) + $space});
+  transform: translateX(calc(-(var(--col-width) * 15 + var(--gutter * 13) + var(--space-3))));
 }
 .c-donate-tout__inner {
   @include media(">xlarge") {
-    padding: 0 $space 0 100px;
+    padding: 0 var(--space-3) 0 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -65,12 +66,12 @@
 .c-donate-tout__inner p {
   position: relative;
   @include media(">xlarge") {
-    width: calc(65% - #{$space});
+    width: calc(65% - var(--space-3));
   }
 }
 .c-donate-tout__inner .o-button {
   width: 100%;
-  margin-top: $space;
+  margin-top: var(--space-3);
   @include media(">xlarge") {
     margin-top: 0;
     width: 35%;
@@ -82,15 +83,15 @@
   position: relative;
   margin-left: -55px;
   margin-top: -95px;
-  margin-right: $space-half;
+  margin-right: var(--space-2);
   float: left;
 
   @include media(">xlarge") {
     float: none;
     margin: 0;
     position: absolute;
-    left: -$space;
-    top: -$space;
+    left: calc(var(--space-3) * -1);
+    top: calc(var(--space-3) * -1);
   }
 }
 .c-donate-tout__graphic path {
@@ -126,7 +127,7 @@
   max-width: 700px;
 
   @include media(">xlarge") {
-    max-width: ($col-width * 14) + ($gutter * 12) + px;
+    max-width: calc((var(--col-width) * 14) + (var(--gutter) * 12));
   }
 }
 .c-donate-tout--static .c-donate-tout__graphic {
@@ -168,12 +169,12 @@
  */
 .c-sponsored-tout {
   width: 100%;
-  padding: $space-triple $space-quad;
+  padding: var(--space-7) var(--space-9);
   background-color: $c-octonary;
   position: relative;
 
   @include media("<=medium") {
-    padding: $space-triple $space;
+    padding: var(--space-7) var(--space-3);
     width: calc(100vw + 4px);
     left: -2px;
   }
@@ -182,12 +183,12 @@
   @include typeface(header, 5);
   position: absolute;
   top: -0.6em;
-  left: $space-quad;
+  left: var(--space-9);
   background-color: $c-white;
-  padding: 0 $space-half;
+  padding: 0 var(--space-2);
 
   @include media("<=medium") {
-    left: $space;
+    left: var(--space-3);
   }
 }
 .c-sponsored-tout .c-block {
@@ -204,13 +205,13 @@
   width: 100%;
 
   @include media(">small", "<=medium") {
-    margin-bottom: $space;
+    margin-bottom: var(--space-3);
     max-width: 360px;
   }
 
   @include media(">medium") {
     max-width: 328px;
-    margin-right: $space-and-half;
+    margin-right: var(--space-4);
   }
 }
 
@@ -218,13 +219,13 @@
  * Newsletter signup tout
  */
 .c-newsletter-tout {
-  padding: $space-triple $space-quad;
+  padding: var(--space-7) var(--space-9);
   position: relative;
   /* Adjusted vertical spacing because of the 10px shadow border.*/
-  margin-bottom: $space-triple + 10px;
+  margin-bottom: calc(var(--space-7) + 10);
 
   @include media("<=medium") {
-    padding: $space-and-half;
+    padding: var(--space-4);
     margin-left: -2px;
   }
 }
@@ -252,17 +253,17 @@
   }
 }
 .c-newsletter-tout__media {
-  padding: $space;
+  padding: var(--space-3);
 
   @include media(">small", "<=medium") {
     padding: 0;
-    margin-bottom: $space;
+    margin-bottom: var(--space-3);
     max-width: 360px;
   }
 
   @include media(">medium") {
     padding: 0;
-    margin-right: $space-and-half;
+    margin-right: var(--space-4);
   }
 
   @include media(">xlarge") {
@@ -282,6 +283,6 @@
 
 .c-newsletter-tout__text {
   @include media(">medium") {
-    padding-top: $space;
+    padding-top: var(--space-3);
   }
 }

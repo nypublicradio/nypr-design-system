@@ -31,9 +31,9 @@
 .c-toggle-box__content {
   position: absolute;
   width: 100%;
-  right: -$space-half;
-  top: $space-double;
-  padding: $space;
+  right: calc(var(--space-2) * -1);
+  top: var(--space-5);
+  padding: var(--space-3);
   background-color: $c-white;
   opacity: 0;
   z-index: $z-index-vanish;
@@ -88,7 +88,7 @@
 }
 .c-toggle-box--share .c-share-tools__link:nth-child(1),
 .c-toggle-box--share .c-share-tools__link:nth-child(2) {
-  margin-bottom: $space-half;
+  margin-bottom: var(--space-2);
 }
 .c-toggle-box--share .c-share-tools__label {
   font-size: var(--font-size-small-3);
@@ -100,9 +100,9 @@
 .o-progress {
   position: absolute;
   left: 0;
-  bottom: -$space-half;
+  bottom: calc(var(--space-2) * -1);
   width: 100%;
-  height: $space-half;
+  height: var(--space-2);
   appearance: none;
   border: none;
   background-color: $c-gray--light;
@@ -147,7 +147,7 @@
   }
 
   .c-share-tools__group > * + * {
-    margin: 0 0 0 $space-quarter;
+    margin: 0 0 0 var(--space-1);
   }
 }
 
@@ -155,7 +155,7 @@
   font-family: var(--font-family-subheader);
   font-size: var(--font-size-body-1);
 
-  margin-right: $space-half;
+  margin-right: var(--space-2);
 }
 
 .c-share-tools__group {

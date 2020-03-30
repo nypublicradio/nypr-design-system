@@ -14,7 +14,7 @@ ul {
  */
 dl {
   overflow: hidden;
-  margin: 0 0 $space;
+  margin: 0 0 var(--space-3);
 }
 
 dt {
@@ -35,7 +35,7 @@ dd {
 
 .o-list .u-icon {
   display: flex;
-  margin-right: $space/2;
+  margin-right: calc(var(--space-3) / 2);
 }
 
 .o-list .u-icon svg {
@@ -60,7 +60,7 @@ dd {
   border-radius: 3px;
   background-color: $c-black;
   font-weight: bold;
-  margin-right: $space;
+  margin-right: var(--space-3);
   float: left;
 }
 

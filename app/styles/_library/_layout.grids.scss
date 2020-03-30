@@ -5,12 +5,12 @@
 .l-grid {
   display: grid;
   grid-template-rows: auto;
-  grid-column-gap: $space;
-  grid-row-gap: $space;
+  grid-column-gap: var(--space-3);
+  grid-row-gap: var(--space-3);
 
   @include media(">large") {
-    grid-column-gap: $space-and-half;
-    grid-row-gap: $space-and-half;
+    grid-column-gap: var(--space-4);
+    grid-row-gap: var(--space-4);
   }
 }
 
@@ -33,8 +33,8 @@
 }
 
 .l-grid--large-gutters {
-  grid-column-gap: $space * 4;
-  grid-row-gap: $space * 4;
+  grid-column-gap: calc(var(--space-3) * 4);
+  grid-row-gap: calc(var(--space-3) * 4);
 }
 
 .l-grid--2up {
@@ -54,27 +54,27 @@
 .l-grid--2up--flex {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 calc(20px * -1); /* $space*/
+  margin: 0 calc(20px * -1); /* var(--space-3)*/
 
   @include media(">xxlarge") {
-    margin: 0 calc((20px * 1.5) * -1); /* $space*/
+    margin: 0 calc((20px * 1.5) * -1); /* var(--space-3)*/
   }
 }
 
 .l-grid--2up--flex > * {
   width: 100%;
-  padding-left: $space;
-  padding-right: $space;
-  margin-top: $space * 2;
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
+  margin-top: calc(var(--space-3) * 2);
 
   @include media(">small") {
     width: 50%;
   }
 
   @include media(">xxlarge") {
-    padding-left: $space * 1.5;
-    padding-right: $space * 1.5;
-    margin-top: $space * 3;
+    padding-left: calc(var(--space-3) * 1.5);
+    padding-right: calc(var(--space-3) * 1.5);
+    margin-top: calc(var(--space-3) * 3);
   }
 }
 
@@ -86,7 +86,7 @@
 
 @media all and (-ms-high-contrast: none) {
   .l-grid--3up > * {
-    width: calc(33.333% - 40px);
+    width: calc(33.333% - 40);
   }
 }
 
@@ -104,7 +104,7 @@
 
 @media all and (-ms-high-contrast: none) {
   .l-grid--4up > * {
-    width: calc(25% - 40px);
+    width: calc(25% - 40);
   }
 }
 
@@ -122,12 +122,12 @@
 
 @media all and (-ms-high-contrast: none) {
   .l-grid--4up--at-medium > * {
-    width: calc(25% - 40px);
+    width: calc(25% - 40);
   }
 }
 
 .l-grid--5up {
-  grid-row-gap: $space * 2;
+  grid-row-gap: calc(var(--space-3) * 2);
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
 
   @include media(">large") {
@@ -137,6 +137,6 @@
 
 @media all and (-ms-high-contrast: none) {
   .l-grid--5up > * {
-    width: calc(20% - 40px);
+    width: calc(20% - 40);
   }
 }

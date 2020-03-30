@@ -12,7 +12,7 @@ table {
 th {
   text-align: left;
   border: 1px solid transparent;
-  padding: ($space / 2) 0;
+  padding: calc(var(--space-3) / 2) 0;
   text-transform: uppercase;
   vertical-align: top;
   font-weight: bold;
@@ -24,7 +24,7 @@ tr {
 
 td {
   border: 1px solid transparent;
-  padding: $space / 2;
+  padding: calc(var(--space-3) / 2);
 }
 
 .c-table--responsive {
@@ -50,7 +50,7 @@ td {
     tr {
       border-bottom: 3px solid $c-border-color;
       display: block;
-      margin-bottom: $space / 2;
+      margin-bottom: calc(var(--space-3) / 2);
 
       &.this-is-active {
         td:not(:first-child) {
@@ -103,7 +103,7 @@ td {
 
 .c-table--responsive th,
   .c-table--responsive td {
-    padding: $space / 2;
+    padding: calc(var(--space-3) / 2);
   }
 
 .c-table--responsive th {

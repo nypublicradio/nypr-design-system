@@ -3,7 +3,7 @@
 \*------------------------------------*/
 
 .c-card {
-  padding: $space*2 $space $space;
+  padding: calc(var(--space-3) * 2) var(--space-3) var(--space-3);
   border: 1px solid $c-border-color;
   box-shadow: 5px 5px 0 rgba($c-primary, .17);
   background-color: red;

@@ -39,15 +39,15 @@
 
 .c-main-header__inner {
   background-color: $c-heading-bgcolor;
-  padding: $space-half $space-half $space-half $space-double;
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: $heading-height + px;
+  height: var(--heading-height);
   position: relative;
 
   @include media(">xsmall") {
-    padding: $space-half $space-half $space-half $space-double;
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
   }
 }
 
@@ -74,7 +74,7 @@
 }
 
 .c-main-header__donate {
-  margin-right: $space;
+  margin-right: var(--space-3);
 
   @include media("<=small") {
     margin-right: 0;
@@ -82,8 +82,8 @@
 
   @include media("<=medium") {
     font-size: var(--font-size-small-3);
-    padding-left: $space;
-    padding-right: $space;
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
   }
 }
 
@@ -99,10 +99,10 @@
   font-weight: normal;
   line-height: 1.2;
   letter-spacing: 1px;
-  padding: 0 $space-double 0 $space;
+  padding: 0 var(--space-5) 0 var(--space-3);
 
   @include media(">medium") {
-    padding-left: $space-and-half;
+    padding-left: var(--space-4);
     padding-right: 50px;
   }
 
@@ -122,7 +122,7 @@
   width: 170px;
 
   @include media(">xsmall") {
-    margin-right: $space-half;
+    margin-right: var(--space-2);
   }
 
   @include media(">small") {
@@ -144,14 +144,14 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0 $space-half 0 $space-half;
+  padding: 0 var(--space-2) 0 var(--space-2);
 }
 
 .c-main-header__share .c-share-tools__link {
   margin: 0;
 
   @include media("<=small") {
-    width: $space-double;
+    width: var(--space-5);
   }
 }
 
@@ -200,7 +200,7 @@
  */
 .c-floating-header {
   position: fixed;
-  top: -$heading-height - $space-half;
+  top: calc(var(--heading-height) * -1 - var(--space-2));
   left: 0;
   width: 100%;
   z-index: $z-index-floating-header;
@@ -208,7 +208,7 @@
   transition: transform 0.25s $hard-ease-in;
 }
 .c-floating-header.is-visible {
-  transform: translateY(#{$heading-height + $space-half});
+  transform: translateY(calc(var(--heading-height) + var(--space-2)));
 }
 
 .c-search-toggle {
@@ -259,7 +259,7 @@
   left: -100%;
   top: 0;
   z-index: $z-index-side-menu;
-  padding-bottom: $space-double;
+  padding-bottom: var(--space-5);
   transition: transform 0.3s $hard-ease-in;
   overflow: auto;
   height: 100vh;
@@ -281,7 +281,7 @@
   margin-left: 0;
 }
 .c-side-menu__group {
-  padding: $space-and-half;
+  padding: var(--space-4);
 
   @include media(">medium") {
     padding-left: 75px;
@@ -293,14 +293,14 @@
 }
 .c-side-menu__branding {
   width: 180px;
-  margin: $space-half auto $space;
+  margin: var(--space-2) auto var(--space-3);
 }
 .c-side-menu__social .c-share-tools {
   fill: white;
   justify-content: center;
 }
 .c-side-menu__secondary-nav .c-secondary-nav {
-  margin-bottom: $space;
+  margin-bottom: var(--space-3);
 }
 .c-side-menu__secondary-nav .c-secondary-nav__list {
   display: flex;
@@ -309,18 +309,18 @@
   align-items: flex-start;
 }
 .c-side-menu__secondary-nav .c-secondary-nav__item {
-  margin-bottom: $space-and-half;
+  margin-bottom: var(--space-4);
 }
 .c-side-menu__secondary-nav .c-secondary-nav__link {
-  margin: 0 $space;
+  margin: 0 var(--space-3);
 
   @include media(">medium") {
-    margin: 0 $space-and-half;
+    margin: 0 var(--space-4);
   }
 }
 .c-side-menu__donate {
   width: 100%;
-  margin-bottom: $space;
+  margin-bottom: var(--space-3);
 }
 .c-side-menu__donate,
 .c-side-menu .c-side-menu__send-story,
@@ -336,14 +336,14 @@
 }
 .c-side-menu__nypr-logo {
   width: 120px;
-  margin: $space-double auto $space;
+  margin: var(--space-5) auto var(--space-3);
 }
 .c-side-menu__nypr-logo path,
 .c-side-menu__nypr-logo polygon {
   fill: $c-white;
 }
 .c-side-menu .c-nypr-nav__list {
-  width: calc(100% + #{$space-double});
+  width: calc(100% + var(--space-5));
 }
 .c-side-menu__nypr-linkroll .c-toggle-box__label {
   font-size: var(--font-size-small-3);

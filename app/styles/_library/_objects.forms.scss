@@ -74,7 +74,7 @@ div.o-confirm-message p {
 }
 .c-search--top .c-search__close {
   position: absolute;
-  left: $space-half;
+  left: var(--space-2);
   top: 50%;
   width: 24px;
   height: 24px;
@@ -184,7 +184,7 @@ div.o-confirm-message p {
  * Newsletter form
  */
 .c-newsletter-form {
-  padding-left: $space;
+  padding-left: var(--space-3);
   position: relative;
   max-width: 600px;
   margin-left: auto;
@@ -198,8 +198,8 @@ div.o-confirm-message p {
   position: absolute;
   width: 140px;
   mix-blend-mode: difference;
-  top: -$space;
-  left: -$space;
+  top: calc(var(--space-3) * -1);
+  left: calc(var(--space-3) * -1);
 
   @include media(">small") {
     top: -60px;
@@ -224,7 +224,7 @@ div.o-confirm-message p {
 .c-newsletter-form__inner {
   background-color: $c-quinary;
   border: 3px solid $c-border-color;
-  padding: $space-double $space-and-half;
+  padding: var(--space-5) var(--space-4);
 
   @include media(">xlarge") {
     position: relative;
@@ -242,7 +242,7 @@ div.o-confirm-message p {
 }
 .c-newsletter-form__icon {
   vertical-align: text-top;
-  margin-right: $space-half;
+  margin-right: var(--space-2);
 }
 .c-newsletter-form__field-group {
   display: flex;

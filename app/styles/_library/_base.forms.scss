@@ -34,7 +34,7 @@ input[type=email],
 input[type=search],
 input[type=tel] {
   font-size: var(--font-size-body-2);
-  padding: $space;
+  padding: var(--space-3);
   font-family: var(--font-family-small);
   box-shadow: none;
   border-radius: 0;
@@ -105,7 +105,7 @@ select {
   cursor: pointer;
   text-indent: 0.01px;
   text-overflow: "";
-  background: url("../images/icons/icon-arrow-down.svg") center left ($space / 2) no-repeat;
+  background: url("../images/icons/icon-arrow-down.svg") center left calc(var(--space-3) / 2) no-repeat;
   background-size: calc(20px - 5px) calc(20px - 5px);
   padding-left: calc((20px * 2) - 5px);
 }
