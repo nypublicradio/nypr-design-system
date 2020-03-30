@@ -10,6 +10,7 @@ module.exports = {
     '@storybook/addon-a11y/register',
     '@storybook/addon-storysource',
     '@storybook/addon-viewport/register',
+    '@storybook/addon-knobs/register',
     {
       name: '@storybook/addon-docs',
       options: {
