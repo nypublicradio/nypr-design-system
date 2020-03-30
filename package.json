@@ -51,6 +51,7 @@
     "@storybook/addon-docs": "5.3.9",
     "@storybook/addon-links": "5.3.9",
     "@storybook/addon-storysource": "^5.3.17",
+    "@storybook/addon-viewport": "^5.3.17",
     "@storybook/addons": "5.3.9",
     "@storybook/ember": "5.3.9",
     "@types/ember": "^3.0.27",
