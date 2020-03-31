@@ -38,16 +38,64 @@
 /**
  * Grid classes
  */
-@for $i from 1 through $grid-columns {
-  .l-container--#{$i}col {
-    @if $i == 1 {
-      max-width: calc((var(--col-width) * #{$i}) + (var(--gutter) * #{$i}));
-    }
-    @else if $i == 2 {
-      max-width: calc((var(--col-width) * #{$i}) + (var(--gutter) * 1));
-    }
-    @else {
-      max-width: calc((var(--col-width) * #{$i}) + (var(--gutter) * (#{$i} - 2)));
-    }
+@mixin grid-column($column) {
+  @if $column == 1 {
+    max-width: calc((var(--col-width) * #{$column}) + (var(--gutter) * #{$column}));
   }
+  @else if $column == 2 {
+    max-width: calc((var(--col-width) * #{$column}) + (var(--gutter) * 1));
+  }
+  @else {
+    max-width: calc((var(--col-width) * #{$column}) + (var(--gutter) * (#{$column} - 2)));
+  }
+}
+
+// There are 16 columns
+.l-container--1col {
+  @include grid-column(1);
+}
+.l-container--2col {
+  @include grid-column(2);
+}
+.l-container--3col {
+  @include grid-column(3);
+}
+.l-container--4col {
+  @include grid-column(4);
+}
+.l-container--5col {
+  @include grid-column(5);
+}
+.l-container--6col {
+  @include grid-column(6);
+}
+.l-container--7col {
+  @include grid-column(7);
+}
+.l-container--8col {
+  @include grid-column(8);
+}
+.l-container--9col {
+  @include grid-column(9);
+}
+.l-container--10col {
+  @include grid-column(10);
+}
+.l-container--11col {
+  @include grid-column(11);
+}
+.l-container--12col {
+  @include grid-column(12);
+}
+.l-container--13col {
+  @include grid-column(13);
+}
+.l-container--14col {
+  @include grid-column(14);
+}
+.l-container--15col {
+  @include grid-column(15);
+}
+.l-container--16col {
+  @include grid-column(16);
 }
