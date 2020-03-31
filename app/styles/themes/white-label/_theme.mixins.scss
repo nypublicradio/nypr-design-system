@@ -37,7 +37,7 @@
   content: "•";
   display: inline-block;
   margin-right: var(--space-2);
-  margin-left: -var(--space-1);
+  margin-left: calc(var(--space-1) * -1);
   color: $c-gray;
   font-size: $font-size;
   transform: translateY(.08em);

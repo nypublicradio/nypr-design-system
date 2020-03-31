@@ -3,8 +3,6 @@
 \*------------------------------------*/
 
 .c-main-header {
-
-
   &.side-menu-is-active {
     .c-main-header__branding {
       opacity: 0;
@@ -14,7 +12,6 @@
 
 // Header with full stacked logo
 .c-main-header--emphasis {
-
   .c-main-header__ad-unit {
     padding-bottom: var(--space-2);
 
@@ -45,7 +42,7 @@
     }
 
     @include media('>xlarge') {
-      left: calc(col-width + var(--gutter));
+      left: calc(var(--col-width) + var(--gutter));
     }
 
     --xl-container: calc(var(--max-width-xl) + var(--space-5));
