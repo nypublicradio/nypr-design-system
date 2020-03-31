@@ -5,9 +5,11 @@
 /*------------------------------------*\
     $VARIABLES
 \*------------------------------------*/
-/**
- * Grid & Baseline Setup
- */
+@import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Source+Sans+Pro:400,400i,700,700i&display=swap");
+.helloworldgothamist {
+  color: red;
+}
+
 /**
  * Theme Colors
  */
@@ -32,11 +34,6 @@
 /**
  * Border Styles
  */
-/**
- * Default Spacing/Padding
- * Maintain a spacing system divisible by 8
- */
-@import url("https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Source+Sans+Pro:400,400i,700,700i&display=swap");
 :root {
   /** Typography */
   /* Theme typefaces */
@@ -60,38 +57,6 @@
   --line-height-small: 1.4;
   --letter-spacing-small: 1px;
   --font-weight-small: 400;
-  /* Brand Color Pallete */
-  --c-black: #000000;
-  --c-dark-gray: #333333;
-  --c-gray: #afafaf;
-  --c-light-gray: #f3f3f3;
-  --c-white: #ffffff;
-  --c-brick-red: #9c1e14;
-  --c-WNYC-fireengine-red: #de1e3d;
-  --c-reddish-orange: #de5e36;
-  --c-banana-yellow: #ffc400;
-  --c-taxicab-yellow: #e3d54a;
-  --c-dusk-blue: #244c84;
-  --c-brown-grey: #939393;
-  --c-dirty-salmon: #f0eeea;
-  --c-purple: #060507;
-  /* Themable Tokens, Light Colors (Default) */
-  --c-background: var(--c-white);
-  --c-background-muted: var(--c-dirty-salmon);
-  --c-background-highlight: var(--c-taxicab-yellow);
-  --c-text: var(--c-dark-gray);
-  --c-text-muted: var(--c-gray);
-  --c-text-error: var(--c-brick-red);
-  --c-text-hover: var(--c-reddish-orange);
-  --c-accent: var(--c-banana-yellow);
-  --c-accent2: var(--c-dusk-blue);
-  --c-button-donate: var(--c-reddish-orange);
-  --c-button-primary: var(--c-banana-yellow);
-  --c-button-text: var(--c-white);
-  /* Themable Tokens, Borders */
-  --b-border-subtle: 2px dashed var(--c-dirty-salmon);
-  --b-border-normal: 3px solid var(--c-black);
-  --b-border-bold: 5px dashed var(--c-reddish-orange);
   /* Font Levers */
   --font-base: 18px;
   --font-ratio: 1.125;
@@ -165,6 +130,67 @@
   --line-height-subheader-8: 1.15;
   --line-height-subheader-9: 1.10;
   --line-height-subheader-10: 1;
+  /* Spacing predefined values, do not edit */
+  --spacing-base-compact: 4px;
+  --spacing-increment-compact: 4px;
+  --spacing-base-default: 8px;
+  --spacing-increment-default: 8px;
+  --spacing-base-loose: 16px;
+  --spacing-increment-loose: 10px;
+  /* Spacing Levers, set these using the predefined values above */
+  --spacing-base: var(--spacing-base-default);
+  --spacing-increment: var(--spacing-increment-default);
+  /* Spacing Scale, use these tokens in your styles */
+  --space-1: calc(var(--spacing-base) / 2);
+  --space-2: var(--spacing-base);
+  --space-3: calc(var(--space-2) + var(--spacing-increment));
+  --space-4: calc(var(--space-3) + var(--spacing-increment));
+  --space-5: calc(var(--space-4) + var(--spacing-increment));
+  --space-6: calc(var(--space-5) + var(--spacing-increment));
+  --space-7: calc(var(--space-6) + var(--spacing-increment));
+  --space-8: calc(var(--space-7) + var(--spacing-increment));
+  --space-9: calc(var(--space-8) + var(--spacing-increment));
+  --space-10: calc(var(--space-9) + var(--spacing-increment));
+  --space-11: calc(var(--space-10) + var(--spacing-increment));
+  /* Layout */
+  --max-width: 1024px;
+  --max-width-xl: 1130px;
+  --heading-height: 72px;
+  --col-width: 48.5px;
+  --gutter: 18px;
+  --article-content-width: 634px;
+  /* Brand Color Pallete */
+  --c-black: #000000;
+  --c-dark-gray: #333333;
+  --c-gray: #afafaf;
+  --c-light-gray: #f3f3f3;
+  --c-white: #ffffff;
+  --c-brick-red: #9c1e14;
+  --c-WNYC-fireengine-red: #de1e3d;
+  --c-reddish-orange: #de5e36;
+  --c-banana-yellow: #ffc400;
+  --c-taxicab-yellow: #e3d54a;
+  --c-dusk-blue: #244c84;
+  --c-brown-grey: #939393;
+  --c-dirty-salmon: #f0eeea;
+  --c-purple: #060507;
+  /* Themable Tokens, Light Colors (Default) */
+  --c-background: var(--c-white);
+  --c-background-muted: var(--c-dirty-salmon);
+  --c-background-highlight: var(--c-taxicab-yellow);
+  --c-text: var(--c-dark-gray);
+  --c-text-muted: var(--c-gray);
+  --c-text-error: var(--c-brick-red);
+  --c-text-hover: var(--c-reddish-orange);
+  --c-accent: var(--c-banana-yellow);
+  --c-accent2: var(--c-dusk-blue);
+  --c-button-donate: var(--c-reddish-orange);
+  --c-button-primary: var(--c-banana-yellow);
+  --c-button-text: var(--c-white);
+  /* Themable Tokens, Borders */
+  --b-border-subtle: 2px dashed var(--c-dirty-salmon);
+  --b-border-normal: 3px solid var(--c-black);
+  --b-border-bold: 5px dashed var(--c-reddish-orange);
 }
 
 /* ------------------------------------*\
@@ -2881,7 +2907,7 @@ hr.u-border-accent {
   content: "•";
   display: inline-block;
   margin-right: var(--space-2);
-  margin-left: -var(--space-1);
+  margin-left: calc(var(--space-1) * -1);
   color: #afafaf;
   font-size: 18px;
   transform: translateY(0.08em);
@@ -3040,7 +3066,7 @@ hr.u-border-accent {
     content: "•";
     display: inline-block;
     margin-right: var(--space-2);
-    margin-left: -var(--space-1);
+    margin-left: calc(var(--space-1) * -1);
     color: #afafaf;
     font-size: 24px;
     transform: translateY(0.08em);
@@ -7896,7 +7922,7 @@ c-main-footer__copyright-text {
 @media (min-width: 1025px) {
   .c-main-header--emphasis:not(.out-of-viewport) .c-main-header__branding {
     /* Recursive call*/
-    left: calc(col-width + var(--gutter));
+    left: calc(var(--col-width) + var(--gutter));
   }
 }
 @media (min-width: 1201px) {

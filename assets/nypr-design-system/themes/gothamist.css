@@ -138,8 +138,8 @@
   --spacing-base-loose: 16px;
   --spacing-increment-loose: 10px;
   /* Spacing Levers, set these using the predefined values above */
-  --spacing-base: var(--spacing-base-loose);
-  --spacing-increment: var(--spacing-increment-loose);
+  --spacing-base: var(--spacing-base-default);
+  --spacing-increment: var(--spacing-increment-default);
   /* Spacing Scale, use these tokens in your styles */
   --space-1: calc(var(--spacing-base) / 2);
   --space-2: var(--spacing-base);
