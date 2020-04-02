@@ -7,33 +7,33 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ## Overview
 
-Brand bars serve as the primary navigation for web properties. They’re always top aligned, they’re always navigation focused, they’re always on brand. #onbrand
+Brand bars serve as the primary navigation for NYPR web properties. They are always top aligned, they are always navigation focused, they are always on brand. #onbrand
 
 ## What’s Inside
 
-Our whitelable Brand Bar component includes a hamburger menu, placeholders for branding, primary navigation, social links, a primary CTA, and a progress bar for articles pages.
+Our whitelable Brand Bar component includes a hamburger menu, placeholders for branding, primary navigation, social links, a primary CTA, a search icon and form field, and a progress bar for article pages. These items are optional to be turned on or off based on the page experience and content.
 
   
 <img alt="brandbar anatomy" src="./images/Organisms-BrandBar-Anatomy.png" width="800" />
 
 
-1. 1- Hamburger Menu - If a site supports side menus, hamburgers are used to trigger their entry. More typically seen on mobile where navigation items are shifted from brand bar to side menu.
+1. 1 - Hamburger Menu - If a site supports sidebar menus, the hamburger navigation is used to launch the menu. More typically seen on mobile where navigation items are shifted from brand bar to side menu.
 
-2. 2- Brand Placeholder - Placeholder for logo of respective brand.
+2. 2- Brand Placeholder - Placeholder for logo of respective site/brand.
 
-3. 3- Primary Links - Top level links to larger areas of a site’s domain
+3. 3- Primary Links - Top level links to larger areas of a site’s domain.
 
-4. 4- Social Icons - Links off to a brands social media accounts
+4. 4- Social Icons - Link off to a brand's social media accounts. On an article page, these can be replaced with "Share" functionality.
 
 5. 5- Primary CTA - Used most times for donate call-to-actions.
 
-6. 6- Search - Icon that launches a text-field on click. This action hides all items on the right side of the brand bar to make visual space for the search field.
+6. 6- Search - Icon that launches a form field on click. This action hides all items on the right side of the brand bar to make visual space for the search field.
 
   
 
 ## States
 
-Depending on the platform, a brand bar can have a number of configurations (states). In Gothamist, our brand bar swaps it’s primary navigation for a headline when on an article page. When the search state is active, neighboring components hide themselves to make room. Configuration options are built-in to our whitelabel component and will expand as we incorporate more brands into Radial. See possible configurations below.
+Depending on the platform, a brand bar can have a number of configurations (states). In Gothamist, the brand bar swaps its primary navigation for the article headline and share tools when on an article page. When the search state is active, neighboring components hide themselves to make room for the added field. Configuration options are built into our whitelabel component and will expand as we incorporate more brands into Radial. See possible configurations below.
 
 <img alt="brandbar Configurations" src="./images/Organisms-BrandBar-Configurations.png" width="800" />
 
@@ -46,6 +46,6 @@ By default, Brand Bars are sticky, keeping the component accessible from anywher
 
 ## Mobile
 
-On mobile, brand bars can hide the majority of their components to fit the narrow screen. In these cases, a Side Menu can be triggered via a hamburger menu or similar icon to show primary and secondary navigation. In our whitelabel bar, only the hambuger menu, branding, and primary CTA are shown at a mobile width. 
+On mobile, the majority of components in the brand bar will be hidden as to fit the smaller screensoze. In these cases, a Side Menu can be triggered via a hamburger menu or similar icon to show primary and secondary navigation items. In the whitelabel, only the hambuger menu, branding, and primary CTA are shown at a mobile width. 
 
 <img alt="brandbar on mobile" src="./images/Organisms-BrandBar-Mobile.png" width="275" />
