@@ -9,7 +9,8 @@ module.exports = {
   ],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended'
+    'plugin:ember/recommended',
+    'plugin:react/recommended'
   ],
   env: {
     browser: true
@@ -44,7 +45,7 @@ module.exports = {
         browser: false,
         node: true
       },
-      plugins: ['node'],
+      plugins: ['node', 'react'],
       rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
         // add your custom rules and overrides for node files here
       })

@@ -8,6 +8,6 @@
 
   @include media("<medium") {
     line-height: var(--line-height-#{$type}-#{$size - 2});
-    font-size: var(--font-size-#{$type}-#{$size - 2});    
+    font-size: var(--font-size-#{$type}-#{$size - 2});
   }
 }
