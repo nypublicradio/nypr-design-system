@@ -39,7 +39,7 @@ blockquote p {
 hr {
   height: 1px;
   border: none;
-  background-color: $c-border-color;
+  background-color: var(--color-border-bold);
   margin: 0 auto;
 }
 

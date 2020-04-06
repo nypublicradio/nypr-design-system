@@ -54,7 +54,7 @@ input[type=checkbox] {
   cursor: pointer;
   display: block;
   float: left;
-  border: 2px solid $c-border-color;
+  border: 2px solid var(--color-border-bold);
   padding: 0;
   user-select: none;
   appearance: none;
@@ -115,7 +115,7 @@ select::-ms-expand {
   }
 
 ::placeholder {
-  color: $c-brown-grey;
+  color: var(--color-brown-grey);
   font-family: var(--font-family-small);
 }
 
@@ -126,5 +126,5 @@ form .o-button:before {
     }
 form .o-button:hover {
       transform: none;
-      background-color: $c-primary;
+      background-color: var(--color-primary2);
     }

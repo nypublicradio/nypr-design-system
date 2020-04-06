@@ -4,7 +4,7 @@
 
 a {
   text-decoration: none;
-  color: $c-link-color;
+  color: var(--color-text-error);
   transition: all 0.15s ease-in-out;
 }
 
@@ -16,49 +16,49 @@ a > span {
 .o-rte-text .u-has-accent {
   display: inline-block;
   padding-bottom: 2px;
-  border-bottom: 2px dotted $c-body-color;
+  border-bottom: 2px dotted var(--color-border-bold);
   box-decoration-break: clone;
 }
 
 .u-has-accent:hover,
 .o-rte-text .u-has-accent:hover {
-  color: $c-white;
-  background-color: $c-primary;
+  color: var(--color-background);
+  background-color: var(--color-primary2);
 }
 
 .u-has-accent--neutral,
 .o-rte-text .u-has-accent--neutral {
-  color: $c-body-color;
-  border-bottom-color: $c-body-color;
+  color: var(--color-border-bold);
+  border-bottom-color: var(--color-border-bold);
 }
 
 .u-has-accent--primary,
 .o-rte-text .u-has-accent--primary {
-  color: $c-primary;
-  border-bottom-color: $c-primary;
+  color: var(--color-primary2);
+  border-bottom-color: var(--color-primary2);
 }
 
 .u-has-accent--quaternary,
 .o-rte-text .u-has-accent--quaternary {
-  color: $c-quaternary;
-  border-bottom-color: $c-quaternary;
+  color: var(--color-primary1);
+  border-bottom-color: var(--color-primary1);
 }
 
 .u-has-accent--white,
 .o-rte-text .u-has-accent--white {
-  color: $c-white;
-  border-bottom-color: $c-white;
+  color: var(--color-background);
+  border-bottom-color: var(--color-background);
 }
 
 .u-has-accent--secondary,
 .o-rte-text .u-has-accent--secondary {
-  color: $c-secondary;
-  border-bottom-color: $c-secondary;
+  color: var(--color-text-error);
+  border-bottom-color: var(--color-text-error);
 }
 
 .u-has-accent--secondary:hover path,
 .o-rte-text .u-has-accent--secondary:hover path {
-  fill: $c-white;
+  fill: var(--color-background);
 }
 
 .u-has-accent-inline {
