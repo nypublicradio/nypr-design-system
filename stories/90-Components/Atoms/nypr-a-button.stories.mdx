@@ -10,6 +10,52 @@ const component = 'nypr-a-button';
 
 <Description of={component} />
 
+Buttons are used to trigger actions by clicking or tapping them. They are one of the main components used to control and affect an interface. Without buttons, well, hyperlinks would still be king, and that’d be hell.
+
+### Usage
+
+Use buttons for primary actions on a page (Edit, Add, Save, Engage Time Warp, etc.) Don’t use buttons as navigational elements, use links.
+
+  
+
+### Labels & Icons
+
+Buttons need labels like tires need air. A label is text inside a button that clearly and succinctly indicates the result of clicking that button. A blue button that has the label “Preserve a copy for later retrieval” is all good and dandy but should probably just read “Save”.
+
+Icons can also be used alongside labels to convey more meaning and add visual flair. In some cases (especially in dense or small UI containers) icons can stand on their own, but should be limited to universal functions (i.e. Add, Play, Delete). 
+
+  
+
+### Variations
+
+Radial offers four classes of button spanning a range of hierarchy from bold to subtle.
+
+Primary buttons are reserved for the primary or most important action on a page. And no, every action can’t be the most important action.
+
+Secondary buttons are  used for secondary actions on screens. Styles for secondary buttons can vary from brand to brand, but they must be less visually engaging then a primary. The common style for this is an outlined button.
+
+To the untrained eye, flat buttons might look like links. But, because they are buttons, and buttons are always linked to actions, flat buttons are reserved for tertiary, less important, actions (i.e. Cancel, Show Details, Hide).
+
+What’s a primary button with an icon, but no label? It’s an icon button. You’ll see these a lot in our audio experiences. Use only when an icon's meaning is unambiguous.
+
+### States
+
+Buttons in our system have four base states: Default (also called Active), Hover, Pressed, Disabled. Unless a brand has a specific set of colors for Hover and Disabled, use opacity to show state change.
+  
+
+### Sizing
+
+Choose buttons sizes according to their parent container and desired visibility. You’ve got four options to choose from. Medium is our default, but there’s also Small, and Large. Buttons sizes affect their icon size, text size, and internal padding.
+
+  
+
+### Accessibility
+
+Button text and background color must meet the WCAG 2.0 contrast standards, requiring a minimum contrast ratio of 3.0.
+
+Icons buttons must contain a label clearly describing the purpose of the control.
+
+
 <Preview>
   <Story name="all" height="80px">{{
     template: hbs`
