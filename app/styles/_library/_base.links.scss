@@ -4,7 +4,7 @@
 
 a {
   text-decoration: none;
-  color: var(--color-text-error);
+  color: rgb(var(--color-text-error));
   transition: all 0.15s ease-in-out;
 }
 
@@ -16,49 +16,49 @@ a > span {
 .o-rte-text .u-has-accent {
   display: inline-block;
   padding-bottom: 2px;
-  border-bottom: 2px dotted var(--color-border-bold);
+  border-bottom: 2px dotted rgb(var(--color-border-bold));
   box-decoration-break: clone;
 }
 
 .u-has-accent:hover,
 .o-rte-text .u-has-accent:hover {
-  color: var(--color-background);
-  background-color: var(--color-primary2);
+  color: rgb(var(--color-background));
+  background-color: rgb(var(--color-primary-2));
 }
 
 .u-has-accent--neutral,
 .o-rte-text .u-has-accent--neutral {
-  color: var(--color-border-bold);
-  border-bottom-color: var(--color-border-bold);
+  color: rgb(var(--color-border-bold));
+  border-bottom-color: rgb(var(--color-border-bold));
 }
 
 .u-has-accent--primary,
 .o-rte-text .u-has-accent--primary {
-  color: var(--color-primary2);
-  border-bottom-color: var(--color-primary2);
+  color: rgb(var(--color-primary-2));
+  border-bottom-color: rgb(var(--color-primary-2));
 }
 
 .u-has-accent--quaternary,
 .o-rte-text .u-has-accent--quaternary {
-  color: var(--color-primary1);
-  border-bottom-color: var(--color-primary1);
+  color: rgb(var(--color-primary-1));
+  border-bottom-color: rgb(var(--color-primary-1));
 }
 
 .u-has-accent--white,
 .o-rte-text .u-has-accent--white {
-  color: var(--color-background);
-  border-bottom-color: var(--color-background);
+  color: rgb(var(--color-background));
+  border-bottom-color: rgb(var(--color-background));
 }
 
 .u-has-accent--secondary,
 .o-rte-text .u-has-accent--secondary {
-  color: var(--color-text-error);
-  border-bottom-color: var(--color-text-error);
+  color: rgb(var(--color-text-error));
+  border-bottom-color: rgb(var(--color-text-error));
 }
 
 .u-has-accent--secondary:hover path,
 .o-rte-text .u-has-accent--secondary:hover path {
-  fill: var(--color-background);
+  fill: rgb(var(--color-background));
 }
 
 .u-has-accent-inline {

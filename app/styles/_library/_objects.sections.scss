@@ -136,14 +136,14 @@
  * Featured block groups
  */
 .c-featured-blocks {
-  border-top: 3px solid $c-black;
-  border-bottom: 3px solid $c-black;
+  border-top: var(--b-border-normal); //no rgb bc px and solid included
+  border-bottom: var(--b-border-normal);
   position: relative;
 
   @include media(">medium") {
     /* Adjusted vertical spacing because of the bottom content break through.*/
     margin-bottom: 120px;
-    border: 3px solid $c-black;
+    border: var(--b-border-normal);
   }
 }
 .c-featured-blocks__heading {
@@ -151,7 +151,7 @@
   top: -0.6em;
   @include typeface(header, 5);
   right: var(--space-9);
-  background-color: $c-white;
+  background-color: rgb(var(--color-background));
   padding: 0 var(--space-2);
 }
 .c-featured-blocks__heading--wnyc {
@@ -190,7 +190,7 @@
 }
 .c-featured-blocks__col1 {
   margin-bottom: var(--space-5);
-  background-color: $c-white;
+  background-color: rgb(var(--color-background));
 
   @include media(">medium") {
     max-width: 620px;
@@ -239,7 +239,7 @@
  */
 .c-section__header {
   padding: var(--space-5) var(--space-3);
-  background-color: $c-quaternary;
+  background-color: rgb(var(--color-primary-1));
   text-align: center;
   margin-bottom: var(--space-5);
 
@@ -265,12 +265,12 @@
  */
 .c-tag-listing__heading {
   @include typeface(header, 4);
-  background-color: $c-senary;
+  background-color: rgb(var(--color-background-highlight)); //dark
   display: inline-block;
   font-weight: normal;
   padding: var(--space-2) var(--space-3);
   margin: var(--space-2) 0;
-  color: $c-white;
+  color: rgb(var(--color-text));
 
   @include media(">medium") {
     @include typeface(header, 8);
@@ -282,7 +282,7 @@
  */
 .c-search-results__header {
   padding-top: var(--space-3);
-  border-bottom: 3px solid $c-black;
+  border-bottom: var(--b-border-normal);
 }
 .c-search-results__header--no-border {
   border-bottom: none;
@@ -311,7 +311,7 @@
 }
 .c-search-results__form .c-search__button:hover {
   background-color: transparent;
-  fill: $c-primary;
+  fill: rgb(var(--color-primary-2));
 }
 .c-search-results__form .c-search__icon {
   width: $icon-small;

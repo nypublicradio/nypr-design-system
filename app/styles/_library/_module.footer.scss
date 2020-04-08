@@ -4,7 +4,7 @@
 
 .c-main-footer {
   padding: var(--space-5) 0;
-  background-image: linear-gradient(to bottom, white 0, $c-dark-bg 0%);
+  background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
   background-position: 100% 142px;
   background-repeat: repeat-x;
 }
@@ -51,7 +51,7 @@
 
 .c-main-footer__send-story {
   display: inline-block;
-  color: $c-body-color;
+  color: rgb(var(--color-background));
   padding: var(--space-3) 0;
   margin-bottom: var(--space-3);
   @include typeface(small, 3);
@@ -65,7 +65,7 @@
 }
 
 .c-main-footer__slogan p {
-  color: $c-white;
+  color: rgb(var(--color-text));
   font-size: var(--font-size-small-4); /* Not in the type scale*/
 }
 
@@ -114,7 +114,7 @@ c-main-footer__copyright-text {
 
 .c-main-footer__nypr-logo path,
 .c-main-footer__nypr-logo polygon {
-  fill: $c-white;
+  fill: rgb(var(--color-text));
 }
 
 .c-main-footer__brand-group {
@@ -134,7 +134,7 @@ c-main-footer__copyright-text {
 }
 
 .c-main-footer__bottom {
-  border-top: 1px dashed rgba($c-white, 0.5);
+  border-top: 1px dashed rgba(var(--color-border-standard), 0.5);
   padding: var(--space-4) var(--space-3);
   text-align: center;
   margin-left: calc(var(--space-3) * -1);
@@ -164,7 +164,7 @@ c-main-footer__copyright-text {
 .c-main-footer__terms-links a {
   margin: 0 var(--space-3);
   padding: 8px 0;
-  color: $c-quaternary;
+  color: rgb(var(--color-primary-1));
   @include typeface(subheader, 3);
   font-weight: normal;
   font-size: var(--font-size-body-3);
@@ -175,6 +175,6 @@ c-main-footer__copyright-text {
 }
 
 .c-main-footer__terms-links a:hover {
-  background-color: $c-primary;
-  color: $c-white;
+  background-color: rgb(var(--color-primary-2));
+  color: rgb(var(--color-link-hover-2));
 }

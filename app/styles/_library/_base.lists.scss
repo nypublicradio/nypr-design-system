@@ -55,7 +55,7 @@ dd {
   content: counter(item);
   counter-increment: item;
 
-  color: var(--color-background);
+  color: rgb(var(--color-background));
   padding: 10px 15px;
   border-radius: 3px;
   background-color: $c-black;

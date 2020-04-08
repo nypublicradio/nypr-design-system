@@ -17,7 +17,7 @@ input[type="submit"] {
   align-items: center;
   padding: 20px var(--space-4) 18px;
   line-height: 22px;
-  color: $c-white;
+  color: rgb(var(--color-background));
   cursor: pointer;
   transition: all 0.3s $hard-ease-in;
   font-family: var(--font-family-small);
@@ -27,7 +27,7 @@ input[type="submit"] {
   font-weight: bold;
   letter-spacing: 2px;
   text-align: center;
-  background-color: $c-primary;
+  background-color: rgb(var(--color-primary-2));
   position: relative;
 
   @include media(">small") {
@@ -44,7 +44,7 @@ input[type="submit"] {
   z-index: $z-index-button-outline;
   width: 100%;
   height: 100%;
-  border: 3px solid $c-primary;
+  border: 3px solid rgb(var(--color-primary-2));
   transform: translate(0, 0);
   transition: all 0.3s $hard-ease-in;
 }
@@ -60,12 +60,12 @@ input[type="submit"] {
 /* Types/Styles*/
 
 .o-button--c-quaternary {
-  color: $c-body-color;
-  background-color: $c-quaternary;
+  color: rgb(var(color-text-metadata));
+  background-color: rgb(var(--color-button-1));
 }
 
 .o-button--c-quaternary:before {
-  border-color: $c-quaternary;
+  border-color: rgb(var(--color-button-1));
 }
 
 /* Sizes*/

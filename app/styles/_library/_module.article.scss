@@ -27,7 +27,7 @@
 .c-article__body a:hover,
 .c-article__body .u-has-accent:hover,
 .c-article__footer .o-rte-text a:hover {
-  text-decoration-color: $c-link-color;
+  text-decoration-color: rgb(var(--color-text-error));
 }
 
 .c-article__header {

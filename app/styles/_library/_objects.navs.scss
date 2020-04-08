@@ -14,7 +14,7 @@
 .o-menu-toggle__line:before,
 .o-menu-toggle__line:after {
   position: absolute;
-  background-color: $c-white;
+  background-color: rgb(var(--color-background)); //this whole file dark ? pulled from light for now. 
   height: 2px;
   display: block;
   left: 50%;
@@ -37,7 +37,7 @@
   .o-menu-toggle:hover .o-menu-toggle__line,
   .o-menu-toggle:hover .o-menu-toggle__line:before,
   .o-menu-toggle:hover .o-menu-toggle__line:after {
-    background-color: $c-primary;
+    background-color: rgb(var(--color-primary-2));
     transition: background-color 0.2s ease-out;
   }
 }
@@ -74,7 +74,7 @@
 .side-menu-is-active:hover .o-menu-toggle__line,
 .side-menu-is-active:hover .o-menu-toggle__line:before,
 .side-menu-is-active:hover .o-menu-toggle__line:after {
-  background-color: $c-white;
+  background-color: rgb(var(--color-background));
 }
 .side-menu-is-active .c-menu-toggle {
   display: none;
@@ -107,7 +107,7 @@
   display: block;
   width: 2px;
   height: 16.5px;
-  background-color: $c-white;
+  background-color: rgb(var(--color-background));
   position: absolute;
   top: 0;
   bottom: 0;
@@ -120,13 +120,13 @@
 .c-primary-nav--top .c-primary-nav__link {
   display: inline-block;
   padding: 0 var(--space-3);
-  color: $c-main-nav-link-color;
+  color: rgb(var(--color-link-hover-2));
   font-size: var(--font-size-body-2);
   font-weight: bold;
   letter-spacing: 1px;
 }
 .c-primary-nav--top .c-primary-nav__link:hover {
-  color: $c-primary;
+  color: rgb(var(--color-primary-2));
 }
 
 /**
@@ -212,8 +212,8 @@
 .c-read-more-nav {
   padding: var(--space-4) var(--space-3);
   text-align: center;
-  border-top: 2px dashed $c-gray;
-  border-bottom: 2px dashed $c-gray;
+  border-top: 2px dashed rgb(var(--color-border-standard));
+  border-bottom: 2px dashed rgb(var(--color-border-standard));
 
   @include media("<=medium") {
     padding: var(--space-4) var(--space-5);
@@ -224,7 +224,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    border: 2px dashed $c-gray;
+    border: 2px dashed rgb(var(--color-border-standard));;
   }
 }
 .c-read-more-nav__wrap {
@@ -262,7 +262,7 @@
 .c-read-more-nav__item:before {
   content: "";
   position: absolute;
-  background-color: $c-gray;
+  background-color: rgb(var(--color-text-muted));
   left: 0;
   top: calc(50% - 2px);
   width: 3px;

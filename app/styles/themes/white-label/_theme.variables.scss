@@ -188,7 +188,7 @@
 /*Dark and Light Groups */
 .u-color-group-dark {
   --color-background:           var(--color-gray-dark);
-  --color-background-muted:     var(--color-background); //not assigned
+  --color-background-muted:     rgb(var(--color-background)); //not assigned
   --color-background-highlight: var(--color-ceramic-blue);
   --color-text:                 var(--color-white);
   --color-text-muted:           var(--color-concrete);

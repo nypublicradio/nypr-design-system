@@ -15,7 +15,7 @@
  */
 .c-donate-tout {
   padding: var(--space-5);
-  background-color: $c-quinary;
+  background-color: rgb(var(--color-background-highlight));
   position: relative;
   width: 100%;
   max-width: calc((var(--col-width) * 14) + (var(--gutter) * 12));
@@ -26,8 +26,8 @@
   bottom: 50px;
   transform: translateX(0);
   transition: transform 0.2s $hard-ease-in;
-  box-shadow: 0 0 10px rgba($c-black, 0.2);
-  border: 3px solid $c-black;
+  box-shadow: 0 0 10px rgba($c-black, 0.2); //no black
+  border: var(--b-border-normal);
 
   @include media("<=xlarge") {
     max-width: 270px;
@@ -42,7 +42,7 @@
 .c-donate-tout:before {
   content: "";
   position: absolute;
-  background-color: $c-quinary;
+  background-color: rgb(var(--color-background-highlight));
   left: -3px;
   top: -3px;
   width: 120px;
@@ -95,7 +95,7 @@
   }
 }
 .c-donate-tout__graphic path {
-  fill: $c-senary;
+  fill: rgb(var(--color-background-highlight)); //dark
 }
 .c-donate-tout__close {
   position: absolute;
@@ -147,7 +147,7 @@
 .c-donate-tout--static .c-donate-tout__graphic:before {
   content: "";
   position: absolute;
-  background-color: $c-quinary;
+  background-color: rgb(var(--color-background-highlight));
   left: -3px;
   top: 70px;
   width: 120px;
@@ -170,7 +170,7 @@
 .c-sponsored-tout {
   width: 100%;
   padding: var(--space-7) var(--space-9);
-  background-color: $c-octonary;
+  background-color: rgb(var(--color-background-muted)); //light
   position: relative;
 
   @include media("<=medium") {
@@ -184,7 +184,7 @@
   position: absolute;
   top: -0.6em;
   left: var(--space-9);
-  background-color: $c-white;
+  background-color: rgb(var(--color-background));
   padding: 0 var(--space-2);
 
   @include media("<=medium") {
@@ -198,8 +198,8 @@
   }
 }
 .c-sponsored-tout .o-kicker {
-  background-color: $c-sponsor-color;
-  color: $c-white;
+  background-color: rgb(var(--color-primary-3));
+  color: rgb(var(--color-background));
 }
 .c-sponsored-tout .c-block__media {
   width: 100%;
@@ -234,7 +234,7 @@
   position: absolute;
   left: -10px;
   top: 11px;
-  border: 3px solid $c-dark-bg;
+  border: 3px solid rgb(var(--color-border-standard));
   width: 100%;
   height: 100%;
   z-index: 0;

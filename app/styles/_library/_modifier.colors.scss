@@ -100,7 +100,7 @@
   fill: $c-gray;
 }
 
-.u-path-fill--white * {
+.u-path-fill--white * { //nyprds gallery overlay
   fill: $c-white;
 }
 
@@ -112,6 +112,6 @@
   fill: $c-secondary;
 }
 
-.u-path-fill--quaternary * {
+.u-path-fill--quaternary * { //used in gothamist
   fill: $c-quaternary;
 }

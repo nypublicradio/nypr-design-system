@@ -34,7 +34,7 @@
   right: calc(var(--space-2) * -1);
   top: var(--space-5);
   padding: var(--space-3);
-  background-color: $c-white;
+  background-color: rgb(var(--color-background));
   opacity: 0;
   z-index: $z-index-vanish;
   transform: scale(0.85);
@@ -48,7 +48,7 @@
   }
 }
 .c-toggle-box .c-toggle-box__label {
-  color: $c-white;
+  color: rgb(var(--color-background));
 }
 .c-toggle-box .o-icon--caret path {
   fill: $c-white;
@@ -106,17 +106,17 @@
   appearance: none;
   border: none;
   background-color: $c-gray--light;
-  color: $c-quaternary;
+  color: rgb(var(--color-primary-1));
   z-index: $z-index-progress-bar;
 }
 .o-progress::-webkit-progress-bar {
   background-color: $c-gray--light;
 }
 .o-progress::-webkit-progress-value {
-  background-color: $c-quaternary;
+  background-color: rgb(var(--color-primary-1));
 }
 .o-progress::-moz-progress-bar {
-  background-color: $c-quaternary;
+  background-color: rgb(var(--color-primary-1));
 }
 
 .c-share-tools {
@@ -179,7 +179,7 @@
 }
 
 .c-share-tools__link:hover path {
-  fill: $c-primary;
+  fill: rgb(var(--color-primary-2));
 }
 
 .c-share-tools--vertical .c-share-tools__group {
@@ -194,7 +194,7 @@
 .c-share-tools--vertical .c-share-tools__link--print {
   @include media(">medium") {
     margin-bottom: 10px;
-    background-image: linear-gradient(to right, transparent 50%, $c-gray 50%);
+    background-image: linear-gradient(to right, transparent 50%, rgb(var(--color-text-muted)) 50%);
     background-position: center top;
     background-size: 16px 1px;
     background-repeat: repeat-x;

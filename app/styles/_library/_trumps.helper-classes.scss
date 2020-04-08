@@ -31,15 +31,15 @@
  * Reversed out content
  */
 .u-reversed-out {
-  background-color: $c-dark-bg;
+  background-color: rgb(var(--color-background)); //dark 
   @include reversed-out-text;
 }
 .u-reversed-out:after {
-    background-color: $c-dark-bg;
+    background-color: rgb(var(--color-background));
   }
 .u-reversed-out input[type=radio]:checked,
   .u-reversed-out input[type=checkbox]:checked {
-    border-color: rgba($c-gray, .3);
+    border-color: rgba(var(--color-border-subtle), .3);
   }
 
 .u-align-center {

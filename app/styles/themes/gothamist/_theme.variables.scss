@@ -142,20 +142,23 @@
   // Article
   --article-content-width: 634px;
 
+  @function hex2rgb($hexColor) {
+    @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
+  }
   /* Brand Color Pallete */
-  --color-black:               #000000;
-  --color-dark-gray:           #333333;
-  --color-gray:                #afafaf;
-  --color-light-gray:          #f3f3f3;
-  --color-white:               #ffffff;
-  --color-brick-red:           #9c1e14;
-  --color-reddish-orange:      #de5e36;
-  --color-banana-yellow:       #ffc400;
-  --color-taxicab-yellow:      #e3d54a;
-  --color-dusk-blue:           #244c84;
-  --color-brown-grey:          #939393;
-  --color-dirty-salmon:        #f0eeea;
-  --color-purple:              #060507;
+  --color-black:               #{hex2rgb(#000000)};
+  --color-dark-gray:           #{hex2rgb(#333333)};
+  --color-gray:                #{hex2rgb(#afafaf)};
+  --color-light-gray:          #{hex2rgb(#f3f3f3)};
+  --color-white:               #{hex2rgb(#ffffff)};
+  --color-brick-red:           #{hex2rgb(#9c1e14)};
+  --color-reddish-orange:      #{hex2rgb(#de5e36)};
+  --color-banana-yellow:       #{hex2rgb(#ffc400)};
+  --color-taxicab-yellow:      #{hex2rgb(#e3d54a)};
+  --color-dusk-blue:           #{hex2rgb(#244c84)};
+  --color-brown-grey:          #{hex2rgb(#939393)};
+  --color-dirty-salmon:        #{hex2rgb(#f0eeea)};
+  --color-purple:              #{hex2rgb(#060507)};
 
   --color-background:           var(--color-white);
   --color-background-muted:     var(--color-dirty-salmon);
@@ -168,13 +171,13 @@
   --color-link:                 var(--color-dark-gray);
   --color-link-body:            var(--color-reddish-orange);
   --color-link-hover:           var(--color-reddish-orange);
-  --color-link-hover2:          var(--color-white);
-  --color-primary1:             var(--color-banana-yellow);
-  --color-primary2:             var(--color-reddish-orange);
-  --color-primary3:             var(--color-purple);
+  --color-link-hover-2:          var(--color-white);
+  --color-primary-1:             var(--color-banana-yellow);
+  --color-primary-2:             var(--color-reddish-orange);
+  --color-primary-3:             var(--color-purple);
   --color-button-donate:        var(--color-reddish-orange);
-  --color-button1:              var(--color-banana-yellow);
-  --color-button2:              var(--color-button1); //none assigned in airtable
+  --color-button-1:              var(--color-banana-yellow);
+  --color-button-2:              var(--color-button1); //none assigned in airtable
   --color-border-bold:          var(--color-dark-gray);
   --color-border-standard:      var(--color-dark-gray);
   --color-border-subtle:        var(--color-gray);
@@ -203,7 +206,7 @@
 /*Dark and Light Groups */
 .u-color-group-dark {
   --color-background:           var(--color-dark-gray);
-  --color-background-muted:     var(--color-background);
+  --color-background-muted:     rgb(var(--color-background));
   --color-background-highlight: var(--color-dusk-blue);
   --color-text:                 var(--color-white);
   --color-text-muted:           var(--color-gray);
@@ -213,13 +216,13 @@
   --color-link:                 var(--color-white);
   --color-link-body:            var(--color-white);
   --color-link-hover:           var(--color-reddish-orange);
-  --color-link-hover2:          var(--color-white);
-  --color-primary1:             var(--color-banana-yellow);
-  --color-primary2:             var(--color-reddish-orange);
-  --color-primary3:             var(--color-purple);
+  --color-link-hover-2:          var(--color-white);
+  --color-primary-1:             var(--color-banana-yellow);
+  --color-primary-2:             var(--color-reddish-orange);
+  --color-primary-3:             var(--color-purple);
   --color-button-donate:        var(--color-reddish-orange);
-  --color-button1:              var(--color-banana-yellow);
-  --color-button2:              var(--color-button1); //none assigned in airtable
+  --color-button-1:              var(--color-banana-yellow);
+  --color-button-2:              var(--color-button1); //none assigned in airtable
   --color-border-bold:          var(--color-border-bold); //none 
   --color-border-standard:      var(--color-border-standard); //none 
   --color-border-subtle:        var(--color-border-subtle); //none
@@ -238,13 +241,15 @@
   --color-link-body:            var(--color-reddish-orange);
   --color-link-hover:           var(--color-reddish-orange);
   --color-link-hover2:          var(--color-white);
-  --color-primary1:             var(--color-banana-yellow);
-  --color-primary2:             var(--color-reddish-orange);
-  --color-primary3:             var(--color-purple);
+  --color-primary-1:             var(--color-banana-yellow);
+  --color-primary-2:             var(--color-reddish-orange);
+  --color-primary-3:             var(--color-purple);
   --color-button-donate:        var(--color-reddish-orange);
-  --color-button1:              var(--color-banana-yellow);
-  --color-button2:              var(--color-button1); //none assigned in airtable
+  --color-button-1:              var(--color-banana-yellow);
+  --color-button-2:              var(--color-button1); //none assigned in airtable
   --color-border-bold:          var(--color-dark-gray);
   --color-border-standard:      var(--color-dark-gray);
   --color-border-subtle:        var(--color-gray);
 }
+
+

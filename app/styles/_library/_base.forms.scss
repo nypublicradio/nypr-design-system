@@ -54,7 +54,7 @@ input[type=checkbox] {
   cursor: pointer;
   display: block;
   float: left;
-  border: 2px solid var(--color-border-bold);
+  border: 2px solid rgb(var(--color-border-bold));
   padding: 0;
   user-select: none;
   appearance: none;
@@ -126,5 +126,5 @@ form .o-button:before {
     }
 form .o-button:hover {
       transform: none;
-      background-color: var(--color-primary2);
+      background-color: rgb(var(--color-primary-2));
     }

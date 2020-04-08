@@ -14,8 +14,8 @@
   @include block-hover;
 }
 .c-block__tag {
-  color: $c-white;
-  background-color: $c-primary;
+  color: rgb(var(--color-text-inverse));
+  background-color: rgb(var(--color-primary-2));
   vertical-align: top;
   position: relative;
   top: 1px;
@@ -74,8 +74,8 @@
  * Urgent block banner
  */
 .c-block--urgent .c-block__eyebrow > .o-kicker {
-  background-color: $c-gray--dark;
-  color: $c-white;
+  background-color: rgb(var(--color-dark-gray));
+  color: rgb(var(--color-text-inverse));
 }
 .c-block--urgent .c-block__title {
   @include typeface(header, 4);
@@ -86,7 +86,7 @@
   }
 }
 .c-block--urgent .c-block__title a {
-  color: $c-secondary;
+  color: rgb(var(--color-text-error));
 }
 .c-block--urgent .c-block__title a:hover {
   @include block-hover;
@@ -100,7 +100,7 @@
 }
 .c-block--urgent .c-block-meta__timestamp {
   margin-right: var(--space-2);
-  color: $c-secondary;
+  color: rgb(var(--color-text-error));
   display: inline-block;
   margin-bottom: -5px;
 }
@@ -180,10 +180,10 @@
   font-weight: normal;
 }
 .c-block-meta__comments:hover {
-  color: $c-primary;
+  color: rgb(var(--color-primary-2));
 }
 .c-block-meta__comments:hover .o-icon--comment {
-  fill: $c-primary;
+  fill: rgb(var(--color-primary-2));
 }
 .c-block-meta__comments .o-icon--comment {
   margin-right: var(--space-1);
