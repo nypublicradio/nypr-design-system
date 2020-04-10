@@ -61,15 +61,21 @@
   }
 }
 
-
-
-.c-main-footer {
+.c-main-footer { 
+  @include color-group-dark;
   .gothamist-letters {
     fill: $c-white;
   }
   .gothamist-buildings {
     fill: $c-dark-bg;
   }
+  .c-newsletter-form {
+    @include color-group-light;
+  }
+}
+
+.o-kicker {
+  @include color-group-dark;
 }
 
 // Standard repeating dashed border
