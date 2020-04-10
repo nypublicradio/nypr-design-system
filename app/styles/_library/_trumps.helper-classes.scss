@@ -31,6 +31,7 @@
  * Reversed out content
  */
 .u-reversed-out {
+  @include color-group-dark;
   background-color: rgb(var(--color-background)); //dark 
   @include reversed-out-text;
 }
