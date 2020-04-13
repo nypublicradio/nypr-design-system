@@ -1228,7 +1228,7 @@ a > span {
 .o-rte-text .u-has-accent {
   display: inline-block;
   padding-bottom: 2px;
-  border-bottom: 2px dotted rgb(var(--color-border-bold));
+  border-bottom: 2px dotted rgb(var(--color-text-metadata));
   box-decoration-break: clone;
 }
 
@@ -1259,7 +1259,6 @@ a > span {
 .u-has-accent--white,
 .o-rte-text .u-has-accent--white {
   color: rgb(var(--color-background));
-  border-bottom-color: rgb(var(--color-background));
 }
 
 .u-has-accent--secondary,
@@ -3375,7 +3374,7 @@ hr.u-border-accent {
 }
 
 .c-toggle-box .c-toggle-box__label {
-  color: rgb(var(--color-background));
+  color: rgb(var(--color-text));
 }
 
 .c-toggle-box .o-icon--caret path {
@@ -3909,7 +3908,7 @@ input[type=submit] {
 
 /* Types/Styles*/
 .o-button--c-quaternary {
-  color: rgb(var(color-text-metadata));
+  color: rgb(var(--color-text-metadata));
   background-color: rgb(var(--color-button-1));
 }
 
@@ -4236,8 +4235,8 @@ input[type=submit] {
 .c-read-more-nav {
   padding: var(--space-4) var(--space-3);
   text-align: center;
-  border-top: 2px dashed rgb(var(--color-border-standard));
-  border-bottom: 2px dashed rgb(var(--color-border-standard));
+  border-top: 2px dashed rgb(var(--color-border-subtle));
+  border-bottom: 2px dashed rgb(var(--color-border-subtle));
 }
 @media (max-width: 768px) {
   .c-read-more-nav {
@@ -4252,7 +4251,7 @@ input[type=submit] {
     align-items: center;
     justify-content: center;
     width: 100%;
-    border: 2px dashed rgb(var(--color-border-standard));
+    border: 2px dashed rgb(var(--color-border-subtle));
   }
 }
 
@@ -4626,7 +4625,7 @@ input[type=submit] {
   position: absolute;
   left: -10px;
   top: 11px;
-  border: 3px solid rgb(var(--color-border-standard));
+  border: var(--b-border-normal);
   width: 100%;
   height: 100%;
   z-index: 0;
@@ -6268,7 +6267,7 @@ c-main-footer__copyright-text {
 }
 
 .c-main-footer__bottom {
-  border-top: 1px dashed rgba(var(--color-border-standard), 0.5);
+  border-top: 1px dashed rgba(var(--color-text-metadata), 0.5);
   padding: var(--space-4) var(--space-3);
   text-align: center;
   margin-left: calc(var(--space-3) * -1);
@@ -7851,6 +7850,27 @@ c-main-footer__copyright-text {
  * Reversed out content
  */
 .u-reversed-out {
+  --color-background: var(--color-dark-gray);
+  --color-background-muted: rgb(var(--color-background));
+  --color-background-highlight: var(--color-dusk-blue);
+  --color-text: var(--color-white);
+  --color-text-muted: var(--color-gray);
+  --color-text-error: var(--color-brick-red);
+  --color-text-inverse: var(--color-dark-gray);
+  --color-text-metadata: var(--color-white);
+  --color-link: var(--color-white);
+  --color-link-body: var(--color-white);
+  --color-link-hover: var(--color-reddish-orange);
+  --color-link-hover-2: var(--color-white);
+  --color-primary-1: var(--color-banana-yellow);
+  --color-primary-2: var(--color-reddish-orange);
+  --color-primary-3: var(--color-purple);
+  --color-button-donate: var(--color-reddish-orange);
+  --color-button-1: var(--color-banana-yellow);
+  --color-button-2: var(--color-button1);
+  --color-border-bold: var(--color-border-bold);
+  --color-border-standard: var(--color-border-standard);
+  --color-border-subtle: var(--color-border-subtle);
   background-color: rgb(var(--color-background));
   color: #ffffff;
 }
