@@ -158,7 +158,7 @@
   --color-dusk-blue:           #{hex2rgb(#244c84)};
   --color-brown-grey:          #{hex2rgb(#939393)};
   --color-dirty-salmon:        #{hex2rgb(#f0eeea)};
-  --color-purple:              #{hex2rgb(#060507)};
+  --color-purple:              #{hex2rgb(#924db1)};
 
   --color-background:           var(--color-white);
   --color-background-muted:     var(--color-dirty-salmon);
@@ -169,6 +169,7 @@
   --color-text-inverse:         var(--color-white);
   --color-text-metadata:        var(--color-dark-gray);
   --color-link:                 var(--color-dark-gray);
+  --color-link-2:               var(--color-brick-red);
   --color-link-body:            var(--color-reddish-orange);
   --color-link-hover:           var(--color-reddish-orange);
   --color-link-hover-2:          var(--color-white);
@@ -186,6 +187,9 @@
   --b-border-subtle: 2px dashed rgb(var(--color-dirty-salmon));
   --b-border-normal: 3px solid rgb(var(--color-dark-gray));
   --b-border-bold:   5px dashed rgb(var(--color-reddish-orange));
+
+  --opacity-hover:              0.75;
+  --opacity-focus:              0.75;
 
   /* Themable Tokens, Light Colors (Default) */
   // --c-background:           var(--c-white);

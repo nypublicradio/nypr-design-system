@@ -74,11 +74,29 @@
   }
 }
 
-.o-kicker {
-  @include color-group-dark;
+//Light accent color, can't use --color-text-inverse  
+.o-breadcrumb, .o-kicker { 
+color: rgb(var(--color-dusk-blue));
 }
 
+.o-kicker--sponsored { 
+  color: rgb(var(--color-text-inverse));
+  }
+
+a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
+  background-color: rgb(var(--color-primary-2));
+  color: rgb(var(--color-link-hover-2));
+  opacity: 1;
+  }
+
+.u-has-accent .u-has-accent--secondary {
+  color: rgb(var(--color-brick-red));
+}
 .c-donate-tout__graphic path {
+  @include color-group-dark
+}
+
+.c-toggle-box .c-toggle-box__label {
   @include color-group-dark
 }
 
