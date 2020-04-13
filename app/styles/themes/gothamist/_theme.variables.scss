@@ -183,9 +183,9 @@
   --color-border-subtle:        var(--color-gray);
 
   /* Themable Tokens, Borders */
-  --b-border-subtle: 2px dashed var(--c-dirty-salmon);
-  --b-border-normal: 3px solid var(--c-black);
-  --b-border-bold:   5px dashed var(--c-reddish-orange);
+  --b-border-subtle: 2px dashed rgb(var(--color-dirty-salmon));
+  --b-border-normal: 3px solid rgb(var(--color-dark-gray));
+  --b-border-bold:   5px dashed rgb(var(--color-reddish-orange));
 
   /* Themable Tokens, Light Colors (Default) */
   // --c-background:           var(--c-white);

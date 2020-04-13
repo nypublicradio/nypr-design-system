@@ -60,7 +60,7 @@ input[type="submit"] {
 /* Types/Styles*/
 
 .o-button--c-quaternary {
-  color: rgb(var(color-text-metadata));
+  color: rgb(var(--color-text-metadata));
   background-color: rgb(var(--color-button-1));
 }
 

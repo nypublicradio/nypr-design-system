@@ -78,6 +78,10 @@
   @include color-group-dark;
 }
 
+.c-donate-tout__graphic path {
+  @include color-group-dark
+}
+
 // Standard repeating dashed border
 .o-border-accent {
   background-image: repeating-linear-gradient(to right, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to right, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%);

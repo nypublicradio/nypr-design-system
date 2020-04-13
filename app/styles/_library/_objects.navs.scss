@@ -212,8 +212,8 @@
 .c-read-more-nav {
   padding: var(--space-4) var(--space-3);
   text-align: center;
-  border-top: 2px dashed rgb(var(--color-border-standard));
-  border-bottom: 2px dashed rgb(var(--color-border-standard));
+  border-top: 2px dashed rgb(var(--color-border-subtle));
+  border-bottom: 2px dashed rgb(var(--color-border-subtle));
 
   @include media("<=medium") {
     padding: var(--space-4) var(--space-5);
@@ -224,7 +224,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    border: 2px dashed rgb(var(--color-border-standard));;
+    border: 2px dashed rgb(var(--color-border-subtle));;
   }
 }
 .c-read-more-nav__wrap {
