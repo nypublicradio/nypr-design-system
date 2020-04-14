@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Molecules/Byline" />
+
+
+## Bylines
+
+## Overview
+
+A byline is a collection of metadata relating to an article. Most importantly, this includes the author and publish date.
+
+## Use Cases
+
+-   Bylines should be included in every article page. If you are crediting an author or a contributing organization, use the byline component to do so.
+    
+-   Bylines can also be used in card components to display metadata like date updated and comment count.
+    
+-   If you are only needing time metadata, use the timestamp component.
+    
+
+## Fields and Formatting
+
+These fields can be used as needed, the component will adapt to various field configurations.
+
+  
+
+**Publish Date** - Time when the article was published. Part of the timestamp component.
+
+  
+**Updated Date** - Time when the article was last updated. Part of the timestamp component.
+
+  
+
+**Comment Count** - If an article has comments, displays the # of comments an article has received in the format "# Comment(s)." where the s is included when there are >1 comments.
+
+  
+
+**Photos** - If an article has photos, displays the # of photos in an article gallery in the format "# Photo(s)." where the s is included when there are >1 photos.
+
+  
+
+**Contributing Organization** - Displayed if content is produced in partnership with another entity. If content is produced in partnership with a single Contributing Organization, display like "With Contributions by Organization".
+
+For 2 or more Contributing Organizations, display like "With Contributions by Organization 1, Organization 2, Organization 3+"
+
+  
+
+**Authors** - The display name of a person(s) who has authored the content. Authors named can be linked to the authors profile if applicable. If content is by a single  author, display like "By John Doe". If Content Item is by two  authors, display like "By John Doe and Jill Doe"
+
+## Bylines on Cards
+
+On the card component, the byline component can be used to show metadata relating to the card content. In Gothamist, this is used to show the date updated field and comment count. In this scenario, the comment count uses a comment icon instead of the word “Comments” See example of Gothamist versus a whitelabel default.
+
+<img alt="example of cards with differently formatted bylinesl" src="./images/Molecules-Bylines-Cards.png" width="500" />
+
+
+## Accessibility
+    
+* Byline text and background color must meet WCAG 2.0 [minimum contrast](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) requirement.
