@@ -121,26 +121,91 @@
   --color-brown-grey:          #{hex2rgb(#939393)};
   --color-dirty-salmon:        #{hex2rgb(#f0eeea)};
   --color-purple:              #{hex2rgb(#924db1)};
+  --opacity-hover:             1;
+
+  --color-primary-1:             var(--color-banana-yellow);
+  --color-primary-2:             var(--color-reddish-orange);
+  --color-primary-3:             var(--color-purple);
 
   --color-background:           var(--color-white);
   --color-background-muted:     var(--color-dirty-salmon);
   --color-background-highlight: var(--color-taxicab-yellow);
+
   --color-text:                 var(--color-dark-gray);
   --color-text-muted:           var(--color-gray);
   --color-text-error:           var(--color-brick-red);
   --color-text-inverse:         var(--color-white);
   --color-text-metadata:        var(--color-dark-gray);
-  --color-link:                 var(--color-dark-gray);
-  --color-link-2:               var(--color-brick-red);
-  --color-link-body:            var(--color-reddish-orange);
-  --color-link-hover:           var(--color-reddish-orange);
-  --color-link-hover-2:          var(--color-white);
-  --color-primary-1:             var(--color-banana-yellow);
-  --color-primary-2:             var(--color-reddish-orange);
-  --color-primary-3:             var(--color-purple);
-  --color-button-donate:        var(--color-reddish-orange);
-  --color-button-1:              var(--color-banana-yellow);
-  --color-button-2:              var(--color-button1); //none assigned in airtable
+
+  --color-link-1:                  var(--color-dark-gray);
+  --color-link-1-background:       transparent;
+  --text-decoration-link-1:        none;
+  --color-link-1-hover:            var(--reddish-orange);
+  --color-link-1-background-hover: inherit;
+  --text-decoration-link-1-hover:  underline dotted rgb(var(--reddish-orange));
+  --opacity-link-1-hover:          var(--opacity-hover);
+  
+
+
+  --color-link-2:                  var(--brick-red);
+  --color-link-2-background:       transparent;
+  --text-decoration-link-2:        underline rgb(var(--brick-red));
+  --color-link-2-hover:            var(--white);
+  --color-link-2-background-hover: var(--reddish-orane);
+  --text-decoration-link-2-hover:  underline rgb(var(--brick-red));
+  --opacity-link-2-hover:          var(--opacity-hover);
+  
+  --color-link-3:                  var(--brick-red);
+  --color-link-3-background:       transparent;
+  --text-decoration-link-3:        underline rgb(var(--brick-red));
+  --color-link-3-hover:            var(--white);
+  --color-link-3-background-hover: var(--reddish-orane);
+  --text-decoration-link-3-hover:  underline rgb(var(--brick-red));
+  --opacity-link-3-hover:          var(--opacity-hover);
+  
+
+
+  --color-tag-primary-text:             var(--color-dusk-blue);
+  --color-tag-primary-background:       var(--color-banana-yellow);
+  --color-tag-primary-hover-text:       var(--color-white);
+  --color-tag-primary-hover-background: var(--color-reddish-orange);
+  --opacity-tag-primary-hover:          var(--opacity-hover);
+
+  --color-tag-sponsored-text:             var(--color-white);
+  --color-tag-sponsored-background:       var(--color-purple);
+  --color-tag-sponsored-hover-text:       inherit;
+  --color-tag-sponsored-hover-background: inherit;
+  --opacity-tag-sponsored-hover:          inherit;
+
+  --color-button-primary-text:             var(--color-dark-gray);
+  --color-button-primary-background:       var(--color-banana-yellow);
+  --color-button-primary-hover-text:       var(--color-dark-gray);
+  --color-button-primary-hover-background: var(--color-banana-yellow);
+  --opacity-button-primary-hover:          var(--opacity-hover);
+  
+  --color-button-donate-text:             var(--color-white);
+  --color-button-donate-background:       var(--color-reddish-orange);
+  --color-button-donate-hover-text:       var(--color-white);
+  --color-button-donate-hover-background: var(--color-reddish-orange);
+  --opacity-button-donate-hover:          var(--opacity-hover);
+
+  --color-button-secondary-text:         var(--color-text);
+  --color-button-secondary-border:       var(--color-text);
+  --color-button-secondary-hover-text:   var(--color-text);
+  --color-button-secondary-hover-border: var(--color-text);
+  --opacity-button-secondary-hover:      var(--opacity-hover);
+
+  .button.mod-donate {
+    color: rgb(var(--color-button-donate-text));
+    background-color: rgb(var(--color-button-donate-background));
+    &:hover {
+      color: rgb(var(--color-button-donate-hover-text));
+      background-color: rgb(var(--color-button-donate-hover-background));
+      opacity: var(--opacity-button-donate-text);
+    }
+  }
+
+
   --color-border-bold:          var(--color-dark-gray);
   --color-border-standard:      var(--color-dark-gray);
   --color-border-subtle:        var(--color-gray);
