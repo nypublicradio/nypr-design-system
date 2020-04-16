@@ -97,7 +97,7 @@ workflows:
       - install:
           filters:
             branches:
-              ignore: radial
+              ignore: master
       - test:
           requires:
             - install
@@ -107,10 +107,13 @@ workflows:
       - install:
           filters:
             branches:
-              only: radial
-      - build-storybook:
+              only: master
+      - test:
           requires:
             - install
+      - build-storybook:
+          requires:
+            - test
       - deploy-storybook:
-          requires: 
+          requires:
             - build-storybook
