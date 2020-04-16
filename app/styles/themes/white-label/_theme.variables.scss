@@ -117,6 +117,9 @@
   --color-sea-green:     #{hex2rgb(#469C78)};
   --color-bright-purple: #{hex2rgb(#924db1)};
 
+  --color-primary1:             var(--color-cool-blue);
+  --color-primary2:             var(--color-sea-green);
+  --color-primary3:             var(--color-bright-purple);
   --color-background:           var(--color-white);
   --color-background-muted:     var(--color-cool-white);
   --color-background-highlight: var(--color-cool-white);

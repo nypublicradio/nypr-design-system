@@ -1,6 +1,6 @@
 import React from 'react';
 import { SpacingSwatch } from './Swatches';
-import { TokenValue } from './Utils';
+import { getComputedTokenValue } from './Utils';
 
 function SpacingTableRow(props) {      
   return <tr>
@@ -11,7 +11,7 @@ function SpacingTableRow(props) {
                 <SpacingSwatch className={`space${props.number}`} size={`var(--space-${props.number})`} />
             </td>
             <td>
-                <TokenValue token={`--space-${props.number}`} property='width' elementClass={'storybook-' + spacingClass} />
+            {getComputedTokenValue(`--space-${props.number}`, 'width', 'storybook-' + spacingClass)}
             </td>
         </>
         )}

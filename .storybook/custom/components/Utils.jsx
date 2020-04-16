@@ -25,13 +25,61 @@ export function TokenValue (props) {
     @property property
     @type {String}
   */
-  let tempDiv = document.createElement('DIV');
-  tempDiv.classList.add(props.elementClass);
-  document.body.append(tempDiv);
-  tempDiv.style[props.property] = `var(${props.token})`;
-  let tokenValue = window.getComputedStyle(tempDiv)[props.property];
-  document.body.removeChild(tempDiv);
   return(
-    <span>{tokenValue}</span>
+    <span>{getComputedTokenValue(props.token, props.property, props.elementClass)}</span>
   )
+}
+
+
+export function getThemeStyleSheets() {
+  return [...document.styleSheets].filter(styleSheet => {
+    return styleSheet.href && styleSheet.href.indexOf('themes') > 0;
+  });
+}
+
+export function getActiveThemeStyleSheet() {
+  return getThemeStyleSheets().find(stylesheet => {
+    let isAlternate = stylesheet.ownerNode && stylesheet;
+    return !stylesheet.ownerNode.relList.contains('alternate');
+  });
+} 
+
+export function getComputedTokenValue(token, property, elementClass) {
+  let tempDiv = document.createElement("DIV");
+  tempDiv.classList.add(elementClass);
+  document.body.append(tempDiv);
+  if (token.indexOf("color") < 0) {
+    tempDiv.style[property] = `rgb(var(${token}))`;
+  } else {
+    tempDiv.style[property] = `var(${token})`;
+  }
+  debugger;
+  let tokenValue = window.getComputedStyle(tempDiv)[property];
+  document.body.removeChild(tempDiv);
+  return tokenValue;
+}
+
+export function getRawTokenValue(token) {
+  let activeTheme = getActiveThemeStyleSheet();
+  let rule = [...activeTheme.cssRules].find(
+    rule => rule.selectorText === ":root"
+  );
+  let matcher = new RegExp(`${token}:\\s*([\\w\\(\\)-]+)`);
+  let matches = rule.cssText.match(matcher);
+  let tokenValue = matches && matches[1];
+  return tokenValue || "";
+}
+
+export function prettifyToken(token) {
+  function cleanVarName(string) {
+    return string
+      .replace("var(", "")
+      .replace("--color-", "")
+      .replace(")", "")
+      .replace(/-/g, " ");
+  }
+  function titleCase(string) {
+    return string.split(' ').map(s => s && s[0].toUpperCase() + s.slice(1)).join(' ');
+  }
+  return titleCase(cleanVarName(token)).trim();
 }
