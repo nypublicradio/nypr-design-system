@@ -76911,6 +76911,12 @@ define("ember-resolver/features", [], function () {
        @argument linkText
       @type {String}
     */
+
+    /**
+      Icon name
+       @argument icon
+      @type {icon}
+    */
     linkText: null
   }); // END-SNIPPET
 
@@ -79163,8 +79169,8 @@ define("ember-resolver/features", [], function () {
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
-    "id": "jpCtNA3+",
-    "block": "{\"symbols\":[\"@message\",\"&default\",\"@close\",\"@linkUrl\",\"@linkText\"],\"statements\":[[7,\"div\"],[11,\"class\",\"c-donate-tout__inner\"],[9],[0,\"\\n\"],[4,\"if\",[[22,3,[]]],null,{\"statements\":[[0,\"    \"],[5,\"nypr-a-button\",[[11,\"class\",\"c-donate-tout__close\"],[11,\"data-test-donate-close\",\"\"]],[[\"@onclick\",\"@blank\"],[[22,3,[]],true]],{\"statements\":[[0,\"\\n      \"],[7,\"span\"],[11,\"class\",\"o-icon u-icon--xs o-icon--close\"],[9],[0,\"\\n        \"],[5,\"nypr-a-svg\",[],[[\"@icon\"],[\"close\"]]],[0,\"\\n      \"],[10],[0,\"\\n    \"]],\"parameters\":[]}],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n  \"],[7,\"div\"],[11,\"class\",\"c-donate-tout__graphic\"],[9],[0,\"\\n    \"],[5,\"nypr-a-svg\",[],[[\"@icon\"],[\"pointing-finger\"]]],[0,\"\\n  \"],[10],[0,\"\\n\\n\"],[4,\"if\",[[24,2]],null,{\"statements\":[[0,\"    \"],[14,2],[0,\"\\n\"]],\"parameters\":[]},{\"statements\":[[0,\"    \"],[7,\"p\"],[11,\"data-test-donate-message\",\"\"],[9],[0,\"\\n      \"],[1,[22,1,[]],true],[0,\"\\n    \"],[10],[0,\"\\n\"]],\"parameters\":[]}],[0,\"\\n  \"],[5,\"nypr-a-button\",[],[[\"@url\"],[[22,4,[]]]],{\"statements\":[[0,\"\\n    \"],[1,[22,5,[]],false],[0,\"\\n  \"]],\"parameters\":[]}],[0,\"\\n\"],[10],[0,\"\\n\"]],\"hasEval\":false}",
+    "id": "yqBe47tM",
+    "block": "{\"symbols\":[\"@message\",\"&default\",\"@close\",\"@icon\",\"@linkUrl\",\"@linkText\"],\"statements\":[[7,\"div\"],[11,\"class\",\"c-donate-tout__inner\"],[9],[0,\"\\n\"],[4,\"if\",[[22,3,[]]],null,{\"statements\":[[0,\"    \"],[5,\"nypr-a-button\",[[11,\"class\",\"c-donate-tout__close\"],[11,\"data-test-donate-close\",\"\"]],[[\"@onclick\",\"@blank\"],[[22,3,[]],true]],{\"statements\":[[0,\"\\n      \"],[7,\"span\"],[11,\"class\",\"o-icon u-icon--xs o-icon--close\"],[9],[0,\"\\n        \"],[5,\"nypr-a-svg\",[],[[\"@icon\"],[\"close\"]]],[0,\"\\n      \"],[10],[0,\"\\n    \"]],\"parameters\":[]}],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n  \"],[7,\"div\"],[11,\"class\",\"c-donate-tout__graphic\"],[9],[0,\"\\n    \"],[5,\"nypr-a-svg\",[],[[\"@icon\"],[[22,4,[]]]]],[0,\"\\n  \"],[10],[0,\"\\n\\n\"],[4,\"if\",[[24,2]],null,{\"statements\":[[0,\"    \"],[14,2],[0,\"\\n\"]],\"parameters\":[]},{\"statements\":[[0,\"    \"],[7,\"p\"],[11,\"data-test-donate-message\",\"\"],[9],[0,\"\\n      \"],[1,[22,1,[]],true],[0,\"\\n    \"],[10],[0,\"\\n\"]],\"parameters\":[]}],[0,\"\\n  \"],[5,\"nypr-a-button\",[],[[\"@url\"],[[22,5,[]]]],{\"statements\":[[0,\"\\n    \"],[1,[22,6,[]],false],[0,\"\\n  \"]],\"parameters\":[]}],[0,\"\\n\"],[10],[0,\"\\n\"]],\"hasEval\":false}",
     "meta": {
       "moduleName": "nypr-design-system/templates/components/nypr-o-donate.hbs"
     }
@@ -79775,36 +79781,36 @@ var __ember_auto_import__ =
 /************************************************************************/
 /******/ ({
 
-/***/ "../../../tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/app.js":
+/***/ "../../../tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/app.js":
 /*!*********************************************************************!*\
-  !*** /tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/app.js ***!
+  !*** /tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/app.js ***!
   \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("\nif (typeof document !== 'undefined') {\n  __webpack_require__.p = (function(){\n    var scripts = document.querySelectorAll('script');\n    return scripts[scripts.length - 1].src.replace(/\\/[^/]*$/, '/');\n  })();\n}\n\nmodule.exports = (function(){\n  var d = _eai_d;\n  var r = _eai_r;\n  window.emberAutoImportDynamic = function(specifier) {\n    return r('_eai_dyn_' + specifier);\n  };\n    d('imagesloaded', [], function() { return __webpack_require__(/*! ./node_modules/imagesloaded/imagesloaded.js */ \"./node_modules/imagesloaded/imagesloaded.js\"); });\n})();\n\n\n//# sourceURL=webpack://__ember_auto_import__//tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/app.js?");
+eval("\nif (typeof document !== 'undefined') {\n  __webpack_require__.p = (function(){\n    var scripts = document.querySelectorAll('script');\n    return scripts[scripts.length - 1].src.replace(/\\/[^/]*$/, '/');\n  })();\n}\n\nmodule.exports = (function(){\n  var d = _eai_d;\n  var r = _eai_r;\n  window.emberAutoImportDynamic = function(specifier) {\n    return r('_eai_dyn_' + specifier);\n  };\n    d('imagesloaded', [], function() { return __webpack_require__(/*! ./node_modules/imagesloaded/imagesloaded.js */ \"./node_modules/imagesloaded/imagesloaded.js\"); });\n})();\n\n\n//# sourceURL=webpack://__ember_auto_import__//tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/app.js?");
 
 /***/ }),
 
-/***/ "../../../tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/l.js":
+/***/ "../../../tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/l.js":
 /*!*******************************************************************!*\
-  !*** /tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/l.js ***!
+  !*** /tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/l.js ***!
   \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\nwindow._eai_r = require;\nwindow._eai_d = define;\n\n\n//# sourceURL=webpack://__ember_auto_import__//tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/l.js?");
+eval("\nwindow._eai_r = require;\nwindow._eai_d = define;\n\n\n//# sourceURL=webpack://__ember_auto_import__//tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/l.js?");
 
 /***/ }),
 
 /***/ 0:
 /*!***************************************************************************************************************************************!*\
-  !*** multi /tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/l.js /tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/app.js ***!
+  !*** multi /tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/l.js /tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/app.js ***!
   \***************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! /tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/l.js */\"../../../tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/l.js\");\nmodule.exports = __webpack_require__(/*! /tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/app.js */\"../../../tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/app.js\");\n\n\n//# sourceURL=webpack://__ember_auto_import__/multi_/tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/l.js_/tmp/broccoli-95JE9YAeuZ4T6E/cache-350-bundler/staging/app.js?");
+eval("__webpack_require__(/*! /tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/l.js */\"../../../tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/l.js\");\nmodule.exports = __webpack_require__(/*! /tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/app.js */\"../../../tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/app.js\");\n\n\n//# sourceURL=webpack://__ember_auto_import__/multi_/tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/l.js_/tmp/broccoli-99JBUt0q9zRn6F/cache-350-bundler/staging/app.js?");
 
 /***/ })
 

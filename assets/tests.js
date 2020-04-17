@@ -3157,13 +3157,33 @@ define("dummy/tests/integration/components/nypr-o-footer-test", ["qunit", "ember
   });
 });
 
-define("dummy/tests/integration/components/nypr-o-gallery-overlay-test", ["qunit", "ember-qunit", "@ember/test-helpers", "dummy/controllers/docs/molecules/nypr-m-gallery-lead", "dummy/helpers/in-viewport"], function (_qunit, _emberQunit, _testHelpers, _nyprMGalleryLead, _inViewport) {
+define("dummy/tests/integration/components/nypr-o-gallery-overlay-test", ["qunit", "ember-qunit", "@ember/test-helpers", "dummy/helpers/in-viewport"], function (_qunit, _emberQunit, _testHelpers, _inViewport) {
   "use strict";
 
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
   function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+  var SLIDES = [{
+    caption: 'This is a slide caption',
+    credit: 'Getty',
+    src: 'https://picsum.photos/600/300?random',
+    full: 'https://picsum.photos/600/300?random',
+    title: 'This is what a slide title looks like'
+  }, {
+    caption: 'This is a slide only a caption; no title or credit',
+    src: 'https://picsum.photos/600/300?random=1',
+    full: 'https://picsum.photos/600/300?random=1'
+  }, {
+    title: 'This is a slide with only a title',
+    src: 'https://picsum.photos/600/300?random=2',
+    full: 'https://picsum.photos/600/300?random=2'
+  }, {
+    caption: 'This is a slide with no title; just caption & credit',
+    credit: 'Foo Bar/AP News',
+    src: 'https://picsum.photos/600/300?random=3',
+    full: 'https://picsum.photos/600/300?random=3'
+  }];
   (0, _qunit.module)('Integration | Component | nypr-o-gallery-overlay', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
     (0, _qunit.test)('it renders', /*#__PURE__*/function () {
@@ -3176,7 +3196,7 @@ define("dummy/tests/integration/components/nypr-o-gallery-overlay-test", ["qunit
                 TITLE = 'Foo Gallery';
                 AD_TEXT = 'Bar Ad';
                 this.setProperties({
-                  SLIDES: _nyprMGalleryLead.GALLERY,
+                  SLIDES: SLIDES,
                   TITLE: TITLE,
                   AD_TEXT: AD_TEXT
                 });
@@ -3190,7 +3210,7 @@ define("dummy/tests/integration/components/nypr-o-gallery-overlay-test", ["qunit
               case 5:
                 assert.dom('[data-test-gallery-title]').hasText(TITLE);
                 assert.dom('[data-test-gallery-slide]').exists({
-                  count: _nyprMGalleryLead.GALLERY.length
+                  count: SLIDES.length
                 });
                 assert.dom('[data-test-gallery-billboard]').includesText(AD_TEXT);
                 gallery = document.querySelector('[data-test-gallery-overlay]');
@@ -3217,9 +3237,9 @@ define("dummy/tests/integration/components/nypr-o-gallery-overlay-test", ["qunit
             switch (_context2.prev = _context2.next) {
               case 0:
                 TITLE = 'Foo Gallery';
-                SLIDE_FOR_INIT = _nyprMGalleryLead.GALLERY.length - 1;
+                SLIDE_FOR_INIT = SLIDES.length - 1;
                 this.setProperties({
-                  SLIDES: _nyprMGalleryLead.GALLERY.map(function (slide, i) {
+                  SLIDES: SLIDES.map(function (slide, i) {
                     Ember.set(slide, 'full', "/test-image".concat(i + 1, ".jpeg"));
                     return slide;
                   }),
@@ -3268,9 +3288,9 @@ define("dummy/tests/integration/components/nypr-o-gallery-overlay-test", ["qunit
                   registerSlide: function registerSlide(slide) {
                     return assert.ok(slide instanceof HTMLElement);
                   },
-                  SLIDES: _nyprMGalleryLead.GALLERY
+                  SLIDES: SLIDES
                 });
-                assert.expect(_nyprMGalleryLead.GALLERY.length);
+                assert.expect(SLIDES.length);
                 _context3.next = 4;
                 return (0, _testHelpers.render)(Ember.HTMLBars.template({
                   "id": "SNQE/y6K",
