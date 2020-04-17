@@ -1,0 +1,111 @@
+/*------------------------------------*\
+    $GALLERY
+\*------------------------------------*/
+
+.c-gallery-overlay {
+  padding: var(--space-5) 0 var(--space-9);
+  color: $c-white;
+  background-color: $c-dark-bg;
+}
+
+.c-gallery-overlay .o-credit a {
+  color: $c-white;
+  border-bottom: 2px dotted $c-white;
+}
+
+.c-gallery-overlay .o-credit a:hover {
+  color: $c-white;
+  background-color: $c-primary;
+}
+
+.c-gallery-overlay .o-rte-text a:visited {
+  color: $c-white;
+}
+
+.c-gallery-overlay .o-ad__label {
+  color: $c-octonary;
+}
+
+.c-gallery-overlay .l-wrap {
+  @include media(">medium") {
+    padding: 0;
+  }
+}
+
+.c-slides {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: hidden;
+}
+.c-slide {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.5s $hard-ease-in 0.2s;
+  position: relative;
+  z-index: $z-index-article-gallery-slide;
+  pointer-events: none;
+  padding-bottom: var(--space-2);
+
+  @for $i from 1 through 5 {
+    &:nth-child(#{$i}) {
+      transition-delay: #{$i * 4 + "00"}ms;
+    }
+  }
+}
+.c-slide__header,
+.c-slide__content {
+  pointer-events: auto;
+}
+.c-slide__header.l-container--content,
+.c-slide__meta.l-container--content {
+  max-width: none;
+  @include media("<=xxlarge") {
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+}
+.c-slide__heading {
+  font-size: var(--font-size-header-5);
+}
+
+.c-slide:nth-child(1) {
+  transition-delay: 0.15s;
+}
+.c-slide__image img {
+  height: initial; /* allows images with height attributes to occupy vertical space while loading*/
+  max-height: 733px;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: contain;
+}
+.c-slide__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.c-slice__count {
+  @include typeface(small, 3);
+}
+
+.c-slide__meta .c-toggle-box .c-toggle-box__content {
+  @include media("<=xxlarge") {
+    left: var(--space-3);
+  }
+}
+
+/* Gallery is active*/
+.gallery-is-active.c-main {
+  position: relative;
+}
+/* Hide the article floating header when in the gallery overlay*/
+.gallery-is-active .c-main-header--article {
+  display: none;
+}
+.gallery-is-active .c-main-header--gallery {
+  display: block;
+}
+.gallery-is-active .c-slide {
+  opacity: 1;
+  transform: translateY(0);
+}

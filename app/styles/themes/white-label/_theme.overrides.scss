@@ -1,0 +1,81 @@
+/*------------------------------------*\
+    $THEME OVERRIDES
+\*------------------------------------*/
+
+.c-main-header {
+  &.side-menu-is-active {
+    .c-main-header__branding {
+      opacity: 0;
+    }
+  }
+}
+
+// Header with full stacked logo
+.c-main-header--emphasis {
+  .c-main-header__ad-unit {
+    padding-bottom: var(--space-2);
+
+    @include media('>medium') {
+      padding-bottom: 30px;
+    }
+  }
+
+  &:not(.out-of-viewport) .c-primary-nav--top {
+    @include media('>xxlarge') {
+      padding-left: 166px;
+    }
+  }
+
+  &:not(.out-of-viewport) .c-main-header__branding {
+    width: 110px;
+    position: relative;
+    bottom: calc(var(--space-3) * -1);
+    align-self: flex-bottom;
+    z-index: $z-index-heading-logo;
+    left: var(--space-2);
+    opacity: 1;
+    transition: opacity .15s $hard-ease-in;
+
+    @include media('>medium') {
+      width: 135px;
+      bottom: calc(var(--space-2) * -1);
+    }
+
+    @include media('>xlarge') {
+      left: calc(var(--col-width) + var(--gutter));
+    }
+
+    --xl-container: calc(var(--max-width-xl) + var(--space-5));
+    @include media('>xxlarge') {
+      position: absolute;
+      bottom: -43px;
+      left: calc(50% - var(--xl-container) / 2 + var(--space-5));
+    }
+  }
+
+  .gothamist-letters {
+    fill: $c-black;
+  }
+  .gothamist-buildings {
+    fill: $c-white;
+  }
+}
+
+
+
+.c-main-footer {
+  .gothamist-letters {
+    fill: $c-white;
+  }
+  .gothamist-buildings {
+    fill: $c-dark-bg;
+  }
+}
+
+// Standard repeating dashed border
+.o-border-accent {
+  background-image: repeating-linear-gradient(to right, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to right, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%);
+  background-position: left top, left bottom, left top, right top;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: 18px 2px, 18px 2px, 2px 18px, 2px 18px;
+}

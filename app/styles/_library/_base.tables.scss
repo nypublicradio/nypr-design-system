@@ -1,0 +1,113 @@
+/*------------------------------------*\
+    $TABLES
+\*------------------------------------*/
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid rgb(var(--color-border-bold));
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  border: 1px solid transparent;
+  padding: calc(var(--space-3) / 2) 0;
+  text-transform: uppercase;
+  vertical-align: top;
+  font-weight: bold;
+}
+
+tr {
+  border: 1px solid transparent;
+}
+
+td {
+  border: 1px solid transparent;
+  padding: calc(var(--space-3) / 2);
+}
+
+.c-table--responsive {
+  border: 1px solid rgb(var(--color-border-bold));
+  border-collapse: collapse;
+  padding: 0;
+  width: 100%;
+
+  @include media("<=medium") {
+    border: 0;
+
+    thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    tr {
+      border-bottom: 3px solid rgb(var(--color-border-bold));
+      display: block;
+      margin-bottom: calc(var(--space-3) / 2);
+
+      &.this-is-active {
+        td:not(:first-child) {
+          display: flex;
+        }
+
+        td:first-child::before {
+          content: "- " attr(data-label);
+        }
+      }
+    }
+
+    td {
+      border-bottom: 1px solid rgb(var(--color-border-bold));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 40px;
+
+      &:first-child {
+        cursor: pointer;
+
+        &::before {
+          content: "+ " attr(data-label);
+        }
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      &:not(:first-child) {
+        display: none;
+      }
+
+      &::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: var(--font-size-xs);
+      }
+    }
+  }
+}
+
+.c-table--responsive tr {
+    border: 1px solid rgb(var(--color-border-bold));
+    background-color: rgb(var(--color-border-subtle));
+  }
+
+.c-table--responsive th,
+  .c-table--responsive td {
+    padding: calc(var(--space-3) / 2);
+  }
+
+.c-table--responsive th {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    border-bottom: 1px solid rgb(var(--color-border-bold));
+  }

@@ -1,0 +1,259 @@
+:root {
+  /** Typography */
+
+  /* Theme typefaces */
+
+  /* Header */
+  --font-family-header:    'Pragati Narrow', Helvetica, sans-serif;
+  --line-height-header:    1.5;
+  --letter-spacing-header: normal;
+  --font-weight-header:    700;
+
+  /* Subheader */
+  --font-family-subheader:    'Pragati Narrow', Helvetica, sans-serif;
+  --line-height-subheader:    1.5;
+  --letter-spacing-subheader: normal;
+  --font-weight-subheader:    700;
+
+  /* Body */
+  --font-family-body:    'Barlow', Helvetica, sans-serif;
+  --line-height-body:    1.8;
+  --letter-spacing-body: normal;
+  --font-weight-body:    400;
+
+  /* Small */
+  --font-family-small:    'B612 Mono', Menlo, Monaco, "Courier New", "Courier", monospace;
+  --line-height-small:    1.4;
+  --letter-spacing-small: 1px;
+  --font-weight-small:    400;
+
+  /* Font Levers */
+
+  --font-base:  18px;
+  --font-ratio: 1.125;
+
+  /* Modular scale */
+  --font-size-1:  calc(var(--font-size-2) / var(--font-ratio));
+  --font-size-2:  calc(var(--font-size-3) / var(--font-ratio));
+  --font-size-3:  calc(var(--font-size-4) / var(--font-ratio));
+  --font-size-4:  calc(var(--font-size-5) / var(--font-ratio));
+  --font-size-5:  calc(var(--font-size-6) / var(--font-ratio));
+  --font-size-6:  var(--font-base);
+  --font-size-7:  calc(var(--font-size-6) * var(--font-ratio));
+  --font-size-8:  calc(var(--font-size-7) * var(--font-ratio));
+  --font-size-9:  calc(var(--font-size-8) * var(--font-ratio));
+  --font-size-10: calc(var(--font-size-9) * var(--font-ratio));
+  --font-size-11: calc(var(--font-size-10) * var(--font-ratio));
+  --font-size-12: calc(var(--font-size-11) * var(--font-ratio));
+  --font-size-13: calc(var(--font-size-12) * var(--font-ratio));
+  --font-size-14: calc(var(--font-size-13) * var(--font-ratio));
+  --font-size-15: calc(var(--font-size-14) * var(--font-ratio));
+  --font-size-16: calc(var(--font-size-15) * var(--font-ratio));
+
+    /* Token size */
+  --font-size-small-1:      var(--font-size-1);
+  --font-size-small-2:      var(--font-size-2);
+  --font-size-small-3:      var(--font-size-3);
+  --font-size-small-4:      var(--font-size-4);
+  --font-size-body-1:       var(--font-size-5);
+  --font-size-body-2:       var(--font-size-6);
+  --font-size-header-1:     var(--font-size-7);
+  --font-size-header-2:     var(--font-size-8);
+  --font-size-header-3:     var(--font-size-9);
+  --font-size-header-4:     var(--font-size-10);
+  --font-size-header-5:     var(--font-size-11);
+  --font-size-header-6:     var(--font-size-12);
+  --font-size-header-7:     var(--font-size-13);
+  --font-size-header-8:     var(--font-size-14);
+  --font-size-header-9:     var(--font-size-15);
+  --font-size-header-10:    var(--font-size-16);
+  --font-size-subheader-1:  var(--font-size-7);
+  --font-size-subheader-2:  var(--font-size-8);
+  --font-size-subheader-3:  var(--font-size-9);
+  --font-size-subheader-4:  var(--font-size-10);
+  --font-size-subheader-5:  var(--font-size-11);
+  --font-size-subheader-6:  var(--font-size-12);
+  --font-size-subheader-7:  var(--font-size-13);
+  --font-size-subheader-8:  var(--font-size-14);
+  --font-size-subheader-9:  var(--font-size-15);
+  --font-size-subheader-10: var(--font-size-16);
+  
+  --line-height-small-1:      1.4;
+  --line-height-small-2:      1.4;
+  --line-height-small-3:      1.4;
+  --line-height-small-4:      1.4;
+  --line-height-body-1:       1.8;
+  --line-height-body-2:       1.8;
+  --line-height-header-1:     1.1;
+  --line-height-header-2:     1.1;
+  --line-height-header-3:     1.2;
+  --line-height-header-4:     1.25;
+  --line-height-header-5:     1.2;
+  --line-height-header-6:     1.2;
+  --line-height-header-7:     1.2;
+  --line-height-header-8:     1.1;
+  --line-height-header-9:     1.1;
+  --line-height-header-10:    1;
+  --line-height-subheader-1:  1.1;
+  --line-height-subheader-2:  1.1;
+  --line-height-subheader-3:  1.2;
+  --line-height-subheader-4:  1.25;
+  --line-height-subheader-5:  1.2;
+  --line-height-subheader-6:  1.2;
+  --line-height-subheader-7:  1.2;
+  --line-height-subheader-8:  1.1;
+  --line-height-subheader-9:  1.1;
+  --line-height-subheader-10: 1;
+
+  /* Spacing predefined values, do not edit */
+  --spacing-base-compact:      4px;
+  --spacing-increment-compact: 4px;
+  --spacing-base-default:      8px;
+  --spacing-increment-default: 8px;
+  --spacing-base-loose:        16px;
+  --spacing-increment-loose:   10px;
+
+  /* Spacing Levers, set these using the predefined values above */
+  --spacing-base:      var(--spacing-base-default);
+  --spacing-increment: var(--spacing-increment-default);
+
+  /* Spacing Scale, use these tokens in your styles */
+  --space-1:  calc(var(--spacing-base) / 2);
+  --space-2:  var(--spacing-base);
+  --space-3:  calc(var(--space-2) + var(--spacing-increment));
+  --space-4:  calc(var(--space-3) + var(--spacing-increment));
+  --space-5:  calc(var(--space-4) + var(--spacing-increment));
+  --space-6:  calc(var(--space-5) + var(--spacing-increment));
+  --space-7:  calc(var(--space-6) + var(--spacing-increment));
+  --space-8:  calc(var(--space-7) + var(--spacing-increment));
+  --space-9:  calc(var(--space-8) + var(--spacing-increment));
+  --space-10: calc(var(--space-9) + var(--spacing-increment));
+  --space-11: calc(var(--space-10) + var(--spacing-increment));
+
+  /* Layout */
+  --max-width:      1024px;
+  --max-width-xl:   1130px;
+  --heading-height: 72px;
+  
+  // Grid
+  --col-width: 48.5px;
+  --gutter:    18px;
+  
+  // Article
+  --article-content-width: 634px;
+
+  @function hex2rgb($hexColor) {
+    @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
+  }
+  /* Brand Color Pallete */
+  --color-black:               #{hex2rgb(#000000)};
+  --color-dark-gray:           #{hex2rgb(#333333)};
+  --color-gray:                #{hex2rgb(#afafaf)};
+  --color-light-gray:          #{hex2rgb(#f3f3f3)};
+  --color-white:               #{hex2rgb(#ffffff)};
+  --color-brick-red:           #{hex2rgb(#9c1e14)};
+  --color-reddish-orange:      #{hex2rgb(#de5e36)};
+  --color-banana-yellow:       #{hex2rgb(#ffc400)};
+  --color-taxicab-yellow:      #{hex2rgb(#e3d54a)};
+  --color-dusk-blue:           #{hex2rgb(#244c84)};
+  --color-brown-grey:          #{hex2rgb(#939393)};
+  --color-dirty-salmon:        #{hex2rgb(#f0eeea)};
+  --color-purple:              #{hex2rgb(#924db1)};
+
+  --color-background:           var(--color-white);
+  --color-background-muted:     var(--color-dirty-salmon);
+  --color-background-highlight: var(--color-taxicab-yellow);
+  --color-text:                 var(--color-dark-gray);
+  --color-text-muted:           var(--color-gray);
+  --color-text-error:           var(--color-brick-red);
+  --color-text-inverse:         var(--color-white);
+  --color-text-metadata:        var(--color-dark-gray);
+  --color-link:                 var(--color-dark-gray);
+  --color-link-2:               var(--color-brick-red);
+  --color-link-body:            var(--color-reddish-orange);
+  --color-link-hover:           var(--color-reddish-orange);
+  --color-link-hover-2:          var(--color-white);
+  --color-primary-1:             var(--color-banana-yellow);
+  --color-primary-2:             var(--color-reddish-orange);
+  --color-primary-3:             var(--color-purple);
+  --color-button-donate:        var(--color-reddish-orange);
+  --color-button-1:              var(--color-banana-yellow);
+  --color-button-2:              var(--color-button1); //none assigned in airtable
+  --color-border-bold:          var(--color-dark-gray);
+  --color-border-standard:      var(--color-dark-gray);
+  --color-border-subtle:        var(--color-gray);
+
+  /* Themable Tokens, Borders */
+  --b-border-subtle: 2px dashed rgb(var(--color-dirty-salmon));
+  --b-border-normal: 3px solid rgb(var(--color-dark-gray));
+  --b-border-bold:   5px dashed rgb(var(--color-reddish-orange));
+
+  --opacity-hover:              0.75;
+  --opacity-focus:              0.75;
+
+  /* Themable Tokens, Light Colors (Default) */
+  // --c-background:           var(--c-white);
+  // --c-background-muted:     var(--c-dirty-salmon);
+  // --c-background-highlight: var(--c-taxicab-yellow);
+  // --c-text:                 var(--c-dark-gray);
+  // --c-text-muted:           var(--c-gray);
+  // --c-text-error:           var(--c-brick-red);
+  // --c-text-hover:           var(--c-reddish-orange);
+  // --c-accent:               var(--c-banana-yellow);
+  // --c-accent2:              var(--c-dusk-blue);
+  // --c-button-donate:        var(--c-reddish-orange);
+  // --c-button-primary:       var(--c-banana-yellow);
+  // --c-button-text:          var(--c-white);
+ 
+}
+
+/*Dark and Light Groups */
+.u-color-group-dark {
+  --color-background:           var(--color-dark-gray);
+  --color-background-muted:     rgb(var(--color-background));
+  --color-background-highlight: var(--color-dusk-blue);
+  --color-text:                 var(--color-white);
+  --color-text-muted:           var(--color-gray);
+  --color-text-error:           var(--color-brick-red);
+  --color-text-inverse:         var(--color-dark-gray);
+  --color-text-metadata:        var(--color-white);
+  --color-link:                 var(--color-white);
+  --color-link-body:            var(--color-white);
+  --color-link-hover:           var(--color-reddish-orange);
+  --color-link-hover-2:          var(--color-white);
+  --color-primary-1:             var(--color-banana-yellow);
+  --color-primary-2:             var(--color-reddish-orange);
+  --color-primary-3:             var(--color-purple);
+  --color-button-donate:        var(--color-reddish-orange);
+  --color-button-1:              var(--color-banana-yellow);
+  --color-button-2:              var(--color-button1); //none assigned in airtable
+  --color-border-bold:          var(--color-border-bold); //none 
+  --color-border-standard:      var(--color-border-standard); //none 
+  --color-border-subtle:        var(--color-border-subtle); //none
+}
+
+.u-color-group-light {
+  --color-background:           var(--color-white);
+  --color-background-muted:     var(--color-dirty-salmon);
+  --color-background-highlight: var(--color-taxicab-yellow);
+  --color-text:                 var(--color-dark-gray);
+  --color-text-muted:           var(--color-gray);
+  --color-text-error:           var(--color-brick-red);
+  --color-text-inverse:         var(--color-white);
+  --color-text-metadata:        var(--color-dark-gray);
+  --color-link:                 var(--color-dark-gray);
+  --color-link-body:            var(--color-reddish-orange);
+  --color-link-hover:           var(--color-reddish-orange);
+  --color-link-hover2:          var(--color-white);
+  --color-primary-1:             var(--color-banana-yellow);
+  --color-primary-2:             var(--color-reddish-orange);
+  --color-primary-3:             var(--color-purple);
+  --color-button-donate:        var(--color-reddish-orange);
+  --color-button-1:              var(--color-banana-yellow);
+  --color-button-2:              var(--color-button1); //none assigned in airtable
+  --color-border-bold:          var(--color-dark-gray);
+  --color-border-standard:      var(--color-dark-gray);
+  --color-border-subtle:        var(--color-gray);
+}
+
+

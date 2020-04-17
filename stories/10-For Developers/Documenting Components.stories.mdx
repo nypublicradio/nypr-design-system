@@ -1,0 +1,113 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="For Developers/Documenting Components" />
+
+# Documenting Components
+
+Storybook makes it easy to provide detailed documentation for components.
+
+## YUIdoc Comments
+
+Use YUIdoc comments to document public properties in the component's `js` file. Include all properties that can be passed into a component here, even ones that are only referenced in code in the `hbs` templates.
+
+YUIdoc examples for ember classes and components:
+https://github.com/ember-learn/ember-cli-addon-docs-yuidoc#documenting-components
+
+Example component YUIdoc comment:
+``````js
+/**
+  Component description.....
+
+  Usage:
+  ```
+  <NyprAButton>
+    Click Me
+  </NyprAButton>
+  ```
+
+  @class nypr-a-button
+  @yield {Block} block
+*/
+export default Component.extend({
+//...
+``````
+
+Example property YUIDoc comment:
+```js
+/**
+Title for the component, plain text.
+
+@argument title
+@type {String}
+*/
+title: '',
+```
+
+## Creating a Story File
+
+Stories are usage examples for your component. Each story can show off a different variant, use case, or special state of a component.
+
+Stories are listed in MDX files. MDX is markdown with embedded JSX. In this case Storybook provides all the JSX components you'll need to document your stories.
+
+In this case our story is wrapped in the `<Story>` tag, which renders your component in an iframe. This is wrapped in a `<Preview>` which
+
+You can create a story file for a component by typing:
+```bash
+ember g stories my-component-name
+```
+
+example story file:
+
+nypr-a-button.stories.mdx
+```md
+import hbs from 'htmlbars-inline-precompile';
+import { Meta, Title, Subtitle, Description, Props, Preview, Story, Heading } from '@storybook/addon-docs/blocks';
+const component = 'nypr-a-button';
+
+<Meta title="Components/Atoms/Button" component={component} />
+
+<Title />
+
+<Subtitle />
+
+<Description of={component} />
+
+<Preview>
+  <Story name="all" height="80px">{{
+    template: hbs`
+    <NyprAButton>Primary Button</NyprAButton>
+    <NyprAButton class='o-button--c-quaternary'>Secondary Button</NyprAButton>
+    `
+  }}</Story>
+</Preview>
+
+<Props of={component} />
+
+<Heading>Primary</Heading>
+
+<Preview withToolbar={true}>
+  <Story name="primary" height="80px">{{
+    template: hbs`<NyprAButton>Primary Button</NyprAButton>`
+  }}</Story>
+</Preview>
+
+<Heading>Text</Heading>
+
+<Preview withToolbar={true}>
+  <Story name="text" height="80px">{{
+    template: hbs`<NyprAButton @blank={{true}}>Text Button</NyprAButton>`
+  }}</Story>
+</Preview>
+
+<Heading>Secondary</Heading>
+
+<Preview withToolbar={true}>
+  <Story name="secondary" height="80px">{{
+    template: hbs`<NyprAButton class='o-button--c-quaternary'>Secondary Button</NyprAButton>`
+  }}</Story>
+</Preview>
+```
+
+Further Reading:
+
+- [Writing MDX stories in Ember](https://github.com/storybookjs/storybook/blob/next/addons/docs/ember/README.md#mdx)

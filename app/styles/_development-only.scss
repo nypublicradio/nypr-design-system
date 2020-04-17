@@ -1,0 +1,15 @@
+@import "./current-environment"; // import auto generated file that sets environment variable
+
+@if $environment == 'development' {
+  body:before {
+    opacity: 0.5;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    content: "#{$theme}";
+    padding: 5px;
+    border: 1px dotted #000;
+    color: #000;
+  }
+}

@@ -1,0 +1,75 @@
+.storybook-Compact {
+  /* This class overrides to use the compact spacing scale, for 
+      use in the spacing table in our documentation */
+  --spacing-base: var(--spacing-base-compact);
+  --spacing-increment: var(--spacing-increment-compact);
+
+  --space-1: calc(var(--spacing-base) / 2);
+  --space-2: var(--spacing-base);
+  --space-3: calc(var(--space-2) + var(--spacing-increment));
+  --space-4: calc(var(--space-3) + var(--spacing-increment));
+  --space-5: calc(var(--space-4) + var(--spacing-increment));
+  --space-6: calc(var(--space-5) + var(--spacing-increment));
+  --space-7: calc(var(--space-6) + var(--spacing-increment));
+  --space-8: calc(var(--space-7) + var(--spacing-increment));
+  --space-9: calc(var(--space-8) + var(--spacing-increment));
+  --space-10: calc(var(--space-9) + var(--spacing-increment));
+  --space-11: calc(var(--space-10) + var(--spacing-increment));
+}
+  
+.storybook-Loose {
+  /* This class overrides to use the loose spacing scale, for 
+    use in the spacing table in our documentation */
+  --spacing-base: var(--spacing-base-loose);
+  --spacing-increment: var(--spacing-increment-loose);
+  
+  --space-1: calc(var(--spacing-base) / 2);
+  --space-2: var(--spacing-base);
+  --space-3: calc(var(--space-2) + var(--spacing-increment));
+  --space-4: calc(var(--space-3) + var(--spacing-increment));
+  --space-5: calc(var(--space-4) + var(--spacing-increment));
+  --space-6: calc(var(--space-5) + var(--spacing-increment));
+  --space-7: calc(var(--space-6) + var(--spacing-increment));
+  --space-8: calc(var(--space-7) + var(--spacing-increment));
+  --space-9: calc(var(--space-8) + var(--spacing-increment));
+  --space-10: calc(var(--space-9) + var(--spacing-increment));
+  --space-11: calc(var(--space-10) + var(--spacing-increment));
+}
+
+.storybook-spacing-table {
+  font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-overflow-scrolling: touch;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 0;
+  border-collapse: collapse;
+}
+
+.storybook-spacing-table  tr:nth-of-type(2n) {
+  background-color: #F8F8F8;
+}
+
+.storybook-spacing-table tr th {
+  font-weight: bold;
+  border: 1px solid rgba(0,0,0,.1);
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+.storybook-spacing-table tr td {
+  border: 1px solid rgba(0,0,0,.1);
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+
+
+  

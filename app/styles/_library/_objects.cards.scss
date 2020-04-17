@@ -1,0 +1,11 @@
+/*------------------------------------*\
+    $CARDS
+\*------------------------------------*/
+
+.c-card {
+  padding: calc(var(--space-3) * 2) var(--space-3) var(--space-3);
+  border: 1px solid rgb(var(--color-border-standard));
+  box-shadow: 5px 5px 0 rgba(var(--color-primary-2), .17);
+  background-color: red;
+}
+

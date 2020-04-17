@@ -2,7 +2,9 @@
 
 # compiled output
 /dist/
+/storybook-static/
 /tmp/
+.storybook/preview-head.html
 
 # dependencies
 /bower_components/
@@ -17,6 +19,7 @@
 /npm-debug.log*
 /testem.log
 /yarn-error.log
+.DS_Store
 
 # ember-try
 /.node_modules.ember-try/
@@ -25,3 +28,6 @@
 
 # importable sass variables
 /tests/dummy/app/utils/sass-vars
+
+/.yalc/
+yalc.lock

@@ -1,0 +1,72 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Molecules/Cards" />
+
+# Cards
+
+A card is a type of container that holds a single piece of content, acting as an entry point to more detailed information.
+
+
+## Overview
+
+Cards hold content-related information like text or images while providing functionality through links and buttons. Information held in cards should be scannable and easily digestible. If an article is the full meal, cards are merely an opening snack.
+
+  
+
+## Anatomy
+
+Radial allows for flexible card functionality with elements that can be switched on or off to best fit your needs.
+
+  
+
+ <img alt="card anatomy" src="./images/Molecules-Cards-card-anatomy.png" width="400" />
+
+ 1. 1- **Image** - This should relate to the information in the card. Follow your brand’s size guidelines.
+ 2. 2- **Tag Label** - If your site supports tagging or "Categories," this Tag Label is made visible here. Keep tags as short as possible -- if a tag is longer than three words, follow the brand's rules on abbreviation and truncation. 
+ 3. 3- **Title** - Every card needs a title! Cards have been designed to handle titles spanning multiple lines. 
+ 4. 4- **Subtitle** - Subtitles can be used to add extra context or categorization to the card Title.
+ 5. 5- **Body** - More information can be placed here. The ideal body length is about the same of a tweet (140 Characters). If the body is longer, follow the brand's rules on abbreviation and truncation.
+ 6. 6- **Button** - Used as a card's primary (and only) CTA. Following the Button component, this must be tied to an action and named as such.
+ 7. 7- **Metadata** - This small text field can be used for short form information like a date stamp or comment count.
+
+  
+
+## Usage
+
+Use groups of cards to display a group or list of related information as entry points to more content (eg., news stories, podcasts, or a detailed group of options).
+
+## Sizing & Grids
+
+Cards use flexible layouts, spanning a max-width of 10 columns and min-width of 4 columns on the grid on desktop. Radial provides cards in two preset sizes, small and large. Large cards are meant to add prominence to content and can handle more elements, while small cards work better with less information in them.
+
+  
+  
+ <img alt="example of cards sizes large and small" src="./images/Molecules-Cards-sizes.png" width="400" />
+
+
+## Horizontal vs. Vertical Cards
+
+Radial uses two different card layouts, Horizontal and Vertical, to provide flexible arrangement. The biggest differentiator between the two layouts is the image placement in relation to text content. When using a vertical layout, the image and text are stacked on top of eachother. When using a horizontal layout, the image and text sit side by side. Vertical cards are more suited to a grid arrangement and look better next to each other, while horizontal cards are made specifically for stacking in a list format. Horizontal and vertical layouts follow the same stacking behavior on mobile.
+
+
+ 
+| Card Type | Examples |
+| -- | -- |
+| Horizontal, Small  | <img alt="example of small horizontal card" src="./images/Molecules-Cards-Small-Horizontal-Card.png" width="296"/> |
+| Horizontal, Large  | <img alt="example of large horizontal card" src="./images/Molecules-Cards-Large-Horizontal-Card.png" width="528.5"/>|
+| Vertical, Small  | <img alt="example of small vertical card" src="./images/Molecules-Cards-Small-Vertical-Card.png" width="174"/> |
+| Vertical, Large  | <img alt="example of large vertical card" src="./images/Molecules-Cards-Large-Vertical-Card.png" width="334"/> |
+
+
+
+  
+
+## Accessibility
+
+* Use correct semantic heading markup to correctly convey hierarchy and content structure.
+    
+* Button text and background color must meet WCAG 2.0 [minimum contrast](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) requirement.
+    
+* Use alt texts for images
+
+

@@ -1,0 +1,92 @@
+/*------------------------------------*\
+    $LEADS/HEROS
+\*------------------------------------*/
+
+.c-lead .o-caption {
+  @include media("<=medium") {
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+}
+
+/**
+ * Gallery version of a lead
+ */
+.c-lead-gallery__top {
+  margin-bottom: var(--space-3);
+}
+.c-lead-gallery__image img {
+  cursor: pointer;
+}
+.c-lead-gallery .o-figure {
+  background-color: rgb(var(--color-background-muted));
+}
+.c-lead-gallery .o-caption {
+  padding: 0 var(--space-3) var(--space-3);
+}
+/* ember compat*/
+.c-lead-gallery .o-caption > .o-credit {
+  padding: 0;
+  display: block;
+}
+.c-lead-gallery__title {
+  font-size: var(--font-size-header-4);
+}
+.c-lead-gallery__caption p {
+  font-size: var(--font-size-body-1);
+}
+.c-lead-gallery__thumbs {
+  display: flex;
+  justify-content: space-between;
+}
+.c-lead-gallery__thumbs-thumb {
+  display: inline-block;
+  max-width: calc(20% - var(--space-3));
+  min-width: calc(20% - var(--space-3));
+  border: $border-style-m;
+  @include typeface(small, 3);
+
+  @include media("<=medium") {
+    max-width: calc(25% - var(--space-3));
+    min-width: calc(25% - var(--space-3));
+    &:nth-child(4) {
+      display: none;
+    }
+  }
+
+  @include media("<=small") {
+    max-width: calc(33.3333% - var(--space-2));
+    min-width: calc(33.3333% - var(--space-2));
+    &:nth-child(3) {
+      display: none;
+    }
+  }
+}
+.c-lead-gallery__thumbs-thumb.is-active {
+  border-color: rgb(var(--color-reddish-orange));
+}
+.c-lead-gallery__thumbs-thumb img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.c-lead-gallery__thumbs-thumb-text {
+  padding: var(--space-3) var(--space-2) var(--space-2);
+  background-color: $c-dark-bg;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: rgb(var(--color-text-inverse));
+  white-space: nowrap;
+}
+.c-lead-gallery__thumbs-thumb-text:hover {
+  background-color: rgb(var(--color-reddish-orange));
+}
+.c-lead-gallery__thumbs-thumb-text span {
+  display: block;
+  font-size: var(--font-size-header-5);
+  width: 100%;
+  text-align: center;
+}

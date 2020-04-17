@@ -1,0 +1,38 @@
+import hbs from 'htmlbars-inline-precompile';
+import { Meta, Title, Subtitle, Description, Props, Preview, Story, Heading } from '@storybook/addon-docs/blocks';
+const component = '<%= dasherizedModuleName %>'
+
+<Meta title="Components/<%= type %>/<%= title %>" component={component} />
+
+<Title />
+
+<Subtitle />
+
+<Description of={component} />
+
+<Preview>
+  <Story name="all" height="80px">{{
+    template: hbs`
+    <<%= classifiedModuleName %> />
+    <<%= classifiedModuleName %> />
+    `
+  }}</Story>
+</Preview>
+
+<Props of={component} />
+
+<Heading>Variant 1</Heading>
+
+<Preview withToolbar={true}>
+  <Story name="variant1" height="80px">{{
+    template: hbs`<<%= classifiedModuleName %> />`
+  }}</Story>
+</Preview>
+
+<Heading>Variant 2</Heading>
+
+<Preview withToolbar={true}>
+  <Story name="variant2" height="80px">{{
+    template: hbs`<<%= classifiedModuleName %> />`
+  }}</Story>
+</Preview>

@@ -10,8 +10,6 @@ import layout from '../templates/components/nypr-o-donate';
   <NyprODonate @message='hello world' @linkText='click me' @linkUrl='http://example.com/pledge' @close=(action close) />
   ```
 
-  Block Usage:
-  ```hbs
   @class nypr-o-donate
   @yield {Hash} hash
 */

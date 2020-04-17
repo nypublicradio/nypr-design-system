@@ -1,0 +1,181 @@
+/*------------------------------------*\
+    $FOOTER
+\*------------------------------------*/
+
+.c-main-footer {
+    padding: var(--space-5) 0;
+    background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
+    background-position: 100% 142px;
+    background-repeat: repeat-x;
+  
+}
+
+.c-main-footer__inner {
+  @include media(">xlarge") {
+    margin-top: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.c-main-footer__col1 {
+  width: 100%;
+  max-width: 570px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.c-main-footer__branding {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  @include media(">xlarge") {
+    justify-content: flex-start;
+  }
+}
+
+.c-main-footer__branding .c-share-tools {
+  fill: white;
+}
+
+.c-main-footer__logo {
+  min-width: 150px;
+  max-width: 150px;
+  margin-right: var(--space-4);
+
+  @include media(">small") {
+    margin-right: var(--space-7);
+  }
+}
+
+.c-main-footer__send-story {
+  display: inline-block;
+  color: rgb(var(--color-background));
+  padding: var(--space-3) 0;
+  margin-bottom: var(--space-3);
+  @include typeface(small, 3);
+  text-transform: uppercase;
+}
+
+.c-main-footer__utility {
+  @include media("<=small") {
+    margin-bottom: -18px;
+  }
+}
+
+.c-main-footer__slogan p {
+  color: rgb(var(--color-text));
+  font-size: var(--font-size-small-4); /* Not in the type scale*/
+}
+
+.c-main-footer__nav {
+  @include media("<=xlarge") {
+    text-align: center;
+    padding-bottom: var(--space-5);
+  }
+}
+
+c-main-footer__copyright-text {
+  @include typeface(small, 3);
+}
+
+.c-secondary-nav__link {
+  @include typeface(small, 3);
+  text-transform: uppercase;
+}
+
+.c-main-footer__nav .c-secondary-nav__item {
+  display: inline-block;
+
+  @include media("<=xlarge") {
+    margin: 0 var(--space-3) var(--space-4);
+  }
+}
+
+.c-main-footer__nav .c-secondary-nav__item:not(:last-child) {
+  @include media(">xlarge") {
+    margin-right: var(--space-5);
+  }
+}
+
+.c-main-footer__nav .c-secondary-nav__link {
+  padding: var(--space-2) 0;
+}
+
+.c-main-footer__nypr-logo {
+  width: 120px;
+  margin: 0 auto var(--space-3);
+
+  @include media(">xlarge") {
+    margin: 0 var(--space-5) 0 0;
+  }
+}
+
+.c-main-footer__nypr-logo path,
+.c-main-footer__nypr-logo polygon {
+  fill: rgb(var(--color-text));
+}
+
+.c-main-footer__brand-group {
+  text-align: center;
+
+  @include media(">xlarge") {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+.c-main-footer .c-toggle-box__content {
+  min-width: 320px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.c-main-footer__bottom {
+  border-top: 1px dashed rgba(var(--color-text-metadata), 0.5);
+  padding: var(--space-4) var(--space-3);
+  text-align: center;
+  margin-left: calc(var(--space-3) * -1);
+  margin-right: calc(var(--space-3) * -1);
+
+  @include media(">xlarge") {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.c-main-footer__terms-links {
+  @include typeface(subheader, 3);
+  font-weight: normal;
+  font-size: var(--font-size-body-3);
+
+  @include media("<=large") {
+    margin-top: var(--space-5);
+  }
+}
+
+.c-main-footer__terms-links a {
+  margin: 0 var(--space-3);
+  padding: 8px 0;
+  color: rgb(var(--color-primary-1));
+  @include typeface(subheader, 3);
+  font-weight: normal;
+  font-size: var(--font-size-body-3);
+
+  @include media(">large") {
+    margin: 0 var(--space-5) 0 0;
+  }
+}
+
+.c-main-footer__terms-links a:hover {
+  background-color: rgb(var(--color-primary-2));
+  color: rgb(var(--color-link-hover-2));
+}

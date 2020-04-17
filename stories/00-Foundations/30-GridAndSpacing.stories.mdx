@@ -1,0 +1,74 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { SpacingTable } from '../../.storybook/custom/components/Tables';
+import './spacingStyles.css';
+
+<Meta title="Foundations/Grid & Spacing" />
+
+
+
+# Grid & Spacing
+
+The Radial grid is responsive and adapts to different screen sizes. We use specific grids and spacing to keep consistent around the site.
+
+## Grid
+
+Radial is currently using an 8px grid as its unit of measurement. These 8px increments should be adhered to when building out components and should be the scale used when going up or down on a component’s size.
+
+The grid is made up of three elements: columns, gutters, and margins. The number and size of columns, gutters, and margins in a grid changes based on the users’ viewport.
+
+  
+  
+
+### Types of Grids
+
+> **Hard/Fixed Grid:** This involves placing objects on a fixed grid with 8-point increments. The number of columns change based on the viewport width.
+> 
+> **Soft Grid:** This involves placing objects at distances from each other that are divisible by 8. This would involve applying a Row and/or Column Layout Grid with properties divisible by 8.
+> 
+> **Layout Grid:** This type of grid involves specifying a grid of mostly columns only for use in atoms or molecules. This layout grid doesnt align with the Hard/Fixed Grid.
+
+  
+
+### Breakpoints
+
+Our Hard/Fixed Grids change based on breakpoints. Our most commonly used breakpoints are listed below:
+
+| Name | Breakpoint | Columns | Gutter |
+|--|--|--|--|
+| $xsmall | 360px | 8 col | 16px |
+| $small | 550px | 8 col | 16px |
+| $medium | 786px | 8 col | 16px |
+| $large | 850px | 16 col | 16px |
+| $xlarge | 1024px | 16 col | 16px |
+| $xxlarge | 1200px | 16 col | 16px |
+| $xxxlarge | 1500px | 16 col | 16px |
+
+  
+
+(TBD EXAMPLES: HARD / FIXED GRID, LAYOUT GRID, BASELINE GRID)
+
+## Spacing
+
+Radial spacing has three related tokens: Compact, Default, and Loose. Below are a few examples of how Radial spacing is used.
+
+<SpacingTable />
+
+### Spacing Usage
+Below you'll find a list of where different types of spacing are typically found
+
+| Name | Usage |
+|--|--|
+| Space 1 | Inline iconography |
+| Space 2 | Below eyebrows and kickers |
+| Space 3 | Below Headlines, between thumbnails and descriptions |
+| Space 4 | Between paragraphs, spacing between icon-only links (social) |
+| Space 5 | Around ads, above headlines, between columns of list items. Medium padding for modules (ex. mid-page donation pop-up) |
+| Space 6 | Used between major molecules (ex. Article intro and media figure, or comments and recirc.  |
+| Space 7 | N/A |
+| Space 8 | Above footer, homepage interruptors, large padding for modules (ex. Newsletter interruptor signup molecule) |
+| Space 9 | N/A |
+| Space 10 | N/A |
+| Space 11 | Below pagination |
+
+**Spacing Examples**
+<img alt="Card Component demonstrating spacing between text elements" src="./images/Foundations-Spacing-DefaultSpacingExample.png" width="579" />

@@ -1,0 +1,92 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ColorSwatch } from '../../.storybook/custom/components/Swatches'
+
+<Meta title="Foundations/Color & Borders" />
+
+# Color & Borders
+
+## Color
+
+Colors in Radial play double duty. They should be expressive of the brand and purposeful in usage. Like Daniel Craig as Bond, colors should look incredible on screen, but also deftly complete the mission.
+
+
+### Categories
+
+Colors can be thought of in three distinct categories. Primary colors include core brand colors (i.e. WNYC red) and can be used for prominent page elements such as CTAs, buttons, and backgrounds. Utility colors are typically shades of black and white used for body text, headers, or default backgrounds. Accent colors are any other polychromatic color used for a functional reason. Accent colors might include a shade of green for success or red for error.
+
+### Tokens
+
+See a more detailed list of tokens in use in [Airtable](https://airtable.com/invite/l?inviteId=invsghVm3eYR1d6T9&inviteToken=124e9347d00036d37c22a656c1db30fb33545926729192aa51f4814f52a8267b).
+
+  
+
+### Accessibility
+
+All text should have enough contrast with its background to be easily readable. Contrast is measured in a ratio format (i.e 4:1) where the difference between the opposing numbers indicates how much luminance there is between a given foreground and background. The bigger the difference between the two numbers, the higher the contrast. According to WCAG 2.0, contrast standards at the AA level are defined:
+
+-   3.0 contrast ratio for large text 
+-   14 pt font or larger for bold    
+-   18 pt font or larger for regular
+-   4.5 contrast ratio for smaller text
+    
+
+### Whitelabel Pallete
+
+Our Whitelabel uses a minimal yet functional palette to communicate best practices of Primary, Utility, and Accent colors.
+
+WHITELABEL COLOR SWATCHES  (PRIMARY / UTILITY / ACCENT)
+
+| Color Swatch Type | Color Swatch Examples |
+| -- | -- |
+| Primary | COLOR SWATCHES HERE |
+| Utility | COLOR SWATCHES HERE |
+| Accent | COLOR SWATCHES HERE |
+
+**Cool Blue** is the primary color for CTAs, buttons, or interactive elements. **Ceramic Blue** can be used as a header color or background color for larger, prominent components. **Sky Blue** is purely a decorative lighter alternative. **Gray Dark** is our primary text color, including headers, body text, and small text. **Cool White** is an alternative background-color. **Ember Red** is used solely for errors or warnings and **Sea Green** for success messaging or confirmations.
+
+### Gothamist Palette
+
+Our no-nonsense civic-minded palette for Gothamist focuses on text content and headlines while accenting with color that reminds us of the warm asphalt jungle that is NYC.
+
+GOTHAMIST COLOR SWATCHES (PRIMARY / UTILITY / ACCENT)
+
+| Color Swatch Type | Color Swatch Examples |
+| -- | -- |
+| Primary | COLOR SWATCHES HERE |
+| Utility | COLOR SWATCHES HERE |
+| Accent | COLOR SWATCHES HERE |
+
+
+**Banana Yellow** is the primary color used for accents, emphasis, and CTAs. **Reddish Orange** is also used for CTAs and actions related to donating or membership. **WNYC Red** is self-explanatory. **Gray Dark** is the primary header and body text color. **Gray** is used for certain icons, and **Dirty Salmon** is used for header underlines and emphasis. **Dusk Blue** is used for important banners, Purple for things relating to sponsored content, and **Taxicab Yellow** for highlighted container backgrounds (banners, signup cards, etc.)
+
+### Themes
+Color groups help pretermine foreground colors based on background color. Gothamist has two color groups, light and dark. 
+
+#### Light
+<img alt="gothamist light theme" src="./images/Foundations-Color-Gothamist-LightTheme.png" width="737" />
+
+#### Dark
+<img alt="gothamist dark theme" src="./images/Foundations-Color-Gothamist-DarkTheme.png" width="492" />
+
+
+## Borders
+
+Borders give structure and decoration to elements and containers when needed. They’re not always necessary, but can be a useful tool in the right scenario, like a potato masher.
+
+### Usage
+
+Currently, borders are actively used in Gothamist in text decoration, buttons, and banners. Dashed styles in this case are important to the brand’s online expression.
+
+### Styles
+
+Radial offers three slots for borders styles: **subtle**, **normal**, and **bold**. Each style has its own color variable, and each style can be customized (i.e. width, style, and color) to suit a brand's theme.
+  
+The Whitelabel styles shown below are only to communicate best practices for the three set styles, **subtle** being the least visually commanding of the three, **bold** being the most. When customizing these borders, make sure the style roughly fits into one of the three naming conventions, relative to the other two.
+
+| Border Name | Border Properties | Border Example |
+| -- | -- | -- |
+| --b-border-subtle | 2px, dashed (3,3) | EXAMPLE OF BORDER STYLE HERE |
+| --b-border-normal | 3px, solid | EXAMPLE OF BORDER STYLE HERE |
+| --b-border-bold | 5px, dashed (10,10) |  EXAMPLE OF BORDER STYLE HERE |
+
+More information on border styling can be found [here](https://flaviocopes.com/css-border/).

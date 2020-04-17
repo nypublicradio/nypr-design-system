@@ -1,0 +1,17 @@
+/*------------------------------------*\
+    $LIST TYPES
+\*------------------------------------*/
+
+/**
+ * Bullet List
+ */
+.o-bullet-list {
+  list-style-type: disc;
+  padding-left: var(--space-3);
+}
+.o-bullet-list li {
+  overflow: visible;
+}
+.o-bullet-list li:last-child {
+  margin-bottom: 0;
+}

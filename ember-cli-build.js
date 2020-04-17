@@ -18,25 +18,17 @@ module.exports = function(defaults) {
       compile: {
         enabled: false,
       },
-      filter: {
-        enabled: true,
-        plugins: [
-          require('tailwindcss')('./config/tailwind.js')
-        ]
-      }
-    },
-
-    'sass-vars': {
-      appDir: 'tests/dummy/app',
-      files: [
-        {colors: 'app/styles/nypr-design-system/vars/_colors.scss'},
-        {'wnyc-colors': 'app/styles/nypr-design-system/vars/_wnyc-colors.scss'},
-        {'gothamist-colors': 'app/styles/nypr-design-system/vars/_gothamist-colors.scss'}
-      ]
     },
     'component-lineage': {
       enabled: true,
-    }
+    },
+    'ember-cli-storybook': {
+      enableAddonDocsIntegration: true,
+      componentFilePathPatterns: ['addon/components/*.js']
+    },
+    'nypr-design-system': {
+      themes: ['white-label', 'gothamist']
+    },
   });
 
   /*

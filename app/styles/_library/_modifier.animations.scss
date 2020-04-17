@@ -1,0 +1,100 @@
+/*------------------------------------*\
+    $ANIMATIONS & TRANSITIONS
+\*------------------------------------*/
+
+/**
+ * Transitions
+ */
+.has-trans {
+  transition: all .4s ease-in-out;
+}
+
+.has-trans--fast {
+  transition: all .1s ease-in-out;
+}
+
+/**
+ * Fade Classes
+ */
+.has-fadeup {
+  opacity: 0;
+  transform: translate(0, 25px);
+  transition: all .6s ease-out;
+}
+
+.fadeup {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.has-fadein {
+  opacity: 0;
+  transition: all .8s ease-out;
+}
+
+.fadein {
+  opacity: 1;
+}
+
+/* Fade image in after load.*/
+.lazyload,
+.lazyloading {
+  opacity: 0;
+  transform: translate(0, 25px);
+  transition: all .6s ease-out;
+}
+
+.lazyloaded {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+/* Bounce up and down.*/
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-3px);
+  }
+  80% {
+    transform: translateY(3px);
+  }
+}
+
+/* Bounce left to right.*/
+@keyframes bounce-horiz {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+/* Slide in from bottom.*/
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Slide out from bottom.*/
+@keyframes slide-out-bottom {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+}

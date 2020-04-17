@@ -1,0 +1,117 @@
+/*------------------------------------*\
+    $COLOR MODIFIERS
+\*------------------------------------*/
+
+/**
+ * Text Colors
+ */
+.u-color--black,
+.u-color--black a {
+  color: $c-black;
+}
+
+.u-color--black-transparent {
+  color: rgba($c-black, 0.7);
+}
+
+.u-color--gray,
+.u-color--gray a {
+  color: $c-gray;
+}
+
+.u-color--gray--light,
+.u-color--gray--light a {
+  color: $c-gray--light;
+}
+
+.u-color--white,
+.u-color--white a {
+  color: $c-white !important;
+}
+
+.u-color--meta,
+.u-color--meta a {
+  color: $c-meta-color;
+}
+
+.u-color--primary,
+.u-color--primary a {
+  color: $c-primary;
+}
+
+.u-color--secondary,
+.u-color--secondary a {
+  color: $c-secondary;
+}
+
+.u-color--senary,
+.u-color--senary a {
+  color: $c-senary;
+}
+
+.u-color--septenary,
+.u-color--septenary a {
+  color: $c-septenary;
+}
+
+/**
+ * Background Colors
+ */
+.u-background-color--none {
+  background: none;
+}
+
+.u-background-color--black {
+  background-color: $c-black;
+}
+
+.u-background-color--gray {
+  background-color: $c-gray;
+}
+
+.u-background-color--gray--light {
+  background-color: $c-gray--light;
+}
+
+.u-background-color--white {
+  background-color: $c-white;
+}
+
+.u-background-color--primary {
+  background-color: $c-primary;
+}
+
+.u-background-color--secondary {
+  background-color: $c-secondary;
+}
+
+.u-background-color--quinary {
+  background-color: $c-quinary;
+}
+
+/**
+ * SVG Fill Colors
+ */
+.u-path-fill--black * {
+  fill: $c-black;
+}
+
+.u-path-fill--gray * {
+  fill: $c-gray;
+}
+
+.u-path-fill--white * { //nyprds gallery overlay
+  fill: $c-white;
+}
+
+.u-path-fill--primary * {
+  fill: $c-primary;
+}
+
+.u-path-fill--secondary * {
+  fill: $c-secondary;
+}
+
+.u-path-fill--quaternary * { //used in gothamist
+  fill: $c-quaternary;
+}

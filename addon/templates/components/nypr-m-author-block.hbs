@@ -15,7 +15,7 @@
     {{/if}}
     {{#if @articleRoute}}
       <span class="c-author-block__details">
-        {{#link-to params=@articleRoute class="u-font--secondary-style u-has-accent u-has-accent--secondary u-font--xs"}}
+        {{#link-to params=@articleRoute class="c-author-block__details-link u-font--secondary-style u-font--xs u-has-accent u-has-accent--secondary"}}
           Articles
         {{/link-to}}
       </span>
@@ -45,7 +45,6 @@
       <p data-test-author-bio>
         {{{@author.bio}}}
       </p>
-      {{!-- <button class="c-author-block__dek-toggle js-toggle-parent o-text-with-icon u-font--secondary-style u-has-accent u-has-accent--secondary u-font--xs">Read&nbsp;<span class="u-active--on">More</span><span class="u-active--off">Less</span><span class="o-icon o-icon--caret">{% include '@atoms/icons/icon-caret.twig' %}</span></button> --}}
     </div>
   {{/if}}
 

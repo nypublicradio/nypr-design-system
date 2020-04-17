@@ -1,0 +1,117 @@
+/*------------------------------------*\
+    $MESSAGING
+\*------------------------------------*/
+
+/**
+ * Text only banner message
+ */
+.o-text-banner {
+  @include media(">large") {
+    padding-top: var(--space-3);
+  }
+}
+
+/**
+ * Boxed in banner
+ */
+.o-box-banner {
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  text-align: center;
+  display: block;
+}
+.o-box-banner__inner {
+  @include media(">large") {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+.o-box-banner.this-is-active {
+  display: none;
+}
+.o-box-banner__close {
+  position: absolute;
+  right: var(--space-2);
+  top: var(--space-2);
+}
+.o-box-banner__title {
+  font-weight: bold;
+  font-size: var(--font-size-header-2);
+
+  @include media(">large") {
+    font-size: var(--font-size-header-4);
+    text-align: right;
+  }
+}
+.o-box-banner__title > a,
+.o-box-banner__title-link {
+  @include inline-accent(
+    rgb(var(--color-text)),
+    rgb(var(--color-text)),
+    rgb(var(--color-primary-2)),
+    false,
+    $c-tertiary
+  );
+  transition: none;
+}
+.o-box-banner__group {
+  @include media(">large") {
+    min-width: 73%;
+    padding-left: var(--space-7);
+    text-align: left;
+  }
+}
+.o-box-banner__dek p {
+  line-height: 1.45;
+
+  @include media("<=medium") {
+    font-size: var(--font-size-body-1);
+  }
+}
+.o-box-banner__dek a {
+  border-bottom-color: rgb(var(--color-border-standard));
+  color: rgb(var(--color-text));
+}
+.o-box-banner__dek a:hover {
+  color: $c-tertiary;
+  background-color: transparent;
+  border-bottom-color: $c-tertiary;
+}
+.o-box-banner--no-desc .o-box-banner__title {
+  margin-bottom: var(--space-3);
+
+  @include media(">large") {
+    padding-right: var(--space-7);
+    text-align: right;
+    margin-top: -4px;
+    margin-bottom: 0;
+    max-width: 75%;
+  }
+}
+.o-box-banner--no-desc .o-box-banner__group {
+  @include media(">large") {
+    min-width: 0;
+    padding-left: 0;
+    text-align: left;
+  }
+}
+.o-box-banner--sticky {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 1s;
+}
+.o-box-banner--sticky.this-is-active {
+  display: block;
+  animation: slide-out-bottom 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+.o-box-banner--senary { //dark
+  background-color: rgb(var(--color-background-highlight));
+  @include reversed-out-text;
+}
+.o-box-banner--senary .o-box-banner__close path {
+  fill: rgb(var(--color-text));
+}
+.o-box-banner--senary .o-box-banner__title a {
+  @include inline-accent(rgb(var(--color-text)), rgb(var(--color-text)), rgb(var(--color-text)), rgb(var(--color-primary-2)), rgb(var(--color-text)));
+}

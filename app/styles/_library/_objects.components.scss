@@ -1,0 +1,206 @@
+/*------------------------------------*\
+    $COMPONENTS
+\*------------------------------------*/
+
+/**
+ * Toggle box container
+ */
+.c-toggle-box {
+  position: relative;
+}
+.c-toggle-box__label {
+  position: relative;
+}
+.c-toggle-box__label:before {
+  content: "";
+  bottom: -22px;
+  right: 0;
+  position: absolute;
+  background-color: $c-white;
+  opacity: 0;
+  transform: translateY(20px) rotate(-45deg);
+  transition: none;
+  width: 0;
+  height: 0;
+}
+.c-toggle-box__label {
+  // font-family: var(--font-family-small);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.c-toggle-box__content {
+  position: absolute;
+  width: 100%;
+  right: calc(var(--space-2) * -1);
+  top: var(--space-5);
+  padding: var(--space-3);
+  background-color: rgb(var(--color-background));
+  opacity: 0;
+  z-index: $z-index-vanish;
+  transform: scale(0.85);
+  transform-origin: left center;
+  transition: all 0.2s ease-out;
+
+  @include media(">medium") {
+    right: auto;
+    left: 50%;
+    transform: scale(0.85) translate(-50%);
+  }
+}
+.c-toggle-box .c-toggle-box__label {
+  color: rgb(var(--color-text));
+}
+.c-toggle-box .o-icon--caret path {
+  fill: $c-white;
+}
+/* Open*/
+.c-toggle-box.this-is-active .c-toggle-box__label:before {
+  opacity: 1;
+  transform: translateY(0) rotate(-45deg);
+  transition: transform 0.1s ease-out 0.15s, opacity 0.15s ease-out 0.15s;
+  width: 15px;
+  height: 15px;
+}
+.c-toggle-box.this-is-active .c-toggle-box__content {
+  opacity: 1;
+  transform: scale(1);
+  z-index: $z-index-toggle-box-content;
+
+  @include media(">medium") {
+    transform: scale(1) translate(-50%);
+  }
+}
+
+/**
+ * Share toggle box
+ */
+.c-toggle-box--share .c-toggle-box__content {
+  width: 115px;
+}
+.c-toggle-box--share .c-share-tools__group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+.c-toggle-box--share .c-share-tools__link {
+  width: 40%;
+}
+.c-toggle-box--share .c-share-tools__link:nth-child(1),
+.c-toggle-box--share .c-share-tools__link:nth-child(2) {
+  margin-bottom: var(--space-2);
+}
+.c-toggle-box--share .c-share-tools__label {
+  font-size: var(--font-size-small-3);
+}
+
+/**
+ * Progress bar
+ */
+.o-progress {
+  position: absolute;
+  left: 0;
+  bottom: calc(var(--space-2) * -1);
+  width: 100%;
+  height: var(--space-2);
+  appearance: none;
+  border: none;
+  background-color: $c-gray--light;
+  color: rgb(var(--color-primary-1));
+  z-index: $z-index-progress-bar;
+}
+.o-progress::-webkit-progress-bar {
+  background-color: $c-gray--light;
+}
+.o-progress::-webkit-progress-value {
+  background-color: rgb(var(--color-primary-1));
+}
+.o-progress::-moz-progress-bar {
+  background-color: rgb(var(--color-primary-1));
+}
+
+.c-share-tools {
+  display: flex;
+  align-items: center;
+
+  @include media("<=small") {
+    flex-wrap: wrap;
+  }
+}
+
+@include media("<=small") {
+  .c-share-tools__label {
+    flex-basis: 100%;
+    margin: 0 0 2px 0;
+
+    + .c-share-tools__group > .c-share-tools__link:first-of-type {
+      margin-left: -5px; /* align first icon with label if present*/
+    }
+  }
+
+  .c-share-tools__link {
+    margin: 0;
+  }
+
+  .c-share-tools__group {
+    flex-wrap: wrap;
+  }
+
+  .c-share-tools__group > * + * {
+    margin: 0 0 0 var(--space-1);
+  }
+}
+
+.c-share-tools__label {
+  font-family: var(--font-family-subheader);
+  font-size: var(--font-size-body-1);
+
+  margin-right: var(--space-2);
+}
+
+.c-share-tools__group {
+  display: flex;
+  align-items: center;
+}
+
+.c-share-tools__link {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  margin: 0 4px;
+
+  @include media(">small") {
+    width: 40px;
+  }
+}
+
+.c-share-tools__link path {
+  transition: all 0.25s ease-in-out;
+}
+
+.c-share-tools__link:hover path {
+  fill: rgb(var(--color-primary-2));
+}
+
+.c-share-tools--vertical .c-share-tools__group {
+  flex-wrap: wrap;
+}
+
+.c-share-tools--vertical .c-share-tools__link {
+  flex-basis: 100%;
+  margin: 4px 0;
+}
+
+.c-share-tools--vertical .c-share-tools__link--print {
+  @include media(">medium") {
+    margin-bottom: 10px;
+    background-image: linear-gradient(to right, transparent 50%, rgb(var(--color-text-muted)) 50%);
+    background-position: center top;
+    background-size: 16px 1px;
+    background-repeat: repeat-x;
+  }
+}
+
+.c-share-tools--vertical .c-share-tools__link--print svg {
+  margin-top: 10px;
+}
