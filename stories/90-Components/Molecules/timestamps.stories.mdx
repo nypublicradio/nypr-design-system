@@ -21,9 +21,13 @@ Timestamp displays information related to the date or time.
 ## Formatting
 Timestamps follow a 12-hour clock and should include an a “am” or “pm” so it’s clear what time is being communicated. Capitalization of "am" or "pm" is left to the discretion of the brand.
 
-If time is more then 24 hrs in the past format like: "Month DD, YYYY, hh:mm a"
+If time is within the current **year**, do not display the year, format like: "Month D, h:mm a"
 
-If time is less then 24 hrs in the past format like: "N hours ago"
+If time is **more than** 24 hrs in the past format like: "Month D, YYYY h:mm a"
+
+If time is **less than** 24 hrs in the past format like: "N hours ago"
+
+If time is **less than** or equal to 5 minutes in the past format like: "Just Now"
 
 
 ## Timestamp on Cards
@@ -55,6 +59,3 @@ Oct.
 Nov.
 
 Dec.
-
-  
-If the article is from current **year**, do not display the year.
