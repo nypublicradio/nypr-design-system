@@ -1,6 +1,6 @@
 # `nypr-design-system` changelog
 
-## `3.0.0.alpha1`
+## `3.0.0-alpha1`
 - [BREAKING] Tokens updated to use CSS custom properties (CSS variables) 
 - [BREAKING] Typography Tokens refactored (WIP)
 - [BREAKING] Spacing Tokens refactored
