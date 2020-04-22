@@ -36,10 +36,10 @@
 }
 .o-box-banner__title {
   font-weight: bold;
-  font-size: var(--font-size-header-2);
+  font-size: var(--font-size-8);
 
   @include media(">large") {
-    font-size: var(--font-size-header-4);
+    font-size: var(--font-size-10);
     text-align: right;
   }
 }
@@ -65,7 +65,7 @@
   line-height: 1.45;
 
   @include media("<=medium") {
-    font-size: var(--font-size-body-1);
+    font-size: var(--font-size-5);
   }
 }
 .o-box-banner__dek a {

@@ -7,10 +7,10 @@
 }
 
 .c-article__headline {
-  @include typeface(header, 10);
+  @include typeface(header, 16);
 
   @include media("<=medium") {
-    @include typeface(header, 8);
+    @include typeface(header, 14);
   }
 }
 
@@ -101,7 +101,7 @@
 }
 
 .c-related-content__list a {
-  font-size: var(--font-size-body-1);
+  font-size: var(--font-size-5);
 }
 
 .c-related-content__heading {
