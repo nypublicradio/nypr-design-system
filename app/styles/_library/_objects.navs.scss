@@ -14,7 +14,7 @@
 .o-menu-toggle__line:before,
 .o-menu-toggle__line:after {
   position: absolute;
-  background-color: rgb(var(--color-background)); //this whole file dark ? pulled from light for now. 
+  background-color: rgb(var(--color-background)); //this whole file dark ? pulled from light for now.
   height: 2px;
   display: block;
   left: 50%;
@@ -92,6 +92,7 @@
  * Primary navigation (top)
  */
 .c-primary-nav--top {
+  @include color-group-dark;
   @include media("<=xlarge") {
     display: none;
   }
@@ -107,7 +108,7 @@
   display: block;
   width: 2px;
   height: 16.5px;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(var(--color-text));
   position: absolute;
   top: 0;
   bottom: 0;

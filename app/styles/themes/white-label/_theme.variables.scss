@@ -117,9 +117,11 @@
   --color-sea-green:     #{hex2rgb(#469C78)};
   --color-bright-purple: #{hex2rgb(#924db1)};
 
-  --color-primary1:             var(--color-cool-blue);
-  --color-primary2:             var(--color-sea-green);
-  --color-primary3:             var(--color-bright-purple);
+  --opacity-hover: 0.75;
+
+  --color-primary-1:            var(--color-cool-blue);
+  --color-primary-2:            var(--color-sea-green);
+  --color-primary-3:            var(--color-bright-purple);
   --color-background:           var(--color-white);
   --color-background-muted:     var(--color-cool-white);
   --color-background-highlight: var(--color-cool-white);
@@ -128,27 +130,48 @@
   --color-text-error:           var(--color-ember-red);
   --color-text-inverse:         var(--color-white);
   --color-text-metadata:        var(--color-gray-dark);
-  --color-link:                 var(--color-gray-dark);
-  --color-link-body:            var(--color-cool-blue);
-  --color-link-hover:           var(--color-sky-blue);
-  --color-link-hover-2:          var(--color-white);
-  --color-primary-1:             var(--color-cool-blue);
-  --color-primary-2:             var(--color-sea-green);
-  --color-primary-3:             var(--color-bright-purple);
-  --color-button-donate:        var(--color-cool-blue);
-  --color-button-1:              var(--color-cool-blue);
-  --color-button-2:              var(--color-sea-green);
-  --color-border-bold:          var(--color-gray-dark);
-  --color-border-standard:      var(--color-gray-dark);
-  --color-border-subtle:        var(--color-concrete);
 
-  /* Themable Tokens, Borders */
-  --b-border-subtle: 2px dashed var(--c-dirty-salmon);
-  --b-border-normal: 3px solid var(--c-black);
-  --b-border-bold:   5px dashed var(--c-reddish-orange);
+  /* Links */
+  --color-link:                 var(--color-cool-blue);
+  --text-decoration-link:       underline;
+  --color-link-hover:           var(--color-white);
+  --text-decoration-link-hover: underline;
+  --opacity-link-hover:         var(--opacity-hover);
 
-  --opacity-hover:              0.75;
-  --opacity-focus:              0.75;
+  /* Navigation Links */
+  --color-navigation-link:                 var(--color-gray-dark);
+  --text-decoration-navigation-link:       underline;
+  --color-navigation-link-hover:           var(--color-sky-blue);
+  --text-decoration-navigation-link-hover: underline;
+  --opacity-navigation-link-hover:         var(--opacity-hover);
+
+  /* Tags */
+  --color-tag-text:             var(--color-white);
+  --color-tag-background:       var(--color-cool-blue);
+  --color-tag-hover-text:       var(--color-white);
+  --color-tag-hover-background: var(--color-cool-blue);
+  --opacity-tag-hover:          var(--opacity-hover);
+
+  /* Buttons */
+  --color-button-primary:         var(--color-cool-blue);
+  --color-button-primary-hover:   var(--color-cool-blue);
+  --color-button-primary-pressed: var(--color-ceramic-blue);
+  --opacity-button-primary-hover: var(--opacity-hover);
+
+  --color-button-outline:         var(--color-cool-blue);
+  --color-button-outline-hover:   var(--color-cool-blue);
+  --color-button-outline-pressed: var(--color-ceramic-blue);
+  --opacity-button-outline:       var(--opacity-hover);
+
+  /* Borders */
+  --color-border-subtle: var(--color-black);
+  --color-border-normal: var(--color-black);
+  --color-border-bold:   var(--color-black);
+
+  --border-subtle: 2px dashed rgb(var(--color-border-subtle));
+  --border-normal: 3px solid  rgb(var(--color-border-normal));
+  --border-bold:   5px dashed rgb(var(--color-border-bold));
+
 }
 
 /*Dark and Light Groups */
@@ -172,7 +195,7 @@
   --color-button-1:             var(--color-cool-blue);
   --color-button-2:             var(--color-sea-green);
   --color-border-bold:          var(--color-border-bold);      //none assigned in airtable
-  --color-border-standard:      var(--color-border-standard);  //none
+  --color-border-normal:        var(--color-border-normal);    //none
   --color-border-subtle:        var(--color-border-subtle);    //none
 }
 
@@ -188,14 +211,14 @@
   --color-link:                 var(--color-gray-dark);
   --color-link-body:            var(--color-cool-blue);
   --color-link-hover:           var(--color-sky-blue);
-  --color-link-hover-2:          var(--color-white);
-  --color-primary-1:             var(--color-cool-blue);
-  --color-primary-2:             var(--color-sea-green);
-  --color-primary-3:             var(--color-bright-purple);
+  --color-link-hover-2:         var(--color-white);
+  --color-primary-1:            var(--color-cool-blue);
+  --color-primary-2:            var(--color-sea-green);
+  --color-primary-3:            var(--color-bright-purple);
   --color-button-donate:        var(--color-cool-blue);
-  --color-button-1:              var(--color-cool-blue);
-  --color-button-2:              var(--color-sea-green);
+  --color-button-1:             var(--color-cool-blue);
+  --color-button-2:             var(--color-sea-green);
   --color-border-bold:          var(--color-gray-dark);
-  --color-border-standard:      var(--color-gray-dark);
+  --color-border-normal:        var(--color-gray-dark);
   --color-border-subtle:        var(--color-concrete);
 }
