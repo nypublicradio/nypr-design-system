@@ -18,7 +18,7 @@
 
 @mixin color-group-dark {
   --color-background:           var(--color-dark-gray);
-  --color-background-muted:     rgb(var(--color-background));
+  --color-background-muted:     var(--color-background);
   --color-background-highlight: var(--color-dusk-blue);
   --color-text:                 var(--color-white);
   --color-text-muted:           var(--color-gray);
@@ -36,8 +36,8 @@
   --color-button-donate:        var(--color-reddish-orange);
   --color-button-1:             var(--color-banana-yellow);
   --color-button-2:             var(--color-button1);          //none assigned in airtable
-  --color-border-bold:          var(--color-border-bold);      //none 
-  --color-border-standard:      var(--color-border-standard);  //none 
+  --color-border-bold:          var(--color-border-bold);      //none
+  --color-border-normal:        var(--color-border-normal);  //none
   --color-border-subtle:        var(--color-border-subtle);    //none
 }
 
@@ -61,6 +61,6 @@
   --color-button-1:              var(--color-banana-yellow);
   --color-button-2:              var(--color-button1); //none assigned in airtable
   --color-border-bold:          var(--color-dark-gray);
-  --color-border-standard:      var(--color-dark-gray);
+  --color-border-normal:      var(--color-dark-gray);
   --color-border-subtle:        var(--color-gray);
 }

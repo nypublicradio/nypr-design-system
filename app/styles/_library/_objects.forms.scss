@@ -223,7 +223,7 @@ div.o-confirm-message p {
 }
 .c-newsletter-form__inner {
   background-color: rgb(var(--color-background-highlight));
-  border: 3px solid rgb(var(--color-border-standard));
+  border: 3px solid rgb(var(--color-border-normal));
   padding: var(--space-5) var(--space-4);
 
   @include media(">xlarge") {
@@ -246,7 +246,7 @@ div.o-confirm-message p {
 }
 .c-newsletter-form__field-group {
   display: flex;
-  border: 3px solid rgb(var(--color-border-standard));
+  border: 3px solid rgb(var(--color-border-normal));
   position: relative;
 }
 .c-newsletter-form__input {
@@ -261,11 +261,11 @@ div.o-confirm-message p {
   animation: bounce-horiz 0.8s 0s ease-out infinite;
 }
 .c-newsletter-form .c-newsletter-form__button {
-  background-color: $c-dark-bg; //not sure what gray 
+  background-color: $c-dark-bg; //not sure what gray
 }
 .c-newsletter-form__submit-icon {
   width: 24px;
-  fill: $c-white; //no fill, no whites 
+  fill: $c-white; //no fill, no whites
 }
 .c-newsletter-form__terms {
   padding-left: 25px;

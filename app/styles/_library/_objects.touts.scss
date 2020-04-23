@@ -27,7 +27,7 @@
   transform: translateX(0);
   transition: transform 0.2s $hard-ease-in;
   box-shadow: 0 0 10px rgba($c-black, 0.2); //no black
-  border: var(--b-border-normal);
+  border: var(--border-normal);
 
   @include media("<=xlarge") {
     max-width: 270px;
@@ -234,7 +234,7 @@
   position: absolute;
   left: -10px;
   top: 11px;
-  border: var(--b-border-normal);
+  border: var(--border-normal);
   width: 100%;
   height: 100%;
   z-index: 0;

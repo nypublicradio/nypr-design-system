@@ -61,7 +61,7 @@
   }
 }
 
-.c-main-footer { 
+.c-main-footer {
   @include color-group-dark;
   .gothamist-letters {
     fill: $c-white;
@@ -73,21 +73,17 @@
     @include color-group-light;
   }
 }
-
-//Light accent color, can't use --color-text-inverse  
-.o-breadcrumb, .o-kicker { 
-color: rgb(var(--color-dusk-blue));
+/* sponsored tags */
+.o-tag--sponsored {
+  font-weight: normal;
 }
 
-.o-kicker--sponsored { 
-  color: rgb(var(--color-text-inverse));
-  }
+.o-tag--sponsored,
+.o-kicker--sponsored {
+  color: rgb(var(--color-white));
+  background-color: rgb(var(--color-purple));
+}
 
-a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
-  background-color: rgb(var(--color-primary-2));
-  color: rgb(var(--color-link-hover-2));
-  opacity: 1;
-  }
 
 .u-has-accent .u-has-accent--secondary {
   color: rgb(var(--color-brick-red));
@@ -106,4 +102,48 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
   background-position: left top, left bottom, left top, right top;
   background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
   background-size: 18px 2px, 18px 2px, 2px 18px, 2px 18px;
+}
+
+// Buttons
+.o-button {
+  color: rgb(var(--color-dark-gray));
+  font-weight: bold;
+  transition: all 0.3s $hard-ease-in;
+  text-transform: uppercase;
+}
+
+.o-button:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: $z-index-button-outline;
+  width: 100%;
+  height: 100%;
+	border-color: 3px solid rgb(var(--color-button-primary));
+  transform: translate(0, 0);
+  transition: all 0.3s $hard-ease-in;
+}
+
+.o-button:hover {
+  transform: translate(10px, -10px);
+}
+
+.o-button:hover:before {
+  transform: translate(-10px, 10px);
+}
+
+.o-button.mod-donate {
+  color: rgb(var(--color-white));
+  background-color: rgb(var(--color-reddish-orange));
+  &:hover {
+    background-color: rgb(var(--color-reddish-orange));
+  }
+  &:active {
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+.o-button.mod-donate:before {
+  border: 3px solid rgb(var(color-reddish-orange));
 }
