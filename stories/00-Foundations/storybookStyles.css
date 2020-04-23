@@ -4,7 +4,10 @@
 These Styles Should not be applied to any websites
 outside of Storybook  */
 
-.sbdocs-ul, .sbdocs-li {
+/* Be sure to only add classes that affect Storybook Docs
+i.e. .sbdocs.sbdocs-example */
+
+.sbdocs.sbdocs-ul, .sbdocs.sbdocs-li {
   margin: 0;
   padding: 0;
   list-style: disc;
