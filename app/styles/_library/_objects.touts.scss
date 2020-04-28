@@ -272,9 +272,7 @@
   }
 }
 .c-newsletter-tout__dek {
-  @include typeface(subheader, 7);
-
-  font-size: var(--font-size-5);
+  @include typeface(subheader, 5);
   font-weight: normal;
 }
 .c-newsletter-tout__heading {

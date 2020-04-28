@@ -153,9 +153,8 @@ c-main-footer__copyright-text {
 }
 
 .c-main-footer__terms-links {
-  @include typeface(subheader, 9);
+  @include typeface(subheader, 7);
   font-weight: normal;
-  font-size: var(--font-size-7);
 
   @include media("<=large") {
     margin-top: var(--space-5);
@@ -166,9 +165,8 @@ c-main-footer__copyright-text {
   margin: 0 var(--space-3);
   padding: 8px 0;
   color: rgb(var(--color-primary-1));
-  @include typeface(subheader, 9);
+  @include typeface(subheader, 7);
   font-weight: normal;
-  font-size: var(--font-size-7);
 
   @include media(">large") {
     margin: 0 var(--space-5) 0 0;
