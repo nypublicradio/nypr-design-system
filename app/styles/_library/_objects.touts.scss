@@ -180,7 +180,7 @@
   }
 }
 .c-sponsored-tout__heading {
-  @include typeface(header, 5);
+  @include typeface(header, 11);
   position: absolute;
   top: -0.6em;
   left: var(--space-9);
@@ -272,13 +272,11 @@
   }
 }
 .c-newsletter-tout__dek {
-  @include typeface(subheader, 1);
-
-  font-size: var(--font-size-body-1);
+  @include typeface(subheader, 5);
   font-weight: normal;
 }
 .c-newsletter-tout__heading {
-  @include typeface(header, 5);
+  @include typeface(header, 11);
 }
 
 .c-newsletter-tout__text {

@@ -30,10 +30,10 @@
   display: block;
 }
 .c-lead-gallery__title {
-  font-size: var(--font-size-header-4);
+  font-size: var(--font-size-10);
 }
 .c-lead-gallery__caption p {
-  font-size: var(--font-size-body-1);
+  font-size: var(--font-size-5);
 }
 .c-lead-gallery__thumbs {
   display: flex;
@@ -86,7 +86,7 @@
 }
 .c-lead-gallery__thumbs-thumb-text span {
   display: block;
-  font-size: var(--font-size-header-5);
+  font-size: var(--font-size-11);
   width: 100%;
   text-align: center;
 }

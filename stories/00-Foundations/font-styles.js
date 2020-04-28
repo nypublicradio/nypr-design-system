@@ -3,9 +3,9 @@ export default [
     text: "Header 10",
     styles: {
       fontFamily: 'var(--font-family-header)',
-      fontSize: 'var(--font-size-header-10)',
+      fontSize: 'var(--font-size-16)',
       fontWeight: 'var(--font-weight-header-10)',
-      lineHeight: 'var(--line-height-header-10)',
+      lineHeight: 'var(--line-height-16)',
       letterSpacing: 'var(--letter-spacing-header-10)',
     }
   },
@@ -13,9 +13,9 @@ export default [
     text: "Header 9",
     styles: {
       fontFamily: 'var(--font-family-header)',
-      fontSize: 'var(--font-size-header-9)',
+      fontSize: 'var(--font-size-15)',
       fontWeight: 'var(--font-weight-header-9)',
-      lineHeight: 'var(--line-height-header-9)',
+      lineHeight: 'var(--line-height-15)',
       letterSpacing: 'var(--letter-spacing-header-9)',
     }
   },
@@ -23,9 +23,9 @@ export default [
     text: "Header 8",
     styles: {
       fontFamily: 'var(--font-family-header)',
-      fontSize: 'var(--font-size-header-8)',
+      fontSize: 'var(--font-size-14)',
       fontWeight: 'var(--font-weight-header-8)',
-      lineHeight: 'var(--line-height-header-8)',
+      lineHeight: 'var(--line-height-14)',
       letterSpacing: 'var(--letter-spacing-header-8)',
     }
   },
@@ -33,9 +33,9 @@ export default [
     text: "Header 7",
     styles: {
       fontFamily: 'var(--font-family-header)',
-      fontSize: 'var(--font-size-header-7)',
+      fontSize: 'var(--font-size-13)',
       fontWeight: 'var(--font-weight-header-7)',
-      lineHeight: 'var(--line-height-header-7)',
+      lineHeight: 'var(--line-height-13)',
       letterSpacing: 'var(--letter-spacing-header-7)',
     }
   },
@@ -43,9 +43,9 @@ export default [
     text: "Header 6",
     styles: {
       fontFamily: 'var(--font-family-header)',
-      fontSize: 'var(--font-size-header-6)',
+      fontSize: 'var(--font-size-12)',
       fontWeight: 'var(--font-weight-header-6)',
-      lineHeight: 'var(--line-height-header-6)',
+      lineHeight: 'var(--line-height-12)',
       letterSpacing: 'var(--letter-spacing-header-6)',
     }
   },
@@ -53,9 +53,9 @@ export default [
     text: "Header 5",
     styles: {
       fontFamily: 'var(--font-family-header)',
-      fontSize: 'var(--font-size-header-5)',
+      fontSize: 'var(--font-size-11)',
       fontWeight: 'var(--font-weight-header-5)',
-      lineHeight: 'var(--line-height-header-5)',
+      lineHeight: 'var(--line-height-11)',
       letterSpacing: 'var(--letter-spacing-header-5)',
     }
   },
@@ -63,9 +63,9 @@ export default [
     text: "Header 4",
     styles: {
       fontFamily: 'var(--font-family-header)',
-      fontSize: 'var(--font-size-header-4)',
+      fontSize: 'var(--font-size-10)',
       fontWeight: 'var(--font-weight-header-4)',
-      lineHeight: 'var(--line-height-header-4)',
+      lineHeight: 'var(--line-height-10)',
       letterSpacing: 'var(--letter-spacing-header-4)',
     }
   },
@@ -73,9 +73,9 @@ export default [
     text: "Header 3",
     styles: {
       fontFamily: 'var(--font-family-header)',
-      fontSize: 'var(--font-size-header-3)',
+      fontSize: 'var(--font-size-9)',
       fontWeight: 'var(--font-weight-header-3)',
-      lineHeight: 'var(--line-height-header-3)',
+      lineHeight: 'var(--line-height-9)',
       letterSpacing: 'var(--letter-spacing-header-3)',
     }
   },
@@ -83,9 +83,9 @@ export default [
     text: "Header 2",
     styles: {
       fontFamily: 'var(--font-family-header)',
-      fontSize: 'var(--font-size-header-2)',
+      fontSize: 'var(--font-size-8)',
       fontWeight: 'var(--font-weight-header-2)',
-      lineHeight: 'var(--line-height-header-2)',
+      lineHeight: 'var(--line-height-8)',
       letterSpacing: 'var(--letter-spacing-header-2)',
     }
   },
@@ -93,9 +93,9 @@ export default [
     text: "Header 1",
     styles: {
       fontFamily: 'var(--font-family-header)',
-      fontSize: 'var(--font-size-header-1)',
+      fontSize: 'var(--font-size-7)',
       fontWeight: 'var(--font-weight-header-1)',
-      lineHeight: 'var(--line-height-header-1)',
+      lineHeight: 'var(--line-height-7)',
       letterSpacing: 'var(--letter-spacing-header-1)',
     }
   },
@@ -103,9 +103,9 @@ export default [
     text: "Body 2",
     styles: {
       fontFamily: 'var(--font-family-body)',
-      fontSize: 'var(--font-size-body-2)',
+      fontSize: 'var(--font-size-6)',
       fontWeight: 'var(--font-weight-body-2)',
-      lineHeight: 'var(--line-height-body-2)',
+      lineHeight: 'var(--line-height-6)',
       letterSpacing: 'var(--letter-spacing-body-2)',
     }
   },
@@ -113,9 +113,9 @@ export default [
     text: "Body 1",
     styles: {
       fontFamily: 'var(--font-family-body)',
-      fontSize: 'var(--font-size-body-1)',
+      fontSize: 'var(--font-size-5)',
       fontWeight: 'var(--font-weight-body-1)',
-      lineHeight: 'var(--line-height-body-1)',
+      lineHeight: 'var(--line-height-5)',
       letterSpacing: 'var(--letter-spacing-body-1)',
     }
   },
@@ -123,9 +123,9 @@ export default [
     text: "Small 4",
     styles: {
       fontFamily: 'var(--font-family-small)',
-      fontSize: 'var(--font-size-small-4)',
+      fontSize: 'var(--font-size-4)',
       fontWeight: 'var(--font-weight-small-4)',
-      lineHeight: 'var(--line-height-small-4)',
+      lineHeight: 'var(--line-height-4)',
       letterSpacing: 'var(--letter-spacing-small-4)',
     }
   },
@@ -133,9 +133,9 @@ export default [
     text: "Small 3",
     styles: {
       fontFamily: 'var(--font-family-small)',
-      fontSize: 'var(--font-size-small-3)',
+      fontSize: 'var(--font-size-3)',
       fontWeight: 'var(--font-weight-small-3)',
-      lineHeight: 'var(--line-height-small-3)',
+      lineHeight: 'var(--line-height-3)',
       letterSpacing: 'var(--letter-spacing-small-3)',
     }
   },
@@ -143,9 +143,9 @@ export default [
     text: "Small 2",
     styles: {
       fontFamily: 'var(--font-family-small)',
-      fontSize: 'var(--font-size-small-2)',
+      fontSize: 'var(--font-size-2)',
       fontWeight: 'var(--font-weight-small-2)',
-      lineHeight: 'var(--line-height-small-2)',
+      lineHeight: 'var(--line-height-2)',
       letterSpacing: 'var(--letter-spacing-small-2)',
     }
   },
@@ -153,9 +153,9 @@ export default [
     text: "Small 1",
     styles: {
       fontFamily: 'var(--font-family-small)',
-      fontSize: 'var(--font-size-small-1)',
+      fontSize: 'var(--font-size-1)',
       fontWeight: 'var(--font-weight-small-1)',
-      lineHeight: 'var(--line-height-small-1)',
+      lineHeight: 'var(--line-height-1)',
       letterSpacing: 'var(--letter-spacing-small-1)',
     }
   },

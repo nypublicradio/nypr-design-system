@@ -18,7 +18,7 @@
 }
 
 .o-error-message p {
-  font-size: var(--font-size-small-3);
+  font-size: var(--font-size-3);
   font-weight: bold;
   line-height: 1.3;
   color: rgb(var(--color-text-error));
@@ -96,7 +96,7 @@ div.o-confirm-message p {
 }
 .c-search--top .c-search__input {
   width: calc(100% - 50px);
-  font-size: var(--font-size-small-4);
+  font-size: var(--font-size-4);
   padding-left: 45px;
   transform: translateX(calc(100% + 50px));
   transition: transform 0.1s ease-out 0.15s;
@@ -237,7 +237,7 @@ div.o-confirm-message p {
   }
 }
 .c-newsletter-form__text p {
-  font-size: var(--font-size-small-4);
+  font-size: var(--font-size-4);
   line-height: 1.55;
 }
 .c-newsletter-form__icon {
@@ -278,8 +278,8 @@ div.o-confirm-message p {
 }
 
 .c-newsletter-form__terms-checkbox-label {
-  @include typeface(body, 1);
-  font-size: var(--font-size-small-2);
+  @include typeface(body, 5);
+  font-size: var(--font-size-2);
 }
 .c-newsletter-form__terms p {
   line-height: 1.35;

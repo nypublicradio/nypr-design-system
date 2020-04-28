@@ -121,7 +121,7 @@
   display: inline-block;
   padding: 0 var(--space-3);
   color: rgb(var(--color-link-hover-2));
-  font-size: var(--font-size-body-2);
+  font-size: var(--font-size-6);
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -235,8 +235,8 @@
   display: inline-block;
   margin-right: var(--space-3);
 
-  @include typeface(subheader, 3);
-  font-size: var(--font-size-body-1);
+  @include typeface(subheader, 9);
+  font-size: var(--font-size-5);
   font-weight: var(--font-weight-body);
 
   @include media("<=medium") {
@@ -271,7 +271,7 @@
   border-radius: 50%;
 }
 .c-read-more-nav__link {
-  font-size: var(--font-size-header-1);
+  font-size: var(--font-size-7);
   font-weight: 600;
   padding-bottom: 0;
 

@@ -7,12 +7,12 @@
   letter-spacing: var(--letter-spacing-#{$type});
   font-weight: var(--font-weight-#{$type});
 
-  line-height: var(--line-height-#{$type}-#{$size});
-  font-size: var(--font-size-#{$type}-#{$size});
+  line-height: var(--line-height-#{$size});
+  font-size: var(--font-size-#{$size});
 
   @include media("<medium") {
-    line-height: var(--line-height-#{$type}-#{$size - 2});
-    font-size: var(--font-size-#{$type}-#{$size - 2});
+    line-height: var(--line-height-#{$size - 2});
+    font-size: var(--font-size-#{$size - 2});
   }
 }
 
