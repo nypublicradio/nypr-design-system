@@ -1,0 +1,82 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Atoms/TextInput"/>
+
+# Text Input
+
+  
+A text input allows you to gather information from a user in the form of alphanumeric text.
+
+  
+  
+
+## What’s Inside
+
+Radial provides a bunch of functionality for text inputs that can be switched on or off to best fit your needs.
+
+  
+
+ <img alt="example of text input anatomy" src="./images/Molecules-TextInput-Anatomy.png" width="400" />
+
+  
+1.  Required Indicator - Turn on this option when a field is required to be filled before submission.
+
+2.  Label - A text label should be used to help communicate the intended input of the field.
+        
+3.  Icon button - An alternative to an independent “submit” button, icon buttons are positioned inline with the field and are used to submit field input.
+    
+4.  Placeholder - Provides additional context to the nature of the indented input, should never be used in place of a label. Then are often used to provide an example of the type of input needed. (i.e. [me@email.com](mailto:my@email.com) for an email field)
+    
+5.  Microcopy - Provides instructional/long form information about the input.
+    
+6.  Checkbox/Icon - Placeholder for a checkbox atom or icon.
+    
+
+  
+  
+
+## States
+
+Default - in this state, the user hasn’t yet interacted with the input, but it's prepped and ready to accept input.
+
+ <img alt="example of default text input" src="./images/Molecules-TextInput-DefaultState.png" width="300" />
+
+Active - Outline the container with the stroke of an accent color to indicate when a user is focused on an element.
+
+ <img alt="example of active text input" src="./images/Molecules-TextInput-ActiveState.png" width="300" />
+
+  
+Required - If a form element is required, an asterisk should be injected before the input label, colored with the brand’s accent color for error.
+
+ <img alt="example of required text input" src="./images/Molecules-TextInput-RequiredState.png" width="300" />
+  
+
+Error - If an error occurred when submitting, the form element with an error should provide feedback with changed container stroke and text, usings the brand’s accent color for error.
+
+ <img alt="example of error text input" src="./images/Molecules-TextInput-ErrorState.png" width="300" />
+  
+
+Disabled - Use when input is not yet possible. Use a brand utility colors for text and stroke.
+
+ <img alt="example of diabled text input" src="./images/Molecules-TextInput-DisabledState.png" width="300" />
+
+  
+  
+  
+ 
+  
+
+## Accessibility
+
+**Text inputs**, when used, should clearly indicate the purpose of the input.
+
+  
+
+Text input components should have a matching `<label>` to them.
+
+  
+
+Add `aria-required` for required inputs.
+
+  
+Labels must have the for attribute matching the ID of the text input, like `<input id="unique-id-of-input" />`. This practice ensures that screen readers inform users correctly about what information to enter where.
