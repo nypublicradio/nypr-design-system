@@ -204,6 +204,12 @@
   // --c-button-donate:        var(--c-reddish-orange);
   // --c-button-primary:       var(--c-banana-yellow);
   // --c-button-text:          var(--c-white);
+
+   /* Animations */
+
+--animation-easing-outgoing:          cubic-bezier(0.4, 0.0, 1, 1);
+--animation-easing-incoming:          cubic-bezier(0.0, 0.0, 0.2, 1);
+--animation-easing-standard:          cubic-bezier(0.4, 0.0, 0.2, 1);
  
 }
 

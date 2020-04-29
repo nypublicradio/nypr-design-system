@@ -25,7 +25,7 @@
 .o-menu-toggle__line:after {
   content: "";
   transform-origin: center;
-  transition: transform 0.1s ease-out;
+  transition: transform 0.1s var(--animation-easing-outgoing);
 }
 .o-menu-toggle__line:before {
   transform: translate(-50%, -6px);
@@ -38,7 +38,7 @@
   .o-menu-toggle:hover .o-menu-toggle__line:before,
   .o-menu-toggle:hover .o-menu-toggle__line:after {
     background-color: rgb(var(--color-primary-2));
-    transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s var(--animation-easing-outgoing);
   }
 }
 

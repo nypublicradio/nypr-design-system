@@ -205,7 +205,7 @@
   width: 100%;
   z-index: $z-index-floating-header;
   transform: translateY(0);
-  transition: transform 0.25s $hard-ease-in;
+  transition: transform 0.25s var(--animation-easing-incoming); //used to be $hard-ease-in
 }
 .c-floating-header.is-visible {
   transform: translateY(calc(var(--heading-height) + var(--space-2)));
@@ -227,7 +227,7 @@
 
 .c-search-toggle__icon path {
   fill: $c-white;
-  transition: all 0.25s ease-in-out;
+  transition: all 0.25s var(--animation-easing-standard);
 }
 
 .c-content-overlay {
@@ -240,13 +240,13 @@
   top: 0;
   opacity: 0;
   transform: translateX(0);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out 0.4s;
+  transition: opacity 0.3s var(--animation-easing-outgoing), transform 0.3s var(--animation-easing-outgoing) 0.4s;
 }
 /* side menu is open*/
 .c-main-header.side-menu-is-active .c-content-overlay {
   opacity: 0.5;
   transform: translateX(100vw);
-  transition: opacity 0.2s ease-in;
+  transition: opacity 0.2s var(--animation-easing-incoming);
 }
 
 /**
@@ -260,7 +260,7 @@
   top: 0;
   z-index: $z-index-side-menu;
   padding-bottom: var(--space-5);
-  transition: transform 0.3s $hard-ease-in;
+  transition: transform 0.3s var(--animation-easing-incoming); //used to be $hard-ease-in
   overflow: auto;
   height: 100vh;
 

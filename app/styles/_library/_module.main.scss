@@ -37,7 +37,7 @@
   left: calc(50% - 10px);
   fill: $c-white;
   position: absolute;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s var(--animation-easing-standard);
 }
 
 .c-welcome-page__start:hover {

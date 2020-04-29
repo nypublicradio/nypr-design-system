@@ -39,7 +39,7 @@
   z-index: $z-index-vanish;
   transform: scale(0.85);
   transform-origin: left center;
-  transition: all 0.2s ease-out;
+  transition: all 0.2s var(--animation-easing-outgoing);
 
   @include media(">medium") {
     right: auto;
@@ -57,7 +57,7 @@
 .c-toggle-box.this-is-active .c-toggle-box__label:before {
   opacity: 1;
   transform: translateY(0) rotate(-45deg);
-  transition: transform 0.1s ease-out 0.15s, opacity 0.15s ease-out 0.15s;
+  transition: transform 0.1s var(--animation-easing-outgoing) 0.15s, opacity 0.15s var(--animation-easing-outgoing) 0.15s;
   width: 15px;
   height: 15px;
 }
@@ -175,7 +175,7 @@
 }
 
 .c-share-tools__link path {
-  transition: all 0.25s ease-in-out;
+  transition: all 0.25s var(--animation-easing-standard);
 }
 
 .c-share-tools__link:hover path {

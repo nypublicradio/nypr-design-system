@@ -25,7 +25,7 @@
   right: calc(-(var(--col-width) * 15) + (var(--gutter) * 13));
   bottom: 50px;
   transform: translateX(0);
-  transition: transform 0.2s $hard-ease-in;
+  transition: transform 0.2s var(--animation-easing-incoming); // used to be $hard-ease-in
   box-shadow: 0 0 10px rgba($c-black, 0.2); //no black
   border: var(--b-border-normal);
 

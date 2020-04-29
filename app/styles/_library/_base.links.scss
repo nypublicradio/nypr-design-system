@@ -5,11 +5,11 @@
 a {
   text-decoration: none;
   color: rgb(var(--color-link-2));
-  transition: all 0.15s ease-in-out;
+  transition: all 0.15s var(--animation-easing-standard); //used to be ease-in-out
 }
 
 a > span {
-  transition: all 0.15s ease-in-out;
+  transition: all 0.15s var(--animation-easing-standard);
 }
 
 .u-has-accent,
