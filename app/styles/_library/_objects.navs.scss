@@ -235,8 +235,10 @@
   display: inline-block;
   margin-right: var(--space-3);
 
-  @include typeface(subheader, 9);
-  font-size: var(--font-size-5);
+  @include typeface(subheader, 3);
+  @include media(">=medium") {
+    @include typeface(subheader, 5);
+  }
   font-weight: var(--font-weight-body);
 
   @include media("<=medium") {

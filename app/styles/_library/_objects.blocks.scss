@@ -24,7 +24,10 @@
   background-color: $c-tertiary;
 }
 .c-block__title {
-  @include typeface(header, 10)
+  @include typeface(header, 8);
+  @include media(">=medium") {
+    @include typeface(header, 10);
+  }
 }
 .c-block__title a {
   color: $c-black;

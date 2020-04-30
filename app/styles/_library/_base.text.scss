@@ -6,7 +6,10 @@
  * Text-Related Elements
  */
 p {
-  @include typeface(body, 6);
+  @include typeface(body, 4);
+  @include media(">=medium") {
+    @include typeface(body, 6);
+  }
 }
 
 small {

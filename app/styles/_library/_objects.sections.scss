@@ -3,7 +3,10 @@
 \*------------------------------------*/
 
 .o-section__heading {
-  @include typeface(header, 11);
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+  }
 }
 
 /**
@@ -149,7 +152,10 @@
 .c-featured-blocks__heading {
   position: absolute;
   top: -0.6em;
-  @include typeface(header, 11);
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+  }
   right: var(--space-9);
   background-color: rgb(var(--color-background));
   padding: 0 var(--space-2);
@@ -330,11 +336,17 @@
 }
 
 .c-search-results__result-number {
-  @include typeface(small, 4)
+  @include typeface(small, 2);
+  @include media(">=medium") {
+    @include typeface(small, 4);
+  }
 }
 
   .c-listing__sections-title {
-    @include typeface(header, 11)
+    @include typeface(header, 9);
+    @include media(">=medium") {
+      @include typeface(header, 11);
+    }
   }
 
 /**
@@ -369,13 +381,15 @@
 .c-basic__header {
   padding: var(--space-3) 0;
   position: relative;
-  @include typeface(header, 16);
-
-  @include media("<=medium") {
-    @include typeface(header, 14);
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
   }
 }
 
 .c-basic__header-kicker {
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }

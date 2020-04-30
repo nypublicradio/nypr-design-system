@@ -9,11 +9,6 @@
 
   line-height: var(--line-height-#{$size});
   font-size: var(--font-size-#{$size});
-
-  @include media("<medium") {
-    line-height: var(--line-height-#{$size - 2});
-    font-size: var(--font-size-#{$size - 2});
-  }
 }
 
 @mixin color-group-dark {

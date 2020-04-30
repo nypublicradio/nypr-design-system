@@ -94,7 +94,10 @@
 }
 
 .c-main-header__title {
-  @include typeface(header, 8);
+  @include typeface(header, 6);
+  @include media(">=medium") {
+    @include typeface(header, 8);
+  }
   color: $c-white;
   font-weight: normal;
   line-height: 1.2;
@@ -350,7 +353,10 @@
 }
 .c-side-menu__copyright p {
   line-height: 2.5;
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }
 .c-side-menu__terms-links {
   display: flex;
@@ -359,7 +365,10 @@
 .c-side-menu__terms-links a {
   color: $c-quaternary;
   padding: 8px 0;
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }
 .c-side-menu__terms-links a:hover {
   background-color: $c-primary;

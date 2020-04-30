@@ -49,14 +49,20 @@
 }
 /* broken markup compat*/
 .o-rte-text.c-article__body {
-  @include typeface(body, 6);
+  @include typeface(body, 4);
+  @include media(">=medium") {
+    @include typeface(body, 6);
+  }
 }
 .o-rte-text > dl dd,
 .o-rte-text > dl dt,
 .o-rte-text > ol li,
 .o-rte-text > ul li,
 .o-rte-text > p {
-  @include typeface(body, 6);
+  @include typeface(body, 4);
+  @include media(">=medium") {
+    @include typeface(body, 6);
+  }
 }
 .o-rte-text a {
   border-bottom: 2px dotted rgb(var(--color-link-2));
@@ -78,23 +84,38 @@
   /*font-weight: normal;*/
 }
 .o-rte-text > h1 {
-  @include typeface(header, 11);
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+  }
   @include media(">large") {
     @include typeface(header, 15);
   }
 }
 .o-rte-text > h2 {
-  @include typeface(header, 11);
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+  }
 }
 .o-rte-text > h3 {
-  @include typeface(header, 10);
+  @include typeface(header, 8);
+  @include media(">=medium") {
+    @include typeface(header, 10);
+  }
 }
 .o-rte-text > h4 {
-  @include typeface(header, 8);
+  @include typeface(header, 6);
+  @include media(">=medium") {
+    @include typeface(header, 8);
+  }
 }
 .o-rte-text > h5,
 .o-rte-text > h6 {
-  @include typeface(small, 4);
+  @include typeface(small, 2);
+  @include media(">=medium") {
+    @include typeface(small, 4);
+  }
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -235,7 +256,10 @@
       }
 .o-pullquote__author {
     color: $c-septenary; 
-    @include typeface(small, 3);
+    @include typeface(small, 1);
+    @include media(">=medium") {
+      @include typeface(small, 3);
+    }
     letter-spacing: 1px;
     text-transform: uppercase;
   }
@@ -264,7 +288,10 @@
 .o-tag,
 .o-kicker,
 .o-breadcrumb {
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
   padding: 2px 6px 3px;
   text-transform: uppercase;
   font-weight: bold;
@@ -307,7 +334,10 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
  */
 .o-caption p,
   .o-caption__text {
-    @include typeface(small, 4);
+    @include typeface(small, 2);
+    @include media(">=medium") {
+      @include typeface(small, 4);
+    }
     font-family: var(--font-family-body);
   }
 .o-caption .o-icon--dashed-arrow {
@@ -342,7 +372,10 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
   align-items: center;
   position: relative;
   z-index: $z-index-to-top;
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
   text-transform: uppercase;
 }
 /* Temporary until i can get the real icon*/
@@ -425,7 +458,10 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
 
 .c-gallery-end-label {
   flex-basis: 100%;
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }
 
 .c-gallery-end-label > .o-icon--down-arrow {
