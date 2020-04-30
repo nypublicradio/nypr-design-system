@@ -11,7 +11,9 @@
 }
 .c-block__media:hover + .c-block__object .c-block__title-link,
 .c-block__media:hover .c-block__title-link {
-  @include block-hover;
+  color: rgb(var(--color-link-hover));
+  text-decoration: var(--text-decoration-link-hover);
+  opacity: var(--opacity-link-hover);
 }
 .c-block__tag {
   color: rgb(var(--color-text-inverse));
@@ -25,13 +27,6 @@
 }
 .c-block__title {
   @include typeface(header, 10);
-}
-.c-block__title a {
-  color: $c-black;
-  transition: none;
-}
-.c-block__title a:hover {
-  @include block-hover;
 }
 .c-block__title--has-icon a:after {
   content: "";
@@ -84,12 +79,6 @@
   @include media(">large") {
     @include typeface(header, 11);
   }
-}
-.c-block--urgent .c-block__title a {
-  color: rgb(var(--color-link-2));
-}
-.c-block--urgent .c-block__title a:hover {
-  @include block-hover;
 }
 .c-block--urgent .c-block-meta {
   display: inline-block;

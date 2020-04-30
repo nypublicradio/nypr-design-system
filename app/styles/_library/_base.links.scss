@@ -4,8 +4,14 @@
 
 a {
   text-decoration: none;
-  color: rgb(var(--color-link-2));
-  transition: var(--animation-easing-standard) var(--animation-duration-fast); //used to be ease-in-out
+  color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-link);
+  transition: all var(--animation-duration-fast) var(--animation-easing-standard); //used to be ease-in-out
+}
+a:hover {
+  color: rgb(var(--color-link-hover));
+  text-decoration: var(--text-decoration-link-hover);
+  opacity: var(--opacity-link-hover);
 }
 
 a > span {

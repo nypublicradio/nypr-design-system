@@ -20,6 +20,7 @@ input[type="submit"] {
 	cursor: pointer;
 	padding: 20px var(--space-4) 18px;
 	text-align: center;
+  text-decoration: none;
 	line-height: 22px;
 	letter-spacing: 2px;
 	color: white;
@@ -34,6 +35,7 @@ input[type="submit"] {
 .o-button:hover {
 	opacity: var(--opacity-button-primary-hover);
 	background: rgb(var(--color-button-primary-hover));
+  text-decoration: none;
 }
 .o-button:active {
 	opacity: 1;

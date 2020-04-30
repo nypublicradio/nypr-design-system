@@ -147,3 +147,25 @@
 .o-button.mod-donate:before {
   border: 3px solid rgb(var(color-reddish-orange));
 }
+
+// Link styles
+
+// Headline link
+.c-block__title a {
+  color: rgb(var(--color-black));
+  text-decoration: none;
+  transition: none;
+}
+.c-block__title a:hover {
+  color:  rgb(var(--color-reddish-orange));
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+// Highlight headline link when hovering card image
+.c-block__media:hover + .c-block__object .c-block__title-link,
+.c-block__media:hover .c-block__title-link {
+  color:  rgb(var(--color-reddish-orange));
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
