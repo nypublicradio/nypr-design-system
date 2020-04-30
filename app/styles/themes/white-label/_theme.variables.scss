@@ -137,16 +137,16 @@
   /* Links */
   --color-link:                 var(--color-cool-blue);
   --text-decoration-link:       underline;
-  --color-link-hover:           var(--color-white);
+  --color-link-hover:           var(--color-sky-blue);
   --text-decoration-link-hover: underline;
-  --opacity-link-hover:         var(--opacity-hover);
+  --opacity-link-hover:         1;
 
   /* Navigation Links */
   --color-navigation-link:                 var(--color-gray-dark);
   --text-decoration-navigation-link:       underline;
   --color-navigation-link-hover:           var(--color-sky-blue);
   --text-decoration-navigation-link-hover: underline;
-  --opacity-navigation-link-hover:         var(--opacity-hover);
+  --opacity-navigation-link-hover:         1;
 
   /* Tags */
   --color-tag-text:             var(--color-white);

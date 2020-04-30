@@ -3,9 +3,14 @@
 \*------------------------------------*/
 
 a {
-  text-decoration: none;
-  color: rgb(var(--color-link-2));
+  color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-link);
   transition: all 0.15s ease-in-out;
+}
+a:hover {
+  color: rgb(var(--color-link-hover));
+  text-decoration: var(--text-decoration-link-hover);
+  opacity: var(--opacity-link-hover);
 }
 
 a > span {

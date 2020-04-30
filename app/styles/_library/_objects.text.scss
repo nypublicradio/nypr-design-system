@@ -59,11 +59,14 @@
   @include typeface(body, 6);
 }
 .o-rte-text a {
-  border-bottom: 2px dotted rgb(var(--color-link-2));
+  color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-link);
+  transition: all 0.15s ease-in-out;
 }
 .o-rte-text a:hover {
-  color: rgb(var(--color-link-hover-2));
-  background-color: rgb(var(--color-primary-2));
+  color: rgb(var(--color-link-hover));
+  text-decoration: var(--text-decoration-link-hover);
+  opacity: var(--opacity-link-hover);
 }
 .o-rte-text a:visited {
   color: rgb(var(--color-link-1));
@@ -265,12 +268,13 @@
 .o-kicker,
 .o-breadcrumb {
   @include typeface(small, 3);
+  background-color: rgb(var(--color-tag-background));
   padding: 2px 6px 3px;
   text-transform: uppercase;
-  font-weight: bold;
-  color: rgb(var(--color-tag-text));
-  background-color: rgb(var(--color-tag-background));
+  text-decoration: none;
   letter-spacing: 1px;
+  color: rgb(var(--color-tag-text));
+  font-weight: bold;
 }
 .o-tag,
 .o-kicker {
@@ -292,6 +296,7 @@ a.o-breadcrumb:hover {
   color: rgb(var(--color-tag-hover-text));
   background-color: rgb(var(--color-tag-hover-background));
   opacity: var(--opacity-tag-hover);
+  text-decoration: none;
 }
 
 .o-tags .o-tag {
