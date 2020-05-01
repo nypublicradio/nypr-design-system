@@ -65,6 +65,7 @@
 }
 .c-donate-tout__inner p {
   position: relative;
+  @include typeface(body, 6);
   @include media(">xlarge") {
     width: calc(65% - var(--space-3));
   }
