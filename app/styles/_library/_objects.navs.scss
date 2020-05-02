@@ -234,10 +234,11 @@
 .c-read-more-nav__label {
   display: inline-block;
   margin-right: var(--space-3);
+  text-transform: uppercase;
 
-  @include typeface(subheader, 3);
+  @include typeface(small, 3);
   @include media(">=medium") {
-    @include typeface(subheader, 5);
+    @include typeface(small, 5);
   }
   font-weight: var(--font-weight-body);
 
