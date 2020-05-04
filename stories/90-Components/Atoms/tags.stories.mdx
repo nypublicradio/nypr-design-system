@@ -7,11 +7,11 @@ import { Meta } from '@storybook/addon-docs/blocks';
 # Tags
 
   
-Tags are snippets of text used to label or categorize content. Content that is associated with a tag may display the tag for the purposes of understanding what the content is about or for navigating to similar content. They originated in our design system for articles and editorial but can be used in other situations to help users differentiate between items, increase recognition, or add further context to content.
+Tags are snippets of text used to label or categorize content. Content that is associated with a tag may display the tag for the purposes of understanding what the content is about or for navigating to similar content. They're primarily utilized in our design system for articles and editorial content.
 
   
 
-## Use In Editorial
+## Usage
 
 Gothamist.com makes use of "tags" atoms as a way to describe content to a reader. These "tags" are used in a few different places across the site, including as the eyebrow/kicker over a thumbnail in an article card (1), the eyebrow/kicker on an article page (2), and as a way to display story tags at the bottom of an article page (3). Usually, tags are linked as a way to drive users to an aggregation page (tag page) where they can discover additional related content.
 
@@ -31,6 +31,9 @@ Tags are most often created by the editorial team, so best practices around leng
 In situations of limited horizontal space (eyebrows on a card component, breadcrumbs on mobile) tags more than 25 characters long should be truncated using ellipsis (...) preceding the 25th character.
 
 
+## Interaction States
+Tags have a singular interaction state during hover. By default, on hover, a tags' background color opacity drops 70%, returning to 100% off hover. Easing for this transition is not required.
+
 ## Color & Accessibility
 
-The background color of a tag should use a brand primary or accent colors in a way that attracts attention to the object. Tags should have a hover state, the coloring of which is left to the discretion of the brand. Both text and background color must meet WCAG 2.0 minimum contrast requirement.
+The background color of a tag should use a brand primary or accent colors in a way that attracts attention to the object. Both text and background color must meet WCAG 2.0 minimum contrast requirement.
