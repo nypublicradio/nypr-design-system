@@ -28,6 +28,7 @@ module('Integration | Component | nypr-o-newsletter-tout', function(hooks) {
 
     assert.dom('.c-newsletter-tout__media img').hasAttribute('src', '/test-image1.jpeg');
     assert.dom('[data-test-newsletter-tout-heading]').hasText('Newsletter Tout');
-    assert.dom('[data-test-newsletter-tout-blurb]').hasText('Tout Blurb')
+    assert.dom('[data-test-newsletter-tout-blurb]').hasText('Tout Blurb');
+    assert.dom('[data-test-newsletter-tout-legal] a').exists();
   });
 });
