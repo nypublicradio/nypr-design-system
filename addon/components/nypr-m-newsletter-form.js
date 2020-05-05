@@ -8,7 +8,7 @@ import { task } from 'ember-concurrency';
 
 import fetch from 'fetch';
 
-export const DEFAULT_LEGAL = "By submitting your information, you're agreeing to receive communications from New York Public Radio in accordance with our <a href='https://www.wnyc.org/terms/' target='_blank' rel='noopener'>Terms</a>."
+export const DEFAULT_LEGAL = "By submitting your information, you're agreeing to receive communications from New York Public Radio in accordance with our <a href='https://www.wnyc.org/terms/' target='_blank' rel='noopener' class='u-has-accent u-has-accent--white'>Terms</a>."
 
 export const DEFAULT_SUBSCRIBED_MESSAGE = "Thanks for signing up!";
 
