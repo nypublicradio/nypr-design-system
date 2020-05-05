@@ -55,10 +55,7 @@
   color: rgb(var(--color-background));
   padding: var(--space-3) 0;
   margin-bottom: var(--space-3);
-  @include typeface(small, 1);
-  @include media(">=medium") {
-    @include typeface(small, 3);
-  }
+  @include typeface(small, 3);
   text-transform: uppercase;
 }
 
@@ -80,18 +77,13 @@
   }
 }
 
-c-main-footer__copyright-text {
-  @include typeface(small, 1);
-  @include media(">=medium") {
-    @include typeface(small, 3);
-  }
+.c-main-footer__copyright-text {
+  @include typeface(small, 3);
+  text-transform: uppercase;
 }
 
 .c-secondary-nav__link {
-  @include typeface(small, 1);
-  @include media(">=medium") {
-    @include typeface(small, 3);
-  }
+  @include typeface(small, 3);
   text-transform: uppercase;
 }
 
@@ -177,10 +169,8 @@ c-main-footer__copyright-text {
   margin: 0 var(--space-3);
   padding: 8px 0;
   color: rgb(var(--color-primary-1));
-  @include typeface(subheader, 5);
-  @include media(">=medium") {
-    @include typeface(subheader, 7);
-  }
+  @include typeface(small, 3);
+  text-transform: uppercase;
   font-weight: normal;
 
   @include media(">large") {
