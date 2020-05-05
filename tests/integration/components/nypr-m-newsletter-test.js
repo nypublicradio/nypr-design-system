@@ -35,7 +35,7 @@ module('Integration | Component | nypr-m-newsletter', function(hooks) {
 
     assert.dom('.c-newsletter-form__graphic svg.party-confetti-icon').exists('can render into graphic slot');
     assert.dom('[data-test-newsletter-blurb]').hasText(BLURB);
-    assert.dom('.c-newsletter-form__terms').hasText(DEFAULT_LEGAL, 'must use the yielded `.legal` component in order to display terms');
+    assert.dom('[data-test-newsletter-tout-legal] a').exists();
 
     await render(hbs`
       <NyprMNewsletter as |newsletter|>
@@ -45,7 +45,6 @@ module('Integration | Component | nypr-m-newsletter', function(hooks) {
       </NyprMNewsletter>
     `);
 
-    assert.dom('.c-newsletter-form__terms').hasText(OTHER_LEGAL, 'can pass in other legal terms');
   });
 
 });
