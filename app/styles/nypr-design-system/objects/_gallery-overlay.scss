@@ -5,7 +5,8 @@
     height: auto;
     opacity: 1;
     top: 0;
-    transition: opacity .2s ease;
+    transition-timing-function: var(--animation-duration-standard);
+    transition: var(--animation-easing-standard);
   }
 
   &.c-article__gallery--static {

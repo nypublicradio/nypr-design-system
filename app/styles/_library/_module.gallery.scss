@@ -41,7 +41,8 @@
 .c-slide {
   opacity: 0;
   transform: translateY(40px);
-  transition: all 1.5s var(--animation-easing-incoming) 0.2s; // used to be $hard-ease-in
+  transition: var(--animation-duration-fast);
+  transition-timing-function: var(--animation-easing-incoming) 0.2s;// used to be $hard-ease-in
   position: relative;
   z-index: $z-index-article-gallery-slide;
   pointer-events: none;

@@ -210,6 +210,10 @@
 --animation-easing-outgoing:          cubic-bezier(0.4, 0.0, 1, 1);
 --animation-easing-incoming:          cubic-bezier(0.0, 0.0, 0.2, 1);
 --animation-easing-standard:          cubic-bezier(0.4, 0.0, 0.2, 1);
+
+--animation-duration-slow:            .6s linear;
+--animation-duration-standard:        .25s linear;
+--animation-duration-fast:            .1s linear; 
  
 }
 

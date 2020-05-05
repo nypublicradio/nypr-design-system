@@ -6,11 +6,13 @@
  * Transitions
  */
 .has-trans {
-  transition: all .4s var(--animation-easing-standard);
+  transition: var(--animation-duration-standard); 
+  transition-timing-function: var(--animation-easing-standard);
 }
 
 .has-trans--fast {
-  transition: all .1s var(--animation-easing-standard);
+  transition: var(--animation-duration-fast);
+  transition-timing-function: all .1s var(--animation-easing-standard);
 }
 
 /**
@@ -19,7 +21,8 @@
 .has-fadeup {
   opacity: 0;
   transform: translate(0, 25px);
-  transition: all .6s var(--animation-easing-outgoing); //used to be ease-out
+  transition: var(--animation-duration-slow);
+  transition-timing-function: var(--animation-easing-outgoing); //used to be ease-out
 }
 
 .fadeup {
@@ -29,7 +32,8 @@
 
 .has-fadein {
   opacity: 0;
-  transition: all .8s var(--animation-easing-outgoing);
+  transition: var(--animation-duration-slow);
+  transition-timing-function: var(--animation-easing-outgoing);
 }
 
 .fadein {
@@ -41,7 +45,8 @@
 .lazyloading {
   opacity: 0;
   transform: translate(0, 25px);
-  transition: all .6s var(--animation-easing-outgoing);
+  transition: var(--animation-duration-slow);
+  transition-timing-function: var(--animation-easing-outgoing);
 }
 
 .lazyloaded {
