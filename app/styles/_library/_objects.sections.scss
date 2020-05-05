@@ -252,12 +252,13 @@
   }
 }
 .c-section__heading {
-  @include typeface(header, 10);
+  @include typeface(small, 10);
   font-weight: normal;
   letter-spacing: 3px;
+  text-transform: uppercase;
 
   @include media(">medium") {
-    @include typeface(header, 14);
+    @include typeface(small, 14);
     font-weight: normal;
   }
 
