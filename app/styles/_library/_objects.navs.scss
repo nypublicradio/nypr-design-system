@@ -237,9 +237,6 @@
   text-transform: uppercase;
 
   @include typeface(small, 3);
-  @include media(">=medium") {
-    @include typeface(small, 5);
-  }
   font-weight: var(--font-weight-body);
 
   @include media("<=medium") {

@@ -238,6 +238,7 @@ $author-media-width-l: 360;
 
 .c-author-block__details-link {
   @include typeface(small, 3);
+  text-transform: uppercase;
 }
 .c-author-block__details:before {
   @include media(">small") {
@@ -261,6 +262,7 @@ $author-media-width-l: 360;
 
 .c-author-block__role  {
   @include typeface(small, 3);
+  text-transform: uppercase;
 }
 .c-author-block__meta,
 .c-author-block__object {

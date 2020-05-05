@@ -326,13 +326,8 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
 /**
  * Caption & credit (used in leads and figures)
  */
-.o-caption p,
-  .o-caption__text {
-    @include typeface(small, 2);
-    @include media(">=medium") {
-      @include typeface(small, 4);
-    }
-    font-family: var(--font-family-body);
+.o-caption p, .o-caption__text {
+    @include typeface(body, 4);
   }
 .o-caption .o-icon--dashed-arrow {
     margin-right: var(--space-2);

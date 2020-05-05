@@ -384,7 +384,12 @@
     @include typeface(header, 16);
   }
 }
-
+.c-basic__heading {
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
+  }
+}
 .c-basic__header-kicker {
   @include typeface(small, 1);
   @include media(">=medium") {
