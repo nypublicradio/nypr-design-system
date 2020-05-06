@@ -1,5 +1,12 @@
 # `nypr-design-system` changelog
 
+## `3.0.0-alpha2`
+
+- [DOCS] Documentation Updates
+- [CHANGE] Update font and line height scales to be independent of type (type = small, body, header, etc)
+- [CHANGE] Move storybook style imports to preview.js 
+- [CHANGE] Remove media query from typeface mixin and convert typeface usages to mobile-first responsive
+
 ## `3.0.0-alpha1`
 - [BREAKING] Tokens updated to use CSS custom properties (CSS variables) 
 - [BREAKING] Typography Tokens refactored (WIP)
