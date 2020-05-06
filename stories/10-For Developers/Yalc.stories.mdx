@@ -1,0 +1,48 @@
+# Yalc is used to link project dependencies together locally without having to publish them.
+
+Example: nypr-design-system is an ember addon that plugs into our ember apps (i.e. gothamist-web-client), and it's useful to see how local changes to the addon will affect the consuming app in your local dev environment. This is what yalc is for.
+
+Yarn link and NPM link claim to do the same thing, but depending on the projects, they can easily run into build and dependency issues. Yalc just works.
+
+# Setup
+
+1. Install yalc. `yarn global add yalc`
+2. Make sure both the dependent package and your consuming app have `.yalc` listed in their `.gitignore`. Do not commit the `.yalc` folder.
+3. Run `yalc publish` in the root of your dependency. This publishes the addon in the local yalc store.
+4. Run `yalc add [name-of-the-package-you-just-published]` in the root of your consuming app.
+5. It's set up! Start up that consuming app and see your local addon changes.
+6. When you make a change in the addon, run `yalc push` from its root directory. This will locally push the latest changes to all the linked apps.
+
+### Having to yalc push every time is annoying, can't this happen automatically?
+Sure, you could make a little watch script like this.
+
+```js
+  // to use:
+  // npm install -g chokidar
+  // then run node watch.js to auto push changes to linked yalc repos
+
+  const exec = require('child_process').exec;
+  const chokidar = require('chokidar');
+
+  // One-liner for current directory
+  let watcher = chokidar.watch('.', {
+    persistent: true,
+    awaitWriteFinish: true,
+    ignoreInitial: true,
+    ignored: [/(^|[\/\\])\../, 'node_modules'] // ignore dotfiles
+  })
+
+  watcher.on('all', (event, path) => {
+    console.log('yalc push --changed');
+    exec('yalc push --changed', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
+    });
+  });
+```
+
+

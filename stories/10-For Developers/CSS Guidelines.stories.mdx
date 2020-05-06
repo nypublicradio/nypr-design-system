@@ -58,3 +58,42 @@ The [Sass parent selector](https://sass-lang.com/documentation/style-rules/paren
     }
 }
 ```
+
+## Breakpoints
+
+Use the [include media](https://github.com/eduardoboucas/include-media) mixins to define breakpoints, and always define them in ascending order with the smallest size (phone) as the default.
+
+```scss
+  /* BAD */
+  /* This is hard to read and prone to error */
+  .my-component {
+    display: grid;
+
+    @include media("< desktop") {
+      grid-template-columns: repeat(5, 1fr)
+    }
+
+    @include media("> tablet") {
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    @include media("<= phone") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* GOOD */
+  .my-component {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    @include media("> phone") {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    @include media("> tablet") {
+      grid-template-columns: repeat(7, 1fr)
+    }
+  }
+
+```
