@@ -5,8 +5,7 @@
     height: auto;
     opacity: 1;
     top: 0;
-    transition-timing-function: var(--animation-duration-standard);
-    transition: var(--animation-easing-standard);
+    transition: var(--animation-easing-standard) var(--animation-duration-standard);
   }
 
   &.c-article__gallery--static {

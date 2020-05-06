@@ -152,7 +152,7 @@
   height: auto;
   opacity: 1;
   top: 0;
-  transition: opacity 0.2s ease;
+  transition: var(--animation-easing-standard) var(--animation-duration-standard);
 }
 .gallery-is-active .c-article {
   overflow: hidden;

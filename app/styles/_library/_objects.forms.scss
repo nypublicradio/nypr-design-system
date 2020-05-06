@@ -84,8 +84,7 @@ div.o-confirm-message p {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition-timing-function:var(--animation-easing-outgoing);
-  transition: transform var(--animation-duration-fast);
+  transition: transform var(--animation-easing-outgoing) var(--animation-duration-fast);
   z-index: $z-index-search-close;
 }
 .c-search--top .c-search__close svg {
@@ -100,8 +99,7 @@ div.o-confirm-message p {
   font-size: var(--font-size-small-4);
   padding-left: 45px;
   transform: translateX(calc(100% + 50px));
-  transition: transform var(--animation-duration-fast);
-  transition-timing-function: var(--animation-easing-outgoing) 0.15s;
+  transition: transform var(--animation-easing-outgoing) 0.15s var(--animation-duration-fast);
 }
 .c-search--top .c-search__button {
   min-width: 50px;
@@ -109,8 +107,7 @@ div.o-confirm-message p {
   position: relative;
   z-index: $z-index-search-button;
   opacity: 0;
-  transition: var(--animation-duration-fast);
-  transition-timing-function: var(--animation-easing-outgoing);
+  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
 .c-search--top .c-search__button:hover {
   background-color: rgb(var(--color-primary-1));
@@ -135,8 +132,7 @@ div.o-confirm-message p {
 }
 .top-search-is-active .c-search__button {
   opacity: 1;
-  transition: var(--animation-duration-fast);
-  transition-timing-function: var(--animation-easing-outgoing);
+  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
 .top-search-is-active .c-search__button path {
   fill: $c-black;
@@ -163,8 +159,7 @@ div.o-confirm-message p {
 }
 .c-search--top.is-open .c-search__button {
   opacity: 1;
-  transition: var(--animation-duration-fast);
-  transition-timing-function: 0.1s var(--animation-easing-outgoing);
+  transition: 0.1s var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
 .c-search--top.is-open .c-search__button .search-icon {
   fill: $c-black;

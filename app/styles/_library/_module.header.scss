@@ -205,8 +205,7 @@
   width: 100%;
   z-index: $z-index-floating-header;
   transform: translateY(0);
-  transition: var(--animation-duration-standard);
-  transition-timing-function: var(--animation-easing-incoming);
+  transition: var(--animation-easing-incoming) var(--animation-duration-standard);
 }
 .c-floating-header.is-visible {
   transform: translateY(calc(var(--heading-height) + var(--space-2)));
@@ -228,8 +227,7 @@
 
 .c-search-toggle__icon path {
   fill: $c-white;
-  transition: (--animation-duration-standard);
-  transition-timing-function: var(--animation-easing-standard);
+  transition: var(--animation-easing-standard) var(--animation-duration-standard);
 }
 
 .c-content-overlay {
@@ -248,8 +246,7 @@
 .c-main-header.side-menu-is-active .c-content-overlay {
   opacity: 0.5;
   transform: translateX(100vw);
-  transition: var(--animation-duration-standard);
-  transition-timing-function: var(--animation-easing-incoming);
+  transition: var(--animation-easing-incoming) var(--animation-duration-standard);
 }
 
 /**

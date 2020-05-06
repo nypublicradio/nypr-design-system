@@ -5,13 +5,11 @@
 a {
   text-decoration: none;
   color: rgb(var(--color-link-2));
-  transition: var(--animation-duration-fast); 
-  transition-timing-function: var(--animation-easing-standard); //used to be ease-in-out
+  transition: var(--animation-easing-standard) var(--animation-duration-fast); //used to be ease-in-out
 }
 
 a > span {
-  transition: var(--animation-duration-fast);
-  transition-timing-function: var(--animation-easing-standard);
+  transition: var(--animation-easing-standard) var(--animation-duration-fast);
 }
 
 .u-has-accent,
