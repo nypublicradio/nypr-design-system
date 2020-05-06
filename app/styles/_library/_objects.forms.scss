@@ -278,8 +278,7 @@ div.o-confirm-message p {
 }
 
 .c-newsletter-form__terms-checkbox-label {
-  @include typeface(body, 5);
-  font-size: var(--font-size-2);
+  @include typeface(body, 2);
 }
 .c-newsletter-form__terms p {
   line-height: 1.35;

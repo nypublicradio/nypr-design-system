@@ -44,7 +44,10 @@
   max-width: calc(20% - var(--space-3));
   min-width: calc(20% - var(--space-3));
   border: $border-style-m;
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 
   @include media("<=medium") {
     max-width: calc(25% - var(--space-3));

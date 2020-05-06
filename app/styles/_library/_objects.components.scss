@@ -152,9 +152,8 @@
 }
 
 .c-share-tools__label {
-  font-family: var(--font-family-subheader);
-  font-size: var(--font-size-5);
-
+  @include typeface(small, 3);
+  text-transform: uppercase;
   margin-right: var(--space-2);
 }
 

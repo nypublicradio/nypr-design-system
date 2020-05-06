@@ -138,7 +138,10 @@
 }
 
 .o-sg-section__content p {
-  @include typeface(body, 5);
+  @include typeface(body, 3);
+  @include media(">=medium") {
+    @include typeface(body, 5);
+  }
 }
 
 .c-swatch {
@@ -223,7 +226,10 @@
   align-content: space-between;
 }
 .c-font-block__free-type {
-  @include typeface(header, 16);
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
+  }
   font-weight: inherit;
   margin-bottom: var(--space-5);
 }

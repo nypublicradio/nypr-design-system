@@ -8,65 +8,125 @@
 // to the trello css styleguide.
 
 .u-header-1 {
-  @include typeface(header, 7)
+  @include typeface(header, 5);
+  @include media(">=medium") {
+    @include typeface(header, 7);
+  }
 }
 .u-header-2 {
-  @include typeface(header, 8)
+  @include typeface(header, 6);
+  @include media(">=medium") {
+    @include typeface(header, 8);
+  }
 }
 .u-header-3 {
-  @include typeface(header, 9)
+  @include typeface(header, 7);
+  @include media(">=medium") {
+    @include typeface(header, 9);
+  }
 }
 .u-header-4 {
-  @include typeface(header, 10)
+  @include typeface(header, 8);
+  @include media(">=medium") {
+    @include typeface(header, 10);
+  }
 }
 .u-header-5 {
-  @include typeface(header, 11)
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+  }
 }
 .u-header-6 {
-  @include typeface(header, 12)
+  @include typeface(header, 10);
+  @include media(">=medium") {
+    @include typeface(header, 12);
+  }
 }
 .u-header-7 {
-  @include typeface(header, 13)
+  @include typeface(header, 11);
+  @include media(">=medium") {
+    @include typeface(header, 13);
+  }
 }
 .u-header-8 {
-  @include typeface(header, 14)
+  @include typeface(header, 12);
+  @include media(">=medium") {
+    @include typeface(header, 14);
+  }
 }
 .u-header-9 {
-  @include typeface(header, 15)
+  @include typeface(header, 13);
+  @include media(">=medium") {
+    @include typeface(header, 15);
+  }
 }
 .u-header-10 {
-  @include typeface(header, 16)
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
+  }
 }
 
 .u-body-1 {
-  @include typeface(body, 5)
+  @include typeface(body, 3);
+  @include media(">=medium") {
+    @include typeface(body, 5);
+  }
 }
 .u-body-2 {
-  @include typeface(body, 6)
+  @include typeface(body, 4);
+  @include media(">=medium") {
+    @include typeface(body, 6);
+  }
 }
 .u-body-3 {
-  @include typeface(body, 7)
+  @include typeface(body, 5);
+  @include media(">=medium") {
+    @include typeface(body, 7);
+  }
 }
 .u-body-4 {
-  @include typeface(body, 8)
+  @include typeface(body, 6);
+  @include media(">=medium") {
+    @include typeface(body, 8);
+  }
 }
 .u-body-5 {
-  @include typeface(body, 9)
+  @include typeface(body, 7);
+  @include media(">=medium") {
+    @include typeface(body, 9);
+  }
 }
 .u-body-6 {
-  @include typeface(body, 10)
+  @include typeface(body, 8);
+  @include media(">=medium") {
+    @include typeface(body, 10);
+  }
 }
 .u-body-7 {
-  @include typeface(body, 11)
+  @include typeface(body, 9);
+  @include media(">=medium") {
+    @include typeface(body, 11);
+  }
 }
 .u-body-8 {
-  @include typeface(body, 12)
+  @include typeface(body, 10);
+  @include media(">=medium") {
+    @include typeface(body, 12);
+  }
 }
 .u-body-9 {
-  @include typeface(body, 13)
+  @include typeface(body, 11);
+  @include media(">=medium") {
+    @include typeface(body, 13);
+  }
 }
 .u-body-10 {
-  @include typeface(body, 14)
+  @include typeface(body, 12);
+  @include media(">=medium") {
+    @include typeface(body, 14);
+  }
 }
 
 .u-small-1 {
@@ -76,8 +136,14 @@
   @include typeface(small, 2)
 }
 .u-small-3 {
-  @include typeface(small, 3)
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }
 .u-small-4 {
-  @include typeface(small, 4)
+  @include typeface(small, 2);
+  @include media(">=medium") {
+    @include typeface(small, 4);
+  }
 }

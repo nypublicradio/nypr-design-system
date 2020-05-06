@@ -3,7 +3,10 @@
 \*------------------------------------*/
 
 .o-section__heading {
-  @include typeface(header, 11);
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+  }
 }
 
 /**
@@ -249,12 +252,13 @@
   }
 }
 .c-section__heading {
-  @include typeface(header, 10);
+  @include typeface(small, 10);
   font-weight: normal;
   letter-spacing: 3px;
+  text-transform: uppercase;
 
   @include media(">medium") {
-    @include typeface(header, 14);
+    @include typeface(small, 14);
     font-weight: normal;
   }
 
@@ -330,11 +334,17 @@
 }
 
 .c-search-results__result-number {
-  @include typeface(small, 4)
+  @include typeface(small, 2);
+  @include media(">=medium") {
+    @include typeface(small, 4);
+  }
 }
 
   .c-listing__sections-title {
-    @include typeface(header, 11)
+    @include typeface(header, 9);
+    @include media(">=medium") {
+      @include typeface(header, 11);
+    }
   }
 
 /**
@@ -369,13 +379,20 @@
 .c-basic__header {
   padding: var(--space-3) 0;
   position: relative;
-  @include typeface(header, 16);
-
-  @include media("<=medium") {
-    @include typeface(header, 14);
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
   }
 }
-
+.c-basic__heading {
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
+  }
+}
 .c-basic__header-kicker {
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }

@@ -65,6 +65,7 @@
 }
 .c-donate-tout__inner p {
   position: relative;
+  @include typeface(body, 6);
   @include media(">xlarge") {
     width: calc(65% - var(--space-3));
   }
@@ -180,16 +181,16 @@
   }
 }
 .c-sponsored-tout__heading {
-  @include typeface(header, 11);
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+    left: var(--space-9);
+  }
   position: absolute;
   top: -0.6em;
-  left: var(--space-9);
+  left: var(--space-3);
   background-color: rgb(var(--color-background));
   padding: 0 var(--space-2);
-
-  @include media("<=medium") {
-    left: var(--space-3);
-  }
 }
 .c-sponsored-tout .c-block {
   @include media(">medium") {
@@ -272,11 +273,18 @@
   }
 }
 .c-newsletter-tout__dek {
-  @include typeface(subheader, 5);
+  @include typeface(subheader, 3);
+  @include media(">=medium") {
+    @include typeface(subheader, 5);
+  }
+  
   font-weight: normal;
 }
 .c-newsletter-tout__heading {
-  @include typeface(header, 11);
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+  }
 }
 
 .c-newsletter-tout__text {

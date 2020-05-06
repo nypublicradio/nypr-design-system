@@ -85,7 +85,10 @@
   align-items: flex-start;
 }
 .c-slice__count {
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }
 
 .c-slide__meta .c-toggle-box .c-toggle-box__content {
