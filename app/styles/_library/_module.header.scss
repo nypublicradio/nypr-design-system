@@ -240,7 +240,7 @@
   top: 0;
   opacity: 0;
   transform: translateX(0);
-  transition: opacity 0.3s var(--animation-easing-outgoing), transform 0.3s var(--animation-easing-outgoing) 0.4s;
+  transition: var(--animation-easing-outgoing) var(--animation-easing-outgoing);
 }
 /* side menu is open*/
 .c-main-header.side-menu-is-active .c-content-overlay {
@@ -260,7 +260,7 @@
   top: 0;
   z-index: $z-index-side-menu;
   padding-bottom: var(--space-5);
-  transition: transform 0.3s var(--animation-easing-incoming); //used to be $hard-ease-in
+  transition: var(--animation-easing-incoming); //used to be $hard-ease-in
   overflow: auto;
   height: 100vh;
 

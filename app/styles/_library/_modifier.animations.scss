@@ -10,7 +10,7 @@
 }
 
 .has-trans--fast {
-  transition: all .1s var(--animation-easing-standard) var(--animation-duration-fast);
+  transition: var(--animation-easing-standard) var(--animation-duration-fast);
 }
 
 /**
