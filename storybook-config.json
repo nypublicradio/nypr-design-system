@@ -2,9 +2,7 @@
   "storybook": {
     "versions": {
       "availableVersions": [
-        "latest",
-        "nc/storybook",
-        "0.0.1"
+        "latest"
       ],
       "hostname": "nypr-design-system.nypr.digital",
       "localhost": "nypr-design-system.nypr.digital",
