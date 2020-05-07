@@ -12,6 +12,7 @@ Timestamp displays information related to the date or time. Current usage includ
   
 
 ## Fields
+This component includes two time slots for time, we reccomend using them as laid out below. 
 
 **Publish Date** - Time when the content was originally published.
 
@@ -19,8 +20,8 @@ Timestamp displays information related to the date or time. Current usage includ
 
   
 
-## Formatting
-Timestamps follow a 12-hour clock and should include an a “am” or “pm” so it is clear what time is being communicated. Capitalization of "am" or "pm" is left to the discretion of the brand.
+## Formatting Time
+Timestamps follow a 12-hour clock and should include an a “am” or “pm” so it is clear what time is being communicated. Capitalization of "am" or "pm" is left to the discretion of the brand. Time is displayed according to a users timezone, a variable handled by Aviary.
 
 If time is within the current **year**, do not display the year, format like: "Month D, h:mm a"
 
@@ -28,8 +29,12 @@ If time is **more than** 24 hrs in the past format like: "Month D, YYYY h:mm a"
 
 If time is **less than** 24 hrs in the past format like: "N hours ago"
 
-If time is **less than** or equal to 5 minutes in the past format like: "Just Now"
+*If time is **less than** or equal to 5 minutes in the past format like: "Just Now"
 
+*Just Now is best used with time-sensitive content like front page news or new content. This formatting option should be able to be turned on and off.
+
+## Formatting Date
+Date terminals such as "th" or "st” (ex: April 30th) are not used. Days of the week should never be abbreivaited and can be turned on and off as needed.
 
 ## Timestamp on Cards
 
