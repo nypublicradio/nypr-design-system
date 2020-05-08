@@ -70,8 +70,7 @@ export default Component.extend({
     @return {String} task value for success or error state
   */
   onSubmit: task(function * (email) {
-    assert(this.endpiont, 'Please pass in the opt in endpoint');
-
+    assert(this.endpoint, 'Please pass in the opt in endpoint');
     let params = this.params || {};
 
     try {
