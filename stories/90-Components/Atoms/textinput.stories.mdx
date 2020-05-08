@@ -25,9 +25,9 @@ Radial provides a bunch of functionality for text inputs that can be switched on
 
 2- **Title** - A text title should be used to help communicate the intended input of the field.
         
-3- **Icon button** - An alternative to an independent “submit” button, icon buttons are positioned inline with the field and are used to submit field input.
+3- **Icon Button** - An alternative to an independent “submit” button, icon buttons are positioned inline with the field and are used to submit field input.
     
-4- **Placeholder** - Provides additional context to the nature of the indented input, should never be used in place of a title. They are often used to provide an example of the type of input needed. (i.e. [me@email.com](mailto:my@email.com) for an email field)
+4- **Placeholder Copy** - Provides additional context to the nature of the indented input, should never be used in place of a title. They are often used to provide an example of the type of input needed. (i.e. [me@email.com](mailto:my@email.com) for an email field)
     
 5- **Microcopy** - Provides instructional/long form information about the input.
     
@@ -40,12 +40,12 @@ Radial provides a bunch of functionality for text inputs that can be switched on
 ## States
 
 #### **Default**
-In this state, the user hasn’t yet interacted with the input, but it's prepped and ready to accept input.
+In this state, the user has not yet interacted with the input. The form is prepped and ready to accept input.
  <img alt="example of default text input" src="./images/Molecules-TextInput-DefaultState.png" width="250" />
 <br/><br/>
 
 #### **Active**
-Outline the container with the stroke of an accent color to indicate when a user is focused on an element.
+When a user is focused on an element and the element is "active," outline the container with the stroke of an accent color to indicate this to the user.
  <img alt="example of active text input" src="./images/Molecules-TextInput-ActiveState.png" width="250" />
 <br/><br/>
 
@@ -56,7 +56,7 @@ If a form element is required, an asterisk should be injected before the input t
 
 
 #### **Error**
-If an error occurred when submitting, the form element with an error should provide feedback with changed container stroke and text, usings the brand’s accent color for error.
+If an error occurred when submitting the form, the form element should provide feedback to the user by displaying a changed container stroke and text, using the brand’s accent color for error.
  <img alt="example of error text input" src="./images/Molecules-TextInput-ErrorState.png" width="250" />
   <br/><br/>
 
@@ -73,7 +73,7 @@ Use when input is not yet possible. Use a brand utility colors for text and stro
 
 ## Accessibility
 
-**Text inputs**, when used, should clearly indicate the purpose of the input. Use the lenght of the text input to communicate the length of the content needed. If the expected input has a character limit, use the HTML `maxlength` attribute to specifies the maximum number of characters allowed in the input.
+**Text inputs**, when used, should clearly indicate the purpose of the input in a way that is accessible to all users. Use the length of the text input to communicate the length of the content needed. If the expected input has a character limit, use the HTML `maxlength` attribute to specify the maximum number of characters allowed in the input.
   
 
 Text input components should have a matching `<label>` to them.
