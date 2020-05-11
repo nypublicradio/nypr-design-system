@@ -157,7 +157,8 @@
 .gallery-is-active .c-article {
   overflow: hidden;
   height: 0;
-  transition: height 0s linear 0.5s;
+  transition: height 0s linear;
+  transition-delay: var(--animation-duration-fast);
 }
 .gallery-is-active .c-article__donate {
   display: none;
