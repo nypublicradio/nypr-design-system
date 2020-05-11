@@ -99,8 +99,8 @@
   --heading-height: 72px;
 
   // Grid
-  --col-width: 48.5px;
   --gutter:    18px;
+  --gutter-large: 36px;
 
   // Article
   --article-content-width: 634px;
@@ -137,7 +137,7 @@
   --color-primary-3:             var(--color-bright-purple);
   --color-button-donate:        var(--color-cool-blue);
   --color-button-1:              var(--color-cool-blue);
-  --color-button-2:              var(--color-sea-green); 
+  --color-button-2:              var(--color-sea-green);
   --color-border-bold:          var(--color-gray-dark);
   --color-border-standard:      var(--color-gray-dark);
   --color-border-subtle:        var(--color-concrete);
@@ -172,7 +172,7 @@
   --color-button-1:             var(--color-cool-blue);
   --color-button-2:             var(--color-sea-green);
   --color-border-bold:          var(--color-border-bold);      //none assigned in airtable
-  --color-border-standard:      var(--color-border-standard);  //none 
+  --color-border-standard:      var(--color-border-standard);  //none
   --color-border-subtle:        var(--color-border-subtle);    //none
 }
 
@@ -194,7 +194,7 @@
   --color-primary-3:             var(--color-bright-purple);
   --color-button-donate:        var(--color-cool-blue);
   --color-button-1:              var(--color-cool-blue);
-  --color-button-2:              var(--color-sea-green); 
+  --color-button-2:              var(--color-sea-green);
   --color-border-bold:          var(--color-gray-dark);
   --color-border-standard:      var(--color-gray-dark);
   --color-border-subtle:        var(--color-concrete);
