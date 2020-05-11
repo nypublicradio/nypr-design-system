@@ -96,11 +96,11 @@
   --max-width:      1024px;
   --max-width-xl:   1130px;
   --heading-height: 72px;
-  
+
   // Grid
-  --col-width: 48.5px;
-  --gutter:    18px;
-  
+  --gutter:       18px;
+  --gutter-large: 40px;
+
   // Article
   --article-content-width: 634px;
 
@@ -166,7 +166,7 @@
   // --c-button-donate:        var(--c-reddish-orange);
   // --c-button-primary:       var(--c-banana-yellow);
   // --c-button-text:          var(--c-white);
- 
+
 }
 
 /*Dark and Light Groups */
@@ -189,8 +189,8 @@
   --color-button-donate:        var(--color-reddish-orange);
   --color-button-1:              var(--color-banana-yellow);
   --color-button-2:              var(--color-button1); //none assigned in airtable
-  --color-border-bold:          var(--color-border-bold); //none 
-  --color-border-standard:      var(--color-border-standard); //none 
+  --color-border-bold:          var(--color-border-bold); //none
+  --color-border-standard:      var(--color-border-standard); //none
   --color-border-subtle:        var(--color-border-subtle); //none
 }
 
