@@ -11,6 +11,7 @@
 # misc
 /.env*
 .idea/
+.storybook/
 /.sass-cache
 /connect.lock
 /coverage/
@@ -26,7 +27,3 @@
 
 # importable sass variables
 /tests/dummy/app/utils/sass-vars
-.idea/
-.storybook/
-
-.storybook/
