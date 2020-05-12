@@ -15,6 +15,7 @@ module('Integration | Component | nypr-m-newsletter-form', function(hooks) {
   test('it handles successful submissions', async function(assert) {
     const ENDPOINT = 'https://example.com';
     const EMAIL = 'foo@bar.com';
+    const LOCATION = 'Footer';
     const OTHER_PARAMS = {id: 'baz'};
     const SUCCESS_RESPONSE = new Response(JSON.stringify({status: 'subscribed'}), {status: 200});
 
@@ -28,7 +29,7 @@ module('Integration | Component | nypr-m-newsletter-form', function(hooks) {
       .withArgs(ENDPOINT, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({...OTHER_PARAMS, email: EMAIL})
+        body: JSON.stringify({...OTHER_PARAMS, email: EMAIL, location: LOCATION})
       })
       .resolves(SUCCESS_RESPONSE);
 
@@ -47,6 +48,7 @@ module('Integration | Component | nypr-m-newsletter-form', function(hooks) {
 
   test('it handles error responses', async function(assert) {
     const EMAIL = 'foo@bar.com';
+    const LOCATION = 'Footer';
     const ENDPOINT = 'https://example.com';
     const ERROR_MESSAGE = 'bad news';
     const ERROR_RESPONSE = new Response(JSON.stringify({detail: ERROR_MESSAGE}), {status: 400});
@@ -60,7 +62,7 @@ module('Integration | Component | nypr-m-newsletter-form', function(hooks) {
       .withArgs(ENDPOINT, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email: EMAIL})
+        body: JSON.stringify({email: EMAIL, location: LOCATION})
       })
       .resolves(ERROR_RESPONSE);
 

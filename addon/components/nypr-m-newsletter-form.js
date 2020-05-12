@@ -13,6 +13,7 @@ export const DEFAULT_LEGAL = "By submitting your information, you're agreeing to
 export const DEFAULT_SUBSCRIBED_MESSAGE = "Thanks for signing up!";
 
 export const DEFAULT_LABEL = 'Newsletter signup';
+export const DEFAULT_LOCATION = '';
 
 /**
   Newsletter sign up form
@@ -79,7 +80,7 @@ export default Component.extend({
   onSubmit: task(function * (email) {
     assert(this.endpoint, 'Please pass in the opt in endpoint');
     let params = this.params || {};
-    let location = this.location || '';
+    let location = this.location || DEFAULT_LOCATION;
 
     try {
       let response = yield fetch(this.endpoint, {
