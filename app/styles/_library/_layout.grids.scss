@@ -5,11 +5,11 @@
 .l-grid {
   display: grid;
   grid-template-rows: auto;
-  grid-gap: var(--gutter);
+  grid-gap: var(--grid-gutter);
 }
 
 .l-grid--large-gutters {
-  grid-gap: var(--gutter-large);
+  grid-gap: var(--grid-gutter-large);
 }
 
 .l-grid--no-gutters {

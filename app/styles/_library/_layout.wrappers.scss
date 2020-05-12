@@ -40,13 +40,13 @@
  */
 @mixin grid-column($column) {
   @if $column == 1 {
-    max-width: calc((var(--col-width) * #{$column}) + (var(--gutter) * #{$column}));
+    max-width: calc((var(--grid-col-width) * #{$column}) + (var(--grid-gutter) * #{$column}));
   }
   @else if $column == 2 {
-    max-width: calc((var(--col-width) * #{$column}) + (var(--gutter) * 1));
+    max-width: calc((var(--grid-col-width) * #{$column}) + (var(--grid-gutter) * 1));
   }
   @else {
-    max-width: calc((var(--col-width) * #{$column}) + (var(--gutter) * (#{$column} - 2)));
+    max-width: calc((var(--grid-col-width) * #{$column}) + (var(--grid-gutter) * (#{$column} - 2)));
   }
 }
 
