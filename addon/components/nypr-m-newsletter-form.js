@@ -53,6 +53,13 @@ export default Component.extend({
   */
 
   /**
+    Location of the signup form
+
+    @argument location
+    @type {String}
+  */
+
+  /**
     Message to display on successful sign ups.
     Defaults to "Thanks for signing up!"
 
@@ -72,12 +79,13 @@ export default Component.extend({
   onSubmit: task(function * (email) {
     assert(this.endpoint, 'Please pass in the opt in endpoint');
     let params = this.params || {};
+    let location = this.location || '';
 
     try {
       let response = yield fetch(this.endpoint, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({...params, email})
+        body: JSON.stringify({...params, email, location})
       })
       .then(checkResponse);
 
