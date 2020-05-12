@@ -3,7 +3,7 @@
   By
   {{#each @authors as |author|}}
     {{~#if (and (not (has-next author @authors)) (gt @authors.length 1))~}}
-     &nbsp;and&nbsp;
+      and&nbsp;
     {{~else if (and (has-next author @authors) (has-previous author @authors))~}}
       ,&nbsp;
     {{~/if~}}

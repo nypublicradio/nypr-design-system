@@ -22,6 +22,7 @@ module('Integration | Component | nypr-m-newsletter-form', function(hooks) {
     this.setProperties({
       ENDPOINT,
       OTHER_PARAMS,
+      LOCATION
     });
 
     this.mock(fetch)
@@ -34,7 +35,7 @@ module('Integration | Component | nypr-m-newsletter-form', function(hooks) {
       .resolves(SUCCESS_RESPONSE);
 
     await render(hbs`
-      <NyprMNewsletterForm @endpoint={{ENDPOINT}} @params={{OTHER_PARAMS}} as |form|>
+      <NyprMNewsletterForm @location={{LOCATION}} @endpoint={{ENDPOINT}} @params={{OTHER_PARAMS}} as |form|>
         <form.input/>
         <form.submit/>
       </NyprMNewsletterForm>
@@ -67,7 +68,7 @@ module('Integration | Component | nypr-m-newsletter-form', function(hooks) {
       .resolves(ERROR_RESPONSE);
 
     await render(hbs`
-      <NyprMNewsletter @endpoint={{ENDPOINT}} />
+      <NyprMNewsletter @endpoint={{ENDPOINT}} @location={{LOCATION}} />
     `);
 
     await fillIn('.c-newsletter-form__input', EMAIL);
