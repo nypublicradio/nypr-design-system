@@ -1,0 +1,75 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Atoms/Checkbox"/>
+
+
+# Checkbox
+
+Checkboxes are elements used to let a user pick one or more options from a set number of options. Selected options display with a checkmark and solid fill background. Clicking a checkbox selects or deselects it depending on the initial state.
+  
+
+## Use Cases
+
+  
+#### Terms and conditions
+Selecting a checkbox can indicate whether you agree to the terms. This implementation can be seen on Gothamist inside Sign Up Forms.
+
+  
+
+#### Forms
+Can be used in forms to select options.
+
+  
+
+#### Filtering
+Can be used to select different filter options for filtering a list of data.
+
+  
+  
+
+## Checkbox vs. Radio Button
+
+If a user can only select one option from a list, use radio buttons. If a user can choose more than one use checkboxes.
+
+  
+  
+  
+  
+
+## What’s Inside
+
+**Checkbox Input** - A checkbox input indicating selected or unselected. By default, it is unselected.
+
+**Checkbox Label** - A short string describing the option.
+
+
+
+## States
+
+**Unselected** (Default) - in this state, the user hasn’t yet interacted with the checkbox, but it's prepped and ready to accept input.
+
+
+**Selected** - Shown if a user has selected a checkbox.
+
+
+**Active** (selected/unselected) - Outline the container with the stroke of an accent color to indicate when a user is focused on the element.
+
+  
+**Disabled** (selected/unselected) - Use when input is not yet possible. Use a brand utility colors for text and stroke.
+
+  
+
+## Alignment
+
+Checkbox labels should be positioned to the right of their inputs. For more than one option, checkboxes can be arranged horizontally or vertically. When possible, arrange checkbox options groups vertically for better scannability.
+
+  
+  
+
+## Accessibility
+
+-   Checkboxes labels and titles should be clear and concise.
+    
+-   Warn users if selecting a checkbox will cause an on-screen change.
+    
+-   Add `aria-required` for required inputs.
