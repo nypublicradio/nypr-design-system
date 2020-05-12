@@ -13,16 +13,17 @@
     </div>
 
     <NyprMNewsletterForm
-            class="c-newsletter-article__form u-spacing"
+            class="c-newsletter-article__form u-spacing gtm__click-tracking"
             @endpoint={{@endpoint}}
             @params={{@params}}
+            @location="Article Page"
             as |form|>
 
       <form.label/>
 
       <form.input/>
 
-      <form.submit>
+      <form.submit data-label="Article Page">
         <span class="c-newsletter-form__submit-icon o-icon o-icon--newsletter-tout">
           <NyprASvg @icon='arrow-dashed'/>
         </span>

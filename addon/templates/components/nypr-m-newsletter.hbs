@@ -16,12 +16,12 @@
     </p>
   </div>
 
-  <NyprMNewsletterForm class="u-spacing gtm__click-tracking" @location="footer" @endpoint={{@endpoint}} @params={{@params}} as |form|>
+  <NyprMNewsletterForm class="u-spacing gtm__click-tracking" @location="Footer" @endpoint={{@endpoint}} @params={{@params}} as |form|>
     <form.label/>
 
     <form.input/>
 
-    <form.submit class="o-button--c-quarternary">
+    <form.submit class="o-button--c-quarternary" data-label="Footer">
       <span class="c-newsletter-form__submit-icon o-icon o-icon--newsletter-form">
         <NyprASvg @icon='arrow-dashed'/>
       </span>

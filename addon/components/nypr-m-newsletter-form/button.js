@@ -11,12 +11,10 @@ export default Component.extend({
     'disabled',
     'data-test-newsletter-submit',
     'data-category',
-    'data-action',
-    'data-label',
+    'data-action'
   ],
   type: 'submit',
   'data-test-newsletter-submit': true,
   'data-category': 'Click Tracking',
-  'data-action': 'Newsletter Signup',
-  'data-label': 'Article Page',
+  'data-action': 'Newsletter Signup'
 });
