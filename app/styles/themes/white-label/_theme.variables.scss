@@ -5,25 +5,21 @@
 
   /* Header */
   --font-family-header:    'Libre Baskerville', 'Times New Roman', serif;
-  --line-height-header:    1.5;
   --letter-spacing-header: normal;
   --font-weight-header:    700;
 
   /* Subheader */
   --font-family-subheader:    'Libre Baskervile', 'Times New Roman', serif;
-  --line-height-subheader:    1.5;
   --letter-spacing-subheader: normal;
   --font-weight-subheader:    700;
 
   /* Body */
   --font-family-body:    'Source Sans Pro', Helvetica, Arial, sans-serif;
-  --line-height-body:    1.8;
   --letter-spacing-body: normal;
   --font-weight-body:    400;
 
   /* Small */
   --font-family-small:    'Source Sans Pro', Helvetica, Arial, sans-serif;
-  --line-height-small:    1.4;
   --letter-spacing-small: 1px;
   --font-weight-small:    400;
 
@@ -56,16 +52,16 @@
   --line-height-3:  1.4;
   --line-height-4:  1.4;
   --line-height-5:  1.8;
-  --line-height-6:  1.8;
-  --line-height-7:  1.50;
-  --line-height-8:  1.45;
-  --line-height-9:  1.40;
-  --line-height-10: 1.35;
-  --line-height-11: 1.30;
-  --line-height-12: 1.25;
-  --line-height-13: 1.20;
-  --line-height-14: 1.15;
-  --line-height-15: 1.10;
+  --line-height-6:  1.58;
+  --line-height-7:  1.1;
+  --line-height-8:  1.1;
+  --line-height-9:  1.2;
+  --line-height-10: 1.25;
+  --line-height-11: 1.2;
+  --line-height-12: 1.2;
+  --line-height-13: 1.2;
+  --line-height-14: 1.1;
+  --line-height-15: 1.1;
   --line-height-16: 1;
 
   /* Spacing predefined values, do not edit */
@@ -137,7 +133,7 @@
   --color-primary-3:             var(--color-bright-purple);
   --color-button-donate:        var(--color-cool-blue);
   --color-button-1:              var(--color-cool-blue);
-  --color-button-2:              var(--color-sea-green); 
+  --color-button-2:              var(--color-sea-green);
   --color-border-bold:          var(--color-gray-dark);
   --color-border-standard:      var(--color-gray-dark);
   --color-border-subtle:        var(--color-concrete);
@@ -172,7 +168,7 @@
   --color-button-1:             var(--color-cool-blue);
   --color-button-2:             var(--color-sea-green);
   --color-border-bold:          var(--color-border-bold);      //none assigned in airtable
-  --color-border-standard:      var(--color-border-standard);  //none 
+  --color-border-standard:      var(--color-border-standard);  //none
   --color-border-subtle:        var(--color-border-subtle);    //none
 }
 
@@ -194,7 +190,7 @@
   --color-primary-3:             var(--color-bright-purple);
   --color-button-donate:        var(--color-cool-blue);
   --color-button-1:              var(--color-cool-blue);
-  --color-button-2:              var(--color-sea-green); 
+  --color-button-2:              var(--color-sea-green);
   --color-border-bold:          var(--color-gray-dark);
   --color-border-standard:      var(--color-gray-dark);
   --color-border-subtle:        var(--color-concrete);

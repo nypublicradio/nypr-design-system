@@ -5,25 +5,21 @@
 
   /* Header */
   --font-family-header:    'Pragati Narrow', Helvetica, sans-serif;
-  --line-height-header:    1.5;
   --letter-spacing-header: normal;
   --font-weight-header:    700;
 
   /* Subheader */
   --font-family-subheader:    'Pragati Narrow', Helvetica, sans-serif;
-  --line-height-subheader:    1.5;
   --letter-spacing-subheader: normal;
   --font-weight-subheader:    700;
 
   /* Body */
   --font-family-body:    'Barlow', Helvetica, sans-serif;
-  --line-height-body:    1.8;
   --letter-spacing-body: normal;
   --font-weight-body:    400;
 
   /* Small */
   --font-family-small:    'B612 Mono', Menlo, Monaco, "Courier New", "Courier", monospace;
-  --line-height-small:    1.4;
   --letter-spacing-small: 1px;
   --font-weight-small:    400;
 
@@ -96,11 +92,11 @@
   --max-width:      1024px;
   --max-width-xl:   1130px;
   --heading-height: 72px;
-  
+
   // Grid
   --col-width: 48.5px;
   --gutter:    18px;
-  
+
   // Article
   --article-content-width: 634px;
 
@@ -167,15 +163,16 @@
   // --c-button-primary:       var(--c-banana-yellow);
   // --c-button-text:          var(--c-white);
 
+
    /* Animations */
 
---animation-easing-outgoing:          cubic-bezier(0.4, 0.0, 1, 1);
---animation-easing-incoming:          cubic-bezier(0.0, 0.0, 0.2, 1);
---animation-easing-standard:          cubic-bezier(0.4, 0.0, 0.2, 1);
+  --animation-easing-outgoing:          cubic-bezier(0.4, 0.0, 1, 1);
+  --animation-easing-incoming:          cubic-bezier(0.0, 0.0, 0.2, 1);
+  --animation-easing-standard:          cubic-bezier(0.4, 0.0, 0.2, 1);
 
---animation-duration-slow:            .6s linear;
---animation-duration-standard:        .25s linear;
---animation-duration-fast:            .1s linear; 
+  --animation-duration-slow:            .6s linear;
+  --animation-duration-standard:        .25s linear;
+  --animation-duration-fast:            .1s linear; 
  
 }
 
@@ -199,8 +196,8 @@
   --color-button-donate:        var(--color-reddish-orange);
   --color-button-1:              var(--color-banana-yellow);
   --color-button-2:              var(--color-button1); //none assigned in airtable
-  --color-border-bold:          var(--color-border-bold); //none 
-  --color-border-standard:      var(--color-border-standard); //none 
+  --color-border-bold:          var(--color-border-bold); //none
+  --color-border-standard:      var(--color-border-standard); //none
   --color-border-subtle:        var(--color-border-subtle); //none
 }
 
