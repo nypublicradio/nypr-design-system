@@ -6,11 +6,11 @@
  * Transitions
  */
 .has-trans {
-  transition: all .4s ease-in-out;
+  transition: var(--animation-easing-standard) var(--animation-duration-standard);
 }
 
 .has-trans--fast {
-  transition: all .1s ease-in-out;
+  transition: var(--animation-easing-standard) var(--animation-duration-fast);
 }
 
 /**
@@ -19,7 +19,7 @@
 .has-fadeup {
   opacity: 0;
   transform: translate(0, 25px);
-  transition: all .6s ease-out;
+  transition: var(--animation-easing-outgoing) var(--animation-duration-slow); //used to be ease-out
 }
 
 .fadeup {
@@ -29,7 +29,7 @@
 
 .has-fadein {
   opacity: 0;
-  transition: all .8s ease-out;
+  transition: var(--animation-easing-outgoing) var(--animation-duration-slow);
 }
 
 .fadein {
@@ -41,7 +41,7 @@
 .lazyloading {
   opacity: 0;
   transform: translate(0, 25px);
-  transition: all .6s ease-out;
+  transition: var(--animation-easing-outgoing) var(--animation-duration-slow);
 }
 
 .lazyloaded {
