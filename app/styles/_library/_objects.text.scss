@@ -155,7 +155,7 @@
 .o-rte-text > ul li:before {
         content: "";
         position: absolute;
-        left: calc(var(--space-4));
+        left: calc(var(--space-4) * -1);
         top: .75em;
         width: 7px;
         height: 7px;
