@@ -1,0 +1,146 @@
+@function hex2rgb($hexColor) {
+  @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
+}
+
+:root {
+  /* Theme Color Palette */
+
+  /* Neutrals */
+  --color-black:      #{hex2rgb(#000000)};
+  --color-gray-dark:  #{hex2rgb(#333333)};
+  --color-gray:       #{hex2rgb(#afafaf)};
+  --color-light-gray: #{hex2rgb(#f3f3f3)};
+  --color-white:      #{hex2rgb(#ffffff)};
+
+  /* Brand Colors */
+  --color-cool-white:    #{hex2rgb(#EAEFF0)};
+  --color-ceramic-blue:  #{hex2rgb(#235B9C)};
+  --color-concrete:      #{hex2rgb(#8C8C8C)};
+  --color-ember-red:     #{hex2rgb(#C75423)};
+  --color-cool-blue:     #{hex2rgb(#3B8AD1)};
+  --color-sky-blue:      #{hex2rgb(#70C5F6)};
+  --color-sea-green:     #{hex2rgb(#469C78)};
+  --color-bright-purple: #{hex2rgb(#924db1)};
+}
+
+@mixin color-group-light {
+  --color-primary-1:            var(--color-cool-blue);
+  --color-primary-2:            var(--color-sea-green);
+  --color-primary-3:            var(--color-bright-purple);
+  --color-background:           var(--color-white);
+  --color-background-muted:     var(--color-cool-white);
+  --color-background-highlight: var(--color-cool-white);
+  --color-text:                 var(--color-gray-dark);
+  --color-text-muted:           var(--color-concrete);
+  --color-text-error:           var(--color-ember-red);
+  --color-text-inverse:         var(--color-white);
+  --color-text-metadata:        var(--color-gray-dark);
+
+  /* Links */
+  --color-link:                 var(--color-cool-blue);
+  --text-decoration-link:       underline;
+  --color-link-hover:           var(--color-sky-blue);
+  --text-decoration-link-hover: underline;
+  --opacity-link-hover:         1;
+
+  /* Navigation Links */
+  --color-navigation-link:                 var(--color-gray-dark);
+  --text-decoration-navigation-link:       underline;
+  --color-navigation-link-hover:           var(--color-sky-blue);
+  --text-decoration-navigation-link-hover: underline;
+  --opacity-navigation-link-hover:         1;
+
+  /* Tags */
+  --color-tag-text:             var(--color-white);
+  --color-tag-background:       var(--color-cool-blue);
+  --color-tag-hover-text:       var(--color-white);
+  --color-tag-hover-background: var(--color-cool-blue);
+  --opacity-tag-hover:          var(--opacity-hover);
+
+  /* Buttons */
+  --color-button-primary:         var(--color-cool-blue);
+  --color-button-primary-hover:   var(--color-cool-blue);
+  --color-button-primary-pressed: var(--color-ceramic-blue);
+  --opacity-button-primary-hover: var(--opacity-hover);
+
+  --color-button-outline:         var(--color-cool-blue);
+  --color-button-outline-hover:   var(--color-cool-blue);
+  --color-button-outline-pressed: var(--color-ceramic-blue);
+  --opacity-button-outline:       var(--opacity-hover);
+
+  /* Borders */
+  --color-border-subtle: var(--color-black);
+  --color-border-normal: var(--color-black);
+  --color-border-bold:   var(--color-black);
+}
+
+@mixin color-group-dark {
+  --color-primary-1:            var(--color-banana-yellow);
+  --color-primary-2:            var(--color-reddish-orange);
+  --color-primary-3:            var(--color-purple);
+  --color-background:           var(--color-gray-dark);
+  --color-background-muted:     rgb(var(--color-background));  //not assigned
+  --color-background-highlight: var(--color-ceramic-blue);
+  --color-text:                 var(--color-white);
+  --color-text-muted:           var(--color-concrete);
+  --color-text-error:           var(--color-ember-red);
+  --color-text-inverse:         var(--color-gray-dark);
+  --color-text-metadata:        var(--color-white);
+
+  /* Links */
+  --color-link:                 var(--color-white);
+  --text-decoration-link:       underline;
+  --color-link-hover:           var(--color-white);
+  --text-decoration-link-hover: underline;
+  --opacity-link-hover:         var(--opacity-hover);
+
+  /* Navigation Links */
+  --color-navigation-link:                 var(--color-white);
+  --text-decoration-navigation-link:       none;
+  --color-navigation-link-hover:           var(--color-white);
+  --text-decoration-navigation-link-hover: none;
+  --opacity-navigation-link-hover:         var(--opacity-hover);
+
+  /* Tags */
+  --color-tag-text:             var(--color-dusk-blue);
+  --color-tag-background:       var(--color-banana-yellow);
+  --color-tag-hover-text:       var(--color-white);
+  --color-tag-hover-background: var(--color-reddish-orange);
+  --opacity-tag-hover:          var(--opacity-hover);
+
+  /* Buttons */
+  --color-button-primary:         var(--color-cool-blue);
+  --color-button-primary-hover:   var(--color-cool-blue);
+  --color-button-primary-pressed: var(--color-cool-blue);
+  --opacity-button-primary-hover: var(--opacity-hover);
+
+  --color-button-outline:         var(--color-white);
+  --color-button-outline-hover:   var(--color-white);
+  --color-button-outline-pressed: var(--color-white);
+  --opacity-button-outline:       var(--opacity-hover);
+
+  --color-border-bold:          var(--color-border-bold);      //none
+  --color-border-standard:      var(--color-border-standard);  //none
+  --color-border-subtle:        var(--color-border-subtle);    //none
+}
+
+/*  Base */
+:root {
+  @include color-group-light;
+
+  /* Borders */
+  --border-subtle: 2px dashed rgb(var(--color-border-subtle));
+  --border-normal: 3px solid  rgb(var(--color-border-normal));
+  --border-bold:   5px dashed rgb(var(--color-border-bold));
+}
+
+/*Dark and Light Groups */
+.u-color-group-dark {
+  @include color-group-dark;
+
+}
+.u-color-group-light {
+  @include color-group-light;
+}
+
+
