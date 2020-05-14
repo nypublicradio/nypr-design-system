@@ -37,10 +37,11 @@ Use the `.component-descendant-descendant` pattern for components.
 ## Prefixes
 
 |prefix|name|description|
-|`l-`| layout | apply these to containers to create layouts |
-|`u-`| utility | used to override defaults and apply other effects |
-|`mod-`| [modifiers](https://github.com/trello/trellisheets/blob/master/styleguide.md#modifiers)| never used standalone, provides variant styling for an element |
-|`is-`| [states](https://github.com/trello/trellisheets/blob/master/styleguide.md#state) | never used standalone, toggled by javascript |
+|--|--|--|
+|`l-`|layout|apply these to containers to create layouts|
+|`u-`|utility| used to override defaults and apply other effects|
+|`mod-`|[modifiers](https://github.com/trello/trellisheets/blob/master/styleguide.md#modifiers)|never used standalone, provides variant styling for an element|
+|`is-`|[states](https://github.com/trello/trellisheets/blob/master/styleguide.md#state)|never used standalone, toggled by javascript|
 
 ## Avoid `&`, the Sass 'parent selector', especially as a class prefix.
 The [Sass parent selector](https://sass-lang.com/documentation/style-rules/parent-selector) can be a nice shorcut for small blocks, but once a section of code is longer than will fit on the screen, it means you have to scroll up to see what it refers to. When used as part of a class names it also breaks searching for a specific class.
