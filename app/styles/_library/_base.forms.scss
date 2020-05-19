@@ -58,6 +58,8 @@ input[type=checkbox] {
   padding: 0;
   user-select: none;
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background-color: $c-faux-black;
 }
 
