@@ -170,6 +170,7 @@
 }
 .c-block-meta__author {
   @include typeface(small, 1);
+  text-transform: uppercase;
 }
 .c-block-meta__comments {
   vertical-align: middle;
