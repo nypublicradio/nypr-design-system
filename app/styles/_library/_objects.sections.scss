@@ -3,6 +3,8 @@
 \*------------------------------------*/
 
 .o-section__heading {
+  display: inline;
+
   @include typeface(header, 9);
   @include media(">=medium") {
     @include typeface(header, 11);
