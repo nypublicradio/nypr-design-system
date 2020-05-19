@@ -8,11 +8,12 @@ import { task } from 'ember-concurrency';
 
 import fetch from 'fetch';
 
-export const DEFAULT_LEGAL = "By submitting your information, you're agreeing to receive communications from New York Public Radio in accordance with our Terms."
+export const DEFAULT_LEGAL = "By submitting your information, you're agreeing to receive communications from New York Public Radio in accordance with our <a href='https://www.wnyc.org/terms/' target='_blank' rel='noopener' class='u-has-accent'>Terms</a>."
 
 export const DEFAULT_SUBSCRIBED_MESSAGE = "Thanks for signing up!";
 
 export const DEFAULT_LABEL = 'Newsletter signup';
+export const DEFAULT_LOCATION = '';
 
 /**
   Newsletter sign up form
@@ -53,6 +54,13 @@ export default Component.extend({
   */
 
   /**
+    Location of the signup form
+
+    @argument location
+    @type {String}
+  */
+
+  /**
     Message to display on successful sign ups.
     Defaults to "Thanks for signing up!"
 
@@ -70,15 +78,15 @@ export default Component.extend({
     @return {String} task value for success or error state
   */
   onSubmit: task(function * (email) {
-    assert(this.endpiont, 'Please pass in the opt in endpoint');
-
+    assert(this.endpoint, 'Please pass in the opt in endpoint');
     let params = this.params || {};
+    let location = this.location || DEFAULT_LOCATION;
 
     try {
       let response = yield fetch(this.endpoint, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({...params, email})
+        body: JSON.stringify({...params, email, location})
       })
       .then(checkResponse);
 
