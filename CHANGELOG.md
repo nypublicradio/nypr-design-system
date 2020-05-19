@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## `2.10.4`
+- [CHANGE] added newsletter signup component for article page
+- [CHANGE] added link for terms on newsletter signup components
+- [CHANGE] added GA tracking to newsletter signup components 
+- [CHANGE] added location field for mailchimp tracking to newsletter signup components 
+
 ## `2.10.3`
 - [CHANGE] Update NyprODonate to accept an icon name as a parameter.
 - [ENHANCEMENT] Add a new icon `nyc-love`, depicting a heart over a city skyline.
