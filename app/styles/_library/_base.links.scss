@@ -47,6 +47,7 @@ a > span {
 .u-has-accent--white,
 .o-rte-text .u-has-accent--white {
   color: rgb(var(--color-background));
+  border-bottom-color: rgb(var(--color-link-1));
 }
 
 .u-has-accent--secondary,
