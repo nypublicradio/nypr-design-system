@@ -3,6 +3,7 @@
 \*------------------------------------*/
 
 .c-main-header {
+  @include color-group-dark;
   &.side-menu-is-active {
     .c-main-header__branding {
       opacity: 0;
@@ -34,7 +35,7 @@
     z-index: $z-index-heading-logo;
     left: var(--space-2);
     opacity: 1;
-    transition: var(--animation-easing-incoming) var(--animation-duration-fast); // used to be $hard-ease-in
+    transition: var(--animation-duration-fast) var(--animation-easing-incoming);
 
     @include media('>medium') {
       width: 135px;
@@ -120,12 +121,13 @@
   z-index: $z-index-button-outline;
   width: 100%;
   height: 100%;
-	border-color: 3px solid rgb(var(--color-button-primary));
+	border: 3px solid rgb(var(--color-button-primary));
   transform: translate(0, 0);
   transition: all var(--animation-duration-standard) var(--animation-easing-standard);
 }
 
 .o-button:hover {
+  color: rgb(var(--color-dark-gray));
   transform: translate(10px, -10px);
 }
 
@@ -145,15 +147,20 @@
 }
 
 .o-button.mod-donate:before {
-  border: 3px solid rgb(var(color-reddish-orange));
+  border: 3px solid rgb(var(--color-reddish-orange));
 }
 
 // Link styles
+@mixin dotted-underline($color) {
+  display: inline-block;
+  padding-bottom: 2px;
+  border-bottom: 2px dotted rgb(var($color));
+  box-decoration-break: clone;
+}
 
 // Headline link
 .c-block__title a {
   color: rgb(var(--color-black));
-  text-decoration: none;
   transition: none;
 }
 .c-block__title a:hover {
@@ -163,26 +170,11 @@
 }
 
 // Top Navigation
-.c-primary-nav--top {
-  @include color-group-dark;
-}
-
 .c-primary-nav--top .c-primary-nav__link:hover {
   color: rgb(var(--color-reddish-orange));
 }
 
-@mixin dotted-underline($color) {
-  display: inline-block;
-  padding-bottom: 2px;
-  border-bottom: 2px dotted rgb(var($color));
-  box-decoration-break: clone;
-}
-
 // Side Navigaton
-.c-primary-nav--side {
-  @include color-group-dark;
-}
-
 .c-primary-nav--side .c-primary-nav__link {
   padding-bottom: 2px;
   color: rgb(var(--color-banana-yellow));
@@ -193,7 +185,6 @@
   }
 }
 
-
 .c-secondary-nav  .c-secondary-nav__link {
   color: rgb(var(--color-white));
   @include dotted-underline(--color-white);
@@ -202,9 +193,14 @@
     background-color: rgb(var(--color-reddish-orange));
   }
 }
+.c-side-menu {
+  @include color-group-dark;
+}
 
-.c-side-menu__terms-links a {
+.c-side-menu__terms-links a,
+.c-main-footer__terms-links a {
   color: rgb(var(--color-banana-yellow));
+  text-decoration: none;
   text-transform: uppercase;
   &:hover, &:focus {
     color: rgb(var(--color-white));
@@ -212,6 +208,25 @@
   }
 }
 
+// Read More Links
+.c-read-more-nav__link {
+  color: rgb(var(--color-reddish-orange));
+  @include dotted-underline(--color-reddish-orange);
+  &:hover, &:focus {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+// brand navigation links
+.c-nypr-nav__link {
+  color: rgb(var(--color-brick-red));
+  @include dotted-underline(--color-brick-red);
+  &:hover, &:focus {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
 
 // Highlight headline link when hovering card image
 .c-block__media:hover + .c-block__object .c-block__title-link,

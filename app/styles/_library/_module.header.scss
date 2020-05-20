@@ -10,7 +10,14 @@
 }
 
 .c-main-header svg {
-  fill: white;
+  fill: rgb(var(--color-text));
+}
+
+.c-main-header a svg {
+  fill: rgb(var(--color-navigation-link));
+}
+.c-main-header a:hover svg {
+  fill: rgba(var(--color-navigation-link-hover), var(--opacity-navigation-link-hover));
 }
 
 .c-main-header__ad-unit {
@@ -208,7 +215,7 @@
   width: 100%;
   z-index: $z-index-floating-header;
   transform: translateY(0);
-  transition: var(--animation-easing-incoming) var(--animation-duration-standard);
+  transition: var(--animation-duration-standard) var(--animation-easing-incoming);
 }
 .c-floating-header.is-visible {
   transform: translateY(calc(var(--heading-height) + var(--space-2)));
@@ -230,26 +237,26 @@
 
 .c-search-toggle__icon path {
   fill: $c-white;
-  transition: var(--animation-easing-standard) var(--animation-duration-standard);
+  transition: var(--animation-duration-standard) var(--animation-easing-standard);
 }
 
 .c-content-overlay {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: $c-white;
+  background-color: white;
   z-index: $z-index-content-overlay;
   left: -100%;
   top: 0;
   opacity: 0;
   transform: translateX(0);
-  transition: var(--animation-easing-outgoing) var(--animation-easing-outgoing);
+  transition: var(--animation-duration-standard) var(--animation-easing-outgoing);
 }
 /* side menu is open*/
 .c-main-header.side-menu-is-active .c-content-overlay {
   opacity: 0.5;
   transform: translateX(100vw);
-  transition: var(--animation-easing-incoming) var(--animation-duration-standard);
+  transition: var(--animation-duration-standard) var(--animation-easing-incoming);
 }
 
 /**
@@ -258,12 +265,13 @@
 .c-side-menu {
   position: fixed;
   width: 100%;
-  background-color: $c-heading-bgcolor;
+  color: rgb(var(--color-text));
+  background-color: rgb(var(--color-background));
   left: -100%;
   top: 0;
   z-index: $z-index-side-menu;
   padding-bottom: var(--space-5);
-  transition: var(--animation-easing-incoming); //used to be $hard-ease-in
+  transition: var(--animation-duration-standard) var(--animation-easing-incoming);
   overflow: auto;
   height: 100vh;
 

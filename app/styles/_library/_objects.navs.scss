@@ -6,11 +6,15 @@
 *  Nav Links
 */
 .c-primary-nav__link,
-.c-secondary-nav__link  {
+.c-secondary-nav__link,
+.c-read-more-nav__link,
+.c-nypr-nav__link,
+.c-main-footer-links a,
+.c-side-menu__terms-links a {
   color: rgb(var(--color-navigation-link));
   text-decoration: var(--text-decoration-navigation-link);
   &:hover, &:focus {
-    color: rgba(var(--color-navigation-link), var(--opacity-navigation-link-hover));
+    color: rgba(var(--color-navigation-link-hover), var(--opacity-navigation-link-hover));
     text-decoration: var(--text-decoration-navigation-link-hover);
   }
 }
@@ -27,7 +31,7 @@
 .o-menu-toggle__line:before,
 .o-menu-toggle__line:after {
   position: absolute;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(var(--color-text));
   height: 2px;
   display: block;
   left: 50%;
@@ -87,7 +91,7 @@
 .side-menu-is-active:hover .o-menu-toggle__line,
 .side-menu-is-active:hover .o-menu-toggle__line:before,
 .side-menu-is-active:hover .o-menu-toggle__line:after {
-  background-color: rgb(var(--color-background));
+  background-color: rgb(var(--color-text));
 }
 .side-menu-is-active .c-menu-toggle {
   display: none;

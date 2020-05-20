@@ -7,7 +7,7 @@
     background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
     background-position: 100% 142px;
     background-repeat: repeat-x;
-  
+
 }
 
 .c-main-footer__inner {
@@ -36,9 +36,17 @@
   }
 }
 
-.c-main-footer__branding .c-share-tools {
-  fill: white;
+.c-main-footer svg {
+  fill: rgb(var(--color-text));
 }
+
+.c-main-footer a svg {
+  fill: rgb(var(--color-navigation-link));
+}
+.c-main-footer a:hover svg {
+  fill: rgba(var(--color-navigation-link-hover), var(--opacity-navigation-link-hover));
+}
+
 
 .c-main-footer__logo {
   min-width: 150px;
