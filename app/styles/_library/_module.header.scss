@@ -363,16 +363,11 @@
   justify-content: space-between;
 }
 .c-side-menu__terms-links a {
-  color: $c-quaternary;
   padding: 8px 0;
   @include typeface(small, 1);
   @include media(">=medium") {
     @include typeface(small, 3);
   }
-}
-.c-side-menu__terms-links a:hover {
-  background-color: $c-primary;
-  color: $c-white;
 }
 
 /* Side menu is active*/

@@ -162,6 +162,57 @@
   text-decoration-style: dotted;
 }
 
+// Top Navigation
+.c-primary-nav--top {
+  @include color-group-dark;
+}
+
+.c-primary-nav--top .c-primary-nav__link:hover {
+  color: rgb(var(--color-reddish-orange));
+}
+
+@mixin dotted-underline($color) {
+  display: inline-block;
+  padding-bottom: 2px;
+  border-bottom: 2px dotted rgb(var($color));
+  box-decoration-break: clone;
+}
+
+// Side Navigaton
+.c-primary-nav--side {
+  @include color-group-dark;
+}
+
+.c-primary-nav--side .c-primary-nav__link {
+  padding-bottom: 2px;
+  color: rgb(var(--color-banana-yellow));
+  @include dotted-underline(--color-banana-yellow);
+  &:hover, &:focus {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+
+.c-secondary-nav  .c-secondary-nav__link {
+  color: rgb(var(--color-white));
+  @include dotted-underline(--color-white);
+  &:hover, &:focus {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+.c-side-menu__terms-links a {
+  color: rgb(var(--color-banana-yellow));
+  text-transform: uppercase;
+  &:hover, &:focus {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+
 // Highlight headline link when hovering card image
 .c-block__media:hover + .c-block__object .c-block__title-link,
 .c-block__media:hover .c-block__title-link {
