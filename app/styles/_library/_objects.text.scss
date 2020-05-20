@@ -285,6 +285,7 @@
   @include typeface(small, 1);
   @include media(">=medium") {
     @include typeface(small, 3);
+    font-weight: bold;
   }
   padding: 2px 6px 3px;
   text-transform: uppercase;
