@@ -27,6 +27,7 @@ There is no current rule set created for font size and line height. At this time
 *For the future, we may round the line heights to the nearest multiple of 8 using CSS “line-height-step,” which is currently in development. Potential to delete table below to be replaced with JSX component which pulls programmatically from site tokens.*
 
 **Gothamist**
+
 To be added to/changed for white label when ready.
 
 | Size Name    | Font Size          | Line Height          |
@@ -99,28 +100,89 @@ See [W3 Page Structure Guidelines](https://www.w3.org/WAI/tutorials/page-structu
 ### **Whitelabel**
 Our Whitelabel uses two typefaces to show a clear hierarchy and to display style variation/font flexibility within a given theme.   **[Libre Baskerville](https://fonts.google.com/specimen/Libre+Baskerville?selection.family=Libre%20Baskerville)** is used as the primary font for headlines and titles.  **[Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro)** is used as our default secondary and tertiary font for body text as well as small headers and info text. The fonts are open source and are freely available for download from [Google Fonts](https://fonts.google.com/).
 
-| Type | Font & Description | Example |
-| -- | -- | -- |
-| Whitelabel, Primary | **Libre Baskerville** <br/>is used as our default primary font for headlines and titles, as well as subheaders which are page headings and section headings | **TK** BOLD, REGULAR EXAMPLE |
-| Whitelabel, Secondary | **Source Sans Pro** <br/>is used as our default secondary and tertiary font for body text as well as small headers and info text | **TK** BOLD, REGULAR, ITALICS EXAMPLES |
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+<table className="sbdocs sbdocs-table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Font & Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Whitelabel, Primary</td>
+      <td style={{ paddingTop: '20px' }}><span style={{ fontFamily: 'Libre Baskerville', fontWeight: '700', fontSize: '28px' }}>Libre Baskerville</span> <br /> is used as our default primary font for headlines and titles, as well as subheaders which are page headings and section headings </td>
+      <td><span style={{ fontFamily: 'Libre Baskerville', fontWeight: '400', fontSize: '18px' }}>Aa</span> <span style={{ fontFamily: 'Libre Baskerville', fontWeight: '700', fontSize: '18px' }}>Aa</span> </td>      
+    </tr>
+    <tr>
+      <td>Whitelabel, Secondary</td>
+      <td style={{ paddingTop: '20px' }}><span style={{ fontFamily: 'Source Sans Pro', fontWeight: '400', fontSize: '28px' }}>Source Sans Pro</span> <br /> is used as a secondary font for body text</td>
+      <td><span style={{ fontFamily: 'Source Sans Pro', fontWeight: '400', fontSize: '18px' }}>Aa</span> <span style={{ fontFamily: 'Source Sans Pro', fontWeight: '700', fontSize: '18px' }}>Aa</span> <span style={{ fontFamily: 'Source Sans Pro', fontWeight: '400i', fontSize: '18px', fontStyle: 'italic' }}>Aa</span></td>      
+    </tr>
+  </tbody>
+</table>
 
 ### **Gothamist**
 Gothamist uses three typefaces for its brand, creating a clear and expressive hierarchy while maintaining readability. These typefaces complement each other, while also performing well in their assigned hierarchy. **[Pragati Narrow](https://fonts.google.com/specimen/Pragati+Narrow)** is used as the primary font for headlines and titles. **[Barlow](https://fonts.google.com/specimen/Barlow)** is used as a secondary font for body text. **[B612 Mono](https://fonts.google.com/specimen/B612+Mono)** is used as a tertiary font for small headers and info text. The fonts are open source and are freely available for download from [Google Fonts](https://fonts.google.com/).
 
-| Type | Font & Description | Example |
-| -- | -- | -- |
-| Gothamist, Primary | **Pragati Narrow** <br/>is used as the primary font for headlines and titles, as well as subheaders which are page headings and section headings | **TK** BOLD, REGULAR EXAMPLES |
-| Gothamist, Secondary | **Barlow** <br/>is used as a secondary font for body text. | **TK** BOLD, REGULAR, ITALICS EXAMPLE |
-| Gothamist, Tertiary | **B612 Mono** <br/>is used as a tertiary font for small headers and info text. Since this font is always displayed at a very small size, to help with legibility, this font should always be utilized in all caps, with a letter-spacing of 1.25 | **TK** BOLD,<br/>REGULAR EXAMPLES |
+<link href="https://fonts.googleapis.com/css2?family=B612+Mono:wght@400;700&amp;family=Barlow:ital,wght@0,400;0,700;1,400&amp;family=Pragati+Narrow:wght@400;700&amp;display=swap" rel="stylesheet" />
+
+<table className="sbdocs sbdocs-table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Font & Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Gothamist, Primary</td>
+      <td style={{ paddingTop: '20px' }}><span style={{ fontFamily: 'Pragati Narrow', fontWeight: '700', fontSize: '28px' }}>Pragati Narrow</span> <br /> is used as the primary font for headlines and titles, as well as subheaders which are page headings and section headings</td>
+      <td><span style={{ fontFamily: 'Pragati Narrow', fontWeight: '400', fontSize: '18px' }}>Aa</span> <span style={{ fontFamily: 'Pragati Narrow', fontWeight: '700', fontSize: '18px' }}>Aa</span> </td>      
+    </tr>
+    <tr>
+      <td>Gothamist, Secondary</td>
+      <td style={{ paddingTop: '20px' }}><span style={{ fontFamily: 'Barlow', fontWeight: '400', fontSize: '28px' }}>Barlow</span> <br /> is used as a secondary font for body text</td>
+      <td><span style={{ fontFamily: 'Barlow', fontWeight: '400', fontSize: '18px' }}>Aa</span> <span style={{ fontFamily: 'Barlow', fontWeight: '700', fontSize: '18px' }}>Aa</span> <span style={{ fontFamily: 'Barlow', fontWeight: '400i', fontSize: '18px', fontStyle: 'italic' }}>Aa</span></td>      
+    </tr>
+    <tr>
+      <td>Gothamist, Tertiary</td>
+      <td style={{ paddingTop: '20px' }}><span style={{ fontFamily: 'B612 Mono', fontWeight: '400', fontSize: '28px' }}>B612 Mono</span> <br /> is used as a tertiary font for small headers and info text. Since this font is always displayed at a very small size, to help with legibility, this font should always be utilized in all caps, with a letter-spacing of 1.25</td>
+      <td><span style={{ fontFamily: 'B612 Mono', fontWeight: '400', fontSize: '18px' }}>Aa</span> <span style={{ fontFamily: 'B612 Mono', fontWeight: '700', fontSize: '18px' }}>Aa</span></td>      
+    </tr>
+  </tbody>
+</table>
 
 
 ### **WQXR**
 WQXR uses two typefaces to show clear hierarchy and promote the readability of content in our audio focused experience. **[Playfair Display](https://fonts.google.com/specimen/Playfair+Display)** is used as our default primary font for headlines and titles. **[Open Sans](https://fonts.google.com/specimen/Open+Sans)** is used as our default secondary and tertiary font for body text as well as small headers and info text. The fonts are open source and are freely available for download from [Google Fonts](https://fonts.google.com/).
 
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
 
-| Type | Font & Description | Example |
-| -- | -- | -- |
-| WQXR, Primary | **Playfair Display** <br/>is used as our default primary font for headlines and titles. | **TK** BOLD EXAMPLE |
-| WQXR, Secondary | **Open Sans** <br/>is used as our default secondary and tertiary font for body text as well as small headers and info text. | **TK** BOLD, REGULAR EXAMPLES |
+<table className="sbdocs sbdocs-table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Font & Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>WQXR, Primary</td>
+      <td style={{ paddingTop: '20px' }}><span style={{ fontFamily: 'Playfair Display', fontWeight: '700', fontSize: '28px' }}>Playfair Display</span> <br /> is used as our default primary font for headlines and titles. </td>
+      <td><span style={{ fontFamily: 'Playfair Display', fontWeight: '400', fontSize: '18px' }}>Aa</span> <span style={{ fontFamily: 'Playfair Display', fontWeight: '700', fontSize: '18px' }}>Aa</span> </td>      
+    </tr>
+    <tr>
+      <td>WQXR, Secondary</td>
+      <td style={{ paddingTop: '20px' }}><span style={{ fontFamily: 'Open Sans', fontWeight: '400', fontSize: '28px' }}>Open Sans</span> <br /> is used as our default secondary and tertiary font for body text as well as small headers and info text. </td>
+      <td><span style={{ fontFamily: 'Open Sans', fontWeight: '400', fontSize: '18px' }}>Aa</span> <span style={{ fontFamily: 'Open Sans', fontWeight: '700', fontSize: '18px' }}>Aa</span> <span style={{ fontFamily: 'Open Sans', fontWeight: '400i', fontSize: '18px', fontStyle: 'italic' }}>Aa</span></td>      
+    </tr>
+  </tbody>
+</table>
+
 
 

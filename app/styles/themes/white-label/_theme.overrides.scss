@@ -34,7 +34,7 @@
     z-index: $z-index-heading-logo;
     left: var(--space-2);
     opacity: 1;
-    transition: opacity .15s $hard-ease-in;
+    transition: var(--animation-duration-fast) var(--animation-easing-incoming); // used to be $hard-ease-in
 
     @include media('>medium') {
       width: 135px;

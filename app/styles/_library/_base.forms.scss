@@ -54,10 +54,12 @@ input[type=checkbox] {
   cursor: pointer;
   display: block;
   float: left;
-  border: 2px solid rgb(var(--color-border-bold));
+  border: 2px solid rgb(var(--color-gray), 0.3);
   padding: 0;
   user-select: none;
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background-color: $c-faux-black;
 }
 

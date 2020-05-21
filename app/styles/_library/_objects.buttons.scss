@@ -19,7 +19,7 @@ input[type="submit"] {
   line-height: 22px;
   color: rgb(var(--color-background));
   cursor: pointer;
-  transition: all 0.3s $hard-ease-in;
+  transition: var(--animation-easing-incoming) var(--animation-duration-standard); // used to be $hard-ease-in
   font-family: var(--font-family-small);
   text-transform: uppercase;
   border: none;
@@ -46,7 +46,7 @@ input[type="submit"] {
   height: 100%;
   border: 3px solid rgb(var(--color-primary-2));
   transform: translate(0, 0);
-  transition: all 0.3s $hard-ease-in;
+  transition: var(--animation-easing-incoming) var(--animation-duration-standard);// used to be $hard-ease-in
 }
 
 .o-button:hover {

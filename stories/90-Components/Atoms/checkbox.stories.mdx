@@ -1,0 +1,89 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Atoms/Checkbox"/>
+
+
+# Checkbox
+
+Checkboxes are elements used to let a user pick one or more choices from a set number of options. Selected options display with a checkmark and solid fill background. Clicking a checkbox selects or deselects it depending on the initial state.
+  
+
+## Use Cases
+
+  
+**Agreement to Terms**
+Selecting a checkbox can indicate whether a user agrees to specific terms before signing up for communication or submitting information to the organization. This implementation can be seen on Gothamist inside Sign Up Forms when a user is asked to agree to the NYPR Terms before submitting their contact information.
+
+  
+
+**Form Selection**
+Checkboxes can be used in various types of forms to allow a user to select one or many options from a list of choices.
+
+  
+
+**Filtering**
+Given a user is looking to simplify results or options from a query, checkboxes can be used to allow the user to select different one or many filter options for filtering a list of data.
+
+  
+  
+
+## Checkbox vs. Radio Button
+
+If a user can only select **one option from a list**, use radio buttons, which are mutually exclusive. If a user can select **more then one option from a list** use check boxes. If there’s only **one option** to select or unselect, use a checkbox.
+  
+  
+  
+  
+
+## What’s Inside
+
+**Checkbox Input** - A checkbox input indicating selected or unselected. By default, it is unselected.
+
+**Checkbox Label** - A short string describing the option.
+
+
+
+## States
+
+
+  
+**Unselected** (Default) - In this state, the user hasn’t yet interacted with the checkbox, but it's prepped and ready to accept input.
+<img alt="example of default checkbox" src="./images/Molecules-Checkbox-DefaultState.png" width="300" />
+<br/>
+
+  
+**Selected** - Shown if a user has selected a checkbox.
+<img alt="example of selected checkbox" src="./images/Molecules-Checkbox-SelectedState.png" width="300" />
+<br/>
+
+  
+  
+**Active** (selected/unselected) - Outline the container with the stroke of an accent color to indicate when a user is focused on the element.
+<img alt="example of active checkbox" src="./images/Molecules-Checkbox-FocusedState.png" width="300" />
+<br/>
+
+  
+**Disabled** (selected/unselected) - Use when input is not yet possible. Use brand utility colors for text and stroke.
+<img alt="example of disabled checkbox" src="./images/Molecules-Checkbox-DisabledState.png" width="300" />
+<br/>
+
+  
+**Error** (selected/unselected) - If an error occurred when submitting, the form element with an error should provide feedback with changed container stroke and text, usings the brand’s accent color for error
+<img alt="example of error checkbox" src="./images/Molecules-Checkbox-ErrorState.png" width="300" />
+<br/>
+  
+
+## Alignment
+
+Checkbox labels (text) should be positioned to the right of their inputs (actual selector). For lists with more than one option, checkboxes can be arranged horizontally or vertically, though vertical is recommended for best readability when possible.
+
+  
+  
+
+## Accessibility
+
+-   Checkboxes labels and titles should be clear and concise.
+    
+-   Warn users if selecting a checkbox will cause an on-screen change.
+    
+-   Add `aria-required` for required inputs.

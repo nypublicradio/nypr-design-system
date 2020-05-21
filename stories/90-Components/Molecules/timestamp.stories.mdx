@@ -12,7 +12,7 @@ Timestamp displays information related to the date or time. Current usage includ
   
 
 ## Fields
-This component includes two time slots for time, we reccomend using them as laid out below. 
+This component includes optional description text, which can be used to help contextualize time in relation to a piece of content to the user. On a news story, publish date and updated date labels are examples of how this might be used. This descriptor text is flexible to be relevant to the organism/context it is used within.
 
 **Publish Date** - Time when the content was originally published.
 
@@ -21,7 +21,7 @@ This component includes two time slots for time, we reccomend using them as laid
   
 
 ## Formatting Time
-Timestamps follow a 12-hour clock and should include an a “am” or “pm” so it is clear what time is being communicated. Capitalization of "am" or "pm" is left to the discretion of the brand. Time is displayed according to a users timezone, a variable handled by Aviary.
+Timestamps follow a 12-hour clock and should include an “am” or “pm” to ensure that times of day are clearly communicated. Capitalization of "am" or "pm" is left to the discretion of the brand. When seen onsite, time is displayed according to the user's timezone. This variable calculation is handled by Aviary.
 
 If time is within the current **year**, do not display the year, format like: "Month D, h:mm a"
 
@@ -34,11 +34,11 @@ If time is **less than** 24 hrs in the past format like: "N hours ago"
 *Just Now is best used with time-sensitive content like front page news or new content. This formatting option should be able to be turned on and off.
 
 ## Formatting Date
-Date terminals such as "th" or "st” (ex: April 30th) are not used. Days of the week should never be abbreivaited and can be turned on and off as needed.
+Date terminals such as "th" or "st” (ex: April 30th) are not used. Days of the week should never be abbreviated and can be turned on and off as needed.
 
 ## Timestamp on Cards
 
-To reduce clutter on the cards and save horizontal space, certain fields display differently.
+To reduce clutter and save horizontal space, certain timestamp fields display differently on cards.
 
 **Months** are abbreviated to the following:
 
