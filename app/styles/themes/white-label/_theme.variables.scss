@@ -101,6 +101,7 @@
   // Grid
   --grid-gutter:       18px;
   --grid-gutter-large: 36px;
+  --grid-col-width: calc(var(--max-width) / 16);
 
   // Article
   --article-content-width: 634px;
