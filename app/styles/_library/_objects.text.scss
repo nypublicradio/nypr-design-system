@@ -155,7 +155,7 @@
 .o-rte-text > ul li:before {
         content: "";
         position: absolute;
-        left: calc(var(--space-4));
+        left: calc(var(--space-4) * -1);
         top: .75em;
         width: 7px;
         height: 7px;
@@ -285,11 +285,13 @@
   @include typeface(small, 1);
   @include media(">=medium") {
     @include typeface(small, 3);
+    font-weight: bold;
   }
   padding: 2px 6px 3px;
   text-transform: uppercase;
   font-weight: bold;
-  color: rgb(var(--color-text-inverse));
+  // Light accent color, can't use --color-text-inverse
+  color: rgb(var(--color-dusk-blue));
   background-color: rgb(var(--color-primary-1));
   letter-spacing: 1px;
 }

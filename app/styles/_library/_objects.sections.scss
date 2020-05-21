@@ -3,6 +3,8 @@
 \*------------------------------------*/
 
 .o-section__heading {
+  display: inline;
+
   @include typeface(header, 9);
   @include media(">=medium") {
     @include typeface(header, 11);
@@ -160,11 +162,11 @@
 .c-featured-blocks__heading--wnyc {
   width: 260px;
   white-space: nowrap;
-  top: -var(--space-5);
+  top: calc(var(--space-5) * -1);
 
   @include media("<=medium") {
     right: auto;
-    left: var(--space-2);
+    left: calc(var(--space-2) * -1);
   }
 }
 .c-featured-blocks__heading--wnyc > span {
