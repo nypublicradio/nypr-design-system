@@ -94,9 +94,9 @@
   --heading-height: 72px;
 
   // Grid
-  --grid-col-width:    48.5px;
   --grid-gutter:       18px;
   --grid-gutter-large: 36px;
+  --grid-col-width: calc(var(--max-width) / 16);
 
   // Article
   --article-content-width: 634px;

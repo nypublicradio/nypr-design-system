@@ -12,3 +12,8 @@ i.e. .sbdocs.sbdocs-example */
   list-style: disc;
 }
 
+/* background for grid layout examples */
+/* not sure if this will be added once colors are done, can possibly be deleted later */
+.u-background-color--cool-white {
+  background: #EAEFF0;
+}
