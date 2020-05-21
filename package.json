@@ -44,7 +44,8 @@
     "imagesloaded": "^4.1.4",
     "sander": "^0.6.0",
     "sass": "^1.16.1",
-    "strip-json-comments": "^2.0.1"
+    "strip-json-comments": "^2.0.1",
+    "yalc": "^1.0.0-pre.35"
   },
   "devDependencies": {
     "@ember/optional-features": "^0.6.3",
