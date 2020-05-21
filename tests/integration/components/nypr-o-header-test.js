@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { module, test, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
@@ -100,7 +100,7 @@ module('Integration | Component | nypr-o-header', function(hooks) {
     assert.dom('body.side-menu-is-active', document).exists();
   });
 
-  test('floating header', async function(assert) {
+  skip('floating header', async function(assert) {
     // header test injection
     await render(hbs`
       <NyprOHeader @rules={{hash progressTarget=true}} as |header|>

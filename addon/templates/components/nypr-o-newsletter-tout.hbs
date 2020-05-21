@@ -22,16 +22,17 @@
     </div>
 
     <NyprMNewsletterForm
-      class="c-newsletter-tout__form u-spacing"
+      class="c-newsletter-tout__form u-spacing gtm__click-tracking"
       @endpoint={{@endpoint}}
       @params={{@params}}
+      @location="Home Page"
       as |form|>
 
       <form.label/>
 
       <form.input/>
 
-      <form.submit>
+      <form.submit data-label="Home Page">
         <span class="c-newsletter-form__submit-icon o-icon o-icon--newsletter-tout">
           <NyprASvg @icon='arrow-dashed'/>
         </span>
