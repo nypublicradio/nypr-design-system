@@ -59,11 +59,14 @@
   @include typeface(body, 6);
 }
 .o-rte-text a {
-  border-bottom: 2px dotted rgb(var(--color-link-2));
+  color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-link);
+  transition: all 0.15s ease-in-out;
 }
 .o-rte-text a:hover {
-  color: rgb(var(--color-link-hover-2));
-  background-color: rgb(var(--color-primary-2));
+  color: rgb(var(--color-link-hover));
+  text-decoration: var(--text-decoration-link-hover);
+  opacity: var(--opacity-link-hover);
 }
 .o-rte-text a:visited {
   color: rgb(var(--color-link-1));
@@ -249,7 +252,7 @@
         content: close-quote;
       }
 .o-pullquote__author {
-    color: $c-septenary; 
+    color: $c-septenary;
     @include typeface(small, 1);
     @include media(">=medium") {
       @include typeface(small, 3);
@@ -272,7 +275,7 @@
   margin-left: calc(var(--space-2) * -1);
 }
 .o-bg-text-accent--senary {
-    background-image: linear-gradient(rgba(var(--color-background-highlight), .2), rgba(var(--color-background-highlight), .2)); //dark 
+    background-image: linear-gradient(rgba(var(--color-background-highlight), .2), rgba(var(--color-background-highlight), .2)); //dark
   }
 
 
@@ -287,8 +290,12 @@
     @include typeface(small, 3);
     font-weight: bold;
   }
+  background-color: rgb(var(--color-tag-background));
   padding: 2px 6px 3px;
   text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1px;
+  color: rgb(var(--color-tag-text));
   font-weight: bold;
   // Light accent color, can't use --color-text-inverse
   color: rgb(var(--color-dusk-blue));
@@ -298,14 +305,6 @@
 .o-tag,
 .o-kicker {
   font-size: var(--font-size-1);
-}
-.o-tag--sponsored {
-    font-weight: normal;
-    background-color: rgb(var(--color-primary-3));
-  }
-
-.o-kicker--sponsored {
-  background-color: rgb(var(--color-primary-3));
 }
 
 a.o-kicker {
@@ -317,9 +316,14 @@ a.o-breadcrumb {
   display: inline-block;
 }
 
-a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
-  opacity: var(--opacity-hover);
-  }
+a.o-kicker:hover,
+ .o-tag:hover,
+a.o-breadcrumb:hover {
+  color: rgb(var(--color-tag-hover-text));
+  background-color: rgb(var(--color-tag-hover-background));
+  opacity: var(--opacity-tag-hover);
+  text-decoration: none;
+}
 
 .o-tags .o-tag {
     margin: 0 var(--space-1) var(--space-2) 0;
@@ -481,7 +485,7 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
     height: 100%;
     left: 0;
     top: 0;
-    border: 3px solid rgb(var(--color-border-standard));
+    border: 3px solid rgb(var(--color-border-normal));
     background-color: rgb(var(--color-background));
   }
 .o-3d-heading:before {

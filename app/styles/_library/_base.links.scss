@@ -4,21 +4,20 @@
 
 a {
   text-decoration: none;
-  color: rgb(var(--color-link-2));
-  transition: var(--animation-easing-standard) var(--animation-duration-fast); //used to be ease-in-out
+  color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-link);
+  transition: all var(--animation-duration-fast) var(--animation-easing-standard); //used to be ease-in-out
+}
+a:hover {
+  color: rgb(var(--color-link-hover));
+  text-decoration: var(--text-decoration-link-hover);
+  opacity: var(--opacity-link-hover);
 }
 
 a > span {
   transition: var(--animation-easing-standard) var(--animation-duration-fast);
 }
 
-.u-has-accent,
-.o-rte-text .u-has-accent {
-  display: inline-block;
-  padding-bottom: 2px;
-  border-bottom: 2px dotted rgb(var(--color-text-metadata));
-  box-decoration-break: clone;
-}
 
 .u-has-accent:hover,
 .o-rte-text .u-has-accent:hover {

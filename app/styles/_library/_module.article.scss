@@ -18,7 +18,7 @@
 .c-article__body a,
 .c-article__body .u-has-accent,
 .c-article__footer .o-rte-text a {
-  text-decoration: underline;
+  text-decoration: var(--text-decoration-link);
   text-underline-position: under;
   border-bottom: none;
 }
@@ -27,7 +27,7 @@
 .c-article__body a:hover,
 .c-article__body .u-has-accent:hover,
 .c-article__footer .o-rte-text a:hover {
-  text-decoration-color: rgb(var(--color-link-2));
+  text-decoration: var(--text-decoration-link-hover);
 }
 
 .c-article__header {
