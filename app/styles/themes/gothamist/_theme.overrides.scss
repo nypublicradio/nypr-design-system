@@ -4,10 +4,15 @@
 
 .c-main-header {
   @include color-group-dark;
+
   &.side-menu-is-active {
     .c-main-header__branding {
       opacity: 0;
     }
+  }
+
+  .c-share-tools__label {
+    color: rgb(var(--color-white));
   }
 }
 
@@ -57,6 +62,7 @@
   .gothamist-letters {
     fill: rgb(var(--color-black));
   }
+
   .gothamist-buildings {
     fill: rgb(var(--color-white));
   }
@@ -64,16 +70,20 @@
 
 .c-main-footer {
   @include color-group-dark;
+
   .gothamist-letters {
     fill: rgb(var(--color-white));
   }
+
   .gothamist-buildings {
     fill: rgb(var(--color-dark-gray));
   }
+
   .c-newsletter-form {
     @include color-group-light;
   }
 }
+
 /* sponsored tags */
 .o-tag--sponsored {
   font-weight: normal;
@@ -89,6 +99,7 @@
 .u-has-accent .u-has-accent--secondary {
   color: rgb(var(--color-brick-red));
 }
+
 .c-donate-tout__graphic path {
   @include color-group-dark
 }
@@ -121,7 +132,7 @@
   z-index: $z-index-button-outline;
   width: 100%;
   height: 100%;
-	border: 3px solid rgb(var(--color-button-primary));
+  border: 3px solid rgb(var(--color-button-primary));
   transform: translate(0, 0);
   transition: all var(--animation-duration-standard) var(--animation-easing-standard);
 }
@@ -138,16 +149,18 @@
 .o-button.mod-donate {
   color: rgb(var(--color-white));
   background-color: rgb(var(--color-reddish-orange));
+
   &:hover {
     background-color: rgb(var(--color-reddish-orange));
   }
+
   &:active {
     background-color: rgb(var(--color-reddish-orange));
   }
 }
 
 .o-button.mod-donate:before {
-  border: 3px solid rgb(var(--color-reddish-orange));
+  border: 3px solid var(--color-reddish-orange);
 }
 
 // Link styles
@@ -164,8 +177,9 @@
   transition: none;
   text-decoration: none;
 }
+
 .c-block__title a:hover {
-  color:  rgb(var(--color-reddish-orange));
+  color: rgb(var(--color-reddish-orange));
   text-decoration: underline;
   text-decoration-style: dotted;
 }
@@ -180,20 +194,23 @@
   padding-bottom: 2px;
   color: rgb(var(--color-banana-yellow));
   @include dotted-underline(--color-banana-yellow);
+
   &:hover, &:focus {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
   }
 }
 
-.c-secondary-nav  .c-secondary-nav__link {
+.c-secondary-nav .c-secondary-nav__link {
   color: rgb(var(--color-white));
   @include dotted-underline(--color-white);
+
   &:hover, &:focus {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
   }
 }
+
 .c-side-menu {
   @include color-group-dark;
 }
@@ -203,6 +220,7 @@
   color: rgb(var(--color-banana-yellow));
   text-decoration: none;
   text-transform: uppercase;
+
   &:hover, &:focus {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
@@ -213,6 +231,7 @@
 .c-read-more-nav__link {
   color: rgb(var(--color-reddish-orange));
   @include dotted-underline(--color-reddish-orange);
+
   &:hover, &:focus {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
@@ -223,6 +242,7 @@
 .c-nypr-nav__link {
   color: rgb(var(--color-brick-red));
   @include dotted-underline(--color-brick-red);
+
   &:hover, &:focus {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
@@ -232,7 +252,7 @@
 // Highlight headline link when hovering card image
 .c-block__media:hover + .c-block__object .c-block__title-link,
 .c-block__media:hover .c-block__title-link {
-  color:  rgb(var(--color-reddish-orange));
+  color: rgb(var(--color-reddish-orange));
   text-decoration: underline;
   text-decoration-style: dotted;
 }
