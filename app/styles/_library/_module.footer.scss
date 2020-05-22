@@ -3,11 +3,11 @@
 \*------------------------------------*/
 
 .c-main-footer {
-    padding: var(--space-5) 0;
-    background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
-    background-position: 100% 142px;
-    background-repeat: repeat-x;
-
+  padding: var(--space-5) 0;
+  background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
+  background-position: 100% 142px;
+  background-repeat: repeat-x;
+  color: rgb(var(--color-white));
 }
 
 .c-main-footer__inner {
@@ -43,6 +43,7 @@
 .c-main-footer a svg {
   fill: rgb(var(--color-navigation-link));
 }
+
 .c-main-footer a:hover svg {
   fill: rgba(var(--color-navigation-link-hover), var(--opacity-navigation-link-hover));
 }
@@ -66,6 +67,7 @@
   @include typeface(small, 3);
   text-transform: uppercase;
   text-decoration: none;
+
   &:hover {
     color: rgb(var(--color-background));
     text-decoration: none;
@@ -189,6 +191,10 @@
   @include media(">large") {
     margin: 0 var(--space-5) 0 0;
   }
+}
+
+.c-main-footer__signup {
+  color: rgb(var(--color-black));
 }
 
 .c-main-footer__terms-links a:hover {

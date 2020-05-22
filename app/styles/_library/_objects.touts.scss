@@ -305,6 +305,10 @@
 
 .c-newsletter-tout__dek {
   @include typeface(small, 5);
+
+  a {
+    border-bottom: 2px dotted rgb(var(--color-white));
+  }
 }
 
 .c-newsletter-tout__heading {

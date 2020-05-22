@@ -18,6 +18,15 @@ a > span {
   transition: var(--animation-easing-standard) var(--animation-duration-fast);
 }
 
+.u-has-accent,
+.o-rte-text .u-has-accent {
+  display: inline-block;
+  padding-bottom: 2px;
+  border-bottom: 2px dotted rgb(var(--color-dark-gray));
+  text-decoration: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
 
 .u-has-accent:hover,
 .o-rte-text .u-has-accent:hover {
