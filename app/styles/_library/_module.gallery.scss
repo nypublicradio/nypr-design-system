@@ -4,26 +4,26 @@
 
 .c-gallery-overlay {
   padding: var(--space-5) 0 var(--space-9);
-  color: $c-white;
-  background-color: $c-dark-bg;
+  color: rgb(var(--color-white));
+  background-color: rgb(var(--color-dark-gray));
 }
 
 .c-gallery-overlay .o-credit a {
-  color: $c-white;
-  border-bottom: 2px dotted $c-white;
+  color: rgb(var(--color-white));
+  border-bottom: 2px dotted rgb(var(--color-white));
 }
 
 .c-gallery-overlay .o-credit a:hover {
-  color: $c-white;
-  background-color: $c-primary;
+  color: rgb(var(--color-white));
+  background-color: rgb(var(--color-reddish-orange));
 }
 
 .c-gallery-overlay .o-rte-text a:visited {
-  color: $c-white;
+  color: rgb(var(--color-white));
 }
 
 .c-gallery-overlay .o-ad__label {
-  color: $c-octonary;
+  color: rgb(var(--color-dirty-salmon));
 }
 
 .c-gallery-overlay .l-wrap {

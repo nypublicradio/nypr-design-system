@@ -3,34 +3,34 @@
     {{yield (hash label=(component 'blank-template' text=this.defaultLabel))}}
   </label>
   {{yield (hash
-    input=(component 'nypr-m-newsletter-form/input'
-      required=true
-      name="newsletter"
-      type="email"
-      class="c-newsletter-form__input"
-      placeholder="your@email.com"
-      value=this.email
-    )
-    submit=(component 'nypr-m-newsletter-form/button'
-      disabled=(or this.onSubmit.isRunning (not this.legalChecked))
-    )
-  )}}
+                  input=(component 'nypr-m-newsletter-form/input'
+                          required=true
+                          name="newsletter"
+                          type="email"
+                          class="c-newsletter-form__input"
+                          placeholder="your@email.com"
+                          value=this.email
+                  )
+                  submit=(component 'nypr-m-newsletter-form/button'
+                          disabled=(or this.onSubmit.isRunning (not this.legalChecked))
+                  )
+          )}}
 </div>
 
 
-  <div class="c-newsletter-form__message" aria-live="polite">
-    {{#if this.onSubmit.last}}
-      {{! template-lint-disable no-triple-curlies }}
-      {{{or this.onSubmit.last.value this.onSubmit.last.error}}}
-    {{/if}}
-  </div>
+<div class="c-newsletter-form__message" aria-live="polite">
+  {{#if this.onSubmit.last}}
+    {{! template-lint-disable no-triple-curlies }}
+    {{{or this.onSubmit.last.value this.onSubmit.last.error}}}
+  {{/if}}
+</div>
 
 
 <div class="c-newsletter-form__terms">
   <label class="c-newsletter-form__terms-checkbox">
     {{input type='checkbox' class='o-checkbox' checked=this.legalChecked}}
-    <p class="c-newsletter-form__terms-checkbox-label u-font--xs">
-      {{yield (hash legal=(component 'blank-template' text=this.defaultLegal))}}
+    <p class="u-font--xs" data-test-newsletter-tout-legal>
+      {{{this.defaultLegal}}}
     </p>
   </label>
 </div>

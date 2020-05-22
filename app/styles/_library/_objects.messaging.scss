@@ -19,6 +19,7 @@
   text-align: center;
   display: block;
 }
+
 .o-box-banner__inner {
   @include media(">large") {
     display: flex;
@@ -26,14 +27,17 @@
     align-items: flex-start;
   }
 }
+
 .o-box-banner.this-is-active {
   display: none;
 }
+
 .o-box-banner__close {
   position: absolute;
   right: var(--space-2);
   top: var(--space-2);
 }
+
 .o-box-banner__title {
   font-weight: bold;
   font-size: var(--font-size-8);
@@ -43,17 +47,19 @@
     text-align: right;
   }
 }
+
 .o-box-banner__title > a,
 .o-box-banner__title-link {
   @include inline-accent(
-    rgb(var(--color-text)),
-    rgb(var(--color-text)),
-    rgb(var(--color-primary-2)),
-    false,
-    $c-tertiary
+      rgb(var(--color-text)),
+      rgb(var(--color-text)),
+      rgb(var(--color-primary-2)),
+      false,
+      rgb(var(--color-brick-red))
   );
   transition: none;
 }
+
 .o-box-banner__group {
   @include media(">large") {
     min-width: 73%;
@@ -61,6 +67,7 @@
     text-align: left;
   }
 }
+
 .o-box-banner__dek p {
   line-height: 1.45;
 
@@ -68,15 +75,18 @@
     font-size: var(--font-size-5);
   }
 }
+
 .o-box-banner__dek a {
-  border-bottom-color: rgb(var(--color-border-normal));
+  border-bottom-color: rgb(var(--border-standard));
   color: rgb(var(--color-text));
 }
+
 .o-box-banner__dek a:hover {
-  color: $c-tertiary;
+  color: rgb(var(--color-brick-red));
   background-color: transparent;
-  border-bottom-color: $c-tertiary;
+  border-bottom-color: rgb(var(--color-brick-red));
 }
+
 .o-box-banner--no-desc .o-box-banner__title {
   margin-bottom: var(--space-3);
 
@@ -88,6 +98,7 @@
     max-width: 75%;
   }
 }
+
 .o-box-banner--no-desc .o-box-banner__group {
   @include media(">large") {
     min-width: 0;
@@ -95,23 +106,28 @@
     text-align: left;
   }
 }
+
 .o-box-banner--sticky {
   position: fixed;
   width: 100%;
   bottom: 0;
   animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both 1s;
 }
+
 .o-box-banner--sticky.this-is-active {
   display: block;
   animation: slide-out-bottom 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
+
 .o-box-banner--senary { //dark
   background-color: rgb(var(--color-background-highlight));
   @include reversed-out-text;
 }
+
 .o-box-banner--senary .o-box-banner__close path {
   fill: rgb(var(--color-text));
 }
+
 .o-box-banner--senary .o-box-banner__title a {
   @include inline-accent(rgb(var(--color-text)), rgb(var(--color-text)), rgb(var(--color-text)), rgb(var(--color-primary-2)), rgb(var(--color-text)));
 }

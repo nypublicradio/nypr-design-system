@@ -12,6 +12,9 @@
   --color-light-gray: #{hex2rgb(#f3f3f3)};
   --color-white:      #{hex2rgb(#ffffff)};
 
+  /* Forms */
+  --color-valid:               #{hex2rgb(#089E00)};
+
   /* Brand Colors */
   --color-cool-white:    #{hex2rgb(#EAEFF0)};
   --color-ceramic-blue:  #{hex2rgb(#235B9C)};
@@ -70,7 +73,7 @@
 
   /* Borders */
   --color-border-subtle: var(--color-black);
-  --color-border-normal: var(--color-black);
+  --color-border-standard: var(--color-black);
   --color-border-bold:   var(--color-black);
 }
 
@@ -130,7 +133,7 @@
 
   /* Borders */
   --border-subtle: 2px dashed rgb(var(--color-border-subtle));
-  --border-normal: 3px solid  rgb(var(--color-border-normal));
+  --border-standard: 3px solid  rgb(var(--color-border-standard));
   --border-bold:   5px dashed rgb(var(--color-border-bold));
 }
 

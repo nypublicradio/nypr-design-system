@@ -12,6 +12,9 @@
   --color-light-gray:          #{hex2rgb(#f3f3f3)};
   --color-white:               #{hex2rgb(#ffffff)};
 
+  /* Forms */
+  --color-valid:               #{hex2rgb(#089E00)};
+
   /* Brand Colors */
   --color-brick-red:           #{hex2rgb(#9c1e14)};
   --color-reddish-orange:      #{hex2rgb(#de5e36)};
@@ -33,6 +36,7 @@
   --color-text:                 var(--color-dark-gray);
   --color-text-muted:           var(--color-gray);
   --color-text-error:           var(--color-brick-red);
+  --color-text-valid:           var(--color-valid);
   --color-text-inverse:         var(--color-white);
   --color-text-metadata:        var(--color-dark-gray);
 
@@ -68,8 +72,8 @@
   --color-button-outline-pressed: var(--dark-gray);
   --opacity-button-outline:       var(--opacity-hover);
 
-  --color-border-subtle: var(--color-dirty-salmon);
-  --color-border-normal: var(--color-dark-gray);
+  --color-border-subtle: var(--color-gray);
+  --color-border-standard: var(--color-dark-gray);
   --color-border-bold:   var(--color-reddish-orange);
 }
 
@@ -84,6 +88,7 @@
   --color-text:                 var(--color-white);
   --color-text-muted:           var(--color-gray);
   --color-text-error:           var(--color-brick-red);
+  --color-text-valid:           var(--color-valid);
   --color-text-inverse:         var(--color-dark-gray);
   --color-text-metadata:        var(--color-white);
 
@@ -130,9 +135,9 @@
   @include color-group-light;
 
   /* Borders */
-  --b-border-subtle: 2px dashed rgb(var(--color-border-subtle));
-  --b-border-normal: 3px solid rgb(var(--color-border-normal));
-  --b-border-bold:   5px dashed rgb(var(--color-border-bold));
+  --border-subtle: 2px dashed rgb(var(--color-border-subtle));
+  --border-standard: 3px solid  rgb(var(--color-border-standard));
+  --border-bold:   5px dashed rgb(var(--color-border-bold));
 }
 
 /*Dark and Light Groups */

@@ -16,7 +16,7 @@
   bottom: -22px;
   right: 0;
   position: absolute;
-  background-color: $c-white;
+  background-color: rgb(var(--color-white));
   opacity: 0;
   transform: translateY(20px) rotate(-45deg);
   transition: none;
@@ -51,7 +51,7 @@
   color: rgb(var(--color-text));
 }
 .c-toggle-box .o-icon--caret path {
-  fill: $c-white;
+  fill: rgb(var(--color-white));
 }
 /* Open*/
 .c-toggle-box.this-is-active .c-toggle-box__label:before {
@@ -60,6 +60,9 @@
   transition: var(--animation-easing-outgoing) var(--animation-easing-outgoing);
   width: 15px;
   height: 15px;
+  position: absolute;
+  top: 25px;
+  right: -4px;
 }
 .c-toggle-box.this-is-active .c-toggle-box__content {
   opacity: 1;
@@ -105,12 +108,12 @@
   height: var(--space-2);
   appearance: none;
   border: none;
-  background-color: $c-gray--light;
+  background-color: rgb(var(--color-light-gray));
   color: rgb(var(--color-primary-1));
   z-index: $z-index-progress-bar;
 }
 .o-progress::-webkit-progress-bar {
-  background-color: $c-gray--light;
+  background-color: rgb(var(--color-light-gray));
 }
 .o-progress::-webkit-progress-value {
   background-color: rgb(var(--color-primary-1));

@@ -6,11 +6,11 @@
  * Validation
  */
 .has-error {
-  border-color: rgb(var(--color-text-error))!important;
+  border-color: rgb(var(--color-text-error)) !important;
 }
 
 .is-valid {
-  border-color: $c-valid !important;
+  border-color: rgb(var(--color-text-valid)) !important;
 }
 
 .o-error-message {
@@ -51,6 +51,7 @@ div.o-confirm-message p {
   display: flex;
   justify-content: space-between;
 }
+
 .c-search__button {
   height: 100%;
   padding: 10px;
@@ -72,6 +73,7 @@ div.o-confirm-message p {
     display: none;
   }
 }
+
 .c-search--top .c-search__close {
   position: absolute;
   left: var(--space-2);
@@ -80,20 +82,23 @@ div.o-confirm-message p {
   height: 24px;
   transform: translate(-40px, -50%);
   border-radius: 50%;
-  background-color: $c-gray--light;
+  background-color: rgb(var(--color-light-gray));
   display: flex;
   align-items: center;
   justify-content: center;
   transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
   z-index: $z-index-search-close;
 }
+
 .c-search--top .c-search__close svg {
   width: 10px;
   height: 10px;
 }
+
 .c-search--top .c-search__close path {
   fill: rgb(var(--color-primary-2));
 }
+
 .c-search--top .c-search__input {
   width: calc(100% - 50px);
   font-size: var(--font-size-4);
@@ -101,6 +106,7 @@ div.o-confirm-message p {
   transform: translateX(calc(100% + 50px));
   transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
+
 .c-search--top .c-search__button {
   min-width: 50px;
   max-width: 50px;
@@ -109,9 +115,11 @@ div.o-confirm-message p {
   opacity: 0;
   transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
+
 .c-search--top .c-search__button:hover {
   background-color: rgb(var(--color-primary-1));
 }
+
 /* Top search entry is open*/
 .top-search-is-active .c-search--top {
   display: flex;
@@ -122,20 +130,24 @@ div.o-confirm-message p {
     display: none;
   }
 }
+
 .top-search-is-active .c-search__close {
   transform: translateY(-50%);
   transition: var(--animation-easing-outgoing);
 }
+
 .top-search-is-active .c-search__input {
   transform: translateX(0);
   transition: var(--animation-easing-outgoing);
 }
+
 .top-search-is-active .c-search__button {
   opacity: 1;
   transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
+
 .top-search-is-active .c-search__button path {
-  fill: $c-black;
+  fill: rgb(var(--color-black));
 }
 
 /* top search is open*/
@@ -149,35 +161,42 @@ div.o-confirm-message p {
     display: none;
   }
 }
+
 .c-search--top.is-open .c-search__close {
   transform: translateY(-50%);
   transition: var(--animation-easing-outgoing);
 }
+
 .c-search--top.is-open .c-search__input {
   transform: translateX(0);
   transition: var(--animation-easing-outgoing);
 }
+
 .c-search--top.is-open .c-search__button {
   opacity: 1;
   transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
+
 .c-search--top.is-open .c-search__button .search-icon {
-  fill: $c-black;
+  fill: rgb(var(--color-black));
 }
 
 /* Side menu search*/
 .c-search--side {
   height: 60px;
 }
+
 .c-search--side .c-search__input {
   width: calc(100% - 60px);
 }
+
 .c-search--side .c-search__button {
   min-width: 60px;
   max-width: 60px;
 }
+
 .c-search--side .c-search__button path {
-  fill: $c-black;
+  fill: rgb(var(--color-black));
 }
 
 /**
@@ -193,7 +212,16 @@ div.o-confirm-message p {
   @include media(">xlarge") {
     padding-left: 120px;
   }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
+
 .c-newsletter-form__graphic {
   position: absolute;
   width: 140px;
@@ -218,12 +246,14 @@ div.o-confirm-message p {
     mix-blend-mode: normal;
   }
 }
+
 .c-newsletter-form__graphic path {
   fill: rgb(var(--color-background-highlight));
 }
+
 .c-newsletter-form__inner {
   background-color: rgb(var(--color-background-highlight));
-  border: 3px solid rgb(var(--color-border-normal));
+  border: var(--border-standard);
   padding: var(--space-5) var(--space-4);
 
   @include media(">xlarge") {
@@ -231,55 +261,106 @@ div.o-confirm-message p {
     max-width: 380px;
   }
 }
+
 .c-newsletter-form__text {
   @include media("<=xlarge") {
     padding-left: 80px;
   }
 }
+
 .c-newsletter-form__text p {
   font-size: var(--font-size-4);
   line-height: 1.55;
 }
+
 .c-newsletter-form__icon {
   vertical-align: text-top;
   margin-right: var(--space-2);
 }
+
 .c-newsletter-form__field-group {
   display: flex;
-  border: 3px solid rgb(var(--color-border-normal));
+  border: var(--border-standard);
   position: relative;
 }
+
 .c-newsletter-form__input {
   width: calc(100% - 60px);
 }
+
 .c-newsletter-form__button {
   width: 60px;
   height: 60px;
   padding: 0;
+  background-color: rgb(var(--color-reddish-orange));
 }
+
 .c-newsletter-form__button:hover:not(:focus) .o-icon--newsletter-form {
   animation: bounce-horiz 0.8s 0s ease-out infinite;
 }
+
 .c-newsletter-form .c-newsletter-form__button {
-  background-color: $c-dark-bg; //not sure what gray
+  background-color: rgb(var(--color-dark-gray));
 }
+
 .c-newsletter-form__submit-icon {
   width: 24px;
-  fill: $c-white; //no fill, no whites
+  fill: rgb(var(--color-white));
 }
+
 .c-newsletter-form__terms {
   padding-left: 25px;
   position: relative;
 }
+
 .c-newsletter-form__terms .o-checkbox {
   position: absolute;
   left: 0;
   top: 2px;
+  border: none;
 }
 
 .c-newsletter-form__terms-checkbox-label {
   @include typeface(body, 2);
 }
+
 .c-newsletter-form__terms p {
   line-height: 1.35;
+}
+
+.c-newsletter-article {
+  max-width: 374px;
+  margin: auto;
+
+  .c-newsletter-article__heading {
+    font-size: 20px;
+  }
+
+  .c-newsletter-form__field-group {
+    border: none;
+
+    input {
+      border: 3px solid rgb(var(--color-dark-gray));
+      height: 40px;
+      font-size: 12px;
+
+      &::placeholder {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .o-button {
+    background-color: rgb(var(--color-reddish-orange));
+  }
+
+  input[type=checkbox] {
+    background-color: rgb(var(--color-reddish-orange));
+    border: rgb(var(--color-reddish-orange));
+  }
+
+  .c-newsletter-form__button {
+    height: 40px;
+    width: 40px;
+  }
 }

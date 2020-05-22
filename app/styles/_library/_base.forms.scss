@@ -60,7 +60,7 @@ input[type=checkbox] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-color: $c-faux-black;
+  background-color: rgb(var(--color-dark-gray));
 }
 
 input[type=radio] + label,
@@ -117,7 +117,7 @@ select::-ms-expand {
   }
 
 ::placeholder {
-  color: var(--color-brown-grey);
+  color: rgb(var(--color-brown-grey));
   font-family: var(--font-family-small);
 }
 

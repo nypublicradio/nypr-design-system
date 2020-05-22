@@ -24,8 +24,8 @@
 /* Two columns with ad unit*/
 .c-block-group .c-block-group__col1 {
   @include media(">medium") {
-    padding-right: var(--gutter);
-    width: calc((100% - 300px) - var(--gutter));
+    padding-right: var(--grid-gutter);
+    width: calc((100% - 300px) - var(--grid-gutter));
   }
 }
 .c-block-group .c-block-group__col2 {
@@ -141,14 +141,14 @@
  * Featured block groups
  */
 .c-featured-blocks {
-  border-top: var(--border-normal); //no rgb bc px and solid included
-  border-bottom: var(--border-normal);
+  border-top: var(--border-standard); //no rgb bc px and solid included
+  border-bottom: var(--border-standard);
   position: relative;
 
   @include media(">medium") {
     /* Adjusted vertical spacing because of the bottom content break through.*/
     margin-bottom: 120px;
-    border: var(--border-normal);
+    border: var(--border-standard);
   }
 }
 .c-featured-blocks__heading {
@@ -288,7 +288,7 @@
  */
 .c-search-results__header {
   padding-top: var(--space-3);
-  border-bottom: var(--border-normal);
+  border-bottom: var(--border-standard);
 }
 .c-search-results__header--no-border {
   border-bottom: none;

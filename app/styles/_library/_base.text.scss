@@ -50,6 +50,6 @@ hr {
  * Abbreviation
  */
 abbr {
-  border-bottom: 1px dotted $c-border-color;
+  border-bottom: 1px dotted var(--color-dark-gray);
   cursor: help;
 }

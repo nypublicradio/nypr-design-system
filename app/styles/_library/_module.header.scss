@@ -16,13 +16,14 @@
 .c-main-header a svg {
   fill: rgb(var(--color-navigation-link));
 }
+
 .c-main-header a:hover svg {
   fill: rgba(var(--color-navigation-link-hover), var(--opacity-navigation-link-hover));
 }
 
 .c-main-header__ad-unit {
   position: relative;
-  background-color: $c-dark-bg;
+  background-color: rgb(var(--color-dark-gray));
   text-align: center;
 }
 
@@ -37,7 +38,7 @@
 }
 
 .c-main-header .o-ad__label {
-  color: $c-gray--light;
+  color: rgb(var(--color-light-gray));
 
   @include media("<=small") {
     display: none;
@@ -45,7 +46,7 @@
 }
 
 .c-main-header__inner {
-  background-color: $c-heading-bgcolor;
+  background-color: rgb(var(--color-dark-gray));
   padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
   display: flex;
   align-items: center;
@@ -94,6 +95,19 @@
   }
 }
 
+.c-main-header__donate.o-button {
+  background-color: rgb(var(--color-reddish-orange));
+  color: rgb(var(--color-white));
+
+  &::before {
+    border: 3px solid rgb(var(--color-reddish-orange));
+  }
+
+  &:hover {
+    color: rgb(var(--color-white));
+  }
+}
+
 .c-main-header__close {
   width: 17px;
   height: 17px;
@@ -105,7 +119,7 @@
   @include media(">=medium") {
     @include typeface(header, 8);
   }
-  color: $c-white;
+  color: rgb(var(--color-white));
   font-weight: normal;
   line-height: 1.2;
   letter-spacing: 1px;
@@ -166,11 +180,11 @@
 }
 
 .c-main-header__share .c-share-tools__link:hover path {
-  fill: $c-primary;
+  fill: rgb(var(--color-reddish-orange));
 }
 
 .c-main-header__share .c-share-tools__link path {
-  fill: $c-white;
+  fill: rgb(var(--color-white));
 }
 
 /* Gallery and Article floating header specific styles*/
@@ -217,6 +231,7 @@
   transform: translateY(0);
   transition: var(--animation-duration-standard) var(--animation-easing-incoming);
 }
+
 .c-floating-header.is-visible {
   transform: translateY(calc(var(--heading-height) + var(--space-2)));
 }
@@ -232,11 +247,11 @@
 }
 
 .c-search-toggle:hover path {
-  fill: $c-primary;
+  fill: rgb(var(--color-reddish-orange));
 }
 
 .c-search-toggle__icon path {
-  fill: $c-white;
+  fill: rgb(var(--color-white));
   transition: var(--animation-duration-standard) var(--animation-easing-standard);
 }
 
@@ -252,6 +267,7 @@
   transform: translateX(0);
   transition: var(--animation-duration-standard) var(--animation-easing-outgoing);
 }
+
 /* side menu is open*/
 .c-main-header.side-menu-is-active .c-content-overlay {
   opacity: 0.5;
@@ -285,12 +301,15 @@
     left: -500px;
   }
 }
+
 .c-side-menu .c-menu-toggle {
   display: none;
 }
+
 .c-side-menu .c-menu-toggle + * {
   margin-left: 0;
 }
+
 .c-side-menu__group {
   padding: var(--space-4);
 
@@ -299,29 +318,36 @@
     padding-right: 75px;
   }
 }
+
 .c-side-menu__group:not(:last-child) {
-  @include border-accent(right, center, rgba($c-gray, 0.2));
+  @include border-accent(right, center, rgba(var(--color-gray), 0.2));
 }
+
 .c-side-menu__branding {
   width: 180px;
   margin: var(--space-2) auto var(--space-3);
 }
+
 .c-side-menu__social .c-share-tools {
   fill: white;
   justify-content: center;
 }
+
 .c-side-menu__secondary-nav .c-secondary-nav {
   margin-bottom: var(--space-3);
 }
+
 .c-side-menu__secondary-nav .c-secondary-nav__list {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   align-items: flex-start;
 }
+
 .c-side-menu__secondary-nav .c-secondary-nav__item {
   margin-bottom: var(--space-4);
 }
+
 .c-side-menu__secondary-nav .c-secondary-nav__link {
   margin: 0 var(--space-3);
 
@@ -329,10 +355,12 @@
     margin: 0 var(--space-4);
   }
 }
+
 .c-side-menu__donate {
   width: 100%;
   margin-bottom: var(--space-3);
 }
+
 .c-side-menu__donate,
 .c-side-menu .c-side-menu__send-story,
 .c-side-menu .c-search--side {
@@ -340,25 +368,31 @@
   margin-left: auto;
   margin-right: auto;
 }
+
 .c-side-menu__send-story {
   @include media("<=xsmall") {
     font-size: var(--font-size-4);
   }
 }
+
 .c-side-menu__nypr-logo {
   width: 120px;
   margin: var(--space-5) auto var(--space-3);
 }
+
 .c-side-menu__nypr-logo path,
 .c-side-menu__nypr-logo polygon {
-  fill: $c-white;
+  fill: rgb(var(--color-white));
 }
+
 .c-side-menu .c-nypr-nav__list {
   width: calc(100% + var(--space-5));
 }
+
 .c-side-menu__nypr-linkroll .c-toggle-box__label {
   font-size: var(--font-size-3);
 }
+
 .c-side-menu__copyright p {
   line-height: 2.5;
   @include typeface(small, 1);
@@ -366,10 +400,12 @@
     @include typeface(small, 3);
   }
 }
+
 .c-side-menu__terms-links {
   display: flex;
   justify-content: space-between;
 }
+
 .c-side-menu__terms-links a {
   padding: 8px 0;
   @include typeface(small, 1);

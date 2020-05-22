@@ -61,7 +61,7 @@ dd {
   color: rgb(var(--color-background));
   padding: 10px 15px;
   border-radius: 3px;
-  background-color: $c-black;
+  background-color: rgb(var(--color-black));
   font-weight: bold;
   margin-right: var(--space-3);
   float: left;

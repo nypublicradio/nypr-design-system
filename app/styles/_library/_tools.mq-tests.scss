@@ -91,7 +91,7 @@
       right: 0;
       padding: 0.5em 1em;
       content: 'No Media Query';
-      color: transparentize(#fff, 0.25);
+      color: transparentize(var(--color-white), 0.25);
       border-top-left-radius: 10px;
       font-size: (12/16)+em;
     }
