@@ -271,7 +271,7 @@ div.o-confirm-message p {
 .c-newsletter-form__text p {
   font-size: var(--font-size-4);
   line-height: 1.55;
-  color: rgb(var(--color-black));
+  color: rgb(var(--color-text));
 }
 
 .c-newsletter-form__icon {
@@ -293,7 +293,7 @@ div.o-confirm-message p {
   width: 60px;
   height: 60px;
   padding: 0;
-  background-color: rgb(var(--color-reddish-orange));
+  background-color: rgb(var(--color-form-button));
 }
 
 .c-newsletter-form__button:hover:not(:focus) .o-icon--newsletter-form {
@@ -301,7 +301,7 @@ div.o-confirm-message p {
 }
 
 .c-newsletter-form .c-newsletter-form__button {
-  background-color: rgb(var(--color-dark-gray));
+  background-color: rgb(var(--color-newsletter-form-button));
 }
 
 .c-newsletter-form__submit-icon {
@@ -348,7 +348,7 @@ div.o-confirm-message p {
     border: none;
 
     input {
-      border: 3px solid rgb(var(--color-dark-gray));
+      border: 3px solid rgb(var(--color-border-standard));
       height: 40px;
       font-size: 12px;
 
@@ -359,12 +359,12 @@ div.o-confirm-message p {
   }
 
   .o-button {
-    background-color: rgb(var(--color-reddish-orange));
+    background-color: rgb(var(--color-form-button));
   }
 
   input[type=checkbox] {
-    background-color: rgb(var(--color-reddish-orange));
-    border: rgb(var(--color-reddish-orange));
+    background-color: rgb(var(--color-form-button));
+    border: rgb(var(--color-form-button));
   }
 
   .c-newsletter-form__button {

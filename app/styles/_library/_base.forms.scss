@@ -54,13 +54,13 @@ input[type=checkbox] {
   cursor: pointer;
   display: block;
   float: left;
-  border: 2px solid rgb(var(--color-gray), 0.3);
+  border: 2px solid rgb(var(--color-checkbox), 0.3);
   padding: 0;
   user-select: none;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-color: rgb(var(--color-dark-gray));
+  background-color: rgb(var(--color-checkbox));
 }
 
 input[type=radio] + label,
@@ -117,7 +117,7 @@ select::-ms-expand {
   }
 
 ::placeholder {
-  color: rgb(var(--color-brown-grey));
+  color: rgb(var(--color-placeholder-text));
   font-family: var(--font-family-small);
 }
 
@@ -128,5 +128,5 @@ form .o-button:before {
     }
 form .o-button:hover {
       transform: none;
-      background-color: rgb(var(--color-primary-2));
+      background-color: rgb(var(--color-form-button));
     }

@@ -55,7 +55,7 @@
       rgb(var(--color-text)),
       rgb(var(--color-primary-2)),
       false,
-      rgb(var(--color-brick-red))
+      rgb(var(--color-link))
   );
   transition: none;
 }
@@ -82,9 +82,9 @@
 }
 
 .o-box-banner__dek a:hover {
-  color: rgb(var(--color-brick-red));
+  color: rgb(var(--color-link));
   background-color: transparent;
-  border-bottom-color: rgb(var(--color-brick-red));
+  border-bottom-color: rgb(var(--color-link));
 }
 
 .o-box-banner--no-desc .o-box-banner__title {

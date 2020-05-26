@@ -26,7 +26,7 @@
 }
 
 .c-block__tag:hover {
-  background-color: rgb(var(--color-brick-red));
+  background-color: rgb(var(--color-link));
 }
 
 .c-block__title {
@@ -80,7 +80,7 @@
  * Urgent block banner
  */
 .c-block--urgent .c-block__eyebrow > .o-kicker {
-  background-color: rgb(var(--color-dark-gray));
+  background-color: rgb(var(--color-text-inverse));
   color: rgb(var(--color-text-inverse));
 }
 
@@ -210,7 +210,7 @@
 
 .c-block-meta__comments .o-icon--comment {
   margin-right: var(--space-1);
-  fill: rgb(var(--color-dark-gray));
+  fill: rgb(var(--color-text-metadata));
 
   width: 13px;
 }

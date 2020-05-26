@@ -23,7 +23,7 @@
 
 .c-main-header__ad-unit {
   position: relative;
-  background-color: rgb(var(--color-dark-gray));
+  background-color: rgb(var(--color-header-background));
   text-align: center;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .c-main-header .o-ad__label {
-  color: rgb(var(--color-light-gray));
+  color: rgb(var(--color-header-label-text));
 
   @include media("<=small") {
     display: none;
@@ -46,7 +46,7 @@
 }
 
 .c-main-header__inner {
-  background-color: rgb(var(--color-dark-gray));
+  background-color: rgb(var(--color-header-background));
   padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
   display: flex;
   align-items: center;
@@ -96,15 +96,15 @@
 }
 
 .c-main-header__donate.o-button {
-  background-color: rgb(var(--color-reddish-orange));
-  color: rgb(var(--color-white));
+  background-color: rgb(var(--color-header-button-background));
+  color: rgb(var(--color-header-button-text));
 
   &::before {
-    border: 3px solid rgb(var(--color-reddish-orange));
+    border: 3px solid rgb(var(--color-header-button-background));
   }
 
   &:hover {
-    color: rgb(var(--color-white));
+    color: rgb(var(--color-header-button-hover-text));
   }
 }
 
@@ -119,7 +119,7 @@
   @include media(">=medium") {
     @include typeface(header, 8);
   }
-  color: rgb(var(--color-white));
+  color: rgb(var(--color-header-text));
   font-weight: normal;
   line-height: 1.2;
   letter-spacing: 1px;
@@ -180,11 +180,11 @@
 }
 
 .c-main-header__share .c-share-tools__link:hover path {
-  fill: rgb(var(--color-reddish-orange));
+  fill: rgb(var(--color-header-icon-hover));
 }
 
 .c-main-header__share .c-share-tools__link path {
-  fill: rgb(var(--color-white));
+  fill: rgb(var(--color-header-icon));
 }
 
 /* Gallery and Article floating header specific styles*/
@@ -247,11 +247,11 @@
 }
 
 .c-search-toggle:hover path {
-  fill: rgb(var(--color-reddish-orange));
+  fill: rgb(var(--color-header-icon-hover));
 }
 
 .c-search-toggle__icon path {
-  fill: rgb(var(--color-white));
+  fill: rgb(var(--color-header-icon));
   transition: var(--animation-duration-standard) var(--animation-easing-standard);
 }
 
@@ -320,7 +320,7 @@
 }
 
 .c-side-menu__group:not(:last-child) {
-  @include border-accent(right, center, rgba(var(--color-gray), 0.2));
+  @include border-accent(right, center, rgba(var(--color-border-subtle), 0.2));
 }
 
 .c-side-menu__branding {
@@ -329,7 +329,7 @@
 }
 
 .c-side-menu__social .c-share-tools {
-  fill: white;
+  fill: rgb(var(--color-header-icon));
   justify-content: center;
 }
 
@@ -382,7 +382,7 @@
 
 .c-side-menu__nypr-logo path,
 .c-side-menu__nypr-logo polygon {
-  fill: rgb(var(--color-white));
+  fill: rgb(var(--color-header-icon));
 }
 
 .c-side-menu .c-nypr-nav__list {
