@@ -26,6 +26,7 @@
   &:hover {
     text-decoration: var(--text-decoration-link-hover);
     color: rgb(var(--color-link-hover));
+    background-color: rgb(var(--color-link-hover-background));
   }
 }
 

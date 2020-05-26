@@ -261,18 +261,17 @@
   height: 100vh;
   background-color: white;
   z-index: $z-index-content-overlay;
-  left: -100%;
+  left: 0;
   top: 0;
   opacity: 0;
   transform: translateX(0);
-  transition: var(--animation-duration-standard) var(--animation-easing-outgoing);
+  transition: opacity var(--animation-duration-standard) var(--animation-easing-outgoing);
 }
 
 /* side menu is open*/
 .c-main-header.side-menu-is-active .c-content-overlay {
   opacity: 0.5;
-  transform: translateX(100vw);
-  transition: var(--animation-duration-standard) var(--animation-easing-incoming);
+  transition: opacity var(--animation-duration-standard) var(--animation-easing-outgoing);
 }
 
 /**
