@@ -31,12 +31,6 @@
 
   @include media("<=xlarge") {
     max-width: 270px;
-    right: calc(-(var(--col-width) * 6) + (var(--grid-gutter) * 4));
-
-    &.is-active {
-      transform: translateX(calc(-(var(--col-width) * 6) + (var(--grid-gutter) * 5)));
-    }
-
   }
 }
 .c-donate-tout:before {
