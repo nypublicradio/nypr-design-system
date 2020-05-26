@@ -2,67 +2,6 @@
     $VARIABLES
 \*------------------------------------*/
 
-//.helloworldgothamist {
-//  color: red;
-//}
-
-/**
- * Theme Colors
- */
-//$c-brick-red: #9c1e14;
-//$c-WNYC-fireengine-red: #de1e3d;
-//$c-reddish-orange: #de5e36;
-//$c-banana-yellow: #ffc400;
-//$c-taxicab-yellow: #e3d54a;
-//$c-dusk-blue: #244c84;
-//$c-brown-grey: #939393;
-//$c-dirty-salmon: #f0eeea;
-//$c-purple: #924db1;
-//
-//$c-primary: $c-reddish-orange;
-//$c-secondary: $c-brick-red;
-//$c-tertiary: $c-WNYC-fireengine-red;
-//$c-quaternary: $c-banana-yellow;
-//$c-quinary: $c-taxicab-yellow;
-//$c-senary: $c-dusk-blue;
-//$c-septenary: $c-brown-grey;
-//$c-octonary: $c-dirty-salmon;
-//$c-nonary: $c-purple;
-
-/**
- * Neutral Colors
- */
-//$c-black: #000000;
-//$c-gray--dark: #333333;
-//$c-gray: #afafaf;
-//$c-gray--light: #f3f3f3;
-//$c-white: #ffffff;
-
-/**
- * Default Colors
- */
-//$c-error: $c-brick-red;
-//$c-valid: #089e00;
-//$c-warning: #fff664;
-//$c-information: #000db5;
-//$c-overlay: rgba($c-black, 0.8);
-
-/**
- * Style Colors
- */
-//$c-body-color: $c-gray--dark;
-//$c-faux-black: $c-gray--dark;
-//$c-meta-color: $c-gray--dark;
-//$c-link-color: $c-secondary;
-//$c-link-color--visited: $c-gray--dark;
-//$c-button-color: $c-secondary;
-//$c-border-color: $c-gray--dark;
-//$c-body-bgcolor: $c-white;
-//$c-heading-bgcolor: $c-gray--dark;
-//$c-dark-bg: $c-gray--dark;
-//$c-main-nav-link-color: $c-white;
-//$c-sponsor-color: $c-purple;
-
 /**
  * Icons
  */
@@ -93,20 +32,3 @@ $breakpoints: (
   'xxlarge': $xxlarge,
   'xxxlarge': $xxxlarge
 );
-
-
-/**
- * Animation
- */
-//$hard-ease-in: cubic-bezier(0.860, 0.000, 0.070, 1.000);
-
-
-/**
- * Border Styles
- */
-//$border-med: 6px;
-//$border-thick: 8px;
-//$border-opacity: 1px solid rgba($c-white, .2);
-//$border-style: 1px solid $c-border-color;
-//$border-style-m: 2px solid $c-border-color;
-//$border-style-thick: 3px solid $c-border-color;

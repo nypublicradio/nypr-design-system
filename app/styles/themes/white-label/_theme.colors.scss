@@ -34,6 +34,7 @@
   --color-background-muted:     var(--color-cool-white);
   --color-background-highlight: var(--color-cool-white);
   --color-text:                 var(--color-gray-dark);
+  --color-text-print:           var(--color-black);
   --color-text-muted:           var(--color-concrete);
   --color-text-error:           var(--color-ember-red);
   --color-text-inverse:         var(--color-white);
@@ -86,6 +87,7 @@
   --color-background-muted:     rgb(var(--color-background));  //not assigned
   --color-background-highlight: var(--color-ceramic-blue);
   --color-text:                 var(--color-white);
+  --color-text-print:           var(--color-black);
   --color-text-muted:           var(--color-concrete);
   --color-text-error:           var(--color-ember-red);
   --color-text-inverse:         var(--color-gray-dark);
