@@ -16,13 +16,12 @@
 .c-donate-tout {
   padding: var(--space-5);
   background-color: rgb(var(--color-background-highlight));
-  position: relative;
   width: 100%;
-  max-width: calc((var(--col-width) * 14) + (var(--gutter) * 12));
+  max-width: calc((var(--grid-col-width) * 14) + (var(--grid-gutter) * 12));
   margin: 70px 0 0 auto;
   position: fixed;
   z-index: $z-index-donate-tout;
-  right: calc(-(var(--col-width) * 15) + (var(--gutter) * 13));
+  right: calc(-1 * ((var(--grid-col-width) * 15) + (var(--grid-gutter) * 13)));
   bottom: 50px;
   transform: translateX(0);
   transition: var(--animation-easing-incoming); // used to be $hard-ease-in
@@ -31,12 +30,6 @@
 
   @include media("<=xlarge") {
     max-width: 270px;
-    right: calc(-(var(--col-width) * 6) + (var(--gutter) * 4));
-
-    &.is-active {
-      transform: translateX(calc(-(var(--col-width) * 6) + (var(--gutter) * 5)));
-    }
-
   }
 }
 .c-donate-tout:before {
@@ -53,7 +46,7 @@
   }
 }
 .c-donate-tout.is-active {
-  transform: translateX(calc(-(var(--col-width) * 15 + var(--gutter * 13) + var(--space-3))));
+  transform: translateX(calc(-1 * (var(--grid-col-width) * 15 + var(--grid-gutter) * 13 + var(--space-3))));
 }
 .c-donate-tout__inner {
   @include media(">xlarge") {
@@ -128,7 +121,7 @@
   max-width: 700px;
 
   @include media(">xlarge") {
-    max-width: calc((var(--col-width) * 14) + (var(--gutter) * 12));
+    max-width: calc((var(--grid-col-width) * 14) + (var(--grid-gutter) * 12));
   }
 }
 .c-donate-tout--static .c-donate-tout__graphic {
