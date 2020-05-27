@@ -17,21 +17,28 @@
   padding: var(--space-5);
   background-color: rgb(var(--color-background-highlight));
   width: 100%;
-  max-width: calc((var(--grid-col-width) * 14) + (var(--grid-gutter) * 12));
+  max-width: 980px;
   margin: 70px 0 0 auto;
   position: fixed;
   z-index: $z-index-donate-tout;
-  right: calc(-1 * ((var(--grid-col-width) * 15) + (var(--grid-gutter) * 13)));
+  right: calc(-(var(--grid-col-width) * 15) + (var(--grid-gutter) * 13));
   bottom: 50px;
   transform: translateX(0);
   transition: var(--animation-easing-incoming); // used to be $hard-ease-in
-  box-shadow: 0 0 10px rgba($c-black, 0.2); //no black
-  border: var(--b-border-normal);
+  box-shadow: 0 0 10px rgba(var(--color-black), 0.2); //no black
+  border: var(--border-standard);
 
   @include media("<=xlarge") {
     max-width: 270px;
+    right: calc(-(var(--grid-col-width) * 6) + (var(--grid-gutter) * 4));
+
+    &.is-active {
+      transform: translateX(calc(-(var(--grid-col-width) * 6) + (var(--grid-gutter) * 5)));
+    }
+
   }
 }
+
 .c-donate-tout:before {
   content: "";
   position: absolute;
@@ -45,9 +52,11 @@
     height: 120px;
   }
 }
+
 .c-donate-tout.is-active {
-  transform: translateX(calc(-1 * (var(--grid-col-width) * 15 + var(--grid-gutter) * 13 + var(--space-3))));
+  transform: translateX(calc(-(var(--grid-col-width) * 15 + var(--grid-gutter * 13) + var(--space-3))));
 }
+
 .c-donate-tout__inner {
   @include media(">xlarge") {
     padding: 0 var(--space-3) 0 100px;
@@ -56,6 +65,7 @@
     justify-content: space-between;
   }
 }
+
 .c-donate-tout__inner p {
   position: relative;
   @include typeface(body, 6);
@@ -63,6 +73,7 @@
     width: calc(65% - var(--space-3));
   }
 }
+
 .c-donate-tout__inner .o-button {
   width: 100%;
   margin-top: var(--space-3);
@@ -71,6 +82,7 @@
     width: 35%;
   }
 }
+
 .c-donate-tout__graphic {
   width: 120px;
   height: 133px;
@@ -88,9 +100,11 @@
     top: calc(var(--space-3) * -1);
   }
 }
+
 .c-donate-tout__graphic path {
   fill: rgb(var(--color-background-highlight)); //dark
 }
+
 .c-donate-tout__close {
   position: absolute;
   top: 0;
@@ -98,6 +112,7 @@
   width: 40px;
   height: 40px;
 }
+
 /* Non-fly-in version*/
 .c-donate-tout--static {
   box-shadow: none;
@@ -111,9 +126,11 @@
     margin-top: 0;
   }
 }
+
 .c-donate-tout--static:before {
   display: none;
 }
+
 .c-donate-tout--static .c-donate-tout__inner {
   margin-left: auto;
   margin-right: auto;
@@ -121,9 +138,10 @@
   max-width: 700px;
 
   @include media(">xlarge") {
-    max-width: calc((var(--grid-col-width) * 14) + (var(--grid-gutter) * 12));
+    max-width: 895px;
   }
 }
+
 .c-donate-tout--static .c-donate-tout__graphic {
   margin-top: -105px;
   margin-left: -30px;
@@ -138,6 +156,7 @@
     }
   }
 }
+
 .c-donate-tout--static .c-donate-tout__graphic:before {
   content: "";
   position: absolute;
@@ -148,9 +167,11 @@
   height: 10px;
   z-index: -1;
 }
+
 .c-donate-tout--static .c-donate-tout__close {
   display: none;
 }
+
 .c-donate-tout--static .o-button {
   max-width: 400px;
   margin-left: auto;
@@ -173,6 +194,7 @@
     left: -2px;
   }
 }
+
 .c-sponsored-tout__heading {
   @include typeface(header, 9);
   @include media(">=medium") {
@@ -185,16 +207,19 @@
   background-color: rgb(var(--color-background));
   padding: 0 var(--space-2);
 }
+
 .c-sponsored-tout .c-block {
   @include media(">medium") {
     display: flex;
     align-items: flex-start;
   }
 }
+
 .c-sponsored-tout .o-kicker {
   background-color: rgb(var(--color-primary-3));
   color: rgb(var(--color-background));
 }
+
 .c-sponsored-tout .c-block__media {
   width: 100%;
 
@@ -222,17 +247,27 @@
     padding: var(--space-4);
     margin-left: -2px;
   }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
+
 .c-newsletter-tout:before {
   content: "";
   position: absolute;
   left: -10px;
   top: 11px;
-  border: var(--b-border-normal);
+  border: var(--border-standard);
   width: 100%;
   height: 100%;
   z-index: 0;
 }
+
 .c-newsletter-tout__inner {
   position: relative; /* re establish stacking order above pseudo element*/
 
@@ -246,6 +281,7 @@
     display: flex;
   }
 }
+
 .c-newsletter-tout__media {
   padding: var(--space-3);
 
@@ -265,10 +301,17 @@
     min-width: 250px;
   }
 }
+
 .c-newsletter-tout__dek {
   @include typeface(small, 5);
+
+  a {
+    border-bottom: 2px dotted rgb(var(--color-text-inverse));
+  }
 }
+
 .c-newsletter-tout__heading {
+  text-decoration: none;
   @include typeface(header, 9);
   @include media(">=medium") {
     @include typeface(header, 11);

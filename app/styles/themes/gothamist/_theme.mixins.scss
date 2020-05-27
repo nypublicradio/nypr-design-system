@@ -5,14 +5,13 @@
 /**
  * Dashed border accent
  */
-@mixin border-accent($direction: right, $position: right, $color: $c-gray) {
+@mixin border-accent($direction: right, $position: right, $color: rgb(var(--color-gray))) {
   background-image: linear-gradient(to $direction, transparent 50%, $color 50%);
   background-position: $position bottom;
   @if $direction == "right" {
     background-repeat: repeat-x;
     background-size: 16px 1px;
-  }
-  @else {
+  } @else {
     background-repeat: repeat-y;
     background-size: 1px 16px;
   }
@@ -22,13 +21,9 @@
  * Block link hover styles
  */
 @mixin block-hover {
-  color: $c-primary;
+  color: rgb(var(--color-reddish-orange));
   text-decoration: underline;
   text-decoration-style: dotted;
-  // background-image: linear-gradient(to right, $c-primary 50%, transparent 50%);
-  // background-position: left bottom .22em;
-  // background-repeat: repeat-x;
-  // background-size: 12px 2px;
 }
 
 @mixin dot-divider(
@@ -38,7 +33,7 @@
   display: inline-block;
   margin-right: var(--space-2);
   margin-left: calc(var(--space-1) * -1);
-  color: $c-gray;
+  color: rgb(var(--color-gray));
   font-size: $font-size;
   transform: translateY(.08em);
 }
@@ -46,18 +41,17 @@
 
 // Used for line wrapping text links.
 @mixin inline-accent(
-  $text-color: $c-body-color,
-  $underline-color: $c-body-color,
-  $hover-underline-color: $c-primary,
-  $hover-bg-color: $c-primary,
-  $hover-text-color: $c-white,
+  $text-color: rgb(var(--color-dark-gray)),
+  $underline-color: rgb(var(--color-dark-gray)),
+  $hover-underline-color: rgb(var(--color-reddish-orange)),
+  $hover-bg-color: rgb(var(--color-reddish-orange)),
+  $hover-text-color: rgb(var(--color-white)),
 ) {
   color: $text-color;
-  background-image: linear-gradient(to right, transparent 55%, $underline-color 45%);
+  background-image: linear-gradient(to right, transparent 55%, rgb(var(--color-dark-gray)) 45%);
   background-position: left bottom .13em;
   background-repeat: repeat-x;
   background-size: 4px 2px;
-  box-decoration-break: clone;
   padding-bottom: 0;
   border-bottom: none;
   line-height: 1.6;
@@ -66,12 +60,11 @@
 
   &:hover {
     color: $hover-text-color;
-    background-image: linear-gradient(to right, transparent 55%, $hover-underline-color 45%);
+    background-image: linear-gradient(to right, transparent 55%, rgb(var(--color-reddish-orange)) 45%);
 
     @if $hover-bg-color {
-      background-color: $hover-bg-color;
-    }
-    @else {
+      background-color: rgb(var(--color-reddish-orange));
+    } @else {
       background-color: transparent;
     }
   }
@@ -79,16 +72,16 @@
 
 // Consistent styles for reversed out text and links.
 @mixin reversed-out-text {
-  color: $c-white;
+  color: rgb(var(--color-white));
 
   p a,
   a:not(.o-button) {
-    color: $c-white;
-    border-bottom-color: $c-white;
+    color: rgb(var(--color-white));
+    border-bottom-color: rgb(var(--color-white));
 
     &:hover {
-      color: $c-white;
-      background-color: $c-primary;
+      color: rgb(var(--color-white));
+      background-color: rgb(var(--color-reddish-orange));
     }
   }
 }

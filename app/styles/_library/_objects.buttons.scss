@@ -1,80 +1,66 @@
 /*------------------------------------*\
     $BUTTONS
 \*------------------------------------*/
-
 button,
 input[type="submit"] {
-  appearance: none;
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-  padding: 0;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	padding: 0;
+	appearance: none;
 }
 
 .o-button {
   display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px var(--space-4) 18px;
-  line-height: 22px;
-  color: rgb(var(--color-background));
-  cursor: pointer;
-  transition: var(--animation-easing-incoming) var(--animation-duration-standard); // used to be $hard-ease-in
-  font-family: var(--font-family-small);
-  text-transform: uppercase;
-  border: none;
-  font-size: var(--font-size-6);
-  font-weight: bold;
-  letter-spacing: 2px;
-  text-align: center;
-  background-color: rgb(var(--color-primary-2));
-  position: relative;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	border-width: 0px;
+	background-color: rgb(var(--color-button-primary));
+	cursor: pointer;
+	padding: 20px var(--space-4) 18px;
+	text-align: center;
+  text-decoration: none;
+	line-height: 22px;
+	letter-spacing: 2px;
+	color: white;
+	font-family: var(--font-family-small);
+	font-size: var(--font-size-6);
 
   @include media(">small") {
-    padding-left: var(--space-5);
-    padding-right: var(--space-5);
+		padding-right: var(--space-5);
+		padding-left: var(--space-5);
+	}
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: $z-index-button-outline;
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgb(var(--color-button-primary));
+    border-color: rgb(var(--color-button-primary));
+    transform: translate(0, 0);
+    transition: var(--animation-easing-incoming) var(--animation-duration-standard);// used to be $hard-ease-in
   }
 }
-
-.o-button:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: $z-index-button-outline;
-  width: 100%;
-  height: 100%;
-  border: 3px solid rgb(var(--color-primary-2));
-  transform: translate(0, 0);
-  transition: var(--animation-easing-incoming) var(--animation-duration-standard);// used to be $hard-ease-in
-}
-
 .o-button:hover {
-  transform: translate(10px, -10px);
+	opacity: var(--opacity-button-primary-hover);
+	background: rgb(var(--color-button-primary-hover));
+  text-decoration: none;
 }
-
-.o-button:hover:before {
-  transform: translate(-10px, 10px);
-}
-
-/* Types/Styles*/
-
-.o-button--c-quaternary {
-  color: rgb(var(--color-text-metadata));
-  background-color: rgb(var(--color-button-1));
-}
-
-.o-button--c-quaternary:before {
-  border-color: rgb(var(--color-button-1));
+.o-button:active {
+	opacity: 1;
+	background: rgb(var(--color-button-primary-pressed));
 }
 
 /* Sizes*/
-
 .o-button--sm {
   font-size: var(--font-size-4);
   padding: 11px 50px 10px;
 }
-
 .o-button--extra {
   padding-left: 80px;
   padding-right: 80px;

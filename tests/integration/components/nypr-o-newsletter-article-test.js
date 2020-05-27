@@ -8,27 +8,17 @@ module('Integration | Component | nypr-o-newsletter-tout', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`
-      <NyprONewsletterTout
-        @img={{hash
-          src='/test-image1.jpeg'
-          alt='newsletter image'
-        }}
+      <NyprONewsletterArticle
         as |tout|>
         <tout.heading>
           Newsletter Tout
         </tout.heading>
 
-        <tout.blurb>
-          Tout Blurb
-        </tout.blurb>
-
         <tout.legal/>
-      </NyprONewsletterTout>
+      </NyprONewsletterArticle>
     `);
 
-    assert.dom('.c-newsletter-tout__media img').hasAttribute('src', '/test-image1.jpeg');
-    assert.dom('[data-test-newsletter-tout-heading]').hasText('Newsletter Tout');
-    assert.dom('[data-test-newsletter-tout-blurb]').hasText('Tout Blurb');
+    assert.dom('[data-test-newsletter-article-heading]').hasText('Newsletter Tout');
     assert.dom('[data-test-newsletter-tout-legal] a').exists();
   });
 });

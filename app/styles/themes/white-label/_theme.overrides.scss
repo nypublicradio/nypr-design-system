@@ -42,7 +42,7 @@
     }
 
     @include media('>xlarge') {
-      left: calc(var(--col-width) + var(--gutter));
+      left: calc(var(--grid-col-width) + var(--grid-gutter));
     }
 
     --xl-container: calc(var(--max-width-xl) + var(--space-5));
@@ -54,10 +54,10 @@
   }
 
   .gothamist-letters {
-    fill: $c-black;
+    fill: rgb(var(--color-black));
   }
   .gothamist-buildings {
-    fill: $c-white;
+    fill: rgb(var(--color-white));
   }
 }
 
@@ -65,16 +65,16 @@
 
 .c-main-footer {
   .gothamist-letters {
-    fill: $c-white;
+    fill: rgb(var(--color-white));
   }
   .gothamist-buildings {
-    fill: $c-dark-bg;
+    fill: rgb(var(--color-dark-gray));
   }
 }
 
 // Standard repeating dashed border
 .o-border-accent {
-  background-image: repeating-linear-gradient(to right, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to right, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%);
+  background-image: repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%);
   background-position: left top, left bottom, left top, right top;
   background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
   background-size: 18px 2px, 18px 2px, 2px 18px, 2px 18px;
