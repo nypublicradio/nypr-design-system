@@ -265,7 +265,10 @@ blockquote {
 }
 
 // homepage newsletter signup
-.c-newsletter-form__terms-checkbox input[type=checkbox], .c-newsletter-form__terms-checkbox input[type=radio]:checked {
+.c-newsletter-form__terms-checkbox .u-reversed-out input[type=checkbox]:checked,
+.c-newsletter-form__terms-checkbox .u-reversed-out input[type=radio]:checked,
+.c-newsletter-form__terms-checkbox .u-reversed-out input[type=checkbox],
+.c-newsletter-form__terms-checkbox .u-reversed-out input[type=radio] {
   border: 2px solid rgba(var(--color-gray), .3);
 }
 
