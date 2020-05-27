@@ -265,12 +265,8 @@ blockquote {
 }
 
 // homepage newsletter signup
-.u-reversed-out input[type=checkbox]:checked, .u-reversed-out input[type=radio]:checked {
-  border: 2px solid rgba(var(--color-gray), 0.3);
-}
-
-.u-reversed-out input[type=checkbox] {
-  border: 2px solid rgba(var(--color-gray), 0.3);
+.u-reversed-out input[type=checkbox], .u-reversed-out input[type=checkbox]:checked, .u-reversed-out input[type=radio]:checked {
+  border: 2px solid rgba(var(--color-gray), .3);
 }
 
 .c-newsletter-form__terms a {
@@ -285,6 +281,6 @@ footer .c-newsletter-form__terms a {
 }
 
 // article page credit
-.o-caption__text>span a {
+.o-caption__text > span a {
   text-decoration: none;
 }
