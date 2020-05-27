@@ -73,6 +73,7 @@
   color: rgb(var(--color-link-hover));
   text-decoration: none;
   opacity: var(--opacity-link-hover);
+  background-color: rgb(var(--color-link-hover-background));
 }
 
 .o-rte-text a:visited {
