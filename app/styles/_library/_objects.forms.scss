@@ -304,6 +304,10 @@ div.o-confirm-message p {
   background-color: rgb(var(--color-newsletter-form-button));
 }
 
+.c-newsletter-form .c-newsletter-form__button svg {
+  fill: rgb(var(--color-footer-text));
+}
+
 .c-newsletter-form__submit-icon {
   width: 24px;
   fill: rgb(var(--color-white));

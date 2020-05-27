@@ -16,7 +16,7 @@
   bottom: -22px;
   right: 0;
   position: absolute;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(var(--color-footer-text));
   opacity: 0;
   transform: translateY(20px) rotate(-45deg);
   transition: none;
@@ -48,10 +48,10 @@
   }
 }
 .c-toggle-box .c-toggle-box__label {
-  color: rgb(var(--color-text));
+  color: rgb(var(--color-footer-text));
 }
 .c-toggle-box .o-icon--caret path {
-  fill: rgb(var(--color-background));
+  fill: rgb(var(--color-footer-text));
 }
 /* Open*/
 .c-toggle-box.this-is-active .c-toggle-box__label:before {

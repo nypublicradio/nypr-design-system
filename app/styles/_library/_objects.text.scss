@@ -64,6 +64,7 @@
 
 .o-rte-text a {
   color: rgb(var(--color-link));
+  border-bottom: 2px dotted rgb(var(--color-link));
   text-decoration: none;
   transition: all 0.15s ease-in-out;
 }

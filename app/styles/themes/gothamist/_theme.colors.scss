@@ -78,11 +78,12 @@
   --color-button-primary-hover:   var(--color-banana-yellow);
   --color-button-primary-pressed: var(--color-banana-yellow);
   --opacity-button-primary-hover: var(--opacity-hover);
-
   --color-button-outline:         var(--dark-gray);
   --color-button-outline-hover:   var(--dark-gray);
   --color-button-outline-pressed: var(--dark-gray);
   --opacity-button-outline:       var(--opacity-hover);
+
+  /* Borders */
 
   --color-border-subtle: var(--color-gray);
   --color-border-standard: var(--color-dark-gray);
@@ -101,6 +102,10 @@
   --color-gallery-link: var(--color-white);
   --color-gallery-link-hover: var(--color-reddish-orange);
   --color-gallery-ad-label: var(--color-dirty-salmon);
+
+  /* Footer */
+  --color-footer-text: var(--color-white);
+  --color-footer-link: var(--color-banana-yellow);
 }
 
 @mixin color-group-dark {
@@ -155,11 +160,12 @@
   --color-button-primary-hover:   var(--color-banana-yellow);
   --color-button-primary-pressed: var(--color-banana-yellow);
   --opacity-button-primary-hover: var(--opacity-hover);
-
   --color-button-outline:         var(--dark-gray);
   --color-button-outline-hover:   var(--dark-gray);
   --color-button-outline-pressed: var(--dark-gray);
   --opacity-button-outline:       var(--opacity-hover);
+
+  /* Borders */
 
   --color-border-bold:          var(--color-border-bold);      //none
   --color-border-standard:      var(--color-border-standard);  //none
@@ -177,6 +183,10 @@
   --color-gallery-link: var(--color-white);
   --color-gallery-link-hover: var(--color-reddish-orange);
   --color-gallery-ad-label: var(--color-dirty-salmon);
+
+  /* Footer */
+  --color-footer-text: var(--color-white);
+  --color-footer-link: var(--color-banana-yellow);
 }
 
 /*  Base */
