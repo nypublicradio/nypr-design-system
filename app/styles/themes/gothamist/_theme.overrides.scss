@@ -273,3 +273,9 @@ blockquote {
   color: rgb(var(--color-white));
   border-bottom: 2px dotted rgb(var(--color-white));
 }
+
+// footer newsletter signup
+footer .c-newsletter-form__terms a {
+  color: rgb(var(--color-text));
+  border-bottom: 2px dotted rgb(var(--color-text));
+}
