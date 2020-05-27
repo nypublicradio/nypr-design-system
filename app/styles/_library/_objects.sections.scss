@@ -271,7 +271,7 @@
  */
 .c-tag-listing__heading {
   @include typeface(tags, 10);
-  background-color: rgb(var(--color-background-highlight)); //dark
+  background-color: rgb(var(--color-tag-highlight)); //dark
   display: inline-block;
   font-weight: normal;
   padding: var(--space-2) var(--space-3);

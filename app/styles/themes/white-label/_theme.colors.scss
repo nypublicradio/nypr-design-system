@@ -68,6 +68,7 @@
   /* Tags */
   --color-tag-text:             var(--color-white);
   --color-tag-background:       var(--color-cool-blue);
+  --color-tag-highlight:        var(--color-cool-blue);
   --color-tag-hover-text:       var(--color-white);
   --color-tag-hover-background: var(--color-cool-blue);
   --opacity-tag-hover:          var(--opacity-hover);
@@ -141,8 +142,9 @@
   --color-header-icon-hover: var(--color-reddish-orange);
 
   /* Tags */
-  --color-tag-text:             var(--color-dusk-blue);
+  --color-tag-text:             var(--color-white);
   --color-tag-background:       var(--color-banana-yellow);
+  --color-tag-highlight:        var(--color-cool-blue);
   --color-tag-hover-text:       var(--color-white);
   --color-tag-hover-background: var(--color-reddish-orange);
   --opacity-tag-hover:          var(--opacity-hover);

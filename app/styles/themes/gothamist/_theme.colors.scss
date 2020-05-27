@@ -32,7 +32,7 @@
   --color-primary-3:            var(--color-purple);
   --color-background:           var(--color-white);
   --color-background-muted:     var(--color-dirty-salmon);
-  --color-background-highlight: var(--color-dusk-blue);
+  --color-background-highlight: var(--color-taxicab-yellow);
   --color-text:                 var(--color-dark-gray);
   --color-text-print:           var(--color-black);
   --color-text-muted:           var(--color-gray);
@@ -69,6 +69,7 @@
   /* Tags */
   --color-tag-text:             var(--color-dusk-blue);
   --color-tag-background:       var(--color-banana-yellow);
+  --color-tag-highlight:        var(--color-dusk-blue);
   --color-tag-hover-text:       var(--color-white);
   --color-tag-hover-background: var(--color-reddish-orange);
   --opacity-tag-hover:          var(--opacity-hover);
@@ -114,7 +115,7 @@
   --color-primary-3:            var(--color-purple);
   --color-background:           var(--color-dark-gray);
   --color-background-muted:     rgb(var(--color-background));
-  --color-background-highlight: var(--color-dusk-blue);
+  --color-background-highlight: var(--color-taxicab-yellow);
 
   --color-text:                 var(--color-white);
   --color-text-print:           var(--color-black);
@@ -151,6 +152,7 @@
   /* Tags */
   --color-tag-text:             var(--color-dusk-blue);
   --color-tag-background:       var(--color-banana-yellow);
+  --color-tag-highlight:        var(--color-dusk-blue);
   --color-tag-hover-text:       var(--color-white);
   --color-tag-hover-background: var(--color-reddish-orange);
   --opacity-tag-hover:          var(--opacity-hover);
