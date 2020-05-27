@@ -265,6 +265,10 @@ blockquote {
 }
 
 // homepage newsletter signup
+.u-reversed-out input[type=checkbox]:checked, .u-reversed-out input[type=radio]:checked {
+  border: 2px solid rgba(var(--color-gray), 0.3);
+}
+
 .u-reversed-out input[type=checkbox] {
   border: 2px solid rgba(var(--color-gray), 0.3);
 }
@@ -278,4 +282,9 @@ blockquote {
 footer .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
+}
+
+// article page credit
+.o-caption__text>span a {
+  text-decoration: none;
 }
