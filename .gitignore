@@ -12,7 +12,7 @@
 
 # misc
 /.env*
-.idea/
+.idea/*
 .storybook/
 /.sass-cache
 /connect.lock
