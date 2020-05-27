@@ -1,0 +1,176 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="For Developers/Token Reference" />
+
+# Token Reference
+
+Tokens are semantic variables we use in our code as placeholders for more specific values that can vary by theme. Although all tokens are variables, not all variables are tokens. Sticking to the guidelines on this page will ensure that you components can flex across different themes.
+
+## Typography
+ 
+⚠️ Although you you should understand these typography tokens that will exist in the compiled output, in the vast majority of cases in the code, you should use the `typeface` SASS mixin.
+
+Example
+
+```scss
+.my-title {
+  @include typeface(header, 8);
+  @include media(">=medium") {
+    @include typeface(header, 10);
+  }
+}
+```
+
+<details open>
+<summary>Typography Tokens</summary>
+
+| name | sample | notes |
+|---|---|---|
+|--font-family-header| | |
+|--letter-spacing-header|  | |
+|--font-weight-header| | |
+|--font-family-subheader| | |
+|--letter-spacing-subheader|  | |
+|--font-weight-subheader| | |
+|--font-family-body| | |
+|--letter-spacing-body| | |
+|--font-weight-body| | |
+|--font-family-small| | |
+|--letter-spacing-small| | |
+|--font-weight-small| | |
+|--font-size-1 | | |
+|--font-size-2| | |
+|--font-size-3| | |
+|--font-size-4| | |
+|--font-size-5| | |
+|--font-size-6| | |
+|--font-size-7| | |
+|--font-size-8| | |
+|--font-size-9| | |
+|--font-size-10| | |
+|--font-size-11| | |
+|--font-size-12| | |
+|--font-size-13| | |
+|--font-size-14| | |
+|--font-size-15| | |
+|--font-size-16| | |
+|--line-height-1 | | |
+|--line-height-2| | |
+|--line-height-3| | |
+|--line-height-4| | |
+|--line-height-5| | |
+|--line-height-6| | |
+|--line-height-7| | |
+|--line-height-8| | |
+|--line-height-9| | |
+|--line-height-10| | |
+|--line-height-11| | |
+|--line-height-12| | |
+|--line-height-13| | |
+|--line-height-14| | |
+|--line-height-15| | |
+|--line-height-16| | |
+
+</details>
+
+## Spacing
+
+Spacing tokens use a 1 - 9 scale. With being the smallest spacing increment, and 9 being the largest.
+
+<details open>
+<summary>Spacing Tokens</summary>
+
+| name | sample | notes |
+|---|---|---|
+|--space-1| | Inline iconography |
+|--space-2| | Below eyebrows and kickers|
+|--space-3| | Below Headlines, between thumbnails and descriptions|
+|--space-4| | Between paragraphs, spacing between icon-only links (social)|
+|--space-5| | Around ads, above headlines, between columns of list items. Medium padding for modules (ex. mid-page donation pop-up)|
+|--space-6| | Used between major molecules (ex. Article intro and media figure, or comments and recirc.|
+|--space-7| | |
+|--space-8| | Above footer, homepage interruptors, large padding for modules (ex. Newsletter interruptor signup molecule)|
+|--space-9| | |
+|--space-10| | |
+|--space-11| | Below pagination|
+
+</details>
+
+## Animation
+
+<details open>
+<summary>Animation Tokens</summary>
+
+| name | sample | notes |
+|---|---|---|
+|--animation-easing-outgoing| |A timing function applied to elements entering a view|
+|--animation-easing-incoming| |A timing function applied to elements exiting a view|
+|--animation-easing-standard| |The most common timing function. used for color transitions on hover states, etc|
+|--animation-duration-slow| ||
+|--animation-duration-standard| ||
+|--animation-duration-fast| ||
+
+</details>
+
+## Color
+
+⚠️ The value of color tokens returns as three raw rgb digits, rather than a color. (e.g. `255 0 255`) so they can be used with opacity values. They need to be wrapped in an rgb or rgba function.
+
+Example:
+```scss
+.my-button {
+  background-color: rgb(var(--color-button-primary));
+  &:active {
+    background-color: rgb(var(--color-button-pressed));
+  }
+  &:hover, &:focus {
+    background-color: rgba(var(--color-button-primary-hover), var(--opacity-button-primary-hover));
+  }
+}
+```
+
+
+<details open>
+<summary>Color Tokens</summary>
+
+|name | sample | notes|
+|---|---|---|
+| --color-primary-1| | |
+| --color-primary-2| | |
+| --color-primary-3| | |
+| --color-background| | |
+| --color-background-muted| | |
+| --color-background-highlight| | |
+| --color-text| | |
+| --color-text-muted| | |
+| --color-text-error| | |
+| --color-text-inverse| | |
+| --color-text-metadata| | |
+| --color-link| | |
+| --text-decoration-link| | |
+| --color-link-hover| | |
+| --text-decoration-link-hover| | |
+| --opacity-link-hover| | |
+| --color-navigation-link| | |
+| --text-decoration-navigation-link| | |
+| --color-navigation-link-hover| | |
+| --text-decoration-navigation-link-hover| | |
+| --opacity-navigation-link-hover| | |
+| --color-tag-text| | |
+| --color-tag-background| | |
+| --color-tag-hover-text| | |
+| --color-tag-hover-background| | |
+| --opacity-tag-hover| | |
+| --color-button-primary| | |
+| --color-button-primary-hover| | |
+| --color-button-primary-pressed| | |
+| --opacity-button-primary-hover| | |
+| --color-button-outline| | |
+| --color-button-outline-hover| | |
+| --color-button-outline-pressed| | |
+| --opacity-button-outline| | |
+| --color-border-subtle| | |
+| --color-border-normal| | |
+| --color-border-bold| | |
+
+</details>
