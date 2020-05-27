@@ -39,6 +39,13 @@ export default Component.extend({
     @argument linkText
     @type {String}
   */
+
+  /**
+    Icon name
+
+    @argument icon
+    @type {icon}
+  */
   linkText: null,
 });
 // END-SNIPPET

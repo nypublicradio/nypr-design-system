@@ -1,5 +1,11 @@
+/* Styles For Spacing Documentation */
+
+/* IMPORTANT:
+These Styles Should not be applied to any websites
+outside of Storybook  */
+
 .storybook-Compact {
-  /* This class overrides to use the compact spacing scale, for 
+  /* This class overrides to use the compact spacing scale, for
       use in the spacing table in our documentation */
   --spacing-base: var(--spacing-base-compact);
   --spacing-increment: var(--spacing-increment-compact);
@@ -16,13 +22,13 @@
   --space-10: calc(var(--space-9) + var(--spacing-increment));
   --space-11: calc(var(--space-10) + var(--spacing-increment));
 }
-  
+
 .storybook-Loose {
-  /* This class overrides to use the loose spacing scale, for 
+  /* This class overrides to use the loose spacing scale, for
     use in the spacing table in our documentation */
   --spacing-base: var(--spacing-base-loose);
   --spacing-increment: var(--spacing-increment-loose);
-  
+
   --space-1: calc(var(--spacing-base) / 2);
   --space-2: var(--spacing-base);
   --space-3: calc(var(--space-2) + var(--spacing-increment));
@@ -72,4 +78,3 @@
 
 
 
-  

@@ -1,5 +1,38 @@
 # `nypr-design-system` changelog
 
+## `3.0.0-alpha2`
+
+- [DOCS] Documentation Updates
+- [CHANGE] Update font and line height scales to be independent of type (type = small, body, header, etc)
+- [CHANGE] Move storybook style imports to preview.js 
+- [CHANGE] Remove media query from typeface mixin and convert typeface usages to mobile-first responsive
+
+## `3.0.0-alpha1`
+- [BREAKING] Tokens updated to use CSS custom properties (CSS variables) 
+- [BREAKING] Typography Tokens refactored (WIP)
+- [BREAKING] Spacing Tokens refactored
+- [BREAKING] Color Tokens refactored (WIP)
+- [CHANGE] CSS themes are now included in addon instead of importing from the Pattern Lab site
+- [ENHANCEMENT] Added White Label CSS theme
+- [ENHANCEMENT] Alternate stylesheet support for development
+- [ENHANCEMENT] Removed parent selectors (ampersands) from SASS
+- [REMOVED] Removed ember-addon-docs site
+- [ENHANCEMENT] Added Storybook
+- [ENHANCEMENT] Added live swatches to storybook documentation for fonts and spacing
+- [ENHANCEMENT] Installed storybook plugins (a11y, actions, knobs, links, viewport)
+- [ENHANCEMENT] Set up a basic Github pages deploy for storybook in circle.yml
+- [DOCS] Added a real README.md
+- [DOCS] Decided on using [Trello CSS Style Guide](https://github.com/trello/trellisheets/blob/master/styleguide.md) going forward
+- [DOCS] Added documentation for Style Foundations
+- [DOCS] Added documentation for Design Onboarding
+- [DOCS] Added documentation for Development Guidelines
+- [DOCS] Added design component documentation for cards, buttons, images, bylines, timestamps, footer, sidebar
+- [DOCS] Added example "stories" for buttons
+
+## `2.10.3`
+- [CHANGE] Update NyprODonate to accept an icon name as a parameter.
+- [ENHANCEMENT] Add a new icon `nyc-love`, depicting a heart over a city skyline.
+
 ## `2.10.2`
 - [CHANGE] replace GTM click tracking attributes added in 2.10.1 with more generic and flexible `...attributes`
 

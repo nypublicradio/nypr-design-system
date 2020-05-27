@@ -19,11 +19,11 @@ input[type="submit"] {
   line-height: 22px;
   color: rgb(var(--color-background));
   cursor: pointer;
-  transition: all 0.3s $hard-ease-in;
+  transition: var(--animation-easing-incoming) var(--animation-duration-standard); // used to be $hard-ease-in
   font-family: var(--font-family-small);
   text-transform: uppercase;
   border: none;
-  font-size: var(--font-size-body-2);
+  font-size: var(--font-size-6);
   font-weight: bold;
   letter-spacing: 2px;
   text-align: center;
@@ -46,7 +46,7 @@ input[type="submit"] {
   height: 100%;
   border: 3px solid rgb(var(--color-primary-2));
   transform: translate(0, 0);
-  transition: all 0.3s $hard-ease-in;
+  transition: var(--animation-easing-incoming) var(--animation-duration-standard);// used to be $hard-ease-in
 }
 
 .o-button:hover {
@@ -71,7 +71,7 @@ input[type="submit"] {
 /* Sizes*/
 
 .o-button--sm {
-  font-size: var(--font-size-small-4);
+  font-size: var(--font-size-4);
   padding: 11px 50px 10px;
 }
 

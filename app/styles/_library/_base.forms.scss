@@ -33,7 +33,7 @@ input[type=password],
 input[type=email],
 input[type=search],
 input[type=tel] {
-  font-size: var(--font-size-body-2);
+  font-size: var(--font-size-6);
   padding: var(--space-3);
   font-family: var(--font-family-small);
   box-shadow: none;
@@ -54,10 +54,12 @@ input[type=checkbox] {
   cursor: pointer;
   display: block;
   float: left;
-  border: 2px solid rgb(var(--color-border-bold));
+  border: 2px solid rgb(var(--color-gray), 0.3);
   padding: 0;
   user-select: none;
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background-color: $c-faux-black;
 }
 

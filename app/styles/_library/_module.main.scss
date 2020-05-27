@@ -37,7 +37,7 @@
   left: calc(50% - 10px);
   fill: $c-white;
   position: absolute;
-  transition: transform 0.3s ease-in-out;
+  transition: transform var(--animation-easing-standard) var(--animation-duration-standard);
 }
 
 .c-welcome-page__start:hover {
@@ -125,7 +125,7 @@
   display: block;
   width: 20px;
   height: 20px;
-  font-size: var(--font-size-small-3);
+  font-size: var(--font-size-3);
   font-weight: bold;
   cursor: pointer;
 }
@@ -138,7 +138,10 @@
 }
 
 .o-sg-section__content p {
-  @include typeface(body, 1);
+  @include typeface(body, 3);
+  @include media(">=medium") {
+    @include typeface(body, 5);
+  }
 }
 
 .c-swatch {
@@ -165,7 +168,7 @@
 }
 
 .c-swatch-a11y__letter {
-  font-size: var(--font-size-header-5);
+  font-size: var(--font-size-11);
   text-transform: uppercase;
   display: inline-block;
   padding: 0 4px;
@@ -223,7 +226,10 @@
   align-content: space-between;
 }
 .c-font-block__free-type {
-  @include typeface(header, 10);
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
+  }
   font-weight: inherit;
   margin-bottom: var(--space-5);
 }

@@ -63,32 +63,44 @@ jobs:
           command: npx ember build
       - run:
           name: Build Docs
-          command: npm run build-storybook
+          command: |
+            [[ $CIRCLE_BRANCH = "master" ]] && RELEASE="latest" || { [[ -n $CIRCLE_BRANCH ]] && RELEASE=$CIRCLE_BRANCH || RELEASE=$CIRCLE_TAG; }
+            npm run build-storybook -- -o storybook-static/$RELEASE
+            cp index.html storybook-config.json storybook-static/
       - persist_to_workspace:
           root: .
           paths:
             - storybook-static
 
-  deploy-storybook:
+
+  deploy-storybook-to-s3:
     <<: *defaults
     steps:
       - checkout
+      - <<: *restore_node
       - attach_workspace:
           at: .
       - run:
           name: Disable jekyll builds
           command: touch storybook-static/.nojekyll
       - run:
-          name: Configure git user
+          name: Install AWSCLI
           command: |
-            git config user.email "ci-build@nypublicradio.org"
-            git config user.name "ci-build"
-      - add_ssh_keys:
-          fingerprints:
-            - "ab:f0:e6:36:b3:6d:67:77:fe:fc:b3:22:23:59:a2:c6"
+            sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            sudo unzip awscliv2.zip
+            sudo ./aws/install
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+            aws configure set default.region $AWS_DEFAULT_REGION
+
       - run:
-          name: Deploy docs to gh-pages branch
-          command: npx gh-pages --dotfiles --message "[skip ci] Publish Docs" --dist storybook-static
+          name: Deploy docs to aws s3
+          command: |
+            [[ $CIRCLE_BRANCH = "master" ]] && RELEASE="latest" || { [[ -n $CIRCLE_BRANCH ]] && RELEASE=$CIRCLE_BRANCH || RELEASE=$CIRCLE_TAG; }
+            yarn storybook-to-aws-s3 --bucket-path=$S3_BUCKET/$RELEASE -e=./storybook-static/$RELEASE
+            aws s3 cp storybook-static/index.html s3://$S3_BUCKET
+            aws s3 cp storybook-static/storybook-config.json s3://$S3_BUCKET
+            AWS_PAGER="" aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/index.html" "/storybook-config.json" "/$RELEASE/*"
 
 workflows:
   version: 2
@@ -97,20 +109,27 @@ workflows:
       - install:
           filters:
             branches:
-              ignore: radial
+              ignore: master
       - test:
           requires:
             - install
 
-  deploy-storybook:
+  deploy-storybook-to-s3:
     jobs:
       - install:
           filters:
+            tags:
+              only: /^v[0-9]+\.[0-9]+\.[0-9]+/
             branches:
-              only: radial
-      - build-storybook:
+              only:
+                - master
+                - /qa\/.*/
+      - test:
           requires:
             - install
-      - deploy-storybook:
-          requires: 
+      - build-storybook:
+          requires:
+            - test
+      - deploy-storybook-to-s3:
+          requires:
             - build-storybook

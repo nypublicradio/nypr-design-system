@@ -30,7 +30,10 @@ dd {
   justify-content: flex-start;
   align-items: center;
 
-  @include typeface(body, 2);
+  @include typeface(body, 4);
+  @include media(">=medium") {
+    @include typeface(body, 6);
+  }
 }
 
 .o-list .u-icon {

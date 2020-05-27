@@ -5,11 +5,11 @@
 a {
   text-decoration: none;
   color: rgb(var(--color-link-2));
-  transition: all 0.15s ease-in-out;
+  transition: var(--animation-easing-standard) var(--animation-duration-fast); //used to be ease-in-out
 }
 
 a > span {
-  transition: all 0.15s ease-in-out;
+  transition: var(--animation-easing-standard) var(--animation-duration-fast);
 }
 
 .u-has-accent,
@@ -47,6 +47,7 @@ a > span {
 .u-has-accent--white,
 .o-rte-text .u-has-accent--white {
   color: rgb(var(--color-background));
+  border-bottom-color: rgb(var(--color-link-1));
 }
 
 .u-has-accent--secondary,

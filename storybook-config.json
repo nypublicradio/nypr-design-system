@@ -1,0 +1,12 @@
+{
+  "storybook": {
+    "versions": {
+      "availableVersions": [
+        "latest"
+      ],
+      "hostname": "nypr-design-system.nypr.digital",
+      "localhost": "nypr-design-system.nypr.digital",
+      "regex": "\/(.*)\/index[.]html$"
+    }
+  }
+}

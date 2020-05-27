@@ -1,0 +1,64 @@
+
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Molecules/Article Metadata" />
+
+
+# Article Metadata
+
+
+The Article Metadata component is a collection of metadata relating to an article. Most importantly, this includes the byline and publish date.
+
+## Use Cases
+
+-  Article Metadata should be included in every article page. If you are crediting an author or a contributing organization, use this component to do so.
+    
+-  Article Metadata can also be used in card components to display metadata like date updated and comment count.
+    
+-  If you are only needing time metadata, use the timestamp component.
+    
+
+## Fields and Formatting
+
+These fields can be used as needed, the component will adapt to various field configurations.
+
+<img alt="anatomy of article metadata" src="./images/Molecules-ArticleMetadata-Anatomy.png" width="400"/>
+
+  <br/>
+
+
+1- **Authors** - The display name of a person(s) who has authored the content. Authors named can be linked to the authors profile if applicable. If content is by a single  author, display like "By John Doe". If Content Item is by two  authors, display like "By John Doe and Jill Doe".  
+
+2- **Contributing Organization** - Displayed if content is produced in partnership with another entity. If content is produced in partnership with an author from a Contributing Organization , display like "Author (Contributing Organization)" inline with the Author field.
+
+If no author is given for Contributing Organizations, display like "with Contributions by Organization 1, Organization 2, Organization 3+" inline with the Author field.
+
+
+3-**Publish Date** - Time when the article was published. Part of the timestamp component.
+
+  
+4- **Updated Date** - Time when the article was last updated. Part of the timestamp component.
+  
+
+5-**Comment Count** - If an article has comments, displays the # of comments an article has received in the format "# Comment(s)." where the "s" is included when there are >1 comments.
+
+  
+
+6- **Photos** - If an article has photos, displays the # of photos in an article gallery in the format "# Photo(s)." where the s is included when there are >1 photos.
+
+  
+
+
+## Article Metadata on Cards
+
+On the card component, the byline component can be used to show metadata relating to the content the card is promoting. In Gothamist, this is used to show the date updated field and comment count. In this scenario, the comment count uses a comment icon instead of the word “Comments” See example of Gothamist versus a whitelabel default.
+
+<img alt="example of cards with differently formatted Article Metadata" src="./images/Molecules-Bylines-Cards.png" width="500" />
+
+## Text Wrapping
+    
+On smaller screens, text should wrap at commas or bullets and avoid splitting information like names and dates into separate lines.
+
+## Accessibility
+    
+Article Metadata text and background color must meet WCAG 2.0 [minimum contrast](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) requirement.

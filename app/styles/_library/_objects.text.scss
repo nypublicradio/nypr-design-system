@@ -49,14 +49,14 @@
 }
 /* broken markup compat*/
 .o-rte-text.c-article__body {
-  @include typeface(body, 2);
+  @include typeface(body, 6);
 }
 .o-rte-text > dl dd,
 .o-rte-text > dl dt,
 .o-rte-text > ol li,
 .o-rte-text > ul li,
 .o-rte-text > p {
-  @include typeface(body, 2);
+  @include typeface(body, 6);
 }
 .o-rte-text a {
   border-bottom: 2px dotted rgb(var(--color-link-2));
@@ -78,23 +78,38 @@
   /*font-weight: normal;*/
 }
 .o-rte-text > h1 {
-  @include typeface(header, 5);
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+  }
   @include media(">large") {
-    @include typeface(header, 9);
+    @include typeface(header, 15);
   }
 }
 .o-rte-text > h2 {
-  @include typeface(header, 5);
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+  }
 }
 .o-rte-text > h3 {
-  @include typeface(header, 4);
+  @include typeface(header, 8);
+  @include media(">=medium") {
+    @include typeface(header, 10);
+  }
 }
 .o-rte-text > h4 {
-  @include typeface(header, 2);
+  @include typeface(header, 6);
+  @include media(">=medium") {
+    @include typeface(header, 8);
+  }
 }
 .o-rte-text > h5,
 .o-rte-text > h6 {
-  @include typeface(small, 4);
+  @include typeface(small, 2);
+  @include media(">=medium") {
+    @include typeface(small, 4);
+  }
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -140,7 +155,7 @@
 .o-rte-text > ul li:before {
         content: "";
         position: absolute;
-        left: calc(var(--space-4));
+        left: calc(var(--space-4) * -1);
         top: .75em;
         width: 7px;
         height: 7px;
@@ -160,7 +175,7 @@
         counter-increment: counter;
         content: counter(counter);
         color: rgb(var(--color-link-2));
-        font-size: var(--font-size-header-5);
+        font-size: var(--font-size-11);
         position: absolute;
         left: -58px;
         top: -.4em;
@@ -169,7 +184,7 @@
         text-align: right;
 
         @include media('<=large') {
-          font-size: var(--font-size-header-4);
+          font-size: var(--font-size-10);
           top: -.3em;
         }
       }
@@ -209,14 +224,14 @@
 }
 .o-pullquote p {
     font-weight: bold;
-    font-size: var(--font-size-header-5);
+    font-size: var(--font-size-11);
     line-height: 1.05;
     background: none;
     margin: var(--space-3) 0 0;
     display: inline-block;
 
     @include media('>medium') {
-      font-size: var(--font-size-header-8);
+      font-size: var(--font-size-14);
     }
   }
 .o-pullquote p span {
@@ -235,7 +250,10 @@
       }
 .o-pullquote__author {
     color: $c-septenary; 
-    @include typeface(small, 3);
+    @include typeface(small, 1);
+    @include media(">=medium") {
+      @include typeface(small, 3);
+    }
     letter-spacing: 1px;
     text-transform: uppercase;
   }
@@ -264,17 +282,22 @@
 .o-tag,
 .o-kicker,
 .o-breadcrumb {
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+    font-weight: bold;
+  }
   padding: 2px 6px 3px;
   text-transform: uppercase;
   font-weight: bold;
-  color: rgb(var(--color-text-inverse));
+  // Light accent color, can't use --color-text-inverse
+  color: rgb(var(--color-dusk-blue));
   background-color: rgb(var(--color-primary-1));
   letter-spacing: 1px;
 }
 .o-tag,
 .o-kicker {
-  font-size: var(--font-size-small-1);
+  font-size: var(--font-size-1);
 }
 .o-tag--sponsored {
     font-weight: normal;
@@ -305,10 +328,8 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
 /**
  * Caption & credit (used in leads and figures)
  */
-.o-caption p,
-  .o-caption__text {
-    @include typeface(small, 4);
-    font-family: var(--font-family-body);
+.o-caption p, .o-caption__text {
+    @include typeface(body, 4);
   }
 .o-caption .o-icon--dashed-arrow {
     margin-right: var(--space-2);
@@ -342,7 +363,10 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
   align-items: center;
   position: relative;
   z-index: $z-index-to-top;
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
   text-transform: uppercase;
 }
 /* Temporary until i can get the real icon*/
@@ -377,7 +401,7 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
  * Back to where you came from link
  */
 .o-back-to-link {
-  font-size: var(--font-size-header-2);
+  font-size: var(--font-size-8);
   margin-left: calc(var(--space-1) * -1);
   padding-left: var(--space-5);
   position: relative;
@@ -425,7 +449,10 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
 
 .c-gallery-end-label {
   flex-basis: 100%;
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }
 
 .c-gallery-end-label > .o-icon--down-arrow {

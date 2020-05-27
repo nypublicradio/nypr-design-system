@@ -1,5 +1,5 @@
-
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import hbs from 'htmlbars-inline-precompile';
 
 <Meta title="Foundations/Layout" />
 
@@ -32,6 +32,22 @@ Not a typical layout, this is used whenever a traditional right-rail is needed t
 | block list group with ad, block list group with 300x600 ad | 4 sm cards, 1 ad | <img alt="List" src="./images/Foundations-Layout-2Col6040-1.jpg" width="200" /> |
 | block list group with footer block and ad | 4 sm cards, 1 lg card, 1 ad | <img alt="List" src="./images/Foundations-Layout-2Col6040-2.jpg" width="200" /> |
 
+<Preview withToolbar={true}>
+  <Story name="RightRail" height="375px">{{
+    template: hbs`
+    <div class="u-padding">
+      <div class="l-grid l-grid--right-rail l-grid--top">
+        <div class="l-grid--order-1-large u-background-color--cool-white u-padding--half">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div class="l-grid--order-2-large">
+          <img alt="List" src="./images/Placeholder-Image-Ad.png" alt="placeholder image"/>
+        </div>
+      </div>
+    </div>
+    `
+  }}</Story>
+</Preview>
 
 ### **4x6 Two Column**
 Similar to a card, this layout is used to show a group or piece of content where one element has prominence. This can be used as a promotional unit showcasing an image, button/forms, and text, or can be used to support a more complex card grid. On mobile, 4x6 layouts will stack left over right.
@@ -40,6 +56,18 @@ Similar to a card, this layout is used to show a group or piece of content where
 |--|--|--|
 | Newsletter Promo ("n/a" - used for email collection on Gothamist Homepage currently) | 1 image, 1 custom text | <img alt="List" src="./images/Foundations-Layout-2Col4060-1.jpg" width="200" /> |
 
+<Preview withToolbar={true}>
+  <Story name="4x6" height="370px">{{
+    template: hbs`
+    <div class="u-padding">
+      <div class="l-grid l-grid--2x3 l-grid--middle">
+        <div><img alt="List" src="./images/Placeholder-Image-1_1.png" alt="placeholder image"/></div>
+        <div class="u-background-color--cool-white u-padding--half"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div>
+      </div>
+    </div>
+    `
+  }}</Story>
+</Preview>
 
 ### **6x6 Two Column**
 This layout is used when two items or groups of items are given equal horizonal weight. On mobile, 6x6 layouts will stack left over right.
@@ -49,3 +77,71 @@ This layout is used when two items or groups of items are given equal horizonal 
 | block group 2up | 2 lg cards | <img alt="List" src="./images/Foundations-Layout-2Col5050-1.jpg" width="200" /> |
 | Featured Block List | Section Title, 3 sm cards, 1 lg card  | <img alt="List" src="./images/Foundations-Layout-2Col5050-2.jpg" width="200" /> |
 | Featured Block List Secondary | Section Title, 3 sm cards, 1 lg card, 1 button | <img alt="List" src="./images/Foundations-Layout-2Col5050-3.jpg" width="200" /> |
+
+<Preview withToolbar={true}>
+  <Story name="6x6" height="510px">{{
+    template: hbs`
+   <div class="u-padding">
+     <div class="l-grid l-grid--2up l-grid--middle">
+       <div class="u-space--bottom u-padding--bottom u-background-color--cool-white">
+        <img alt="List" src="./images/Placeholder-Image-4_3.png" alt="placeholder image"/>
+         <p class="u-padding--half">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+       </div>
+       <div class="u-space--bottom u-padding--bottom u-background-color--cool-white">
+        <img alt="List" src="./images/Placeholder-Image-4_3.png" alt="placeholder image"/>
+         <p class="u-padding--half">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+       </div>
+     </div>
+   </div>
+    `
+  }}</Story>
+</Preview>
+
+### **Horizontal Card Layout**
+
+<Preview withToolbar={true}>
+  <Story name="HorizontalCard" height="170px">{{
+    template: hbs`
+      <div class="u-padding">
+        <div class="l-grid l-grid--1x4 l-grid--middle">
+          <div>
+            <img alt="List" src="./images/Placeholder-Image-4_3.png" alt="placeholder image"/>
+          </div>
+          <div class="u-background-color--cool-white u-padding--half">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+        </div>
+      </div>
+    `
+  }}</Story>
+</Preview>
+
+### **Wrappers & Containers**
+
+<Preview withToolbar={true}>
+  <Story name="Wrappers" height="1100px">{{
+    template: hbs`
+      <div class="u-padding">
+        <div class="l-container u-background-color--cool-white u-padding--half u-space--bottom u-align-center">container</div>
+        <div class="l-container l-container--xl u-background-color--cool-white u-padding--half u-space--bottom u-align-center">xl container</div>
+        <div class="l-container l-container--content u-background-color--cool-white u-padding--half u-space--bottom u-align-center">article content container</div>
+        <div class="l-container l-container--1col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">1 col</div>
+        <div class="l-container l-container--2col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">2 col</div>
+        <div class="l-container l-container--3col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">3 col</div>
+        <div class="l-container l-container--4col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">4 col</div>
+        <div class="l-container l-container--5col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">5 col</div>
+        <div class="l-container l-container--6col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">6 col</div>
+        <div class="l-container l-container--7col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">7 col</div>
+        <div class="l-container l-container--8col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">8 col</div>
+        <div class="l-container l-container--9col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">9 col</div>
+        <div class="l-container l-container--10col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">10 col</div>
+        <div class="l-container l-container--11col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">11 col</div>
+        <div class="l-container l-container--12col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">12 col</div>
+        <div class="l-container l-container--13col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">13 col</div>
+        <div class="l-container l-container--14col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">14 col</div>
+        <div class="l-container l-container--15col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">15 col</div>
+        <div class="l-container l-container--16col u-background-color--cool-white u-padding--half u-space--bottom u-align-center">16 col</div>
+      </div>
+    `
+  }}</Story>
+</Preview>

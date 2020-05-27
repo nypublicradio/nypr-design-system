@@ -18,7 +18,7 @@
 }
 
 .o-error-message p {
-  font-size: var(--font-size-small-3);
+  font-size: var(--font-size-3);
   font-weight: bold;
   line-height: 1.3;
   color: rgb(var(--color-text-error));
@@ -65,7 +65,7 @@ div.o-confirm-message p {
   top: 50%;
   z-index: $z-index-vanish;
   overflow: hidden;
-  transition: z-index 0.1s ease-out 0.5s;
+  transition: var(--animation-easing-outgoing);
   transform: translateY(-50%);
 
   @include media("<=small") {
@@ -84,7 +84,7 @@ div.o-confirm-message p {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.15s ease-out;
+  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
   z-index: $z-index-search-close;
 }
 .c-search--top .c-search__close svg {
@@ -96,10 +96,10 @@ div.o-confirm-message p {
 }
 .c-search--top .c-search__input {
   width: calc(100% - 50px);
-  font-size: var(--font-size-small-4);
+  font-size: var(--font-size-4);
   padding-left: 45px;
   transform: translateX(calc(100% + 50px));
-  transition: transform 0.1s ease-out 0.15s;
+  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
 .c-search--top .c-search__button {
   min-width: 50px;
@@ -107,7 +107,7 @@ div.o-confirm-message p {
   position: relative;
   z-index: $z-index-search-button;
   opacity: 0;
-  transition: opacity 0.15s ease-out 0.3s;
+  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
 .c-search--top .c-search__button:hover {
   background-color: rgb(var(--color-primary-1));
@@ -116,7 +116,7 @@ div.o-confirm-message p {
 .top-search-is-active .c-search--top {
   display: flex;
   z-index: $z-index-search-top-show;
-  transition: z-index 0s;
+  transition: 0s;
 
   @include media("<=small") {
     display: none;
@@ -124,15 +124,15 @@ div.o-confirm-message p {
 }
 .top-search-is-active .c-search__close {
   transform: translateY(-50%);
-  transition: transform 0.15s ease-out 0.3s;
+  transition: var(--animation-easing-outgoing);
 }
 .top-search-is-active .c-search__input {
   transform: translateX(0);
-  transition: transform 0.15s ease-out 0.1s;
+  transition: var(--animation-easing-outgoing);
 }
 .top-search-is-active .c-search__button {
   opacity: 1;
-  transition: opacity 0.1s ease-out;
+  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
 .top-search-is-active .c-search__button path {
   fill: $c-black;
@@ -143,7 +143,7 @@ div.o-confirm-message p {
 .c-search--top.is-open {
   display: flex;
   z-index: $z-index-search-top-show;
-  transition: z-index 0s;
+  transition: 0s;
 
   @include media("<=small") {
     display: none;
@@ -151,15 +151,15 @@ div.o-confirm-message p {
 }
 .c-search--top.is-open .c-search__close {
   transform: translateY(-50%);
-  transition: transform 0.15s ease-out 0.3s;
+  transition: var(--animation-easing-outgoing);
 }
 .c-search--top.is-open .c-search__input {
   transform: translateX(0);
-  transition: transform 0.15s ease-out 0.1s;
+  transition: var(--animation-easing-outgoing);
 }
 .c-search--top.is-open .c-search__button {
   opacity: 1;
-  transition: opacity 0.1s ease-out;
+  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
 }
 .c-search--top.is-open .c-search__button .search-icon {
   fill: $c-black;
@@ -237,7 +237,7 @@ div.o-confirm-message p {
   }
 }
 .c-newsletter-form__text p {
-  font-size: var(--font-size-small-4);
+  font-size: var(--font-size-4);
   line-height: 1.55;
 }
 .c-newsletter-form__icon {
@@ -278,8 +278,7 @@ div.o-confirm-message p {
 }
 
 .c-newsletter-form__terms-checkbox-label {
-  @include typeface(body, 1);
-  font-size: var(--font-size-small-2);
+  @include typeface(body, 2);
 }
 .c-newsletter-form__terms p {
   line-height: 1.35;

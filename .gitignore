@@ -31,3 +31,5 @@
 
 /.yalc/
 yalc.lock
+
+.idea/

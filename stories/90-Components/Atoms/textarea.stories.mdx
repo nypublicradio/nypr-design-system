@@ -1,0 +1,83 @@
+
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Atoms/TextArea"/>
+
+# Textarea
+
+  
+A textarea is a type of input that allows users to input multiple lines of text. Use when the expected input is longer than 3-5 words. For shorter input, use the Text Input component.
+  
+  
+
+## What’s Inside
+
+Radial provides functionality for text areas that can be switched on or off to best fit your needs.
+<br/><br/>
+  
+
+ <img alt="example of textarea anatomy" src="./images/Molecules-TextArea-Anatomy.png" width="400" />
+ 
+<br/>
+  
+
+
+1- **Label** - A text label should be used to help communicate the intended input of the field.
+    
+2- **Required Indicator** - Turn on this option when a field is required to be filled before submission.    
+
+3- **Placeholder** - Provides additional context to the nature of the indented input, should never be used in place of a label. Then are often used to provide an example of the type of input needed. (i.e. [me@email.com](mailto:my@email.com) for an email field)
+
+4- **Character Count** - Provides a maximum length constraint to the text area. 280 characters is a common rule-of-thumb here. Count goes into the negatives when input passes limit. 
+
+  
+  <br/>
+
+
+## States
+
+#### **Default**
+In this state, the user hasn’t yet interacted with the input, but it's prepped and ready to accept input.
+ <img alt="example of default textarea" src="./images/Molecules-TextArea-DefaultState.png" width="300" />
+<br/><br/>
+
+#### **Active**
+Outline the container with the stroke of an accent color to indicate when a user is focused on an element.
+ <img alt="example of active textarea" src="./images/Molecules-TextArea-ActiveState.png" width="300" />
+<br/><br/>
+
+#### **Required**  
+If a form element is required, an asterisk should be injected before the input label, colored with the brand’s accent color for error.
+ <img alt="example of required textarea" src="./images/Molecules-TextArea-RequiredState.png" width="300" />
+  <br/><br/>
+
+
+#### **Error**
+If an error occurred when submitting, the form element with an error should provide feedback with changed container stroke and text, usings the brand’s accent color for error. Text areas have the option of erroring if the character limit is passed.
+ <img alt="example of error textarea" src="./images/Molecules-TextArea-ErrorState.png" width="300" />
+  <br/><br/>
+
+#### **Disabled**
+Use when input is not yet possible. Use a brand utility colors for text and stroke.
+ <img alt="example of diabled textarea" src="./images/Molecules-TextArea-DisabledState.png" width="300" />
+
+  <br/><br/>
+
+  
+  
+ 
+  
+
+## Accessibility
+
+Like Text Inputs, Textareas, should clearly indicate the purpose of the input.
+
+  
+
+Textarea components should have a matching `<label>` to them.
+
+
+Add `aria-required` for required inputs.
+
+  
+If the textarea is not enclosed within the label tag, then labels must have the for attribute matching the ID of the textarea, like `<input id="unique-id-of-input"/>`. This practice ensures that screen readers inform users correctly about what information to enter where.

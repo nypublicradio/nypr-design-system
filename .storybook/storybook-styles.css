@@ -1,0 +1,19 @@
+/* Styles For Storybook Documentation */
+
+/* IMPORTANT:
+These Styles Should not be applied to any websites
+outside of Storybook  */
+
+/* Be sure to only add classes that affect Storybook Docs
+i.e. .sbdocs.sbdocs-example */
+
+.sbdocs.sbdocs-ul, .sbdocs.sbdocs-li {
+  margin: 0;
+  list-style: disc;
+}
+
+/* background for grid layout examples */
+/* not sure if this will be added once colors are done, can possibly be deleted later */
+.u-background-color--cool-white {
+  background: #EAEFF0;
+}

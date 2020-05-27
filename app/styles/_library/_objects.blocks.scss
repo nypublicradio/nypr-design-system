@@ -24,7 +24,7 @@
   background-color: $c-tertiary;
 }
 .c-block__title {
-  @include typeface(header, 4)
+  @include typeface(header, 10);
 }
 .c-block__title a {
   color: $c-black;
@@ -66,7 +66,7 @@
   line-height: 1.45;
 
   @include media("<=medium") {
-    @include typeface(body, 1)
+    @include typeface(body, 5)
   }
 }
 
@@ -78,11 +78,11 @@
   color: rgb(var(--color-text-inverse));
 }
 .c-block--urgent .c-block__title {
-  @include typeface(header, 4);
+  @include typeface(header, 10);
   line-height: 1.15;
 
   @include media(">large") {
-    @include typeface(header, 5);
+    @include typeface(header, 11);
   }
 }
 .c-block--urgent .c-block__title a {
@@ -124,7 +124,7 @@
   }
 }
 .c-block--horizontal .c-block__title {
-  @include typeface(header, 2);
+  @include typeface(header, 8);
 }
 .c-block--horizontal .c-block__object {
   padding: 0 0 0 var(--space-3);
@@ -144,7 +144,7 @@
 }
 .c-block--horizontal--large .c-block__title {
   @include media(">medium") {
-    @include typeface(header, 5);
+    @include typeface(header, 11);
   }
 }
 .c-block--horizontal--large .c-block__object {
@@ -170,6 +170,7 @@
 }
 .c-block-meta__author {
   @include typeface(small, 1);
+  text-transform: uppercase;
 }
 .c-block-meta__comments {
   vertical-align: middle;
@@ -211,7 +212,7 @@ $author-media-width-l: 360;
 }
 .c-author-block__title {
   @include media(">large") {
-    @include typeface(header, 5);
+    @include typeface(header, 11);
   }
 }
 .c-author-block__social {
@@ -238,6 +239,7 @@ $author-media-width-l: 360;
 
 .c-author-block__details-link {
   @include typeface(small, 3);
+  text-transform: uppercase;
 }
 .c-author-block__details:before {
   @include media(">small") {
@@ -261,6 +263,7 @@ $author-media-width-l: 360;
 
 .c-author-block__role  {
   @include typeface(small, 3);
+  text-transform: uppercase;
 }
 .c-author-block__meta,
 .c-author-block__object {
@@ -352,9 +355,9 @@ $author-media-width-l: 360;
   }
 
   @include media(">small") {
-    @include typeface(header, 8);
+    @include typeface(header, 14);
   }
   @include media(">large") {
-    @include typeface(header, 10);
+    @include typeface(header, 16);
   }
 }

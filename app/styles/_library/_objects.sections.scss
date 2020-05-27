@@ -3,7 +3,12 @@
 \*------------------------------------*/
 
 .o-section__heading {
-  @include typeface(header, 5);
+  display: inline;
+
+  @include typeface(header, 9);
+  @include media(">=medium") {
+    @include typeface(header, 11);
+  }
 }
 
 /**
@@ -64,7 +69,7 @@
 }
 .c-block-group--2up .c-block__title {
   @include media("<=medium") {
-    font-size: var(--font-size-header-2);
+    font-size: var(--font-size-8);
   }
 }
 .c-block-group--2up .c-block-group__col {
@@ -149,7 +154,7 @@
 .c-featured-blocks__heading {
   position: absolute;
   top: -0.6em;
-  @include typeface(header, 5);
+  @include typeface(header, 11);
   right: var(--space-9);
   background-color: rgb(var(--color-background));
   padding: 0 var(--space-2);
@@ -157,11 +162,11 @@
 .c-featured-blocks__heading--wnyc {
   width: 260px;
   white-space: nowrap;
-  top: -var(--space-5);
+  top: calc(var(--space-5) * -1);
 
   @include media("<=medium") {
     right: auto;
-    left: var(--space-2);
+    left: calc(var(--space-2) * -1);
   }
 }
 .c-featured-blocks__heading--wnyc > span {
@@ -211,7 +216,7 @@
 /* Main featured block group*/
 .c-featured-blocks--primary .c-featured-blocks__col1 .c-block__title {
   @include media(">xlarge") {
-    font-size: var(--font-size-header-8);
+    font-size: var(--font-size-14);
     line-height: 1.15;
   }
 }
@@ -249,12 +254,13 @@
   }
 }
 .c-section__heading {
-  @include typeface(header, 4);
+  @include typeface(small, 10);
   font-weight: normal;
   letter-spacing: 3px;
+  text-transform: uppercase;
 
   @include media(">medium") {
-    @include typeface(header, 8);
+    @include typeface(small, 14);
     font-weight: normal;
   }
 
@@ -264,7 +270,7 @@
  * Tag listing header
  */
 .c-tag-listing__heading {
-  @include typeface(header, 4);
+  @include typeface(header, 10);
   background-color: rgb(var(--color-background-highlight)); //dark
   display: inline-block;
   font-weight: normal;
@@ -273,7 +279,7 @@
   color: rgb(var(--color-text));
 
   @include media(">medium") {
-    @include typeface(header, 8);
+    @include typeface(header, 14);
   }
 }
 
@@ -290,13 +296,13 @@
 .c-search-results__form .c-search__input {
   padding: 0;
 
-  font-size: var(--font-size-header-4);
+  font-size: var(--font-size-10);
   font-family: var(--font-family-body);
   font-weight: bold;
   text-transform: uppercase;
 
   @include media(">medium") {
-    font-size: var(--font-size-header-8);
+    font-size: var(--font-size-14);
   }
 }
 .c-search-results__form .c-search__button {
@@ -324,17 +330,23 @@
 }
 .c-search-results__term {
   font-family: var(--font-family-body);
-  font-size: var(--font-size-header-8);
+  font-size: var(--font-size-14);
   font-weight: bold;
   text-transform: uppercase;
 }
 
 .c-search-results__result-number {
-  @include typeface(small, 4)
+  @include typeface(small, 2);
+  @include media(">=medium") {
+    @include typeface(small, 4);
+  }
 }
 
   .c-listing__sections-title {
-    @include typeface(header, 5)
+    @include typeface(header, 9);
+    @include media(">=medium") {
+      @include typeface(header, 11);
+    }
   }
 
 /**
@@ -369,13 +381,20 @@
 .c-basic__header {
   padding: var(--space-3) 0;
   position: relative;
-  @include typeface(header, 10);
-
-  @include media("<=medium") {
-    @include typeface(header, 8);
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
   }
 }
-
+.c-basic__heading {
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
+  }
+}
 .c-basic__header-kicker {
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }

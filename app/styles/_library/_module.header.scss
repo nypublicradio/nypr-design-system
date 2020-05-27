@@ -81,7 +81,7 @@
   }
 
   @include media("<=medium") {
-    font-size: var(--font-size-small-3);
+    font-size: var(--font-size-3);
     padding-left: var(--space-3);
     padding-right: var(--space-3);
   }
@@ -94,7 +94,10 @@
 }
 
 .c-main-header__title {
-  @include typeface(header, 2);
+  @include typeface(header, 6);
+  @include media(">=medium") {
+    @include typeface(header, 8);
+  }
   color: $c-white;
   font-weight: normal;
   line-height: 1.2;
@@ -205,7 +208,7 @@
   width: 100%;
   z-index: $z-index-floating-header;
   transform: translateY(0);
-  transition: transform 0.25s $hard-ease-in;
+  transition: var(--animation-easing-incoming) var(--animation-duration-standard);
 }
 .c-floating-header.is-visible {
   transform: translateY(calc(var(--heading-height) + var(--space-2)));
@@ -227,7 +230,7 @@
 
 .c-search-toggle__icon path {
   fill: $c-white;
-  transition: all 0.25s ease-in-out;
+  transition: var(--animation-easing-standard) var(--animation-duration-standard);
 }
 
 .c-content-overlay {
@@ -240,13 +243,13 @@
   top: 0;
   opacity: 0;
   transform: translateX(0);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out 0.4s;
+  transition: var(--animation-easing-outgoing) var(--animation-easing-outgoing);
 }
 /* side menu is open*/
 .c-main-header.side-menu-is-active .c-content-overlay {
   opacity: 0.5;
   transform: translateX(100vw);
-  transition: opacity 0.2s ease-in;
+  transition: var(--animation-easing-incoming) var(--animation-duration-standard);
 }
 
 /**
@@ -260,7 +263,7 @@
   top: 0;
   z-index: $z-index-side-menu;
   padding-bottom: var(--space-5);
-  transition: transform 0.3s $hard-ease-in;
+  transition: var(--animation-easing-incoming); //used to be $hard-ease-in
   overflow: auto;
   height: 100vh;
 
@@ -331,7 +334,7 @@
 }
 .c-side-menu__send-story {
   @include media("<=xsmall") {
-    font-size: var(--font-size-small-4);
+    font-size: var(--font-size-4);
   }
 }
 .c-side-menu__nypr-logo {
@@ -346,11 +349,14 @@
   width: calc(100% + var(--space-5));
 }
 .c-side-menu__nypr-linkroll .c-toggle-box__label {
-  font-size: var(--font-size-small-3);
+  font-size: var(--font-size-3);
 }
 .c-side-menu__copyright p {
   line-height: 2.5;
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }
 .c-side-menu__terms-links {
   display: flex;
@@ -359,7 +365,10 @@
 .c-side-menu__terms-links a {
   color: $c-quaternary;
   padding: 8px 0;
-  @include typeface(small, 3);
+  @include typeface(small, 1);
+  @include media(">=medium") {
+    @include typeface(small, 3);
+  }
 }
 .c-side-menu__terms-links a:hover {
   background-color: $c-primary;
