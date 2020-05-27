@@ -270,16 +270,16 @@
  * Tag listing header
  */
 .c-tag-listing__heading {
-  @include typeface(header, 10);
+  @include typeface(tags, 10);
   background-color: rgb(var(--color-background-highlight)); //dark
   display: inline-block;
   font-weight: normal;
   padding: var(--space-2) var(--space-3);
   margin: var(--space-2) 0;
-  color: rgb(var(--color-text));
+  color: rgb(var(--color-text-inverse));
 
   @include media(">medium") {
-    @include typeface(header, 14);
+    @include typeface(tags, 14);
   }
 }
 
