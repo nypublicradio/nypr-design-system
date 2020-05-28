@@ -236,6 +236,7 @@ blockquote {
 
 // Read More Links
 .c-read-more-nav__link {
+  font-family: var(--font-family-pragati);
   color: rgb(var(--color-reddish-orange));
   @include dotted-underline(--color-reddish-orange);
 
@@ -247,6 +248,7 @@ blockquote {
 
 // brand navigation links
 .c-nypr-nav__link {
+  font-family: var(--font-family-pragati);
   color: rgb(var(--color-brick-red));
   @include dotted-underline(--color-brick-red);
 
