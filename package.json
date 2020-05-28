@@ -16,6 +16,7 @@
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
+    "lint:styles": "npx stylelint app/styles/_library/**/*.scss",
     "start": "ember serve",
     "test": "ember test",
     "test:all": "ember try:each",
@@ -46,6 +47,8 @@
     "sander": "^0.6.0",
     "sass": "^1.16.1",
     "strip-json-comments": "^2.0.1",
+    "stylelint": "^13.5.0",
+    "stylelint-value-no-unknown-custom-properties": "^3.0.0",
     "yalc": "^1.0.0-pre.35"
   },
   "devDependencies": {
