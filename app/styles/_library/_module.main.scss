@@ -62,8 +62,6 @@
   text-align: right;
   width: 100%;
   color: rgb(var(--color-text));
-  text-transform: uppercase;
-
   @include typeface(small, 1);
 }
 
