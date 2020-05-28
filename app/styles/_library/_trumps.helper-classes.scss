@@ -32,16 +32,18 @@
  */
 .u-reversed-out {
   @include color-group-dark;
-  background-color: rgb(var(--color-background)); //dark 
+  background-color: rgb(var(--color-background)); //dark
   @include reversed-out-text;
 }
+
 .u-reversed-out:after {
-    background-color: rgb(var(--color-background));
-  }
+  background-color: rgb(var(--color-background));
+}
+
 .u-reversed-out input[type=radio]:checked,
-  .u-reversed-out input[type=checkbox]:checked {
-    border: 2px solid rgba(var(--color-gray), 0.3);
-  }
+.u-reversed-out input[type=checkbox]:checked {
+  border: 2px solid rgba(var(--color-gray), 0.3);
+}
 
 .u-align-center {
   text-align: center;
@@ -70,15 +72,18 @@
 .u-active--off {
   display: none;
 }
+
 [class*="-is-active"].js-toggle-parent .u-active--on, [class*="-is-active"].js-toggle .u-active--on {
-    display: none;
-  }
+  display: none;
+}
+
 [class*="-is-active"].js-toggle-parent .u-active--off, [class*="-is-active"].js-toggle .u-active--off {
-    display: block;
-  }
+  display: block;
+}
+
 [class*="-is-active"] .u-hide-on-active {
-    display: none;
-  }
+  display: none;
+}
 
 /**
  * Breakout content

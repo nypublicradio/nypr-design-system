@@ -270,6 +270,12 @@ blockquote {
   border-bottom: 2px dotted rgb(var(--color-white));
 }
 
+.u-reversed-out input[type=radio],
+.u-reversed-out input[type=radio]:checked,
+.u-reversed-out input[type=checkbox]:checked {
+  border: 2px solid rgba(var(--color-gray), 0.3);
+}
+
 // footer newsletter signup
 footer .c-newsletter-form__terms a {
   color: rgb(var(--color-text));

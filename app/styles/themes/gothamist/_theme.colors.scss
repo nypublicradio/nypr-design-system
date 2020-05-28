@@ -85,7 +85,6 @@
   --opacity-button-outline:       var(--opacity-hover);
 
   /* Borders */
-
   --color-border-subtle: var(--color-gray);
   --color-border-standard: var(--color-dark-gray);
   --color-border-bold:   var(--color-reddish-orange);
@@ -98,6 +97,9 @@
 
   /* Lists */
   --color-bullet: var(--color-black);
+
+  /* PullQuotes */
+  --color-pull-quote-text: var(--color-brown-grey);
 
   /* Gallery */
   --color-gallery-link: var(--color-white);
@@ -168,7 +170,6 @@
   --opacity-button-outline:       var(--opacity-hover);
 
   /* Borders */
-
   --color-border-bold:          var(--color-border-bold);      //none
   --color-border-standard:      var(--color-border-standard);  //none
   --color-border-subtle:        var(--color-border-subtle);    //none
@@ -180,6 +181,9 @@
 
   /* Lists */
   --color-bullet: var(--color-black);
+
+  /* PullQuotes */
+  --color-pull-quote-text: var(--color-brown-grey);
 
   /* Gallery */
   --color-gallery-link: var(--color-white);
