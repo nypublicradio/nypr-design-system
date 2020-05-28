@@ -30,10 +30,10 @@
 
   @include media("<=xlarge") {
     max-width: 270px;
-    right: calc(-(var(--grid-col-width) * 6) + (var(--grid-gutter) * 4));
+    right: calc(-1 * (var(--grid-col-width) * 6) + (var(--grid-gutter) * 4));
 
     &.is-active {
-      transform: translateX(calc(-(var(--grid-col-width) * 6) + (var(--grid-gutter) * 5)));
+      transform: translateX(calc(-1 * (var(--grid-col-width) * 6) + (var(--grid-gutter) * 5)));
     }
 
   }
@@ -54,7 +54,7 @@
 }
 
 .c-donate-tout.is-active {
-  transform: translateX(calc(-(var(--grid-col-width) * 15 + var(--grid-gutter * 13) + var(--space-3))));
+  transform: translateX(calc(-1 * (var(--grid-col-width) * 15 + var(--grid-gutter * 13) + var(--space-3))));
 }
 
 .c-donate-tout__inner {
