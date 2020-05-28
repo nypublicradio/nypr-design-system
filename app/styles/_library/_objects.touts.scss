@@ -21,7 +21,7 @@
   margin: 70px 0 0 auto;
   position: fixed;
   z-index: $z-index-donate-tout;
-  right: calc(-(var(--grid-col-width) * 15) + (var(--grid-gutter) * 13));
+  right: calc(-1 * (var(--grid-col-width) * 15) + (var(--grid-gutter) * 13));
   bottom: 50px;
   transform: translateX(0);
   transition: var(--animation-easing-incoming); // used to be $hard-ease-in

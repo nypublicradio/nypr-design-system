@@ -57,14 +57,14 @@
   --opacity-navigation-link-hover:         var(--opacity-hover);
 
   /* Header */
-  --color-header-text: var(--color-white);
-  --color-header-background: var(--color-dark-gray);
-  --color-header-label-text: var(--color-light-gray);
+  --color-header-text:              var(--color-white);
+  --color-header-background:        var(--color-dark-gray);
+  --color-header-label-text:        var(--color-light-gray);
   --color-header-button-background: var(--color-reddish-orange);
-  --color-header-button-text: var(--color-white);
+  --color-header-button-text:       var(--color-white);
   --color-header-button-hover-text: var(--color-white);
-  --color-header-icon: var(--color-white);
-  --color-header-icon-hover: var(--color-reddish-orange);
+  --color-header-icon:              var(--color-white);
+  --color-header-icon-hover:        var(--color-reddish-orange);
 
   /* Tags */
   --color-tag-text:             var(--color-dusk-blue);
@@ -85,24 +85,26 @@
   --opacity-button-outline:       var(--opacity-hover);
 
   /* Borders */
-
-  --color-border-subtle: var(--color-gray);
-  --color-border-standard: var(--color-dark-gray);
-  --color-border-bold:   var(--color-reddish-orange);
+  --color-border-subtle:    var(--color-gray);
+  --color-border-standard:  var(--color-dark-gray);
+  --color-border-bold:      var(--color-reddish-orange);
 
   /* Forms */
-  --color-checkbox: var(--color-dark-gray);
-  --color-placeholder-text: var(--color-brown-grey);
-  --color-form-button: var(--color-reddish-orange);
+  --color-checkbox:               var(--color-dark-gray);
+  --color-placeholder-text:       var(--color-brown-grey);
+  --color-form-button:            var(--color-reddish-orange);
   --color-newsletter-form-button: var(--color-dark-gray);
 
   /* Lists */
   --color-bullet: var(--color-black);
 
+  /* Pull Quotes */
+  --color-pull-quote-text: var(--color-brown-grey);
+
   /* Gallery */
-  --color-gallery-link: var(--color-white);
+  --color-gallery-link:       var(--color-white);
   --color-gallery-link-hover: var(--color-reddish-orange);
-  --color-gallery-ad-label: var(--color-dirty-salmon);
+  --color-gallery-ad-label:   var(--color-dirty-salmon);
 
   /* Footer */
   --color-footer-text: var(--color-white);
@@ -140,14 +142,14 @@
   --opacity-navigation-link-hover:         var(--opacity-hover);
 
   /* Header */
-  --color-header-text: var(--color-white);
-  --color-header-background: var(--color-dark-gray);
-  --color-header-label-text: var(--color-light-gray);
+  --color-header-text:              var(--color-white);
+  --color-header-background:        var(--color-dark-gray);
+  --color-header-label-text:        var(--color-light-gray);
   --color-header-button-background: var(--color-reddish-orange);
-  --color-header-button-text: var(--color-white);
+  --color-header-button-text:       var(--color-white);
   --color-header-button-hover-text: var(--color-white);
-  --color-header-icon: var(--color-white);
-  --color-header-icon-hover: var(--color-reddish-orange);
+  --color-header-icon:              var(--color-white);
+  --color-header-icon-hover:        var(--color-reddish-orange);
 
   /* Tags */
   --color-tag-text:             var(--color-dusk-blue);
@@ -168,23 +170,25 @@
   --opacity-button-outline:       var(--opacity-hover);
 
   /* Borders */
-
   --color-border-bold:          var(--color-border-bold);      //none
   --color-border-standard:      var(--color-border-standard);  //none
   --color-border-subtle:        var(--color-border-subtle);    //none
 
   /* Forms */
-  --color-checkbox: var(--color-dark-gray);
+  --color-checkbox:         var(--color-dark-gray);
   --color-placeholder-text: var(--color-brown-grey);
-  --color-form-button: var(--color-reddish-orange);
+  --color-form-button:      var(--color-reddish-orange);
 
   /* Lists */
   --color-bullet: var(--color-black);
 
+  /* Pull Quotes */
+  --color-pull-quote-text: var(--color-brown-grey);
+
   /* Gallery */
-  --color-gallery-link: var(--color-white);
+  --color-gallery-link:       var(--color-white);
   --color-gallery-link-hover: var(--color-reddish-orange);
-  --color-gallery-ad-label: var(--color-dirty-salmon);
+  --color-gallery-ad-label:   var(--color-dirty-salmon);
 
   /* Footer */
   --color-footer-text: var(--color-white);

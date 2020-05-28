@@ -106,7 +106,7 @@ blockquote {
 }
 
 .c-donate-tout__graphic path {
-  @include color-group-dark
+  fill: rgb(var(--color-dusk-blue));
 }
 
 .c-toggle-box .c-toggle-box__label {

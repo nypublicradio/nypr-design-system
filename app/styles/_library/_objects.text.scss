@@ -285,7 +285,7 @@
 }
 
 .o-pullquote__author {
-  color: rgb(var(--color-brown-grey));
+  color: rgb(var(--color-pull-quote-text));
   @include typeface(small, 1);
   @include media(">=medium") {
     @include typeface(small, 3);
@@ -299,7 +299,7 @@
  * Text background accent
  */
 .o-bg-text-accent {
-  background-image: linear-gradient(rgba(var(--color-brown-grey), .2), rgba(var(--color-brown-grey), .2));
+  background-image: linear-gradient(rgba(var(--color-pull-quote-text), .2), rgba(var(--color-pull-quote-text), .2));
   background-position: center bottom .2em;
   background-size: 100% .55em;
   background-repeat: no-repeat;
@@ -331,10 +331,6 @@
   letter-spacing: 1px;
   color: rgb(var(--color-tag-text));
   font-weight: bold;
-  // Light accent color, can't use --color-text-inverse
-  color: rgb(var(--color-dusk-blue));
-  background-color: rgb(var(--color-primary-1));
-  letter-spacing: 1px;
 }
 
 .o-tag,
