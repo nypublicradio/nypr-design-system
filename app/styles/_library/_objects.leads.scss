@@ -30,10 +30,10 @@
   display: block;
 }
 .c-lead-gallery__title {
-  font-size: var(--font-size-10);
+  @include typeface(header, 10);
 }
 .c-lead-gallery__caption p {
-  font-size: var(--font-size-5);
+  @include typeface(body, 5);
 }
 .c-lead-gallery__thumbs {
   display: flex;
@@ -89,7 +89,7 @@
 }
 .c-lead-gallery__thumbs-thumb-text span {
   display: block;
-  font-size: var(--font-size-11);
+  @include typeface(small, 11);
   width: 100%;
   text-align: center;
 }

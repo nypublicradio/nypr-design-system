@@ -23,9 +23,8 @@ input[type="submit"] {
   text-decoration: none;
 	line-height: 22px;
 	letter-spacing: 2px;
-	color: white;
-	font-family: var(--font-family-small);
-	font-size: var(--font-size-6);
+  color: white;
+  @include typeface(small, 6);
 
   @include media(">small") {
 		padding-right: var(--space-5);
@@ -58,7 +57,7 @@ input[type="submit"] {
 
 /* Sizes*/
 .o-button--sm {
-  font-size: var(--font-size-4);
+  @include typeface(small, 4);
   padding: 11px 50px 10px;
 }
 .o-button--extra {

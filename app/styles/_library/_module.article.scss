@@ -112,7 +112,7 @@
 }
 
 .c-related-content__list a {
-  font-size: var(--font-size-5);
+  @include typeface(header, 5);
 }
 
 .c-related-content__heading {
@@ -120,7 +120,7 @@
 }
 
 .c-article__related a {
-  font-family: var(--font-family-header);
+  @include typeface(header, 5);
   display: inline;
   line-height: 1.35;
 }

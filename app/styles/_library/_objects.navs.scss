@@ -139,7 +139,7 @@
   padding: 0 var(--space-3);
   color: rgb(var(--color-navigation-link));
   text-decoration: rgb(var(--text-decoration-navigation-link));
-  font-size: var(--font-size-6);
+  @include typeface(header, 6);
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -252,7 +252,6 @@
   text-transform: uppercase;
 
   @include typeface(small, 3);
-  font-weight: var(--font-weight-body);
 
   @include media("<=medium") {
     margin-bottom: var(--space-2);
@@ -286,7 +285,7 @@
   border-radius: 50%;
 }
 .c-read-more-nav__link {
-  font-size: var(--font-size-7);
+  @include typeface(header, 7);
   font-weight: 600;
   padding-bottom: 0;
 

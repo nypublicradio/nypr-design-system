@@ -46,7 +46,7 @@
  * Rich text editor text
  */
 .o-rte-text {
-  font-family: var(--font-family-body);
+  @include typeface(body, 6);
 }
 
 /* broken markup compat*/
@@ -201,16 +201,16 @@
   counter-increment: counter;
   content: counter(counter);
   color: rgb(var(--color-link-2));
-  font-size: var(--font-size-11);
+
+  @include typeface(small, 11);
   position: absolute;
   left: -58px;
   top: -.4em;
-  font-family: var(--font-family-small);
   width: 50px;
   text-align: right;
 
   @include media('<=large') {
-    font-size: var(--font-size-10);
+    @include typeface(small, 10);
     top: -.3em;
   }
 }
@@ -255,14 +255,14 @@
 
 .o-pullquote p {
   font-weight: bold;
-  font-size: var(--font-size-11);
+  @include typeface(header, 11);
   line-height: 1.05;
   background: none;
   margin: var(--space-3) 0 0;
   display: inline-block;
 
   @include media('>medium') {
-    font-size: var(--font-size-14);
+    @include typeface(header, 14);
   }
 }
 
@@ -273,7 +273,10 @@
 
 .o-pullquote p span:before,
 .o-pullquote p span:after {
-  font-family: var(--font-family-header);
+  @include typeface(header, 11);
+  @include media('>medium') {
+    @include typeface(header, 14);
+  }
 }
 
 .o-pullquote p span:before {
@@ -335,7 +338,7 @@
 
 .o-tag,
 .o-kicker {
-  font-size: var(--font-size-1);
+  @include typeface(small, 1)
 }
 
 a.o-kicker {
@@ -446,7 +449,7 @@ a.o-breadcrumb:hover {
  * Back to where you came from link
  */
 .o-back-to-link {
-  font-size: var(--font-size-8);
+  @include typeface(small, 8);
   margin-left: calc(var(--space-1) * -1);
   padding-left: var(--space-5);
   position: relative;

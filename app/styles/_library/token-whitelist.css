@@ -72,6 +72,11 @@
   --color-border-standard: *;
   --color-border-bold:     *;
 
+
+  --border-subtle:   *;
+  --border-standard: *;
+  --border-bold:     *;
+
   /* Layout */
   --max-width:      *;
   --max-width-xl:   *;

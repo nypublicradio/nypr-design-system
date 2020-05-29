@@ -6,7 +6,7 @@
   text-align: center;
   position: relative;
   z-index: $z-index-header;
-  font-family: var(--font-family-header);
+  @include typeface(header, 6);
 }
 
 .c-main-header svg {
@@ -89,7 +89,7 @@
   }
 
   @include media("<=medium") {
-    font-size: var(--font-size-3);
+    @include typeface(small, 3);
     padding-left: var(--space-3);
     padding-right: var(--space-3);
   }
@@ -371,7 +371,7 @@
 
 .c-side-menu__send-story {
   @include media("<=xsmall") {
-    font-size: var(--font-size-4);
+    typeface(small, 4)
   }
 }
 
@@ -390,7 +390,7 @@
 }
 
 .c-side-menu__nypr-linkroll .c-toggle-box__label {
-  font-size: var(--font-size-3);
+  @include typeface(small, 3);
 }
 
 .c-side-menu__copyright p {
