@@ -292,3 +292,13 @@ footer .c-newsletter-form__terms a {
 .c-lead-gallery__thumbs-thumb-text {
   text-transform: uppercase;
 }
+
+// gallery title text
+.o-back-to-link {
+  font-family: var(--font-family-pragati);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
