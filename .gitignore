@@ -29,10 +29,8 @@
 
 # importable sass variables
 /tests/dummy/app/utils/sass-vars
-.idea/
-.storybook/
 
+# yalc
 /.yalc/
 yalc.lock
 
-.idea/
