@@ -1,5 +1,12 @@
 # `nypr-design-system` changelog
 
+## `3.0.0-beta1`
+
+- [DOCS] Documentation Updates
+- [CHANGE] Update colors to use tokens
+- [CHANGE] Add tokens for link colors, button colors, tag colors
+- [BUGFIX] Fixes for gallery page
+
 ## `3.0.0-alpha2`
 
 - [DOCS] Documentation Updates
