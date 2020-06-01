@@ -12,7 +12,7 @@
 
     <div class="c-newsletter-tout__text u-spacing">
       <h3 class="c-newsletter-tout__heading" data-test-newsletter-tout-heading>
-        <strong class="o-bg-text-accent o-bg-text-accent--senary">
+        <strong>
           {{yield (hash heading=(component 'blank-template'))}}
         </strong>
       </h3>
@@ -22,16 +22,17 @@
     </div>
 
     <NyprMNewsletterForm
-      class="c-newsletter-tout__form u-spacing"
+      class="c-newsletter-tout__form u-spacing gtm__click-tracking"
       @endpoint={{@endpoint}}
       @params={{@params}}
+      @location="Home Page"
       as |form|>
 
       <form.label/>
 
       <form.input/>
 
-      <form.submit>
+      <form.submit data-label="Home Page">
         <span class="c-newsletter-form__submit-icon o-icon o-icon--newsletter-tout">
           <NyprASvg @icon='arrow-dashed'/>
         </span>

@@ -18,6 +18,11 @@
   --letter-spacing-body: normal;
   --font-weight-body:    400;
 
+  /* Tags */
+  --font-family-tags:    'B612 Mono', Menlo, Monaco, "Courier New", "Courier", monospace;
+  --letter-spacing-tags: normal;
+  --font-weight-tags:    400;
+
   /* Small */
   --font-family-small:    'Source Sans Pro', Helvetica, Arial, sans-serif;
   --letter-spacing-small: 1px;
@@ -102,97 +107,15 @@
   // Article
   --article-content-width: 634px;
 
-@function hex2rgb($hexColor) {
-  @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
-}
-  /* Brand Color Pallete */
-  --color-white:         #{hex2rgb(#ffffff)};
-  --color-gray-dark:     #{hex2rgb(#333333)};
-  --color-cool-white:    #{hex2rgb(#EAEFF0)};
-  --color-ceramic-blue:  #{hex2rgb(#235B9C)};
-  --color-concrete:      #{hex2rgb(#8C8C8C)};
-  --color-ember-red:     #{hex2rgb(#C75423)};
-  --color-cool-blue:     #{hex2rgb(#3B8AD1)};
-  --color-sky-blue:      #{hex2rgb(#70C5F6)};
-  --color-sea-green:     #{hex2rgb(#469C78)};
-  --color-bright-purple: #{hex2rgb(#924db1)};
+  // Opacity
+  --opacity-hover: 0.75;
 
-  --color-background:           var(--color-white);
-  --color-background-muted:     var(--color-cool-white);
-  --color-background-highlight: var(--color-cool-white);
-  --color-text:                 var(--color-gray-dark);
-  --color-text-muted:           var(--color-concrete);
-  --color-text-error:           var(--color-ember-red);
-  --color-text-inverse:         var(--color-white);
-  --color-text-metadata:        var(--color-gray-dark);
-  --color-link:                 var(--color-gray-dark);
-  --color-link-body:            var(--color-cool-blue);
-  --color-link-hover:           var(--color-sky-blue);
-  --color-link-hover-2:          var(--color-white);
-  --color-primary-1:             var(--color-cool-blue);
-  --color-primary-2:             var(--color-sea-green);
-  --color-primary-3:             var(--color-bright-purple);
-  --color-button-donate:        var(--color-cool-blue);
-  --color-button-1:              var(--color-cool-blue);
-  --color-button-2:              var(--color-sea-green);
-  --color-border-bold:          var(--color-gray-dark);
-  --color-border-standard:      var(--color-gray-dark);
-  --color-border-subtle:        var(--color-concrete);
+  // Animation
+  --animation-easing-outgoing:          cubic-bezier(0.4, 0.0, 1, 1);
+  --animation-easing-incoming:          cubic-bezier(0.0, 0.0, 0.2, 1);
+  --animation-easing-standard:          cubic-bezier(0.4, 0.0, 0.2, 1);
 
-  /* Themable Tokens, Borders */
-  --b-border-subtle: 2px dashed var(--c-dirty-salmon);
-  --b-border-normal: 3px solid var(--c-black);
-  --b-border-bold:   5px dashed var(--c-reddish-orange);
-
-  --opacity-hover:              0.75;
-  --opacity-focus:              0.75;
-}
-
-/*Dark and Light Groups */
-.u-color-group-dark {
-  --color-background:           var(--color-gray-dark);
-  --color-background-muted:     rgb(var(--color-background));  //not assigned
-  --color-background-highlight: var(--color-ceramic-blue);
-  --color-text:                 var(--color-white);
-  --color-text-muted:           var(--color-concrete);
-  --color-text-error:           var(--color-ember-red);
-  --color-text-inverse:         var(--color-gray-dark);
-  --color-text-metadata:        var(--color-white);
-  --color-link:                 var(--color-white);
-  --color-link-body:            var(--color-white);
-  --color-link-hover:           var(--color-cool-white);
-  --color-link-hover-2:         var(--color-white);
-  --color-primary-1:            var(--color-cool-blue);
-  --color-primary-2:            var(--color-sea-green);
-  --color-primary-3:            var(--color-bright-purple);
-  --color-button-donate:        var(--color-cool-blue);
-  --color-button-1:             var(--color-cool-blue);
-  --color-button-2:             var(--color-sea-green);
-  --color-border-bold:          var(--color-border-bold);      //none assigned in airtable
-  --color-border-standard:      var(--color-border-standard);  //none
-  --color-border-subtle:        var(--color-border-subtle);    //none
-}
-
-.u-color-group-light {
-  --color-background:           var(--color-white);
-  --color-background-muted:     var(--color-cool-white);
-  --color-background-highlight: var(--color-cool-white);
-  --color-text:                 var(--color-gray-dark);
-  --color-text-muted:           var(--color-concrete);
-  --color-text-error:           var(--color-ember-red);
-  --color-text-inverse:         var(--color-white);
-  --color-text-metadata:        var(--color-gray-dark);
-  --color-link:                 var(--color-gray-dark);
-  --color-link-body:            var(--color-cool-blue);
-  --color-link-hover:           var(--color-sky-blue);
-  --color-link-hover-2:          var(--color-white);
-  --color-primary-1:             var(--color-cool-blue);
-  --color-primary-2:             var(--color-sea-green);
-  --color-primary-3:             var(--color-bright-purple);
-  --color-button-donate:        var(--color-cool-blue);
-  --color-button-1:              var(--color-cool-blue);
-  --color-button-2:              var(--color-sea-green);
-  --color-border-bold:          var(--color-gray-dark);
-  --color-border-standard:      var(--color-gray-dark);
-  --color-border-subtle:        var(--color-concrete);
+  --animation-duration-slow:            .6s;
+  --animation-duration-standard:        .25s;
+  --animation-duration-fast:            .1s;
 }

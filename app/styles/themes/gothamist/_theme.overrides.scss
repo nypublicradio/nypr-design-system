@@ -2,11 +2,22 @@
     $THEME OVERRIDES
 \*------------------------------------*/
 
+pre,
+blockquote {
+  border: 1px solid rgb(var(--color-brown-grey));
+}
+
 .c-main-header {
+  @include color-group-dark;
+
   &.side-menu-is-active {
     .c-main-header__branding {
       opacity: 0;
     }
+  }
+
+  .c-share-tools__label {
+    color: rgb(var(--color-white));
   }
 }
 
@@ -34,7 +45,7 @@
     z-index: $z-index-heading-logo;
     left: var(--space-2);
     opacity: 1;
-    transition: var(--animation-easing-incoming) var(--animation-duration-fast); // used to be $hard-ease-in
+    transition: var(--animation-duration-fast) var(--animation-easing-incoming);
 
     @include media('>medium') {
       width: 135px;
@@ -42,7 +53,7 @@
     }
 
     @include media('>xlarge') {
-      left: calc(var(--col-width) + var(--gutter));
+      left: calc(var(--grid-col-width) + var(--grid-gutter));
     }
 
     --xl-container: calc(var(--max-width-xl) + var(--space-5));
@@ -54,46 +65,48 @@
   }
 
   .gothamist-letters {
-    fill: $c-black;
+    fill: rgb(var(--color-black));
   }
+
   .gothamist-buildings {
-    fill: $c-white;
+    fill: rgb(var(--color-white));
   }
 }
 
-.c-main-footer { 
+.c-main-footer {
   @include color-group-dark;
+
   .gothamist-letters {
-    fill: $c-white;
+    fill: rgb(var(--color-white));
   }
+
   .gothamist-buildings {
-    fill: $c-dark-bg;
+    fill: rgb(var(--color-dark-gray));
   }
+
   .c-newsletter-form {
     @include color-group-light;
   }
 }
 
-//Light accent color, can't use --color-text-inverse  
-.o-breadcrumb, .o-kicker { 
-color: rgb(var(--color-dusk-blue));
+/* sponsored tags */
+.o-tag--sponsored {
+  font-weight: normal;
 }
 
-.o-kicker--sponsored { 
-  color: rgb(var(--color-text-inverse));
-  }
+.o-tag--sponsored,
+.o-kicker--sponsored {
+  color: rgb(var(--color-white));
+  background-color: rgb(var(--color-purple));
+}
 
-a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
-  background-color: rgb(var(--color-primary-2));
-  color: rgb(var(--color-link-hover-2));
-  opacity: 1;
-  }
 
 .u-has-accent .u-has-accent--secondary {
   color: rgb(var(--color-brick-red));
 }
+
 .c-donate-tout__graphic path {
-  @include color-group-dark
+  fill: rgb(var(--color-dusk-blue));
 }
 
 .c-toggle-box .c-toggle-box__label {
@@ -102,8 +115,180 @@ a.o-kicker:hover, .o-tag:hover, a.o-breadcrumb:hover {
 
 // Standard repeating dashed border
 .o-border-accent {
-  background-image: repeating-linear-gradient(to right, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to right, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, $c-black 0%, $c-black 44%, transparent 44%, transparent 100%);
+  background-image: repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%);
   background-position: left top, left bottom, left top, right top;
   background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
   background-size: 18px 2px, 18px 2px, 2px 18px, 2px 18px;
+}
+
+// Buttons
+.o-button {
+  color: rgb(var(--color-dark-gray));
+  font-weight: bold;
+  transition: all var(--animation-duration-standard) var(--animation-easing-standard);
+  text-transform: uppercase;
+}
+
+.o-button:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: $z-index-button-outline;
+  width: 100%;
+  height: 100%;
+  border: 3px solid rgb(var(--color-button-primary));
+  border-color: rgb(var(--color-button-primary));
+  transform: translate(0, 0);
+  transition: all var(--animation-duration-standard) var(--animation-easing-standard);
+}
+
+.o-button:hover {
+  color: rgb(var(--color-dark-gray));
+  transform: translate(10px, -10px);
+}
+
+.o-button:hover:before {
+  transform: translate(-10px, 10px);
+}
+
+.o-button.mod-donate {
+  color: rgb(var(--color-white));
+  background-color: rgb(var(--color-reddish-orange));
+
+  &:hover {
+    background-color: rgb(var(--color-reddish-orange));
+  }
+
+  &:active {
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+.o-button.mod-donate:before {
+  border: 3px solid rgb(var(--color-reddish-orange));
+  border-color: rgb(var(--color-reddish-orange));
+}
+
+// Link styles
+@mixin dotted-underline($color) {
+  display: inline-block;
+  padding-bottom: 2px;
+  border-bottom: 2px dotted rgb(var($color));
+  box-decoration-break: clone;
+}
+
+// Headline link
+.c-block__title a {
+  color: rgb(var(--color-text));
+  transition: none;
+  text-decoration: none;
+}
+
+.c-block__title a:hover {
+  color: rgb(var(--color-reddish-orange));
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+// Top Navigation
+.c-primary-nav--top .c-primary-nav__link:hover {
+  color: rgb(var(--color-reddish-orange));
+}
+
+// Side Navigaton
+.c-primary-nav--side .c-primary-nav__link {
+  padding-bottom: 2px;
+  color: rgb(var(--color-banana-yellow));
+  @include dotted-underline(--color-banana-yellow);
+
+  &:hover, &:focus {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+.c-secondary-nav .c-secondary-nav__link {
+  color: rgb(var(--color-white));
+  @include dotted-underline(--color-white);
+
+  &:hover, &:focus {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+.c-side-menu {
+  @include color-group-dark;
+}
+
+.c-side-menu__terms-links a,
+.c-main-footer__terms-links a {
+  color: rgb(var(--color-banana-yellow));
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover, &:focus {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+// Read More Links
+.c-read-more-nav__link {
+  font-family: var(--font-family-pragati);
+  color: rgb(var(--color-reddish-orange));
+  @include dotted-underline(--color-reddish-orange);
+
+  &:hover, &:focus {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+// brand navigation links
+.c-nypr-nav__link {
+  font-family: var(--font-family-pragati);
+  color: rgb(var(--color-brick-red));
+  @include dotted-underline(--color-brick-red);
+
+  &:hover, &:focus {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+// Highlight headline link when hovering card image
+.c-block__media:hover + .c-block__object .c-block__title-link,
+.c-block__media:hover .c-block__title-link {
+  color: rgb(var(--color-reddish-orange));
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+// homepage newsletter signup
+.c-newsletter-form__terms a {
+  color: rgb(var(--color-white));
+  border-bottom: 2px dotted rgb(var(--color-white));
+}
+
+// footer newsletter signup
+footer .c-newsletter-form__terms a {
+  color: rgb(var(--color-text));
+  border-bottom: 2px dotted rgb(var(--color-text));
+}
+
+// article page credit
+.o-caption__text > span a {
+  text-decoration: none;
+}
+
+// advertisement label
+.o-ad__label {
+  text-transform: uppercase;
+}
+
+// view all button on gallery
+.c-lead-gallery__thumbs-thumb-text {
+  text-transform: uppercase;
 }

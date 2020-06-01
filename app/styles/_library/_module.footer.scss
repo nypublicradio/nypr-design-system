@@ -3,11 +3,11 @@
 \*------------------------------------*/
 
 .c-main-footer {
-    padding: var(--space-5) 0;
-    background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
-    background-position: 100% 142px;
-    background-repeat: repeat-x;
-  
+  padding: var(--space-5) 0;
+  background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
+  background-position: 100% 142px;
+  background-repeat: repeat-x;
+  color: rgb(var(--color-footer-text));
 }
 
 .c-main-footer__inner {
@@ -21,7 +21,7 @@
 
 .c-main-footer__col1 {
   width: 100%;
-  max-width: 570px;
+  max-width: 549px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -36,9 +36,18 @@
   }
 }
 
-.c-main-footer__branding .c-share-tools {
-  fill: white;
+.c-main-footer svg {
+  fill: rgb(var(--color-footer-text));
 }
+
+.c-main-footer a svg {
+  fill: rgb(var(--color-footer-text));
+}
+
+.c-main-footer a:hover svg {
+  fill: rgba(var(--color-navigation-link-hover), var(--opacity-navigation-link-hover));
+}
+
 
 .c-main-footer__logo {
   min-width: 150px;
@@ -57,6 +66,12 @@
   margin-bottom: var(--space-3);
   @include typeface(small, 3);
   text-transform: uppercase;
+  text-decoration: none;
+
+  &:hover {
+    color: rgb(var(--color-background));
+    text-decoration: none;
+  }
 }
 
 .c-main-footer__utility {
@@ -66,7 +81,7 @@
 }
 
 .c-main-footer__slogan p {
-  color: rgb(var(--color-text));
+  color: rgb(var(--color-footer-text));
   font-size: var(--font-size-4); /* Not in the type scale*/
 }
 
@@ -116,7 +131,7 @@
 
 .c-main-footer__nypr-logo path,
 .c-main-footer__nypr-logo polygon {
-  fill: rgb(var(--color-text));
+  fill: rgb(var(--color-footer-text));
 }
 
 .c-main-footer__brand-group {
@@ -136,7 +151,7 @@
 }
 
 .c-main-footer__bottom {
-  border-top: 1px dashed rgba(var(--color-text-metadata), 0.5);
+  border-top: 1px dashed rgba(var(--color-footer-text), 0.5);
   padding: var(--space-4) var(--space-3);
   text-align: center;
   margin-left: calc(var(--space-3) * -1);
@@ -168,7 +183,7 @@
 .c-main-footer__terms-links a {
   margin: 0 var(--space-3);
   padding: 8px 0;
-  color: rgb(var(--color-primary-1));
+  color: rgb(var(--color-footer-link));
   @include typeface(small, 3);
   text-transform: uppercase;
   font-weight: normal;
@@ -176,6 +191,14 @@
   @include media(">large") {
     margin: 0 var(--space-5) 0 0;
   }
+}
+
+.c-main-footer__signup {
+  color: rgb(var(--color-text-inverse));
+}
+
+.c-main-footer__signup svg {
+  fill: rgb(var(--color-text));
 }
 
 .c-main-footer__terms-links a:hover {

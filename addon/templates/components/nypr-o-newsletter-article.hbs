@@ -1,0 +1,41 @@
+{{!-- BEGIN-SNIPPET nypr-o-newsletter-article.hbs --}}
+<div class="c-newsletter-article__inner">
+  {{#if @ariaTitle}}<h2 class="is-vishidden">{{@ariaTitle}}</h2>{{/if}}
+
+  <div class="c-newsletter-article__content u-spacing">
+
+    <div class="c-newsletter-article__text u-spacing">
+      <h3 class="c-newsletter-article__heading" data-test-newsletter-article-heading>
+        <strong>
+          {{yield (hash heading=(component 'blank-template'))}}
+        </strong>
+      </h3>
+    </div>
+
+    <NyprMNewsletterForm
+            class="c-newsletter-article__form u-spacing gtm__click-tracking"
+            @endpoint={{@endpoint}}
+            @params={{@params}}
+            @location="Article Page"
+            as |form|>
+
+      <form.label/>
+
+      <form.input/>
+
+      <form.submit data-label="Article Page">
+        <span class="c-newsletter-form__submit-icon o-icon o-icon--newsletter-form">
+          <NyprASvg @icon='arrow-dashed'/>
+        </span>
+        <span class="is-vishidden">Submit email</span>
+      </form.submit>
+
+      <form.legal>
+        {{yield (hash legal=(component form.legal))}}
+      </form.legal>
+    </NyprMNewsletterForm>
+
+  </div>
+
+</div>
+{{!-- END-SNIPPET --}}

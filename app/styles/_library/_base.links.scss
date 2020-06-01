@@ -4,8 +4,14 @@
 
 a {
   text-decoration: none;
-  color: rgb(var(--color-link-2));
-  transition: var(--animation-easing-standard) var(--animation-duration-fast); //used to be ease-in-out
+  color: var(--color-link);
+  text-decoration: var(--text-decoration-link);
+  transition: all var(--animation-duration-fast) var(--animation-easing-standard); //used to be ease-in-out
+}
+a:hover {
+  color: var(--color-link-hover);
+  text-decoration: var(--text-decoration-link-hover);
+  opacity: var(--opacity-link-hover);
 }
 
 a > span {
@@ -16,14 +22,16 @@ a > span {
 .o-rte-text .u-has-accent {
   display: inline-block;
   padding-bottom: 2px;
-  border-bottom: 2px dotted rgb(var(--color-text-metadata));
+  border-bottom: 2px dotted rgb(var(--color-border-standard));
+  text-decoration: none;
+  -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
 
 .u-has-accent:hover,
 .o-rte-text .u-has-accent:hover {
   color: rgb(var(--color-background));
-  background-color: rgb(var(--color-primary-2));
+  background-color: rgb(var(--color-link-hover-background));
 }
 
 .u-has-accent--neutral,
@@ -47,13 +55,13 @@ a > span {
 .u-has-accent--white,
 .o-rte-text .u-has-accent--white {
   color: rgb(var(--color-background));
-  border-bottom-color: rgb(var(--color-link-1));
+  border-bottom-color: rgb(var(--color-link));
 }
 
 .u-has-accent--secondary,
 .o-rte-text .u-has-accent--secondary {
-  color: rgb(var(--color-link-2));
-  border-bottom-color: rgb(var(--color-link-2));
+  color: rgb(var(--color-link));
+  border-bottom-color: rgb(var(--color-link));
 }
 
 .u-has-accent--secondary:hover path,

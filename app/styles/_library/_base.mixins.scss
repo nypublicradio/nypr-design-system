@@ -1,7 +1,3 @@
-@function hex2rgb($hexColor) {
-  @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
-}
-
 @mixin typeface($type, $size) {
   font-family: var(--font-family-#{$type});
   letter-spacing: var(--letter-spacing-#{$type});
@@ -9,53 +5,4 @@
 
   line-height: var(--line-height-#{$size});
   font-size: var(--font-size-#{$size});
-}
-
-@mixin color-group-dark {
-  --color-background:           var(--color-dark-gray);
-  --color-background-muted:     rgb(var(--color-background));
-  --color-background-highlight: var(--color-dusk-blue);
-  --color-text:                 var(--color-white);
-  --color-text-muted:           var(--color-gray);
-  --color-text-error:           var(--color-brick-red);
-  --color-text-inverse:         var(--color-dark-gray);
-  --color-text-metadata:        var(--color-white);
-  --color-link-1:               var(--color-white);
-  --color-link-2:               var(--color-brick-red);
-  --color-link-body:            var(--color-white);
-  --color-link-hover:           var(--color-reddish-orange);
-  --color-link-hover-2:         var(--color-white);
-  --color-primary-1:            var(--color-banana-yellow);
-  --color-primary-2:            var(--color-reddish-orange);
-  --color-primary-3:            var(--color-purple);
-  --color-button-donate:        var(--color-reddish-orange);
-  --color-button-1:             var(--color-banana-yellow);
-  --color-button-2:             var(--color-button1);          //none assigned in airtable
-  --color-border-bold:          var(--color-border-bold);      //none 
-  --color-border-standard:      var(--color-border-standard);  //none 
-  --color-border-subtle:        var(--color-border-subtle);    //none
-}
-
-@mixin color-group-light {
-  --color-background:           var(--color-white);
-  --color-background-muted:     var(--color-dirty-salmon);
-  --color-background-highlight: var(--color-taxicab-yellow);
-  --color-text:                 var(--color-dark-gray);
-  --color-text-muted:           var(--color-gray);
-  --color-text-error:           var(--color-brick-red);
-  --color-text-inverse:         var(--color-white);
-  --color-text-metadata:        var(--color-dark-gray);
-  --color-link-1:                 var(--color-dark-gray);
-  --color-link-body:            var(--color-reddish-orange);
-  --color-link-hover:           var(--color-reddish-orange);
-  --color-link-hover-2:          var(--color-white);
-  --color-primary-1:             var(--color-banana-yellow);
-  --color-primary-2:             var(--color-reddish-orange);
-  --color-primary-3:             var(--color-purple);
-  --color-button-donate:        var(--color-reddish-orange);
-  --color-button-1:              var(--color-banana-yellow);
-  --color-button-2:              var(--color-button1); //none assigned in airtable
-  --color-border-bold:          var(--color-dark-gray);
-  --color-border-standard:      var(--color-dark-gray);
-  --color-border-subtle:        var(--color-gray);
 }

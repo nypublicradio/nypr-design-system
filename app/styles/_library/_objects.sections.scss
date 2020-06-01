@@ -24,8 +24,8 @@
 /* Two columns with ad unit*/
 .c-block-group .c-block-group__col1 {
   @include media(">medium") {
-    padding-right: var(--gutter);
-    width: calc((100% - 300px) - var(--gutter));
+    padding-right: var(--grid-gutter);
+    width: calc((100% - 300px) - var(--grid-gutter));
   }
 }
 .c-block-group .c-block-group__col2 {
@@ -141,14 +141,14 @@
  * Featured block groups
  */
 .c-featured-blocks {
-  border-top: var(--b-border-normal); //no rgb bc px and solid included
-  border-bottom: var(--b-border-normal);
+  border-top: var(--border-standard); //no rgb bc px and solid included
+  border-bottom: var(--border-standard);
   position: relative;
 
   @include media(">medium") {
     /* Adjusted vertical spacing because of the bottom content break through.*/
     margin-bottom: 120px;
-    border: var(--b-border-normal);
+    border: var(--border-standard);
   }
 }
 .c-featured-blocks__heading {
@@ -270,16 +270,16 @@
  * Tag listing header
  */
 .c-tag-listing__heading {
-  @include typeface(header, 10);
-  background-color: rgb(var(--color-background-highlight)); //dark
+  @include typeface(tags, 10);
+  background-color: rgb(var(--color-tag-highlight)); //dark
   display: inline-block;
   font-weight: normal;
   padding: var(--space-2) var(--space-3);
   margin: var(--space-2) 0;
-  color: rgb(var(--color-text));
+  color: rgb(var(--color-text-inverse));
 
   @include media(">medium") {
-    @include typeface(header, 14);
+    @include typeface(tags, 14);
   }
 }
 
@@ -288,7 +288,7 @@
  */
 .c-search-results__header {
   padding-top: var(--space-3);
-  border-bottom: var(--b-border-normal);
+  border-bottom: var(--border-standard);
 }
 .c-search-results__header--no-border {
   border-bottom: none;

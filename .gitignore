@@ -12,6 +12,7 @@
 
 # misc
 /.env*
+.idea/
 /.sass-cache
 /connect.lock
 /coverage/
@@ -29,7 +30,7 @@
 # importable sass variables
 /tests/dummy/app/utils/sass-vars
 
+# yalc
 /.yalc/
 yalc.lock
 
-.idea/
