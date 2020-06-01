@@ -77,6 +77,12 @@
 /**
  * Share toggle box
  */
+.c-toggle-box--share .c-toggle-box__dropdown {
+  margin-right: -4px;
+  @include media(">medium") {
+    margin-right: 23px;
+  }
+}
 .c-toggle-box--share .c-toggle-box__content {
   width: 115px;
 }
