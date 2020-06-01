@@ -13,7 +13,6 @@
 # misc
 /.env*
 .idea/
-.storybook/
 /.sass-cache
 /connect.lock
 /coverage/
