@@ -13,13 +13,12 @@
 }
 .c-toggle-box__label:before {
   content: "";
-  bottom: -22px;
-  right: 0;
+  top: 25px;
+  right: -4px;
   position: absolute;
   background-color: rgb(var(--color-footer-text));
   opacity: 0;
-  transform: translateY(20px) rotate(-45deg);
-  transition: none;
+  transform: rotate(-45deg);
   width: 0;
   height: 0;
 }
@@ -56,13 +55,8 @@
 /* Open*/
 .c-toggle-box.this-is-active .c-toggle-box__label:before {
   opacity: 1;
-  transform: translateY(0) rotate(-45deg);
-  transition: var(--animation-easing-outgoing) var(--animation-easing-outgoing);
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  top: 25px;
-  right: -4px;
+  transform: rotate(-45deg);
+  transition: var(--animation-duration-standard) var(--animation-easing-outgoing);
 }
 .c-toggle-box.this-is-active .c-toggle-box__content {
   opacity: 1;
