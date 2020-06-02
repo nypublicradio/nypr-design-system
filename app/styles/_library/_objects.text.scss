@@ -247,6 +247,7 @@
   margin: auto var(--space-3);
   text-align: center;
   background: none;
+  border: none;
 
   @include media('>medium') {
     margin: auto calc(var(--grid-col-width) + var(--grid-gutter)) var(--space-7);
