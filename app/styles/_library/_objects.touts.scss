@@ -21,7 +21,7 @@
   margin: 70px 0 0 auto;
   position: fixed;
   z-index: $z-index-donate-tout;
-  right: calc(-1 * (var(--grid-col-width) * 15) + (var(--grid-gutter) * 13));
+  right: calc(-1 * ((var(--grid-col-width) * 15) + (var(--grid-gutter) * 13)));
   bottom: 50px;
   transform: translateX(0);
   transition: var(--animation-easing-incoming); // used to be $hard-ease-in
@@ -30,12 +30,6 @@
 
   @include media("<=xlarge") {
     max-width: 270px;
-    right: calc(-1 * (var(--grid-col-width) * 6) + (var(--grid-gutter) * 4));
-
-    &.is-active {
-      transform: translateX(calc(-1 * (var(--grid-col-width) * 6) + (var(--grid-gutter) * 5)));
-    }
-
   }
 }
 
@@ -54,7 +48,7 @@
 }
 
 .c-donate-tout.is-active {
-  transform: translateX(calc(-1 * (var(--grid-col-width) * 15 + var(--grid-gutter * 13) + var(--space-3))));
+  transform: translateX(calc(-1 * (var(--grid-col-width) * 15 + var(--grid-gutter) * 13 + var(--space-3))));
 }
 
 .c-donate-tout__inner {
