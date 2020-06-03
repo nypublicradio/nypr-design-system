@@ -283,6 +283,12 @@ footer .c-newsletter-form__terms a {
   text-decoration: none;
 }
 
+// article page newsletter signup
+.c-newsletter-form__terms a {
+  color: rgb(var(--color-text));
+  border-bottom: 2px dotted rgb(var(--color-text));
+}
+
 // advertisement label
 .o-ad__label {
   text-transform: uppercase;
