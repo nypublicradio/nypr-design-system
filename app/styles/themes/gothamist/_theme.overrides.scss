@@ -7,6 +7,10 @@ blockquote {
   border: 1px solid rgb(var(--color-brown-grey));
 }
 
+.c-article__body blockquote {
+  border: none;
+}
+
 .c-main-header {
   @include color-group-dark;
 
