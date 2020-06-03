@@ -69,7 +69,7 @@
 }
 
 .c-block__dek p {
-  line-height: 1.45;
+  line-height: var(--line-height-4);
 
   @include media("<=medium") {
     @include typeface(body, 5)
