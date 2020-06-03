@@ -57,6 +57,12 @@ div.o-confirm-message p {
   padding: 10px;
 }
 
+/* Override reset CSS on Safari */
+.c-search__input {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /* Heading search menu*/
 .c-search--top {
   height: 50px;
