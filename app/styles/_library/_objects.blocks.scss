@@ -72,7 +72,8 @@
   line-height: var(--line-height-4);
 
   @include media("<=medium") {
-    @include typeface(body, 5)
+    @include typeface(body, 5);
+    line-height: var(--line-height-4);
   }
 }
 
