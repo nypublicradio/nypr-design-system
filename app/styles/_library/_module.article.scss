@@ -183,7 +183,10 @@
 // image caption arrow icon
 .image-none i {
   &::before {
-    margin-top: 4px;
+    margin-top: 0;
     margin-bottom: auto;
+    @include media(">small") {
+      margin-top: 3px;
+    }
   }
 }
