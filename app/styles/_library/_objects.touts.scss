@@ -306,10 +306,7 @@
 
 .c-newsletter-tout__heading {
   text-decoration: none;
-  @include typeface(header, 9);
-  @include media(">=medium") {
-    @include typeface(header, 11);
-  }
+  @include typeface(header, 11);
 }
 
 .c-newsletter-tout__text {
