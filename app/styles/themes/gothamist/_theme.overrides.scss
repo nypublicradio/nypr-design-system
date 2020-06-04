@@ -288,6 +288,10 @@ footer .c-newsletter-form__terms a {
 }
 
 // article page newsletter signup
+.c-newsletter-article__heading {
+  font-family: var(--font-family-pragati);
+}
+
 .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
