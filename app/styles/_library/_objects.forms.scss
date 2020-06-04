@@ -55,12 +55,22 @@ div.o-confirm-message p {
 .c-search__button {
   height: 100%;
   padding: 10px;
+  margin: 0px;
+  border-radius: 0px;
+}
+
+.c-search__button:focus {
+  outline: none;
 }
 
 /* Override reset CSS on Safari */
 .c-search__input {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.c-search__input:focus {
+  outline: none;
 }
 
 /* Heading search menu*/
