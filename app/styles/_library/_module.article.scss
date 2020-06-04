@@ -23,6 +23,7 @@
   text-underline-position: under;
   border-bottom: none;
   color: rgb(var(--color-link));
+
   &:hover {
     text-decoration: var(--text-decoration-link-hover);
     color: rgb(var(--color-link-hover));
@@ -32,6 +33,7 @@
 
 .c-article__header .u-has-accent--secondary {
   color: rgb(var(--color-link));
+
   &:hover {
     color: rgb(var(--color-link-hover));
   }
@@ -93,17 +95,18 @@
   @include media("<=medium") {
     background: none;
     margin-bottom: var(--space-4);
-    margin-left: -6px; /* Arbitrary number to adjust for left alignment - https://cl.ly/4286d2bc8efc*/
+    margin-left: -14px; /* Arbitrary number to adjust for left alignment - https://cl.ly/4286d2bc8efc*/
   }
 
   @include media(">medium") {
-    width: var(--grid-col-width);
+    width: 48.5px; /* Arbitrary number to adjust for alignment */
     text-align: center;
     position: absolute;
     top: 0;
-    left: calc(-1 * (var(--grid-col-width) * 2) + (var(--grid-gutter) * 2));
+    left: -61px; /* Arbitrary number to adjust for alignment */
   }
 }
+
 /**
  * Related content
  */
@@ -165,12 +168,25 @@
   top: 0;
   transition: var(--animation-easing-standard) var(--animation-duration-standard);
 }
+
 .gallery-is-active .c-article {
   overflow: hidden;
   height: 0;
   transition: height 0s linear;
   transition-delay: var(--animation-duration-fast);
 }
+
 .gallery-is-active .c-article__donate {
   display: none;
+}
+
+// image caption arrow icon
+.image-none i {
+  &::before {
+    margin-top: 0;
+    margin-bottom: auto;
+    @include media(">small") {
+      margin-top: 3px;
+    }
+  }
 }
