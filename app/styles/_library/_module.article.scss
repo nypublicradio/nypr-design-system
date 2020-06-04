@@ -95,15 +95,15 @@
   @include media("<=medium") {
     background: none;
     margin-bottom: var(--space-4);
-    margin-left: -6px; /* Arbitrary number to adjust for left alignment - https://cl.ly/4286d2bc8efc*/
+    margin-left: -14px; /* Arbitrary number to adjust for left alignment - https://cl.ly/4286d2bc8efc*/
   }
 
   @include media(">medium") {
-    width: var(--grid-col-width);
+    width: 48.5px; /* Arbitrary number to adjust for alignment */
     text-align: center;
     position: absolute;
     top: 0;
-    left: calc(-1 * (var(--grid-col-width) * 2) + (var(--grid-gutter) * 2));
+    left: -61px; /* Arbitrary number to adjust for alignment */
   }
 }
 
