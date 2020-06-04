@@ -271,6 +271,11 @@ blockquote {
 }
 
 // homepage newsletter signup
+.c-newsletter-tout__dek {
+  font-family: var(--font-family-barlow);
+  font-size: var(--font-size-6);
+}
+
 .c-newsletter-form__terms a {
   color: rgb(var(--color-white));
   border-bottom: 2px dotted rgb(var(--color-white));
