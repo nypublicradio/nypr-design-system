@@ -1,5 +1,33 @@
 # `nypr-design-system` changelog
 
+## `3.0.0-beta3`
+
+- [BUGFIX] #73 don't cut off flyout banner
+https://jira.wnyc.org/browse/DS-743
+https://jira.wnyc.org/browse/DS-750
+https://jira.wnyc.org/browse/DS-774
+
+## `3.0.0-beta2`
+
+- [BUGFIX] #71 footer fixes
+https://jira.wnyc.org/browse/DS-744
+https://jira.wnyc.org/browse/DS-746
+https://jira.wnyc.org/browse/DS-747
+https://jira.wnyc.org/browse/DS-748
+https://jira.wnyc.org/browse/DS-754
+https://jira.wnyc.org/browse/DS-767
+
+- [BUGFIX] #74 newsletter form link styles fixed
+https://jira.wnyc.org/browse/DS-768
+
+- [BUGFIX] #70 #72 article page blockqoute border fixed
+https://jira.wnyc.org/browse/DS-762
+https://jira.wnyc.org/browse/DS-763
+
+- [BUGFIX] #69 don't cut off flyout banner
+https://jira.wnyc.org/browse/DS-758
+https://jira.wnyc.org/browse/DS-761
+
 ## `3.0.0-beta1`
 
 - [DOCS] Documentation Updates

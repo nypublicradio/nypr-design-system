@@ -7,6 +7,10 @@ blockquote {
   border: 1px solid rgb(var(--color-brown-grey));
 }
 
+.c-article__body blockquote {
+  border: none;
+}
+
 .c-main-header {
   @include color-group-dark;
 
@@ -283,6 +287,12 @@ footer .c-newsletter-form__terms a {
   text-decoration: none;
 }
 
+// article page newsletter signup
+.c-newsletter-form__terms a {
+  color: rgb(var(--color-text));
+  border-bottom: 2px dotted rgb(var(--color-text));
+}
+
 // advertisement label
 .o-ad__label {
   text-transform: uppercase;
@@ -317,4 +327,10 @@ footer .c-newsletter-form__terms a {
 // staff page
 .o-rte-text > h3 {
   font-weight: normal;
+}
+
+// article page image caption arrow icon
+.image-none i {
+  font-family: var(--font-family-barlow);
+  line-height: var(--line-height-2);
 }

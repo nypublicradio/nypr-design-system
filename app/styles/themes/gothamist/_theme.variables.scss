@@ -115,7 +115,13 @@
   --animation-easing-incoming:          cubic-bezier(0.0, 0.0, 0.2, 1);
   --animation-easing-standard:          cubic-bezier(0.4, 0.0, 0.2, 1);
 
+  --animation-easing-outgoing-search:   transform .15s ease-out;
+
   --animation-duration-slow:            .6s;
   --animation-duration-standard:        .25s;
   --animation-duration-fast:            .1s;
+
+  --animation-delay-none:               0s;
+  --animation-delay-short:              .1s;
+  --animation-delay-long:               .3s;
 }

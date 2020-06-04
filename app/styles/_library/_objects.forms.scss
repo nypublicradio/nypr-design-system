@@ -55,6 +55,22 @@ div.o-confirm-message p {
 .c-search__button {
   height: 100%;
   padding: 10px;
+  margin: 0px;
+  border-radius: 0px;
+}
+
+.c-search__button:focus {
+  outline: none;
+}
+
+/* Override reset CSS on Safari */
+.c-search__input {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.c-search__input:focus {
+  outline: none;
 }
 
 /* Heading search menu*/
@@ -66,7 +82,7 @@ div.o-confirm-message p {
   top: 50%;
   z-index: $z-index-vanish;
   overflow: hidden;
-  transition: var(--animation-easing-outgoing);
+  transition: z-index .1s ease-out .5s;
   transform: translateY(-50%);
 
   @include media("<=small") {
@@ -86,7 +102,7 @@ div.o-confirm-message p {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
+  transition: var(--animation-easing-outgoing-search) var(--animation-delay-none);
   z-index: $z-index-search-close;
 }
 
@@ -104,7 +120,7 @@ div.o-confirm-message p {
   font-size: var(--font-size-4);
   padding-left: 45px;
   transform: translateX(calc(100% + 50px));
-  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
+  transition: var(--animation-easing-outgoing-search) var(--animation-delay-short);
 }
 
 .c-search--top .c-search__button {
@@ -164,12 +180,12 @@ div.o-confirm-message p {
 
 .c-search--top.is-open .c-search__close {
   transform: translateY(-50%);
-  transition: var(--animation-easing-outgoing);
+  transition: var(--animation-easing-outgoing-search) var(--animation-delay-long);
 }
 
 .c-search--top.is-open .c-search__input {
   transform: translateX(0);
-  transition: var(--animation-easing-outgoing);
+  transition: var(--animation-easing-outgoing-search) var(--animation-delay-short);
 }
 
 .c-search--top.is-open .c-search__button {
@@ -287,6 +303,7 @@ div.o-confirm-message p {
 
 .c-newsletter-form__input {
   width: calc(100% - 60px);
+  margin: 0;
 }
 
 .c-newsletter-form__button {
