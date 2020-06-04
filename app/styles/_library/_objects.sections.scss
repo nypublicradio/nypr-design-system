@@ -338,8 +338,9 @@
 .c-search-results__result-number {
   @include typeface(small, 2);
   @include media(">=medium") {
-    @include typeface(small, 4);
+    @include typeface(small, 5);
   }
+  text-transform: uppercase;
 }
 
   .c-listing__sections-title {
