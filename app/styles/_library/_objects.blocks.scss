@@ -69,10 +69,11 @@
 }
 
 .c-block__dek p {
-  line-height: 1.45;
+  line-height: var(--line-height-4);
 
   @include media("<=medium") {
-    @include typeface(body, 5)
+    @include typeface(body, 5);
+    line-height: var(--line-height-4);
   }
 }
 
@@ -191,7 +192,7 @@
   display: inline-flex;
   align-items: center;
   margin-left: var(--space-2);
-  @include typeface(small, 2);
+  @include typeface(small, 1);
   font-weight: normal;
   text-decoration: none;
 
