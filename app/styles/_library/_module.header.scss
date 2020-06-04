@@ -115,27 +115,22 @@
 }
 
 .c-main-header__title {
-  @include typeface(header, 6);
-  @include media(">=medium") {
-    @include typeface(header, 8);
-  }
-  color: rgb(var(--color-header-text));
-  font-weight: normal;
-  line-height: 1.2;
-  letter-spacing: 1px;
+  display: none;
   padding: 0 var(--space-5) 0 var(--space-3);
+  padding-right: 50px;
+  padding-left: var(--space-4);
+  color: rgb(var(--color-text));
 
-  @include media(">medium") {
-    padding-left: var(--space-4);
-    padding-right: 50px;
+  @include media(">=large") {
+    display: block;
+    @include typeface(header, 8);
+    line-height: 1.2;
+    letter-spacing: 1px;
+    font-weight: normal;
   }
 
   @include media(">xlarge") {
     padding-right: 100px;
-  }
-
-  @include media("<=large") {
-    display: none;
   }
 }
 
