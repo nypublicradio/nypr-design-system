@@ -1,5 +1,19 @@
 # `nypr-design-system` changelog
 
+## `3.0.0-beta5`
+
+- #86 Max width allows all nav items to display in one horizontal line 
+
+https://jira.wnyc.org/browse/DS-792
+
+- #84 Re-add focus outline to search input and button 
+
+https://jira.wnyc.org/browse/DS-782
+
+- #83 Animate Donate Flyout 
+
+https://jira.wnyc.org/browse/DS-527
+
 ## `3.0.0-beta4`
 
 - #76 make header article title not bold
