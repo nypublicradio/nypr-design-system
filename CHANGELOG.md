@@ -1,8 +1,38 @@
 # `nypr-design-system` changelog
 
+## `3.0.0-beta4`
+
+- #76 make header article title not bold
+
+https://jira.wnyc.org/browse/DS-741
+
+- #77 article newsletter signup styles
+
+https://jira.wnyc.org/browse/DS-753
+
+- #78 tags vqa
+
+https://jira.wnyc.org/browse/DS-765
+https://jira.wnyc.org/browse/DS-766
+
+- #79 search results header fix
+
+https://jira.wnyc.org/browse/DS-771
+
+- #80 staff page vqa
+
+https://jira.wnyc.org/browse/DS-777
+
+- #81 article page vqa
+
+https://jira.wnyc.org/browse/DS-786
+https://jira.wnyc.org/browse/DS-789
+https://jira.wnyc.org/browse/DS-756
+
 ## `3.0.0-beta3`
 
 - [BUGFIX] #73 don't cut off flyout banner
+
 https://jira.wnyc.org/browse/DS-743
 https://jira.wnyc.org/browse/DS-750
 https://jira.wnyc.org/browse/DS-774
@@ -10,6 +40,7 @@ https://jira.wnyc.org/browse/DS-774
 ## `3.0.0-beta2`
 
 - [BUGFIX] #71 footer fixes
+
 https://jira.wnyc.org/browse/DS-744
 https://jira.wnyc.org/browse/DS-746
 https://jira.wnyc.org/browse/DS-747
@@ -18,13 +49,16 @@ https://jira.wnyc.org/browse/DS-754
 https://jira.wnyc.org/browse/DS-767
 
 - [BUGFIX] #74 newsletter form link styles fixed
+
 https://jira.wnyc.org/browse/DS-768
 
 - [BUGFIX] #70 #72 article page blockqoute border fixed
+
 https://jira.wnyc.org/browse/DS-762
 https://jira.wnyc.org/browse/DS-763
 
 - [BUGFIX] #69 don't cut off flyout banner
+
 https://jira.wnyc.org/browse/DS-758
 https://jira.wnyc.org/browse/DS-761
 
