@@ -24,7 +24,7 @@
   right: calc(-1 * ((var(--grid-col-width) * 15) + (var(--grid-gutter) * 13)));
   bottom: 50px;
   transform: translateX(0);
-  transition: var(--animation-easing-incoming); // used to be $hard-ease-in
+  transition: var(--animation-easing-incoming-donate); // used to be $hard-ease-in
   box-shadow: 0 0 10px rgba(var(--color-black), 0.2); //no black
   border: var(--border-standard);
 
