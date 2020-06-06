@@ -1,5 +1,15 @@
 # `nypr-design-system` changelog
 
+## `3.0.0-beta6`
+
+- #87 updated footer logo
+
+https://jira.wnyc.org/browse/DS-784
+
+- #88 homepage newsletter style updates
+
+https://jira.wnyc.org/browse/DS-783
+
 ## `3.0.0-beta5`
 
 - #86 Max width allows all nav items to display in one horizontal line 
