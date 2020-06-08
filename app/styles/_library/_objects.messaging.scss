@@ -39,11 +39,10 @@
 }
 
 .o-box-banner__title {
-  font-weight: bold;
-  font-size: var(--font-size-8);
+  @include typeface(header, 8);
 
   @include media(">large") {
-    font-size: var(--font-size-10);
+    @include typeface(header, 10);
     text-align: right;
   }
 }
