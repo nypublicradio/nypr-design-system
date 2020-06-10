@@ -5,7 +5,7 @@
   "rules": {
     "csstools/value-no-unknown-custom-properties": [true, {
       "importFrom": [
-        "app/styles/_library/token-whitelist.css"
+        "app/styles/_library/token-allowlist.css"
       ]
     }]
   }
