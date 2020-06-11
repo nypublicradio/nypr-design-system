@@ -1,5 +1,19 @@
 # `nypr-design-system` changelog
 
+## `3.0.0`
+
+- #89 Update font for product marketing banner
+
+https://jira.wnyc.org/browse/DS-799
+
+- #90 Adjust footer column widths
+
+https://jira.wnyc.org/browse/DS-799
+
+- #91 Adjust breaking news styles
+
+https://jira.wnyc.org/browse/DS-789
+
 ## `3.0.0-beta6`
 
 - #87 updated footer logo
