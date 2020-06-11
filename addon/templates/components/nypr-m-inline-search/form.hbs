@@ -1,6 +1,6 @@
 <label for="search" class="is-vishidden">Search this site</label>
 {{#if @close}}
-  <NyprAButton @blank={{true}} @onclick={{action doClose}} class="c-search__close o-icon">
+  <NyprAButton @blank={{true}} @onclick={{action doClose}} class="c-search__close o-icon" name="collapseSearchHeader">
     <NyprASvg @icon='close'/>
   </NyprAButton>
 {{/if}}
