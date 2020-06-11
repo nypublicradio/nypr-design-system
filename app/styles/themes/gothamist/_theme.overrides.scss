@@ -272,7 +272,7 @@ blockquote {
 
 // homepage newsletter signup
 .c-newsletter-tout__heading strong {
-  background-image: linear-gradient(rgba(36,76,132,0.2), rgba(36,76,132,0.2));
+  background-image: linear-gradient(rgba(36, 76, 132, 0.2), rgba(36, 76, 132, 0.2));
   background-position: center bottom .2em;
   background-size: 100% .55em;
   background-repeat: no-repeat;
@@ -352,4 +352,18 @@ footer .c-newsletter-form__terms a {
 .image-none i {
   font-family: var(--font-family-barlow);
   line-height: var(--line-height-2);
+}
+
+// breaking news
+.c-block--urgent .c-block__eyebrow > .o-kicker {
+  color: rgb(var(--color-white));
+  background: rgb(var(--color-dark-gray));
+}
+
+.c-block--urgent .c-block__title a {
+  color: rgb(var(--color-brick-red));
+}
+
+.c-block--urgent .c-block-meta__timestamp {
+  color: rgb(var(--color-brick-red));
 }
