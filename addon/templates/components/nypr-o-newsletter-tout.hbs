@@ -1,5 +1,5 @@
 {{!-- BEGIN-SNIPPET nypr-o-newsletter-tout.hbs --}}
-<div class="c-newsletter-tout__inner">
+<div class="c-newsletter-tout__inner" name="newsletterSection">
   {{#if @ariaTitle}}<h2 class="is-vishidden">{{@ariaTitle}}</h2>{{/if}}
   <div class="c-newsletter-tout__media">
     <NyprAPicture
@@ -11,7 +11,7 @@
   <div class="c-newsletter-tout__content u-spacing">
 
     <div class="c-newsletter-tout__text u-spacing">
-      <h3 class="c-newsletter-tout__heading" data-test-newsletter-tout-heading>
+      <h3 class="c-newsletter-tout__heading" name="newsletterHeader" data-test-newsletter-tout-heading>
         <strong>
           {{yield (hash heading=(component 'blank-template'))}}
         </strong>
@@ -30,9 +30,9 @@
 
       <form.label/>
 
-      <form.input/>
+      <form.input name="emailField"/>
 
-      <form.submit data-label="Home Page">
+      <form.submit data-label="Home Page" name="submitButton">
         <span class="c-newsletter-form__submit-icon o-icon o-icon--newsletter-tout">
           <NyprASvg @icon='arrow-dashed'/>
         </span>
