@@ -5,14 +5,14 @@ import { Meta } from '@storybook/addon-docs/blocks';
 # Text Input
 
   
-A text input allows you to gather information from a user in the form of alphanumeric text.
+A text input allows you to gather information from a user in the form of alphanumeric text. This is often used in tandem with other atoms, like a checkbox or call to action button, to make up larger form organisms like what is seen in a newsletter signup module or the Audio Crowdsourcing tool. 
 
   
   
 
 ## What’s Inside
 
-Radial provides a bunch of functionality for text inputs that can be switched on or off to best fit your needs.
+Radial provides flexibile functionality for text inputs that can be switched on or off to best fit your needs.
 <br/><br/>
   
 
@@ -20,15 +20,15 @@ Radial provides a bunch of functionality for text inputs that can be switched on
  
   
 
-1- **Required Indicator** - Turn on this option when a field is required to be filled before submission.
+1- **Required Indicator** - Turn on the required indicator when a field is required to be filled before submission. This is optional.
 
-2- **Title** - A text title should be used to help communicate the intended input of the field.
+2- **Title** - A text title should be used to help communicate the intended input of the field when needed. This is optional.
         
-3- **Icon Button** - An alternative to an independent “submit” button, icon buttons are positioned inline with the field and are used to submit field input.
+3- **Icon Button** - An alternative to an independent “submit” button, icon buttons are positioned inline with the field and are used to submit field input. This is optional.
     
-4- **Placeholder Copy** - Provides additional context to the nature of the indented input, should never be used in place of a title. They are often used to provide an example of the type of input needed. (i.e. [me@email.com](mailto:my@email.com) for an email field)
+4- **Placeholder Copy** - Placeholder copy provides additional context to the nature of the indented input. This should never be used in place of a title. Placeholder copy is most often used to provide an example of the type of input needed. (i.e. [me@email.com](mailto:my@email.com) for an email field). This is required.
 
-5- **Microcopy** - This assistive text appears below the input label and helps the user to provide the right information. This is also used for error messaging when their is a problem with user input.
+5- **Microcopy** - This assistive text appears below the input label and helps the user to understand the necessary information to provide. This is also used for error messaging when there is a problem with the user's input.
     
 
 
@@ -38,7 +38,7 @@ Radial provides a bunch of functionality for text inputs that can be switched on
 ## States
 
 #### **Default**
-In this state, the user has not yet interacted with the input. The form is prepped and ready to accept input.
+In the text input's default state, the user has not yet interacted with the input. The form is prepped and ready to accept input.
  <img alt="example of default text input" src="./images/Molecules-TextInput-DefaultState.png" width="250" />
 <br/><br/>
 
@@ -54,12 +54,12 @@ If a form element is required, an asterisk should be injected before the input t
 
 
 #### **Error**
-If an error occurred when submitting the form, the form element should provide feedback to the user by displaying a changed container stroke and error text microcopy, usings the brand’s accent color for error
+If an error occurred when the form was submitted, the form element should provide feedback to the user by displaying a changed container stroke and error text microcopy, usings the brand’s accent color for error.
  <img alt="example of error text input" src="./images/Molecules-TextInput-ErrorState.png" width="250" />
   <br/><br/>
 
 #### **Disabled**
-Use when input is not yet possible. Use a brand utility colors for text and stroke.
+Use the disabled state when input is not yet possible. Use a brand utility colors for text and stroke.
  <img alt="example of diabled text input" src="./images/Molecules-TextInput-DisabledState.png" width="250" />
 
   <br/><br/>
@@ -82,3 +82,7 @@ Add `aria-required` for required inputs.
 
   
 If the text input is not enclosed within a label tag, then labels must have the `for` attribute matching the ID of the text input, like `<input id="unique-id-of-input" />`. This practice ensures that screen readers inform users correctly about what information to enter where. Reference to this best practice can be found [here](https://www.w3.org/TR/WCAG20-TECHS/H44.html).
+
+## TBD Future Notes Section
+
+Area to include notes about future iterations to this atom, quantitative or qualitative research related to the atom, or more. Fancy section name to come.
