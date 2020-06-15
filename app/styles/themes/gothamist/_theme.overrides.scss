@@ -448,3 +448,22 @@ footer .c-newsletter-form__terms a {
 .c-read-more-nav__label {
   text-transform: uppercase;
 }
+
+/**
+ * Newsletter signup tout
+ */
+.c-newsletter-tout {
+  /* Adjusted vertical spacing because of the 10px shadow border.*/
+  margin-bottom: calc(var(--space-7) + 10);
+}
+
+.c-newsletter-tout:before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 11px;
+  border: var(--border-standard);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
