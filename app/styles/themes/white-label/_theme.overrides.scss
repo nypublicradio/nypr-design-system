@@ -10,10 +10,17 @@
   }
 }
 
-
 // Header search
 .c-search--top .c-search__close path {
   fill: rgb(var(--color-ember-red));
+}
+
+.c-search--top.is-open .c-search__button .search-icon {
+  fill: rgb(var(--color-white));
+}
+
+.c-search--top .c-search__button:hover {
+  opacity: var(--opacity-hover);
 }
 
 // Header with full stacked logo
