@@ -434,3 +434,17 @@ footer .c-newsletter-form__terms a {
   z-index: -1;
   background-color: rgb(var(--color-white));
 }
+
+// Read more nav
+.c-read-more-nav {
+  border-top: 2px dashed rgb(var(--color-border-subtle));
+  border-bottom: 2px dashed rgb(var(--color-border-subtle));
+
+  @include media(">medium") {
+    border: 2px dashed rgb(var(--color-border-subtle));
+  }
+}
+
+.c-read-more-nav__label {
+  text-transform: uppercase;
+}

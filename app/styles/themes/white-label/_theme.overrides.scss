@@ -215,3 +215,21 @@
 .o-to-top:hover {
   color: rgb(var(--color-link));
 }
+
+// article page
+
+.u-has-accent--secondary path {
+  transition: var(--animation-duration-fast);
+}
+.u-has-accent--secondary:hover path,
+.o-rte-text .u-has-accent--secondary:hover path {
+  fill: rgb(var(--color-link-hover));
+}
+
+.c-lead-gallery__thumbs-thumb-text:hover {
+  background-color: rgb(var(--color-link-hover));
+}
+
+.o-caption .o-icon--dashed-arrow {
+  fill: rgb(var(--color-sky-blue));
+}
