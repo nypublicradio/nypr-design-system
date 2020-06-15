@@ -91,6 +91,10 @@ blockquote {
   .c-newsletter-form {
     @include color-group-light;
   }
+
+  .c-main-footer__bottom {
+    border-top: 1px dashed rgba(var(--color-footer-text), 0.5);
+  }
 }
 
 /* sponsored tags */
@@ -366,4 +370,28 @@ footer .c-newsletter-form__terms a {
 
 .c-block--urgent .c-block-meta__timestamp {
   color: rgb(var(--color-brick-red));
+}
+
+// 3D heading border
+.o-3d-heading:before,
+.o-3d-heading:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: var(--border-standard);
+  background-color: transparent;
+}
+
+.o-3d-heading:before {
+  z-index: -2;
+  left: -10px;
+  top: 10px;
+}
+
+.o-3d-heading:after {
+  z-index: -1;
+  background-color: rgb(var(--color-white));
 }
