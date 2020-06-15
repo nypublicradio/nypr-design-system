@@ -10,6 +10,12 @@
   }
 }
 
+
+// Header search
+.c-search--top .c-search__close path {
+  fill: rgb(var(--color-ember-red));
+}
+
 // Header with full stacked logo
 .c-main-header--emphasis {
   .c-main-header__ad-unit {
