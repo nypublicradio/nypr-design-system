@@ -99,10 +99,6 @@
   background-color: rgb(var(--color-header-button-background));
   color: rgb(var(--color-header-button-text));
 
-  &::before {
-    border: 3px solid rgb(var(--color-header-button-background));
-  }
-
   &:hover {
     color: rgb(var(--color-header-button-hover-text));
   }

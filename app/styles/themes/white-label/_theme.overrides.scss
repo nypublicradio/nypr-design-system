@@ -10,6 +10,11 @@
   }
 }
 
+// Header donate
+.c-main-header__donate.o-button {
+  font-size: var(--font-size-5);
+}
+
 // Header search
 .c-search--top .c-search__close path {
   fill: rgb(var(--color-ember-red));
