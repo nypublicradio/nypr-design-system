@@ -20,10 +20,6 @@
   fill: rgb(var(--color-ember-red));
 }
 
-.c-search--top.is-open .c-search__button .search-icon {
-  fill: rgb(var(--color-white));
-}
-
 .c-search--top .c-search__button:hover {
   opacity: var(--opacity-hover);
 }
@@ -147,4 +143,26 @@
 
 .c-nypr-nav__link {
   text-decoration: none;
+}
+
+// Side menu
+.c-search--side .c-search__input {
+  border: 1px solid rgb(var(--color-concrete));
+}
+
+.c-side-menu .c-search__button:hover {
+  background-color: rgb(var(--color-button-primary));
+  opacity: var(--opacity-hover);
+}
+
+.c-share-tools__link:hover path {
+  fill: rgb(var(--color-navigation-link-hover));
+}
+
+.c-primary-nav--side .c-primary-nav__link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
