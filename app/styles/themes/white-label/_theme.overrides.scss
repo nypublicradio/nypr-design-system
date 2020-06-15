@@ -128,6 +128,18 @@
   }
 }
 
+// Headings
+.c-basic__heading {
+  @include typeface(header, 13);
+  @include media(">=medium") {
+    @include typeface(header, 15);
+  }
+}
+
+.o-rte-text > h1, .o-rte-text > h2, .o-rte-text > h3, .o-rte-text > h4, .o-rte-text > h5, .o-rte-text > h6 {
+  padding-top: var(--space-4);
+}
+
 // Standard repeating dashed border
 .o-border-accent {
   background-image: repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%);

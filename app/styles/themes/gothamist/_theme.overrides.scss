@@ -390,7 +390,28 @@ footer .c-newsletter-form__terms a {
   text-transform: uppercase;
 }
 
-// 3D heading border
+.c-basic__header:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  @include border-accent;
+}
+
+/**
+ * 3D box effect for headings
+ */
+.o-3d-heading {
+  padding: .1em .25em;
+  display: inline-block;
+  position: relative;
+  z-index: 5;
+  background-color: rgb(var(--color-background));
+  left: 10px;
+  margin-right: var(--space-3);
+}
+
 .o-3d-heading:before,
 .o-3d-heading:after {
   content: "";

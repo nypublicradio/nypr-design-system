@@ -368,14 +368,6 @@
 /**
  * Basic "flat" pages
  */
-.c-basic__header:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  height: 1px;
-  @include border-accent;
-}
 .c-basic__header {
   padding: var(--space-3) 0;
   position: relative;
