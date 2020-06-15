@@ -207,3 +207,11 @@
     text-decoration: none;
   }
 }
+
+// Back to top icon & text
+.o-to-top .o-icon--up-arrow {
+  fill: rgb(var(--color-link));
+}
+.o-to-top:hover {
+  color: rgb(var(--color-link));
+}
