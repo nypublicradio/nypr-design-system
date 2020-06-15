@@ -142,6 +142,10 @@
   font-size: var(--font-size-6);
   font-weight: bold;
   letter-spacing: 1px;
+  &:hover {
+    color: rgb(var(--color-navigation-link-hover));
+    text-decoration: rgb(var(--text-decoration-navigation-link-hover));
+  }
 }
 
 /**

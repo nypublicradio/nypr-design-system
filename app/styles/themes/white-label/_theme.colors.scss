@@ -49,7 +49,7 @@
   --opacity-link-hover:         1;
 
   /* Navigation Links */
-  --color-navigation-link:                 var(--color-gray-dark);
+  --color-navigation-link:                 var(--color-black);
   --text-decoration-navigation-link:       underline;
   --color-navigation-link-hover:           var(--color-sky-blue);
   --text-decoration-navigation-link-hover: underline;
@@ -57,13 +57,13 @@
 
   /* Header */
   --color-header-text: var(--color-white);
-  --color-header-background: var(--color-dark-gray);
-  --color-header-label-text: var(--color-light-gray);
-  --color-header-button-background: var(--color-reddish-orange);
+  --color-header-background: var(--color-cool-white);
+  --color-header-label-text: var(--color-black);
+  --color-header-button-background: var(--color-cool-blue);
   --color-header-button-text: var(--color-white);
   --color-header-button-hover-text: var(--color-white);
-  --color-header-icon: var(--color-white);
-  --color-header-icon-hover: var(--color-reddish-orange);
+  --color-header-icon: var(--color-black);
+  --color-header-icon-hover: var(--color-cool-blue);
 
   /* Tags */
   --color-tag-text:             var(--color-white);
@@ -85,14 +85,15 @@
   --opacity-button-outline:       var(--opacity-hover);
 
   /* Borders */
-  --color-border-subtle: var(--color-black);
-  --color-border-standard: var(--color-black);
-  --color-border-bold:   var(--color-black);
+  --color-border-subtle: var(--color-background-highlight);
+  --color-border-standard: var(--color-background-highlight);
+  --color-border-bold:   var(--color-background-highlight);
 
   /* Forms */
   --color-checkbox: var(--color-dark-gray);
   --color-placeholder-text: var(--color-brown-grey);
   --color-form-button: var(--color-reddish-orange);
+  --color-newsletter-form-button: var(--color-sky-blue);
 
   /* Lists */
   --color-bullet: var(--color-black);
@@ -104,6 +105,10 @@
   --color-gallery-link: var(--color-white);
   --color-gallery-link-hover: var(--color-reddish-orange);
   --color-gallery-ad-label: var(--color-dirty-salmon);
+
+  /* Footer */
+  --color-footer-text: var(--color-black);
+  --color-footer-link: var(--color-ceramic-blue);
 }
 
 @mixin color-group-dark {
@@ -163,14 +168,15 @@
   --color-button-outline-pressed: var(--color-white);
   --opacity-button-outline:       var(--opacity-hover);
 
-  --color-border-bold:          var(--color-border-bold);      //none
-  --color-border-standard:      var(--color-border-standard);  //none
-  --color-border-subtle:        var(--color-border-subtle);    //none
+  --color-border-bold:          var(--color-background-highlight);      //none
+  --color-border-standard:      var(--color-background-highlight);  //none
+  --color-border-subtle:        var(--color-background-highlight);    //none
 
   /* Forms */
   --color-checkbox: var(--color-dark-gray);
   --color-placeholder-text: var(--color-brown-grey);
   --color-form-button: var(--color-reddish-orange);
+  --color-newsletter-form-button: var(--color-sky-blue);
 
   /* Lists */
   --color-bullet: var(--color-black);
@@ -182,6 +188,10 @@
   --color-gallery-link: var(--color-white);
   --color-gallery-link-hover: var(--color-reddish-orange);
   --color-gallery-ad-label: var(--color-dirty-salmon);
+
+  /* Footer */
+  --color-footer-text: var(--color-black);
+  --color-footer-link: var(--color-ceramic-blue);
 }
 
 /*  Base */

@@ -25,6 +25,12 @@ blockquote {
   }
 }
 
+.c-main-header__donate.o-button {
+  &::before {
+    border: 3px solid rgb(var(--color-header-button-background));
+  }
+}
+
 // Header with full stacked logo
 .c-main-header--emphasis {
   .c-main-header__ad-unit {
@@ -90,6 +96,10 @@ blockquote {
 
   .c-newsletter-form {
     @include color-group-light;
+  }
+
+  .c-main-footer__bottom {
+    border-top: 1px dashed rgba(var(--color-footer-text), 0.5);
   }
 }
 
@@ -334,6 +344,7 @@ footer .c-newsletter-form__terms a {
 
 // gallery share text
 .o-text-with-icon {
+  text-transform: uppercase;
   font-family: var(--font-family-b612);
 }
 
@@ -377,4 +388,28 @@ footer .c-newsletter-form__terms a {
 .c-section__heading {
   @include typeface(small, 10);
   text-transform: uppercase;
+}
+
+// 3D heading border
+.o-3d-heading:before,
+.o-3d-heading:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: var(--border-standard);
+  background-color: transparent;
+}
+
+.o-3d-heading:before {
+  z-index: -2;
+  left: -10px;
+  top: 10px;
+}
+
+.o-3d-heading:after {
+  z-index: -1;
+  background-color: rgb(var(--color-white));
 }

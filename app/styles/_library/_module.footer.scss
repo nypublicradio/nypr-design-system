@@ -151,7 +151,6 @@
 }
 
 .c-main-footer__bottom {
-  border-top: 1px dashed rgba(var(--color-footer-text), 0.5);
   padding: var(--space-4) var(--space-3);
   text-align: center;
   margin-left: calc(var(--space-3) * -1);
@@ -208,5 +207,6 @@
 
 // view all brands
 .o-text-with-icon {
+  text-transform: capitalize;
   font-size: var(--font-size-2);
 }

@@ -10,6 +10,20 @@
   }
 }
 
+// Header donate
+.c-main-header__donate.o-button {
+  font-size: var(--font-size-5);
+}
+
+// Header search
+.c-search--top .c-search__close path {
+  fill: rgb(var(--color-ember-red));
+}
+
+.c-search--top .c-search__button:hover {
+  opacity: var(--opacity-hover);
+}
+
 // Header with full stacked logo
 .c-main-header--emphasis {
   .c-main-header__ad-unit {
@@ -56,19 +70,61 @@
   .gothamist-letters {
     fill: rgb(var(--color-black));
   }
+
   .gothamist-buildings {
-    fill: rgb(var(--color-white));
+    fill: rgb(var(--color-black));
   }
 }
 
-
-
+// Footer
 .c-main-footer {
-  .gothamist-letters {
-    fill: rgb(var(--color-white));
+  background-image: rgb(var(--color-cool-white));
+  background: rgb(var(--color-cool-white));
+  color: rgb(var(--color-black));
+
+  a,
+  a:visited,
+  a:active {
+    color: rgb(var(--color-ceramic-blue));
+    text-decoration: none;
+
+    &:hover {
+      color: rgb(var(--color-black));
+      text-decoration: none;
+    }
   }
+
+  .gothamist-letters {
+    fill: rgb(var(--color-black));
+  }
+
   .gothamist-buildings {
-    fill: rgb(var(--color-dark-gray));
+    fill: rgb(var(--color-black));
+  }
+
+  .c-newsletter-form__inner {
+    border: 3px solid rgb(var(--color-black));
+  }
+
+  .c-newsletter-form__graphic path {
+    fill: rgb(var(--color-sky-blue));
+  }
+
+  .c-main-footer__signup svg {
+    fill: rgb(var(--color-black));
+  }
+
+  .c-newsletter-form__terms p {
+    color: rgb(var(--color-black));
+  }
+
+  .c-newsletter-form__terms input[type="checkbox"] {
+    background-color: transparent;
+    border: 2px solid rgb(var(--color-black));
+  }
+
+  .c-newsletter-form__terms input[type="checkbox"]:checked {
+    background-color: rgb(var(--color-black));
   }
 }
 
@@ -78,4 +134,35 @@
   background-position: left top, left bottom, left top, right top;
   background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
   background-size: 18px 2px, 18px 2px, 2px 18px, 2px 18px;
+}
+
+// View All Brands Toggle Box
+.c-toggle-box__label::before {
+  background-color: rgb(var(--color-white));
+}
+
+.c-nypr-nav__link {
+  text-decoration: none;
+}
+
+// Side menu
+.c-search--side .c-search__input {
+  border: 1px solid rgb(var(--color-concrete));
+}
+
+.c-side-menu .c-search__button:hover {
+  background-color: rgb(var(--color-button-primary));
+  opacity: var(--opacity-hover);
+}
+
+.c-share-tools__link:hover path {
+  fill: rgb(var(--color-navigation-link-hover));
+}
+
+.c-primary-nav--side .c-primary-nav__link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
