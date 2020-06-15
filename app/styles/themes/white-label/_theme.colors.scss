@@ -49,7 +49,7 @@
   --opacity-link-hover:         1;
 
   /* Navigation Links */
-  --color-navigation-link:                 var(--color-gray-dark);
+  --color-navigation-link:                 var(--color-black);
   --text-decoration-navigation-link:       underline;
   --color-navigation-link-hover:           var(--color-sky-blue);
   --text-decoration-navigation-link-hover: underline;
@@ -57,13 +57,13 @@
 
   /* Header */
   --color-header-text: var(--color-white);
-  --color-header-background: var(--color-dark-gray);
-  --color-header-label-text: var(--color-light-gray);
-  --color-header-button-background: var(--color-reddish-orange);
+  --color-header-background: var(--color-cool-white);
+  --color-header-label-text: var(--color-black);
+  --color-header-button-background: var(--color-cool-blue);
   --color-header-button-text: var(--color-white);
   --color-header-button-hover-text: var(--color-white);
-  --color-header-icon: var(--color-white);
-  --color-header-icon-hover: var(--color-reddish-orange);
+  --color-header-icon: var(--color-black);
+  --color-header-icon-hover: var(--color-cool-blue);
 
   /* Tags */
   --color-tag-text:             var(--color-white);
