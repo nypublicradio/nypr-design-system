@@ -126,6 +126,10 @@
   .c-newsletter-form__terms input[type="checkbox"]:checked {
     background-color: rgb(var(--color-black));
   }
+
+  .c-main-footer__terms-links a:hover {
+    background: none;
+  }
 }
 
 // Typography
