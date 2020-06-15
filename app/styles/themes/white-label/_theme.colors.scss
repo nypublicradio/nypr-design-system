@@ -104,6 +104,10 @@
   --color-gallery-link: var(--color-white);
   --color-gallery-link-hover: var(--color-reddish-orange);
   --color-gallery-ad-label: var(--color-dirty-salmon);
+
+  /* Footer */
+  --color-footer-text: var(--color-black);
+  --color-footer-link: var(--color-ceramic-blue);
 }
 
 @mixin color-group-dark {
@@ -182,6 +186,10 @@
   --color-gallery-link: var(--color-white);
   --color-gallery-link-hover: var(--color-reddish-orange);
   --color-gallery-ad-label: var(--color-dirty-salmon);
+
+  /* Footer */
+  --color-footer-text: var(--color-black);
+  --color-footer-link: var(--color-ceramic-blue);
 }
 
 /*  Base */
