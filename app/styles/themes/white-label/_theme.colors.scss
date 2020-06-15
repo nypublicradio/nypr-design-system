@@ -85,9 +85,9 @@
   --opacity-button-outline:       var(--opacity-hover);
 
   /* Borders */
-  --color-border-subtle: var(--color-black);
-  --color-border-standard: var(--color-black);
-  --color-border-bold:   var(--color-black);
+  --color-border-subtle: var(--color-background-highlight);
+  --color-border-standard: var(--color-background-highlight);
+  --color-border-bold:   var(--color-background-highlight);
 
   /* Forms */
   --color-checkbox: var(--color-dark-gray);
@@ -167,9 +167,9 @@
   --color-button-outline-pressed: var(--color-white);
   --opacity-button-outline:       var(--opacity-hover);
 
-  --color-border-bold:          var(--color-border-bold);      //none
-  --color-border-standard:      var(--color-border-standard);  //none
-  --color-border-subtle:        var(--color-border-subtle);    //none
+  --color-border-bold:          var(--color-background-highlight);      //none
+  --color-border-standard:      var(--color-background-highlight);  //none
+  --color-border-subtle:        var(--color-background-highlight);    //none
 
   /* Forms */
   --color-checkbox: var(--color-dark-gray);
