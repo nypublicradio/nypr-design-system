@@ -367,3 +367,14 @@ footer .c-newsletter-form__terms a {
 .c-block--urgent .c-block-meta__timestamp {
   color: rgb(var(--color-brick-red));
 }
+
+// Section page
+
+.c-section__header {
+  background-color: rgb(var(--color-primary-1));
+}
+
+.c-section__heading {
+  @include typeface(small, 10);
+  text-transform: uppercase;
+}

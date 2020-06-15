@@ -244,7 +244,6 @@
  */
 .c-section__header {
   padding: var(--space-5) var(--space-3);
-  background-color: rgb(var(--color-primary-1));
   text-align: center;
   margin-bottom: var(--space-5);
 
@@ -254,10 +253,8 @@
   }
 }
 .c-section__heading {
-  @include typeface(small, 10);
   font-weight: normal;
   letter-spacing: 3px;
-  text-transform: uppercase;
 
   @include media(">medium") {
     @include typeface(small, 14);
