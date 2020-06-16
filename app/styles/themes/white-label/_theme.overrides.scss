@@ -89,7 +89,7 @@
     text-decoration: none;
 
     &:hover {
-      color: rgb(var(--color-black));
+      color: rgb(var(--color-ceramic-blue));
       text-decoration: none;
     }
   }
@@ -103,7 +103,17 @@
   }
 
   .c-newsletter-form__inner {
-    border: 3px solid rgb(var(--color-black));
+    border: none;
+    background-color: rgb(var(--color-ceramic-blue));
+    color: rgb(var(--color-white));
+  }
+
+  .c-newsletter-form__field-group {
+    border: none;
+  }
+
+  .c-newsletter-form__field-group .o-button:hover {
+    background-color: rgb(var(--color-sky-blue));
   }
 
   .c-newsletter-form__graphic path {
@@ -111,24 +121,32 @@
   }
 
   .c-main-footer__signup svg {
-    fill: rgb(var(--color-black));
+    fill: rgb(var(--color-white));
   }
 
+  .c-newsletter-form__text p,
   .c-newsletter-form__terms p {
-    color: rgb(var(--color-black));
+    color: rgb(var(--color-white));
   }
 
   .c-newsletter-form__terms input[type="checkbox"] {
-    background-color: transparent;
-    border: 2px solid rgb(var(--color-black));
+    background-color: rgb(var(--color-ceramic-blue));
+    border: 2px solid rgb(var(--color-white));
   }
 
   .c-newsletter-form__terms input[type="checkbox"]:checked {
-    background-color: rgb(var(--color-black));
+    background-color: rgb(var(--color-ceramic-blue));
   }
 
-  .c-main-footer__terms-links a:hover {
-    background: none;
+  .c-newsletter-form__terms-checkbox a,
+  .c-newsletter-form__terms-checkbox a:visited,
+  .c-newsletter-form__terms-checkbox a:active {
+    background: transparent;
+    color: rgb(var(--color-white));
+
+    &:hover {
+      color: rgb(var(--color-white));
+    }
   }
 }
 
