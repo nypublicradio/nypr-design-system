@@ -467,3 +467,14 @@ footer .c-newsletter-form__terms a {
   height: 100%;
   z-index: 0;
 }
+
+// Breadcrumbs
+.o-breadcrumbs:before {
+  content: "";
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  left: -4px;
+  top: calc(50% + 1px);
+  @include border-accent;
+}
