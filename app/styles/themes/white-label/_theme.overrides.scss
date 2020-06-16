@@ -273,3 +273,11 @@
 .c-tag-listing__heading {
   text-transform: capitalize;
 }
+
+// Home page
+
+.c-block__object .c-block__title-link:hover {
+  color: rgb(var(--color-link-hover));
+  text-decoration: var(--text-decoration-link-hover);
+  opacity: var(--opacity-link-hover);
+}
