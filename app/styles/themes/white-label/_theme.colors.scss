@@ -7,7 +7,7 @@
 
   /* Neutrals */
   --color-black:      #{hex2rgb(#000000)};
-  --color-gray-dark:  #{hex2rgb(#333333)};
+  --color-dark-gray:  #{hex2rgb(#333333)};
   --color-gray:       #{hex2rgb(#afafaf)};
   --color-light-gray: #{hex2rgb(#f3f3f3)};
   --color-white:      #{hex2rgb(#ffffff)};
@@ -33,12 +33,12 @@
   --color-background:           var(--color-white);
   --color-background-muted:     var(--color-cool-white);
   --color-background-highlight: var(--color-cool-white);
-  --color-text:                 var(--color-gray-dark);
+  --color-text:                 var(--color-dark-gray);
   --color-text-print:           var(--color-black);
   --color-text-muted:           var(--color-concrete);
   --color-text-error:           var(--color-ember-red);
   --color-text-inverse:         var(--color-white);
-  --color-text-metadata:        var(--color-gray-dark);
+  --color-text-metadata:        var(--color-dark-gray);
 
   /* Links */
   --color-link:                 var(--color-cool-blue);
@@ -122,7 +122,7 @@
   --color-text-print:           var(--color-black);
   --color-text-muted:           var(--color-concrete);
   --color-text-error:           var(--color-ember-red);
-  --color-text-inverse:         var(--color-gray-dark);
+  --color-text-inverse:         var(--color-dark-gray);
   --color-text-metadata:        var(--color-white);
 
   /* Links */
