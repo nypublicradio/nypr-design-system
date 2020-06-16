@@ -308,3 +308,18 @@
   background-color: transparent;
   opacity: var(--opacity-hover);
 }
+
+// Banners
+
+.c-banners .o-box-banner {
+  background: rgb(var(--color-cool-white));
+}
+
+.o-box-banner__close {
+  right: var(--space-5);
+  top: 0;
+}
+
+.c-block--urgent .c-block__eyebrow > .o-kicker {
+  background: rgb(var(--color-ceramic-blue));
+}
