@@ -102,24 +102,6 @@
     fill: rgb(var(--color-black));
   }
 
-  .c-newsletter-form__inner {
-    border: none;
-    background-color: rgb(var(--color-ceramic-blue));
-    color: rgb(var(--color-white));
-  }
-
-  .c-newsletter-form__field-group {
-    border: none;
-  }
-
-  .c-newsletter-form__field-group .o-button:hover {
-    background-color: rgb(var(--color-sky-blue));
-  }
-
-  .c-newsletter-form__graphic path {
-    fill: rgb(var(--color-sky-blue));
-  }
-
   .c-main-footer__signup svg {
     fill: rgb(var(--color-white));
   }
@@ -127,15 +109,6 @@
   .c-newsletter-form__text p,
   .c-newsletter-form__terms p {
     color: rgb(var(--color-white));
-  }
-
-  .c-newsletter-form__terms input[type="checkbox"] {
-    background-color: rgb(var(--color-ceramic-blue));
-    border: 2px solid rgb(var(--color-white));
-  }
-
-  .c-newsletter-form__terms input[type="checkbox"]:checked {
-    background-color: rgb(var(--color-ceramic-blue));
   }
 
   .c-newsletter-form__terms-checkbox a,
@@ -280,6 +253,45 @@
   color: rgb(var(--color-link-hover));
   text-decoration: var(--text-decoration-link-hover);
   opacity: var(--opacity-link-hover);
+}
+
+// newsletter signup
+
+.c-newsletter-form__inner {
+  border: none;
+  background-color: rgb(var(--color-ceramic-blue));
+  color: rgb(var(--color-white));
+}
+
+.c-newsletter-form__field-group {
+  border: none;
+}
+
+.c-newsletter-form__field-group .o-button {
+  background-color: rgb(var(--color-sky-blue));
+
+  &:hover {
+    background-color: rgb(var(--color-sky-blue));
+    opacity: var(--opacity-hover);
+  }
+}
+
+.c-newsletter-form__graphic path {
+  fill: rgb(var(--color-sky-blue));
+}
+
+.c-newsletter-form__terms input[type="checkbox"] {
+  background-color: rgb(var(--color-ceramic-blue));
+  border: 2px solid rgb(var(--color-white));
+}
+
+.c-newsletter-form__terms input[type="checkbox"]:checked {
+  background-color: rgb(var(--color-ceramic-blue));
+  border: 2px solid rgb(var(--color-white));
+}
+
+.c-donate-tout__graphic path {
+  fill: rgb(var(--color-ceramic-blue));
 }
 
 // Gallery overlay
