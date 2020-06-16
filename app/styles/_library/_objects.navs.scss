@@ -219,16 +219,6 @@
   display: flex;
 }
 
-.o-breadcrumbs:before {
-  content: "";
-  height: 1px;
-  width: 100%;
-  position: absolute;
-  left: -4px;
-  top: calc(50% + 1px);
-  @include border-accent;
-}
-
 .o-breadcrumb {
   position: relative;
   display: inline-block;
