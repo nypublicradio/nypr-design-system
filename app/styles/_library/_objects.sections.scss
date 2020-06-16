@@ -257,7 +257,7 @@
   letter-spacing: 3px;
 
   @include media(">medium") {
-    @include typeface(small, 14);
+    @include typeface(header, 14);
     font-weight: normal;
   }
 
