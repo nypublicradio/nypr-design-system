@@ -281,3 +281,18 @@
   text-decoration: var(--text-decoration-link-hover);
   opacity: var(--opacity-link-hover);
 }
+
+// Gallery overlay
+.c-gallery-overlay .o-back-to-link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.c-gallery-overlay .u-has-accent:hover,
+.c-gallery-overlay .o-rte-text .u-has-accent:hover {
+  background-color: transparent;
+  opacity: var(--opacity-hover);
+}
