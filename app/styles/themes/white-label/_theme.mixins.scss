@@ -84,7 +84,8 @@
 
     &:hover {
       color: rgb(var(--color-white));
-      background-color: rgb(var(--color-ember-red));
+      opacity: var(--opacity-hover);
+      background-color: transparent;
     }
   }
 }
