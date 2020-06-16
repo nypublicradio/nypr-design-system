@@ -159,6 +159,11 @@
 .o-rte-text > h1, .o-rte-text > h2, .o-rte-text > h3, .o-rte-text > h4, .o-rte-text > h5, .o-rte-text > h6 {
   padding-top: var(--space-4);
 }
+.c-block__dek p,
+.c-block__title,
+.c-block--horizontal--large .c-block__title {
+  line-height: 1.25;
+}
 
 .c-block-meta__timestamp {
   @include typeface(small, 2);
