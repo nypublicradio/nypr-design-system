@@ -301,12 +301,12 @@ blockquote {
   border-bottom: 2px dotted rgb(var(--color-white));
 }
 
-.c-newsletter-form__terms input[type="checkbox"] {
+.c-newsletter-tout .c-newsletter-form__terms input[type="checkbox"] {
   border: 2px solid;
   border-color: rgb(var(--color-white));
 }
 
-.c-newsletter-form__terms input[type="checkbox"]:checked {
+.c-newsletter-tout .c-newsletter-form__terms input[type="checkbox"]:checked {
   border: 2px solid rgb(var(--color-white));
 }
 
