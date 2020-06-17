@@ -366,6 +366,10 @@ footer .c-newsletter-form__terms a {
 }
 
 // breaking news
+.c-banners .o-box-banner {
+  padding: var(--space-3) var(--space-4) var(--space-4);
+}
+
 .c-block--urgent .c-block__eyebrow > .o-kicker {
   color: rgb(var(--color-white));
   background: rgb(var(--color-dark-gray));
@@ -380,7 +384,6 @@ footer .c-newsletter-form__terms a {
 }
 
 // Section page
-
 .c-tag-listing__heading {
   @include typeface(tags, 10);
   color: rgb(var(--color-text-inverse));
@@ -445,6 +448,10 @@ footer .c-newsletter-form__terms a {
 .o-3d-heading:after {
   z-index: -1;
   background-color: rgb(var(--color-white));
+}
+
+.o-3d-heading--quinary:after {
+  background-color: rgb(var(--color-background-highlight));
 }
 
 // Read more nav
