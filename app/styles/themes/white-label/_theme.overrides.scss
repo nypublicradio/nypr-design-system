@@ -241,6 +241,14 @@
   fill: rgb(var(--color-sky-blue));
 }
 
+.c-article__headline {
+  @include typeface(header, 13);
+
+  @include media(">medium") {
+    @include typeface(header, 13);
+  }
+}
+
 // Staff page
 
 .c-author-block__details-link:hover {
@@ -324,3 +332,4 @@
 .c-block--urgent .c-block__eyebrow > .o-kicker {
   background: rgb(var(--color-ceramic-blue));
 }
+
