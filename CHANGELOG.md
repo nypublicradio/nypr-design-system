@@ -14,7 +14,7 @@ https://jira.wnyc.org/browse/DS-799
 
 https://jira.wnyc.org/browse/DS-789
 
-## `3.0.0-beta7`
+## `3.0.0-beta8`
 
 - #93 qa automation
 
