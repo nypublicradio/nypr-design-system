@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Organisms/Site Header" />
+
+
+# Site Header
+
+Site Headers serve as the primary navigation for NYPR web properties. They are always top aligned, they are always navigation focused, they are always on brand. #onbrand
+
+## What’s Inside
+
+Our whitelable Site Header component includes a hamburger menu, placeholders for branding, primary navigation, social links, a primary CTA, a search icon and form field, and a progress bar for article pages. These items are optional to be turned on or off based on the page experience and content.
+
+  
+<img alt="Site Header anatomy" src="./images/Organisms-BrandBar-Anatomy.png" width="800" />
+
+
+1. 1 - **Hamburger Menu** - If a site supports sidebar menus, the hamburger navigation is used to launch the menu. More typically seen on mobile where navigation items are shifted from site header to side menu.
+
+2. 2 - **Brand Placeholder** - Placeholder for logo of respective site/brand.
+
+3. 3 - **Primary Links** - Top level links to larger areas of a site’s domain.
+
+4. 4 - **Social Icons** - Link off to a brand's social media accounts. On an article page, these can be replaced with "Share" functionality.
+
+5. 5 - **Primary CTA** - Used most times for donate call-to-actions.
+
+6. 6 - **Search** - Icon that launches a form field on click. This action hides all items on the right side of the site header to make visual space for the search field.
+
+  
+
+## States
+
+Depending on the platform, a site header can have a number of configurations (states). In Gothamist, the site header swaps its primary navigation for the article headline and share tools when on an article page. When the search state is active, neighboring components hide themselves to make room for the added field. Configuration options are built into our whitelabel component and will expand as we incorporate more brands into Radial. See possible configurations below.
+
+<img alt="Site Header Configurations" src="./images/Organisms-BrandBar-Configurations.png" width="800" />
+
+
+## Behaviors
+
+By default, Site Headers are sticky, keeping the component accessible from anywhere on a page without having to scroll.
+
+  
+
+## Mobile
+
+On mobile, the majority of components in the Site Header will be hidden as to fit the smaller screensize. In these cases, a Side Menu can be triggered via a hamburger menu or similar icon to show primary and secondary navigation items. In the whitelabel, only the hambuger menu, branding, and primary CTA are shown at a mobile width. 
+
+<img alt="brandbar on mobile" src="./images/Organisms-BrandBar-Mobile.png" width="275" />
