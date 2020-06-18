@@ -1,7 +1,7 @@
 {{!-- BEGIN-SNIPPET nypr-o-header-nav.hbs --}}
 <ul>
   {{#each @navItems as |item i|}}
-    <li class="c-primary-nav__item">
+    <li class="c-primary-nav__item" name="header{{i}}">
       {{#if item.route}}
         {{#link-to
           params=item.route
