@@ -305,6 +305,19 @@ div.o-confirm-message p {
   background-color: rgb(var(--color-form-button));
 }
 
+.c-newsletter-form__button[disabled] {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+.c-newsletter-form .c-newsletter-form__button:hover[disabled] {
+  background-color: rgb(var(--color-newsletter-form-button));
+}
+
+.c-newsletter-form__button:hover:not(:focus)[disabled] .o-icon--newsletter-form {
+  animation: none;
+}
+
 .c-newsletter-form__button:hover:not(:focus) .o-icon--newsletter-form {
   animation: bounce-horiz 0.8s 0s ease-out infinite;
 }
