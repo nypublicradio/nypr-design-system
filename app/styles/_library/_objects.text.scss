@@ -511,43 +511,6 @@ a.o-breadcrumb:hover {
   margin: 0 auto var(--space-2);
 }
 
-
-/**
- * 3D box effect for headings
- */
-.o-3d-heading {
-  padding: .1em .25em;
-  display: inline-block;
-  position: relative;
-  z-index: 5;
-  background-color: rgb(var(--color-background));
-  left: 10px;
-  margin-right: var(--space-3);
-}
-
-.o-3d-heading:before,
-.o-3d-heading:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  border: var(--border-standard);
-  background-color: transparent;
-}
-
-.o-3d-heading:before {
-  z-index: -2;
-  left: -10px;
-  top: 10px;
-}
-
-.o-3d-heading:after {
-  z-index: -1;
-  background-color: rgb(var(--color-white));
-}
-
 /* Quinary background color*/
 .o-3d-heading--quinary:after {
   background-color: rgb(var(--color-background-highlight))

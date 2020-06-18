@@ -234,8 +234,6 @@
 .c-newsletter-tout {
   padding: var(--space-7) var(--space-9);
   position: relative;
-  /* Adjusted vertical spacing because of the 10px shadow border.*/
-  margin-bottom: calc(var(--space-7) + 10);
 
   @include media("<=medium") {
     padding: var(--space-4);
@@ -249,17 +247,6 @@
       text-decoration: none;
     }
   }
-}
-
-.c-newsletter-tout:before {
-  content: "";
-  position: absolute;
-  left: -10px;
-  top: 11px;
-  border: var(--border-standard);
-  width: 100%;
-  height: 100%;
-  z-index: 0;
 }
 
 .c-newsletter-tout__inner {

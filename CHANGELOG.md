@@ -14,6 +14,42 @@ https://jira.wnyc.org/browse/DS-799
 
 https://jira.wnyc.org/browse/DS-789
 
+## `3.0.0-beta7`
+
+- #93 qa automation
+
+https://jira.wnyc.org/browse/DS-660
+
+- #94 whitelabel vqa
+
+https://jira.wnyc.org/browse/DS-636
+https://jira.wnyc.org/browse/DS-710
+https://jira.wnyc.org/browse/DS-727
+https://jira.wnyc.org/browse/DS-730
+https://jira.wnyc.org/browse/DS-732
+https://jira.wnyc.org/browse/DS-734
+https://jira.wnyc.org/browse/DS-735
+https://jira.wnyc.org/browse/DS-736
+https://jira.wnyc.org/browse/DS-818
+https://jira.wnyc.org/browse/DS-707
+https://jira.wnyc.org/browse/DS-826
+https://jira.wnyc.org/browse/DS-809
+https://jira.wnyc.org/browse/DS-807
+https://jira.wnyc.org/browse/DS-814
+https://jira.wnyc.org/browse/DS-815
+https://jira.wnyc.org/browse/DS-820
+https://jira.wnyc.org/browse/DS-790
+https://jira.wnyc.org/browse/DS-731
+https://jira.wnyc.org/browse/DS-733
+https://jira.wnyc.org/browse/DS-802
+https://jira.wnyc.org/browse/DS-717
+https://jira.wnyc.org/browse/DS-676
+https://jira.wnyc.org/browse/DS-713
+https://jira.wnyc.org/browse/DS-819
+https://jira.wnyc.org/browse/DS-825
+https://jira.wnyc.org/browse/DS-806
+https://jira.wnyc.org/browse/DS-831
+
 ## `3.0.0-beta6`
 
 - #87 updated footer logo
