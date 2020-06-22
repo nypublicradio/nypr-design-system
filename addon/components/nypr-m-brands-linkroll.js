@@ -18,7 +18,7 @@ const NAV_ITEMS = [{
   url: 'https://gothamist.com',
   title: 'Gothamist',
 }, {
-  url: 'https://www.njpr.org',
+  url: 'http://njpublicradio.org',
   title: 'NJPR',
 }, {
   url: 'https://www.wnycstudios.org',
