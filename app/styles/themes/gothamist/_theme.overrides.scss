@@ -623,3 +623,12 @@ blockquote {
 .c-search--top .c-search__button:hover {
   background-color: rgb(var(--color-primary-1));
 }
+
+.c-contact-tout {
+  padding: var(--space-4);
+  width: 100%;
+}
+
+.u-reversed-out:after {
+  background-color: rgb(var(--color-background));
+}

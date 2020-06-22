@@ -66,12 +66,6 @@
   fill: rgb(var(--color-sky-blue));
 }
 
-// Staff page
-
-.c-author-block__details-link:hover {
-  color: rgb(var(--color-sky-blue));
-}
-
 // newsletter signup
 
 .c-newsletter-form__inner {
@@ -110,18 +104,4 @@
 
 .c-donate-tout__graphic path {
   fill: rgb(var(--color-ceramic-blue));
-}
-
-// Banners
-
-.c-banners .o-box-banner {
-  background: rgb(var(--color-cool-white));
-}
-
-.o-box-banner__close {
-  right: var(--space-5);
-}
-
-.c-block--urgent .c-block__eyebrow > .o-kicker {
-  background: rgb(var(--color-ceramic-blue));
 }

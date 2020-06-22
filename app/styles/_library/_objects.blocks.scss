@@ -96,7 +96,7 @@
  * Urgent block banner
  */
 .c-block--urgent .c-block__eyebrow > .o-kicker {
-  background-color: rgb(var(--color-text-inverse));
+  background: rgb(var(--color-background));
   color: rgb(var(--color-text-inverse));
 }
 
@@ -298,6 +298,7 @@ $author-media-width-l: 360;
   text-decoration: none;
 
   &:hover {
+    color: rgb(var(--color-link-hover));
     text-decoration: none;
   }
 }
