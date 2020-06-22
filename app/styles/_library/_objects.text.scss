@@ -59,7 +59,7 @@
 .o-rte-text > ol li,
 .o-rte-text > ul li,
 .o-rte-text > p {
-  @include typeface(body, 6);
+  @include typeface(body, 5);
 }
 
 .o-rte-text a {
@@ -86,8 +86,7 @@
 .o-rte-text > h4,
 .o-rte-text > h5,
 .o-rte-text > h6 {
-  padding-top: var(--space-3);
-  /*font-weight: normal;*/
+  padding-top: var(--space-4);
 }
 
 .o-rte-text > h1 {
@@ -182,13 +181,13 @@
   top: .75em;
   width: 7px;
   height: 7px;
-  background-color: rgb(var(--color-brick-red));
+  background-color: rgb(var(--color-text));
   border-radius: 50%;
 }
 
 .o-rte-text > ul li li:before {
   background-color: transparent;
-  border: 2px solid rgb(var(--color-brick-red));
+  border: 2px solid rgb(var(--color-text));
   width: 4px;
   height: 4px;
 }
@@ -414,7 +413,7 @@ a.o-breadcrumb:hover {
 /* Temporary until i can get the real icon*/
 .o-to-top .o-icon--up-arrow {
   margin-right: var(--space-2);
-  fill: rgb(var(--color-primary-2));
+  fill: rgb(var(--color-link));
 }
 
 .o-to-top svg {
@@ -422,7 +421,7 @@ a.o-breadcrumb:hover {
 }
 
 .o-to-top:hover {
-  color: rgb(var(--color-primary-2));
+  color: rgb(var(--color-link));
 }
 
 .o-to-top:hover .o-icon--up-arrow {
@@ -520,6 +519,13 @@ a.o-breadcrumb:hover {
 /**
  * Border accents
  */
+.o-border-accent {
+  background-image: repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%);
+  background-position: left top, left bottom, left top, right top;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: 18px 2px, 18px 2px, 2px 18px, 2px 18px;
+}
+
 .u-border-accent {
   @include border-accent;
 }

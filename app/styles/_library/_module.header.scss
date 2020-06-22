@@ -96,6 +96,7 @@
 }
 
 .c-main-header__donate.o-button {
+  font-size: var(--font-size-5);
   background-color: rgb(var(--color-header-button-background));
   color: rgb(var(--color-header-button-text));
 
@@ -171,7 +172,7 @@
 }
 
 .c-main-header__share .c-share-tools__link:hover path {
-  fill: rgb(var(--color-header-icon-hover));
+  fill: rgb(var(--color-navigation-link-hover));
 }
 
 .c-main-header__share .c-share-tools__link path {
@@ -299,6 +300,11 @@
 
 .c-side-menu .c-menu-toggle + * {
   margin-left: 0;
+}
+
+.c-side-menu .c-search__button:hover {
+  background-color: rgb(var(--color-button-primary));
+  opacity: var(--opacity-hover);
 }
 
 .c-side-menu__group {

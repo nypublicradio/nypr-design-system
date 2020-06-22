@@ -10,6 +10,18 @@
   color: rgb(var(--color-footer-text));
 }
 
+.c-main-footer a,
+.c-main-footer a:visited,
+.c-main-footer a:active {
+  color: rgb(var(--color-footer-link));
+  text-decoration: none;
+
+  &:hover {
+    color: rgb(var(--color-footer-link));
+    text-decoration: none;
+  }
+}
+
 .c-main-footer__inner {
   @include media(">xlarge") {
     margin-top: 0;

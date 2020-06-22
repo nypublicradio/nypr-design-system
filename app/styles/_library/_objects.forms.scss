@@ -125,7 +125,7 @@ div.o-confirm-message p {
 }
 
 .c-search--top .c-search__button:hover {
-  background-color: rgb(var(--color-primary-1));
+  opacity: var(--opacity-hover);
 }
 
 /* Top search entry is open*/
@@ -378,6 +378,10 @@ div.o-confirm-message p {
 
   .o-button {
     background-color: rgb(var(--color-form-button));
+
+    &:hover {
+      opacity: var(--opacity-hover);
+    }
   }
 
   input[type=checkbox] {
