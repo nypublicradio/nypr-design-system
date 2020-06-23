@@ -317,6 +317,14 @@ footer .c-newsletter-form__terms a {
   border-bottom: 2px dotted rgb(var(--color-text));
 }
 
+.c-newsletter-form .c-newsletter-form__button:hover[disabled] {
+  background-color: rgb(var(--color-dark-gray));
+}
+
+.c-newsletter-form .c-newsletter-form__button {
+  background-color: rgb(var(--color-dark-gray));
+}
+
 // article page credit
 .o-caption__text > span a {
   text-decoration: none;

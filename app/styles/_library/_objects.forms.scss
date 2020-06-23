@@ -310,20 +310,12 @@ div.o-confirm-message p {
   opacity: .6;
 }
 
-.c-newsletter-form .c-newsletter-form__button:hover[disabled] {
-  background-color: rgb(var(--color-newsletter-form-button));
-}
-
 .c-newsletter-form__button:hover:not(:focus)[disabled] .o-icon--newsletter-form {
   animation: none;
 }
 
 .c-newsletter-form__button:hover:not(:focus) .o-icon--newsletter-form {
   animation: bounce-horiz 0.8s 0s ease-out infinite;
-}
-
-.c-newsletter-form .c-newsletter-form__button {
-  background-color: rgb(var(--color-newsletter-form-button));
 }
 
 .c-newsletter-form .c-newsletter-form__button svg {
