@@ -637,3 +637,7 @@ blockquote {
 .u-reversed-out:after {
   background-color: rgb(var(--color-background));
 }
+
+.c-block--horizontal .c-block__title {
+  @include typeface(header, 8);
+}
