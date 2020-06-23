@@ -6,7 +6,7 @@
   text-align: center;
   position: relative;
   z-index: $z-index-header;
-  font-family: var(--font-family-header);
+  @include typeface(header, 5);
 }
 
 .c-main-header svg {
@@ -23,7 +23,7 @@
 
 .c-main-header__ad-unit {
   position: relative;
-  background-color: rgb(var(--color-header-background));
+  background-color: rgb(var(--color-background));
   text-align: center;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .c-main-header .o-ad__label {
-  color: rgb(var(--color-header-label-text));
+  color: rgb(var(--color-text-muted));
 
   @include media("<=small") {
     display: none;
@@ -46,7 +46,7 @@
 }
 
 .c-main-header__inner {
-  background-color: rgb(var(--color-header-background));
+  background-color: rgb(var(--color-background));
   padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
   display: flex;
   align-items: center;
@@ -92,19 +92,6 @@
     font-size: var(--font-size-3);
     padding-left: var(--space-3);
     padding-right: var(--space-3);
-  }
-}
-
-.c-main-header__donate.o-button {
-  background-color: rgb(var(--color-header-button-background));
-  color: rgb(var(--color-header-button-text));
-
-  &::before {
-    border: 3px solid rgb(var(--color-header-button-background));
-  }
-
-  &:hover {
-    color: rgb(var(--color-header-button-hover-text));
   }
 }
 
@@ -175,11 +162,11 @@
 }
 
 .c-main-header__share .c-share-tools__link:hover path {
-  fill: rgb(var(--color-header-icon-hover));
+  fill: rgb(var(--color-text, --opacity-hover));
 }
 
 .c-main-header__share .c-share-tools__link path {
-  fill: rgb(var(--color-header-icon));
+  fill: rgb(var(--color-text));
 }
 
 /* Gallery and Article floating header specific styles*/
@@ -242,11 +229,11 @@
 }
 
 .c-search-toggle:hover path {
-  fill: rgb(var(--color-header-icon-hover));
+  fill: rgba(var(--color-text, --opacity-hover));
 }
 
 .c-search-toggle__icon path {
-  fill: rgb(var(--color-header-icon));
+  fill: rgb(var(--color-text));
   transition: var(--animation-duration-standard) var(--animation-easing-standard);
 }
 
@@ -324,7 +311,7 @@
 }
 
 .c-side-menu__social .c-share-tools {
-  fill: rgb(var(--color-header-icon));
+  fill: rgb(var(--color-text));
   justify-content: center;
 }
 
@@ -377,7 +364,7 @@
 
 .c-side-menu__nypr-logo path,
 .c-side-menu__nypr-logo polygon {
-  fill: rgb(var(--color-header-icon));
+  fill: rgb(var(--color-text));
 }
 
 .c-side-menu .c-nypr-nav__list {

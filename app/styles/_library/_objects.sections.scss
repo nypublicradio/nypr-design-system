@@ -295,9 +295,8 @@
 }
 .c-search-results__form .c-search__input {
   padding: 0;
-
-  font-size: var(--font-size-10);
-  font-family: var(--font-family-body);
+  @include typeface(body, 10);
+  line-height: 28px;
   font-weight: bold;
   text-transform: uppercase;
 
@@ -329,8 +328,7 @@
   }
 }
 .c-search-results__term {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-14);
+  @include typeface(body, 14);
   font-weight: bold;
   text-transform: uppercase;
 }

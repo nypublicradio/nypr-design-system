@@ -90,7 +90,7 @@ td {
         content: attr(data-label);
         font-weight: bold;
         text-transform: uppercase;
-        font-size: var(--font-size-xs);
+        font-size: var(--font-size-3);
       }
     }
   }
@@ -107,7 +107,7 @@ td {
   }
 
 .c-table--responsive th {
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-3);
     text-transform: uppercase;
     border-bottom: 1px solid rgb(var(--color-border-bold));
   }

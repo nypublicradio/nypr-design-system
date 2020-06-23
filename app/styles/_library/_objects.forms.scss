@@ -90,11 +90,11 @@ div.o-confirm-message p {
   height: 24px;
   transform: translate(-40px, -50%);
   border-radius: 50%;
-  background-color: rgb(var(--color-light-gray));
+  background-color: rgb(var(--color-neutral-accent-1));
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--animation-easing-outgoing-search) var(--animation-delay-none);
+  transition: transform .15s ease-out var(--animation-delay-none);
   z-index: $z-index-search-close;
 }
 
@@ -112,7 +112,7 @@ div.o-confirm-message p {
   font-size: var(--font-size-4);
   padding-left: 45px;
   transform: translateX(calc(100% + 50px));
-  transition: var(--animation-easing-outgoing-search) var(--animation-delay-short);
+  transition: transform .15s ease-out var(--animation-delay-short);
 }
 
 .c-search--top .c-search__button {
@@ -121,7 +121,7 @@ div.o-confirm-message p {
   position: relative;
   z-index: $z-index-search-button;
   opacity: 0;
-  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
+  transition: var(--animation-duration-fast) var(--animation-easing-outgoing);
 }
 
 .c-search--top .c-search__button:hover {
@@ -155,7 +155,7 @@ div.o-confirm-message p {
 }
 
 .top-search-is-active .c-search__button path {
-  fill: rgb(var(--color-black));
+  fill: rgb(var(--color-high-contrast));
 }
 
 /* top search is open*/
@@ -172,21 +172,21 @@ div.o-confirm-message p {
 
 .c-search--top.is-open .c-search__close {
   transform: translateY(-50%);
-  transition: var(--animation-easing-outgoing-search) var(--animation-delay-long);
+  transition: transform .15s ease-out var(--animation-delay-long);
 }
 
 .c-search--top.is-open .c-search__input {
   transform: translateX(0);
-  transition: var(--animation-easing-outgoing-search) var(--animation-delay-short);
+  transition: transform .15s ease-out var(--animation-delay-short);
 }
 
 .c-search--top.is-open .c-search__button {
   opacity: 1;
-  transition: var(--animation-easing-outgoing) var(--animation-duration-fast);
+  transition: var(--animation-duration-fast) var(--animation-easing-outgoing);
 }
 
 .c-search--top.is-open .c-search__button .search-icon {
-  fill: rgb(var(--color-black));
+  fill: rgb(var(--color-high-contrast));
 }
 
 /* Side menu search*/
@@ -204,7 +204,7 @@ div.o-confirm-message p {
 }
 
 .c-search--side .c-search__button path {
-  fill: rgb(var(--color-black));
+  fill: rgb(var(--color-high-contrast));
 }
 
 /**
@@ -302,24 +302,19 @@ div.o-confirm-message p {
   width: 60px;
   height: 60px;
   padding: 0;
-  background-color: rgb(var(--color-form-button));
 }
 
 .c-newsletter-form__button:hover:not(:focus) .o-icon--newsletter-form {
   animation: bounce-horiz 0.8s 0s ease-out infinite;
 }
 
-.c-newsletter-form .c-newsletter-form__button {
-  background-color: rgb(var(--color-newsletter-form-button));
-}
-
 .c-newsletter-form .c-newsletter-form__button svg {
-  fill: rgb(var(--color-footer-text));
+  fill: rgb(var(--color-text-inverse));
 }
 
 .c-newsletter-form__submit-icon {
   width: 24px;
-  fill: rgb(var(--color-white));
+  fill: rgb(var(--color-text-inverse));
 }
 
 .c-newsletter-form__terms {
@@ -369,15 +364,6 @@ div.o-confirm-message p {
         font-size: 12px;
       }
     }
-  }
-
-  .o-button {
-    background-color: rgb(var(--color-form-button));
-  }
-
-  input[type=checkbox] {
-    background-color: rgb(var(--color-form-button));
-    border: rgb(var(--color-form-button));
   }
 
   .c-newsletter-form__button {

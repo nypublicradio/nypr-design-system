@@ -7,43 +7,6 @@
   padding-bottom: var(--space-5);
 }
 
-.c-welcome-page {
-  background-color: rgb(var(--color-black));
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url(/images/radial-assets/bg-texture.png);
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  padding: var(--space-3);
-}
-
-.c-welcome-page__logo {
-  max-width: 500px;
-  max-height: 500px;
-  min-width: 430px;
-  min-height: 430px;
-  width: 100%;
-  height: 100%;
-}
-
-.c-welcome-page__start {
-  display: block;
-  width: 40px;
-  transform: translateY(0) rotate(90deg);
-  bottom: var(--space-5);
-  left: calc(50% - 10px);
-  fill: rgb(var(--color-white));
-  position: absolute;
-  transition: transform var(--animation-easing-standard) var(--animation-duration-standard);
-}
-
-.c-welcome-page__start:hover {
-  transform: translateY(4px) rotate(90deg);
-}
-
 /**
  * Ad styling (only for prototyping)
  */

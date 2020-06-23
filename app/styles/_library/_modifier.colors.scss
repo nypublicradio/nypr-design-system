@@ -1,3 +1,6 @@
+/* Deprecated -- avoid using these classes in your components */
+/* stylelint-disable */
+
 /*------------------------------------*\
     $COLOR MODIFIERS
 \*------------------------------------*/
@@ -34,3 +37,4 @@
 .u-path-fill--quaternary * { //used in gothamist
   fill: rgb(var(--color-taxicab-yellow));
 }
+/* stylelint-enable */

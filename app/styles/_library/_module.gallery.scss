@@ -4,26 +4,26 @@
 
 .c-gallery-overlay {
   padding: var(--space-5) 0 var(--space-9);
-  color: rgb(var(--color-gallery-link));
-  background-color: rgb(var(--color-dark-gray));
+  color: rgb(var(--color-text));
+  background-color: rgb(var(--color-background));
 }
 
 .c-gallery-overlay .o-credit a {
-  color: rgb(var(--color-gallery-link));
-  border-bottom: 2px dotted rgb(var(--color-gallery-link));
+  color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-link);
 }
 
 .c-gallery-overlay .o-credit a:hover {
-  color: rgb(var(--color-gallery-link));
-  background-color: rgb(var(--color-gallery-link-hover));
+  color: rgba(var(--color-link-hover, --opacity-link-hover));
 }
 
 .c-gallery-overlay .o-rte-text a:visited {
-  color: rgb(var(--color-gallery-link));
+  color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-link);
 }
 
 .c-gallery-overlay .o-ad__label {
-  color: rgb(var(--color-gallery-ad-label));
+  color: rgb(var(--color-text-muted));
 }
 
 .c-gallery-overlay .l-wrap {

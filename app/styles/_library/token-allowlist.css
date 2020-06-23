@@ -43,15 +43,21 @@
   --color-text:                 *;
   --color-text-print:           *;
   --color-text-muted:           *;
+  --color-text-valid:           *;
   --color-text-error:           *;
   --color-text-inverse:         *;
   --color-text-metadata:        *;
+
+  /* Colors: Neutral Accents */
+  --color-neutral-accent-1: *;
+  --color-neutral-accent-2: *;
+  --color-neutral-accent-3: *;
+  --color-high-contrast:    *;
 
   /* Colors: Links */
   --color-link:                  *;
   --text-decoration-link:        *;
   --color-link-hover:            *;
-  --color-link-hover-background: *;
   --text-decoration-link-hover:  *;
   --opacity-link-hover:          *;
 
@@ -61,16 +67,6 @@
   --color-navigation-link-hover:           *;
   --text-decoration-navigation-link-hover: *;
   --opacity-navigation-link-hover:         *;
-
-  /* Colors: Header */
-  --color-header-text:              *;
-  --color-header-background:        *;
-  --color-header-label-text:        *;
-  --color-header-button-background: *;
-  --color-header-button-text:       *;
-  --color-header-button-hover-text: *;
-  --color-header-icon:              *;
-  --color-header-icon-hover:        *;
 
   /* Colors: Tags */
   --color-tag-text:             *;
@@ -125,4 +121,9 @@
   --animation-duration-slow:     *;
   --animation-duration-standard: *;
   --animation-duration-fast:     *;
+
+  /* ??? */
+  --animation-delay-none:  *;
+  --animation-delay-short: *;
+  --animation-delay-long:  *;
 }

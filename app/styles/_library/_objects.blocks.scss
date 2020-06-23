@@ -219,9 +219,9 @@
 /**
  * Author block
  */
-$author-media-width-s: 250;
-$author-media-width-l: 360;
 .c-author-block {
+  --author-media-width-s: 250px;
+  --author-media-width-l: 360px;
   position: relative;
   overflow: auto;
 }
@@ -288,12 +288,12 @@ $author-media-width-l: 360;
   margin-bottom: var(--space-2);
 
   @include media(">small") {
-    max-width: $author-media-width-s + px;
+    max-width: var(--author-media-width-s);
     float: left;
   }
 
   @include media(">large") {
-    max-width: $author-media-width-l + px;
+    max-width: var(--author-media-width-l);
   }
 }
 
@@ -305,12 +305,12 @@ $author-media-width-l: 360;
 .c-author-block__meta,
 .c-author-block__object {
   @include media(">small") {
-    width: calc(100% - #{$author-media-width-s}px - #{var(--space-3)});
+    width: calc(100% - var(--author-media-width-s) - var(--space-3));
     float: right;
   }
 
   @include media(">large") {
-    width: calc(100% - #{$author-media-width-l}px - #{var(--space-3)});
+    width: calc(100% - var(--author-media-width-l) - var(--space-3));
   }
 }
 

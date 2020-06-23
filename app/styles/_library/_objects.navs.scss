@@ -239,7 +239,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    border: 2px dashed rgb(var(--color-border-subtle));;
+    border: 2px dashed rgb(var(--color-border-subtle));
   }
 }
 .c-read-more-nav__wrap {
@@ -247,12 +247,10 @@
   position: relative;
 }
 .c-read-more-nav__label {
+  @include typeface(small, 3);
   display: inline-block;
   margin-right: var(--space-3);
   text-transform: uppercase;
-
-  @include typeface(small, 3);
-  font-weight: var(--font-weight-body);
 
   @include media("<=medium") {
     margin-bottom: var(--space-2);
@@ -277,7 +275,7 @@
 .c-read-more-nav__item:before {
   content: "";
   position: absolute;
-  background-color: rgb(var(--color-text-muted));
+  background-color: rgb(var(--color-neutral-accent-2));
   left: 0;
   top: calc(50% - 2px);
   width: 3px;

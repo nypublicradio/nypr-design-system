@@ -7,6 +7,32 @@ blockquote {
   border: 1px solid rgb(var(--color-brown-grey));
 }
 
+.o-list--numbered li::before {
+  background-color: rgb(var(--color-black));
+}
+
+/* forms */
+
+input[type=radio],
+input[type=checkbox] {
+  border: 2px solid rgb(var(--color-dark-gray), 0.3);
+  background-color: rgb(var(--color-dark-gray));
+}
+
+
+/* articles */
+
+.c-article__header .u-has-accent,
+.c-article__body a,
+.c-article__body .u-has-accent,
+.c-article__body .u-has-accent--neutral,
+.c-article__footer .o-rte-text a {
+  &:hover {
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+
 .c-article__body blockquote {
   border: none;
 }
@@ -90,6 +116,9 @@ blockquote {
 
   .c-newsletter-form {
     @include color-group-light;
+  }
+  .c-newsletter-form__button :hover {
+    background-color: rgb(var(--color-form-button));
   }
 }
 
@@ -195,6 +224,20 @@ blockquote {
   text-decoration-style: dotted;
 }
 
+.c-gallery-overlay .o-credit a {
+  @include  dotted-underline(rgb(var(--color-link)));
+  &:hover {
+    color: rgb(var(--color-link));
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+.c-lead-gallery__thumbs-thumb.is-active {
+  border-color: rgb(var(--color-reddish-orange));
+}
+.c-lead-gallery__thumbs-thumb-text:hover {
+  background-color: rgb(var(-color-reddish-orange));
+}
+
 // Top Navigation
 .c-primary-nav--top .c-primary-nav__link:hover {
   color: rgb(var(--color-reddish-orange));
@@ -206,7 +249,7 @@ blockquote {
   color: rgb(var(--color-banana-yellow));
   @include dotted-underline(--color-banana-yellow);
 
-  &:hover, &:focus {
+  &:hover {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
   }
@@ -291,6 +334,33 @@ blockquote {
   border-bottom: 2px dotted rgb(var(--color-white));
 }
 
+.c-newsletter-form__button {
+  background-color: rgb(var(--color-reddish-orange));
+}
+
+.c-newsletter-form .c-newsletter-form__button {
+  background-color: rgb(var(--color-dark-gray));
+}
+
+.c-newsletter-article {
+  .o-button {
+    background-color: rgb(var(--color-reddish-orange));
+  }
+
+  input[type=checkbox] {
+    background-color: rgb(var(--color-reddish-orange));
+    border: rgb(var(--color-reddish-orange));
+  }
+}
+
+form .o-button:hover {
+  background-color: rgb(var(--color-reddish-orange));
+}
+
+.o-rte-text a:hover {
+  background-color: rgb(var(--color-reddish-orange));
+}
+
 // footer newsletter signup
 footer .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
@@ -311,7 +381,7 @@ footer .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
 }
-
+--color-link
 // advertisement label
 .o-ad__label {
   text-transform: uppercase;

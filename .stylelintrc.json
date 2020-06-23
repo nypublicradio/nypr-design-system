@@ -1,5 +1,6 @@
 {
   "plugins": [
+    "stylelint-scss",
     "stylelint-value-no-unknown-custom-properties"
   ],
   "rules": {
