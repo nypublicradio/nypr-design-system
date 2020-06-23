@@ -253,6 +253,7 @@
   }
 }
 .c-section__heading {
+  @include typeface(header, 12);
   font-weight: normal;
   letter-spacing: 3px;
 
