@@ -96,6 +96,11 @@ blockquote {
   }
 }
 
+.c-main-footer__terms-links a:hover {
+  background-color: rgb(var(--color-primary-2));
+  color: rgb(var(--color-link-hover-2));
+}
+
 .c-main-footer {
   @include color-group-dark;
 
