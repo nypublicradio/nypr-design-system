@@ -86,6 +86,10 @@
   }
 }
 
+.c-newsletter-form__graphic {
+  mix-blend-mode: normal;
+}
+
 .c-newsletter-form__graphic path {
   fill: rgb(var(--color-sky-blue));
 }
