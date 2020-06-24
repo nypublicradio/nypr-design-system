@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## `3.0.1-beta1`
+
+- [BUGFIX] #95 Fixed Newsletter Signup Form Styling (https://jira.wnyc.org/browse/DS-584)
+- [BUGFIX] #96 Featured Block Header Size (https://jira.wnyc.org/browse/DS-834)
+- [BUGFIX] #98 Product Marketing Banner Size (https://jira.wnyc.org/browse/DS-833)
+
 ## `3.0.0`
 
 - #89 Update font for product marketing banner
