@@ -411,6 +411,11 @@ blockquote {
 
 // gallery
 
+.c-gallery-overlay .o-credit a:hover {
+  color: rgb(var(--color-gallery-link));
+  background-color: rgb(var(--color-gallery-link-hover));
+}
+
 .c-lead-gallery__thumbs-thumb-text:hover {
   background-color: rgb(var(--color-link-hover-background));
 }
