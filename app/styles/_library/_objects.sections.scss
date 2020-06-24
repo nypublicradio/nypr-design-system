@@ -154,7 +154,7 @@
 .c-featured-blocks__heading {
   position: absolute;
   top: -0.6em;
-  @include typeface(header, 11);
+  @include typeface(header, 10);
   right: var(--space-9);
   background-color: rgb(var(--color-background));
   padding: 0 var(--space-2);

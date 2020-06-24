@@ -205,6 +205,11 @@ blockquote {
   text-decoration-style: dotted;
 }
 
+// Homepage Featured Block
+.c-featured-blocks__heading {
+  @include typeface(header, 11);
+}
+
 // Top Navigation
 .c-primary-nav--top .c-primary-nav__link:hover {
   color: rgb(var(--color-reddish-orange));
