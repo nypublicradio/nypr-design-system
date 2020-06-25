@@ -7,6 +7,10 @@ blockquote {
   border: 1px solid rgb(var(--color-brown-grey));
 }
 
+blockquote {
+  @include border-accent(bottom, left);
+}
+
 .c-article__body blockquote {
   border: none;
 }

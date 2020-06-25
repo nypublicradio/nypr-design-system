@@ -29,7 +29,6 @@ b {
  */
 blockquote {
   margin-left: var(--space-5);
-  @include border-accent(bottom, left);
 }
 blockquote p {
     margin: var(--space-5) 0;
