@@ -253,31 +253,18 @@
   }
 }
 .c-section__heading {
-  @include typeface(header, 12);
-  font-weight: normal;
-  letter-spacing: 3px;
-
-  @include media(">medium") {
-    @include typeface(header, 14);
-    font-weight: normal;
-  }
-
+  @include typeface(header, 13);
 }
 
 /**
  * Tag listing header
  */
 .c-tag-listing__heading {
-  @include typeface(header, 10);
+  @include typeface(header, 13);
   display: inline-block;
-  font-weight: normal;
   margin: var(--space-2) 0;
   color: rgb(var(--color-text));
   text-transform: capitalize;
-
-  @include media(">medium") {
-    @include typeface(header, 14);
-  }
 }
 
 /**

@@ -484,6 +484,7 @@ blockquote {
   @include typeface(tags, 10);
   color: rgb(var(--color-text-inverse));
   text-transform: lowercase;
+  font-weight: normal;
   padding: var(--space-2) var(--space-3);
   background-color: rgb(var(--color-tag-highlight)); //dark
 
@@ -499,6 +500,13 @@ blockquote {
 .c-section__heading {
   @include typeface(small, 10);
   text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 3px;
+
+  @include media(">medium") {
+    @include typeface(header, 14);
+    font-weight: normal;
+  }
 }
 
 .c-basic__heading {
