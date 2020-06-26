@@ -48,6 +48,10 @@
   }
 }
 
+.c-block__title a {
+  color: rbg(var(--color-text));
+}
+
 .c-block__title--has-icon a:after {
   content: "";
   display: inline-block;

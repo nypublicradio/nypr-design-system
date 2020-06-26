@@ -41,12 +41,12 @@
   --color-text-metadata:        var(--color-dark-gray);
 
   /* Links */
-  --color-link:                 var(--color-cool-blue);
+  --color-link:                 var(--color-ceramic-blue);
   --text-decoration-link:       underline;
-  --color-link-hover:           var(--color-sky-blue);
-  --color-link-hover-background: var(--color-white);
+  --color-link-hover:           var(--color-ceramic-blue);
+  --color-link-hover-background: none;
   --text-decoration-link-hover: underline;
-  --opacity-link-hover:         1;
+  --opacity-link-hover:         0.8;
 
   /* Navigation Links */
   --color-navigation-link:                 var(--color-black);
