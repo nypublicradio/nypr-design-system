@@ -1,5 +1,24 @@
 # `nypr-design-system` changelog
 
+## `3.0.1-beta2`
+
+- [BUGFIX] #97 White label Theme Fixes
+
+https://jira.wnyc.org/browse/DS-843 updated njpr URL
+https://jira.wnyc.org/browse/DS-857 footer newsletter svg color
+https://jira.wnyc.org/browse/DS-860 footer link hover state
+https://jira.wnyc.org/browse/DS-858 updated article header styles
+https://jira.wnyc.org/browse/DS-855 updated article font size
+https://jira.wnyc.org/browse/DS-856 section page header styles
+https://jira.wnyc.org/browse/DS-862 headers for auxillary pages styles
+https://jira.wnyc.org/browse/DS-863 gallery credit link hover state
+https://jira.wnyc.org/browse/DS-862 headline styles
+
+- [BUGFIX] #99 Styles for footer links
+
+https://jira.wnyc.org/browse/DS-867 footer link styles
+
+
 ## `3.0.1-beta1`
 
 - [BUGFIX] #95 Fixed Newsletter Signup Form Styling (https://jira.wnyc.org/browse/DS-584)
