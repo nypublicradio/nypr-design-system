@@ -7,6 +7,10 @@ blockquote {
   border: 1px solid rgb(var(--color-brown-grey));
 }
 
+blockquote {
+  @include border-accent(bottom, left);
+}
+
 .c-article__body blockquote {
   border: none;
 }
@@ -25,10 +29,23 @@ blockquote {
   }
 }
 
+.c-main-header__share .c-share-tools__link:hover path {
+  fill: rgb(var(--color-header-icon-hover));
+}
+
 .c-main-header__donate.o-button {
   &::before {
     border: 3px solid rgb(var(--color-header-button-background));
   }
+}
+
+// Back to top icon & text
+.o-to-top .o-icon--up-arrow {
+  fill: rgb(var(--color-primary-2));
+}
+
+.o-to-top:hover {
+  color: rgb(var(--color-primary-2));
 }
 
 // Header with full stacked logo
@@ -81,6 +98,11 @@ blockquote {
   .gothamist-buildings {
     fill: rgb(var(--color-white));
   }
+}
+
+.c-main-footer__terms-links a:hover {
+  background-color: rgb(var(--color-primary-2));
+  color: rgb(var(--color-link-hover-2));
 }
 
 .c-main-footer {
@@ -199,15 +221,24 @@ blockquote {
   text-decoration: none;
 }
 
+.c-block__object .c-block__title-link:hover,
 .c-block__title a:hover {
   color: rgb(var(--color-reddish-orange));
   text-decoration: underline;
   text-decoration-style: dotted;
 }
 
-// Homepage Featured Block
-.c-featured-blocks__heading {
-  @include typeface(header, 11);
+.c-block__title {
+  @include media(">medium") {
+    @include typeface(header, 10);
+  }
+}
+
+.c-block--horizontal--large .c-block__title {
+  @include media(">medium") {
+    font-size: var(--font-size-11);
+    line-height: var(--line-height-11);
+  }
 }
 
 // Top Navigation
@@ -216,6 +247,11 @@ blockquote {
 }
 
 // Side Navigaton
+.c-side-menu .c-search__button:hover {
+  background-color: rgb(var(--color-form-button));
+  opacity: 1;
+}
+
 .c-primary-nav--side .c-primary-nav__link {
   padding-bottom: 2px;
   color: rgb(var(--color-banana-yellow));
@@ -317,7 +353,7 @@ blockquote {
 }
 
 // footer newsletter signup
-footer .c-newsletter-form__terms a {
+.c-main-footer .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
 }
@@ -377,9 +413,38 @@ footer .c-newsletter-form__terms a {
   text-transform: uppercase;
 }
 
+// gallery
+
+.c-gallery-overlay .o-credit a:hover {
+  color: rgb(var(--color-gallery-link));
+  background-color: rgb(var(--color-gallery-link-hover));
+}
+
+.c-lead-gallery__thumbs-thumb-text:hover {
+  background-color: rgb(var(--color-link-hover-background));
+}
+
 // staff page
 .o-rte-text > h3 {
   font-weight: normal;
+}
+
+.o-rte-text > ul li:before {
+  background-color: rgb(var(--color-brick-red));
+}
+
+.o-rte-text > ul li li:before {
+  border: 2px solid rgb(var(--color-brick-red));
+}
+
+// article page
+
+.c-article__headline {
+  @include typeface(header, 14);
+
+  @include media(">medium") {
+    @include typeface(header, 16);
+  }
 }
 
 // article page image caption arrow icon
@@ -389,6 +454,14 @@ footer .c-newsletter-form__terms a {
 }
 
 // breaking news
+.c-block--urgent .c-block__title a {
+  &:hover {
+    color: rgb(var(--color-brick-red));
+    text-decoration: underline;
+    text-decoration-style: dotted;
+  }
+}
+
 .c-banners .o-box-banner {
   padding: var(--space-3) var(--space-4) var(--space-4);
 }
@@ -406,11 +479,16 @@ footer .c-newsletter-form__terms a {
   color: rgb(var(--color-brick-red));
 }
 
+.c-block-meta__timestamp {
+  @include typeface(small, 1);
+}
+
 // Section page
 .c-tag-listing__heading {
   @include typeface(tags, 10);
   color: rgb(var(--color-text-inverse));
   text-transform: lowercase;
+  font-weight: normal;
   padding: var(--space-2) var(--space-3);
   background-color: rgb(var(--color-tag-highlight)); //dark
 
@@ -426,6 +504,20 @@ footer .c-newsletter-form__terms a {
 .c-section__heading {
   @include typeface(small, 10);
   text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 3px;
+
+  @include media(">medium") {
+    @include typeface(header, 14);
+    font-weight: normal;
+  }
+}
+
+.c-basic__heading {
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
+  }
 }
 
 .c-basic__header:before {
@@ -519,4 +611,42 @@ footer .c-newsletter-form__terms a {
   left: -4px;
   top: calc(50% + 1px);
   @include border-accent;
+}
+
+// Typography
+
+.o-rte-text > h1,
+.o-rte-text > h2,
+.o-rte-text > h3,
+.o-rte-text > h4,
+.o-rte-text > h5,
+.o-rte-text > h6 {
+  padding-top: var(--space-3);
+}
+
+.u-has-accent--secondary:hover path,
+.o-rte-text .u-has-accent--secondary:hover path {
+  fill: rgb(var(--color-background));
+}
+
+.o-box-banner__close {
+  right: var(--space-2);
+  top: var(--space-2);
+}
+
+.c-search--top .c-search__button:hover {
+  background-color: rgb(var(--color-primary-1));
+}
+
+.c-contact-tout {
+  padding: var(--space-4);
+  width: 100%;
+}
+
+.u-reversed-out:after {
+  background-color: rgb(var(--color-background));
+}
+
+.c-block--horizontal .c-block__title {
+  @include typeface(header, 8);
 }

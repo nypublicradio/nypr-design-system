@@ -179,6 +179,11 @@
 .c-primary-nav--side .c-primary-nav__link {
   font-size: 28px;
   line-height: 1;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .c-primary-nav.c-primary-nav--top ul,
@@ -209,6 +214,11 @@
   margin-bottom: var(--space-2);
   line-height: 1;
   padding-bottom: var(--space-1);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 /**

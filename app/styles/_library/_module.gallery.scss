@@ -14,8 +14,7 @@
 }
 
 .c-gallery-overlay .o-credit a:hover {
-  color: rgb(var(--color-gallery-link));
-  background-color: rgb(var(--color-gallery-link-hover));
+  opacity: var(--opacity-hover);
 }
 
 .c-gallery-overlay .o-rte-text a:visited {
@@ -30,6 +29,20 @@
   @include media(">medium") {
     padding: 0;
   }
+}
+
+.c-gallery-overlay .o-back-to-link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.c-gallery-overlay .u-has-accent:hover,
+.c-gallery-overlay .o-rte-text .u-has-accent:hover {
+  background-color: transparent;
+  opacity: var(--opacity-hover);
 }
 
 .c-slides {

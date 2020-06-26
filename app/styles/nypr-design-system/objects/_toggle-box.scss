@@ -13,7 +13,7 @@ $ember-basic-dropdown-content-z-index: 10000;
 .c-toggle-box__label:before {
   width: 0;
   height: 0;
-  background-color: transparent;
+  background-color: rgb(var(--color-white));
   transform: translateY(20px);
   border: 12px solid transparent;
   border-bottom-color: white;

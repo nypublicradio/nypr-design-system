@@ -10,6 +10,7 @@
   text-align: right;
 }
 
+.c-block__object .c-block__title-link:hover,
 .c-block__media:hover + .c-block__object .c-block__title-link,
 .c-block__media:hover .c-block__title-link {
   color: rgb(var(--color-link-hover));
@@ -31,6 +32,20 @@
 
 .c-block__title {
   @include typeface(header, 10);
+  @include media(">medium") {
+    @include typeface(header, 8);
+  }
+  line-height: var(--line-height-4);
+
+  a,
+  a:visited,
+  a:active {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .c-block__title--has-icon a:after {
@@ -81,7 +96,7 @@
  * Urgent block banner
  */
 .c-block--urgent .c-block__eyebrow > .o-kicker {
-  background-color: rgb(var(--color-text-inverse));
+  background: rgb(var(--color-background));
   color: rgb(var(--color-text-inverse));
 }
 
@@ -131,7 +146,7 @@
 }
 
 .c-block--horizontal .c-block__title {
-  @include typeface(header, 8);
+  @include typeface(header, 7);
 }
 
 .c-block--horizontal .c-block__object {
@@ -154,7 +169,18 @@
 
 .c-block--horizontal--large .c-block__title {
   @include media(">medium") {
-    @include typeface(header, 11);
+    @include typeface(header, 8);
+  }
+  line-height: var(--line-height-4);
+
+  a,
+  a:visited,
+  a:active {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
@@ -176,7 +202,7 @@
 }
 
 .c-block-meta__timestamp {
-  @include typeface(small, 1);
+  @include typeface(small, 2);
   text-transform: uppercase;
   font-weight: normal;
   vertical-align: middle;
@@ -272,6 +298,7 @@ $author-media-width-l: 360;
   text-decoration: none;
 
   &:hover {
+    color: rgb(var(--color-link-hover));
     text-decoration: none;
   }
 }
