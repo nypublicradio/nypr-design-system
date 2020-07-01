@@ -199,9 +199,9 @@
   @include color-group-light;
 
   /* Borders */
-  --border-subtle: 2px dashed rgb(var(--color-border-subtle));
+  --border-subtle: 2px solid rgb(var(--color-border-subtle));
   --border-standard: 3px solid  rgb(var(--color-border-standard));
-  --border-bold:   5px dashed rgb(var(--color-border-bold));
+  --border-bold:   5px solid rgb(var(--color-border-bold));
 }
 
 /*Dark and Light Groups */
