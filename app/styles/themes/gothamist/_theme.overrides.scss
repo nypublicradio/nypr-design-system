@@ -650,3 +650,30 @@ blockquote {
 .c-block--horizontal .c-block__title {
   @include typeface(header, 8);
 }
+
+// icons
+
+.u-icon--xs {
+  width: 16px;
+  height: 16px;
+}
+
+.u-icon--s {
+  width: 20px;
+  height: 20px;
+}
+
+.u-icon--m {
+  width: 30px;
+  height: 30px;
+}
+
+.u-icon--l {
+  width: 40px;
+  height: 40px;
+}
+
+.u-icon--xl {
+  width: 50px;
+  height: 50px;
+}
