@@ -9,15 +9,10 @@
   display: inline-block;
 }
 
-.o-icon svg {
-  background: pink;
-}
-
 .o-icon svg,
 .o-icon path,
 .o-icon image,
 .o-icon rect {
-  overflow: visible;
   fill: rgb(var(--color-text));
 }
 
@@ -49,11 +44,3 @@
   width: 40px;
   height: 40px;
 }
-
-// legacy variables
-
-$icon-xsmall: 16px;
-$icon-small: 20px;
-$icon-medium: 30px;
-$icon-large: 40px;
-$icon-xlarge: 50px;

@@ -304,12 +304,12 @@
   fill: rgb(var(--color-primary-2));
 }
 .c-search-results__form .c-search__icon {
-  width: $icon-small;
-  height: $icon-small;
+  width: 20px;
+  height: 20px;
 
   @include media(">medium") {
-    width: $icon-medium;
-    height: $icon-medium;
+    width: 30px;
+    height: 30px;
   }
 }
 .c-search-results__term {
