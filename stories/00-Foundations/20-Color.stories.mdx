@@ -1,5 +1,6 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
 import { ColorSwatch } from '../../.storybook/custom/components/Swatches'
+import hbs from 'htmlbars-inline-precompile';
 
 <Meta title="Foundations/Color & Borders" />
 
@@ -43,10 +44,25 @@ Radial offers three slots for borders styles: **subtle**, **normal**, and **bold
   
 The Whitelabel styles shown below are only to communicate best practices for the three set styles, **subtle** being the least visually commanding of the three, **bold** being the most. When customizing these borders, make sure the style roughly fits into one of the three naming conventions, relative to the other two.
 
-| Border Name | Border Properties | Border Example |
-| -- | -- | -- |
-| --b-border-subtle | 2px, dashed (3,3) | EXAMPLE OF BORDER STYLE HERE |
-| --b-border-normal | 3px, solid | EXAMPLE OF BORDER STYLE HERE |
-| --b-border-bold | 5px, dashed (10,10) |  EXAMPLE OF BORDER STYLE HERE |
+| Border Name | Border Properties |
+| -- | -- |
+| --border-subtle | 2px, dashed (3,3) |
+| --border-normal | 3px, solid |
+| --border-bold | 5px, dashed (10,10) |
+
+<Preview withToolbar={true}>
+  <Story name="BorderExamples" height="300px">{{
+    template: hbs`
+    <div class="u-padding">
+      <p class="u-space--bottom">Subtle:</p>
+      <div class="sbdocs sbdocs-border-subtle u-space--double--bottom"></div>
+      <p class="u-space--bottom">Standard:</p>
+      <div class="sbdocs sbdocs-border-standard u-space--double--bottom"></div>
+      <p class="u-space--bottom">Bold:</p>
+      <div class="sbdocs sbdocs-border-bold"></div>
+    </div>
+    `
+  }}</Story>
+</Preview>
 
 More information on border styling can be found [here](https://flaviocopes.com/css-border/).
