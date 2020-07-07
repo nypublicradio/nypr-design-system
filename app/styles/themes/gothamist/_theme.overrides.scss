@@ -278,7 +278,8 @@ blockquote {
 }
 
 .c-side-menu__terms-links a,
-.c-main-footer__terms-links a {
+.c-main-footer__terms-links a,
+.c-main-footer__terms-links a:visited {
   color: rgb(var(--color-banana-yellow));
   text-decoration: none;
   text-transform: uppercase;
