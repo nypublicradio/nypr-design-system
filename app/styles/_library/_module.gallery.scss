@@ -39,6 +39,11 @@
   }
 }
 
+.c-gallery-overlay .o-back-to-link .u-has-accent,
+.c-gallery-overlay .o-back-to-link .u-has-accent:visited {
+  color: rgb(var(--color-white));
+}
+
 .c-gallery-overlay .u-has-accent:hover,
 .c-gallery-overlay .o-rte-text .u-has-accent:hover {
   background-color: transparent;
