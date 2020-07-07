@@ -4,13 +4,13 @@
   {{#if @close}}
     <NyprAButton class="c-donate-tout__close" data-test-donate-close @onclick={{@close}} @blank={{true}}>
       <span class="o-icon u-icon--xs o-icon--close">
-        <Icon @icon="close" @title="close"/>
+        <Icon @icon='close' @title='close'/>
       </span>
     </NyprAButton>
   {{/if}}
 
   <div class="c-donate-tout__graphic">
-    <Icon @icon={{@icon}}/>
+    <NyprASvg @icon={{@icon}}/>
   </div>
 
   {{#if (has-block)}}
