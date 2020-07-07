@@ -5,7 +5,7 @@
    target={{if target @target "_blank"}}
    rel="noopener"
    onclick={{if clickAction (action "handleClick")}}>
-  <NyprASvg @icon={{@service}}/>
+  <Icon @icon={{@service}}/>
   {{#if title}}
     <div class="c-share-tools__link-title">{{@title}}</div>
   {{/if}}

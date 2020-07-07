@@ -22,7 +22,7 @@
   {{#if @commentRoute}}
     {{#link-to params=@commentRoute class="c-block-meta__comments u-font--secondary-style u-font--xs"}}
       <span class="o-icon o-icon--comment u-icon--xxs">
-        <NyprASvg @icon='comment'/>
+        <Icon @icon="comment" @title="comment"/>
       </span>
       {{@commentCount}}
     {{/link-to}}
@@ -35,7 +35,7 @@
       rel="noopener"
     >
       <span class="o-icon o-icon--comment u-icon--xs">
-        <NyprASvg @icon='comment'/>
+        <Icon @icon="comment" @title="comment"/>
       </span>
       {{@commentCount}}
     </a>

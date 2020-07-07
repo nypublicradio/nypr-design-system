@@ -8,7 +8,7 @@
   <div class="c-newsletter-form__text">
     <p>
       <span class="c-newsletter-form__icon o-icon o-icon--newsletter-form u-icon--s">
-        <NyprASvg @icon='arrow-dashed'/>
+        <Icon @icon="gothamist/gothamist-arrow" @title="arrow"/>
       </span>
       <span data-test-newsletter-blurb>
         {{yield (hash blurb=(component 'blank-template'))}}
@@ -23,7 +23,7 @@
 
     <form.submit class="o-button--c-quarternary" data-label="Footer">
       <span class="c-newsletter-form__submit-icon o-icon o-icon--newsletter-form">
-        <NyprASvg @icon='arrow-dashed'/>
+        <Icon @icon="gothamist/gothamist-arrow" @title="arrow"/>
       </span>
       <span class="is-vishidden">Submit email</span>
     </form.submit>

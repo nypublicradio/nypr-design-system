@@ -22,7 +22,7 @@
       {{#link-to params=@galleryRoute class="u-has-accent u-has-accent--secondary" data-test-gallery-link=true}}
         {{@galleryPhotosCount}} {{if (eq @galleryPhotosCount 1) 'Photo' 'Photos'}}
         <span class="o-icon o-icon--gallery u-icon--xs">
-          <NyprASvg @icon='gallery'/>
+          <Icon @icon='gallery' @title="gallery"/>
         </span>
       {{/link-to}}
     {{/if}}

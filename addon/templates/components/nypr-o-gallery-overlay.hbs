@@ -7,7 +7,7 @@
       {{#if @parentRoute}}
         {{#link-to params=@parentRoute class="o-back-to-link" aria-label=(concat "Related Article: " @title)}}
           <span class="o-icon o-icon--prev-caret u-path-fill--white u-icon--xs">
-            <NyprASvg @icon="caret-down"/>
+            <Icon @icon="simple-arrow-down" @title="caret down"/>
           </span>
           <span class="u-has-accent u-has-accent--white" data-test-gallery-title>
             {{{@title}}}
@@ -36,7 +36,7 @@
 
       <span class="o-end-label c-gallery-end-label u-font--secondary-style u-font--xs u-color--gray" aria-description="End of Gallery">
         <span class="o-icon o-icon--down-arrow u-icon--m">
-          <NyprASvg @icon='arrow-dashed'/>
+          <Icon @icon="gothamist/gothamist-arrow" @title="arrow"/>
         </span>
         End
       </span>
