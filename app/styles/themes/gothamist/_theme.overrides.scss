@@ -402,6 +402,16 @@ blockquote {
   }
 }
 
+.c-gallery-overlay .u-has-accent,
+.c-gallery-overlay .u-has-accent:visited {
+  color: rgb(var(--color-background));
+
+  &:hover {
+    background-color: rgb(var(--color-link-hover-background));
+  }
+
+}
+
 // gallery share text
 .o-text-with-icon {
   text-transform: uppercase;
