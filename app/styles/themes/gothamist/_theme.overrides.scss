@@ -399,19 +399,23 @@ blockquote {
 
   &:hover {
     text-decoration: none;
+
+    .u-has-accent {
+      &:hover {
+        background-color: rgb(var(--color-link-hover-background));
+      }
+    }
   }
 }
 
-.c-gallery-overlay .u-has-accent,
-.c-gallery-overlay .u-has-accent:visited {
-  color: rgb(var(--color-background));
-
-  &:hover {
-    background-color: rgb(var(--color-link-hover-background));
-  }
-
+.c-gallery-overlay .o-back-to-link .u-has-accent,
+.c-gallery-overlay .o-back-to-link .u-has-accent:visited {
+  color: rgb(var(--color-white));
 }
 
+.c-gallery-overlay .u-has-accent:hover {
+  background-color: rgb(var(--color-link-hover-background));
+}
 // gallery share text
 .o-text-with-icon {
   text-transform: uppercase;
