@@ -1,0 +1,42 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import { ColorSwatch } from '../../.storybook/custom/components/Swatches'
+import hbs from 'htmlbars-inline-precompile';
+
+<Meta title="Foundations/Color & Borders" />
+
+# Borders
+
+Borders give structure and decoration to elements in order to form containers for content. Like other styling elements, they allow us to delineate different types of content in order to help users find what they are looking for. They are also used to set visual tone, create sensical UX patterns and draw a users eye to important call-outs or information. Remember, borders are not always necessary, but can be a useful tool in the right scenario, like a potato masher.
+
+### Usage
+
+Generally borders are used to help call-out or indicate something of high value on the page. Typically borders can help establish hierarchy on the page, for example, using a prominent border around an email collector can signify the primary action for the user to take, while using a more subtle border (for example sponsored ad) can help users to distinguish paid content from standard editorial content.  
+
+### Styles
+
+Radial offers three slots for borders styles: **subtle**, **standard**, and **bold**. Each style has its own color variable, and each style can be customized (i.e. width, style, and color) to suit a brand's theme.
+  
+The Whitelabel styles shown below are only to communicate best practices for the three set styles, **subtle** being the least visually commanding of the three, **bold** being the most. When customizing these borders, make sure the style roughly fits into one of the three naming conventions, relative to the other two.
+
+| Border Name | Border Properties |
+| -- | -- |
+| --border-subtle | 2px, dashed (3,3) |
+| --border-standard | 3px, solid |
+| --border-bold | 5px, dashed (10,10) |
+
+<Preview withToolbar={true}>
+  <Story name="BorderExamples" height="300px">{{
+    template: hbs`
+    <div class="u-padding">
+      <p class="u-space--bottom">Subtle:</p>
+      <div class="sbdocs sbdocs-border-subtle u-space--double--bottom"></div>
+      <p class="u-space--bottom">Standard:</p>
+      <div class="sbdocs sbdocs-border-standard u-space--double--bottom"></div>
+      <p class="u-space--bottom">Bold:</p>
+      <div class="sbdocs sbdocs-border-bold"></div>
+    </div>
+    `
+  }}</Story>
+</Preview>
+
+More information on border styling can be found [here](https://flaviocopes.com/css-border/).
