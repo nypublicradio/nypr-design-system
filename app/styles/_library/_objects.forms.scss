@@ -394,3 +394,8 @@ div.o-confirm-message p {
     width: 40px;
   }
 }
+
+.c-newsletter-article svg,
+.c-newsletter-article svg rect {
+  fill: rgb(var(--color-text-inverse));
+}
