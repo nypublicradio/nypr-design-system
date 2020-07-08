@@ -321,7 +321,7 @@ Icons that are interactive must follow the same WCAG 2.0 contrast standards as t
 ## Gothamist Icons
 
 <Preview>
-  <Story name="GothamistIcons" height="100px">{{
+  <Story name="GothamistIcons" height="200px">{{
     template: hbs`
     <div class="l-grid l-grid--4up">
       <div>
@@ -330,6 +330,22 @@ Icons that are interactive must follow the same WCAG 2.0 contrast standards as t
               <Icon @icon='gothamist/arrow' @title='icon title' />
             </span>
           <div>gothamist arrow</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--l u-space--right">
+              <Icon @icon='gothamist/logo' @title='icon title' />
+            </span>
+          <div>gothamist logo</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--l u-space--right">
+              <Icon @icon='gothamist/logo-stacked' @title='icon title' />
+            </span>
+          <div>gothamist logo stacked</div>
         </div>
       </div>
       <div>
@@ -353,6 +369,25 @@ Icons that are interactive must follow the same WCAG 2.0 contrast standards as t
   }}</Story>
 </Preview>
 
+## WNYC Icons
+
+<Preview>
+  <Story name="LogoIcons" height="100px">{{
+    template: hbs`
+    <div class="l-grid l-grid--4up">
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--l u-space--right">
+              <Icon @icon='wnyc/logo' @title='icon title' />
+            </span>
+          <div>wnyc logo</div>
+        </div>
+      </div>
+    </div>
+    `
+  }}</Story>
+</Preview>
+
 ## WQXR Icons
 
 <Preview>
@@ -365,6 +400,14 @@ Icons that are interactive must follow the same WCAG 2.0 contrast standards as t
               <Icon @icon='wqxr/listener-count' @title='icon title' />
             </span>
           <div>listener count</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--s u-space--right">
+              <Icon @icon='wqxr/logo' @title='icon title' />
+            </span>
+          <div>wqxr logo</div>
         </div>
       </div>
       <div>
