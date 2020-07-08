@@ -413,6 +413,7 @@ blockquote {
 .c-gallery-overlay .u-has-accent:hover {
   background-color: rgb(var(--color-link-hover-background));
 }
+
 // gallery share text
 .o-text-with-icon {
   text-transform: uppercase;
@@ -688,4 +689,19 @@ blockquote {
 .u-icon--xl {
   width: 50px;
   height: 50px;
+}
+
+.c-main-footer .c-main-footer__signup svg,
+.c-main-footer .c-main-footer__signup svg rect {
+  fill: rgb(var(--color-text));
+}
+
+.c-main-footer .c-newsletter-form__button svg,
+.c-main-footer .c-newsletter-form__button svg rect {
+  fill: rgb(var(--color-footer-text));
+}
+
+.c-newsletter-article svg,
+.c-newsletter-article svg rect {
+  fill: rgb(var(--color-text-inverse));
 }
