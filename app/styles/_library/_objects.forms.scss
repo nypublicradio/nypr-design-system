@@ -366,7 +366,7 @@ div.o-confirm-message p {
     border: none;
 
     input {
-      border: 3px solid rgb(var(--color-border-standard));
+      border: var(--border-standard);
       height: 40px;
       font-size: 12px;
 

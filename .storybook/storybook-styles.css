@@ -17,3 +17,17 @@ i.e. .sbdocs.sbdocs-example */
 .u-background-color--cool-white {
   background: #EAEFF0;
 }
+
+/* some border styles for border examples */
+.sbdocs.sbdocs-border-subtle {
+  width: 100%;
+  border-bottom: var(--border-subtle);
+}
+.sbdocs.sbdocs-border-standard {
+  width: 100%;
+  border-bottom: var(--border-standard);
+}
+.sbdocs.sbdocs-border-bold {
+  width: 100%;
+  border-bottom: var(--border-bold);
+}

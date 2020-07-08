@@ -1,5 +1,35 @@
 # `nypr-design-system` changelog
 
+## `3.0.1-beta3`
+
+- #104 whitelabel vqa
+
+https://jira.wnyc.org/browse/DS-876
+https://jira.wnyc.org/browse/DS-874
+https://jira.wnyc.org/browse/DS-880
+
+- #103 and #102 borders
+
+https://jira.wnyc.org/browse/DS-676
+https://jira.wnyc.org/browse/DS-526
+https://jira.wnyc.org/browse/DS-835
+
+- #101 iconography part 1
+
+https://jira.wnyc.org/browse/DS-528
+
+- #100 token reference
+
+https://jira.wnyc.org/browse/DS-606
+- #99 DS-867 footer links and more
+
+
+https://jira.wnyc.org/browse/DS-867
+
+- #98 whitelabel vqa
+
+https://jira.wnyc.org/browse/DS-883
+
 ## `3.0.1-beta2`
 
 - [BUGFIX] #97 White label Theme Fixes

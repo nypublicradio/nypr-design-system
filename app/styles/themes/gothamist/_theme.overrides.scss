@@ -278,7 +278,8 @@ blockquote {
 }
 
 .c-side-menu__terms-links a,
-.c-main-footer__terms-links a {
+.c-main-footer__terms-links a,
+.c-main-footer__terms-links a:visited {
   color: rgb(var(--color-banana-yellow));
   text-decoration: none;
   text-transform: uppercase;
@@ -398,9 +399,18 @@ blockquote {
 
   &:hover {
     text-decoration: none;
+
+    .u-has-accent {
+      &:hover {
+        background-color: rgb(var(--color-link-hover-background));
+      }
+    }
   }
 }
 
+.c-gallery-overlay .u-has-accent:hover {
+  background-color: rgb(var(--color-link-hover-background));
+}
 // gallery share text
 .o-text-with-icon {
   text-transform: uppercase;
