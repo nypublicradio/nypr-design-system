@@ -266,10 +266,12 @@ blockquote {
 .c-secondary-nav .c-secondary-nav__link {
   color: rgb(var(--color-white));
   @include dotted-underline(--color-white);
+  text-decoration: none;
 
   &:hover, &:focus {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
+    text-decoration: none;
   }
 }
 
