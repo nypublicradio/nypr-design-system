@@ -1,5 +1,13 @@
 # `nypr-design-system` changelog
 
+## `3.0.1-beta4`
+
+- #105 more whitelabel vqa
+
+https://jira.wnyc.org/browse/DS-901
+https://jira.wnyc.org/browse/DS-902
+https://jira.wnyc.org/browse/DS-736
+
 ## `3.0.1-beta3`
 
 - #104 whitelabel vqa
