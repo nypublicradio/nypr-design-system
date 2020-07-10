@@ -266,10 +266,12 @@ blockquote {
 .c-secondary-nav .c-secondary-nav__link {
   color: rgb(var(--color-white));
   @include dotted-underline(--color-white);
+  text-decoration: none;
 
   &:hover, &:focus {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
+    text-decoration: none;
   }
 }
 
@@ -411,6 +413,7 @@ blockquote {
 .c-gallery-overlay .u-has-accent:hover {
   background-color: rgb(var(--color-link-hover-background));
 }
+
 // gallery share text
 .o-text-with-icon {
   text-transform: uppercase;
@@ -686,4 +689,19 @@ blockquote {
 .u-icon--xl {
   width: 50px;
   height: 50px;
+}
+
+.c-main-footer .c-main-footer__signup svg,
+.c-main-footer .c-main-footer__signup svg rect {
+  fill: rgb(var(--color-text));
+}
+
+.c-main-footer .c-newsletter-form__button svg,
+.c-main-footer .c-newsletter-form__button svg rect {
+  fill: rgb(var(--color-footer-text));
+}
+
+.c-newsletter-article svg,
+.c-newsletter-article svg rect {
+  fill: rgb(var(--color-text-inverse));
 }
