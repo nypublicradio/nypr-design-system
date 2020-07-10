@@ -20,6 +20,6 @@ export default Component.extend({
     @argument icon
     @type {String}
   */
-  icon: 'caret-down',
+  icon: 'simple-arrow-down',
 });
 // END-SNIPPET
