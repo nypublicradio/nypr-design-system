@@ -1,0 +1,187 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="For Developers/Token Implementation Notes" />
+
+Tokens are what powers Radial's themability. By building our components with tokens instead of specific values, we allow them to be easily rethemed. They won't cover everything we want in a new design but they let us tune the defaults so we won't have to change as much with custom CSS.
+
+## Glossary
+
+Tere are a feew terms around tokens that can be confusings so let's be clear what we're talking about.
+
+**Variables:** CSS custom properties, also known as CSS variables. This is the technical feature we use to implement tokens.
+
+**Dials:** Variables that can be set by a theme author to change the value of a single token. For example, changing a color.
+
+**Levers:** Variables that can be set by a theme author to change the value of multiple tokens. For example, setting the font scaling factor which changes all of the font size tokens.
+
+**Tokens:** CSS Variables that a developer uses when implementing the base styles for a component.
+
+## CSS Custom Properties
+
+We chose to go with CSS custom properties over SASS variables because of several features that weren't easily replicated with SASS.
+
+Advantages
+- preserving the variables in source allows us to use the CSS as a source of truth in our storybook docs.
+- can see token names in the browser devtools when debugging
+- scoping rules make implementing color groups straightforward
+
+Disadvantages:
+- limited support in IE
+
+## Token Linting
+
+We use stylelint to enforce an allowlist so that things like theme specific colors don't get added to component styles.
+
+## Component Specific Tokens
+
+TODO: Add reccomendations for adding dials to components.
+
+## Typography
+
+### Typefaces
+For Typography our set of tokens supports up to four typefaces. A header, subheader, body, and small font. In addition to the font family, we have tokens to set the default values for font weight and letter spacing. This gives a theme author the option to use a non-default weight for headers, such as a semibold (600) or ultrabold (900) header, or a custom default line spacing.
+
+Default settings for a typeface:
+```
+--font-family-header:    'Libre Baskerville', 'Times New Roman', serif;
+--letter-spacing-header: normal;
+--font-weight-header:    700;
+```
+
+### Font Scale
+
+For font sizes we use a modular font scale. A theme author only needs to set the levers `--font-base` (a font size in pixels) and `--font-ratio` to adjust the modular font scale. This will configure a range of font size tokens numbered from 1 to 16 with `--font-size-6` matching the base size. Size 1 is the smallest, and size 16 is the largest.
+
+There are reccomendations for designers to try to restrict certain typefaces to certain ranges of font sizes for consistency.
+
+### Line Heights
+
+There's also a set of default line-height tokens to match each font size token. Because ideal line heights for fonts can vary depending on the typeface and context, these need to be configured manually.
+
+When a developer uses a `--font-size-*` token they should generally use the correspending `--line-height-*` token, unless manually setting a different height makes sense (for example, single-line text that should be vertically centered, such as in a button, might have a custom line height to match the button size.)
+
+### The typeface mixin
+To help developers always include the font-weight letter-spacing and line-height tokens, which can be tedious to enter and easily overlooked the typeface mixin sets all these values in a single line.
+
+```
+@include typeface(header, 10)
+```
+will expand to
+```
+font-family:    var(--font-family-header);
+letter-spacing: var(--letter-spacing-header);
+font-weight:    var(--font-weight-header);
+font-size:      var(--font-size-10);
+line-height:    var(--line-height-10);
+```
+
+One recommended pattern is to use the typeface mixin whenever changing typefaces, but use the font size and line height tokens in media queries or modifier classes that change the size.
+
+Example font token usage:
+```
+.my-header {
+    @include typeface (header, 8);
+
+    @include media(">=medium") {
+       font-size:      var(--font-size-10);
+       line-height:    var(--line-height-10);
+    }
+}
+
+.my-header.mod-smaller {
+    font-size:      var(--font-size-6);
+    line-height:    var(--line-height-6);
+
+    @include media(">=medium") {
+       font-size:      var(--font-size-8);
+       line-height:    var(--line-height-8);
+    }
+}
+```
+
+## Spacing
+
+Radial includes three predefined spacing scales, Compact, Default, and Loose. To choose a spacing scale for a theme, the theme author can change the variables `--spacing-base` and `spacing-increment` to use a set of predefine variables.
+
+Setting a theme to use compact spacing:
+```
+  --spacing-base:      var(--spacing-base-compact);
+  --spacing-increment: var(--spacing-increment-compact);
+```
+
+Setting these levers configures the values for a range of spacing tokens, numbered `--space-1` to `--space-11`.
+
+When creating components, developers and designers should use these tokens consistely according to a set of guidelines.
+
+## Colors
+
+### Color Format
+
+The problem:
+We want to be able to store colors in a way where:
+
+1. We can apply opacity to the colors themselves.
+2. The variables are preserved as CSS variables even after compilation.
+
+Obstacles:
+- SASS functions wont work because they compile out the variable names.
+- Supported CSS color formats won't let use rgb colors:
+- Using the 8 digit hex format (#RRGGBBAA) almost works, but we can't concatenate css vars without a space in-between. `--my-green: '#229922'; --my-opacity: 'cc'; color: var(--my-green)var(--my-opacity);` doesn't work. nor does `--my-green: '#229922'; color: var(--my-green)cc;`.
+-  `--my-green: '#229922'; rgba(#229922, 0.8)` also won't work in plain CSS.
+
+We ended up storing colors as a comma separated set of rgb values: e.g. `--my-green: "34,153,34";`
+This lets us do `color: rgba(var(--my-green), 0.8)` or even `color: rgba(var(--my-green), (--opacity-token))`
+
+Since the design team uses hex colors in their designs, we include a sass function that will convert hex colors to these rgb values, to make theme files easier to parse.
+
+`--my-green: hex2rgb("229922");` becomes `--my-green: "34,153,34"` in the compiled css.
+
+Found this after sorting this all out, but the first part of this article covers basically this exact same solution: https://blog.jim-nielsen.com/2019/generating-shades-of-color-using-css-variables/
+
+### The base palette
+
+Because color tokens will be need to be customized for each theme, and also documented in several places we don't want to go overboard with the list of color tokens. The base set should be colors that are use widely in multiple places across our sites and provide a useful default pallete that we can use to build our components.
+
+### Primary Theme Colors
+
+The guidelines for wherre to use these within components are still a little unclear, but basically these are the brand colors for the site.
+
+### Background Colors
+
+The main background color and some alternates for special classes.
+
+### Text Colors
+
+Colors for various types and states of text. Something to note here is that the definition of "text" is pretty flexible. Text color tokens can be used as defaults for any "text-like" things, such as inline icons, list bullets, etc. Basically anything that sits inline and needs to have contrast with the background.
+
+### Link Colors
+
+A typical site will probably customize links in multiple places, but as defaults to use for building our components we provide two sets of link tokens. The defaults for links, `--link-*` and a second set to use in navigation elements, `--navigation-link-*`.
+
+### Tag Colors
+
+Customize the default appearance of "tag" atoms that are used in various components.
+
+### Button Colors
+
+Customize the default appearance of buttons. Right now we assume light text on a dark background. `--button-color` is the `background-color` of the button.
+
+### Color Groups
+
+We use color groups to allow for multiple color schemes without adding new tokens. Typically there are two color groups in a theme, a "light" group and a "dark" group. A color group is a new set of values for the same tokens. The dark group might have dark background colors light text colors.
+
+You can look at the colors file in the white label theme for an example.
+
+Color groups are usually implemented with a SASS mixin that can be applies the new values. You can apply this mixin to the element you want to use the color group in your overrides.
+
+```
+// my-theme/overrides/components/_header.scss
+.header {
+  @include color-group-dark;
+}
+```
+
+## Icons
+
+## Borders
+
