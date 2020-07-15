@@ -8,7 +8,14 @@
           class=(concat 'c-primary-nav__link ' @linkClass)
           data-test-nav-link=i
         }}
-          {{item.text}}
+          {{#if item.icon}}
+            <div class='c-primary-nav-link__icon'>
+              <NyprASvg @icon='{{item.icon}}' />
+            </div>
+          {{/if}}
+          {{#if item.text}}
+            <div class='c-primary-nav-link__text'>{{item.text}}</div>
+          {{/if}}
         {{/link-to}}
       {{else if item.url}}
         <a
@@ -16,7 +23,14 @@
           class="c-primary-nav__link {{@linkClass}}"
           data-test-nav-link={{i}}
         >
-          {{item.text}}
+          {{#if item.icon}}
+            <div class='c-primary-nav-link__icon'>
+              <NyprASvg @icon='{{item.icon}}' />
+            </div>
+          {{/if}}
+          {{#if item.text}}
+            <div class='c-primary-nav-link__text'>{{item.text}}</div>
+          {{/if}}
         </a>
       {{/if}}
     </li>
