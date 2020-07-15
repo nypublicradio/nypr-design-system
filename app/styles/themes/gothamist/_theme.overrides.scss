@@ -241,24 +241,6 @@ blockquote {
   }
 }
 
-// Nav Links
-
-.c-primary-nav__link {
-  text-decoration: none;
-
-  &:hover, &:focus {
-    text-decoration: none;
-  }
-}
-
-.c-primary-nav__link .c-primary-nav-link__text {
-  display: inline-block;
-}
-
-.c-primary-nav__link .c-primary-nav-link__icon {
-  display: inline-block;
-}
-
 // Top Navigation
 .c-primary-nav--top .c-primary-nav__link:hover {
   color: rgb(var(--color-reddish-orange));
@@ -268,11 +250,6 @@ blockquote {
   }
 }
 
-.c-primary-nav--top .c-primary-nav__link .c-primary-nav-link__icon svg {
-  height: var(--font-size-3);
-  padding-right: 4px;
-}
-
 // Side Navigaton
 .c-side-menu .c-search__button:hover {
   background-color: rgb(var(--color-form-button));
@@ -280,7 +257,6 @@ blockquote {
 }
 
 .c-primary-nav--side .c-primary-nav__link {
-  padding-bottom: 2px;
   color: rgb(var(--color-banana-yellow));
 
   &:hover, &:focus {
@@ -298,9 +274,7 @@ blockquote {
 }
 
 .c-primary-nav--side .c-primary-nav__link .c-primary-nav-link__icon svg {
-  height: var(--font-size-7);
   fill: rgb(var(--color-banana-yellow));
-  padding-right: 8px;
 }
 
 .c-secondary-nav .c-secondary-nav__link {
