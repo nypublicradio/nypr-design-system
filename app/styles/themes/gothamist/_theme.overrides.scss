@@ -80,14 +80,14 @@ blockquote {
     }
 
     @include media('>xlarge') {
-      left: calc(var(--grid-col-width) + var(--grid-gutter));
+      margin-left: calc(var(--grid-col-width) + var(--grid-gutter));
     }
 
     --xl-container: calc(var(--max-width-xl) + var(--space-5));
     @include media('>xxlarge') {
       position: absolute;
       bottom: -43px;
-      left: calc(50% - var(--xl-container) / 2 + var(--space-5));
+      margin-left: calc(50% - var(--xl-container) / 2 + var(--space-5));
     }
   }
 
