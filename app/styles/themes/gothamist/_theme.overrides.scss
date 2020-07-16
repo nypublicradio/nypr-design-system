@@ -258,6 +258,9 @@ blockquote {
 
 .c-primary-nav--side .c-primary-nav__link {
   color: rgb(var(--color-banana-yellow));
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover, &:focus {
     color: rgb(var(--color-white));
