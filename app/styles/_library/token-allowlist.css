@@ -33,6 +33,24 @@
   --font-size-15: *;
   --font-size-16: *;
 
+  /* Line Height */
+  --line-height-1:  *;
+  --line-height-2:  *;
+  --line-height-3:  *;
+  --line-height-4:  *;
+  --line-height-5:  *;
+  --line-height-6:  *;
+  --line-height-7:  *;
+  --line-height-8:  *;
+  --line-height-9:  *;
+  --line-height-10: *;
+  --line-height-11: *;
+  --line-height-12: *;
+  --line-height-13: *;
+  --line-height-14: *;
+  --line-height-15: *;
+  --line-height-16: *;
+
   /* Colors */
   --color-primary-1:            *;
   --color-primary-2:            *;

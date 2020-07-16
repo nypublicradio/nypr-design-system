@@ -29,12 +29,13 @@ b {
  */
 blockquote {
   margin-left: var(--space-5);
-  @include border-accent(bottom, left);
+  border-left: var(--border-subtle);
 }
+
 blockquote p {
-    margin: var(--space-5) 0;
-    padding: var(--space-2) var(--space-4);
-  }
+  margin: var(--space-5) 0;
+  padding: var(--space-2) var(--space-4);
+}
 
 /**
  * Horizontal Rule

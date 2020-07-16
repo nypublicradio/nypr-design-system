@@ -7,7 +7,7 @@
 
   /* Neutrals */
   --color-black:      #{hex2rgb(#000000)};
-  --color-gray-dark:  #{hex2rgb(#333333)};
+  --color-dark-gray:  #{hex2rgb(#333333)};
   --color-gray:       #{hex2rgb(#afafaf)};
   --color-light-gray: #{hex2rgb(#f3f3f3)};
   --color-white:      #{hex2rgb(#ffffff)};
@@ -28,28 +28,28 @@
 
 @mixin color-group-light {
   --color-primary-1:            var(--color-cool-blue);
-  --color-primary-2:            var(--color-sea-green);
+  --color-primary-2:            var(--color-ceramic-blue);
   --color-primary-3:            var(--color-bright-purple);
   --color-background:           var(--color-white);
   --color-background-muted:     var(--color-cool-white);
   --color-background-highlight: var(--color-cool-white);
-  --color-text:                 var(--color-gray-dark);
+  --color-text:                 var(--color-dark-gray);
   --color-text-print:           var(--color-black);
   --color-text-muted:           var(--color-concrete);
   --color-text-error:           var(--color-ember-red);
   --color-text-inverse:         var(--color-white);
-  --color-text-metadata:        var(--color-gray-dark);
+  --color-text-metadata:        var(--color-dark-gray);
 
   /* Links */
-  --color-link:                 var(--color-cool-blue);
+  --color-link:                 var(--color-ceramic-blue);
   --text-decoration-link:       underline;
-  --color-link-hover:           var(--color-sky-blue);
-  --color-link-hover-background: var(--color-white);
+  --color-link-hover:           var(--color-ceramic-blue);
+  --color-link-hover-background: none;
   --text-decoration-link-hover: underline;
-  --opacity-link-hover:         1;
+  --opacity-link-hover:         0.8;
 
   /* Navigation Links */
-  --color-navigation-link:                 var(--color-gray-dark);
+  --color-navigation-link:                 var(--color-black);
   --text-decoration-navigation-link:       underline;
   --color-navigation-link-hover:           var(--color-sky-blue);
   --text-decoration-navigation-link-hover: underline;
@@ -57,17 +57,17 @@
 
   /* Header */
   --color-header-text: var(--color-white);
-  --color-header-background: var(--color-dark-gray);
-  --color-header-label-text: var(--color-light-gray);
-  --color-header-button-background: var(--color-reddish-orange);
+  --color-header-background: var(--color-cool-white);
+  --color-header-label-text: var(--color-black);
+  --color-header-button-background: var(--color-cool-blue);
   --color-header-button-text: var(--color-white);
   --color-header-button-hover-text: var(--color-white);
-  --color-header-icon: var(--color-white);
-  --color-header-icon-hover: var(--color-reddish-orange);
+  --color-header-icon: var(--color-black);
+  --color-header-icon-hover: var(--color-cool-blue);
 
   /* Tags */
   --color-tag-text:             var(--color-white);
-  --color-tag-background:       var(--color-cool-blue);
+  --color-tag-background:       var(--color-ceramic-blue);
   --color-tag-highlight:        var(--color-cool-blue);
   --color-tag-hover-text:       var(--color-white);
   --color-tag-hover-background: var(--color-cool-blue);
@@ -85,39 +85,23 @@
   --opacity-button-outline:       var(--opacity-hover);
 
   /* Borders */
-  --color-border-subtle: var(--color-black);
-  --color-border-standard: var(--color-black);
-  --color-border-bold:   var(--color-black);
-
-  /* Forms */
-  --color-checkbox: var(--color-dark-gray);
-  --color-placeholder-text: var(--color-brown-grey);
-  --color-form-button: var(--color-reddish-orange);
-
-  /* Lists */
-  --color-bullet: var(--color-black);
-
-  /* Pull Quotes */
-  --color-pull-quote-text: var(--color-brown-grey);
-
-  /* Gallery */
-  --color-gallery-link: var(--color-white);
-  --color-gallery-link-hover: var(--color-reddish-orange);
-  --color-gallery-ad-label: var(--color-dirty-salmon);
+  --color-border-subtle: var(--color-background-highlight);
+  --color-border-standard: var(--color-background-highlight);
+  --color-border-bold:   var(--color-background-highlight);
 }
 
 @mixin color-group-dark {
   --color-primary-1:            var(--color-banana-yellow);
   --color-primary-2:            var(--color-reddish-orange);
   --color-primary-3:            var(--color-purple);
-  --color-background:           var(--color-gray-dark);
+  --color-background:           var(--color-ceramic-blue);
   --color-background-muted:     rgb(var(--color-background));  //not assigned
   --color-background-highlight: var(--color-ceramic-blue);
   --color-text:                 var(--color-white);
   --color-text-print:           var(--color-black);
   --color-text-muted:           var(--color-concrete);
   --color-text-error:           var(--color-ember-red);
-  --color-text-inverse:         var(--color-gray-dark);
+  --color-text-inverse:         var(--color-dark-gray);
   --color-text-metadata:        var(--color-white);
 
   /* Links */
@@ -146,7 +130,7 @@
 
   /* Tags */
   --color-tag-text:             var(--color-white);
-  --color-tag-background:       var(--color-banana-yellow);
+  --color-tag-background:       var(--color-ceramic-blue);
   --color-tag-highlight:        var(--color-cool-blue);
   --color-tag-hover-text:       var(--color-white);
   --color-tag-hover-background: var(--color-reddish-orange);
@@ -163,25 +147,9 @@
   --color-button-outline-pressed: var(--color-white);
   --opacity-button-outline:       var(--opacity-hover);
 
-  --color-border-bold:          var(--color-border-bold);      //none
-  --color-border-standard:      var(--color-border-standard);  //none
-  --color-border-subtle:        var(--color-border-subtle);    //none
-
-  /* Forms */
-  --color-checkbox: var(--color-dark-gray);
-  --color-placeholder-text: var(--color-brown-grey);
-  --color-form-button: var(--color-reddish-orange);
-
-  /* Lists */
-  --color-bullet: var(--color-black);
-
-  /* Pull Quotes */
-  --color-pull-quote-text: var(--color-brown-grey);
-
-  /* Gallery */
-  --color-gallery-link: var(--color-white);
-  --color-gallery-link-hover: var(--color-reddish-orange);
-  --color-gallery-ad-label: var(--color-dirty-salmon);
+  --color-border-bold:          var(--color-background-highlight);      //none
+  --color-border-standard:      var(--color-background-highlight);  //none
+  --color-border-subtle:        var(--color-background-highlight);    //none
 }
 
 /*  Base */
@@ -189,9 +157,9 @@
   @include color-group-light;
 
   /* Borders */
-  --border-subtle: 2px dashed rgb(var(--color-border-subtle));
+  --border-subtle: 2px solid rgb(var(--color-border-subtle));
   --border-standard: 3px solid  rgb(var(--color-border-standard));
-  --border-bold:   5px dashed rgb(var(--color-border-bold));
+  --border-bold:   5px solid rgb(var(--color-border-bold));
 }
 
 /*Dark and Light Groups */

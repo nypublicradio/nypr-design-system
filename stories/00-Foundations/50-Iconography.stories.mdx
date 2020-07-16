@@ -1,4 +1,5 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import hbs from 'htmlbars-inline-precompile';
 
 <Meta title="Foundations/Iconography" />
 
@@ -20,21 +21,340 @@ Icons that are interactive must follow the same WCAG 2.0 contrast standards as t
 
 ## Available Icons
 
-TBD Table of all icons used across the Whitelabel and Gothamist here. (VISUAL EXAMPLE, NAME, TOKEN NAME - TBD)
-
+<Preview>
+  <Story name="AllIcons" height="575px">{{
+    template: hbs`
+    <div class="l-grid l-grid--4up">
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--s u-space--right">
+              <Icon @icon='arrow-pointed-down' @title='icon title' />
+            </span>
+          <div>arrow pointed down</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--s u-space--right">
+              <Icon @icon='arrow-pointed-left' @title='icon title' />
+            </span>
+          <div>arrow pointed left</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='arrow-pointed-right' @title='icon title' />
+            </span>
+          <div>arrow pointed right</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='arrow-pointed-up' @title='icon title' />
+            </span>
+          <div>arrow pointed up</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='audio' @title='icon title' />
+            </span>
+          <div>audio</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='bookmark' @title='icon title' />
+            </span>
+          <div>bookmark</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='checkmark' @title='icon title' />
+            </span>
+          <div>checkmark</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='close' @title='icon title' />
+            </span>
+          <div>close</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='comment' @title='icon title' />
+            </span>
+          <div>comment</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='download' @title='icon title' />
+            </span>
+          <div>download</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='dropdown' @title='icon title' />
+            </span>
+          <div>dropdown</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='email' @title='icon title' />
+            </span>
+          <div>email</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='embed' @title='icon title' />
+            </span>
+          <div>embed</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='facebook' @title='icon title' />
+            </span>
+          <div>facebook</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='gallery' @title='icon title' />
+            </span>
+          <div>gallery</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='gothamist/gothamist-arrow' @title='icon title' />
+            </span>
+          <div>gothamist arrow</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='hamburger' @title='icon title' />
+            </span>
+          <div>hamburger</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='instagram' @title='icon title' />
+            </span>
+          <div>instagram</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='open-in-new-window' @title='icon title' />
+            </span>
+          <div>open in new window</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='placeholder' @title='icon title' />
+            </span>
+          <div>placeholder</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='play' @title='icon title' />
+            </span>
+          <div>play</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='print' @title='icon title' />
+            </span>
+          <div>print</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='rss' @title='icon title' />
+            </span>
+          <div>rss</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='reddit' @title='icon title' />
+            </span>
+          <div>reddit</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='search' @title='icon title' />
+            </span>
+          <div>search</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='simple-arrow-left' @title='icon title' />
+            </span>
+          <div>simple arrow left</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='simple-arrow-right' @title='icon title' />
+            </span>
+          <div>simple arrow right</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='simple-arrow-up' @title='icon title' />
+            </span>
+          <div>simple arrow up</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='spotify' @title='icon title' />
+            </span>
+          <div>spotify</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='stylish-arrow' @title='icon title' />
+            </span>
+          <div>stylish arrow</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='twitter' @title='icon title' />
+            </span>
+          <div>twitter</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='video' @title='icon title' />
+            </span>
+          <div>video</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='volume' @title='icon title' />
+            </span>
+          <div>volume</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='volume-muted' @title='icon title' />
+            </span>
+          <div>volume-muted</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='youtube' @title='icon title' />
+            </span>
+          <div>youtube</div>
+        </div>
+      </div>
+    </div>
+    `
+  }}</Story>
+</Preview>
 
 ## Sizing
 
 Our default icons come in four sizes: 16px (XS), 24px (S), 32px (M), and 40px (L). These sizes are the dimensions of the SVG and include the icon as well as the padding. This consistency helps when sourcing third party icons. Larger sizes may be available to other brands. 
 
-| Size | Measurement | Example |
-| -- | -- | -- |
-| XS | 16px | ICON |
-| S | 24px | ICON |
-| M | 32px | ICON |
-| L | 40px | ICON |
+| Size | Measurement |
+| -- | -- |
+| XS | 16px |
+| S | 24px |
+| M | 32px |
+| L | 40px |
 
 When creating new icons, padding can be determined by using at least ⅛ of the icon frame’s width.
+
+## Sizing Examples
+
+<Preview>
+  <Story name="IconSizes" height="175px">{{
+    template: hbs`
+          <div class= "u-flex u-align-items--center u-space--bottom">
+              <span class= "o-icon u-icon--xs u-space--right">
+                <Icon @icon='audio' @title='icon title' />
+              </span>
+            <div>XS</div>
+          </div>
+          <div class= "u-flex u-align-items--center u-space--bottom">
+              <span class= "o-icon u-icon--s u-space--right">
+                <Icon @icon='audio' @title='icon title' />
+              </span>
+            <div>S</div>
+          </div>
+          <div class= "u-flex u-align-items--center u-space--bottom">
+              <span class= "o-icon u-icon--m u-space--right">
+                <Icon @icon='audio' @title='icon title' />
+              </span>
+            <div>M</div>
+          </div>
+          <div class= "u-flex u-align-items--center u-space--bottom">
+              <span class= "o-icon u-icon--l u-space--right">
+                <Icon @icon='audio' @title='icon title' />
+              </span>
+            <div>L</div>
+          </div>
+    `
+  }}</Story>
+</Preview>
 
 TBD GRAPHIC HERE
 
@@ -43,7 +363,3 @@ TBD GRAPHIC HERE
 
 Design & Dev Team TBD
 
-  
-## Tokens
-
-Dev Team TBD

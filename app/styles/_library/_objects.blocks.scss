@@ -10,6 +10,7 @@
   text-align: right;
 }
 
+.c-block__object .c-block__title-link:hover,
 .c-block__media:hover + .c-block__object .c-block__title-link,
 .c-block__media:hover .c-block__title-link {
   color: rgb(var(--color-link-hover));
@@ -31,13 +32,31 @@
 
 .c-block__title {
   @include typeface(header, 10);
+  @include media(">medium") {
+    @include typeface(header, 8);
+  }
+  line-height: var(--line-height-4);
+
+  a,
+  a:visited,
+  a:active {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.c-block__title a {
+  color: rbg(var(--color-text));
 }
 
 .c-block__title--has-icon a:after {
   content: "";
   display: inline-block;
-  width: $icon-small;
-  height: $icon-small;
+  width: 20px;
+  height: 20px;
   margin-left: var(--space-2);
   margin-bottom: 0.2em;
   vertical-align: middle;
@@ -57,8 +76,8 @@
 }
 
 .c-block__title--is-outbound-link a:after {
-  width: $icon-xsmall;
-  height: $icon-xsmall;
+  width: 16px;
+  height: 16px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath d='M15.46,3.45V0H30V14.54H26.55V5.89L17,15.44,14.56,13l9.55-9.56Z'/%3E%3Cpath d='M20,26.38V14.56h3.62V30H0V6.43H15.44v3.62H3.62V26.38Z'/%3E%3C/svg%3E%0A");
   opacity: 0.5;
   margin-bottom: 0.3em;
@@ -81,7 +100,7 @@
  * Urgent block banner
  */
 .c-block--urgent .c-block__eyebrow > .o-kicker {
-  background-color: rgb(var(--color-text-inverse));
+  background: rgb(var(--color-background));
   color: rgb(var(--color-text-inverse));
 }
 
@@ -131,7 +150,7 @@
 }
 
 .c-block--horizontal .c-block__title {
-  @include typeface(header, 8);
+  @include typeface(header, 7);
 }
 
 .c-block--horizontal .c-block__object {
@@ -154,7 +173,18 @@
 
 .c-block--horizontal--large .c-block__title {
   @include media(">medium") {
-    @include typeface(header, 11);
+    @include typeface(header, 8);
+  }
+  line-height: var(--line-height-4);
+
+  a,
+  a:visited,
+  a:active {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
@@ -176,7 +206,7 @@
 }
 
 .c-block-meta__timestamp {
-  @include typeface(small, 1);
+  @include typeface(small, 2);
   text-transform: uppercase;
   font-weight: normal;
   vertical-align: middle;
@@ -193,6 +223,7 @@
   align-items: center;
   margin-left: var(--space-2);
   @include typeface(small, 1);
+  line-height: 1;
   font-weight: normal;
   text-decoration: none;
 
@@ -272,6 +303,7 @@
   text-decoration: none;
 
   &:hover {
+    color: rgb(var(--color-link-hover));
     text-decoration: none;
   }
 }

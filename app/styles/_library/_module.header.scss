@@ -292,6 +292,11 @@
   margin-left: 0;
 }
 
+.c-side-menu .c-search__button:hover {
+  background-color: rgb(var(--color-button-primary));
+  opacity: var(--opacity-hover);
+}
+
 .c-side-menu__group {
   padding: var(--space-4);
 

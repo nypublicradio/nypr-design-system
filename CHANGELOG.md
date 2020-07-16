@@ -1,5 +1,118 @@
 # `nypr-design-system` changelog
 
+## `3.0.1-beta4`
+
+- #105 more whitelabel vqa
+
+https://jira.wnyc.org/browse/DS-901
+https://jira.wnyc.org/browse/DS-902
+https://jira.wnyc.org/browse/DS-736
+
+## `3.0.1-beta3`
+
+- #104 whitelabel vqa
+
+https://jira.wnyc.org/browse/DS-876
+https://jira.wnyc.org/browse/DS-874
+https://jira.wnyc.org/browse/DS-880
+
+- #103 and #102 borders
+
+https://jira.wnyc.org/browse/DS-676
+https://jira.wnyc.org/browse/DS-526
+https://jira.wnyc.org/browse/DS-835
+
+- #101 iconography part 1
+
+https://jira.wnyc.org/browse/DS-528
+
+- #100 token reference
+
+https://jira.wnyc.org/browse/DS-606
+- #99 DS-867 footer links and more
+
+
+https://jira.wnyc.org/browse/DS-867
+
+- #98 whitelabel vqa
+
+https://jira.wnyc.org/browse/DS-883
+
+## `3.0.1-beta2`
+
+- [BUGFIX] #97 White label Theme Fixes
+
+https://jira.wnyc.org/browse/DS-843 updated njpr URL
+https://jira.wnyc.org/browse/DS-857 footer newsletter svg color
+https://jira.wnyc.org/browse/DS-860 footer link hover state
+https://jira.wnyc.org/browse/DS-858 updated article header styles
+https://jira.wnyc.org/browse/DS-855 updated article font size
+https://jira.wnyc.org/browse/DS-856 section page header styles
+https://jira.wnyc.org/browse/DS-862 headers for auxillary pages styles
+https://jira.wnyc.org/browse/DS-863 gallery credit link hover state
+https://jira.wnyc.org/browse/DS-862 headline styles
+
+- [BUGFIX] #99 Styles for footer links
+
+https://jira.wnyc.org/browse/DS-867 footer link styles
+
+
+## `3.0.1-beta1`
+
+- [BUGFIX] #95 Fixed Newsletter Signup Form Styling (https://jira.wnyc.org/browse/DS-584)
+- [BUGFIX] #96 Featured Block Header Size (https://jira.wnyc.org/browse/DS-834)
+- [BUGFIX] #98 Product Marketing Banner Size (https://jira.wnyc.org/browse/DS-833)
+
+## `3.0.0`
+
+- #89 Update font for product marketing banner
+
+https://jira.wnyc.org/browse/DS-799
+
+- #90 Adjust footer column widths
+
+https://jira.wnyc.org/browse/DS-799
+
+- #91 Adjust breaking news styles
+
+https://jira.wnyc.org/browse/DS-789
+
+## `3.0.0-beta8`
+
+- #93 qa automation
+
+https://jira.wnyc.org/browse/DS-660
+
+- #94 whitelabel vqa
+
+https://jira.wnyc.org/browse/DS-636
+https://jira.wnyc.org/browse/DS-710
+https://jira.wnyc.org/browse/DS-727
+https://jira.wnyc.org/browse/DS-730
+https://jira.wnyc.org/browse/DS-732
+https://jira.wnyc.org/browse/DS-734
+https://jira.wnyc.org/browse/DS-735
+https://jira.wnyc.org/browse/DS-736
+https://jira.wnyc.org/browse/DS-818
+https://jira.wnyc.org/browse/DS-707
+https://jira.wnyc.org/browse/DS-826
+https://jira.wnyc.org/browse/DS-809
+https://jira.wnyc.org/browse/DS-807
+https://jira.wnyc.org/browse/DS-814
+https://jira.wnyc.org/browse/DS-815
+https://jira.wnyc.org/browse/DS-820
+https://jira.wnyc.org/browse/DS-790
+https://jira.wnyc.org/browse/DS-731
+https://jira.wnyc.org/browse/DS-733
+https://jira.wnyc.org/browse/DS-802
+https://jira.wnyc.org/browse/DS-717
+https://jira.wnyc.org/browse/DS-676
+https://jira.wnyc.org/browse/DS-713
+https://jira.wnyc.org/browse/DS-819
+https://jira.wnyc.org/browse/DS-825
+https://jira.wnyc.org/browse/DS-806
+https://jira.wnyc.org/browse/DS-831
+
 ## `3.0.0-beta6`
 
 - #87 updated footer logo

@@ -10,6 +10,18 @@
   color: rgb(var(--color-text));
 }
 
+.c-main-footer a,
+.c-main-footer a:visited,
+.c-main-footer a:active {
+  color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-navigation-link);
+
+  &:hover {
+    color: rgb(var(--color-link-hover), var(--opacity-link-hover));
+    text-decoration: var(--text-decoration-navigation-link-hover);
+  }
+}
+
 .c-main-footer__inner {
   @include media(">xlarge") {
     margin-top: 0;
@@ -21,7 +33,7 @@
 
 .c-main-footer__col1 {
   width: 100%;
-  max-width: 570px;
+  max-width: 548px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -196,11 +208,13 @@
   color: rgb(var(--color-text-inverse));
 }
 
-.c-main-footer__signup svg {
-  fill: rgb(var(--color-text));
+.c-main-footer .c-main-footer__signup svg,
+.c-main-footer .c-main-footer__signup svg rect {
+  fill: rgb(var(--color-text-inverse));
 }
 
 // view all brands
 .o-text-with-icon {
+  text-transform: capitalize;
   font-size: var(--font-size-2);
 }

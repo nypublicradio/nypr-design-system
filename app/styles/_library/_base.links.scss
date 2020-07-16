@@ -4,12 +4,13 @@
 
 a {
   text-decoration: none;
-  color: var(--color-link);
+  color: rgb(var(--color-link));
   text-decoration: var(--text-decoration-link);
   transition: all var(--animation-duration-fast) var(--animation-easing-standard);
 }
+
 a:hover {
-  color: var(--color-link-hover);
+  color: rgb(var(--color-link-hover));
   text-decoration: var(--text-decoration-link-hover);
   opacity: var(--opacity-link-hover);
 }
@@ -51,21 +52,19 @@ a > span {
   border-bottom-color: rgb(var(--color-primary-1));
 }
 
-.u-has-accent--white,
-.o-rte-text .u-has-accent--white {
-  color: rgb(var(--color-background));
-  border-bottom-color: rgb(var(--color-link));
-}
-
 .u-has-accent--secondary,
 .o-rte-text .u-has-accent--secondary {
   color: rgb(var(--color-link));
   border-bottom-color: rgb(var(--color-link));
 }
 
+.u-has-accent--secondary path {
+  transition: var(--animation-duration-fast);
+}
+
 .u-has-accent--secondary:hover path,
 .o-rte-text .u-has-accent--secondary:hover path {
-  fill: rgb(var(--color-background));
+  fill: rgb(var(--color-link-hover));
 }
 
 .u-has-accent-inline {

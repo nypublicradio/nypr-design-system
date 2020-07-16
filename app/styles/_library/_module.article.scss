@@ -7,10 +7,10 @@
 }
 
 .c-article__headline {
-  @include typeface(header, 14);
+  @include typeface(header, 13);
 
   @include media(">medium") {
-    @include typeface(header, 16);
+    @include typeface(header, 13);
   }
 }
 

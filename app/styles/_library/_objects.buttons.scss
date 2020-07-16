@@ -11,6 +11,7 @@ input[type="submit"] {
 }
 
 .o-button {
+  @include typeface(small, 6);
   display: inline-flex;
 	position: relative;
 	align-items: center;
@@ -24,7 +25,6 @@ input[type="submit"] {
 	line-height: 22px;
 	letter-spacing: 2px;
   color: white;
-  @include typeface(small, 6);
 
   @include media(">small") {
 		padding-right: var(--space-5);

@@ -1,0 +1,245 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="For Developers/Token Reference" />
+
+# Token Reference
+
+Tokens are semantic variables we use in our code as placeholders for more specific values that can vary by theme. Although all tokens are variables, not all variables are tokens. Sticking to the guidelines on this page will ensure that you components can flex across different themes.
+
+## Typography
+
+
+
+<details open>
+<summary>Typeface Tokens</summary>
+These tokens refer to the 4 sets of type family and default settings for weight and letter spacing.
+
+⚠️ You shouldn't use these directly in your sass, but they're here for reference, since you'll see them in the compiled css. They should almost always be used as a set. Ensure this by always using the `typeface` mixin instead of manually setting these token values.
+
+Example
+```scss
+.my-title {
+  @include typeface(header, 8);
+  @include media(">=medium") {
+    font-size: var(--font-size-10);
+    line-height: var(--line-height-10);
+  }
+}
+```
+
+| name | sample | notes |
+|---|---|---|
+|--font-family-header| | |
+|--letter-spacing-header|  | |
+|--font-weight-header| | |
+|--font-family-subheader| | |
+|--letter-spacing-subheader|  | |
+|--font-weight-subheader| | |
+|--font-family-body| | |
+|--letter-spacing-body| | |
+|--font-weight-body| | |
+|--font-family-small| | |
+|--letter-spacing-small| | |
+|--font-weight-small| | |
+</details>
+
+<details open>
+<summary>Type Sizing Tokens</summary>
+These tokens let you change the size of a font, usually after the font's typeface has already been set in an earlier style. For example you might set a base typeface and size in an element with the `typeface mixin`, and then change the size in a media query or modifier class.
+
+⚠️ If you use a line height token it should be paired with the font size token of the same number. If you want a different line height than the default, it's probably for something custom, so just use a literal value instead of trying to mix and match.
+
+Example
+```scss
+.my-button {
+  @include typeface(body, 8);
+}
+.my-button.mod-small {
+  font-size: var(--font-size-6);
+  line-height: var(--line-height-6);
+}
+```
+
+| name | sample | notes |
+|---|---|---|
+|--font-size-1 | | |
+|--font-size-2| | |
+|--font-size-3| | |
+|--font-size-4| | |
+|--font-size-5| | |
+|--font-size-6| | |
+|--font-size-7| | |
+|--font-size-8| | |
+|--font-size-9| | |
+|--font-size-10| | |
+|--font-size-11| | |
+|--font-size-12| | |
+|--font-size-13| | |
+|--font-size-14| | |
+|--font-size-15| | |
+|--font-size-16| | |
+|--line-height-1 | | |
+|--line-height-2| | |
+|--line-height-3| | |
+|--line-height-4| | |
+|--line-height-5| | |
+|--line-height-6| | |
+|--line-height-7| | |
+|--line-height-8| | |
+|--line-height-9| | |
+|--line-height-10| | |
+|--line-height-11| | |
+|--line-height-12| | |
+|--line-height-13| | |
+|--line-height-14| | |
+|--line-height-15| | |
+|--line-height-16| | |
+
+</details>
+
+## Spacing
+
+Spacing tokens use a 1 - 9 scale. With being the smallest spacing increment, and 9 being the largest.
+
+<details open>
+<summary>Spacing Tokens</summary>
+
+| name | sample | notes |
+|---|---|---|
+|--space-1| | Inline iconography |
+|--space-2| | Below eyebrows and kickers|
+|--space-3| | Below Headlines, between thumbnails and descriptions|
+|--space-4| | Between paragraphs, spacing between icon-only links (social)|
+|--space-5| | Around ads, above headlines, between columns of list items. Medium padding for modules (ex. mid-page donation pop-up)|
+|--space-6| | Used between major molecules (ex. Article intro and media figure, or comments and recirc.|
+|--space-7| | |
+|--space-8| | Above footer, homepage interruptors, large padding for modules (ex. Newsletter interruptor signup molecule)|
+|--space-9| | |
+|--space-10| | |
+|--space-11| | Below pagination|
+
+</details>
+
+## Animation
+
+<details open>
+<summary>Animation Tokens</summary>
+
+| name | sample | notes |
+|---|---|---|
+|--animation-easing-outgoing| |A timing function applied to elements entering a view|
+|--animation-easing-incoming| |A timing function applied to elements exiting a view|
+|--animation-easing-standard| |The most common timing function. used for color transitions on hover states, etc|
+|--animation-duration-slow| ||
+|--animation-duration-standard| ||
+|--animation-duration-fast| ||
+|--animation-delay-none| |?|
+|--animation-delay-short| |?|
+|--animation-delay-long| |?|
+
+</details>
+
+## Color
+
+⚠️ The value of color tokens returns as three raw rgb digits, rather than a color. (e.g. `255 0 255`) so they can be used with opacity values. They need to be wrapped in an rgb or rgba function.
+
+Example:
+```scss
+.my-button {
+  background-color: rgb(var(--color-button-primary));
+  &:active {
+    background-color: rgb(var(--color-button-pressed));
+  }
+  &:hover {
+    background-color: rgba(var(--color-button-primary-hover), var(--opacity-button-primary-hover));
+  }
+}
+```
+
+<details open>
+<summary>Main Color Tokens</summary>
+
+|name | sample | notes|
+|---|---|---|
+| --color-primary-1| | |
+| --color-primary-2| | |
+| --color-primary-3| | |
+| --color-background| | |
+| --color-background-muted| | |
+| --color-background-highlight| | |
+
+</details>
+
+<details open>
+<summary>Text Color Tokens</summary>
+
+For coloring text. Can also be useful as a default for text-like things, like symbols, bullets, inline-icons, etc.
+
+|name | sample | notes|
+|---|---|---|
+| --color-text| | |
+| --color-text-muted| | |
+| --color-text-error| | |
+| --color-text-valid| | |
+| --color-text-inverse| | |
+| --color-text-metadata| | |
+</details>
+
+<details open>
+<summary>Link Color Tokens</summary>
+
+Two types of links. Styles for hover states. Navigation links will generally be found in the header, footer, and side menu. To get more fine grained control than the tokens allow, or a wider range of link styles, customize your theme with overrides.
+
+|name | sample | notes|
+|---|---|---|
+| --color-link| | |
+| --text-decoration-link| | |
+| --color-link-hover| | |
+| --text-decoration-link-hover| | |
+| --opacity-link-hover| | |
+| --color-navigation-link| | |
+| --text-decoration-navigation-link| | |
+| --color-navigation-link-hover| | |
+| --text-decoration-navigation-link-hover| | |
+| --opacity-navigation-link-hover| | |
+</details>
+
+<details open>
+<summary>Tag Color Tokens</summary>
+
+|name | sample | notes|
+|---|---|---|
+| --color-tag-text| | |
+| --color-tag-background| | |
+| --color-tag-hover-text| | |
+| --color-tag-hover-background| | |
+| --opacity-tag-hover| | |
+</details>
+
+<details open>
+<summary>Button Color Tokens</summary>
+
+The default token setup expets a button to be a light color on a contrasting dark background. With the exception of link-styled buttons and ghost/outline buttons, "Button color" refers to the background color.
+
+|name | sample | notes|
+|---|---|---|
+| --color-button-primary| | |
+| --color-button-primary-hover| | |
+| --color-button-primary-pressed| | |
+| --opacity-button-primary-hover| | |
+| --color-button-outline| | |
+| --color-button-outline-hover| | |
+| --color-button-outline-pressed| | |
+| --opacity-button-outline| | |
+</details>
+
+<details open>
+<summary>Border Color Tokens</summary>
+
+|name | sample | notes|
+|---|---|---|
+| --color-border-subtle| | |
+| --color-border-normal| | |
+| --color-border-bold| | |
+
+</details>

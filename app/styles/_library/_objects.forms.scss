@@ -125,7 +125,7 @@ div.o-confirm-message p {
 }
 
 .c-search--top .c-search__button:hover {
-  background-color: rgb(var(--color-primary-1));
+  opacity: var(--opacity-hover);
 }
 
 /* Top search entry is open*/
@@ -304,6 +304,15 @@ div.o-confirm-message p {
   padding: 0;
 }
 
+.c-newsletter-form__button[disabled] {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+.c-newsletter-form__button:hover:not(:focus)[disabled] .o-icon--newsletter-form {
+  animation: none;
+}
+
 .c-newsletter-form__button:hover:not(:focus) .o-icon--newsletter-form {
   animation: bounce-horiz 0.8s 0s ease-out infinite;
 }
@@ -356,7 +365,7 @@ div.o-confirm-message p {
     border: none;
 
     input {
-      border: 3px solid rgb(var(--color-border-standard));
+      border: var(--border-standard);
       height: 40px;
       font-size: 12px;
 

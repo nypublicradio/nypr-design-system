@@ -33,6 +33,10 @@ input[type=checkbox] {
 }
 
 
+blockquote {
+  @include border-accent(bottom, left);
+}
+
 .c-article__body blockquote {
   border: none;
 }
@@ -49,6 +53,25 @@ input[type=checkbox] {
   .c-share-tools__label {
     color: rgb(var(--color-white));
   }
+}
+
+.c-main-header__share .c-share-tools__link:hover path {
+  fill: rgb(var(--color-header-icon-hover));
+}
+
+.c-main-header__donate.o-button {
+  &::before {
+    border: 3px solid rgb(var(--color-header-button-background));
+  }
+}
+
+// Back to top icon & text
+.o-to-top .o-icon--up-arrow {
+  fill: rgb(var(--color-primary-2));
+}
+
+.o-to-top:hover {
+  color: rgb(var(--color-primary-2));
 }
 
 // Header with full stacked logo
@@ -103,6 +126,11 @@ input[type=checkbox] {
   }
 }
 
+.c-main-footer__terms-links a:hover {
+  background-color: rgb(var(--color-primary-2));
+  color: rgb(var(--color-link-hover-2));
+}
+
 .c-main-footer {
   @include color-group-dark;
 
@@ -117,8 +145,13 @@ input[type=checkbox] {
   .c-newsletter-form {
     @include color-group-light;
   }
+
   .c-newsletter-form__button :hover {
     background-color: rgb(var(--color-form-button));
+  }
+
+  .c-main-footer__bottom {
+    border-top: 1px dashed rgba(var(--color-footer-text), 0.5);
   }
 }
 
@@ -218,6 +251,7 @@ input[type=checkbox] {
   text-decoration: none;
 }
 
+.c-block__object .c-block__title-link:hover,
 .c-block__title a:hover {
   color: rgb(var(--color-reddish-orange));
   text-decoration: underline;
@@ -238,12 +272,30 @@ input[type=checkbox] {
   background-color: rgb(var(-color-reddish-orange));
 }
 
+.c-block__title {
+  @include media(">medium") {
+    @include typeface(header, 10);
+  }
+}
+
+.c-block--horizontal--large .c-block__title {
+  @include media(">medium") {
+    font-size: var(--font-size-11);
+    line-height: var(--line-height-11);
+  }
+}
+
 // Top Navigation
 .c-primary-nav--top .c-primary-nav__link:hover {
   color: rgb(var(--color-reddish-orange));
 }
 
 // Side Navigaton
+.c-side-menu .c-search__button:hover {
+  background-color: rgb(var(--color-form-button));
+  opacity: 1;
+}
+
 .c-primary-nav--side .c-primary-nav__link {
   padding-bottom: 2px;
   color: rgb(var(--color-banana-yellow));
@@ -258,10 +310,12 @@ input[type=checkbox] {
 .c-secondary-nav .c-secondary-nav__link {
   color: rgb(var(--color-white));
   @include dotted-underline(--color-white);
+  text-decoration: none;
 
   &:hover, &:focus {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
+    text-decoration: none;
   }
 }
 
@@ -270,7 +324,8 @@ input[type=checkbox] {
 }
 
 .c-side-menu__terms-links a,
-.c-main-footer__terms-links a {
+.c-main-footer__terms-links a,
+.c-main-footer__terms-links a:visited {
   color: rgb(var(--color-banana-yellow));
   text-decoration: none;
   text-transform: uppercase;
@@ -315,7 +370,7 @@ input[type=checkbox] {
 
 // homepage newsletter signup
 .c-newsletter-tout__heading strong {
-  background-image: linear-gradient(rgba(36,76,132,0.2), rgba(36,76,132,0.2));
+  background-image: linear-gradient(rgba(36, 76, 132, 0.2), rgba(36, 76, 132, 0.2));
   background-position: center bottom .2em;
   background-size: 100% .55em;
   background-repeat: no-repeat;
@@ -327,11 +382,6 @@ input[type=checkbox] {
 .c-newsletter-tout__dek {
   font-family: var(--font-family-barlow);
   font-size: var(--font-size-6);
-}
-
-.c-newsletter-form__terms a {
-  color: rgb(var(--color-white));
-  border-bottom: 2px dotted rgb(var(--color-white));
 }
 
 .c-newsletter-form__button {
@@ -361,10 +411,28 @@ form .o-button:hover {
   background-color: rgb(var(--color-reddish-orange));
 }
 
+.c-newsletter-tout .c-newsletter-form__terms input[type="checkbox"] {
+  border: 2px solid;
+  border-color: rgb(var(--color-white));
+}
+
+.c-newsletter-tout .c-newsletter-form__terms input[type="checkbox"]:checked {
+  border: 2px solid;
+  border-color: rgb(var(--color-white));
+}
+
 // footer newsletter signup
-footer .c-newsletter-form__terms a {
+.c-main-footer .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
+}
+
+.c-newsletter-form .c-newsletter-form__button:hover[disabled] {
+  background-color: rgb(var(--color-dark-gray));
+}
+
+.c-newsletter-form .c-newsletter-form__button {
+  background-color: rgb(var(--color-dark-gray));
 }
 
 // article page credit
@@ -399,11 +467,22 @@ footer .c-newsletter-form__terms a {
 
   &:hover {
     text-decoration: none;
+
+    .u-has-accent {
+      &:hover {
+        background-color: rgb(var(--color-link-hover-background));
+      }
+    }
   }
+}
+
+.c-gallery-overlay .u-has-accent:hover {
+  background-color: rgb(var(--color-link-hover-background));
 }
 
 // gallery share text
 .o-text-with-icon {
+  text-transform: uppercase;
   font-family: var(--font-family-b612);
 }
 
@@ -413,13 +492,282 @@ footer .c-newsletter-form__terms a {
   text-transform: uppercase;
 }
 
+// gallery
+
+.c-gallery-overlay .o-credit a:hover {
+  color: rgb(var(--color-gallery-link));
+  background-color: rgb(var(--color-gallery-link-hover));
+}
+
+.c-lead-gallery__thumbs-thumb-text:hover {
+  background-color: rgb(var(--color-link-hover-background));
+}
+
 // staff page
 .o-rte-text > h3 {
   font-weight: normal;
+}
+
+.o-rte-text > ul li:before {
+  background-color: rgb(var(--color-brick-red));
+}
+
+.o-rte-text > ul li li:before {
+  border: 2px solid rgb(var(--color-brick-red));
+}
+
+// article page
+
+.c-article__headline {
+  @include typeface(header, 14);
+
+  @include media(">medium") {
+    @include typeface(header, 16);
+  }
 }
 
 // article page image caption arrow icon
 .image-none i {
   font-family: var(--font-family-barlow);
   line-height: var(--line-height-2);
+}
+
+// breaking news
+.c-block--urgent .c-block__title a {
+  &:hover {
+    color: rgb(var(--color-brick-red));
+    text-decoration: underline;
+    text-decoration-style: dotted;
+  }
+}
+
+.c-banners .o-box-banner {
+  padding: var(--space-3) var(--space-4) var(--space-4);
+}
+
+.c-block--urgent .c-block__eyebrow > .o-kicker {
+  color: rgb(var(--color-white));
+  background: rgb(var(--color-dark-gray));
+}
+
+.c-block--urgent .c-block__title a {
+  color: rgb(var(--color-brick-red));
+}
+
+.c-block--urgent .c-block-meta__timestamp {
+  color: rgb(var(--color-brick-red));
+}
+
+.c-block-meta__timestamp {
+  @include typeface(small, 1);
+}
+
+// Section page
+.c-tag-listing__heading {
+  @include typeface(tags, 10);
+  color: rgb(var(--color-text-inverse));
+  text-transform: lowercase;
+  font-weight: normal;
+  padding: var(--space-2) var(--space-3);
+  background-color: rgb(var(--color-tag-highlight)); //dark
+
+  @include media(">medium") {
+    @include typeface(tags, 14);
+  }
+}
+
+.c-section__header {
+  background-color: rgb(var(--color-primary-1));
+}
+
+.c-section__heading {
+  @include typeface(small, 10);
+  text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 3px;
+
+  @include media(">medium") {
+    @include typeface(header, 14);
+    font-weight: normal;
+  }
+}
+
+.c-basic__heading {
+  @include typeface(header, 14);
+  @include media(">=medium") {
+    @include typeface(header, 16);
+  }
+}
+
+.c-basic__header:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  @include border-accent;
+}
+
+/**
+ * 3D box effect for headings
+ */
+.o-3d-heading {
+  padding: .1em .25em;
+  display: inline-block;
+  position: relative;
+  z-index: 5;
+  background-color: rgb(var(--color-background));
+  left: 10px;
+  margin-right: var(--space-3);
+}
+
+.o-3d-heading:before,
+.o-3d-heading:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: var(--border-standard);
+  background-color: transparent;
+}
+
+.o-3d-heading:before {
+  z-index: -2;
+  left: -10px;
+  top: 10px;
+}
+
+.o-3d-heading:after {
+  z-index: -1;
+  background-color: rgb(var(--color-white));
+}
+
+.o-3d-heading--quinary:after {
+  background-color: rgb(var(--color-background-highlight));
+}
+
+// Read more nav
+.c-read-more-nav {
+  border-top: 2px dashed rgb(var(--color-border-subtle));
+  border-bottom: 2px dashed rgb(var(--color-border-subtle));
+
+  @include media(">medium") {
+    border: 2px dashed rgb(var(--color-border-subtle));
+  }
+}
+
+.c-read-more-nav__label {
+  text-transform: uppercase;
+}
+
+/**
+ * Newsletter signup tout
+ */
+.c-newsletter-tout {
+  /* Adjusted vertical spacing because of the 10px shadow border.*/
+  margin-bottom: calc(var(--space-7) + 10);
+}
+
+.c-newsletter-tout:before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 11px;
+  border: var(--border-standard);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+// Breadcrumbs
+.o-breadcrumbs:before {
+  content: "";
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  left: -4px;
+  top: calc(50% + 1px);
+  @include border-accent;
+}
+
+// Typography
+
+.o-rte-text > h1,
+.o-rte-text > h2,
+.o-rte-text > h3,
+.o-rte-text > h4,
+.o-rte-text > h5,
+.o-rte-text > h6 {
+  padding-top: var(--space-3);
+}
+
+.u-has-accent--secondary:hover path,
+.o-rte-text .u-has-accent--secondary:hover path {
+  fill: rgb(var(--color-background));
+}
+
+.o-box-banner__close {
+  right: var(--space-2);
+  top: var(--space-2);
+}
+
+.c-search--top .c-search__button:hover {
+  background-color: rgb(var(--color-primary-1));
+}
+
+.c-contact-tout {
+  padding: var(--space-4);
+  width: 100%;
+}
+
+.u-reversed-out:after {
+  background-color: rgb(var(--color-background));
+}
+
+.c-block--horizontal .c-block__title {
+  @include typeface(header, 8);
+}
+
+// icons
+
+.u-icon--xs {
+  width: 16px;
+  height: 16px;
+}
+
+.u-icon--s {
+  width: 20px;
+  height: 20px;
+}
+
+.u-icon--m {
+  width: 30px;
+  height: 30px;
+}
+
+.u-icon--l {
+  width: 40px;
+  height: 40px;
+}
+
+.u-icon--xl {
+  width: 50px;
+  height: 50px;
+}
+
+.c-main-footer .c-main-footer__signup svg,
+.c-main-footer .c-main-footer__signup svg rect {
+  fill: rgb(var(--color-text));
+}
+
+.c-main-footer .c-newsletter-form__button svg,
+.c-main-footer .c-newsletter-form__button svg rect {
+  fill: rgb(var(--color-footer-text));
+}
+
+.c-newsletter-article svg,
+.c-newsletter-article svg rect {
+  fill: rgb(var(--color-text-inverse));
 }
