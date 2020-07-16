@@ -517,13 +517,6 @@ a.o-breadcrumb:hover {
 /**
  * Border accents
  */
-.o-border-accent {
-  background-image: repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%);
-  background-position: left top, left bottom, left top, right top;
-  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-  background-size: 18px 2px, 18px 2px, 2px 18px, 2px 18px;
-}
-
 .u-border-accent {
   @include border-accent;
 }

@@ -124,3 +124,7 @@
 .c-donate-tout__graphic path {
   fill: rgb(var(--color-ceramic-blue));
 }
+
+.c-gallery-overlay {
+  @include color-group-dark;
+}
