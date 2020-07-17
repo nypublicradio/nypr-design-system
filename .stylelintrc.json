@@ -9,5 +9,6 @@
         "app/styles/_library/token-allowlist.css"
       ]
     }]
-  }
+  },
+  "ignoreFiles": ["**/_base.mixins.scss"]
 }
