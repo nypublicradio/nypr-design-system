@@ -118,6 +118,7 @@ select::-ms-expand {
 
 ::placeholder {
   @include typeface(small, 6);
+  letter-spacing: normal;
   color: rgb(var(--color-text-muted));
 }
 

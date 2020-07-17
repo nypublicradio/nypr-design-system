@@ -259,19 +259,20 @@ blockquote {
   text-decoration-style: dotted;
 }
 
-.c-gallery-overlay .o-credit a {
-  @include  dotted-underline(rgb(var(--color-link)));
-  &:hover {
-    color: rgb(var(--color-link));
-    background-color: rgb(var(--color-reddish-orange));
-  }
-}
 .c-lead-gallery__thumbs-thumb.is-active {
   border-color: rgb(var(--color-reddish-orange));
 }
 .c-lead-gallery__thumbs-thumb-text:hover {
   background-color: rgb(var(-color-reddish-orange));
 }
+.c-lead-gallery .o-credit a:hover {
+  color: rgb(var(--color-link-hover));
+  background-color: rgb(var(--color-redd  ish-orange));
+}
+.c-lead-gallery__thumbs-thumb-text:hover {
+  background-color: rgb(var(--color-reddish-orange));
+}
+
 
 .c-block__title {
   @include media(">medium") {
@@ -409,6 +410,7 @@ form .o-button:hover {
 }
 
 .o-rte-text a:hover {
+  color: rgb(var(--color-link-hover));
   background-color: rgb(var(--color-reddish-orange));
 }
 
@@ -426,7 +428,11 @@ form .o-button:hover {
 .c-main-footer .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
+  &:hover {
+    background-color: rgb(var(--color-reddish-orange));
+  }
 }
+
 
 .c-newsletter-form .c-newsletter-form__button:hover[disabled] {
   background-color: rgb(var(--color-dark-gray));
@@ -449,8 +455,13 @@ form .o-button:hover {
 .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
+  &:hover {
+    background-color: rgb(var(--color-reddish-orange));
+    color: rgb(var(--color-text-inverse));
+  }
 }
---color-link
+
+
 // advertisement label
 .o-ad__label {
   text-transform: uppercase;
@@ -471,7 +482,7 @@ form .o-button:hover {
 
     .u-has-accent {
       &:hover {
-        background-color: rgb(var(--color-link-hover-background));
+        background-color: rgb(var(--color-reddish-orange));
       }
     }
   }
@@ -495,13 +506,12 @@ form .o-button:hover {
 
 // gallery
 
-.c-gallery-overlay .o-credit a:hover {
-  color: rgb(var(--color-gallery-link));
-  background-color: rgb(var(--color-gallery-link-hover));
-}
-
-.c-lead-gallery__thumbs-thumb-text:hover {
-  background-color: rgb(var(--color-link-hover-background));
+.c-gallery-overlay .o-credit a {
+  @include  dotted-underline(rgb(var(--color-link)));
+  &:hover {
+    color: rgb(var(--color-link-hover));
+    background-color: rgb(var(--color-reddish-orange));
+  }
 }
 
 // staff page

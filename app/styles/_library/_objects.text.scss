@@ -320,6 +320,7 @@
   line-height: 1;
   @include media(">=medium") {
     font-size: var(--font-size-3);
+    line-height: var(--line-height-3);
     font-weight: bold;
   }
   background-color: rgb(var(--color-tag-background));
