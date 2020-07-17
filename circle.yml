@@ -45,9 +45,17 @@ jobs:
     steps:
       - checkout
       - <<: *restore_node
-
       - run:
-          name: Addon Tests
+          name: Lint JS code
+          command: yarn run lint:js
+      - run:
+          name: Lint Templates
+          command: yarn run lint:hbs
+      - run:
+          name: Lint Styles
+          command: yarn run lint:styles
+      - run:
+          name: Run Ember Tests
           command: npx ember test
 
       - store_test_results:
