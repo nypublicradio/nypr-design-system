@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## `3.0.1-beta5`
+
+- #107 iconography
+
+https://jira.wnyc.org/browse/DS-528
+
 ## `3.0.1-beta4`
 
 - #105 more whitelabel vqa
