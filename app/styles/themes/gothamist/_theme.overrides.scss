@@ -42,6 +42,7 @@ blockquote {
 }
 
 .c-main-header {
+  // Header uses the dark color group
   @include color-group-dark;
 
   &.side-menu-is-active {
@@ -60,6 +61,14 @@ blockquote {
 }
 
 .c-main-header__donate.o-button {
+  // there's some weirdness here right now because the donate button has
+  // the o-button-sm class on it (why?) so we're overriding extra things
+  @include typeface(small, 5);
+  letter-spacing: 2px;
+  font-weight: 700;
+  line-height: 22px;
+  height: 43px;
+
   &::before {
     border: 3px solid rgb(var(--color-header-button-background));
   }
@@ -126,13 +135,14 @@ blockquote {
   }
 }
 
-.c-main-footer__terms-links a:hover {
-  background-color: rgb(var(--color-primary-2));
-  color: rgb(var(--color-link-hover-2));
-}
-
 .c-main-footer {
+  // Footer uses the dark color group
   @include color-group-dark;
+
+  // But mini-newsletter form uses the light color group
+  .c-newsletter-form {
+    @include color-group-light;
+  }
 
   .gothamist-letters {
     fill: rgb(var(--color-white));
@@ -142,16 +152,12 @@ blockquote {
     fill: rgb(var(--color-dark-gray));
   }
 
-  .c-newsletter-form {
-    @include color-group-light;
-  }
-
   .c-newsletter-form__button :hover {
     background-color: rgb(var(--color-form-button));
   }
 
   .c-main-footer__bottom {
-    border-top: 1px dashed rgba(var(--color-footer-text), 0.5);
+    border-top: 1px dashed rgba(var(--color-text), 0.5);
   }
 }
 
@@ -476,9 +482,16 @@ form .o-button:hover {
 .o-back-to-link {
   font-family: var(--font-family-pragati);
   text-decoration: none;
+  .o-icon {
+    fill: white;
+  }
+  .u-has-accent {
+    @include  dotted-underline(--color-white);
+  }
 
   &:hover {
     text-decoration: none;
+    border-bottom: none;
 
     .u-has-accent {
       &:hover {
@@ -506,8 +519,18 @@ form .o-button:hover {
 
 // gallery
 
+.c-gallery-overlay {
+  // Gallery uses the dark color group
+  @include color-group-dark;
+
+  // But the share link popus use the light color group
+  .c-toggle-box__dropdown {
+    @include color-group-light;
+  }
+}
+
 .c-gallery-overlay .o-credit a {
-  @include  dotted-underline(rgb(var(--color-link)));
+  @include  dotted-underline(--color-link);
   &:hover {
     color: rgb(var(--color-link-hover));
     background-color: rgb(var(--color-reddish-orange));
