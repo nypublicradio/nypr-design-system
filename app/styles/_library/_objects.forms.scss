@@ -255,7 +255,8 @@ div.o-confirm-message p {
   }
 }
 
-.c-newsletter-form__graphic path {
+.c-main-footer .c-main-footer__signup .c-newsletter-form__graphic svg,
+.c-main-footer .c-main-footer__signup .c-newsletter-form__graphic path {
   fill: rgb(var(--color-background-highlight));
 }
 

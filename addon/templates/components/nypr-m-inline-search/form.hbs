@@ -1,7 +1,7 @@
 <label for="search" class="is-vishidden">Search this site</label>
 {{#if @close}}
   <NyprAButton @blank={{true}} @onclick={{action doClose}} class="c-search__close o-icon" name="collapseSearchHeader">
-    <NyprASvg @icon='close'/>
+    <Icon @icon="close" @title="close"/>
   </NyprAButton>
 {{/if}}
 
@@ -20,7 +20,7 @@
   name="searchIcon"
   data-test-inline-search-submit>
   <span class="c-search__icon o-icon o-icon--search u-icon--xs">
-    <NyprASvg @icon='search'/>
+    <Icon @icon="search" @title="search"/>
   </span>
   <span class="is-vishidden">Search</span>
 </button>

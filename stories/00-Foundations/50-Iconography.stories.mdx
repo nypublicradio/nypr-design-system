@@ -19,10 +19,10 @@ If an icon is used without accompanying text, a title attribute is needed on the
 
 Icons that are interactive must follow the same WCAG 2.0 contrast standards as typography, requiring a minimum contrast ratio 3.0. Non-interactive icons like status symbols or brand logos don’t need to follow these standards.
 
-## Available Icons
+## Base Icons
 
 <Preview>
-  <Story name="AllIcons" height="575px">{{
+  <Story name="BaseIcons" height="500px">{{
     template: hbs`
     <div class="l-grid l-grid--4up">
       <div>
@@ -148,14 +148,6 @@ Icons that are interactive must follow the same WCAG 2.0 contrast standards as t
       <div>
         <div class= "u-flex u-align-items--center u-space--bottom">
             <span class= "o-icon u-icon--s u-space--right">
-              <Icon @icon='gothamist/gothamist-arrow' @title='icon title' />
-            </span>
-          <div>gothamist arrow</div>
-        </div>
-      </div>
-      <div>
-        <div class= "u-flex u-align-items--center u-space--bottom">
-            <span class= "o-icon u-icon--s u-space--right">
               <Icon @icon='hamburger' @title='icon title' />
             </span>
           <div>hamburger</div>
@@ -167,6 +159,14 @@ Icons that are interactive must follow the same WCAG 2.0 contrast standards as t
               <Icon @icon='instagram' @title='icon title' />
             </span>
           <div>instagram</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='nypr-logo' @title='icon title' />
+            </span>
+          <div>nypr logo</div>
         </div>
       </div>
       <div>
@@ -252,6 +252,14 @@ Icons that are interactive must follow the same WCAG 2.0 contrast standards as t
       <div>
         <div class= "u-flex u-align-items--center u-space--bottom">
             <span class= "o-icon u-icon--s u-space--right">
+              <Icon @icon='simple-arrow-down' @title='icon title' />
+            </span>
+          <div>simple arrow down</div>
+        </div>
+      </div>
+      <div>
+        <div class= "u-flex u-align-items--center u-space--bottom">
+            <span class= "o-icon u-icon--s u-space--right">
               <Icon @icon='spotify' @title='icon title' />
             </span>
           <div>spotify</div>
@@ -310,6 +318,119 @@ Icons that are interactive must follow the same WCAG 2.0 contrast standards as t
   }}</Story>
 </Preview>
 
+## Gothamist Icons
+
+<Preview>
+  <Story name="GothamistIcons" height="200px">{{
+    template: hbs`
+    <div class="l-grid l-grid--4up">
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--s u-space--right">
+              <Icon @icon='gothamist/arrow' @title='icon title' />
+            </span>
+          <div>gothamist arrow</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--l u-space--right">
+              <Icon @icon='gothamist/logo' @title='icon title' />
+            </span>
+          <div>gothamist logo</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--l u-space--right">
+              <Icon @icon='gothamist/logo-stacked' @title='icon title' />
+            </span>
+          <div>gothamist logo stacked</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--l u-space--right">
+              <Icon @icon='gothamist/nyc-love' @title='icon title' />
+            </span>
+          <div>nyc love</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--l u-space--right">
+              <Icon @icon='gothamist/party-confetti' @title='icon title' />
+            </span>
+          <div>party confetti</div>
+        </div>
+      </div>
+    </div>
+    `
+  }}</Story>
+</Preview>
+
+## WNYC Icons
+
+<Preview>
+  <Story name="LogoIcons" height="100px">{{
+    template: hbs`
+    <div class="l-grid l-grid--4up">
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--l u-space--right">
+              <Icon @icon='wnyc/logo' @title='icon title' />
+            </span>
+          <div>wnyc logo</div>
+        </div>
+      </div>
+    </div>
+    `
+  }}</Story>
+</Preview>
+
+## WQXR Icons
+
+<Preview>
+  <Story name="WqxrIcons" height="100px">{{
+    template: hbs`
+    <div class="l-grid l-grid--4up">
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--s u-space--right">
+              <Icon @icon='wqxr/listener-count' @title='icon title' />
+            </span>
+          <div>listener count</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--s u-space--right">
+              <Icon @icon='wqxr/music-note' @title='icon title' />
+            </span>
+          <div>music note</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--s u-space--right">
+              <Icon @icon='wqxr/pause' @title='icon title' />
+            </span>
+          <div>pause</div>
+        </div>
+      </div>
+      <div>
+        <div class="u-flex u-align-items--center u-space--bottom">
+            <span class="o-icon u-icon--s u-space--right">
+              <Icon @icon='wqxr/logo' @title='icon title' />
+            </span>
+          <div>wqxr logo</div>
+        </div>
+      </div>
+    </div>
+    `
+  }}</Story>
+</Preview>
+
 ## Sizing
 
 Our default icons come in four sizes: 16px (XS), 24px (S), 32px (M), and 40px (L). These sizes are the dimensions of the SVG and include the icon as well as the padding. This consistency helps when sourcing third party icons. Larger sizes may be available to other brands. 
@@ -357,7 +478,6 @@ When creating new icons, padding can be determined by using at least ⅛ of the 
 </Preview>
 
 TBD GRAPHIC HERE
-
 
 ## Audio Icon Guidelines
 

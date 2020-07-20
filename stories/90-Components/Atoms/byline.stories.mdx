@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Atoms/Byline"/>
+
+# Byline
+
+The byline molecule is used to display the author or authors who have created a piece of content, helping a user to contextualize the content they are digesting and learn more about the person(s) who created it. This molecule can include one or more author names along with optional author organization name(s), to identify organizations the author works for or is affiliated to as is needed. Bylines are used inside the [Article Metadata](https://nypr-design-system.nypr.digital/latest/index.html?path=/docs/components-molecules-article-metadata--page) organism most frequently, but are also at times used on [Cards](https://nypr-design-system.nypr.digital/latest/index.html?path=/docs/components-molecules-cards--page) and other components. This molecule should be used when displaying authors or contributing organizations associated with a piece of content.
+
+  
+
+## Fields and Formatting
+
+<br/><br/>
+
+
+ <img alt="example of byline anatomy" src="./images/Atom-Byline-Anatomy.png" width="400" />
+  
+<br/><br/>
+
+1- **Authors** - The display name of a person(s) who has authored the content. Author names listed in the byline will most often link to the author’s bio page or author listing page. If content is by a single author, display like, "By John Doe". If content is by two authors, display like, "By John Doe and Jill Doe". Three or more names are displayed as, “By John Doe, Jill Doe, and Steve Buscemi” Prepending “By” to this field is optional. The order in which authors appear is determined by the API order as is dictated by CMS users in Aviary CMS.
+
+2- **Contributing Organization** - The display name of an organization(s) who an author is affiliated to if content is produced by or in partnership with another entity, for example in the case of a wire story from NPR/AP or a partnership publication between WNYC and ProPublica. If content is produced by or in partnership with an author from a Contributing Organization, display like "Author (Contributing Organization)" inline with the Author field. Contributing Organization will most often link to a dynamically populated listing page or to an organization’s landing page, if provided.
+
+## Text Wrapping
+
+On smaller breakpoints, text should wrap at commas or bullets to avoid splitting name information into separate lines. An author’s first and last name and their organization should be anchored to wrap together.

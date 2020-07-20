@@ -19,7 +19,7 @@ module('Integration | Component | nypr-m-newsletter', function(hooks) {
       <NyprMNewsletter as |newsletter|>
 
         <newsletter.graphic>
-          <NyprASvg @icon='party-confetti'/>
+          <Icon @icon='gothamist/party-confetti' @title="newsletter signup"/>
         </newsletter.graphic>
 
         <newsletter.blurb>

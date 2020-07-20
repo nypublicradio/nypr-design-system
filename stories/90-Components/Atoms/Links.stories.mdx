@@ -1,0 +1,112 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Atoms/Links"/>
+
+
+# Links
+
+  
+Links make text actionable, letting users navigate to a new page or reveal more information. Links can appear inline within a body of text or by themselves as standalone elements. If you need to use a link with an icon, use an icon button instead.
+
+## Use Cases
+
+  
+
+**Internal Navigation**
+
+- Navigate to different pages within a website or app
+
+- Navigate to different areas within a single web page (anchor links)
+
+If a link drives to an internal page, that page should open in the same tab/screen when clicked.
+
+  
+
+**External Navigation**
+
+-   Navigate to web pages outside of the website or app
+    
+-   Drive to external clients to handle contact, including email addresses, phone numbers, or other methods of contact
+
+If a link drives to an external page, that page should open in a new tab/screen when clicked.
+    
+
+  
+
+**Don’t Use When**
+
+-   Carrying out an action. Use a button instead. (ex: Play/Pause, Cancel, Submit)
+    
+-   You need a button-like thing in a condensed space, use a Flat Button instead.
+    
+
+  
+
+## Inline vs. Standalone
+
+  
+
+### Inline
+Inline links are used to provide reference for a user, helping the user to find additional information about the content they are reading from directly within that sentence or paragraph of text. Inline links behave similarly to standalone links, but should always be underlined to help alert the user of the words linked by creating visibility among neighboring words. They inherit their hover styles and colors from a brand’s foundations.
+
+  
+
+### Standalone
+Standalone links are used for all use cases outside of linked text within an article body. They also inherit their hover styles and colors from a brand’s foundations, but they do not require underlines.
+
+  
+
+## States
+
+  
+
+#### **Default**
+In the default state, the user has not yet interacted with the link. The link is active and patiently waiting to be clicked.
+ <img alt="example of default link" src="./images/Atoms-Links-DefaultState.png" width="75" />
+  <br/>
+  
+
+#### **Hover**
+
+When a user hovers over a link with their cursor, the link’s appearance changes to show active potential. The specific appearance can be customized by theme. On whitelabel, the Cool Blue link changes to a light Sky Blue when hovered over.
+<img alt="example of hover link" src="./images/Atoms-Links-HoverState.png" width="75" />
+  <br/>
+  
+
+#### **Disabled**
+
+The disabled link state should be used when interaction is not yet possible to designate to a user that the link exists but is not able to be clicked. Use brand utility colors for text and stroke.
+<img alt="example of disabled link" src="./images/Atoms-Links-DisabledState.png" width="75" />
+  <br/>
+  
+
+#### **Visited**
+
+Visited link treatment should be used sparingly when it is important that a user knows they have already clicked on a link. Examples include within a search result page or page containing a long list of links, to help make clear for the user which links they have clicked on previously. This state is turned off by default to prevent unnecessary visual noise.
+<img alt="example of a visited link" src="./images/Atoms-Links-VisitedState.png" width="75" />
+  <br/>
+  
+
+## Accessibility
+
+  
+
+Link text color must meet the WCAG 2.0 contrast standards, requiring a minimum contrast ratio of 3.0.
+
+Always include an href attribute for a link.
+
+  
+
+If the link text isn’t descriptive, include an aria-label attribute to describe the intent of a link.
+
+  
+
+The html title attribute can be used to supplement the link text with any additional useful description.
+  
+
+## Testing + Learnings
+
+
+No hyperlink tests have been run at this time.
+
+  

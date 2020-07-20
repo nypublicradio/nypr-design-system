@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Atoms/Counter"/>
+
+# Counter
+
+Our counter component is a nifty little widget that includes text, an icon, and an incrementing number value. We use it for counting comments, photos, or any other user-facing numerical value. See it in use inside our Card and Article Metadata components.
+
+  
+  
+
+## What’s Inside
+<br/>
+ <img alt="example of counter anatomy" src="./images/Atom-Counter-Anatomy.png" width="100" />
+
+
+1- **Icon** - Optional icon to indicate the thing you’re counting (Note: You must include either an icon, text, or both to give context to the value being counted. Don’t leave that number standing out by its lonesome)
+
+
+2- **Value** - The numerical value of whatever is being counted.
+
+ 
+3- **Text** - Placeholder for text describing the thing you’re counting. 1-2 words maximum. See note on descriptive requirements above.
+
+  
+  
+
+## Configuration
+
+When used, icons should always appear to the left of the value and text to the right of the value. This ensures that visual language always reads correctly left to right.
+
+ <img alt="example of counter configurations" src="./images/Atom-Counter-Configurations.png" width="150" />
+
+
+
+## Accessibility
+
+Restated, you must use a descriptive element (text or icon) to describe the value being shown.
+
+  
+
+## Future Section TBD
+
+The icon arrangement rules reflected in this documentation will need to be implemented on Gothamat.

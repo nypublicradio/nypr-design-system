@@ -5,11 +5,11 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Tooltip
 
-Tooltips are floating pieces of contextual information about an element on screen, displayed when a user hovers or focuses on the element it is describing. Tooltips can be attached to links, text, buttons, or inputs.
+Tooltips are floating pieces of contextual information about an element on screen that help a user to better understand something onsite. They are displayed when a user hovers or focuses on the element it is describing. While toolstips should typically be attached to icons, they can also be triggered by links, text, buttons, or inputs. If the information is critical for the user to achieve a task, keep the information clear onsite rather than hiding within a tooltip.
 
 ## Use Cases
 
--   Give additional information to a page element or control.
+-   Give additional information to a page element or control
     
 -   Aid in input instructions with form fields
     
@@ -19,27 +19,31 @@ Tooltips are floating pieces of contextual information about an element on scree
 
 Confused whether you should use a tooltip? Figure out in 3 seconds if a using tooltip is necessary by visiting [this](https://media.nngroup.com/media/editor/2018/11/19/v2tooltipsasset-9.png) link.
     
+## Tooltip vs Drawer Menu
 
+Though they can look visually similar, a drawer menu is different from a tooltip due to the function it provides to a user. At its core, a drawer menu is a menu, used to give a user access to extended actionable, interactive options.  
+
+Tooltips, on the other hand, are used to provide additional, helpful information to a user as they interact with a website. The information within a tooltip is not typically interactive but rather informative and helpful. If the information being provided is critical to the user's experience, it should be exposed onsite at all times and not placed within a tooltip. 
   
 
 ## Variants
 
-Tooltips can vary functionally by their configuration or stylistically by their brand. This includes typography, color, padding, and the optional link button or primary CTA. See the examples below for Whitelabel (left) vs. Gothamist (right).
+Tooltips can vary in their configuration or style by brand. This includes typography, color, padding, and the optional link button or primary CTA. See the examples below for Whitelabel (left) vs. Gothamist (right).
  <img alt="tooltip variations" src="./images/Molecules-Tooltips-Variants.png" width="400" />
 
 ## Placement
 
-Tooltips should always be positioned next to the element it is connected to. Icon tooltips and interactive tooltips may be positioned top, bottom, left, or right to the trigger item. The position will vary depending on where the element is in relation to the edge of the screen.
+Tooltips should always be positioned next to the element they are connected to. Icon tooltips and interactive tooltips may be positioned top, bottom, left, or right to the trigger item. The position will vary depending on where the element is in relation to the edge of the screen.
 
 
 ## Motion
 
-Animation for tooltips come into to play when the tooltip is activated. Use our preset Incoming and Outgoing easing tokens to make tooltips appear and disappear.
+Animation for tooltips comes into play when the tooltip is activated upon user hover or click. Use our preset Incoming and Outgoing easing tokens to make tooltips appear and disappear.
 
   
 
 ## Accessibility
 
-Tooltips are viewable on hover or focus of the element there connected to, this functionality gives viewability to all users, even those not using a mouse.
+Tooltips are viewable on hover or focus of the element they are connected to, this functionality gives viewability to all users, even those not using a mouse.
 
 On mobile, elements with tooltips should be accessible on click if they are typically triggered on hover/focus.

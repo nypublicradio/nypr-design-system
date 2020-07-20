@@ -1,0 +1,69 @@
+
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Molecules/DrawerMenu"/>
+
+
+# TBD Menu Name (FKA Drawer)
+
+Drawer menus are used to display interactive menus of options that are secondary to the core experience and can be hidden from the site's initial view. When triggered, a drawer menu opens into a floating container that can hold a list of links or buttons to help user navigate or take action from within the page. 
+
+  
+
+## Use Cases
+
+-   Present selectable options to a user that don’t always need to be visible. One example of this use case is a share menu which hides share options to minimize the intrusion to the core experience, but when expanded displays a list of icon buttons to be used for sharing content to various social platforms.
+    
+-   Present controls or functionality that are shown only when needed. Examples of this use case are a volume slide or station switcher within an audio player, which are hidden on initial view and expand to allow extended control on interaction.
+    
+
+  
+
+## Drawer Menu vs Tooltip
+
+Though they can look visually similar, a drawer menu is different from a tooltip due to the function it provides to a user. A drawer menu is used to hide a menu of options or interactive elements in a way that helps a user to navigate but is not intrusive to the core site experience. 
+
+Tooltips, on the other hand, are used to provide additional, helpful information to a user as they interact with a website. The information within a tooltip is not typically interactive but rather informative and helpful to the user experience.
+
+
+
+## States
+
+### Default/Closed State
+
+By default, a drawer menu loads in its closed state so that the contents of the menu are hidden from view to the user. The menu is indicated to the user via button, link, carat (more TK from Cole)
+
+### Opened State
+
+When a user interacts with the menu, the menu expands to display additional navigational information. This includes support for links, icon buttons, (more tk from Cole)
+
+  
+
+## Placement
+
+An expanded drawer menu should always open directly above or below the element it is connected to. The position will vary depending on where the element is in relation to the edge of the screen. 
+  
+
+
+## Motion
+
+Animation for drawer menus comes into play when the menu is activated via click. Use our preset Incoming and Outgoing easing tokens to make drawer menus appear and disappear.
+
+  
+
+## Variants
+
+Drawer menus can vary in configuration or style by brand. This includes typography, color, padding, and iconography. See the examples below.
+
+ <img alt="examples of drawer menus" src="./images/Molecules-DrawerMenu-Variants.png" width="300" />
+
+  
+
+## Accessibility
+
+Drawer menus are viewable on click of the element they are connected to. This functionality gives viewability to all users, even those not using a mouse.
+
+
+## Testing + Learnings
+
+No tests have been run at this time.

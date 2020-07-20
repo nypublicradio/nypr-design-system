@@ -95,10 +95,18 @@
   }
 }
 
-.c-main-header__close {
+.c-main-header__donate.o-button {
+  font-size: var(--font-size-5);
+}
+
+.c-main-header .c-main-header__close {
   width: 17px;
   height: 17px;
-  fill: white;
+  fill: rgb(var(--color-text));
+}
+
+.c-main-header .c-main-header__close path {
+  fill: rgb(var(--color-text));
 }
 
 .c-main-header__title {
