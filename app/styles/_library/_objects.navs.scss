@@ -305,7 +305,7 @@
 .c-read-more-nav__item:before {
   content: "";
   position: absolute;
-  background-color: rgb(var(--color-neutral-accent-2));
+  background-color: rgba(var(--color-high-contrast), 0.358);
   left: 0;
   top: calc(50% - 2px);
   width: 3px;

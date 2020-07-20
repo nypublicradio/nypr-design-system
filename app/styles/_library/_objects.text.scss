@@ -492,7 +492,7 @@ a.o-breadcrumb:hover {
 /* Temporary until i can get the real icon*/
 .o-end-label .o-icon--down-arrow {
   transform: rotate(90deg);
-  fill: rgb(var(--color-neutral-accent-2));
+  fill: rgb(var(--color-high-contrast), 0.358);
   margin-bottom: var(--space-2);
 }
 

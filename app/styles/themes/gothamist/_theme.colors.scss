@@ -7,10 +7,12 @@
 
   /* Neutrals */
   --color-black:               #{hex2rgb(#000000)};
-  --color-dark-gray:           #{hex2rgb(#333333)};
-  --color-gray:                #{hex2rgb(#afafaf)};
-  --color-light-gray:          #{hex2rgb(#f3f3f3)};
+  --color-dark-gray:           #{hex2rgb(#333333)}; //80%
+  --color-gray:                #{hex2rgb(#afafaf)}; //31.5%
+  --color-light-gray:          #{hex2rgb(#f3f3f3)}; //4.8%
   --color-white:               #{hex2rgb(#ffffff)};
+
+
 
   /* Forms */
   --color-valid:               #{hex2rgb(#089E00)};
@@ -41,11 +43,9 @@
   --color-text-inverse:         var(--color-white);
   --color-text-metadata:        var(--color-dark-gray);
 
-  /* Neutral colors for decorative elements */
-  --color-neutral-accent-1: var(--color-light-gray);
-  --color-neutral-accent-2: var(--color-gray);
-  --color-neutral-accent-3: var(--color-brown-gray);
-  --color-high-contrast:    var(--color-black);
+  /* Black and white relative to the color group background */
+  --color-high-contrast:          var(--color-black);
+  --color-high-contrast-inverse:  var(--color-white);
 
   /* Links */
   --color-link:                  var(--color-brick-red);
@@ -101,11 +101,9 @@
   --color-text-inverse:         var(--color-dark-gray);
   --color-text-metadata:        var(--color-white);
 
-  /* Neutral colors for decorative elements */
-  --color-neutral-accent-1: var(--color-brown-gray);
-  --color-neutral-accent-2: var(--color-gray);
-  --color-neutral-accent-3: var(--color-light-gray);
+  /* Black and white relative to the color group background */
   --color-high-contrast:    var(--color-white);
+  --color-high-contrast-inverse:    var(--color-black);
 
 
   /* Links */

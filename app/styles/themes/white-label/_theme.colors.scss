@@ -40,6 +40,10 @@
   --color-text-inverse:         var(--color-white);
   --color-text-metadata:        var(--color-dark-gray);
 
+  /* Black and white relative to the color group background */
+  --color-high-contrast:          var(--color-black);
+  --color-high-contrast-inverse:  var(--color-white);
+
   /* Links */
   --color-link:                 var(--color-ceramic-blue);
   --text-decoration-link:       underline;
@@ -103,6 +107,10 @@
   --color-text-error:           var(--color-ember-red);
   --color-text-inverse:         var(--color-dark-gray);
   --color-text-metadata:        var(--color-white);
+
+  /* Black and white relative to the color group background */
+  --color-high-contrast:          var(--color-white);
+  --color-high-contrast-inverse:  var(--color-black);
 
   /* Links */
   --color-link:                 var(--color-white);
