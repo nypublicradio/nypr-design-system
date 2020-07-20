@@ -5,8 +5,11 @@
       {{#if item.route}}
         {{#link-to
           params=item.route
-          class=(concat 'c-primary-nav__link ' @linkClass)
+          class=(concat 'c-primary-nav__link ' @linkClass (if item.tracking.trackClick ' gtm__click-tracking-container'))
           data-test-nav-link=i
+          data-category=(if item.tracking.trackClick (if item.tracking.dataCategory item.tracking.dataCategory @linkDataCategory))
+          data-action=(if item.tracking.trackClick (if item.tracking.dataAction item.tracking.dataAction @linkDataAction))
+          data-label=(if item.tracking.trackClick (if item.tracking.dataLabel item.tracking.dataLabel @linkDataLabel))
         }}
           {{#if item.icon}}
             <div class='c-primary-nav-link__icon'>
@@ -20,8 +23,11 @@
       {{else if item.url}}
         <a
           href={{item.url}}
-          class="c-primary-nav__link {{@linkClass}}"
+          class="c-primary-nav__link {{@linkClass}} {{if item.tracking.trackClick ' gtm__click-tracking-container'}}"
           data-test-nav-link={{i}}
+          data-category={{if item.tracking.trackClick (if item.tracking.dataCategory item.tracking.dataCategory @linkDataCategory)}}
+          data-action={{if item.tracking.trackClick (if item.tracking.dataAction item.tracking.dataAction @linkDataAction)}}
+          data-label={{if item.tracking.trackClick (if item.tracking.dataLabel item.tracking.dataLabel @linkDataLabel)}}
         >
           {{#if item.icon}}
             <div class='c-primary-nav-link__icon'>
