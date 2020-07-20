@@ -1,6 +1,7 @@
 /*
+  A list of tokens to allow in the base styles. This is a css formatted list. The values don't matter.
 
-
+  This is used by the `lint:styles` command in package.json.
 */
 
 :root {
@@ -67,10 +68,8 @@
   --color-text-metadata:        *;
 
   /* Colors: Neutral Accents */
-  --color-neutral-accent-1: *;
-  --color-neutral-accent-2: *;
-  --color-neutral-accent-3: *;
   --color-high-contrast:    *;
+  --color-high-contrast-inverse:    *;
 
   /* Colors: Links */
   --color-link:                  *;
