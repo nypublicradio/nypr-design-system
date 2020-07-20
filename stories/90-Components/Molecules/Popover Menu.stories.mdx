@@ -1,12 +1,12 @@
 
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Components/Molecules/DrawerMenu"/>
+<Meta title="Components/Molecules/Popover Menu"/>
 
 
-# TBD Menu Name (FKA Drawer)
+# Popover Menu (FKA Drawer)
 
-Drawer menus are used to display interactive menus of options that are secondary to the core experience and can be hidden from the site's initial view. When triggered, a drawer menu opens into a floating container that can hold a list of links or buttons to help user navigate or take action from within the page. 
+Popover menus are used to display interactive menus of options that are secondary to the core experience and can be hidden from the site's initial view. When triggered, a drawer menu opens into a floating container that can hold a list of links or buttons to help user navigate or take action from within the page. 
 
   
 
@@ -19,7 +19,7 @@ Drawer menus are used to display interactive menus of options that are secondary
 
   
 
-## Drawer Menu vs Tooltip
+## Popover Menu vs Tooltip
 
 Though they can look visually similar, a drawer menu is different from a tooltip due to the function it provides to a user. A drawer menu is used to hide a menu of options or interactive elements in a way that helps a user to navigate but is not intrusive to the core site experience. 
 
@@ -31,11 +31,16 @@ Tooltips, on the other hand, are used to provide additional, helpful information
 
 ### Default/Closed State
 
-By default, a drawer menu loads in its closed state so that the contents of the menu are hidden from view to the user. The menu is indicated to the user via button, link, carat (more TK from Cole)
+By default, a drawer menu loads in its closed state so that the contents of the menu are hidden from view to the user. The menu is indicated to the user via button, link, carat or other appropriate icon. 
+
+ <img alt="examples of a closed popover" src="./images/Molecules-Popover-ClosedState.png" width="300" />
+
 
 ### Opened State
 
-When a user interacts with the menu, the menu expands to display additional navigational information. This includes support for links, icon buttons, (more tk from Cole)
+When a user interacts with the menu trigger, the menu expands to display additional navigational information. This includes support for links, icon buttons, and other basic atoms.
+
+ <img alt="examples of a open popover" src="./images/Molecules-Popover-OpenState.png" width="300" />
 
   
 
@@ -53,7 +58,7 @@ Animation for drawer menus comes into play when the menu is activated via click.
 
 ## Variants
 
-Drawer menus can vary in configuration or style by brand. This includes typography, color, padding, and iconography. See the examples below.
+Popover menus can vary in configuration or style by brand. This includes typography, color, padding, and iconography. See the examples below.
 
  <img alt="examples of drawer menus" src="./images/Molecules-DrawerMenu-Variants.png" width="300" />
 
@@ -61,7 +66,7 @@ Drawer menus can vary in configuration or style by brand. This includes typograp
 
 ## Accessibility
 
-Drawer menus are viewable on click of the element they are connected to. This functionality gives viewability to all users, even those not using a mouse.
+Popover menus are viewable on click of the element they are connected to. This functionality gives viewability to all users, even those not using a mouse.
 
 
 ## Testing + Learnings
