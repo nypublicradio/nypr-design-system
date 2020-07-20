@@ -482,8 +482,8 @@ form .o-button:hover {
 .o-back-to-link {
   font-family: var(--font-family-pragati);
   text-decoration: none;
-  .o-icon {
-    fill: white;
+  .o-icon svg > * {
+    fill: rgb(var(--color-text));
   }
   .u-has-accent {
     @include  dotted-underline(--color-white);
@@ -494,6 +494,7 @@ form .o-button:hover {
     border-bottom: none;
 
     .u-has-accent {
+      background-image: none;
       &:hover {
         background-color: rgb(var(--color-reddish-orange));
       }
@@ -531,6 +532,7 @@ form .o-button:hover {
 
 .c-gallery-overlay .o-credit a {
   @include  dotted-underline(--color-link);
+  text-decoration: none;
   &:hover {
     color: rgb(var(--color-link-hover));
     background-color: rgb(var(--color-reddish-orange));
