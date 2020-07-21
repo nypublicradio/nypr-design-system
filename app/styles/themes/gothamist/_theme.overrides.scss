@@ -80,14 +80,14 @@ blockquote {
     }
 
     @include media('>xlarge') {
-      left: calc(var(--grid-col-width) + var(--grid-gutter));
+      margin-left: calc(var(--grid-col-width) + var(--grid-gutter));
     }
 
     --xl-container: calc(var(--max-width-xl) + var(--space-5));
     @include media('>xxlarge') {
       position: absolute;
       bottom: -43px;
-      left: calc(50% - var(--xl-container) / 2 + var(--space-5));
+      margin-left: calc(50% - var(--xl-container) / 2 + var(--space-5));
     }
   }
 
@@ -244,6 +244,10 @@ blockquote {
 // Top Navigation
 .c-primary-nav--top .c-primary-nav__link:hover {
   color: rgb(var(--color-reddish-orange));
+
+  .c-primary-nav-link__icon svg {
+    fill: rgb(var(--color-reddish-orange));
+  }
 }
 
 // Side Navigaton
@@ -253,14 +257,27 @@ blockquote {
 }
 
 .c-primary-nav--side .c-primary-nav__link {
-  padding-bottom: 2px;
   color: rgb(var(--color-banana-yellow));
-  @include dotted-underline(--color-banana-yellow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover, &:focus {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
+
+    .c-primary-nav-link__icon svg {
+      fill: rgb(var(--color-white));
+    }
   }
+}
+
+.c-primary-nav--side .c-primary-nav__link .c-primary-nav-link__text {
+  @include dotted-underline(--color-banana-yellow);
+}
+
+.c-primary-nav--side .c-primary-nav__link .c-primary-nav-link__icon svg {
+  fill: rgb(var(--color-banana-yellow));
 }
 
 .c-secondary-nav .c-secondary-nav__link {
