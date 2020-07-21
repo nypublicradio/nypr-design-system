@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## `3.0.1-beta6`
+
+- #108 Add Click Tracking to primary navigation links
+
+https://jira.wnyc.org/browse/DS-842
+
 ## `3.0.1-beta5`
 
 - #107 iconography
