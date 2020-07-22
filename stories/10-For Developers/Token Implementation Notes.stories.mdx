@@ -12,9 +12,9 @@ There are a few terms around tokens that can be confusing so let's define them u
 
 **Variables:** A name and a value. Here we're usually talking about CSS custom properties, also known as CSS variables. This is the technical feature we use to implement tokens.
 
-**Tokens:** CSS Variables that a developer uses when implementing the base styles for a component. Not all variables are tokens. For example, a theme might have a local palette of colors that's used to set the token values. When I write some code for a theme that defines "button color" as "brand red", "button color" is a token, but "brand red" isn't.
+**Tokens:** CSS Variables that a developer uses when implementing the base styles for a component. Not all variables are tokens. For example, a theme might have a local palette of colors that's used to set the token values. When I write some code for a theme that defines _button color_ as _brand red_, _button color_ is a token, but _brand red_ isn't.
 
-**Dials:** Variables that can be set by a theme author to change the value of a single token. For example, "button color".
+**Dials:** Variables that can be set by a theme author to change the value of a single token. For example, _button color_.
 
 **Levers:** Variables that can be set by a theme author to change the value of multiple tokens. For example, the font scaling factor which changes all of the derived font size tokens.
 
@@ -34,7 +34,7 @@ Disadvantages:
 
 We use stylelint to enforce an allowlist so that things like theme specific colors don't get added to component styles.
 
-Right now we only apply this check to the base styles and are less strict with what goes into the site specific themes themselves. There's no benifit to saying "brand theme" can't use "brand color" directly.
+Right now we only apply this check to the base styles and are less strict with what goes into the site specific themes themselves. There's no benifit to saying _brand theme_ can't use _brand color_ directly.
 
 ## Component Specific Tokens
 
@@ -85,7 +85,7 @@ A recommended pattern is to use the typeface mixin whenever setting a typeface f
 Example font token usage:
 ```
 .my-header {
-  // the base font size. This is "mobile-first".
+  // the base font size
   @include typeface (header, 8);
 
     @include media(">=medium") {
@@ -120,17 +120,19 @@ Example font token usage:
 
 ## Spacing
 
-Radial includes three predefined spacing scales, Compact, Default, and Loose. To choose the spacing scale for a theme, the theme author can change the variables `--spacing-base` and `spacing-increment` to use a pair of these predefined variables.
+Radial uses a range of spacing tokens, numbered `--space-1` to `--space-11`. These tokens are used for margin and padding values within and between components. Our goal with spacing tokens is to be able to choose the visual density for a theme.
 
-Setting a theme to use compact spacing:
+When creating components, developers and designers should use these tokens consistely according to the [spacing guidelines](./index.html?path=/docs/foundations-spacing--page#spacing-usage).
+
+When creating a theme, these values aren't configured manually. Radial includes three predefined spacing scales, Compact, Default, and Loose. To choose the spacing scale for a theme, the theme author can change the variables `--spacing-base` and `spacing-increment` to use a pair of these predefined variables.
+
+Example: Setting a theme to use compact spacing
 ```
   --spacing-base:      var(--spacing-base-compact);
   --spacing-increment: var(--spacing-increment-compact);
 ```
 
-Setting these levers configures the values for a range of spacing tokens, numbered `--space-1` to `--space-11`.
-
-When creating components, developers and designers should use these tokens consistely according to the spacing guidelines.
+Setting the above levers will automatically configure the values of `--space-1` to `--space-11`.
 
 ## Colors
 
@@ -195,7 +197,7 @@ Colors for various types and states of text. Something to note here is that the 
 
 ### Link Colors
 
-A typical site will probably customize links in multiple places, but as defaults to use for building our components, we provide two sets of link tokens. The defaults for links, `--color-link-*` and a second set to use in navigation elements, `--color-navigation-link-*`.
+A typical site will probably customize links in multiple places, but as defaults to use for building our components, we provide two sets of link tokens. The defaults for links, `--color-link`, `text-decoration-link`, ` --color-link-hover`, ` --text-decoration-link-hover`, `--opacity-link-hover` and a second set to use in navigation elements, `--color-link-navigation`, etc.
 
 ### Tag Colors
 
@@ -222,7 +224,3 @@ Color groups are usually implemented as a SASS mixin that can apply the new valu
   @include color-group-dark;
 }
 ```
-
-## Icons
-
-## Borders
