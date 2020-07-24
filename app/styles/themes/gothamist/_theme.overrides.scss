@@ -552,6 +552,10 @@ form .o-button:hover {
   border: 2px solid rgb(var(--color-brick-red));
 }
 
+.c-author-block__details-link:hover {
+  background-color: rgb(var(--color-reddish-orange));
+}
+
 // article page
 
 .c-article__headline {
