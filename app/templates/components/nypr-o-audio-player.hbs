@@ -10,7 +10,7 @@
   {{/if}}
 </div>
 
-<PlayButton @playItemId={{this.streamSlug}} class="jukebox-player-listen-button" data-test-element="listen-button"/>
+<NyprMPlayButton @playItemId={{this.streamSlug}} class="jukebox-player-listen-button" data-test-element="listen-button"/>
 
 <TrackAdditionalInfo class="jukebox-player-track" data-test-element="track" @ensembleName={{ensembleName}} @conductorName={{conductorName}} as |options|>
   {{#if @composerName}}
