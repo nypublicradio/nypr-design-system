@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.0
+- [CHANGE] Refactor of color tokens
+- [ENHANCEMENT] Style linting, token allowlist for base styles
+
 ## `3.0.1-beta6`
 
 - #108 Add Click Tracking to primary navigation links
