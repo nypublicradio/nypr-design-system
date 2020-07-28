@@ -1,0 +1,214 @@
+@mixin pauseShowing() {
+    .play-icon-shapes > .play {
+      opacity: 0;
+    }
+    .play-icon-shapes > .pause {
+      opacity: 1;
+    }
+  }
+  
+  @mixin playShowing() {
+    .play-icon-shapes > .play {
+      opacity: 1;
+    }
+    .play-icon-shapes > .pause {
+      opacity: 0;
+    }
+  }
+  
+  @mixin showRadiatingWaves() {
+    .play-icon-shapes .outer-circle-fx {
+      display: block;
+      animation: pulse-rings-outer 5s 1s infinite;
+      fill: #1FABF1;
+    }
+  
+    .play-icon-shapes .inner-circle-fx {
+      display: block;
+      animation: pulse-rings-inner 5s 1s infinite;
+      fill: #1FABF1;
+    }
+  }
+  
+  @mixin hideRadiatingWaves() {
+    .play-icon-shapes .fx > * {
+      animation: none;
+    }
+  }
+  
+  @keyframes pulse-rings-outer {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    8% {
+      transform: scale(2);
+      opacity: 0.3;
+    }
+    16% {
+      transform: scale(2);
+      opacity: 0.3;
+    }
+    40%, 100% { // delay before starting the next round
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes pulse-rings-inner {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    8% {
+      transform: scale(1.7);
+      opacity: 0.2;
+    }
+    16% {
+      transform: scale(1.7);
+      opacity: 0.2;
+    }
+    40%, 100% { // delay before starting the next round
+      transform: scale(2.125);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes bigSpin {
+    0% {
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @mixin spinner(
+    $primary: rgba(239,239,239,1),
+    $accent: rgba(176,176,175,1),
+    $innerWidth: 14px,
+    $innerHeight: 14px,
+    $outerWidth: 30px,
+    $outerHeight: 30px,
+    $borderWidth: 6px,
+    $top: 0px,
+    $left: 0px,
+    $right: 0px,
+    $bottom: 0px
+    ) {
+      &:before { //inner spinner
+        content: '';
+        display: block;
+        position: absolute;
+        top: #{$top}; left: #{$left}; right: #{$right}; bottom: #{$bottom};
+        margin: auto;
+        width: #{$innerWidth};
+        height: #{$innerWidth};
+        border: #{$borderWidth} solid $primary;
+        border-radius: 50%;
+        border-left-color: $accent;
+        border-top-color: $accent;
+  
+        animation: bigSpin .8s linear infinite;
+        transform-origin: 50% 50%;
+      }
+      &:after { //outer spinner
+        content: '';
+        display: block;
+        position: absolute;
+        top: #{$top}; left: #{$left}; right: #{$right}; bottom: #{$bottom};
+        margin: auto;
+        width: #{$outerWidth};
+        height: #{$outerHeight};
+        border: #{$borderWidth} solid $primary;
+        border-radius: 50%;
+        border-left-color: $accent;
+        border-top-color: $accent;
+  
+        text-align: center;
+        animation: bigSpin 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        transform-origin: 50% 50%;
+      }
+    }
+  
+  .play-button {
+    cursor: pointer;
+    position: relative;
+    appearance: none;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    transition: all 0.1s ease-in-out;
+    overflow: visible!important;
+  
+    svg {
+      // Essential for radiating waves animation
+      overflow:visible;
+      max-width: 100%;
+    }
+  
+    &:hover {
+      transition: all 0.1s ease-in-out;
+      transform: scale(1.1);
+    }
+  
+    &.is-paused {
+      @include playShowing();
+      @include showRadiatingWaves();
+    }
+  
+    &.is-paused:hover {
+      @include hideRadiatingWaves();
+    }
+  
+    &.is-paused.is-loading {
+      @include hideRadiatingWaves();
+    }
+  
+    &.is-playing {
+      @include pauseShowing();
+      opacity: 0.9;
+    }
+  
+    &.is-loading {
+      .play-icon-shapes {
+        .play, .pause {
+          opacity: 0;
+        }
+      }
+  
+      @include spinner(
+        $primary: rgba(white, 0),
+        $accent: white
+      );
+    }
+  
+    .play-icon-shapes {
+      > * {
+        transition: opacity 0.1s ease-in-out;
+      }
+      .play {
+        fill: #FFF;
+        stroke: none;
+      }
+  
+      .outer-circle {
+        stroke: #FFF;
+        stroke-width: 3px;
+      }
+  
+      .inner-circle {
+        display: none; // we'll always hide this one
+      }
+  
+      .outer-circle-fx, .inner-circle-fx {
+        pointer-events: none;
+        transform-origin: center;
+        fill: transparent;
+        stroke: transparent;
+        transition: all 0.5 ease-in-out;
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+  }
+  
