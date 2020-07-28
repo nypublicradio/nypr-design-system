@@ -28,7 +28,7 @@
 
 <div class="jukebox-player-controls">
   {{#if (can-change-volume)}}
-    {{nypr-player/volume-control
+    {{nypr-m-volume-control
       volume     = hifi.volume
       setVolume  = (action "setVolume")
       toggleMute = (action "toggleMute")
