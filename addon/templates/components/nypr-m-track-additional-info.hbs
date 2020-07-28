@@ -1,0 +1,19 @@
+{{#if (or @ensembleName @conductorName)}}
+  <ToggleBox @verticalPosition={{@verticalPosition}} @horizontalPosition={{@horizontalPosition}} @open={{true}} @customIconPlacement={{true}} class="secondary-metadata-toggle-box" as |toggle|>
+    <toggle.trigger class="gtm__click-tracking-expand-track-info">
+      {{yield (hash icon=toggle.icon)}}
+    </toggle.trigger>
+    <toggle.dropdown>
+      <div class="secondary-metadata-content">
+        {{#if @ensembleName}}
+          <div class="ensemble secondary-metadata-content-field">Performed by the <strong>{{@ensembleName}}</strong></div>
+        {{/if}}
+        {{#if @conductorName}}
+          <div class="conductor secondary-metadata-content-field">Conducted by <strong>{{@conductorName}}</strong></div>
+        {{/if}}
+      </div>
+    </toggle.dropdown>
+  </ToggleBox>
+{{else}}
+  {{yield}}
+{{/if}}
