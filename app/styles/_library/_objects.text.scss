@@ -46,7 +46,7 @@
  * Rich text editor text
  */
 .o-rte-text {
-  font-family: var(--font-family-body);
+  @include typeface(body, 6);
 }
 
 /* broken markup compat*/
@@ -70,14 +70,12 @@
 }
 
 .o-rte-text a:hover {
-  color: rgb(var(--color-link-hover));
+  color: rgba(var(--color-link-hover) var(--opacity-link-hover));
   text-decoration: none;
-  opacity: var(--opacity-link-hover);
-  background-color: rgb(var(--color-link-hover-background));
 }
 
 .o-rte-text a:visited {
-  color: rgb(var(--color-link-1));
+  color: rgb(var(--color-link));
 }
 
 .o-rte-text > h1,
@@ -181,13 +179,13 @@
   top: .75em;
   width: 7px;
   height: 7px;
-  background-color: rgb(var(--color-text));
+  background-color: rgb(var(--color-link));
   border-radius: 50%;
 }
 
 .o-rte-text > ul li li:before {
   background-color: transparent;
-  border: 2px solid rgb(var(--color-border-standard));
+  border: 2px solid rgb(var(--color-link));
   width: 4px;
   height: 4px;
 }
@@ -197,14 +195,13 @@
 }
 
 .o-rte-text > ol li:before {
+  @include typeface(small, 11);
   counter-increment: counter;
   content: counter(counter);
-  color: rgb(var(--color-link-2));
-  font-size: var(--font-size-11);
+  color: rgb(var(--color-text));
   position: absolute;
   left: -58px;
   top: -.4em;
-  font-family: var(--font-family-small);
   width: 50px;
   text-align: right;
 
@@ -273,7 +270,7 @@
 
 .o-pullquote p span:before,
 .o-pullquote p span:after {
-  font-family: var(--font-family-header);
+  @include typeface(header, 11);
 }
 
 .o-pullquote p span:before {
@@ -285,7 +282,7 @@
 }
 
 .o-pullquote__author {
-  color: rgb(var(--color-pull-quote-text));
+  color: rgb(var(--color-text-muted));
   @include typeface(small, 1);
   @include media(">=medium") {
     @include typeface(small, 3);
@@ -299,7 +296,7 @@
  * Text background accent
  */
 .o-bg-text-accent {
-  background-image: linear-gradient(rgba(var(--color-pull-quote-text), .2), rgba(var(--color-pull-quote-text), .2));
+  background-image: linear-gradient(rgba(var(--color-text-muted), .2), rgba(var(--color-text-muted), .2));
   background-position: center bottom .2em;
   background-size: 100% .55em;
   background-repeat: no-repeat;
@@ -320,8 +317,10 @@
 .o-kicker,
 .o-breadcrumb {
   @include typeface(small, 1);
+  line-height: 1;
   @include media(">=medium") {
-    @include typeface(small, 3);
+    font-size: var(--font-size-3);
+    line-height: var(--line-height-3);
     font-weight: bold;
   }
   background-color: rgb(var(--color-tag-background));
@@ -463,7 +462,7 @@ a.o-breadcrumb:hover {
 }
 
 .o-back-to-link .u-path-fill--white svg * {
-  fill: rgb(var(--color-white)); //no fill
+  fill: rgb(var(--color-text-inverse)); //no fill
 }
 
 .o-back-to-link .u-has-accent {
@@ -493,7 +492,7 @@ a.o-breadcrumb:hover {
 /* Temporary until i can get the real icon*/
 .o-end-label .o-icon--down-arrow {
   transform: rotate(90deg);
-  fill: rgb(var(--color-gray));
+  fill: rgb(var(--color-high-contrast), 0.358);
   margin-bottom: var(--space-2);
 }
 
@@ -519,13 +518,6 @@ a.o-breadcrumb:hover {
 /**
  * Border accents
  */
-.o-border-accent {
-  background-image: repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to right, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%), repeating-linear-gradient(to bottom, rgb(var(--color-black)) 0%, rgb(var(--color-black)) 44%, transparent 44%, transparent 100%);
-  background-position: left top, left bottom, left top, right top;
-  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-  background-size: 18px 2px, 18px 2px, 2px 18px, 2px 18px;
-}
-
 .u-border-accent {
   @include border-accent;
 }

@@ -65,9 +65,6 @@
     }
   }
 }
-.c-lead-gallery__thumbs-thumb.is-active {
-  border-color: rgb(var(--color-reddish-orange));
-}
 .c-lead-gallery__thumbs-thumb img {
   display: block;
   object-fit: cover;
@@ -84,9 +81,7 @@
   color: rgb(var(--color-text-inverse));
   white-space: nowrap;
 }
-.c-lead-gallery__thumbs-thumb-text:hover {
-  background-color: rgb(var(--color-link-hover));
-}
+
 .c-lead-gallery__thumbs-thumb-text span {
   display: block;
   font-size: var(--font-size-11);

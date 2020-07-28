@@ -3,6 +3,7 @@
 \*------------------------------------*/
 
 .c-main-header {
+  --color-background: var(--color-cool-white);
   &.side-menu-is-active {
     .c-main-header__branding {
       opacity: 0;
@@ -24,8 +25,7 @@
 
 // Footer
 .c-main-footer {
-  background-image: rgb(var(--color-cool-white));
-  background: rgb(var(--color-cool-white));
+  --color-background: var(--color-cool-white);
 
   .gothamist-letters {
     fill: rgb(var(--color-black));
@@ -54,9 +54,24 @@
       color: rgb(var(--color-text-inverse));
     }
   }
+
+}
+
+.c-main-footer a,
+.c-main-footer a:visited,
+.c-main-footer a:active {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 // Side menu
+.c-side-menu {
+  --color-background: var(--color-white);
+}
+
 .c-search--side .c-search__input {
   border: 1px solid;
   border-color: rgb(var(--color-concrete));
@@ -109,4 +124,8 @@
 
 .c-donate-tout__graphic path {
   fill: rgb(var(--color-ceramic-blue));
+}
+
+.c-gallery-overlay {
+  @include color-group-dark;
 }

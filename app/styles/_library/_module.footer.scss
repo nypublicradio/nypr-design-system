@@ -7,18 +7,18 @@
   background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
   background-position: 100% 142px;
   background-repeat: repeat-x;
-  color: rgb(var(--color-footer-text));
+  color: rgb(var(--color-text));
 }
 
 .c-main-footer a,
 .c-main-footer a:visited,
 .c-main-footer a:active {
-  color: rgb(var(--color-footer-link));
-  text-decoration: none;
+  color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-navigation-link);
 
   &:hover {
-    color: rgb(var(--color-footer-link));
-    text-decoration: none;
+    color: rgb(var(--color-link-hover), var(--opacity-link-hover));
+    text-decoration: var(--text-decoration-navigation-link-hover);
   }
 }
 
@@ -49,11 +49,11 @@
 }
 
 .c-main-footer svg {
-  fill: rgb(var(--color-footer-text));
+  fill: rgb(var(--color-text));
 }
 
 .c-main-footer a svg {
-  fill: rgb(var(--color-footer-text));
+  fill: rgb(var(--color-text));
 }
 
 .c-main-footer a:hover svg {
@@ -93,7 +93,7 @@
 }
 
 .c-main-footer__slogan p {
-  color: rgb(var(--color-footer-text));
+  color: rgb(var(--color-text));
   font-size: var(--font-size-4); /* Not in the type scale*/
 }
 
@@ -143,7 +143,7 @@
 
 .c-main-footer__nypr-logo path,
 .c-main-footer__nypr-logo polygon {
-  fill: rgb(var(--color-footer-text));
+  fill: rgb(var(--color-text));
 }
 
 .c-main-footer__brand-group {
@@ -163,6 +163,7 @@
 }
 
 .c-main-footer__bottom {
+  border-top: 1px dashed rgba(var(--color-text), 0.5);
   padding: var(--space-4) var(--space-3);
   text-align: center;
   margin-left: calc(var(--space-3) * -1);
@@ -194,7 +195,6 @@
 .c-main-footer__terms-links a {
   margin: 0 var(--space-3);
   padding: 8px 0;
-  color: rgb(var(--color-footer-link));
   @include typeface(small, 3);
   text-transform: uppercase;
   font-weight: normal;
@@ -212,10 +212,6 @@
 .c-main-footer .c-main-footer__signup svg path,
 .c-main-footer .c-main-footer__signup svg rect {
   fill: rgb(var(--color-text-inverse));
-}
-
-.c-main-footer__terms-links a:hover {
-  color: rgb(var(--color-link-hover));
 }
 
 // view all brands

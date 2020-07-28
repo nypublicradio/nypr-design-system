@@ -16,7 +16,7 @@
   top: 25px;
   right: -4px;
   position: absolute;
-  background-color: rgb(var(--color-footer-text));
+  background-color: rgb(var(--color-text));
   opacity: 0;
   transform: rotate(-45deg);
   width: 0;
@@ -47,10 +47,10 @@
   }
 }
 .c-toggle-box .c-toggle-box__label {
-  color: rgb(var(--color-footer-text));
+  color: rgb(var(--color-text));
 }
 .c-toggle-box .o-icon--caret path {
-  fill: rgb(var(--color-footer-text));
+  fill: rgb(var(--color-text));
 }
 /* Open*/
 .c-toggle-box.this-is-active .c-toggle-box__label:before {
@@ -108,12 +108,12 @@
   height: var(--space-2);
   appearance: none;
   border: none;
-  background-color: rgb(var(--color-light-gray));
+  background-color: rgba(var(--color-high-contrast), 0.048);
   color: rgb(var(--color-primary-1));
   z-index: $z-index-progress-bar;
 }
 .o-progress::-webkit-progress-bar {
-  background-color: rgb(var(--color-light-gray));
+  background-color: rgba(var(--color-high-contrast), 0.048);
 }
 .o-progress::-webkit-progress-value {
   background-color: rgb(var(--color-primary-1));
@@ -196,7 +196,7 @@
 .c-share-tools--vertical .c-share-tools__link--print {
   @include media(">medium") {
     margin-bottom: 10px;
-    background-image: linear-gradient(to right, transparent 50%, rgb(var(--color-text-muted)) 50%);
+    background-image: linear-gradient(to right, transparent 50%, rgba(var(--color-high-contrast), 0.358) 50%);
     background-position: center top;
     background-size: 16px 1px;
     background-repeat: repeat-x;

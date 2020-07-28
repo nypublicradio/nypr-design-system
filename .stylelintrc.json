@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    "stylelint-scss",
+    "stylelint-value-no-unknown-custom-properties"
+  ],
+  "rules": {
+    "csstools/value-no-unknown-custom-properties": [true, {
+      "importFrom": [
+        "app/styles/_library/token-allowlist.css"
+      ]
+    }]
+  },
+  "ignoreFiles": ["**/_base.mixins.scss"]
+}

@@ -27,7 +27,6 @@
   &:hover {
     text-decoration: var(--text-decoration-link-hover);
     color: rgb(var(--color-link-hover));
-    background-color: rgb(var(--color-link-hover-background));
   }
 }
 
@@ -123,9 +122,9 @@
 }
 
 .c-article__related a {
-  font-family: var(--font-family-header);
-  display: inline;
+  @include typeface(header, 5);
   line-height: 1.35;
+  display: inline;
 }
 
 .c-article__related--wide-screens {

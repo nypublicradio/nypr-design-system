@@ -33,9 +33,9 @@ input[type=password],
 input[type=email],
 input[type=search],
 input[type=tel] {
-  font-size: var(--font-size-6);
+  @include typeface(small, 6);
+  line-height: 28px;
   padding: var(--space-3);
-  font-family: var(--font-family-small);
   box-shadow: none;
   border-radius: 0;
 }
@@ -54,13 +54,13 @@ input[type=checkbox] {
   cursor: pointer;
   display: block;
   float: left;
-  border: 2px solid rgb(var(--color-checkbox), 0.3);
   padding: 0;
   user-select: none;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-color: rgb(var(--color-checkbox));
+  border: 2px solid rgb(var(--color-text), 0.3);
+  background-color: rgb(var(--color-text));
 }
 
 input[type=radio] + label,
@@ -117,8 +117,9 @@ select::-ms-expand {
   }
 
 ::placeholder {
-  color: rgb(var(--color-placeholder-text));
-  font-family: var(--font-family-small);
+  @include typeface(small, 6);
+  letter-spacing: normal;
+  color: rgb(var(--color-text-muted));
 }
 
 
@@ -128,5 +129,4 @@ form .o-button:before {
     }
 form .o-button:hover {
       transform: none;
-      background-color: rgb(var(--color-form-button));
     }

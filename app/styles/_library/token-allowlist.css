@@ -1,0 +1,146 @@
+/*
+  A list of tokens to allow in the base styles. This is a css formatted list. The values don't matter.
+
+  This is used by the `lint:styles` command in package.json.
+*/
+
+:root {
+  /* Spacing */
+  --space-1: *;
+  --space-2: *;
+  --space-3: *;
+  --space-4: *;
+  --space-5: *;
+  --space-6: *;
+  --space-7: *;
+  --space-8: *;
+  --space-9: *;
+
+  /* Font Sizing */
+  --font-size-1:  *;
+  --font-size-2:  *;
+  --font-size-3:  *;
+  --font-size-4:  *;
+  --font-size-5:  *;
+  --font-size-6:  *;
+  --font-size-7:  *;
+  --font-size-8:  *;
+  --font-size-9:  *;
+  --font-size-10: *;
+  --font-size-11: *;
+  --font-size-12: *;
+  --font-size-13: *;
+  --font-size-14: *;
+  --font-size-15: *;
+  --font-size-16: *;
+
+  /* Line Height */
+  --line-height-1:  *;
+  --line-height-2:  *;
+  --line-height-3:  *;
+  --line-height-4:  *;
+  --line-height-5:  *;
+  --line-height-6:  *;
+  --line-height-7:  *;
+  --line-height-8:  *;
+  --line-height-9:  *;
+  --line-height-10: *;
+  --line-height-11: *;
+  --line-height-12: *;
+  --line-height-13: *;
+  --line-height-14: *;
+  --line-height-15: *;
+  --line-height-16: *;
+
+  /* Colors */
+  --color-primary-1:            *;
+  --color-primary-2:            *;
+  --color-primary-3:            *;
+  --color-background:           *;
+  --color-background-muted:     *;
+  --color-background-highlight: *;
+  --color-text:                 *;
+  --color-text-print:           *;
+  --color-text-muted:           *;
+  --color-text-valid:           *;
+  --color-text-error:           *;
+  --color-text-inverse:         *;
+  --color-text-metadata:        *;
+
+  /* Colors: Neutral Accents */
+  --color-high-contrast:    *;
+  --color-high-contrast-inverse:    *;
+
+  /* Colors: Links */
+  --color-link:                  *;
+  --text-decoration-link:        *;
+  --color-link-hover:            *;
+  --text-decoration-link-hover:  *;
+  --opacity-link-hover:          *;
+
+  /* Colors: Navigation Links */
+  --color-navigation-link:                 *;
+  --text-decoration-navigation-link:       *;
+  --color-navigation-link-hover:           *;
+  --text-decoration-navigation-link-hover: *;
+  --opacity-navigation-link-hover:         *;
+
+  /* Colors: Tags */
+  --color-tag-text:             *;
+  --color-tag-background:       *;
+  --color-tag-highlight:        *;
+  --color-tag-hover-text:       *;
+  --color-tag-hover-background: *;
+  --opacity-tag-hover:          *;
+
+  /* Colors: Buttons */
+  --color-button-primary:         *;
+  --color-button-primary-hover:   *;
+  --color-button-primary-pressed: *;
+  --opacity-button-primary-hover: *;
+
+  --color-button-outline:         *;
+  --color-button-outline-hover:   *;
+  --color-button-outline-pressed: *;
+  --opacity-button-outline:       *;
+
+  /* Colors: Borders */
+  --color-border-subtle:   *;
+  --color-border-standard: *;
+  --color-border-bold:     *;
+
+  /* Borders */
+  --border-subtle:   *;
+  --border-standard: *;
+  --border-bold:     *;
+
+  /* Layout */
+  --max-width:      *;
+  --max-width-xl:   *;
+  --heading-height: *;
+
+  /* Grid */
+  --grid-gutter:       *;
+  --grid-gutter-large: *;
+  --grid-col-width:    *;
+
+  /* Article */
+  --article-content-width: *;
+
+  /* Opacity */
+  --opacity-hover: *;
+
+  /* Animation */
+  --animation-easing-outgoing: *;
+  --animation-easing-incoming: *;
+  --animation-easing-standard: *;
+
+  --animation-duration-slow:     *;
+  --animation-duration-standard: *;
+  --animation-duration-fast:     *;
+
+  /* ??? */
+  --animation-delay-none:  *;
+  --animation-delay-short: *;
+  --animation-delay-long:  *;
+}

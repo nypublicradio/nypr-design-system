@@ -7,6 +7,32 @@ blockquote {
   border: 1px solid rgb(var(--color-brown-grey));
 }
 
+.o-list--numbered li::before {
+  background-color: rgb(var(--color-black));
+}
+
+/* forms */
+
+input[type=radio],
+input[type=checkbox] {
+  border: 2px solid rgb(var(--color-dark-gray), 0.3);
+  background-color: rgb(var(--color-dark-gray));
+}
+
+
+/* articles */
+
+.c-article__header .u-has-accent,
+.c-article__body a,
+.c-article__body .u-has-accent,
+.c-article__body .u-has-accent--neutral,
+.c-article__footer .o-rte-text a {
+  &:hover {
+    background-color: rgb(var(--color-reddish-orange));
+  }
+}
+
+
 blockquote {
   @include border-accent(bottom, left);
 }
@@ -16,6 +42,7 @@ blockquote {
 }
 
 .c-main-header {
+  // Header uses the dark color group
   @include color-group-dark;
 
   &.side-menu-is-active {
@@ -34,6 +61,14 @@ blockquote {
 }
 
 .c-main-header__donate.o-button {
+  // there's some weirdness here right now because the donate button has
+  // the o-button-sm class on it (why?) so we're overriding extra things
+  @include typeface(small, 5);
+  letter-spacing: 2px;
+  font-weight: 700;
+  line-height: 22px;
+  height: 43px;
+
   &::before {
     border: 3px solid rgb(var(--color-header-button-background));
   }
@@ -100,13 +135,14 @@ blockquote {
   }
 }
 
-.c-main-footer__terms-links a:hover {
-  background-color: rgb(var(--color-primary-2));
-  color: rgb(var(--color-link-hover-2));
-}
-
 .c-main-footer {
+  // Footer uses the dark color group
   @include color-group-dark;
+
+  // But mini-newsletter form uses the light color group
+  .c-newsletter-form {
+    @include color-group-light;
+  }
 
   .gothamist-letters {
     fill: rgb(var(--color-white));
@@ -116,12 +152,12 @@ blockquote {
     fill: rgb(var(--color-dark-gray));
   }
 
-  .c-newsletter-form {
-    @include color-group-light;
+  .c-newsletter-form__button :hover {
+    background-color: rgb(var(--color-form-button));
   }
 
   .c-main-footer__bottom {
-    border-top: 1px dashed rgba(var(--color-footer-text), 0.5);
+    border-top: 1px dashed rgba(var(--color-text), 0.5);
   }
 }
 
@@ -156,6 +192,7 @@ blockquote {
   background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
   background-size: 18px 2px, 18px 2px, 2px 18px, 2px 18px;
 }
+
 
 // Buttons
 .o-button {
@@ -228,6 +265,21 @@ blockquote {
   text-decoration-style: dotted;
 }
 
+.c-lead-gallery__thumbs-thumb.is-active {
+  border-color: rgb(var(--color-reddish-orange));
+}
+.c-lead-gallery__thumbs-thumb-text:hover {
+  background-color: rgb(var(-color-reddish-orange));
+}
+.c-lead-gallery .o-credit a:hover {
+  color: rgb(var(--color-link-hover));
+  background-color: rgb(var(--color-redd  ish-orange));
+}
+.c-lead-gallery__thumbs-thumb-text:hover {
+  background-color: rgb(var(--color-reddish-orange));
+}
+
+
 .c-block__title {
   @include media(">medium") {
     @include typeface(header, 10);
@@ -262,7 +314,7 @@ blockquote {
   justify-content: center;
   align-items: center;
 
-  &:hover, &:focus {
+  &:hover {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
 
@@ -357,9 +409,32 @@ blockquote {
   font-size: var(--font-size-6);
 }
 
-.c-newsletter-form__terms a {
-  color: rgb(var(--color-white));
-  border-bottom: 2px dotted rgb(var(--color-white));
+.c-newsletter-form__button {
+  background-color: rgb(var(--color-reddish-orange));
+}
+
+.c-newsletter-form .c-newsletter-form__button {
+  background-color: rgb(var(--color-dark-gray));
+}
+
+.c-newsletter-article {
+  .o-button {
+    background-color: rgb(var(--color-reddish-orange));
+  }
+
+  input[type=checkbox] {
+    background-color: rgb(var(--color-reddish-orange));
+    border: rgb(var(--color-reddish-orange));
+  }
+}
+
+form .o-button:hover {
+  background-color: rgb(var(--color-reddish-orange));
+}
+
+.o-rte-text a:hover {
+  color: rgb(var(--color-link-hover));
+  background-color: rgb(var(--color-reddish-orange));
 }
 
 .c-newsletter-tout .c-newsletter-form__terms input[type="checkbox"] {
@@ -376,7 +451,11 @@ blockquote {
 .c-main-footer .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
+  &:hover {
+    background-color: rgb(var(--color-reddish-orange));
+  }
 }
+
 
 .c-newsletter-form .c-newsletter-form__button:hover[disabled] {
   background-color: rgb(var(--color-dark-gray));
@@ -399,7 +478,12 @@ blockquote {
 .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
+  &:hover {
+    background-color: rgb(var(--color-reddish-orange));
+    color: rgb(var(--color-text-inverse));
+  }
 }
+
 
 // advertisement label
 .o-ad__label {
@@ -415,13 +499,21 @@ blockquote {
 .o-back-to-link {
   font-family: var(--font-family-pragati);
   text-decoration: none;
+  .o-icon svg > * {
+    fill: rgb(var(--color-text));
+  }
+  .u-has-accent {
+    @include  dotted-underline(--color-white);
+  }
 
   &:hover {
     text-decoration: none;
+    border-bottom: none;
 
     .u-has-accent {
+      background-image: none;
       &:hover {
-        background-color: rgb(var(--color-link-hover-background));
+        background-color: rgb(var(--color-reddish-orange));
       }
     }
   }
@@ -445,13 +537,23 @@ blockquote {
 
 // gallery
 
-.c-gallery-overlay .o-credit a:hover {
-  color: rgb(var(--color-gallery-link));
-  background-color: rgb(var(--color-gallery-link-hover));
+.c-gallery-overlay {
+  // Gallery uses the dark color group
+  @include color-group-dark;
+
+  // But the share link popus use the light color group
+  .c-toggle-box__dropdown {
+    @include color-group-light;
+  }
 }
 
-.c-lead-gallery__thumbs-thumb-text:hover {
-  background-color: rgb(var(--color-link-hover-background));
+.c-gallery-overlay .o-credit a {
+  @include  dotted-underline(--color-link);
+  text-decoration: none;
+  &:hover {
+    color: rgb(var(--color-link-hover));
+    background-color: rgb(var(--color-reddish-orange));
+  }
 }
 
 // staff page
@@ -465,6 +567,10 @@ blockquote {
 
 .o-rte-text > ul li li:before {
   border: 2px solid rgb(var(--color-brick-red));
+}
+
+.c-author-block__details-link:hover {
+  background-color: rgb(var(--color-reddish-orange));
 }
 
 // article page

@@ -6,7 +6,7 @@ a {
   text-decoration: none;
   color: rgb(var(--color-link));
   text-decoration: var(--text-decoration-link);
-  transition: all var(--animation-duration-fast) var(--animation-easing-standard); //used to be ease-in-out
+  transition: all var(--animation-duration-fast) var(--animation-easing-standard);
 }
 
 a:hover {
@@ -32,7 +32,6 @@ a > span {
 .u-has-accent:hover,
 .o-rte-text .u-has-accent:hover {
   color: rgb(var(--color-background));
-  background-color: rgb(var(--color-link-hover-background));
 }
 
 .u-has-accent--neutral,
