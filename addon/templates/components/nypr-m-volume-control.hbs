@@ -6,7 +6,7 @@
     </div>
   </div>
   <button class="nypr-player-button mod-volume" {{action 'toggleMute'}}>
-    {{nypr-svg className="nypr-player-icon mod-volume-unmuted" icon="volume"}}
-    {{nypr-svg className="nypr-player-icon mod-volume-muted" icon="mute"}}
+    <Icon @icon="volume" @title="volume" class="nypr-player-icon mod-volume-unmuted"/>
+    <Icon @icon="volume-muted" @title="volume muted" class="nypr-player-icon mod-volume-muted"/>
   </button>
 </div>
