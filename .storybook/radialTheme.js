@@ -4,12 +4,12 @@ export default create({
   base: 'light',
 
   colorPrimary: 'hotpink',
-  colorSecondary: 'deepskyblue',
+  colorSecondary: 'rgb(30, 167, 253);',
 
   // UI
   appBg: 'white',
-  appContentBg: 'silver',
-  appBorderColor: 'grey',
+  appContentBg: 'white',
+  appBorderColor: 'gainsboro',
   appBorderRadius: 4,
 
   // Typography
@@ -22,7 +22,7 @@ export default create({
 
   // Toolbar default and active colors
   barTextColor: 'silver',
-  barSelectedColor: 'black',
+  barSelectedColor: 'rgb(30, 167, 253);',
   barBg: 'white',
 
   // Form colors
