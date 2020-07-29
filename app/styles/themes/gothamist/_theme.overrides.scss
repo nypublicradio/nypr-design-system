@@ -56,6 +56,11 @@ blockquote {
   }
 }
 
+.c-share-tools__label {
+  text-transform: uppercase;
+  @include typeface(small, 3);
+}
+
 .c-main-header__share .c-share-tools__link:hover path {
   fill: rgb(var(--color-header-icon-hover));
 }
@@ -136,6 +141,11 @@ blockquote {
 }
 
 .c-main-footer {
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
+  background-position: 100% 142px;
+  background-repeat: repeat-x;
+
   // Footer uses the dark color group
   @include color-group-dark;
 
@@ -152,6 +162,11 @@ blockquote {
     fill: rgb(var(--color-dark-gray));
   }
 
+  .c-main-footer__slogan p {
+    color: rgb(var(--color-text));
+    font-size: var(--font-size-4); /* Not in the type scale*/
+  }
+
   .c-newsletter-form__button :hover {
     background-color: rgb(var(--color-form-button));
   }
@@ -159,6 +174,53 @@ blockquote {
   .c-main-footer__bottom {
     border-top: 1px dashed rgba(var(--color-text), 0.5);
   }
+}
+
+.c-main-footer__send-story {
+  display: inline-block;
+  color: rgb(var(--color-background));
+  padding: var(--space-3) 0;
+  margin-bottom: var(--space-3);
+  @include typeface(small, 3);
+  text-transform: uppercase;
+  text-decoration: none;
+
+  &:hover {
+    color: rgb(var(--color-background));
+    text-decoration: none;
+  }
+}
+
+.c-main-footer__copyright-text {
+  @include typeface(small, 3);
+  text-transform: uppercase;
+}
+
+.c-secondary-nav__link {
+  @include typeface(small, 3);
+  text-transform: uppercase;
+}
+
+.c-main-footer__terms-links a {
+  @include typeface(small, 3);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.c-main-footer__signup {
+  color: rgb(var(--color-text-inverse));
+}
+
+.c-main-footer .c-main-footer__signup svg,
+.c-main-footer .c-main-footer__signup svg path,
+.c-main-footer .c-main-footer__signup svg rect {
+  fill: rgb(var(--color-text-inverse));
+}
+
+// view all brands
+.o-text-with-icon {
+  text-transform: capitalize;
+  font-size: var(--font-size-2);
 }
 
 /* sponsored tags */

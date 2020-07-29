@@ -1,0 +1,78 @@
+<footer class="c-main-footer" data-test-main-footer ...attributes>
+
+  <div class="l-container u-spacing--triple">
+
+    <div class="l-grid l-grid--2up l-grid--large-gutters">
+      <!-- left column -->
+      <div>
+        <!-- logo -->
+        <div class="c-main-footer__logo u-space--double--bottom">
+          {{#link-to 'index'}}
+            {{yield (hash logo=(component 'blank-template'))}}
+          {{/link-to}}
+        </div>
+        <!-- slogan -->
+        <div class="c-main-footer__slogan u-space--double--bottom">
+          {{yield (hash slogan=(component 'blank-template'))}}
+        </div>
+        <!-- primary nav -->
+        <div class="c-main-footer__nav u-space--double--bottom" name="primaryNavFooter">
+          {{yield (hash primaryNav=(component 'nypr-m-secondary-nav'))}}
+        </div>
+        <!-- left component area -->
+        <div class="c-main-footer__left-component">
+          {{yield (hash leftComponent=(component 'blank-template'))}}
+        </div>
+      </div>
+
+      <!-- right column -->
+      <div>
+        <!-- right component area -->
+        <div class="c-main-footer__right-component u-space--double--bottom">
+          {{yield (hash rightComponent=(component 'blank-template'))}}
+        </div>
+        <!-- secondary/tertiary nav -->
+        <div class="l-grid l-grid--2up">
+          <div class="c-main-footer__secondary-nav u-space--double--bottom" name="secondaryNavFooter">
+            {{yield (hash secondaryNav=(component 'nypr-m-secondary-nav'))}}
+          </div>
+          <div class="c-main-footer__secondary-nav u-space--double--bottom" name="tertiaryNavFooter">
+            {{yield (hash tertiaryNav=(component 'nypr-m-secondary-nav'))}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="l-grid l-grid--2up l-grid--middle l-grid--large-gutters">
+      <!-- brand group -->
+      <div class="c-main-footer__brand-group">
+        <div class="c-main-footer__nypr-logo">
+          <Icon @icon='nypr-logo' @title="nypr logo"/>
+        </div>
+        <NyprMBrandsLinkroll/>
+      </div>
+      <!-- social share -->
+      <div class="c-main-footer__social" name="shareToolFooter">
+        {{yield (hash social=(component 'blank-template'))}}
+      </div>
+    </div>
+
+    <!-- copyright and legal links -->
+    <div class="c-main-footer__bottom">
+      <div class="c-main-footer__copyright">
+        <p class="u-font--secondary-style u-font--xs c-main-footer__copyright-text u-color--white">&copy; {{moment-format (now) 'YYYY'}} New York Public Radio. All rights reserved.</p>
+      </div>
+      <div class="c-main-footer__terms-links">
+        <a href="https://www.wnyc.org/terms" class="u-font--secondary-style u-font--xs" target="_blank" rel="noopener" name="termsFooter">
+          Terms of Use
+        </a>
+        <a href="https://www.wnyc.org/privacy" class="u-font--secondary-style u-font--xs" target="_blank" rel="noopener" name="privacyFooter">
+          Privacy Policy
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</footer>

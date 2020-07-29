@@ -4,9 +4,7 @@
 
 .c-main-footer {
   padding: var(--space-5) 0;
-  background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
-  background-position: 100% 142px;
-  background-repeat: repeat-x;
+  background-color: rgb(var(--color-background));
   color: rgb(var(--color-text));
 }
 
@@ -71,30 +69,10 @@
   }
 }
 
-.c-main-footer__send-story {
-  display: inline-block;
-  color: rgb(var(--color-background));
-  padding: var(--space-3) 0;
-  margin-bottom: var(--space-3);
-  @include typeface(small, 3);
-  text-transform: uppercase;
-  text-decoration: none;
-
-  &:hover {
-    color: rgb(var(--color-background));
-    text-decoration: none;
-  }
-}
-
 .c-main-footer__utility {
   @include media("<=small") {
     margin-bottom: -18px;
   }
-}
-
-.c-main-footer__slogan p {
-  color: rgb(var(--color-text));
-  font-size: var(--font-size-4); /* Not in the type scale*/
 }
 
 .c-main-footer__nav {
@@ -104,14 +82,13 @@
   }
 }
 
-.c-main-footer__copyright-text {
-  @include typeface(small, 3);
-  text-transform: uppercase;
+.c-main-footer .c-share-tools__label {
+  @include typeface(body, 5);
 }
 
-.c-secondary-nav__link {
-  @include typeface(small, 3);
-  text-transform: uppercase;
+.c-main-footer .c-secondary-nav__subheader {
+  @include typeface(subheader, 7);
+  font-weight: normal;
 }
 
 .c-main-footer__nav .c-secondary-nav__item {
@@ -163,7 +140,6 @@
 }
 
 .c-main-footer__bottom {
-  border-top: 1px dashed rgba(var(--color-text), 0.5);
   padding: var(--space-4) var(--space-3);
   text-align: center;
   margin-left: calc(var(--space-3) * -1);
@@ -193,10 +169,9 @@
 }
 
 .c-main-footer__terms-links a {
+  @include typeface(body, 6);
   margin: 0 var(--space-3);
   padding: 8px 0;
-  @include typeface(small, 3);
-  text-transform: uppercase;
   font-weight: normal;
 
   @include media(">large") {
@@ -204,18 +179,21 @@
   }
 }
 
-.c-main-footer__signup {
-  color: rgb(var(--color-text-inverse));
+.c-main-footer .c-toggle-box__label {
+  text-transform: none;
 }
 
-.c-main-footer .c-main-footer__signup svg,
-.c-main-footer .c-main-footer__signup svg path,
-.c-main-footer .c-main-footer__signup svg rect {
-  fill: rgb(var(--color-text-inverse));
+.c-main-footer .c-main-footer__nav .c-secondary-nav__item {
+  font-size: var(--font-size-6);
+}
+
+.c-main-footer .c-main-footer__secondary-nav .c-secondary-nav__item {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-6);
 }
 
 // view all brands
-.o-text-with-icon {
-  text-transform: capitalize;
-  font-size: var(--font-size-2);
+.c-main-footer .o-text-with-icon {
+  font-size: var(--font-size-3);
 }

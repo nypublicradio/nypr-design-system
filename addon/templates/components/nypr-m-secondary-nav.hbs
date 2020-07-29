@@ -1,3 +1,7 @@
+{{#if @subheader}}
+  <h3 class="c-secondary-nav__subheader u-space--bottom">{{@subheader}}</h3>
+{{/if}}
+
 {{#if @navItems}}
   <ul class="c-secondary-nav__list">
     {{#each @navItems as |item i|}}
