@@ -1,0 +1,19 @@
+{{#if show.about.people.firstObject.image}}
+  <img
+   alt="image for {{altText}}"
+   src={{image-template show.about.people.firstObject.image.template width height show.about.people.firstObject.image.crop}}>
+{{else}}
+  {{#if stream.currentShow.fullImage.url}}
+    <img
+     alt="image for {{altText}}"
+     src={{stream.currentShow.fullImage.url}}>
+  {{else}}
+    {{#if stream.imageLogo}}
+      <img
+       alt="image for {{altText}}"
+       src={{stream.imageLogo}}>
+    {{/if}}
+  {{/if}}
+{{/if}}
+
+{{yield}}

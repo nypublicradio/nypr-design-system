@@ -1,0 +1,80 @@
+<div class="on-air-now">
+    <div class="on-air-now-upper">
+      <div class="on-air-now-label"><div class="on-air-now-label-text">live</div><div class="on-air-now-label-dot"></div></div>
+      <NyprMOnAirImage
+        @stream={{this.nowPlaying.stream}}
+        @show={{this.nowPlaying.show}}
+        @height={{200}}
+        @width={{200}}
+        @altText={{onAirTitle}}
+      />
+      <div class="on-air-now-inner">
+        <div class="label-title-message-play">
+          <div class="show-title" data-test-element="show-title">{{onAirTitle}}</div>
+          {{#if (or twitterHandle emailAddress)}}
+            <div class="message-the-show">
+              <NyprMToggleBox class="message-the-show-toggle-box" as |toggle|>
+                <toggle.trigger>
+                  <div class="message-the-show-title">MESSAGE THE SHOW</div>
+                </toggle.trigger>
+                <toggle.dropdown>
+                  <NyprMShareTools class="listen-message-the-show-popup social-media-links" as |share|>
+                    <div class="social-media__container">
+                      {{#if twitterHandle}}
+                        <share.link
+                          @href="#"
+                          @service="twitter"
+                          @username={{twitterHandle}}
+                          @title="Twitter"
+                          @target="_self"
+                          class="gtm__click-tracking"
+                          data-category="Non-Jukebox Player"
+                          data-action="Message"
+                          data-label="Twitter"
+                        />
+                      {{/if}}
+                      {{#if emailAddress}}
+                        <share.link
+                          @service="email"
+                          @username={{emailAddress}}
+                          @title="Email"
+                          class="gtm__click-tracking"
+                          data-category="Non-Jukebox Player"
+                          data-action="Message"
+                          data-label="Email"
+                        />
+                      {{/if}}
+                    </div>
+                  </NyprMShareTools>
+                </toggle.dropdown>
+              </NyprMToggleBox>
+            </div>
+          {{/if}}
+
+          <div class="listen-play-button">
+              <!--
+            <NyprMPlayButton
+              class="play-button mod-main-page"
+              data-action="Clicked Play/Pause Stream: jukebox-display"
+              data-label={{this.nowPlaying.stream.name}}
+              title={{this.nowPlaying.stream.name}}
+              @playItemId={{this.nowPlaying.stream.slug}}
+              @playerLabel="main player"
+            />
+                -->
+          </div>
+        </div>
+        <div class="image-label">
+          <NyprMOnAirImage
+            @stream={{this.nowPlaying.stream}}
+            @show={{this.nowPlaying.show}}
+            @height={{325}}
+            @width={{325}}
+            @altText={{onAirTitle}}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{yield}}
