@@ -53,16 +53,16 @@
           {{/if}}
 
           <div class="listen-play-button">
-              <!--
             <NyprMPlayButton
-              class="play-button mod-main-page"
-              data-action="Clicked Play/Pause Stream: jukebox-display"
+              class="play-button-text mod-main-page"
+              data-action="Clicked Play/Pause Stream: main-player"
               data-label={{this.nowPlaying.stream.name}}
               title={{this.nowPlaying.stream.name}}
               @playItemId={{this.nowPlaying.stream.slug}}
               @playerLabel="main player"
+              @textMode=true
+              @text="listen live"
             />
-                -->
           </div>
         </div>
         <div class="image-label">

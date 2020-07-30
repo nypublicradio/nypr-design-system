@@ -234,5 +234,36 @@
       }
     }
   }
+
+  .listen-play-button {
+    width: 185px;
+    height: 45px;
+    background-color: #235B9C;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
+    margin-bottom: 96px;
+    display: flex;
+    flex-direction: row;
+
+    .play-button {
+      align-items: center;
+      margin-left: 10px;
+
+      svg {
+        max-height: 54px;
+      }
+
+      div {
+        color: #fff;
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        letter-spacing: 1.6px;
+        text-transform: capitalize;
+      }
+    }
+  }
   
   

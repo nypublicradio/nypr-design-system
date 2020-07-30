@@ -170,6 +170,10 @@
     }
   
     &.is-loading {
+      .play-button-text {
+        opacity: 0;
+      }
+
       .play-icon-shapes {
         .play, .pause {
           opacity: 0;
