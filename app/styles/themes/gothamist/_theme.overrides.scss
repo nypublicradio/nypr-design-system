@@ -145,6 +145,7 @@ blockquote {
   background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
   background-position: 100% 142px;
   background-repeat: repeat-x;
+  padding: var(--space-5) 0;
 
   // Footer uses the dark color group
   @include color-group-dark;
@@ -172,7 +173,19 @@ blockquote {
   }
 
   .c-main-footer__bottom {
+    text-align: center;
     border-top: 1px dashed rgba(var(--color-text), 0.5);
+    @include media(">xlarge") {
+      text-align: left;
+      justify-content: space-between;
+    }
+  }
+
+  .c-main-footer__bottom p {
+    @include typeface(body, 4);
+    @include media(">xlarge") {
+      @include typeface(body, 6);
+    }
   }
 }
 
@@ -201,10 +214,22 @@ blockquote {
   text-transform: uppercase;
 }
 
+.c-main-footer__terms-links {
+  @include media("<=large") {
+    margin-top: var(--space-5);
+  }
+}
+
 .c-main-footer__terms-links a {
   @include typeface(small, 3);
+  margin: 0 var(--space-3);
+  padding: 8px 0;
   text-transform: uppercase;
   font-weight: bold;
+
+  @include media(">large") {
+    margin: 0 var(--space-5) 0 0;
+  }
 }
 
 .c-main-footer__signup {
@@ -215,6 +240,16 @@ blockquote {
 .c-main-footer .c-main-footer__signup svg path,
 .c-main-footer .c-main-footer__signup svg rect {
   fill: rgb(var(--color-text-inverse));
+}
+
+// brand group
+
+.c-main-footer__nypr-logo {
+  margin: 0 auto var(--space-3);
+}
+
+.c-main-footer__brand-group {
+  text-align: center;
 }
 
 // view all brands
@@ -330,13 +365,16 @@ blockquote {
 .c-lead-gallery__thumbs-thumb.is-active {
   border-color: rgb(var(--color-reddish-orange));
 }
+
 .c-lead-gallery__thumbs-thumb-text:hover {
   background-color: rgb(var(-color-reddish-orange));
 }
+
 .c-lead-gallery .o-credit a:hover {
   color: rgb(var(--color-link-hover));
-  background-color: rgb(var(--color-redd  ish-orange));
+  background-color: rgb(var(--color-redd ish-orange));
 }
+
 .c-lead-gallery__thumbs-thumb-text:hover {
   background-color: rgb(var(--color-reddish-orange));
 }
@@ -513,6 +551,7 @@ form .o-button:hover {
 .c-main-footer .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
+
   &:hover {
     background-color: rgb(var(--color-reddish-orange));
   }
@@ -540,6 +579,7 @@ form .o-button:hover {
 .c-newsletter-form__terms a {
   color: rgb(var(--color-text));
   border-bottom: 2px dotted rgb(var(--color-text));
+
   &:hover {
     background-color: rgb(var(--color-reddish-orange));
     color: rgb(var(--color-text-inverse));
@@ -561,11 +601,13 @@ form .o-button:hover {
 .o-back-to-link {
   font-family: var(--font-family-pragati);
   text-decoration: none;
+
   .o-icon svg > * {
     fill: rgb(var(--color-text));
   }
+
   .u-has-accent {
-    @include  dotted-underline(--color-white);
+    @include dotted-underline(--color-white);
   }
 
   &:hover {
@@ -574,6 +616,7 @@ form .o-button:hover {
 
     .u-has-accent {
       background-image: none;
+
       &:hover {
         background-color: rgb(var(--color-reddish-orange));
       }
@@ -610,8 +653,9 @@ form .o-button:hover {
 }
 
 .c-gallery-overlay .o-credit a {
-  @include  dotted-underline(--color-link);
+  @include dotted-underline(--color-link);
   text-decoration: none;
+
   &:hover {
     color: rgb(var(--color-link-hover));
     background-color: rgb(var(--color-reddish-orange));
