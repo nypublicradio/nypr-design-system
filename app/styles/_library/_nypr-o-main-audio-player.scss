@@ -122,6 +122,25 @@
         margin-left: 0px;
       }
     }
+
+    .show-sub-title * {
+      color: #333333;
+      font-family: Open Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14.22px;
+      line-height: 24px;
+      margin-right: 16px;
+      margin-left: 16px;
+      text-align: center;
+      @include media(">=medium") {
+        font-size: 18px;
+        line-height: 32px;
+        text-align: left;
+        margin-right: 0px;
+        margin-left: 0px;
+      }
+    }
   
     .message-the-show {
       display: flex;
@@ -236,6 +255,11 @@
     margin-bottom: 96px;
     display: flex;
     flex-direction: row;
+
+    @include media(">=medium") {
+      margin-right: 0px;
+      margin-left: 0px;
+    }
 
     .play-button {
       align-items: center;
