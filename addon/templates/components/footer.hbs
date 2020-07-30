@@ -44,7 +44,7 @@
         <div class="c-main-footer__nypr-logo">
           <Icon @icon='nypr-logo' @title="nypr logo"/>
         </div>
-        <NyprMBrandsLinkroll/>
+        <NyprMBrandsLinkroll @exclude={{@site}}/>
       </div>
       <div class="c-main-footer__social" name="shareToolFooter">
         {{yield (hash social=(component 'blank-template'))}}
