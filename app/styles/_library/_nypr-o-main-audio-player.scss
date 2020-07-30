@@ -31,10 +31,6 @@
         margin: 11px auto 10px auto;
         display: block;
   
-        //img {
-        //  border-radius: 50%;
-        //}
-  
         @include media(">=medium") {
           display: none;
         }
@@ -52,13 +48,6 @@
       background-color: #ffffff;
       border-radius: 4px;
       letter-spacing: 1px;
-      
-      //margin-right: 0;
-      //@include media("<medium") {
-      //  margin-left: auto;
-      //  margin-bottom: 10px;
-      //  margin-right: auto;
-      //}
     }
 
     .on-air-now-label-text {
@@ -84,24 +73,22 @@
     .on-air-now-inner {
       @include media(">medium") {
         display: flex;
+        .label-title-message-play {
+          margin-right: 24px;
+        }
       }
   
       .show-image {
-        height: 244px;
-        width: 244px;
+        height: 224;
+        width: 224px;
         object-fit: cover;
         filter: grayscale(100%);
         display: block;
-        margin-right: 35px;
         @include media("<medium") {
           display: none;
-          margin-left: auto;
-          margin-right: auto;
-          margin-bottom: 10px;
         }
   
         img {
-          border-radius: 50%;
           height: 100%;
           width: 100%;
         }
@@ -125,11 +112,15 @@
       margin-right: 16px;
       margin-left: 16px;
       text-align: center;
-      //@include media("<medium") {
-        //font-size: 28px;
-        //line-height: 38px;
-        //text-align: center;
-      //}
+      @include media(">=medium") {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 51.957px;
+        line-height: 60px;
+        text-align: left;
+        margin-right: 0px;
+        margin-left: 0px;
+      }
     }
   
     .message-the-show {
