@@ -1,0 +1,53 @@
+
+// CSS Arrows out of borders
+@mixin arrow-up($width, $color) {
+  border-left: $width solid transparent;
+  border-right: $width solid transparent;
+  border-bottom: $width solid $color;
+  width: 0;
+  height: 0;
+}
+
+@mixin arrow-down($width, $color) {
+  border-left: $width solid transparent;
+  border-right: $width solid transparent;
+  border-top: $width solid $color;
+  width: 0;
+  height: 0;
+}
+
+@mixin arrow-left($width, $color) {
+  border-top: $width solid transparent;
+  border-bottom: $width solid transparent;
+  border-right: $width solid $color;
+  width: 0;
+  height: 0;
+}
+
+@mixin arrow-right($width, $color) {
+  border-top: $width solid transparent;
+  border-bottom: $width solid transparent;
+  border-left: $width solid $color;
+  width: 0;
+  height: 0;
+}
+
+@mixin values-for-mobile-desktop($rule, $mobile-value, $desktop-value) {
+  #{$rule}: $mobile-value;
+
+  @include media(">=medium") {
+    #{$rule}: $desktop-value;
+  }
+}
+
+@mixin selector-to-grid-area($selector, $desktop-grid-area, $mobile-grid-area: $desktop-grid-area) {
+  #{$selector} {
+    grid-area: $mobile-grid-area;
+  }
+
+  @include media(">=medium") {
+    #{$selector} {
+      grid-area: $desktop-grid-area;
+    }
+  }
+}

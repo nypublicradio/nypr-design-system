@@ -1,0 +1,10 @@
+.sliding-bar {
+  background-color: #ffffff;
+  height: 2px;
+  width: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: left;
+  transform: translate(0,0) scaleX(1);
+}

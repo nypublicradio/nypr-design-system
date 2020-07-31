@@ -1,0 +1,623 @@
+@import "../vars/fonts";
+
+/**
+ * Wrapping element to keep content contained and centered.
+ */
+.l-wrap {
+  margin: 0 auto;
+  padding-left: $space-double;
+  padding-right: $space-double;
+  width: 100%;
+  position: relative;
+}
+
+/**
+   * Layout containers - keep content centered and within a maximum width. Also
+   * adjusts left and right padding as the viewport widens.
+   */
+
+.l-container {
+  max-width: ($max-width + $space-double);
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+
+  &--xl {
+    max-width: ($max-width-xl + $space-double);
+  }
+}
+
+.l-container--content {
+  max-width: $article-content-width + px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/**
+   * Grid classes
+   */
+@for $i from 1 through $grid-columns {
+  .l-container--#{$i}col {
+    @if $i == 1 {
+      max-width: ($col-width * $i) + ($gutter * $i) + px;
+    } @else if $i == 2 {
+      max-width: ($col-width * $i) + ($gutter * 1) + px;
+    } @else {
+      max-width: ($col-width * $i) + ($gutter * ($i - 2)) + px;
+    }
+  }
+}
+
+/*------------------------------------*\
+    $FOOTER
+\*------------------------------------*/
+
+.c-main-footer {
+  padding: 100px 0px 100px 0px;
+  background-image: linear-gradient(to bottom, white 0, $c-denim-blue 0%);
+  background-position: 100% 142px;
+  background-repeat: repeat-x;
+  color: #ffffff;
+
+  &__inner {
+    @include media(">xlarge") {
+      margin-top: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+  }
+
+  &__col1.top-half-header {
+    width: 100%;
+    max-width: 1000px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  &__branding {
+    display: flex;
+    justify-content: flex-start;
+
+    @include media(">xlarge") {
+      justify-content: flex-start;
+    }
+  }
+
+  &__logo.main-logo {
+    min-width: 150px;
+    max-width: 378px;
+    flex-basis: 100%;
+
+    @include media(">small") {
+      margin-right: $space-triple;
+    }
+  }
+
+  &__send-story {
+    display: inline-block;
+    color: $c-body-color;
+    padding: $space 0;
+    margin-bottom: $space;
+  }
+
+  &__utility {
+    margin-top: 16px;
+    @include media("<=small") {
+      margin-bottom: -18px;
+    }
+  }
+
+  &__social {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__slogan {
+    // This should really be a site default/
+    // The default is still coming from the design system, and it's wrong.
+
+    a {
+      color: $white;
+      display: inline;
+      border-bottom: 1px solid $white;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    p {
+      color: $c-white;
+      font-family: $font-body;
+      font-size: 14px; // Not in the type scale
+      display: flex;
+      flex-direction: row;
+      max-width: 378px;
+    }
+
+    margin-right: 50px;
+  }
+
+  &__nav {
+    @include media("<=xlarge") {
+      text-align: center;
+      padding-bottom: $space-double;
+    }
+
+    .c-secondary-nav__item {
+      display: inline-block;
+
+      @include media("<=xlarge") {
+        margin: 0 $space $space-and-half;
+      }
+
+      &:not(:last-child) {
+        @include media(">xlarge") {
+          margin-right: $space-double;
+        }
+      }
+    }
+
+    .c-secondary-nav__link {
+      padding: $space-half 0;
+    }
+  }
+
+  &__nypr-logo {
+    width: 120px;
+    margin: 0 $space-and-half $space-and-half 0;
+    @include media(">xlarge") {
+      margin: 0 $space 0 0;
+    }
+
+    path,
+    polygon {
+      fill: $c-white;
+    }
+  }
+
+  &__brand-group {
+    .logo-and-toggle {
+      flex-direction: row;
+      justify-content: flex-start;
+      opacity: 0.7;
+    }
+
+    @include media(">xlarge") {
+      .c-main-footer__copyright {
+        margin-left: auto;
+      }
+    }
+  }
+
+  .c-main-footer__slogan p {
+    display: inline-block;
+    line-height: 1.8;
+    margin-top: 0;
+  }
+
+  .c-main-footer__slogan a {
+    text-decoration: none;
+  }
+
+  .c-toggle-box__content {
+    min-width: 320px;
+    max-width: 400px;
+    width: 100%;
+    text-transform: capitalize;
+  }
+
+  .toggle-box__label {
+    text-transform: none;
+    border: none;
+    font-family: $font-body;
+    font-size: 12px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    color: $white;
+
+    svg {
+      fill: #FFF;
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  &__bottom {
+    border-top: 1px rgba($c-white, 0.5);
+    padding: $space-and-half $space;
+    text-align: center;
+    margin-left: -$space;
+    margin-right: -$space;
+
+    @include media(">xlarge") {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__terms-links {
+    @include media("<=large") {
+      margin-top: $space-double;
+    }
+
+    a {
+      margin: 0 $space;
+      padding: 8px 0;
+      color: $c-quaternary;
+
+      @include media(">large") {
+        margin: 0 $space-double 0 0;
+      }
+    }
+  }
+
+  &__copyright p {
+    opacity: 0.7;
+    font-family: $font-body;
+    text-transform: none;
+  }
+
+  .c-share-tools {
+    align-items: flex-start;
+  }
+
+  .c-share-tools__label {
+    font-family: $font-heading;
+    font-size: 28px;
+    text-transform: none;
+  }
+
+  .social-media__container {
+    fill: white;
+    padding-top: 5px;
+    padding-bottom: 25px;
+
+    a {
+      padding: 5px;
+      margin: 0 4px;
+      height: 30px;
+      width: 30px;
+    }
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  .feedback {
+    background: white;
+    border-radius: 15.5px;
+    width: 208px;
+    height: 30px;
+    font-family: "OpenSans", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    color: $c-denim-blue;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 10px 20px 10px 20px;
+  }
+
+  .tertiary-hover {
+    display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    position: relative;
+  }
+
+  .tertiary-hover:before {
+    content: "";
+    position: absolute;
+    border-radius: 20px;
+    border: rgba(255, 255, 255, 0) solid 2px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition-duration: 0.3s;
+    transition-property: top, right, bottom, left;
+  }
+
+  .tertiary-hover:hover:before,
+  .tertiary-hover:focus:before,
+  .tertiary-hover:active:before {
+    top: -4px;
+    right: -4px;
+    bottom: -4px;
+    left: -4px;
+    border: rgba(255, 255, 255, 1) solid 2px;
+  }
+
+  .c-share-tools__link:hover svg * {
+    fill: white;
+  }
+
+  .spotify,
+  .facebook,
+  .twitter,
+  .instagram,
+  .youtube {
+    display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    position: relative;
+
+    &:hover,
+    &:focus,
+    &:active {
+      &:before {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        border: rgba(255, 255, 255, 0) solid 2px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transition-duration: 0.3s;
+        transition-property: top, right, bottom, left;
+
+        top: -4px;
+        right: -4px;
+        bottom: -4px;
+        left: -4px;
+        border: rgba(255, 255, 255, 1) solid 2px;
+      }
+    }
+  }
+
+  .jlgreene {
+    text-decoration: none;
+    border-bottom: 0;
+
+    .jlgreene-logo {
+      path {
+        fill: $white;
+      }
+
+      padding: 0 3px;
+      position: relative;
+      top: 5px;
+      display: inline-block;
+      height: 16px;
+      width: 100px;
+      margin-top: -4px;
+      position: relative;
+      top: 3px;
+      display: inline;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  @include media(">small") {
+    .about-and-contact {
+      all: unset;
+    }
+    .social-media-links {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @include media("<=small") {
+    .c-main-footer__social {
+      display: flex;
+      flex-direction: column;
+    }
+    .c-main-footer_brand-group {
+      flex-direction: column;
+    }
+    .c-main-footer__slogan p {
+      max-width: 450px;
+      margin-bottom: 50px;
+    }
+    .about-us-div {
+      margin-bottom: 50px;
+    }
+    .social-media__container {
+      width: 100%;
+    }
+  }
+}
+
+/*------------------------------------*\
+    $FOOTER
+\*------------------------------------*/
+
+.about-us-links {
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  padding-bottom: 4px;
+  margin-top: 10px;
+  border-bottom: 1px solid $white;
+
+  &:hover {
+    color: rgba($color: white, $alpha: 0.8);
+  }
+}
+
+.about-us-div .c-share-tools__group a {
+  display: inline-block;
+  width: fit-content;
+  clear: both;
+  text-decoration: none;
+}
+
+.u-has-accent:hover {
+  background-color: black;
+  color: rgba($color: white, $alpha: 0.8);
+}
+
+.u-font--secondary-style {
+  letter-spacing: 0px;
+}
+
+.about-and-connect {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.slogans {
+  display: flex;
+  flex-direction: column;
+}
+
+.second-slogan {
+  white-space: nowrap;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.jl-logo {
+  padding-left: 5px;
+}
+
+.logo-and-brands {
+  display: flex;
+  flex-direction: row;
+}
+
+.c-toggle-box--linkroll {
+  padding-top: 15px;
+  padding-left: 5px;
+}
+
+.c-main-footer__brand-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 48px;
+}
+
+.c-main-footer__copyright p {
+  font-size: 12px;
+}
+
+//MOBILE//
+
+@include media("<=small") {
+  .l-wrap {
+    margin: 0 auto;
+    padding-left: $space;
+    padding-right: $space;
+    width: 100%;
+    position: relative;
+  }
+  .about-and-connect {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  _:-ms-lang(x), .c-share-tools {
+    flex-wrap: nowrap;
+  }
+
+  _:-ms-lang(x), .c-share-tools__group {
+    margin-top: 10px;
+  }
+
+  _:-ms-lang(x), .about-and-connect {
+    margin-bottom: 20px;
+  }
+
+  .slogans {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-and-brands {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c-main-footer__copyright p {
+    opacity: 0.7;
+  }
+}
+
+//TABLET//
+
+@include media("<=xlarge") {
+  @include media(">small") {
+    #jl-greene-bit {
+      padding-left: 50px;
+    }
+
+    .about-and-connect {
+      display: flex;
+      flex-direction: row;
+      justify-content: initial;
+    }
+
+    .c-main-footer .social-media-links {
+      display: flex;
+      flex-direction: column;
+      padding-left: 170px;
+    }
+
+    .slogans {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .second-slogan {
+      margin-left: 30px;
+      margin-top: 0;
+    }
+
+    .logo-and-brands {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-bottom: 5px;
+
+      .c-toggle-box {
+        margin-top: 8px;
+      }
+    }
+
+    .c-main-footer__nypr-logo {
+      margin: 0 auto 16px;
+    }
+  }
+
+  .c-main-footer__social {
+    flex-direction: column;
+  }
+
+  .c-main-footer__branding {
+    justify-content: flex-start;
+  }
+
+  .c-main-footer__copyright p {
+    opacity: 1;
+  }
+
+  .c-main-footer__brand-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c-share-tools__group {
+    display: flex;
+    align-items: center;
+  }
+}

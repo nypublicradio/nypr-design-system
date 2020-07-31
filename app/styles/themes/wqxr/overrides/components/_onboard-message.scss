@@ -1,0 +1,134 @@
+@import '../vars/colors';
+@import '../vars/fonts';
+
+.onboard-message {
+  display: flex;
+  flex-direction: column;
+  max-width: 735px;
+  background-color: $denim-blue;
+  border-radius: 4px;
+  backdrop-filter: blur(2px);
+  color: #ffffff;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include media('<=medium') {
+    width: auto;
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .onboard-close {
+    margin-left: auto;
+    margin-right: 8px;
+    margin-top: 8px;
+
+    svg {
+      display: inline;
+      height: 17px;
+      width: 17px;
+      path {
+        fill: #ffffff;
+      }
+    }
+
+    &:hover {
+      opacity: 80%;
+    }
+  }
+
+  .onboard-title {
+    margin-top: 8px;
+    text-align: center;
+    font-family: $font-heading;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.36;
+  }
+
+  .onboard-body {
+    margin-top: 8px;
+    text-align: center;
+    font-family: $font-body;
+    font-size: 14px;
+    line-height: 1.71;
+    margin-left: 40px;
+    margin-right: 40px;
+
+    @include media('<=medium') {
+      margin-left: 24px;
+      margin-right: 24px;
+    }
+
+    .onboard-feedback {
+      font-weight: bold;
+      border-bottom: 1px solid #ffffff;
+      padding-bottom: 4px;
+    }
+  }
+
+  .onboard-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 28px;
+    padding-bottom: 38px;
+
+    @include media('<=medium') {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .onboard-old-wqxr-button, .onboard-jukebox-button {
+      width: 232px;
+      height: 30px;
+      border-radius: 15px;
+      text-transform: uppercase;
+      display: inline-block;
+      text-align: center;
+      font-family: $font-body;
+      font-weight: bold;
+      font-size: 10px;
+    }
+
+    .onboard-old-wqxr-button {
+      border: 2px solid #ffffff;
+      background-color: transparent;
+      line-height: 26px;
+      margin-right: 8px;
+
+      @include media('<=medium') {
+        margin-right: 0px;
+        margin-bottom: 16px;
+      }
+
+      &:hover {
+        opacity: 80%;
+        color: $denim-blue;
+        background: white;
+        border-color: white;
+      }
+    }
+
+    .onboard-jukebox-button {
+      background-color: #ffffff;
+      color: $denim-blue;
+      line-height: 30px;
+      margin-left: 8px;
+
+      @include media('<=medium') {
+        margin-left: 0px;
+      }
+
+      &:hover {
+        opacity: 80%;
+      }
+    }
+  }
+}
