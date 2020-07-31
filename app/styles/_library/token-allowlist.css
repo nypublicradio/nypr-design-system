@@ -99,11 +99,6 @@
   --color-button-primary-pressed: *;
   --opacity-button-primary-hover: *;
 
-  --color-button-outline:         *;
-  --color-button-outline-hover:   *;
-  --color-button-outline-pressed: *;
-  --opacity-button-outline:       *;
-
   /* Colors: Borders */
   --color-border-subtle:   *;
   --color-border-standard: *;

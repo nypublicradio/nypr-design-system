@@ -1,0 +1,131 @@
+/*------------------------------------*\
+    $THEME OVERRIDES
+\*------------------------------------*/
+
+.c-main-header {
+  --color-background: var(--color-cool-white);
+  &.side-menu-is-active {
+    .c-main-header__branding {
+      opacity: 0;
+    }
+  }
+}
+
+// Header search
+.c-search--top .c-search__close path {
+  fill: rgb(var(--color-ember-red));
+}
+
+// Header logo
+.c-main-header--emphasis {
+  .gothamist-buildings {
+    fill: rgb(var(--color-black));
+  }
+}
+
+// Footer
+.c-main-footer {
+  --color-background: var(--color-cool-white);
+
+  .gothamist-letters {
+    fill: rgb(var(--color-black));
+  }
+
+  .gothamist-buildings {
+    fill: rgb(var(--color-black));
+  }
+
+  .c-main-footer__signup svg {
+    fill: rgb(var(--color-text-inverse));
+  }
+
+  .c-newsletter-form__text p,
+  .c-newsletter-form__terms p {
+    color: rgb(var(--color-text-inverse));
+  }
+
+  .c-newsletter-form__terms-checkbox a,
+  .c-newsletter-form__terms-checkbox a:visited,
+  .c-newsletter-form__terms-checkbox a:active {
+    background: transparent;
+    color: rgb(var(--color-text-inverse));
+
+    &:hover {
+      color: rgb(var(--color-text-inverse));
+    }
+  }
+
+}
+
+.c-main-footer a,
+.c-main-footer a:visited,
+.c-main-footer a:active {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// Side menu
+.c-side-menu {
+  --color-background: var(--color-white);
+}
+
+.c-search--side .c-search__input {
+  border: 1px solid;
+  border-color: rgb(var(--color-concrete));
+}
+
+.o-caption .o-icon--dashed-arrow {
+  fill: rgb(var(--color-sky-blue));
+}
+
+// newsletter signup
+
+.c-newsletter-form__inner {
+  border: none;
+  background-color: rgb(var(--color-ceramic-blue));
+  color: rgb(var(--color-white));
+}
+
+.c-newsletter-form__field-group {
+  border: none;
+}
+
+.c-newsletter-form__field-group .o-button {
+  background-color: rgb(var(--color-sky-blue));
+
+  &:hover {
+    background-color: rgb(var(--color-sky-blue));
+  }
+}
+
+.c-newsletter-form__graphic {
+  mix-blend-mode: normal;
+}
+
+.c-main-footer .c-main-footer__signup .c-newsletter-form__graphic svg,
+.c-main-footer .c-main-footer__signup .c-newsletter-form__graphic path {
+  fill: rgb(var(--color-sky-blue));
+}
+
+.c-newsletter-form__terms input[type="checkbox"] {
+  background-color: rgb(var(--color-ceramic-blue));
+  border: 2px solid;
+  border-color: rgb(var(--color-white));
+}
+
+.c-newsletter-form__terms input[type="checkbox"]:checked {
+  background-color: rgb(var(--color-ceramic-blue));
+  border: 2px solid;
+  border-color: rgb(var(--color-white));
+}
+
+.c-donate-tout__graphic path {
+  fill: rgb(var(--color-ceramic-blue));
+}
+
+.c-gallery-overlay {
+  @include color-group-dark;
+}
