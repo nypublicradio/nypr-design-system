@@ -1,0 +1,21 @@
+{{#basic-dropdown
+  calculatePosition=(or @calculatePosition this.calculatePosition)
+  horizontalPosition=(or @horizontalPosition "left")
+  verticalPostion=(or @verticalPosition "below")
+  renderInPlace=@renderInPlace
+  onOpen=(action (mut this.open) true)
+  onClose=(action (mut this.open) false)
+  as |dd|}}
+  {{yield (hash
+    toggle=dd.actions.toggle
+    icon=(if @customIconPlacement (component "nypr-m-toggle-box/icon" icon=icon))
+    trigger=(component "nypr-m-toggle-box/trigger"
+              button=dd.trigger
+              icon=icon
+              customIconPlacement=@customIconPlacement
+            )
+    dropdown=(component dd.content
+                class=this.contentClasses
+              )
+  )}}
+{{/basic-dropdown}}
