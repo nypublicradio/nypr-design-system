@@ -1,5 +1,10 @@
 @import "../vars/fonts";
 
+
+.c-main-footer {
+  @include color-group-dark;
+}
+
 /**
  * Wrapping element to keep content contained and centered.
  */
