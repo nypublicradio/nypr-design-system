@@ -1,0 +1,37 @@
+<div class="jukebox-player-show" data-test-element="show">
+  <div class="jukebox-player-show-title" data-test-element="show-title">
+    {{@showTitle}}
+  </div>
+
+  {{#if @hostName}}
+    <div class="jukebox-player-show-host" data-test-element="show-host">
+      {{@hostName}}
+    </div>
+  {{/if}}
+</div>
+
+<NyprMPlayButton @playItemId={{this.streamSlug}} class="jukebox-player-listen-button" data-test-element="listen-button"/>
+
+<NyprMTrackAdditionalInfo class="jukebox-player-track" data-test-element="track" @ensembleName={{ensembleName}} @conductorName={{conductorName}} as |options|>
+  {{#if @composerName}}
+    <div class="jukebox-player-track-composer mod-scrolling-overflow" data-test-element="track-composer">
+      {{@composerName}}
+    </div>
+  {{/if}}
+  {{#if @trackTitle}}
+    <div class="jukebox-player-track-title mod-scrolling-overflow" data-test-element="track-title">
+      {{@trackTitle}}
+      {{options.icon}}
+    </div>
+  {{/if}}
+</NyprMTrackAdditionalInfo>
+
+<div class="jukebox-player-controls">
+  {{#if (can-change-volume)}}
+    {{nypr-m-volume-control
+      volume     = hifi.volume
+      setVolume  = (action "setVolume")
+      toggleMute = (action "toggleMute")
+      isMuted    = hifi.isMuted}}
+  {{/if}}
+</div>

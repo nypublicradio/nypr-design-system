@@ -1,0 +1,7 @@
+{{#component @button class="toggle-box__label" aria-role="button" }}
+  {{yield}}
+
+  {{#unless @customIconPlacement}}
+    {{component "nypr-m-toggle-box/icon" icon=@icon}}
+  {{/unless}}
+{{/component}}

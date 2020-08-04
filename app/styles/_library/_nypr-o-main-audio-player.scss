@@ -1,0 +1,285 @@
+.on-air-now {
+    background-color: #EAEFF0;
+
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+    z-index: 1;
+    @include media("<medium") {
+      width: 100%;
+      padding: 0px;
+    }
+    @include media("<medium") {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  
+    .on-air-now-upper {
+      @include media("<medium") {
+        display: flex;
+        flex-direction: column;
+        margin-top: 106px;
+        margin-bottom: 24px;
+        justify-content: center;
+        align-items: center;
+      }
+  
+      > .show-image {
+        max-height: 100px;
+        max-width: 100px;
+        filter: grayscale(100%);
+        margin: 11px auto 10px auto;
+        display: block;
+  
+        @include media(">=medium") {
+          display: none;
+        }
+      }
+    }
+  
+    .on-air-now-label {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      height: 16px;
+      width: 51px;
+      background-color: #ffffff;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+
+    .on-air-now-label-text {
+      text-transform: uppercase;
+      color: #333333;
+      font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      font-style: normal;
+      font-size: 10px;
+      margin-right: 4px;
+      line-height: 16px;
+      letter-spacing: 2px;
+    }
+
+    .on-air-now-label-dot {
+      background-color: #1277c4;
+      width: 8px;
+      height: 8px;
+      border-radius: 8px;
+      background-color: #E74F4F;
+    }
+  
+    .on-air-now-inner {
+      @include media(">medium") {
+        display: flex;
+        .label-title-message-play {
+          margin-right: 24px;
+        }
+      }
+  
+      .show-image {
+        height: 224;
+        width: 224px;
+        object-fit: cover;
+        filter: grayscale(100%);
+        display: block;
+        @include media("<medium") {
+          display: none;
+        }
+  
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  
+    .label-title {
+      @include media("<medium") {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+    }
+  
+    .show-title {
+      color: #235B9C;
+      font-family: 'Libre Baskerville', 'Times New Roman', serif;
+      font-size: 28.8325px;
+      line-height: 43px;
+      margin-bottom: 8px;
+      margin-top: 12px;
+      margin-right: 16px;
+      margin-left: 16px;
+      text-align: center;
+      @include media(">=medium") {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 51.957px;
+        line-height: 60px;
+        text-align: left;
+        margin-right: 0px;
+        margin-left: 0px;
+      }
+    }
+
+    .show-sub-title * {
+      color: #333333;
+      font-family: Open Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14.22px;
+      line-height: 24px;
+      margin-right: 16px;
+      margin-left: 16px;
+      text-align: center;
+      @include media(">=medium") {
+        font-size: 18px;
+        line-height: 32px;
+        text-align: left;
+        margin-right: 0px;
+        margin-left: 0px;
+      }
+    }
+  
+    .message-the-show {
+      display: flex;
+      margin-top: 12px;
+      margin-bottom: 20px;
+      @include media("<medium") {
+        justify-content: center;
+      }
+    }
+  
+    .message-the-show-toggle-box {
+      display: inline-flex;
+  
+      .toggle-box__label {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+      }
+  
+      > button:focus {
+        outline: none;
+      }
+  
+      > button {
+        border: none;
+        padding-left: 6px;
+        padding-right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 14px;
+  
+        @include media("<medium") {
+          padding-left: 0px;
+        }
+      }
+  
+      .u-icon--xs {
+        height: 6px;
+        fill: #235B9C;
+        margin-left: 4px;
+        margin-top: 7px;
+
+        path {
+          fill: #235B9C;
+        }
+      }
+    }
+  
+    .message-the-show-title {
+      color: #235B9C;
+      font-family: "OpenSans-Bold", sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12.64px;
+      line-height: 20px;
+      letter-spacing: 1.6px;
+    }
+  }
+
+  .listen-message-the-show-popup {
+    // using negative to correct the padding of parent element, which does not
+    // have a class name specific to the 'Message the Show' popup
+    margin: -1px -6px;
+  
+    .c-share-tools__group {
+      margin-top: 0px;
+    }
+  
+    .c-share-tools__link {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      margin-top: 10px;
+      text-decoration: none;
+      font-weight: normal;
+  
+      &:first-child {
+        margin-top: 0px;
+      }
+  
+      width: 100%;
+      height: 100%;
+  
+      svg {
+        height: 12px;
+        width: 12px;
+
+        * {
+          fill: #fff;
+        }
+      }
+  
+      .c-share-tools__link-title {
+        color: #ffffff;
+        font-family: $font-body-bold;
+        font-size: 12px;
+        letter-spacing: 1.2px;
+        margin-left: 8px;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .listen-play-button {
+    width: 185px;
+    height: 45px;
+    background-color: #235B9C;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
+    margin-bottom: 96px;
+    display: flex;
+    flex-direction: row;
+
+    @include media(">=medium") {
+      margin-right: 0px;
+      margin-left: 0px;
+    }
+
+    .play-button {
+      align-items: center;
+      margin-left: 10px;
+
+      svg {
+        max-height: 54px;
+        max-width: 54px;
+      }
+
+      div {
+        color: #fff;
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        letter-spacing: 1.6px;
+        text-transform: capitalize;
+      }
+    }
+  }
+  
+  

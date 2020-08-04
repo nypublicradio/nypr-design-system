@@ -55,7 +55,7 @@ Radial is deployed as a static site which is housed in an S3 Bucket behind a Clo
 ### Production/Staging Environments
 We use the `addon-versions` addon to maintain a single environment for both production and staging. This addon allows us to use the underlying directory structure of the S3 bucket as separate versions of the site. Each "version" that is deployed to the S3 bucket is stored in its own directory (as seen in the snippet from `circle.yml` below). 
 ```bash
-[[ $CIRCLE_BRANCH = "master" ]] && RELEASE="latest" || { [[ -n $CIRCLE_BRANCH ]] && RELEASE=$CIRCLE_BRANCH || RELEASE=$CIRCLE_TAG; }
+[[ $CIRCLE_BRANCH = "main" ]] && RELEASE="latest" || { [[ -n $CIRCLE_BRANCH ]] && RELEASE=$CIRCLE_BRANCH || RELEASE=$CIRCLE_TAG; }
 yarn storybook-to-aws-s3 --bucket-path=$S3_BUCKET/$RELEASE -e=./storybook-static/$RELEASE
 aws s3 cp storybook-static/index.html s3://$S3_BUCKET
 aws s3 cp storybook-static/storybook-config.json s3://$S3_BUCKET
