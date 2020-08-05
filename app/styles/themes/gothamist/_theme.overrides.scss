@@ -184,7 +184,8 @@ blockquote {
   .c-main-footer__bottom p {
     @include typeface(body, 4);
     @include media(">xlarge") {
-      @include typeface(body, 6);
+      font-size: var(--font-size-6);
+      line-height:  var(--line-height-6);
     }
   }
 }
@@ -372,7 +373,7 @@ blockquote {
 
 .c-lead-gallery .o-credit a:hover {
   color: rgb(var(--color-link-hover));
-  background-color: rgb(var(--color-redd ish-orange));
+  background-color: rgb(var(--color-reddish-orange));
 }
 
 .c-lead-gallery__thumbs-thumb-text:hover {
