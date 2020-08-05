@@ -115,7 +115,7 @@
         content: '';
         display: block;
         position: absolute;
-        top: #{$top}; left: #{$left - $innerWidth}; right: #{$right}; bottom: #{$bottom};
+        top: #{$top}; left: #{$left - $innerWidth/2}; right: #{$right}; bottom: #{$bottom};
         margin: auto;
         width: #{$outerWidth};
         height: #{$outerHeight};
