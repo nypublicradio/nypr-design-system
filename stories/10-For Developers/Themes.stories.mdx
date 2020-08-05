@@ -1,0 +1,18 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="For Developers/Themes" />
+
+# Themes
+
+Themes live in the `/app/styles/themes/` folder. Themes consist of a main theme `scss` file and a folder containing more scss. The main file imports uses scss imports to pull in all of the files from the folder, which just exists as a way to organize the scss.
+
+## Example theme folder layout
+
+| File | Description |
+|--------|---------------|
+| my-new-theme.scss                                      | Main theme file, loads the other files with sass imports
+| my-new-theme/_theme.colors.scss                        | The color variables
+| my-new-theme/_theme.variables.scss                     | Other Variables
+| my-new-theme/_theme.fonts.scss                         | Font Importes
+| my-new-theme/_theme.overrides.scss                     | Contains overrides to bases classes or imports them from a folder
+| my-new-theme/overrides/components/_component-name.scss | Overrides for a specific component
