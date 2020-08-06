@@ -3,11 +3,13 @@
 \*------------------------------------*/
 
 .c-main-footer {
-  padding: var(--space-5) 0;
-  background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
-  background-position: 100% 142px;
-  background-repeat: repeat-x;
+  padding: var(--space-5);
+  background-color: rgb(var(--color-background));
   color: rgb(var(--color-text));
+
+  @include media(">xlarge") {
+    padding: var(--space-5) 0;
+  }
 }
 
 .c-main-footer a,
@@ -71,30 +73,14 @@
   }
 }
 
-.c-main-footer__send-story {
-  display: inline-block;
-  color: rgb(var(--color-background));
-  padding: var(--space-3) 0;
-  margin-bottom: var(--space-3);
-  @include typeface(small, 3);
-  text-transform: uppercase;
-  text-decoration: none;
-
-  &:hover {
-    color: rgb(var(--color-background));
-    text-decoration: none;
-  }
+.c-main-footer__slogan p {
+  @include typeface(body, 6);
 }
 
 .c-main-footer__utility {
   @include media("<=small") {
     margin-bottom: -18px;
   }
-}
-
-.c-main-footer__slogan p {
-  color: rgb(var(--color-text));
-  font-size: var(--font-size-4); /* Not in the type scale*/
 }
 
 .c-main-footer__nav {
@@ -104,14 +90,28 @@
   }
 }
 
-.c-main-footer__copyright-text {
-  @include typeface(small, 3);
-  text-transform: uppercase;
+.c-main-footer__primary-nav {
+  @include media("<=xlarge") {
+    text-align: center;
+    padding-bottom: var(--space-5);
+  }
 }
 
-.c-secondary-nav__link {
-  @include typeface(small, 3);
-  text-transform: uppercase;
+.c-main-footer .c-main-footer__primary-nav .c-secondary-nav__item {
+  @include media("<xlarge") {
+    display: block;
+    margin: 0 0 var(--space-2);
+    text-align: left;
+  }
+}
+
+.c-main-footer .c-share-tools__label {
+  @include typeface(body, 5);
+}
+
+.c-main-footer .c-secondary-nav__subheader {
+  @include typeface(subheader, 7);
+  font-weight: normal;
 }
 
 .c-main-footer__nav .c-secondary-nav__item {
@@ -134,7 +134,7 @@
 
 .c-main-footer__nypr-logo {
   width: 120px;
-  margin: 0 auto var(--space-3);
+  margin: 0 0 var(--space-3);
 
   @include media(">xlarge") {
     margin: 0 var(--space-5) 0 0;
@@ -147,9 +147,10 @@
 }
 
 .c-main-footer__brand-group {
-  text-align: center;
+  text-align: left;
 
   @include media(">xlarge") {
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -163,9 +164,8 @@
 }
 
 .c-main-footer__bottom {
-  border-top: 1px dashed rgba(var(--color-text), 0.5);
   padding: var(--space-4) var(--space-3);
-  text-align: center;
+  text-align: left;
   margin-left: calc(var(--space-3) * -1);
   margin-right: calc(var(--space-3) * -1);
 
@@ -174,10 +174,17 @@
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
-    text-align: left;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
   }
+}
+
+.c-main-footer__bottom p {
+  @include typeface(body, 6);
+}
+
+.c-main-footer__copyright {
+  margin-right: var(--space-4);
 }
 
 .c-main-footer__terms-links {
@@ -188,34 +195,37 @@
   font-weight: normal;
 
   @include media("<=large") {
-    margin-top: var(--space-5);
+    margin-top: var(--space-2);
   }
 }
 
 .c-main-footer__terms-links a {
-  margin: 0 var(--space-3);
+  @include typeface(body, 6);
   padding: 8px 0;
-  @include typeface(small, 3);
-  text-transform: uppercase;
   font-weight: normal;
+  display: block;
 
   @include media(">large") {
-    margin: 0 var(--space-5) 0 0;
+    margin: 0 var(--space-4) 0 0;
+    display: inline-block;
   }
 }
 
-.c-main-footer__signup {
-  color: rgb(var(--color-text-inverse));
+.c-main-footer .c-toggle-box__label {
+  text-transform: none;
 }
 
-.c-main-footer .c-main-footer__signup svg,
-.c-main-footer .c-main-footer__signup svg path,
-.c-main-footer .c-main-footer__signup svg rect {
-  fill: rgb(var(--color-text-inverse));
+.c-main-footer .c-main-footer__nav .c-secondary-nav__item {
+  font-size: var(--font-size-6);
+}
+
+.c-main-footer .c-main-footer__secondary-nav .c-secondary-nav__item {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-6);
 }
 
 // view all brands
-.o-text-with-icon {
-  text-transform: capitalize;
-  font-size: var(--font-size-2);
+.c-main-footer .o-text-with-icon {
+  font-size: var(--font-size-3);
 }

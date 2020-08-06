@@ -22,6 +22,12 @@
   }
 }
 
+.l-grid--2up--small {
+  @media all and (max-width: $medium) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .l-grid--3up {
   @include media(">medium") {
     grid-template-columns: repeat(3, 1fr);
