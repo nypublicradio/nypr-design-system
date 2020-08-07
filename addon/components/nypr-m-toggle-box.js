@@ -13,7 +13,7 @@ export default Component.extend({
   open: false,
   theme: 'dark',
   icon: 'caret-down',
-  closeDelay: 5000,
+  closeDelay: 500000,
   contentClass: '',
 
   contentClasses: computed('theme', function() {
