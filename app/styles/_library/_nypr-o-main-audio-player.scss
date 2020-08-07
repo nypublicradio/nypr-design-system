@@ -215,6 +215,7 @@
       margin-top: 10px;
       text-decoration: none;
       font-weight: normal;
+      align-items: center;
 
       &:first-child {
         margin-top: 0px;
@@ -236,6 +237,7 @@
         color: #ffffff;
         font-family: $font-body-bold;
         font-size: 12px;
+        line-height: 12px;
         letter-spacing: 1.2px;
         margin-left: 8px;
         text-transform: uppercase;
