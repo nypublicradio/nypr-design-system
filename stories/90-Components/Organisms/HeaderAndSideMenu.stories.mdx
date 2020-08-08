@@ -1,0 +1,95 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import hbs from 'htmlbars-inline-precompile';
+
+<Meta title="Components/Organisms/HeaderAndSideMenu" />
+
+# Header and Side Menu
+ 
+<Preview>
+  <Story name="Header and Side Menu" height="800px">{{
+    template: hbs`
+          <NyprOHeader
+                  @donateURL={{DONATE_URL}}
+                  data-test-main-header
+                  as |header|
+          >
+            <header.left data-test-header-left as |left|>
+              <left.branding>
+                {{#link-to "index"}}
+                  <Icon @icon='gothamist/logo' @title='gothamist logo'/>
+                {{/link-to}}
+              </left.branding>
+            </header.left>
+            
+            <header.nav @navItems={{primaryNav}} data-test-top-nav/>
+          
+            <header.right data-test-header-right as |right|>
+              <NyprAButton class='c-main-header__donate o-button--sm mod-donate' name="donateHeader" @url={{DONATE_URL}}>
+                Donate
+              </NyprAButton>
+            </header.right>
+          
+            <header.menu @donateUrl={{DONATE_URL}} data-test-side-menu as |menu|>
+              <menu.branding>
+                {{#link-to 'index'}}
+                  <Icon @icon='gothamist/logo' @title='gothamist logo' class="site-header-title-logo"/>
+                {{/link-to}}
+              </menu.branding>
+          
+              <menu.primaryNav @navItems={{primaryNav}}/>
+              <menu.secondaryNav @navItems={{secondaryNav}}/>
+          
+              <menu.social @label='Follow Us' as |share|>
+                <share.link @service='facebook' @username='gothamist'/>
+                <share.link @service='twitter' @username='gothamist' />
+                <share.link @service='instagram' @username='gothamist' />
+              </menu.social>
+              
+            </header.menu>
+          </NyprOHeader>`,
+    context: { 
+      primaryNav: [
+        {
+          route: ['index'],
+          text: 'Primary Link 1',
+        },
+        {
+          route: ['index'],
+          text: 'Primary Link 2',
+        },
+        {
+          route: ['index'],
+          text: 'Primary Link 3',
+        }
+      ],
+      secondaryNav: [
+        {
+         route: ['index'],
+         text: 'Secondary Link 1',
+        },
+        {
+         route: ['index'],
+         text: 'Secondary Link 2',
+        },
+        {
+         route: ['index'],
+         text: 'Secondary Link 3',
+        }
+      ],
+      tertiaryNav: [
+        {
+         route: ['index'],
+         text: 'Tertiary Link 1',
+        },
+        {
+         route: ['index'],
+         text: 'Tertiary Link 2',
+        },
+        {
+         route: ['index'],
+         text: 'Tertiary Link 3',
+        }
+      ]
+    }
+  }}</Story>
+</Preview>

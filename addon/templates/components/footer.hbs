@@ -14,19 +14,15 @@
         <div class="c-main-footer__nav c-main-footer__primary-nav" name="primaryNavFooter">
           {{yield (hash primaryNav=(component 'nypr-m-secondary-nav'))}}
         </div>
-        {{#if @leftComponent}}
-          <div class="c-main-footer__left-component u-space--double--top">
-            {{yield (hash leftComponent=(component 'blank-template'))}}
-          </div>
-        {{/if}}
+        <div class="c-main-footer__left-component u-space--double--top">
+          {{yield (hash leftComponent=(component 'blank-template'))}}
+        </div>
       </div>
 
       <div>
-        {{#if @rightComponent}}
-          <div class="c-main-footer__right-component u-space--double--bottom">
-            {{yield (hash rightComponent=(component 'blank-template'))}}
-          </div>
-        {{/if}}
+        <div class="c-main-footer__right-component u-space--double--bottom">
+          {{yield (hash rightComponent=(component 'blank-template'))}}
+        </div>
         <div class="l-grid l-grid--2up l-grid--2up--small">
           <div class="c-main-footer__secondary-nav u-space--double--bottom" name="secondaryNavFooter">
             {{yield (hash secondaryNav=(component 'nypr-m-secondary-nav'))}}
