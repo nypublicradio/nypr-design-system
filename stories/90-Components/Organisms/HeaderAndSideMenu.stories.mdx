@@ -65,6 +65,11 @@ import hbs from 'htmlbars-inline-precompile';
               </menu.branding>
           
               <menu.primaryNav @navItems={{primaryNav}}/>
+              
+              <menu.component>
+                <p class="u-space--double--top u-space--double--bottom"><em>slot for component</em></p>
+              </menu.component>
+              
               <menu.secondaryNav @navItems={{secondaryNav}}/>
           
               <menu.social @label='Follow Us' as |share|>
@@ -181,6 +186,7 @@ import hbs from 'htmlbars-inline-precompile';
               </menu.branding>
           
               <menu.primaryNav @navItems={{primaryNav}}/>
+              
               <menu.secondaryNav @navItems={{secondaryNav}}/>
           
               <menu.social @label='Follow Us' as |share|>
