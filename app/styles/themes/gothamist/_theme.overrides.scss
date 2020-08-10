@@ -444,6 +444,7 @@ blockquote {
   display: flex;
   justify-content: center;
   align-items: center;
+  @extend .u-has-accent;
 
   &:hover {
     color: rgb(var(--color-white));

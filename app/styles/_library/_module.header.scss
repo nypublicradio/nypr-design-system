@@ -355,6 +355,7 @@
 
 .c-side-menu__secondary-nav .c-secondary-nav__link {
   margin: 0 var(--space-3);
+  text-decoration: none;
 
   @include media(">medium") {
     margin: 0 var(--space-4);
