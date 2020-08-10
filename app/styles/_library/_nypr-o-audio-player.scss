@@ -91,26 +91,26 @@ $nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
     display: none;
   }
 
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  justify-content: flex-end;
   align-items: center;
   background-color: $nypr-player-background-color;
+  bottom: 0;
   height: 100%;
+  justify-content: flex-end;
+  position: absolute;
+  right: 0;
+  top: 0;
 
   .nypr-player-volume-slider-track::after {
     z-index: 0;
   }
 
   .nypr-player-volume-control {
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    align-items: center;
-    padding-right: 10px;
     margin-right: -20px;
+    padding-right: 10px;
   }
 
   .nypr-player-volume-slider-wrapper {
@@ -143,18 +143,18 @@ $nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
   }
 
   .nypr-player-button.mod-volume {
-    order: -1;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    display: flex;
     flex-basis: 0;
+    justify-content: center;
     margin-right: -5px;
+    order: -1;
+    text-align: center;
 
     svg {
+      left: 0;
       position: relative;
       top: 0;
-      left: 0;
     }
   }
 }
@@ -189,21 +189,21 @@ $nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
 }
 
 .nypr-o-audio-player-level-two-three .toggle-box__label {
-  line-height: 1.22;
-  text-align: left;
-  min-width: 30%;
-  height: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   align-content: flex-start;
   align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  justify-content: space-around;
+  line-height: 1.22;
+  min-width: 30%;
+  text-align: left;
 }
 
 .nypr-o-audio-player-level-one {
   font-family: $font-body-bold;
-  font-weight: normal;
   font-size: 10px;
+  font-weight: normal;
   letter-spacing: 1.2px;
   line-height: 13px;
   overflow: hidden;
@@ -223,8 +223,8 @@ $nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
   font-weight: normal;
   font-size: 18px;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
   width: 100%;
 }
 
@@ -241,8 +241,8 @@ $nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
 
 .nypr-o-audio-player-level-three.nypr-o-audio-player-level-two-visible,
 .nypr-o-audio-player-level-three.nypr-o-audio-player-level-two-visible * {
-  white-space: nowrap;
-  overflow: hidden;
   line-height: 1;
+  overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
