@@ -146,6 +146,14 @@
   }
 }
 
+.c-main-header__share {
+  display: none;
+  width: auto;
+  @include media(">small") {
+    display: block;
+  }
+}
+
 .c-main-header__share > span {
   @include media("<=small") {
     display: none;
