@@ -1,32 +1,34 @@
-<div class="jukebox-player-show" data-test-element="show">
-  <div class="jukebox-player-show-title" data-test-element="show-title">
-    {{@showTitle}}
+<div class="nypr-o-audio-player-level-one-four" data-test-element="show">
+  {{#if @levelOne}}
+  <div class="nypr-o-audio-player-level-one" data-test-element="show-title">
+    {{@levelOne}}
   </div>
+  {{/if}}
 
-  {{#if @hostName}}
-    <div class="jukebox-player-show-host" data-test-element="show-host">
-      {{@hostName}}
+  {{#if @levelFour}}
+    <div class="nypr-o-audio-player-level-four" data-test-element="show-host">
+      {{@levelFour}}
     </div>
   {{/if}}
 </div>
 
-<NyprMPlayButton @playItemId={{this.streamSlug}} class="jukebox-player-listen-button" data-test-element="listen-button"/>
+<NyprMPlayButton @playItemId={{this.streamSlug}} class="nypr-o-audio-player-play-button" data-test-element="play-button"/>
 
-<NyprMTrackAdditionalInfo class="jukebox-player-track" data-test-element="track" @ensembleName={{ensembleName}} @conductorName={{conductorName}} as |options|>
-  {{#if @composerName}}
-    <div class="jukebox-player-track-composer mod-scrolling-overflow" data-test-element="track-composer">
-      {{@composerName}}
+<NyprMTrackAdditionalInfo class="nypr-o-audio-player-level-two-three" data-test-element="track" @ensembleName={{ensembleName}} @conductorName={{conductorName}} as |options|>
+  {{#if @levelTwo}}
+    <div class="nypr-o-audio-player-level-two mod-scrolling-overflow" data-test-element="track-composer">
+      {{{@levelTwo}}}
     </div>
   {{/if}}
-  {{#if @trackTitle}}
-    <div class="jukebox-player-track-title mod-scrolling-overflow" data-test-element="track-title">
-      {{@trackTitle}}
-      {{options.icon}}
+
+  {{#if @levelThree}}
+    <div class="nypr-o-audio-player-level-three {{if @levelTwo 'nypr-o-audio-player-level-two-visible'}} mod-scrolling-overflow" data-test-element="track-composer">
+      {{{@levelThree}}}
     </div>
   {{/if}}
 </NyprMTrackAdditionalInfo>
 
-<div class="jukebox-player-controls">
+<div class="nypr-o-audio-player-controls">
   {{#if (can-change-volume)}}
     {{nypr-m-volume-control
       volume     = hifi.volume

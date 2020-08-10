@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   dj: service(),
   hifi: service(),
-  classNames: ['jukebox-player'],
+  classNames: ['nypr-o-audio-player'],
 
   actions: {
     async playOrPause() {
