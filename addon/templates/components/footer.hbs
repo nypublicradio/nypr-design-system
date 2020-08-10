@@ -1,6 +1,6 @@
 <footer class="c-main-footer" data-test-main-footer ...attributes>
 
-  <div class="l-container u-spacing--triple">
+  <div class="l-container">
     <div class="l-grid l-grid--2up l-grid--large-gutters">
       <div>
         <div class="c-main-footer__logo u-space--double--bottom">
@@ -14,13 +14,13 @@
         <div class="c-main-footer__nav c-main-footer__primary-nav" name="primaryNavFooter">
           {{yield (hash primaryNav=(component 'nypr-m-secondary-nav'))}}
         </div>
-        <div class="c-main-footer__left-component u-space--double--top">
+        <div class="c-main-footer__left-component">
           {{yield (hash leftComponent=(component 'blank-template'))}}
         </div>
       </div>
 
       <div>
-        <div class="c-main-footer__right-component u-space--double--bottom">
+        <div class="c-main-footer__right-component">
           {{yield (hash rightComponent=(component 'blank-template'))}}
         </div>
         <div class="l-grid l-grid--2up l-grid--2up--small">
@@ -35,8 +35,8 @@
 
     </div>
 
-    <div class="l-grid l-grid--2up l-grid--middle l-grid--large-gutters">
-      <div class="c-main-footer__brand-group">
+    <div class="l-grid l-grid--2up--xlarge l-grid--middle l-grid--large-gutters">
+      <div class="c-main-footer__brand-group u-space--triple--top">
         <div class="c-main-footer__nypr-logo">
           <Icon @icon='nypr-logo' @title="nypr logo"/>
         </div>
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <div class="c-main-footer__bottom">
+    <div class="c-main-footer__bottom u-space--top">
       <div class="c-main-footer__copyright">
         <p class="u-font--secondary-style u-font--xs c-main-footer__copyright-text u-color--white">&copy; {{moment-format (now) 'YYYY'}} New York Public Radio. All rights reserved.</p>
       </div>

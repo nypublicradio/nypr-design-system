@@ -166,7 +166,7 @@ While the footer is always full-width, sections can condense and stack as the sc
 
    
 <Preview>
-  <Story name="Footer" height="800px">{{
+  <Story name="Footer 1" height="800px">{{
     template: hbs`
           <Footer @site="wnyc" as |footer|>
             <footer.logo>
@@ -188,16 +188,144 @@ While the footer is always full-width, sections can condense and stack as the sc
             </footer.social>
             
             <footer.leftComponent>
-              <p><em>slot for component</em></p>
+              <p class="u-space--double--top"><em>slot for component</em></p>
             </footer.leftComponent>
             
             <footer.rightComponent>
-              <p><em>slot for component</em></p>
+              <p class="u-space--double--bottom"><em>slot for component</em></p>
             </footer.rightComponent>
           
             <footer.primaryNav @navItems={{primaryNav}}/>
             <footer.secondaryNav @subheader="Subheader 1" @navItems={{secondaryNav}}/>
             <footer.tertiaryNav @subheader="Subheader 2" @navItems={{tertiaryNav}}/>
+          
+          </Footer>`,
+    context: { 
+      primaryNav: [
+        {
+          route: ['index'],
+          text: 'Primary Link 1',
+        },
+        {
+          route: ['index'],
+          text: 'Primary Link 2',
+        },
+        {
+          route: ['index'],
+          text: 'Primary Link 3',
+        }
+      ],
+      secondaryNav: [
+        {
+         route: ['index'],
+         text: 'Secondary Link 1',
+        },
+        {
+         route: ['index'],
+         text: 'Secondary Link 2',
+        },
+        {
+         route: ['index'],
+         text: 'Secondary Link 3',
+        }
+      ],
+      tertiaryNav: [
+        {
+         route: ['index'],
+         text: 'Tertiary Link 1',
+        },
+        {
+         route: ['index'],
+         text: 'Tertiary Link 2',
+        },
+        {
+         route: ['index'],
+         text: 'Tertiary Link 3',
+        }
+      ]
+    }
+  }}</Story>
+  
+  <Story name="Footer 2" height="800px">{{
+    template: hbs`
+          <Footer @site="wnyc" as |footer|>
+            <footer.logo>
+              <Icon @icon='wnyc/logo' @title='logo' />
+            </footer.logo>
+          
+            <footer.slogan>
+              <p>
+                Listener-supported WNYC is the home for independent journalism and courageous conversation on air and online. Broadcasting live from New York City on 93.9 FM and AM 820 and available online and on the go.
+              </p>
+            </footer.slogan>
+          
+            <footer.secondaryNav @subheader="Subheader 1" @navItems={{secondaryNav}}/>
+          
+          </Footer>`,
+    context: { 
+      primaryNav: [
+        {
+          route: ['index'],
+          text: 'Primary Link 1',
+        },
+        {
+          route: ['index'],
+          text: 'Primary Link 2',
+        },
+        {
+          route: ['index'],
+          text: 'Primary Link 3',
+        }
+      ],
+      secondaryNav: [
+        {
+         route: ['index'],
+         text: 'Secondary Link 1',
+        },
+        {
+         route: ['index'],
+         text: 'Secondary Link 2',
+        },
+        {
+         route: ['index'],
+         text: 'Secondary Link 3',
+        }
+      ],
+      tertiaryNav: [
+        {
+         route: ['index'],
+         text: 'Tertiary Link 1',
+        },
+        {
+         route: ['index'],
+         text: 'Tertiary Link 2',
+        },
+        {
+         route: ['index'],
+         text: 'Tertiary Link 3',
+        }
+      ]
+    }
+  }}</Story>
+  
+  <Story name="Footer 3" height="800px">{{
+    template: hbs`
+          <Footer @site="wnyc" as |footer|>
+            <footer.logo>
+              <Icon @icon='wnyc/logo' @title='logo' />
+            </footer.logo>
+          
+            <footer.slogan>
+              <p>
+                Listener-supported WNYC is the home for independent journalism and courageous conversation on air and online. Broadcasting live from New York City on 93.9 FM and AM 820 and available online and on the go.
+              </p>
+            </footer.slogan>
+            
+            <footer.primaryNav @navItems={{primaryNav}}/>
+            
+            <footer.rightComponent>
+              <p><em>slot for component</em></p>
+            </footer.rightComponent>
           
           </Footer>`,
     context: { 
