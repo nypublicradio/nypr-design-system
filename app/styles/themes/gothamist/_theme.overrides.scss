@@ -57,7 +57,9 @@ blockquote {
 }
 
 .c-main-footer .c-share-tools__label {
+  @include typeface(small, 3);
   text-align: left;
+  text-transform: uppercase;
 }
 
 .c-main-footer .c-share-tools__group {
@@ -84,11 +86,6 @@ blockquote {
 
 .c-main-header__share {
     display: block;
-}
-
-.c-share-tools__label {
-  text-transform: uppercase;
-  @include typeface(small, 3);
 }
 
 .c-main-header__share .c-share-tools__link:hover path {
@@ -235,7 +232,7 @@ blockquote {
   }
 }
 
-.c-main-footer__copyright-text {
+.c-main-footer .c-main-footer__bottom .c-main-footer__copyright-text {
   @include typeface(small, 3);
   text-transform: uppercase;
 }
@@ -277,6 +274,9 @@ blockquote {
 
 .c-main-footer__nypr-logo {
   margin: 0 auto var(--space-3);
+  @include media(">large") {
+    margin: 0 var(--space-5) 0 0;
+  }
 }
 
 .c-main-footer__brand-group {
