@@ -67,3 +67,129 @@ Side menus should always be kept on the same side as the objects that triggered 
 ## Mobile
 
 On mobile side menus expand to cover 100% of the width of the screen when opened.
+
+
+
+## Example
+
+<Preview withToolbar={true}>
+  <Story name="Side Menu" height="1000px">{{
+    template: hbs`
+          <NyprOHeader
+                  @donateURL={{DONATE_URL}}
+                  data-test-main-header
+                  as |header|
+          >
+            <header.left data-test-header-left as |left|>
+              <left.branding>
+                {{#link-to "index"}}
+                  <Icon @icon='gothamist/logo' @title='gothamist logo'/>
+                {{/link-to}}
+              </left.branding>
+            </header.left>
+            
+            <header.nav @navItems={{primaryNav}} data-test-top-nav/>
+          
+            <header.right data-test-header-right as |right|>
+              <NyprMShareTools class="c-main-header__share" as |tools|>
+                <tools.share
+                  @service='facebook'
+                  @utm={{hash medium='social' source='facebook' campaign='shared_facebook'}}
+                  data-test-facebook-share
+                />
+                <tools.share
+                  @service='twitter'
+                  @params={{hash text=share.title via='gothamist'}}
+                  @utm={{hash medium='social' source='twitter' campaign='shared_twitter'}}
+                  data-test-twitter-share
+                />
+                <tools.share
+                  @service='reddit'
+                  @params={{hash title=share.title}}
+                  @utm={{hash medium='social' source='reddit' campaign='shared_reddit'}}
+                  data-test-reddit-share
+                />
+                <tools.share
+                  @service='email'
+                  @params={{hash body=(concat share.title ' - {{URL}}')}}
+                  @utm={{hash medium='social' source='email' campaign='shared_email'}}
+                  data-test-email-share
+                />
+              </NyprMShareTools>
+              <NyprAButton class='c-main-header__donate o-button--sm mod-donate' name="donateHeader" @url={{DONATE_URL}}>
+                Donate
+              </NyprAButton>
+              <right.search as |search|>
+                <search.open/>
+              </right.search>
+            </header.right>
+          
+            <header.menu @donateUrl={{DONATE_URL}} @isOpen=true data-test-side-menu as |menu|>
+              <menu.branding>
+                {{#link-to 'index'}}
+                  <Icon @icon='gothamist/logo' @title='gothamist logo' class="site-header-title-logo"/>
+                {{/link-to}}
+              </menu.branding>
+          
+              <menu.primaryNav @navItems={{primaryNav}}/>
+              
+              <menu.component>
+                <p class="u-space--double--top u-space--double--bottom"><em>slot for component</em></p>
+              </menu.component>
+              
+              <menu.secondaryNav @navItems={{secondaryNav}}/>
+          
+              <menu.social @label='Follow Us' as |share|>
+                <share.link @service='facebook' @username='gothamist'/>
+                <share.link @service='twitter' @username='gothamist' />
+                <share.link @service='instagram' @username='gothamist' />
+              </menu.social>
+              
+            </header.menu>
+          </NyprOHeader>`,
+    context: { 
+      primaryNav: [
+        {
+          route: ['index'],
+          text: 'Primary Link 1',
+        },
+        {
+          route: ['index'],
+          text: 'Primary Link 2',
+        },
+        {
+          route: ['index'],
+          text: 'Primary Link 3',
+        }
+      ],
+      secondaryNav: [
+        {
+         route: ['index'],
+         text: 'Secondary Link 1',
+        },
+        {
+         route: ['index'],
+         text: 'Secondary Link 2',
+        },
+        {
+         route: ['index'],
+         text: 'Secondary Link 3',
+        }
+      ],
+      tertiaryNav: [
+        {
+         route: ['index'],
+         text: 'Tertiary Link 1',
+        },
+        {
+         route: ['index'],
+         text: 'Tertiary Link 2',
+        },
+        {
+         route: ['index'],
+         text: 'Tertiary Link 3',
+        }
+      ]
+    }
+  }}</Story>
+</Preview>
