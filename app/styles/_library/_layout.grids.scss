@@ -28,6 +28,12 @@
   }
 }
 
+.l-grid--2up--xlarge {
+  @media all and (min-width: $xlarge) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .l-grid--3up {
   @include media(">medium") {
     grid-template-columns: repeat(3, 1fr);

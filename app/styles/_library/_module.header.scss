@@ -111,6 +111,8 @@
 
 .c-main-header__title {
   display: none;
+  text-align: center;
+  flex: 1;
   padding: 0 var(--space-5) 0 var(--space-3);
   padding-right: 50px;
   padding-left: var(--space-4);
@@ -144,6 +146,14 @@
   }
 }
 
+.c-main-header__share {
+  display: none;
+  width: auto;
+  @include media(">small") {
+    display: block;
+  }
+}
+
 .c-main-header__share > span {
   @include media("<=small") {
     display: none;
@@ -157,7 +167,7 @@
 .c-main-header__share .c-share-tools__group {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: auto;
   padding: 0 var(--space-2) 0 var(--space-2);
 }
 
@@ -345,6 +355,7 @@
 
 .c-side-menu__secondary-nav .c-secondary-nav__link {
   margin: 0 var(--space-3);
+  text-decoration: none;
 
   @include media(">medium") {
     margin: 0 var(--space-4);

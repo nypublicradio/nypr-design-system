@@ -56,6 +56,36 @@ blockquote {
   }
 }
 
+.c-main-footer .c-share-tools__label {
+  text-align: left;
+}
+
+.c-main-footer .c-share-tools__group {
+  margin: initial;
+}
+
+.c-main-header__title {
+  text-align: left;
+}
+
+.c-main-footer__nav {
+  @include media("<=xlarge") {
+    text-align: center;
+    padding-bottom: var(--space-5);
+  }
+}
+
+.c-main-footer__primary-nav {
+  @include media("<=xlarge") {
+    text-align: center;
+    padding-bottom: var(--space-5);
+  }
+}
+
+.c-main-header__share {
+    display: block;
+}
+
 .c-share-tools__label {
   text-transform: uppercase;
   @include typeface(small, 3);
@@ -414,6 +444,7 @@ blockquote {
   display: flex;
   justify-content: center;
   align-items: center;
+  @extend .u-has-accent;
 
   &:hover {
     color: rgb(var(--color-white));

@@ -27,7 +27,7 @@ module.exports = function (defaults) {
       componentFilePathPatterns: ['addon/components/*.js']
     },
     'nypr-design-system': {
-      themes: ['gothamist', 'white-label', 'deprecated']
+      themes: ['white-label', 'gothamist', 'deprecated']
     },
   });
 
