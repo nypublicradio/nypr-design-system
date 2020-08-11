@@ -165,7 +165,7 @@ While the footer is always full-width, sections can condense and stack as the sc
  
 
    
-<Preview>
+<Preview withToolbar={true}>
   <Story name="Footer 1" height="800px">{{
     template: hbs`
           <Footer @site="wnyc" as |footer|>
@@ -245,7 +245,9 @@ While the footer is always full-width, sections can condense and stack as the sc
       ]
     }
   }}</Story>
-  
+</Preview>
+
+<Preview withToolbar={true}>
   <Story name="Footer 2" height="800px">{{
     template: hbs`
           <Footer @site="wnyc" as |footer|>
@@ -307,7 +309,9 @@ While the footer is always full-width, sections can condense and stack as the sc
       ]
     }
   }}</Story>
-  
+</Preview>
+
+<Preview withToolbar={true}>  
   <Story name="Footer 3" height="800px">{{
     template: hbs`
           <Footer @site="wnyc" as |footer|>
