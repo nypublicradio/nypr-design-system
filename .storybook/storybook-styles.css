@@ -7,6 +7,13 @@ outside of Storybook  */
 /* Be sure to only add classes that affect Storybook Docs
 i.e. .sbdocs.sbdocs-example */
 
+.sbdocs.sbdocs-wrapper {
+  padding: 32px;
+}
+.sbdocs.sbdocs-content {
+  max-width: 100%;
+}
+
 .sbdocs.sbdocs-ul, .sbdocs.sbdocs-li {
   margin: 0;
   list-style: disc;
