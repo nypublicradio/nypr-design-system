@@ -1,12 +1,12 @@
-<div class="nypr-o-audio-player-level-one-four" data-test-element="show">
+<div class="nypr-o-audio-player-level-one-four" data-test-element="level-one-four">
   {{#if @levelOne}}
-  <div class="nypr-o-audio-player-level-one" data-test-element="show-title">
+  <div class="nypr-o-audio-player-level-one" data-test-element="level-one">
     {{@levelOne}}
   </div>
   {{/if}}
 
   {{#if @levelFour}}
-    <div class="nypr-o-audio-player-level-four" data-test-element="show-host">
+    <div class="nypr-o-audio-player-level-four" data-test-element="level-four">
       {{@levelFour}}
     </div>
   {{/if}}
@@ -16,13 +16,13 @@
 
 <NyprMTrackAdditionalInfo class="nypr-o-audio-player-level-two-three" data-test-element="track" @ensembleName={{levelSix}} @conductorName={{levelFive}} as |options|>
   {{#if @levelTwo}}
-    <div class="nypr-o-audio-player-level-two mod-scrolling-overflow" data-test-element="track-composer">
+    <div class="nypr-o-audio-player-level-two mod-scrolling-overflow" data-test-element="level-two">
       {{@levelTwo}}
     </div>
   {{/if}}
 
   {{#if @levelThree}}
-    <div class="nypr-o-audio-player-level-three {{if @levelTwo 'nypr-o-audio-player-level-two-visible'}} mod-scrolling-overflow" data-test-element="track-composer">
+    <div class="nypr-o-audio-player-level-three {{if @levelTwo 'nypr-o-audio-player-level-two-visible'}} mod-scrolling-overflow" data-test-element="level-three">
       <span class="nypr-o-audio-player-level-three-text">{{@levelThree}}</span>
       {{options.icon}}
     </div>
