@@ -14,18 +14,20 @@
 
 <NyprMPlayButton @playItemId={{this.streamSlug}} class="nypr-o-audio-player-play-button" data-test-element="play-button"/>
 
-<NyprMTrackAdditionalInfo class="nypr-o-audio-player-level-two-three" data-test-element="track" @ensembleName={{ensembleName}} @conductorName={{conductorName}} as |options|>
+<NyprMTrackAdditionalInfo class="nypr-o-audio-player-level-two-three" data-test-element="track" @ensembleName={{levelSix}} @conductorName={{levelFive}} as |options|>
   {{#if @levelTwo}}
     <div class="nypr-o-audio-player-level-two mod-scrolling-overflow" data-test-element="track-composer">
-      {{{@levelTwo}}}
+      {{@levelTwo}}
     </div>
   {{/if}}
 
   {{#if @levelThree}}
     <div class="nypr-o-audio-player-level-three {{if @levelTwo 'nypr-o-audio-player-level-two-visible'}} mod-scrolling-overflow" data-test-element="track-composer">
-      {{{@levelThree}}}
+      <span class="nypr-o-audio-player-level-three-text">{{@levelThree}}</span>
+      {{options.icon}}
     </div>
   {{/if}}
+  
 </NyprMTrackAdditionalInfo>
 
 <div class="nypr-o-audio-player-controls">
