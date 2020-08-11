@@ -150,23 +150,8 @@ Link to information about working for the brand/organization or a list of open p
 
 Much like our other larger organisms, sections of the footer component can be turned on and off to suit the needs of a brand. Two areas for additional components provide further flexibility. Below are some examples of footer configurations done by toggling molecules off and on.
 
-<img alt="footer1 config" src="./images/Organisms-Footer -Desktop1.png" width="500" />
-&nbsp;
-<img alt="footer3 config" src="./images/Organisms-Footer - Desktop-3.png" width="500" />
-&nbsp;
-<img alt="footer2 config" src="./images/Organisms-Footer -Desktop-2.png" width="500" />
-&nbsp;
-
-  ## Responsive Sizing
-
-While the footer is always full-width, sections can condense and stack as the screen size gets narrower. Smaller breakpoints like tablet (1) and mobile (2) are separate components in our Figma library. Note that in mobile, our legal text bumps past other molecules to remain at the bottom of the footer.
-
- <img alt="footer sizes" src="./images/Organisms-Footer-Sizes.png" width="500" />
- 
-
-   
 <Preview withToolbar={true}>
-  <Story name="Footer 1" height="800px">{{
+  <Story name="Footer Config 1" height="850px">{{
     template: hbs`
           <Footer @site="wnyc" as |footer|>
             <footer.logo>
@@ -248,7 +233,7 @@ While the footer is always full-width, sections can condense and stack as the sc
 </Preview>
 
 <Preview withToolbar={true}>
-  <Story name="Footer 2" height="800px">{{
+  <Story name="Footer Config 2" height="800px">{{
     template: hbs`
           <Footer @site="wnyc" as |footer|>
             <footer.logo>
@@ -312,7 +297,7 @@ While the footer is always full-width, sections can condense and stack as the sc
 </Preview>
 
 <Preview withToolbar={true}>  
-  <Story name="Footer 3" height="800px">{{
+  <Story name="Footer Config 3" height="800px">{{
     template: hbs`
           <Footer @site="wnyc" as |footer|>
             <footer.logo>
@@ -378,3 +363,9 @@ While the footer is always full-width, sections can condense and stack as the sc
     }
   }}</Story>
 </Preview>
+
+  ## Responsive Sizing
+
+While the footer is always full-width, sections can condense and stack as the screen size gets narrower. Smaller breakpoints like tablet (1) and mobile (2) are separate components in our Figma library. Note that in mobile, our legal text bumps past other molecules to remain at the bottom of the footer.
+
+ <img alt="footer sizes" src="./images/Organisms-Footer-Sizes.png" width="500" />
