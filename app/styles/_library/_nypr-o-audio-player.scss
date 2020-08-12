@@ -1,30 +1,5 @@
-// variables pulled from nypr-jukeboxes -- replace with design system variables
-$white: #fff;
-$denim-blue: #00518e;
-$font-heading: "Playfair Display";
-$font-body-bold: "OpenSans-Bold", sans-serif;
-$font-body: "OpenSans-Regular", sans-serif; 
-
-$nypr-player-primary-color                   : $white;
-$nypr-player-background-color                : darken($denim-blue, 2%);
-$nypr-player-accent-color                    : $white;
-
-$nypr-player-button-color                    : $white;
-$nypr-player-button-hover-color              : rgba($white, 0.8);
-$nypr-player-button-active-color             : $white;
-$nypr-player-slider-handle-color             : $white;
-
-$nypr-player-info-text-color                 : $white;
-$nypr-player-link-underline-color            : $white;
-$nypr-player-timelabel-color                 : $white;
-$nypr-player-timelabel-total-color           : rgba($white, 0.6);
-
-$nypr-player-backdrop-color                  : rgba($white, 0.75);
-$nypr-player-progress-played-color           : $white;
-$nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
-
 .nypr-o-audio-player {
-  background-color: $nypr-player-background-color!important;
+  background-color: rgb(var(--color-primary-1));
   bottom: -5px;
   box-sizing: border-box;
   display: grid;
@@ -92,7 +67,7 @@ $nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
   }
 
   align-items: center;
-  background-color: $nypr-player-background-color;
+  background-color: rgb(var(--color-primary-1));
   bottom: 0;
   height: 100%;
   justify-content: flex-end;
@@ -106,11 +81,15 @@ $nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
 
   .nypr-player-volume-control {
     align-items: center;
+    cursor: pointer;
     display: flex;
     flex-direction: row;
+    height: 100%;
     justify-content: flex-end;
     margin-right: -20px;
+    outline: 0;
     padding-right: 10px;
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
   }
 
   .nypr-player-volume-slider-wrapper {
@@ -127,6 +106,8 @@ $nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
   }
 
   .nypr-player-volume {
+    display: flex;
+    height: 100%;
     margin-left: 0;
     margin-right: 0;
     padding-right: 20px;
@@ -142,13 +123,33 @@ $nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
     }
   }
 
+  .nypr-player-button {
+    appearance: none;
+    background-color: transparent;
+    display: flex;
+    cursor: pointer;
+    height: 100%;
+    padding: 0 13px;
+    position: relative;
+
+    svg {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+
   .nypr-player-button.mod-volume {
     align-items: center;
     display: flex;
     flex-basis: 0;
+    height: 100%;
     justify-content: center;
     margin-right: -5px;
+    min-width: 50px;
     order: -1;
+    outline: 0;
+    position: relative;
     text-align: center;
 
     svg {
@@ -201,7 +202,7 @@ $nypr-player-progress-downloaded-color       : darken($denim-blue, 20%);
 }
 
 .nypr-o-audio-player-level-one {
-  font-family: $font-body-bold;
+  font-family: "OpenSans-Bold", sans-serif;;
   font-size: 10px;
   font-weight: normal;
   letter-spacing: 1.2px;
