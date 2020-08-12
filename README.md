@@ -9,7 +9,6 @@ This repo contains an Ember addon, `nypr-design-system` and the files to
 power Storybook.
 
 
-
 ## Ember Addon
 
 
