@@ -1,0 +1,8 @@
+<button class="button" ...attributes>
+  {{#if icon}}
+    <Icon class="button-icon" @icon={{icon}} @title={{iconAlt}} />
+  {{/if}}
+  {{#if label}}
+  <span class="button-label">{{label}}</span>
+  {{/if}}
+</button>

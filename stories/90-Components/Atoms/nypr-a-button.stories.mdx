@@ -61,17 +61,6 @@ Icons buttons must contain a label clearly describing the purpose of the control
 
 
 
-<Preview>
-  <Story name="all" height="80px">{{
-    template: hbs`
-    <NyprAButton>Primary Button</NyprAButton>
-    <NyprAButton @blank={{true}}>Text Button</NyprAButton>
-    <NyprAButton class='o-button--c-quaternary'>Secondary Button</NyprAButton>
-    <NyprAButton class='o-button--sm'>Small Button</NyprAButton>
-    <NyprAButton class='o-button--extra'>Extra Button</NyprAButton>
-    `
-  }}</Story>
-</Preview>
 
 <Props of={component} />
 
@@ -79,15 +68,20 @@ Icons buttons must contain a label clearly describing the purpose of the control
 
 <Preview withToolbar={true}>
   <Story name="primary" height="80px">{{
-    template: hbs`<NyprAButton>Primary Button</NyprAButton>`
+    template: hbs`<Button @label="Button" class="mod-small"/> 
+<Button @label="Button" />
+<Button @label="Button" class="mod-large"/> `
   }}</Story>
 </Preview>
 
-<Heading>Text</Heading>
+
+<Heading>Primary with Icon</Heading>
 
 <Preview withToolbar={true}>
-  <Story name="text" height="80px">{{
-    template: hbs`<NyprAButton @blank={{true}}>Text Button</NyprAButton>`
+  <Story name="primary with icon" height="80px">{{
+    template: hbs`<Button @icon="audio" @label="Button" class="mod-small"/> 
+<Button @icon="audio" @label="Button" />
+<Button @icon="audio" @label="Button" class="mod-large"/> `
   }}</Story>
 </Preview>
 
@@ -95,22 +89,28 @@ Icons buttons must contain a label clearly describing the purpose of the control
 
 <Preview withToolbar={true}>
   <Story name="secondary" height="80px">{{
-    template: hbs`<NyprAButton class='o-button--c-quaternary'>Secondary Button</NyprAButton>`
+    template: hbs`<Button @label="Button" class="mod-secondary mod-small"/> 
+<Button @label="Button" class="mod-secondary" />
+<Button @label="Button" class="mod-secondary mod-large"/> `
   }}</Story>
 </Preview>
 
-<Heading>Small</Heading>
+<Heading>Icon</Heading>
 
 <Preview withToolbar={true}>
-  <Story name="small" height="80px">{{
-    template: hbs`<NyprAButton class='o-button--sm'>Small Button</NyprAButton>`
+  <Story name="icon" height="80px">{{
+    template: hbs`<Button @icon="audio" @iconAlt="Play" class="mod-small"/> 
+<Button @icon="audio" @iconAlt="Play" />
+<Button @icon="audio" @iconAlt="Play" class="mod-large"/> `,
   }}</Story>
 </Preview>
 
-<Heading>Extra</Heading>
+<Heading>Flat</Heading>
 
 <Preview withToolbar={true}>
-  <Story name="extra" height="80px">{{
-    template: hbs`<NyprAButton class='o-button--extra'>Extra Button</NyprAButton>`
+  <Story name="flat" height="80px">{{
+    template: hbs`<Button @label="Button" class="mod-flat mod-small"/> 
+<Button @label="Button" class="mod-flat" />
+<Button @label="Button" class="mod-flat mod-large"/> `
   }}</Story>
 </Preview>
