@@ -1,13 +1,13 @@
 <div class="nypr-o-audio-player-level-one-four" data-test-element="level-one-four">
   {{#if @levelOne}}
   <div class="nypr-o-audio-player-level-one" data-test-element="level-one">
-    {{@levelOne}}
+    {{strip-html @levelOne}}
   </div>
   {{/if}}
 
   {{#if @levelFour}}
     <div class="nypr-o-audio-player-level-four" data-test-element="level-four">
-      {{@levelFour}}
+      {{strip-html @levelFour}}
     </div>
   {{/if}}
 </div>
@@ -17,13 +17,13 @@
 <NyprMTrackAdditionalInfo class="nypr-o-audio-player-level-two-three" data-test-element="track" @ensembleName={{levelSix}} @conductorName={{levelFive}} as |options|>
   {{#if @levelTwo}}
     <div class="nypr-o-audio-player-level-two mod-scrolling-overflow" data-test-element="level-two">
-      {{@levelTwo}}
+      {{strip-html @levelTwo}}
     </div>
   {{/if}}
 
   {{#if @levelThree}}
     <div class="nypr-o-audio-player-level-three {{if @levelTwo 'nypr-o-audio-player-level-two-visible'}} mod-scrolling-overflow" data-test-element="level-three">
-      <span class="nypr-o-audio-player-level-three-text">{{@levelThree}}</span>
+      <span class="nypr-o-audio-player-level-three-text">{{strip-html @levelThree}}</span>
       {{options.icon}}
     </div>
   {{/if}}
