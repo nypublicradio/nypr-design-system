@@ -248,12 +248,9 @@
 .nypr-o-audio-player-level-three .nypr-o-audio-player-level-three-text {
   display: -webkit-box;
   overflow: hidden;
-}
-
-.nypr-o-audio-player-level-three .nypr-o-audio-player-level-three-text {
+  -webkit-line-clamp: 3;
   /* autoprefixer: off */
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
   /* autoprefixer: on */
 }
 
