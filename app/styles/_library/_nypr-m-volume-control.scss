@@ -11,7 +11,7 @@ $nypr-player-floating-queue-button-background: $nypr-player-background-color !de
 $nypr-player-button-color                    : $nypr-player-primary-color !default;
 $nypr-player-button-hover-color              : rgba($nypr-player-primary-color, 0.8) !default;
 $nypr-player-button-active-color             : $nypr-player-accent-color !default;
-$nypr-player-slider-handle-color             : $nypr-player-accent-color !default;
+$nypr-player-slider-handle-color             : #fff !default;
 
 @mixin svg-color($color) {
     polygon, rect, circle, path {
