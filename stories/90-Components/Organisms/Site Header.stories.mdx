@@ -73,31 +73,6 @@ On mobile, the majority of components in the Site Header will be hidden as to fi
             <header.nav @navItems={{primaryNav}} data-test-top-nav/>
           
             <header.right data-test-header-right as |right|>
-              <NyprMShareTools class="c-main-header__share" as |tools|>
-                <tools.share
-                  @service='facebook'
-                  @utm={{hash medium='social' source='facebook' campaign='shared_facebook'}}
-                  data-test-facebook-share
-                />
-                <tools.share
-                  @service='twitter'
-                  @params={{hash text=share.title via='gothamist'}}
-                  @utm={{hash medium='social' source='twitter' campaign='shared_twitter'}}
-                  data-test-twitter-share
-                />
-                <tools.share
-                  @service='reddit'
-                  @params={{hash title=share.title}}
-                  @utm={{hash medium='social' source='reddit' campaign='shared_reddit'}}
-                  data-test-reddit-share
-                />
-                <tools.share
-                  @service='email'
-                  @params={{hash body=(concat share.title ' - {{URL}}')}}
-                  @utm={{hash medium='social' source='email' campaign='shared_email'}}
-                  data-test-email-share
-                />
-              </NyprMShareTools>
               <NyprAButton class='c-main-header__donate o-button--sm mod-donate' name="donateHeader" @url={{DONATE_URL}}>
                 Donate
               </NyprAButton>
