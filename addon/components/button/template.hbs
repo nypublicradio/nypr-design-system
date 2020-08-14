@@ -1,8 +1,22 @@
-<button class="button" ...attributes>
-  {{#if icon}}
-    <Icon class="button-icon" @icon={{icon}} @title={{iconAlt}} />
+{{#if hasBlock}}
+  <button class="button" ...attributes>{{yield}}</button>
+{{else}}
+  {{#if @href}}
+      <a class="button" href="{{@href}}" ...attributes>
+          {{#if @icon}}
+              <Icon class="button-icon" @name="icon" />
+          {{/if}}
+          <span class="button-label">{{@label}}</span>
+      </a>
+  {{else}}
+    <button class="button" ...attributes>
+      {{#if @icon}}
+        <Icon class="button-icon" @icon={{@icon}} @title={{@iconAlt}} />
+      {{/if}}
+      {{#if @label}}
+        <span class="button-label">{{@label}}</span>
+      {{/if}}
+    </button>
   {{/if}}
-  {{#if label}}
-  <span class="button-label">{{label}}</span>
-  {{/if}}
-</button>
+{{/if}}
+
