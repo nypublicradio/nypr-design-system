@@ -1,34 +1,100 @@
 .button {
-  @include typeface(small, 6);
+  /* normalize .button styles  */
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  line-height: 1.15;
+  overflow: visible;
+  white-space: nowrap;
+  text-transform: none;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  appearance: none;
+}
 
+.button {
+  @include typeface(body, 6);
+  padding: var(--space-1) var(--space-3);
+	border-width: 0px;
   display: inline-flex;
 	position: relative;
 	align-items: center;
-	justify-content: center;
-	border-width: 0px;
+  justify-content: center;
 	cursor: pointer;
-  text-decoration: none;
 
-
-  padding: var(--space-1) var(--space-4);
-  color: white;
-  background-color: rgb(var(--color-button-primary));
+  color: rgb(var(--color-button-text));
+  border-color: rgb(var(--color-button));
+  background-color: rgb(var(--color-button));
 }
 
 .button:hover {
-  background-color: rgba(var(--color-button-primary-hover), var(--opacity-button-primary-hover));
+  background-color: rgba(var(--color-button-hover), var(--opacity-button-hover));
 }
 
+.button-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: var(--space-2);
+  margin-left: var(--space-1);
+}
+
+.button-icon * {
+  fill: rgb(var(--color-button-text));
+}
+
+.button-label {
+  line-height: 32px;
+}
+
+/* Secondary buttons */
+
 .button.mod-secondary {
-  color: rgb(var(--color-button-primary));
-  border: 1px solid rgb(var(--color-button-primary));
+  color: rgb(var(--color-button));
+  border: 1px solid rgb(var(--color-button));
   background-color: transparent;
 }
 
+/* Icon buttons */
+
+.button.mod-icon-only {
+  padding: var(--space-3);
+}
+  .button.mod-icon-only .button-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+.button.mod-icon-only.mod-small {
+  padding: var(--space-2);
+}
+
+.button.mod-icon-only.mod-large {
+  padding: var(--space-4);
+}
+  .button.mod-icon-only.mod-large .button-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+/* Flat buttons */
+
+.button.mod-flat {
+  display: inline;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  margin: none;
+  padding: none;
+  color: rgb(var(--color-link));
+}
+
+.button.mod-flat :hover
+
 .button.mod-small {
-  font-size: var(--font-size-4);
+  padding: 2px var(--space-2);
 }
 
 .button.mod-large {
-  font-size: var(--font-size-8);
+  padding: var(--space-2) var(--space-4);
 }
