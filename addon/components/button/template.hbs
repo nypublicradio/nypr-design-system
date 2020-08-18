@@ -1,15 +1,15 @@
 {{#if (has-block)}}
-  <button class="button" ...attributes>{{yield}}</button>
+  <button class="button" type="button" ...attributes>{{yield}}</button>
 {{else}}
   {{#if @href}}
-      <a class="button" href="{{@href}}" ...attributes>
+      <a class="button  {{if (and @icon (not @label)) "mod-icon-only"}}" href="{{@href}}" ...attributes>
           {{#if @icon}}
-              <Icon class="button-icon" @name="icon" />
+              <Icon class="button-icon mod-xs" @name="icon" />
           {{/if}}
           <span class="button-label">{{@label}}</span>
       </a>
   {{else}}
-    <button class="button" ...attributes>
+    <button class="button  {{if (and @icon (not @label)) "mod-icon-only"}}" type="button" ...attributes>
       {{#if @icon}}
         <Icon class="button-icon" @icon={{@icon}} @title={{@iconAlt}} />
       {{/if}}
