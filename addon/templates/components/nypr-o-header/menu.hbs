@@ -23,10 +23,6 @@
     {{yield (hash component=(component 'blank-template'))}}
   </div>
 
-  <div class="c-side-menu__social" name="shareToolSideMenu">
-    {{yield (hash social=(component 'nypr-m-share-tools'))}}
-  </div>
-
 </div>
 
 <div class="c-side-menu__group">
@@ -40,6 +36,10 @@
       search=(component 'nypr-m-inline-search' formClass="c-search--side")
       tipButton=(component 'nypr-a-button' class="c-side-menu__send-story o-button--c-quaternary u-full-width")
     )}}
+  </div>
+
+  <div class="c-side-menu__social" name="shareToolSideMenu">
+    {{yield (hash social=(component 'nypr-m-share-tools'))}}
   </div>
 
   <div class="c-side-menu__nypr-logo">

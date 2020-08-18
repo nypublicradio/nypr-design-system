@@ -85,7 +85,7 @@ blockquote {
 }
 
 .c-main-header__share {
-    display: block;
+  display: block;
 }
 
 .c-main-header__share .c-share-tools__link:hover path {
@@ -212,7 +212,7 @@ blockquote {
     @include typeface(body, 4);
     @include media(">xlarge") {
       font-size: var(--font-size-6);
-      line-height:  var(--line-height-6);
+      line-height: var(--line-height-6);
     }
   }
 }
@@ -437,6 +437,14 @@ blockquote {
 .c-side-menu .c-search__button:hover {
   background-color: rgb(var(--color-form-button));
   opacity: 1;
+}
+
+.c-side-menu .c-side-menu__social {
+  margin-top: var(--space-6);
+}
+
+.c-primary-nav--side {
+  margin-bottom: 0;
 }
 
 .c-primary-nav--side .c-primary-nav__link {
