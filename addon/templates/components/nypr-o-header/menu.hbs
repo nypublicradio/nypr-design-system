@@ -23,19 +23,14 @@
     {{yield (hash component=(component 'blank-template'))}}
   </div>
 
+  <NyprMInlineSearch @formClass="c-search--side u-space--triple--top" @search={{@searchAction}}/>
+
 </div>
 
 <div class="c-side-menu__group">
 
   <div class="c-side-menu__secondary-nav" name="miscNavSideMenu">
     {{yield (hash secondaryNav=(component 'nypr-m-secondary-nav'))}}
-  </div>
-
-  <div class="u-spacing">
-    {{yield (hash
-      search=(component 'nypr-m-inline-search' formClass="c-search--side")
-      tipButton=(component 'nypr-a-button' class="c-side-menu__send-story o-button--c-quaternary u-full-width")
-    )}}
   </div>
 
   <div class="c-side-menu__social" name="shareToolSideMenu">
