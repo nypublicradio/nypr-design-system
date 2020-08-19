@@ -79,7 +79,8 @@
 
   /* Buttons */
   --color-button-text:          var(--color-white);
-  --color-button:               var(--color-cool-blue);
+  --color-button:               var(--color-ceramic-blue);
+  --color-button-pressed:       var(--color-ceramic-blue); // we need to update this
   --color-button-hover:         var(--color-cool-blue);
   --opacity-button-hover:       var(--opacity-hover);
 
@@ -142,11 +143,12 @@
   /* Buttons */
   --color-button-text:            var(--color-white);
   --color-button:                 var(--color-cool-blue);
+  --color-button-pressed:         var(--color-cool-blue); // we need to update this
   --color-button-hover:           var(--color-cool-blue);
   --opacity-button-hover:         var(--opacity-hover);
 
-  --color-border-bold:          var(--color-background-highlight);      //none
-  --color-border-standard:      var(--color-background-highlight);  //none
+  --color-border-bold:          var(--color-background-highlight);    //none
+  --color-border-standard:      var(--color-background-highlight);    //none
   --color-border-subtle:        var(--color-background-highlight);    //none
 }
 
