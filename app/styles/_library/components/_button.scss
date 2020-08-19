@@ -14,7 +14,7 @@
 }
 
 .button {
-  @include typeface(body, 6);
+  @include typeface(body, 7);
   padding: var(--space-1) var(--space-3);
 	border-width: 0px;
   display: inline-flex;
@@ -33,8 +33,9 @@
 }
 
 .button-icon {
-  width: 16px;
-  height: 16px;
+  padding: 0 4px;
+  width: 24px;
+  height: 24px;
   margin-right: var(--space-2);
   margin-left: var(--space-1);
 }
@@ -58,24 +59,22 @@
 /* Icon buttons */
 
 .button.mod-icon-only {
-  padding: var(--space-3);
+  padding: var(--space-1);
 }
   .button.mod-icon-only .button-icon {
-    width: 16px;
-    height: 16px;
-  }
-
-.button.mod-icon-only.mod-small {
-  padding: var(--space-2);
-}
-
-.button.mod-icon-only.mod-large {
-  padding: var(--space-4);
-}
-  .button.mod-icon-only.mod-large .button-icon {
+    margin: 0;
+    padding: 0 4px;
     width: 24px;
     height: 24px;
   }
+
+.button.mod-icon-only.mod-small {
+  padding: calc(var(--space-1) / 2);
+}
+
+.button.mod-icon-only.mod-large {
+  padding: var(--space-2);
+}
 
 /* Flat buttons */
 
@@ -89,10 +88,12 @@
   color: rgb(var(--color-link));
 }
 
-.button.mod-flat :hover
+.button.mod-flat :hover {
+  color: rgb(var(--color-link-hover));
+}
 
 .button.mod-small {
-  padding: 2px var(--space-2);
+  padding:  calc(var(--space-1) / 2) var(--space-2);
 }
 
 .button.mod-large {

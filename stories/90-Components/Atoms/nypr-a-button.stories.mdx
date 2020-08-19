@@ -1,6 +1,6 @@
 import hbs from 'htmlbars-inline-precompile';
 import { Meta, Title, Subtitle, Description, Props, Preview, Story, Heading } from '@storybook/addon-docs/blocks';
-const component = 'nypr-a-button';
+const component = 'button';
 
 <Meta title="Components/Atoms/Button" component={component} />
 
@@ -99,9 +99,9 @@ Icons buttons must contain a label clearly describing the purpose of the control
 
 <Preview withToolbar={true}>
   <Story name="icon" height="80px">{{
-    template: hbs`<Button @icon="audio" @iconAlt="Play" class="mod-small"/> 
-<Button @icon="audio" @iconAlt="Play" />
-<Button @icon="audio" @iconAlt="Play" class="mod-large"/> `,
+    template: hbs`<Button @icon="audio" @alt="Play" class="mod-small"/> 
+<Button @icon="audio" @alt="Play" />
+<Button @icon="audio" @alt="Play" class="mod-large"/> `,
   }}</Story>
 </Preview>
 
