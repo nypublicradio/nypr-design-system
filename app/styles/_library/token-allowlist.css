@@ -94,6 +94,12 @@
   --opacity-tag-hover:          *;
 
   /* Colors: Buttons */
+  --color-button-text:     *;
+  --color-button:          *;
+  --color-button-pressed:  *;
+  --color-button-hover:    *;
+  --opacity-button-hover:  *;
+
   --color-button-primary:         *;
   --color-button-primary-hover:   *;
   --color-button-primary-pressed: *;

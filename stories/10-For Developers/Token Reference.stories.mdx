@@ -146,12 +146,12 @@ Spacing tokens use a 1 - 9 scale. With being the smallest spacing increment, and
 Example:
 ```scss
 .my-button {
-  background-color: rgb(var(--color-button-primary));
+  background-color: rgb(var(--color-button));
   &:active {
     background-color: rgb(var(--color-button-pressed));
   }
   &:hover {
-    background-color: rgba(var(--color-button-primary-hover), var(--opacity-button-primary-hover));
+    background-color: rgba(var(--color-button-hover), var(--opacity-button-hover));
   }
 }
 ```
@@ -223,14 +223,11 @@ The default token setup expets a button to be a light color on a contrasting dar
 
 |name | sample | notes|
 |---|---|---|
-| --color-button-primary| | |
-| --color-button-primary-hover| | |
-| --color-button-primary-pressed| | |
-| --opacity-button-primary-hover| | |
-| --color-button-outline| | |
-| --color-button-outline-hover| | |
-| --color-button-outline-pressed| | |
-| --opacity-button-outline| | |
+| --color-button-text:       | | |
+| --color-button:            | | |
+| --color-button-pressed:    | | `:active state` |
+| --color-button-hover:      | | |
+| --opacity-button-hover:    | | |
 </details>
 
 <details open>

@@ -32,6 +32,10 @@
   background-color: rgba(var(--color-button-hover), var(--opacity-button-hover));
 }
 
+.button:active {
+  background-color: rgba(var(--color-button-pressed));
+}
+
 .button-icon {
   padding: 0 4px;
   width: 24px;
