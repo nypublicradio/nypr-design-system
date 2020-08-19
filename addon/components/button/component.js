@@ -39,7 +39,7 @@ export default Component.extend({
 
   /**
   Alternate text for screenreaders. If you only provide and icon and no label,
-  you need to include this.
+  don't forget to include this.
 
   @argument alt
   @type {String}

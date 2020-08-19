@@ -2,7 +2,7 @@
   <button class="button" type="button" ...attributes>{{yield}}</button>
 {{else}}
   {{#if @href}}
-      <a class="button  {{if (and @icon (not @label)) "mod-icon-only"}}" href="{{@href}}" target="_blank" rel="noopener" ...attributes>
+      <a class="button  {{if (and @icon (not @label)) "is-icon-only"}}" href="{{@href}}" target="_blank" rel="noopener" ...attributes>
         {{#if @icon}}
             <Icon class="button-icon icon" @name="icon" role="presentation" />
         {{/if}}
@@ -14,7 +14,7 @@
         {{/if}}
       </a>
   {{else}}
-    <button class="button  {{if (and @icon (not @label)) "mod-icon-only"}}" type="button" ...attributes>
+    <button class="button  {{if (and @icon (not @label)) "is-icon-only"}}" type="button" ...attributes>
       {{#if @icon}}
         <Icon class="button-icon icon" @icon={{@icon}} role="presentation" />
       {{/if}}

@@ -15,11 +15,9 @@ module('Integration | Component | button', function(hooks) {
 
     await render(hbs`<Button @label={{label}} @icon={{icon}} />`);
 
-
     assert.dom('.button-label').exists();
     assert.dom('.button-label').hasText(BUTTON_LABEL);
     assert.dom('svg.button-icon').exists();
-
 
     a11yAudit(this.element).then(() => {
       assert.ok(true, 'no a11y errors found!');
@@ -44,14 +42,16 @@ module('Integration | Component | button', function(hooks) {
     const BUTTON_ICON = 'audio';
     const ALT_TEXT = 'Play'
     this.set('icon', BUTTON_ICON);
-    this.set('iconAlt', ALT_TEXT);
+    this.set('alt', ALT_TEXT);
 
-    await render(hbs`<Button @icon={{icon}} @iconAlt={{iconAlt}} />`);
+    await render(hbs`<Button @icon={{icon}} @alt={{alt}} />`);
 
     assert.dom('.button-label').doesNotExist();
     assert.dom('svg.button-icon').exists();
-    assert.dom('.button').hasClass('mod-icon-only');
-    assert.dom('.button-icon title').hasText(ALT_TEXT);
+    assert.dom('.button').hasClass('is-icon-only');
+    assert.dom('.button-alt').exists();
+    assert.dom('.button-alt').hasClass('is-vishidden');
+    assert.dom('.button-alt').hasText(ALT_TEXT);
     a11yAudit(this.element).then(() => {
       assert.ok(true, 'no a11y errors found!');
     });
