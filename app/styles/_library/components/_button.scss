@@ -29,10 +29,12 @@
 }
 
 .button:hover {
+  color: rgb(var(--color-button-text-hover));
   background-color: rgba(var(--color-button-hover), var(--opacity-button-hover));
 }
 
 .button:active {
+  color: rgb(var(--color-button-text-pressed));
   background-color: rgba(var(--color-button-pressed));
 }
 
