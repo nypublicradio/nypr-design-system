@@ -4,11 +4,11 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Creating a Component
 
-This document lays out step by step guidelines and best practices for creating Radial components. Taking a consistent approach to components will makes the design system easier to learn and use. 
+This document lays out step by step guidelines and best practices for creating Radial components. Taking a consistent approach to components will makes the design system easier to learn and use.
 
 ## Naming Components
 
-Radial component names use UpperCamelCase, with no special prefix. They're namespaced by their place in the atomic design heirarchy. To keep atoms extra easy to use, skip extra namespacing and just use the component name. For molecules and organisms, namespace them by putting them in folders, named molecule, or component.
+Radial component names use UpperCamelCase, with no special prefix. They're namespaced by their place in the [atomic design heirarchy](/docs/for-designers/intro#atomic-design-principles). To keep atoms extra easy to use, skip extra namespacing and just use the component name. For molecules and organisms, namespace them by putting them in folders, named molecule, or component.
 
 | Filename | Component Syntax |
 |---|---|
@@ -18,21 +18,25 @@ Radial component names use UpperCamelCase, with no special prefix. They're names
 
 ## Creating the component skeleton
 
+If you're starting from scratch, you want to create a basic component skeleton. If you're refactoring an existing component you can skip this step and work with a copy of that component instead.
+
 In Ember you can generate component boilerplate with the following command:
 
-```ember g component button --pod````
+```ember g component button --pod```
 
-Now, in the component template give your component a top level HTML tag, a class, and `...attributes`.
+This command uses Ember's pods folder layout option to keep the component's template and js file in the same folder.
+
+Now, in the component template, give your component a top level HTML tag, a class, and `...attributes`.
 The outer element of your component's class should have the same name as the component, but in kebab-case. (e.g. `<div class="breaking-news">`).
 This will gives you a very bare bones component to start with, so storybook doesn't throw errors when you write your stories.
 
 ```html
 <button class="button" ...attributes></button>
 ```
-   
+
 ## Create stories in Storybook
 
-Storybook allows us to prototype and build out our component with multiple variations
+Storybook allows you to prototype and build out your component with multiple variations visible while you work.
 
 Stories are living examples that demonstrate the different variations of a component. Use design comps as a guide to which stories to include. For example, consider these button designs:
 
@@ -52,13 +56,13 @@ import { Preview, Story } from '@storybook/addon-docs/blocks';
 </Preview>
 ```
 
-Don't worry that your component code is still only a skeleton, write your stories with the properties and classes you would expect the component to have to show these variations. You can always go back and change it later if your component development takes a different direction.
+Don't worry if your component code is still only a skeleton, write your stories with the properties and classes you would expect the component to have to show these variations. You can always go back and change it later if your component development takes a different direction.
 
 ```hbs
 <Button @icon="audio" @iconAlt="Play" class="mod-large"/>
 ```
 
-Even if you don't know if the finished component will end up having a property called iconAlt, you can make a guess and you can always change it later.
+For example, even if you don't know if the finished component will end up having a property called `iconAlt`, you can make a guess and you can always change it later.
 
 If you need to mock larger data structures in your stories you can use a context object. A context object is a javascript object containing properties that a story's template can access.
 
@@ -82,7 +86,7 @@ Further Reading:
 - [Writing MDX stories in Ember](https://github.com/storybookjs/storybook/blob/next/addons/docs/ember/README.md#mdx)
 
 
-# Write your component code
+# Writing your component code
 
 ## Starting your local development servers
 
@@ -96,9 +100,9 @@ Then, start Storybook, and navigate to the stories you created. Now you go back 
 
 
 ## Styles
-  Each component's styles should live in their own file. Add a stylesheet for your component in `/app/styles/_library/components/`. This will be a sass partial, so the filename should start with an underscore. e.g. `app/styles/_library/components/_button.scss`.
+  Each component's styles should live in its own file. Add a stylesheet for your component in `/app/styles/_library/components/`. This will be a sass partial, so the filename should start with an underscore. e.g. `app/styles/_library/components/_button.scss`.
 
-  All components are imported into the final stylesheet in `app/styles/_library/_components.scss`. Add an import for the component here.
+  All components are imported into the final stylesheet via `app/styles/_library/_components.scss`. Add an import for the component there.
 
 ```scss
 //app/styles/_library/_components.scss
@@ -107,7 +111,7 @@ Then, start Storybook, and navigate to the stories you created. Now you go back 
 
 ```
 
-Every element should have a class. This allows for easier targeting not just in your stylesheets and themes but also in automated testing and analytics tools. Use the [Trello styleguide's convention](https://github.com/trello/trellisheets/blob/master/styleguide.md#2-components), `.component-descendant-descendant`, for naming your classes.
+Every element should have a class. This allows for easier targeting, not just in your stylesheets and themes, but also in automated testing and analytics tools. Use the [Trello styleguide's convention](https://github.com/trello/trellisheets/blob/master/styleguide.md#2-components), `.component-descendant-descendant`, for naming your classes.
 ```html
 <button class="button" ...attributes>
     <Icon class="button-icon" @name={@icon} />
@@ -133,7 +137,7 @@ the `...attributes` syntax will merge the classes, so you can style this button 
 
 ## Tokens
 
-Use *tokens* to define style values where possible. Cross reference the design comps with the [token list](/docs/for-developers-token-reference--page), and consult with a designer if necessary to help find the appropriate token values. 
+Use *tokens* to define style values where possible. Cross reference the design comps with the [token list](/docs/for-developers-token-reference--page), and consult with a designer if necessary to help find the appropriate token values.
 
 ```scss
 .button {}
@@ -154,7 +158,7 @@ Sometimes a component has properties that are optional, such as an icon or secon
 {{/if}}
 ```
 
-When it makes sense, you can handle even larger variations with template conditionals. Try to keep your components dumb and avoid unecessary controller code if something can be done in the template. In the following example, the conditianal checks for the presence of an href property and changes the base element for the component to a link if it has a link.
+When it makes sense, you can handle even larger variations with template conditionals. When possible, try to keep your components as dumb data containers and avoid unecessary logic in the js file if something can be done in the template. In the following example, the conditional checks for the presence of an href property and changes the base element for the component to a link if it has a link.
 
 ```hbs
 {{if @href}}
@@ -166,17 +170,47 @@ When it makes sense, you can handle even larger variations with template conditi
 
 ## States
 
- Certain states on a component might affect how its displayed, for example a menu that can be open or closed. Use code to conditionally provide css classes that indicates these states as hooks for styling. Again use the [Trello Style guide's Naming convention](https://github.com/trello/trellisheets/blob/master/styleguide.md#state), `.component-descendant.is-state`.
+ Certain states on a component might affect how it's displayed, for example a menu that can be open or closed. Use code to conditionally provide CSS classes that indicates these states as hooks for styling. Again use the [Trello Style guide's Naming convention](https://github.com/trello/trellisheets/blob/master/styleguide.md#state), `.component-descendant.is-state`.
+
+```hbs
+    <button class="button  {{if (and @icon (not @label)) "is-icon-only"}}" type="button" ...attributes>
+```
+
+In the button example above, the icon only version of button has different styling so the state is made available as a CSS class.
 
 ## Events
 
 In the case of something like a simple button component, `...attributes` on the button element makes all the HTML button events available at the component level. But for more complex components, you want to pass events up to the component level. Take a newsletter form for example. You want to expose events like onSubmit, onSuccess, onError, and so on. This allows clients using the component a way to access these events.
 
+In a client app:
+
 ```html
-<Newsletter @onSuccess={{fn this.trackEvent 'NewsletterSubscribe,Footer'}} />
+<Newsletter @onSuccess={{trackEvent 'NewsletterSubscribe,Footer'}} />
 ```
 
-todo: still need to figure out what is a good way to implement something like this.
+In your component, maybe something like this? The sytntax example may not work and need updating, but in any case you should call the events from the within the component when they happen.
+
+```
+// stub these out so it's always safe to call them
+onSubmitClick: () => {},
+onSuccess: () => {},
+onFailure: () => {},
+
+submitNewsletter() {
+  this.onSubmitClick(); // button clicked
+  try {
+    let response = yield fetch(subscribeEndpoint, fetchOptions)
+    .then((response) => {
+      handleResponse(response)
+      .then(this.onSuccess); // subscribe succeeded
+    });
+  } catch({ detail }) {
+    this.onFailure() // subscribe failed
+    return detail;
+  }
+}
+```
+
 
 ## Documenting your component's code
 
@@ -215,10 +249,102 @@ Title for the component, plain text.
 title: '',
 ```
 
-## Write Tests
+# Testing your Component
 
-Don't forget to write tests for your component. Test the various states and conditions you have in your template. For example in the case of the button you might want to test a button without an icon, and a button without a label, and a button with both. [`qunit-dom`](https://github.com/simplabs/qunit-dom/blob/master/API.md) is available for your test assertions.  You should also test any events you pass out of your component to make sure they are firing correctly. You *don't* need to test every style based variation, like the large button and small button.
+Don't forget to write tests for your component.
 
-### ember-a11y-testing
+## Test different component states
 
-You should use [ember-a11y-testing](https://github.com/ember-a11y/ember-a11y-testing) to test the accessibility of your component. It usually only requires adding `await a11yAudit();` to a test.
+Test the rendering of various states and conditions you have in your template to make sure the resulting DOM output is correct. For example in the case of the button you might want to test a button with only a label, and a button with only an icon, and a button with both.
+
+```js
+  test('it renders a button with a label and an icon', async function(assert) {
+    await render(hbs`<Button @label='Play' @icon='audio' />`);
+
+    // assertions
+  });
+
+  test('it renders a button with a label only', async function(assert) {
+    await render(hbs`<Button @label='Play' />`);
+
+    // assertions
+  });
+
+  test('it renders a button with an icon only', async function(assert) {
+    await render(hbs`<Button @icon='audio' @alt='Play' />`);
+
+    // assertions
+  });
+
+  etc.
+```
+
+[`qunit-dom`](https://github.com/simplabs/qunit-dom/blob/master/API.md) is available for your test assertions.
+
+```js
+  test('it renders a button with a label and an icon', async function(assert) {
+    await render(hbs`<Button @label='Play' @icon='audio' />`);
+
+    assert.dom('.button-label').exists();
+    assert.dom('.button-label').hasText('Play');
+    assert.dom('svg.button-icon').exists();
+  });
+```
+
+## Test for accessibility
+
+
+For rendering tests like these you should also use [ember-a11y-testing](https://github.com/ember-a11y/ember-a11y-testing) to test the accessibility of your component.
+
+Import the a11yAudit helper at the top of your test file,
+
+```js
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
+```
+
+and include this code in your tests,
+
+```js
+    a11yAudit(this.element).then(() => {
+      assert.ok(true, 'no a11y errors found!');
+    });
+```
+like this.
+
+```js
+  test('it renders a button with a label and an icon', async function(assert) {
+    await render(hbs`<Button @label='Play' @icon='audio' />`);
+
+    assert.dom('.button-label').exists();
+    assert.dom('.button-label').hasText('Play');
+    assert.dom('svg.button-icon').exists();
+
+    a11yAudit(this.element).then(() => {
+      assert.ok(true, 'no a11y errors found!');
+    });
+  });
+```
+
+## Test component events
+
+You should also test any events you pass out of your component to make sure they are firing correctly.
+
+```js
+   test('the onClick event works', async function(assert) {
+    assert.expect(1);
+
+    let clickHandler = function() {
+      assert.ok('click handler was triggered')
+    };
+
+    this.set('clickHandler', clickHandler);
+
+    await render(hbs`<Button onClick={{clickHandler}} />`);
+
+    await click('.button');
+  });
+```
+
+This example is just testing the standard dom `onClick` event, as passed to the template's button element by `...atributes`, but a similar pattern would work for an event provided by a component. (e.g. `<Newsletter @onSubscribe={{subscribeHandler}} />`)
+
+You *don't* need to test all the style based variation, like the large button and small button classes.

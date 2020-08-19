@@ -17,7 +17,7 @@ For variables, we use CSS custom properties, usually scoped to the root element
   /* this is the variable: */
   --color-wnyc-red: #de1e3d;
   /* this is the design token, which should be used in the design system: */
-  --color-primary-1: var(--color-wnyc-red);
+  --color-primary: var(--color-wnyc-red);
 }
 ```
 
@@ -48,18 +48,20 @@ The [Sass parent selector](https://sass-lang.com/documentation/style-rules/paren
 
 ```sass
 /* BAD */
-.o-my-component {
-    &__message {
+.my-component {
+    &-message {
         color: var(--color-alert);
     }
 }
 
 /* GOOD */
-.o-my-component {
-    .o-my-component__message {
-        color: var(--color-alert);
-    }
+.my-component {
+
 }
+  .my-component-message {
+      color: var(--color-alert);
+  }
+
 ```
 
 ## Breakpoints

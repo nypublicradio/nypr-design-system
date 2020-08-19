@@ -58,21 +58,21 @@
 
 /* Icon buttons */
 
-.button.mod-icon-only {
+.button.is-icon-only {
   padding: var(--space-1);
 }
-  .button.mod-icon-only .button-icon {
+  .button.is-icon-only .button-icon {
     margin: 0;
     padding: 0 4px;
     width: 24px;
     height: 24px;
   }
 
-.button.mod-icon-only.mod-small {
+.button.is-icon-only.mod-small {
   padding: calc(var(--space-1) / 2);
 }
 
-.button.mod-icon-only.mod-large {
+.button.is-icon-only.mod-large {
   padding: var(--space-2);
 }
 
