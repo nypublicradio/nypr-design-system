@@ -54,12 +54,27 @@
   line-height: 32px;
 }
 
+/* Button sizes */
+
+.button.mod-small {
+  padding:  calc(var(--space-1) / 2) var(--space-2);
+}
+
+.button.mod-large {
+  padding: var(--space-2) var(--space-4);
+}
+
 /* Secondary buttons */
 
 .button.mod-secondary {
   color: rgb(var(--color-button));
   border: 1px solid rgb(var(--color-button));
   background-color: transparent;
+}
+
+.button.mod-secondary:hover {
+  color:  rgba(var(--color-button-hover), var(--opacity-button-hover));
+  border: 1px solid  rgba(var(--color-button-hover), var(--opacity-button-hover));
 }
 
 /* Icon buttons */
@@ -86,22 +101,15 @@
 
 .button.mod-flat {
   display: inline;
-  text-decoration: underline;
   background: none;
   border: none;
   margin: none;
   padding: none;
   color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-link);
 }
 
 .button.mod-flat :hover {
-  color: rgb(var(--color-link-hover));
-}
-
-.button.mod-small {
-  padding:  calc(var(--space-1) / 2) var(--space-2);
-}
-
-.button.mod-large {
-  padding: var(--space-2) var(--space-4);
+  color: rgba(var(--color-link-hover), var(--opacity-link-hover));
+  text-decoration: var(--text-decoration-link-hover);
 }
