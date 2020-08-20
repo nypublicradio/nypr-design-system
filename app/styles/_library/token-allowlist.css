@@ -98,9 +98,12 @@
   --color-button:              *;
   --color-button-text-pressed: *;
   --color-button-pressed:      *;
+  --transform-button-pressed:  *;
   --color-button-text-hover:   *;
   --color-button-hover:        *;
   --opacity-button-hover:      *;
+  --transform-button-hover:    *;
+
 
   --color-button-primary:         *;
   --color-button-primary-hover:   *;

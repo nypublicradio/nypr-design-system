@@ -31,11 +31,13 @@
 .button:hover {
   color: rgb(var(--color-button-text-hover));
   background-color: rgba(var(--color-button-hover), var(--opacity-button-hover));
+  transform: var(--transform-button-hover);
 }
 
 .button:active {
   color: rgb(var(--color-button-text-pressed));
   background-color: rgba(var(--color-button-pressed));
+  transform: var(--transform-button-pressed);
 }
 
 .button-icon {
@@ -98,6 +100,7 @@
 }
 
 /* Flat buttons */
+// these should match the default link styles
 
 .button.mod-flat {
   display: inline;
@@ -107,9 +110,11 @@
   padding: none;
   color: rgb(var(--color-link));
   text-decoration: var(--text-decoration-link);
+  transform: none;
 }
 
 .button.mod-flat :hover {
   color: rgba(var(--color-link-hover), var(--opacity-link-hover));
   text-decoration: var(--text-decoration-link-hover);
+  transform: none;
 }
