@@ -1,0 +1,346 @@
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+
+/**
+ * Grid & Baseline Setup
+ */
+// Global
+$max-width: 1024;
+$max-width-xl: 1130;
+$heading-height: 72;
+
+// Navigation
+$main-nav-font-size: 18;
+
+// Grid
+$grid-columns: 16;
+$col-width: 48.5;
+$gutter: 18;
+
+// Article
+$article-header-width: 764;
+$article-content-width: 634;
+
+/**
+ * Theme Colors
+ */
+$c-brick-red: #9c1e14;
+$c-WNYC-fireengine-red: #de1e3d;
+$c-reddish-orange: #de5e36;
+$c-banana-yellow: #ffc400;
+$c-taxicab-yellow: #e3d54a;
+$c-dusk-blue: #244c84;
+$c-brown-grey: #939393;
+$c-dirty-salmon: #f0eeea;
+$c-purple: #924db1;
+$c-denim-blue: #00518e;
+$c-water-blue: #1277c4;
+
+$c-primary: $c-reddish-orange;
+$c-secondary: $c-brick-red;
+$c-tertiary: $c-WNYC-fireengine-red;
+$c-quaternary: $c-banana-yellow;
+$c-quinary: $c-taxicab-yellow;
+$c-senary: $c-dusk-blue;
+$c-septenary: $c-brown-grey;
+$c-octonary: $c-dirty-salmon;
+$c-nonary: $c-purple;
+
+/**
+ * Neutral Colors
+ */
+$c-black: #000000;
+$c-gray--dark: #333333;
+$c-gray: #afafaf;
+$c-gray--light: #f3f3f3;
+$c-white: #ffffff;
+
+/**
+ * Default Colors
+ */
+$c-error: $c-brick-red;
+$c-valid: #089e00;
+$c-warning: #fff664;
+$c-information: #000db5;
+$c-overlay: rgba($c-black, 0.8);
+
+/**
+ * Style Colors
+ */
+$c-body-color: $c-gray--dark;
+$c-faux-black: $c-gray--dark;
+$c-meta-color: $c-gray--dark;
+$c-link-color: $c-dusk-blue;
+$c-link-color--visited: $c-water-blue;
+$c-button-color: $c-secondary;
+$c-border-color: $c-gray--dark;
+$c-body-bgcolor: $c-water-blue;
+$c-heading-bgcolor: $c-gray--dark;
+$c-dark-bg: $c-gray--dark;
+$c-main-nav-link-color: $c-white;
+$c-sponsor-color: $c-purple;
+
+/**
+ * Typography
+ */
+$ff-font: "Open Sans", Helvetica, 'Arial', sans-serif;
+$ff-font--sans: $ff-font;
+$ff-font--serif: 'Times New Roman', serif;
+$ff-font--monospace: 'B612 Mono', Menlo, Monaco, "Courier New", "Courier", monospace;
+
+// Theme typefaces
+$ff-font--primary: 'Pragati Narrow', Helvetica, sans-serif;
+$ff-font--secondary: $ff-font--monospace;
+$ff-font--tertiary: 'Barlow', Helvetica, sans-serif;
+
+// Type sizing
+$font-size-xxs: 10px;
+$font-size-xs: 12px;
+$font-size-s: 16px;
+$font-size-s-m: 22px;
+$font-size-m: 28px;
+$font-size-l: 32px;
+$font-size-xl: 44px;
+$font-size-xxl: 56px;
+
+
+/**
+ * Icons
+ */
+$icon-xsmall: 16px;
+$icon-small: 20px;
+$icon-medium: 30px;
+$icon-large: 40px;
+$icon-xlarge: 50px;
+
+
+/**
+ * Common Breakpoints
+ */
+$xsmall: 360px;
+$small: 550px;
+$medium: 768px;
+$large: 850px;
+$xlarge: 1024px;
+$xxlarge: 1200px;
+$xxxlarge: 1500px;
+
+$breakpoints: (
+  'xsmall': $xsmall,
+  'small': $small,
+  'medium': $medium,
+  'large': $large,
+  'xlarge': $xlarge,
+  'xxlarge': $xxlarge,
+  'xxxlarge': $xxxlarge
+);
+
+$media-expressions: (
+  'screen': 'screen',
+  'print': 'print',
+  'handheld': 'handheld',
+  'landscape': '(orientation: landscape)',
+  'portrait': '(orientation: portrait)',
+  'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)',
+  'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi)'
+);
+
+/**
+ * Animation
+ */
+$hard-ease-in: cubic-bezier(0.860, 0.000, 0.070, 1.000);
+
+
+/**
+ * Border Styles
+ */
+$border-med: 6px;
+$border-thick: 8px;
+$border-opacity: 1px solid rgba($c-white, .2);
+$border-style: 1px solid $c-border-color;
+$border-style-m: 2px solid $c-border-color;
+$border-style-thick: 3px solid $c-border-color;
+
+
+/**
+ * Default Spacing/Padding
+ * Maintain a spacing system divisible by 8
+ */
+$space:             16px;
+$space-quarter:     $space/4;   // 4
+$space-half:        $space/2;   // 8
+$space-and-half:    $space*1.5; // 24
+$space-double:      $space*2;   // 32
+$space-double-half: $space*2.5; // 40
+$space-triple:      $space*3;   // 48
+$space-quad:        $space*4;   // 64
+
+///
+
+.c-color {
+  display: flex;
+
+  &__item {
+    padding: $space/2;
+    border: 1px solid gray;
+    margin-right: $space;
+  }
+
+  &__swatch {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin-bottom: $space/2;
+  }
+}
+
+.sg-nav {
+  li:first-child {
+    @media (min-width: 620px) {
+      border-left: 1px solid rgba($c-white, .3);
+    }
+  }
+  > li:last-child {
+    display: none;
+  }
+}
+
+.sg-main {
+  max-width: $max-width;
+  padding: $space;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sg-header {
+  background-image: url("/images/NYPR-logo--white.png");
+  background-position: 4px 4px;
+  background-repeat: no-repeat;
+  background-size: 58px 25px;
+  background-color: $c-black;
+  padding-left: 65px;
+
+  a {
+    color: $c-white;
+
+    &.active {
+      background-color: darken($c-black, 10);
+    }
+
+    &:hover {
+      background-color: darken($c-black, 16);
+      opacity: 0.8;
+    }
+  }
+}
+
+.sg-acc-panel {
+  li {
+    background-color: darken($c-black, 10);
+  }
+}
+
+.sg-current-size {
+  color: $c-white;
+}
+
+.sg-acc-handle {
+  &:after {
+    color: rgba($c-white, .5);
+  }
+
+  &.active {
+    background-color: darken($c-black, 10);
+  }
+}
+
+.sg-current-size .sg-input {
+  background-color: darken($c-black, 20);
+  color: $c-white;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: auto;
+  max-width: 35px;
+  text-align: center;
+}
+
+.typeahead.tt-input {
+  background-color: darken($c-black, 16) !important;
+  color: $c-white;
+}
+
+.sg-tools-toggle {
+  background-color: $c-black;
+
+  path {
+    fill: $c-white;
+  }
+}
+
+.sg-subtype {
+  > * {
+    letter-spacing: 0.06em;
+    opacity: 0.5;
+    font-size: 24px;
+  }
+}
+
+.sg-pattern .sg-pattern-example {
+  > * {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  > svg {
+    width: 50px;
+    height: 50px;
+
+    path {
+      fill: $c-white;
+    }
+  }
+}
+
+.c-share-tools {
+  display: flex;
+  flex-direction: column;
+}
+
+.wqxr-logo-icon, .c-share-tools__group {
+  margin-top: 10px;
+  align-items: flex-start;
+  width: 100%;
+  path {
+    fill: $c-white;
+  }
+}
+
+.social-media-links .c-share-tools__group {
+  flex-direction: column;
+}
+
+.about-us-div .c-share-tools__group {
+  display: flex;
+
+ .about-us-left {
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+  }
+  .about-us-right {
+    display: flex;
+    flex-direction: column;
+  }
+  .about-us-div, a {
+    font-family: 'Open Sans', sans-serif;
+    text-transform: none;
+  }
+}
+
+.term-links {
+  text-transform: none;
+  padding: 2px;
+}

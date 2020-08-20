@@ -1,0 +1,110 @@
+$ember-basic-dropdown-content-background-color: #FFF !default;
+$ember-basic-dropdown-content-z-index: 10000 !default;
+$ember-basic-dropdown-overlay-background: rgba(0, 0, 0, 0.5) !default;
+$ember-basic-dropdown-overlay-pointer-events: none !default;
+
+@import "ember-basic-dropdown";
+
+
+@mixin toggleBoxCaret($size, $color) {
+  .toggle-box__icon svg {
+    width: $size;
+    height: $size;
+    fill: $color;
+
+    path {
+      fill: $color;
+    }
+  }
+}
+
+$arrow_width: 8px;
+
+.toggle-box__label {
+  cursor: pointer;
+}
+
+.toggle-box__label:focus {
+  outline: 0;
+}
+
+.toggle-box__dropdown {
+  border-radius: 4px;
+  padding: 19px 24px;
+  max-width: 300px;
+}
+
+// Default dark theme
+.toggle-box__dropdown.dark {
+  background-color: $black;
+
+  &:before {
+    content: '';
+    cursor: pointer;
+    overflow: visible;
+    position: absolute;
+  }
+
+  &[data-v-pos="below"]::before {
+    @include arrow-up($arrow_width, $black);
+    top: -$arrow_width;
+  }
+
+  &[data-v-pos="above"]::before {
+    @include arrow-down($arrow_width, $black);
+    bottom: -$arrow_width;
+  }
+
+  &[data-h-pos="right"]::before {
+    right: 33%;
+  }
+
+  &[data-h-pos="left"]::before {
+    left: 33%;
+  }
+
+  &[data-h-pos="center"]::before {
+    left: calc(50% - #{$arrow_width});
+  }
+}
+
+.toggle-box--share {
+  .toggle-box__dropdown {
+    width: 115px;
+  }
+}
+
+.toggle-box__dropdown.ember-basic-dropdown--transitioning-in {
+  will-change: transform, opacity;
+  animation: scale-fade-in .2s ease-out;
+}
+
+.toggle-box__dropdown.ember-basic-dropdown--transitioning-out {
+  will-change: transform, opacity;
+  animation: scale-fade-in .2s ease-out reverse;
+}
+
+.toggle-box__label {
+  .o-icon {
+    display: inline-flex;
+    justify-content: center;
+  }
+}
+
+
+@keyframes scale-fade-in {
+  0% {
+    // Make sure the element's resting state is at full scale for
+    // position calculations
+    transform: scale(1);
+    opacity: 0;
+  }
+  1% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

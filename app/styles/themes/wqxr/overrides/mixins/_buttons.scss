@@ -1,0 +1,250 @@
+@import "../vars/colors";
+@import "../vars/fonts";
+@import "text";
+@import "disable-subpixel-antialiasing";
+
+@mixin button_pristine {
+  display: inline-block;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+// BEGIN-FREESTYLE-USAGE button-default
+@mixin button_default {
+  @include button_pristine;
+  @include text_minor-heading;
+  height: 25px;
+  min-width: 60px;
+  margin-right: 13px;
+  padding: 2.5px 7px;
+  line-height: 14px;
+  border: solid 2px $lime;
+  background-color: $lime;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  &:hover {
+    opacity: 0.6;
+  }
+  @include media(">=medium") {
+    height: 30px;
+    min-width: 74px;
+    padding: 3px 8px;
+    line-height: 18px;
+  }
+}
+// END-FREESTYLE-USAGE
+
+@mixin button_alternate {
+  @include button_default;
+  @include disable-subpixel-antialiasing;
+  background-color: $cyan;
+  border: solid 2px $cyan;
+  color: $white;
+}
+
+// BEGIN-FREESTYLE-USAGE button-big
+@mixin button_big {
+  @include button_default;
+  height: 30px;
+  min-width: 110px;
+  padding: 4px 8px;
+  line-height: 18px;
+  font-size: 18px;
+  vertical-align: bottom;
+  @include media(">=medium") {
+    height: 40px;
+    min-width: 130px;
+    padding: 6px 8px;
+    line-height: 22px;
+    font-size: 22px;
+  }
+}
+// END-FREESTYLE-USAGE
+
+// BEGIN-FREESTYLE-USAGE button-hollow-big
+@mixin button_hollow_big {
+  @include button_big;
+  background: transparent;
+  color: $black;
+
+  a {
+    color: $black;
+  }
+}
+// END-FREESTYLE-USAGE
+
+// BEGIN-FREESTYLE-USAGE button-hollow-big-inverse
+@mixin button_hollow_big_inverse {
+  @include button_big;
+  @include text_inverted;
+  @include disable-subpixel-antialiasing;
+  background: transparent;
+}
+// END-FREESTYLE-USAGE
+
+@mixin button_base {
+  @include text_minor-heading;
+  align-items: center;
+  display: flex;
+  flex: 0 0 115px;
+  height: 25px;
+  justify-content: center;
+
+  a {
+    text-decoration: none;
+  }
+
+  @include media(">=medium") {
+    height: 30px;
+    min-width: 74px;
+    padding: 3px 8px;
+    line-height: 18px;
+  }
+}
+
+@mixin button_main {
+  @include button_base;
+
+  background-color: $lime;
+
+  &:hover {
+    background-color: lighten($lime, 20%);
+  }
+
+  a {
+    color: $black;
+  }
+}
+
+@mixin button_hollow {
+  @include button_base;
+  @include text_inverted;
+
+  border: solid 2px $lime;
+
+  a {
+    color: $white;
+  }
+}
+
+@mixin button_hollow_inverse {
+  @include button_hollow;
+  @include disable-subpixel-antialiasing;
+  background: transparent;
+
+  a {
+    color: $black;
+
+    &:hover {
+      color: lighten($black, 10%);
+    }
+  }
+}
+
+@mixin button_link {
+  @include button_pristine;
+  @include text_minor-heading;
+  white-space: nowrap;
+  padding: 0;
+  height: 20px;
+  svg {
+    height: 11px;
+  }
+  @include media(">=medium") {
+    height: 26px;
+    svg {
+      height: 14px;
+    }
+  }
+  * {
+    fill: $cyan;
+  }
+  fill: $cyan;
+  &:hover {
+    color: $cyan--hover;
+    * {
+      fill: $cyan;
+    }
+  }
+}
+
+@mixin button_link-inverse {
+  @include button_link;
+  @include disable-subpixel-antialiasing;
+  color: $lime;
+  * {
+    fill: $lime;
+  }
+  &:hover {
+    color: $lime--hover;
+    * {
+      fill: $lime--hover;
+    }
+  }
+}
+
+@mixin button_listen {
+  .listen-ui {
+    display: inline-block;
+
+    svg {
+      height: 11px;
+      width: 13px;
+
+      @include media(">=medium") {
+        height: 15px;
+        width: 17px;
+      }
+    }
+  }
+
+  &.is-paused .icon--pause,
+  &.is-playing .icon--play,
+  &.is-loading .icon--play {
+    display: none;
+  }
+}
+
+@mixin button_circle {
+  @include button_pristine;
+  width: 35px;
+  max-width: 35px;
+  height: 35px;
+  max-height: 35px;
+  padding: 0;
+  border: 2px solid $light-grey;
+  border-radius: 50%;
+  line-height: 30px;
+  text-align: center;
+  font-size: 21px;
+  vertical-align: middle;
+  color: $black;
+  &:hover {
+    color: $black--hover;
+  }
+}
+
+@mixin button_circle-small {
+  @include button_pristine;
+  cursor: pointer;
+  width: 28px;
+  max-width: 28px;
+  height: 28px;
+  max-height: 35px;
+  padding: 0;
+  border: 2px solid $light-grey;
+  border-radius: 50%;
+  line-height: 22px;
+  text-align: center;
+  font-size: 15px;
+  vertical-align: middle;
+  color: $black;
+  &:hover {
+    color: $black--hover;
+  }
+}

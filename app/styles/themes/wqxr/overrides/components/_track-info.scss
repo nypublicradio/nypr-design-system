@@ -1,0 +1,113 @@
+@import '../vars/colors';
+@import '../vars/fonts';
+
+.song-metadata {
+  background-repeat: no-repeat;
+  background-image: linear-gradient($water-blue, $water-blue);
+  background-size: 2px 100%;
+  background-position: 3px center;
+
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 16px;
+  padding-top: 16px;
+  width: 100%;
+  justify-content: flex-start;
+
+  .metadata {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .composer {
+    color: $denim-blue;
+    font-family: $font-body;
+    font-size: 18px;
+    font-weight: 900;
+
+    @include media("<medium") {
+      font-size: 18px;
+      line-height: normal;
+    }
+  }
+
+  .start-time {
+    display: flex;
+    font-family: $font-body-bold;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    justify-content: flex-end;
+    margin-left: 32px;
+    margin-top: 4px;
+    opacity: 0.5;
+    color: #000000;
+    text-transform: uppercase;
+    @include media("<medium") {
+      margin-left: 0px;
+    }
+  }
+
+  .title {
+    color: #000000;
+    font-family: $font-body;
+    font-size: $font-size-s;
+    margin-right: 5px;
+    margin-top: 4px;
+    text-align: left;
+    line-height: 16px;
+    text-transform: none;
+    @include media("<medium") {
+      font-size: 14px;
+    }
+  }
+
+  .dot {
+    background-color: $water-blue;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    margin-right: 28px;
+    margin-top: 8px;
+  }
+
+  .secondary-metadata-toggle-box {
+    width: 100%;
+    .u-icon--xs path {
+      fill: #000000;
+    }
+    .toggle-box__label * {
+      pointer-events: none;
+    }
+  }
+}
+
+.o-text-with-icon {
+  color: white;
+  fill: white;
+  font-size: 12px;
+}
+
+.ember-basic-dropdown-content {
+  background-color: transparent;
+}
+
+.secondary-metadata-content {
+  background-color: black;
+  color: white;
+  font-family: $font-body;
+  font-size: 12px;
+  line-height: 1.5;
+
+  div:last-child {
+    margin-bottom: 0px;
+  }
+
+  .secondary-metadata-content-field {
+    margin-bottom: 12px;
+    font-family: $font-body;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}

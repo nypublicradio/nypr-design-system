@@ -1,0 +1,171 @@
+@import '../vars/colors';
+@import '../vars/fonts';
+
+@mixin text_inverted {
+  color: $white;
+  fill: $white;
+  a {
+    @include text_white-link;
+  }
+}
+
+@mixin text_transparent {
+  color: $dark-grey;
+}
+
+@mixin text_bright-link {
+  text-decoration: none;
+  color: $cyan;
+  fill: $cyan;
+  &:hover {
+    color: $cyan--hover;
+    fill: $cyan--hover;
+  }
+}
+
+@mixin text_white-link {
+  text-decoration: none;
+  color: $white;
+  fill: $white;
+  &:hover {
+    color: $white--hover;
+    fill: $white--hover;
+  }
+}
+
+@mixin text_dark-link {
+  text-decoration: none;
+  color: $black;
+  &:hover {
+    color: $black--hover;
+  }
+}
+
+// BEGIN-FREESTYLE-USAGE main-heading
+@mixin text_main-heading {
+  font-family: $headline-font;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.33;
+  color: $black;
+  margin: 0 0 5px 0;
+  a {
+    @include text_dark-link;
+  }
+  @include media(">=medium") {
+    font-size: 45px;
+    line-height: 1.18;
+  }
+}
+// END-FREESTYLE-USAGE
+//
+// BEGIN-FREESTYLE-USAGE main-heading
+@mixin text_hero-heading {
+  @include text_main-heading;
+  font-size: 34px;
+
+  @include media(">=medium") {
+    font-size: 56px;
+    line-height: 1.18;
+  }
+}
+// END-FREESTYLE-USAGE
+
+// BEGIN-FREESTYLE-USAGE major-heading
+@mixin text_major-heading {
+  font-family: $headline-font;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.36;
+  color: $black;
+  a {
+    @include text_dark-link;
+  }
+  @include media(">=medium") {
+    font-size: 28px;
+    line-height: 1.29;
+  }
+}
+// END-FREESTYLE-USAGE
+
+// BEGIN-FREESTYLE-USAGE minor-heading
+@mixin text_minor-heading {
+  font-family: $headline-font;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.43;
+  color: $black;
+  fill: $black;
+  a {
+    @include text_bright-link;
+  }
+  @include media(">=medium") {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
+// END-FREESTYLE-USAGE
+
+// BEGIN-FREESTYLE-USAGE body-text
+@mixin text_body {
+  font-family: $body-font;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.57;
+  color: $black;
+  a {
+    @include text_bright-link;
+    font-weight: 600;
+  }
+  b, strong {
+    font-weight: 600;
+  }
+  @include media(">=medium") {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
+// END-FREESTYLE-USAGE
+
+// BEGIN-FREESTYLE-USAGE bold-text
+@mixin text_bold {
+  @include text_body;
+  font-weight: 600;
+}
+// END-FREESTYLE-USAGE
+
+// BEGIN-FREESTYLE-USAGE big-text
+@mixin text_big {
+  @include text_body;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.38;
+  @include media(">=medium") {
+    font-size: 24px;
+    line-height: 1.33;
+  }
+}
+// END-FREESTYLE-USAGE
+
+// BEGIN-FREESTYLE-USAGE small-text
+@mixin text_small {
+  font-family: $body-font;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.67;
+  color: $dark-grey;
+  a {
+    @include text_dark-link;
+  }
+  @include media(">=medium") {
+    font-size: 14px;
+    line-height: 1.57;
+  }
+}
+// END-FREESTYLE-USAGE
+
+@mixin text_margin_padding_reset {
+  padding: 0;
+  margin: 0;
+}

@@ -1,0 +1,35 @@
+.brands-linkroll {
+  @include toggleBoxCaret(10px, #FFF);
+}
+
+.brands-linkroll-nav {
+  width: auto;
+}
+
+.brands-linkroll-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 262px;
+  height: 90px;
+  margin: 0;
+  padding: 0;
+}
+
+.brands-linkroll-nav-list-item {
+  white-space: nowrap;
+  width: 50%;
+}
+
+.brands-linkroll-nav-list-item-link {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid $white;
+  font-size: 10px;
+  font-family: $font-body-bold;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 8px 0;
+}
