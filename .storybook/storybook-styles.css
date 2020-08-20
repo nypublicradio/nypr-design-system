@@ -11,7 +11,7 @@ i.e. .sbdocs.sbdocs-example */
   padding: 32px;
 }
 .sbdocs.sbdocs-content {
-  max-width: 100%;
+  max-width: 1300px;
 }
 
 .sbdocs.sbdocs-ul, .sbdocs.sbdocs-li {
