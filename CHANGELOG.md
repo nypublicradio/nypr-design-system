@@ -1,5 +1,18 @@
 # `nypr-design-system` changelog
 
+## 3.1.1
+
+- [ENHANCEMENT] Added white label versions of main and persistent audio players (#113 #118 #123)
+- [SECURITY] Bumped elliptic package version (#112)
+- [ENHANCEMENT] Added Radial branding to storybook (#115 #116)
+- [ENHANCEMENT] Created White label version of footer (#114 #120 #121 #122)
+- [ENHANCEMENT] Created White label version of header (#125 #126 #127 #128)
+- [ENHANCEMENT] Updated Storybook docs for footer and header (#119)
+- [CHANGE] Remove search from side menu (#129)
+- [ENHANCEMENT] Created theme for WQXR Beta (#117)
+- [ENHANCEMENT] Storybook docs styling update (#124 #131 #133)
+- [BUGFIX] Fixed CSS compilation issues, and missing dependency for ember-in-viewport (#134)
+
 ## 3.1.0
 - [CHANGE] Refactor of color tokens
 - [ENHANCEMENT] Style linting, token allowlist for base styles
@@ -141,15 +154,15 @@ https://jira.wnyc.org/browse/DS-783
 
 ## `3.0.0-beta5`
 
-- #86 Max width allows all nav items to display in one horizontal line 
+- #86 Max width allows all nav items to display in one horizontal line
 
 https://jira.wnyc.org/browse/DS-792
 
-- #84 Re-add focus outline to search input and button 
+- #84 Re-add focus outline to search input and button
 
 https://jira.wnyc.org/browse/DS-782
 
-- #83 Animate Donate Flyout 
+- #83 Animate Donate Flyout
 
 https://jira.wnyc.org/browse/DS-527
 
@@ -226,11 +239,11 @@ https://jira.wnyc.org/browse/DS-761
 
 - [DOCS] Documentation Updates
 - [CHANGE] Update font and line height scales to be independent of type (type = small, body, header, etc)
-- [CHANGE] Move storybook style imports to preview.js 
+- [CHANGE] Move storybook style imports to preview.js
 - [CHANGE] Remove media query from typeface mixin and convert typeface usages to mobile-first responsive
 
 ## `3.0.0-alpha1`
-- [BREAKING] Tokens updated to use CSS custom properties (CSS variables) 
+- [BREAKING] Tokens updated to use CSS custom properties (CSS variables)
 - [BREAKING] Typography Tokens refactored (WIP)
 - [BREAKING] Spacing Tokens refactored
 - [BREAKING] Color Tokens refactored (WIP)
@@ -254,8 +267,8 @@ https://jira.wnyc.org/browse/DS-761
 ## `2.10.4`
 - [CHANGE] added newsletter signup component for article page
 - [CHANGE] added link for terms on newsletter signup components
-- [CHANGE] added GA tracking to newsletter signup components 
-- [CHANGE] added location field for mailchimp tracking to newsletter signup components 
+- [CHANGE] added GA tracking to newsletter signup components
+- [CHANGE] added location field for mailchimp tracking to newsletter signup components
 
 ## `2.10.3`
 - [CHANGE] Update NyprODonate to accept an icon name as a parameter.
