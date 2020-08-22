@@ -1,3 +1,85 @@
+.nypr-o-main-audio-player {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+
+  .live {
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    height: 16px;
+    justify-content: center;
+    letter-spacing: 1px;
+    width: 51px;
+    
+    .text {
+      color: #333333;
+      font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: bold;
+      letter-spacing: 2px;
+      line-height: 16px;
+      margin-right: 4px;
+      text-transform: uppercase;
+    }
+  
+    .dot {
+      background-color: #E74F4F;
+      border-radius: 8px;
+      height: 8px;
+      width: 8px;
+    } 
+  }
+
+  .on-air-image {
+    border: 1px solid #8C8C8C;
+    max-height: 328px;
+    max-width: 328x;
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
+  }
+
+  .play-button {
+    align-items: center;
+    background-color: #235B9C;
+    padding-right: 20px;
+
+    svg {
+      max-height: 54px;
+      max-width: 54px;
+    }
+
+    div {
+      color: #fff;
+      font-family: Open Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      letter-spacing: 1.6px;
+      text-transform: capitalize;
+    }
+  }
+
+  .title {
+    color: #235B9C;
+    font-family: 'Libre Baskerville', 'Times New Roman', serif;
+    font-size: 28.8325px;
+    text-align: center;
+  }
+
+  .description {
+    color: #333333;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14.22px;
+  }
+}
+
+
 .on-air-now {
     background-color: #EAEFF0;
 
@@ -24,50 +106,10 @@
         align-items: center;
       }
 
-      > .show-image {
-        max-height: 100px;
-        max-width: 100px;
-        margin: 11px auto 10px auto;
-        display: block;
-
-        @include media(">=medium") {
-          display: none;
-        }
-      }
+      
     }
 
-    .on-air-now-label {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
 
-      height: 16px;
-      width: 51px;
-      background-color: #ffffff;
-      border-radius: 4px;
-      letter-spacing: 1px;
-    }
-
-    .on-air-now-label-text {
-      text-transform: uppercase;
-      color: #333333;
-      font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-      font-weight: bold;
-      font-style: normal;
-      font-size: 10px;
-      margin-right: 4px;
-      line-height: 16px;
-      letter-spacing: 2px;
-    }
-
-    .on-air-now-label-dot {
-      background-color: #1277c4;
-      width: 8px;
-      height: 8px;
-      border-radius: 8px;
-      background-color: #E74F4F;
-    }
 
     .on-air-now-inner {
       @include media(">medium") {
