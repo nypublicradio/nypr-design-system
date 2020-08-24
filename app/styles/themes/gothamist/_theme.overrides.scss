@@ -971,7 +971,7 @@ form .o-button:hover {
 }
 
 .c-main-footer .c-main-footer__right-component {
-  @include media(">large") {
+  @include media(">medium") {
     margin-top: 170px;
   }
   @include media(">xlarge") {
