@@ -172,7 +172,10 @@ blockquote {
   background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
   background-position: 100% 142px;
   background-repeat: repeat-x;
-  padding: var(--space-5) 0;
+  padding: var(--space-5);
+  @include media(">xlarge") {
+    padding: var(--space-5) 0;
+  }
 
   // Footer uses the dark color group
   @include color-group-dark;
@@ -256,17 +259,17 @@ blockquote {
   font-weight: bold;
 
   @include media(">large") {
-    margin: 0 var(--space-5) 0 0;
+    margin: 0 11px 0 var(--space-5);
   }
 }
 
-.c-main-footer__signup {
+.c-main-footer__right-component {
   color: rgb(var(--color-text-inverse));
 }
 
-.c-main-footer .c-main-footer__signup svg,
-.c-main-footer .c-main-footer__signup svg path,
-.c-main-footer .c-main-footer__signup svg rect {
+.c-main-footer .c-main-footer__right-component svg,
+.c-main-footer .c-main-footer__right-component svg path,
+.c-main-footer .c-main-footer__right-component svg rect {
   fill: rgb(var(--color-text-inverse));
 }
 
@@ -960,9 +963,16 @@ form .o-button:hover {
   height: 50px;
 }
 
-.c-main-footer .c-main-footer__signup svg,
-.c-main-footer .c-main-footer__signup svg path,
-.c-main-footer .c-main-footer__signup svg rect {
+.c-main-footer .c-main-footer__social {
+  margin: auto;
+  @include media(">large") {
+    margin: auto 0 auto auto;
+  }
+}
+
+.c-main-footer .c-main-footer__right-component svg,
+.c-main-footer .c-main-footer__right-component svg path,
+.c-main-footer .c-main-footer__right-component svg rect {
   fill: rgb(var(--color-text));
 }
 
