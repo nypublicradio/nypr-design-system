@@ -438,7 +438,7 @@ blockquote {
 
 // Side Navigaton
 .c-side-menu .c-search__button:hover {
-  background-color: rgb(var(--color-form-button));
+  background-color: rgb(var(--color-reddish-orange));
   opacity: 1;
 }
 
@@ -967,6 +967,15 @@ form .o-button:hover {
   margin: auto;
   @include media(">xlarge") {
     margin: auto 0 auto auto;
+  }
+}
+
+.c-main-footer .c-main-footer__right-component {
+  @include media(">large") {
+    margin-top: 170px;
+  }
+  @include media(">xlarge") {
+    margin-top: 0;
   }
 }
 
