@@ -58,12 +58,12 @@ blockquote {
 
 .c-main-footer .c-share-tools__label {
   @include typeface(small, 3);
-  text-align: left;
+  text-align: center;
   text-transform: uppercase;
 }
 
 .c-main-footer .c-share-tools__group {
-  margin: initial;
+  margin: auto;
 }
 
 .c-main-header__title {
@@ -276,8 +276,8 @@ blockquote {
 // brand group
 
 .c-main-footer__nypr-logo {
-  margin: 0 auto var(--space-3);
-  @include media(">large") {
+  margin: 0 auto var(--space-3) auto;
+  @include media(">xlarge") {
     margin: 0 var(--space-5) 0 0;
   }
 }
@@ -965,7 +965,7 @@ form .o-button:hover {
 
 .c-main-footer .c-main-footer__social {
   margin: auto;
-  @include media(">large") {
+  @include media(">xlarge") {
     margin: auto 0 auto auto;
   }
 }
