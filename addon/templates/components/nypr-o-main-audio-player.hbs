@@ -26,4 +26,13 @@
 
 <div class="description" data-test-element="show-description">{{{strip-html onAirDescription}}}</div>
 
+{{#if displayEpisodeContent}}
+  {{nypr-o-main-audio-player/episode-content
+    description=this.nowPlaying.stream.currentShow.description
+  }}
+{{/if}}
+{{#if this.nowPlaying.nextAiring}}
+  {{nypr-o-main-audio-player/schedule airing=this.nowPlaying.nextAiring}}
+{{/if}}
+
 {{yield}}

@@ -1,0 +1,13 @@
+{{#if segments}}
+
+{{else}}
+    {{#if description}}
+        <div class="description">
+            <div class="dot"></div>
+            <div class="text">
+                {{{strip-html description}}}
+            </div>
+        </div>
+    {{/if}}
+{{/if}}
+{{yield}}

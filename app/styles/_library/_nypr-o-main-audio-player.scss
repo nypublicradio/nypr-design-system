@@ -38,7 +38,7 @@
   .on-air-image {
     border: 1px solid #8C8C8C;
     max-height: 328px;
-    max-width: 328x;
+    max-width: 328px;
     filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   }
 
@@ -76,6 +76,117 @@
     font-style: normal;
     font-weight: normal;
     font-size: 14.22px;
+  }
+
+  .episode-content {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+
+    .description {
+      align-items: center;
+      background-image: linear-gradient(#EAEFF0,#EAEFF0);
+      background-position: 7px top;
+      background-repeat: no-repeat;
+      background-size: 2px 50%;
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 20px;
+      padding-top: 20px;
+
+      .dot {
+        background-color: #3B8AD1;
+        border-radius: 8px;
+        height: 16px;
+        margin-right: 10px;
+        min-width: 16px;
+      }
+
+      .text {
+        color: #333333;
+        font-family: Open Sans;
+        font-size: 12.6px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 19px;
+      }
+    }
+  }
+
+  .schedule {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .metadata {
+      align-items: center;
+      background-color: #EAEFF0;
+      display: flex;
+      flex-direction: row;
+      padding: 10px;
+
+      .image {
+        background: #aaa;
+        filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.15));
+        height: 48px;
+        margin-right: 10px;
+        max-height: 48px;
+        max-width: 48px;
+        min-height: 48px;
+        min-width: 48px;
+      }
+
+      .title-outer {
+        flex: 1;
+
+        .label {
+          color: #3B8AD1;
+          font-family: Open Sans;
+          font-size: 11.237px;
+          font-style: normal;
+          font-weight: bold;
+          letter-spacing: 1.2px;
+          line-height: 16px;
+          text-transform: uppercase;
+        }
+
+        .title {
+          color: #333333;
+          display: flex;
+          font-family: Open Sans;
+          font-size: 14.2px;
+          font-style: normal;
+          font-weight: bold;
+          line-height: 19px;
+          text-align: left;
+        }
+      }
+
+      .time {
+        align-self: flex-end;
+        color: #8C8C8C;
+        font-family: Open Sans;
+        font-size: 11.237px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 16px;
+        min-width: 60px;
+        text-align: right;
+      }
+    }
+
+    .full-schedule-button {
+      background: #235B9C;
+      color: #fff;
+      font-family: Open Sans;
+      font-size: 12.64px;
+      font-style: normal;
+      font-weight: bold;
+      height: 56px;
+      line-height: 56px;
+      text-align: center;
+      text-transform: uppercase;
+    }
   }
 }
 
