@@ -6,20 +6,20 @@
 
   .live {
     align-items: center;
-    background-color: #ffffff;
+    background-color: rgb(var(--color-background));
     border-radius: 4px;
     display: flex;
     flex-direction: row;
     height: 16px;
     justify-content: center;
     letter-spacing: 1px;
+    margin-bottom: 8px;
     width: 51px;
     
     .text {
-      color: #333333;
-      font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-      font-size: 10px;
-      font-style: normal;
+      @include typeface(body, 1);
+
+      color: rgb(var(--color-text));
       font-weight: bold;
       letter-spacing: 2px;
       line-height: 16px;
@@ -36,15 +36,17 @@
   }
 
   .on-air-image {
-    border: 1px solid #8C8C8C;
+    border: 1px solid rgb(var(--color-text-muted));
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
+    margin-bottom: 24px;
     max-height: 328px;
     max-width: 328px;
-    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   }
 
   .play-button {
     align-items: center;
-    background-color: #235B9C;
+    background-color: rgb(var(--color-primary-2));
+    margin-bottom: 24px;
     padding-right: 20px;
 
     svg {
@@ -53,7 +55,7 @@
     }
 
     div {
-      color: #fff;
+      color: rgb(var(--color-background));
       font-family: Open Sans;
       font-style: normal;
       font-weight: bold;
@@ -64,21 +66,25 @@
   }
 
   .title {
-    color: #235B9C;
-    font-family: 'Libre Baskerville', 'Times New Roman', serif;
-    font-size: 28.8325px;
+    @include typeface(header, 10);
+
+    color: rgb(var(--color-primary-2));
+    font-weight: normal;
+    margin-bottom: 8px;
     text-align: center;
   }
 
   .description {
-    color: #333333;
+    color: rgb(var(--color-text));
     font-family: Open Sans;
     font-style: normal;
     font-weight: normal;
     font-size: 14.22px;
+    margin-bottom: 24px;
   }
 
   .episode-content {
+    margin-bottom: 8px;
     padding-left: 20px;
     padding-right: 20px;
     width: 100%;
@@ -95,7 +101,7 @@
       padding-top: 20px;
 
       .dot {
-        background-color: #3B8AD1;
+        background-color: rgb(var(--color-primary-1));
         border-radius: 8px;
         height: 16px;
         margin-right: 10px;
@@ -103,7 +109,7 @@
       }
 
       .text {
-        color: #333333;
+        color: rgb(var(--color-text));;
         font-family: Open Sans;
         font-size: 12.6px;
         font-style: normal;
@@ -120,13 +126,13 @@
 
     .metadata {
       align-items: center;
-      background-color: #EAEFF0;
+      background-color: rgb(var(--color-background-muted));
       display: flex;
       flex-direction: row;
       padding: 10px;
 
       .image {
-        background: #aaa;
+        background: rgb(var(--color-cool-white));
         filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.15));
         height: 48px;
         margin-right: 10px;
@@ -140,7 +146,7 @@
         flex: 1;
 
         .label {
-          color: #3B8AD1;
+          color: rgb(var(--color-primary-1));
           font-family: Open Sans;
           font-size: 11.237px;
           font-style: normal;
@@ -151,7 +157,7 @@
         }
 
         .title {
-          color: #333333;
+          color: rgb(var(--color-text-metadata));
           display: flex;
           font-family: Open Sans;
           font-size: 14.2px;
@@ -164,7 +170,7 @@
 
       .time {
         align-self: flex-end;
-        color: #8C8C8C;
+        color: rgb(var(--color-text-muted));
         font-family: Open Sans;
         font-size: 11.237px;
         font-style: normal;
@@ -176,8 +182,8 @@
     }
 
     .full-schedule-button {
-      background: #235B9C;
-      color: #fff;
+      background: rgb(var(--color-primary-2));
+      color: rgb(var(--color-text-inverse));
       font-family: Open Sans;
       font-size: 12.64px;
       font-style: normal;
@@ -189,249 +195,3 @@
     }
   }
 }
-
-
-.on-air-now {
-    background-color: #EAEFF0;
-
-    display: flex;
-    justify-content: center;
-    padding: 24px;
-    z-index: 1;
-    @include media("<medium") {
-      width: 100%;
-      padding: 0px;
-    }
-    @include media("<medium") {
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    .on-air-now-upper {
-      @include media("<medium") {
-        display: flex;
-        flex-direction: column;
-        margin-top: 106px;
-        margin-bottom: 24px;
-        justify-content: center;
-        align-items: center;
-      }
-
-      
-    }
-
-
-
-    .on-air-now-inner {
-      @include media(">medium") {
-        display: flex;
-        .label-title-message-play {
-          margin-right: 24px;
-        }
-      }
-
-      .show-image {
-        height: 224px;
-        width: 224px;
-        object-fit: cover;
-        display: block;
-        @include media("<medium") {
-          display: none;
-        }
-
-        img {
-          height: 100%;
-          width: 100%;
-        }
-      }
-    }
-
-    .label-title {
-      @include media("<medium") {
-        display: flex;
-        flex-direction: column-reverse;
-      }
-    }
-
-    .show-title {
-      color: #235B9C;
-      font-family: 'Libre Baskerville', 'Times New Roman', serif;
-      font-size: 28.8325px;
-      line-height: 43px;
-      margin-bottom: 8px;
-      margin-top: 12px;
-      margin-right: 16px;
-      margin-left: 16px;
-      text-align: center;
-      @include media(">=medium") {
-        font-style: normal;
-        font-weight: normal;
-        font-size: 51.957px;
-        line-height: 60px;
-        text-align: left;
-        margin-right: 0px;
-        margin-left: 0px;
-      }
-    }
-
-    .show-sub-title * {
-      color: #333333;
-      font-family: Open Sans;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14.22px;
-      line-height: 24px;
-      margin-right: 16px;
-      margin-left: 16px;
-      text-align: center;
-      @include media(">=medium") {
-        font-size: 18px;
-        line-height: 32px;
-        text-align: left;
-        margin-right: 0px;
-        margin-left: 0px;
-      }
-    }
-
-    .message-the-show {
-      display: flex;
-      margin-top: 12px;
-      margin-bottom: 20px;
-      @include media("<medium") {
-        justify-content: center;
-      }
-    }
-
-    .message-the-show-toggle-box {
-      display: inline-flex;
-
-      .toggle-box__label {
-        display: flex;
-        align-content: center;
-        justify-content: center;
-      }
-
-      > button:focus {
-        outline: none;
-      }
-
-      > button {
-        border: none;
-        padding-left: 6px;
-        padding-right: 0;
-        margin-left: auto;
-        margin-right: auto;
-        line-height: 14px;
-
-        @include media("<medium") {
-          padding-left: 0px;
-        }
-      }
-
-      .u-icon--xs {
-        height: 6px;
-        fill: #235B9C;
-        margin-left: 4px;
-        margin-top: 7px;
-
-        path {
-          fill: #235B9C;
-        }
-      }
-    }
-
-    .message-the-show-title {
-      color: #235B9C;
-      font-family: "OpenSans-Bold", sans-serif;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 12.64px;
-      line-height: 20px;
-      letter-spacing: 1.6px;
-    }
-  }
-
-  .listen-message-the-show-popup {
-    // using negative to correct the padding of parent element, which does not
-    // have a class name specific to the 'Message the Show' popup
-    margin: -1px -6px;
-
-    .c-share-tools__group {
-      margin-top: 0px;
-    }
-
-    .c-share-tools__link {
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: row;
-      margin-top: 10px;
-      text-decoration: none;
-      font-weight: normal;
-      align-items: center;
-
-      &:first-child {
-        margin-top: 0px;
-      }
-
-      width: 100%;
-      height: 100%;
-
-      svg {
-        height: 12px;
-        width: 12px;
-
-        * {
-          fill: #fff;
-        }
-      }
-
-      .c-share-tools__link-title {
-        color: #ffffff;
-        font-family: "OpenSans-Bold", sans-serif;;
-        font-size: 12px;
-        line-height: 12px;
-        letter-spacing: 1.2px;
-        margin-left: 8px;
-        text-transform: uppercase;
-      }
-    }
-  }
-
-  .listen-play-button {
-    width: 185px;
-    height: 45px;
-    background-color: #235B9C;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 32px;
-    margin-bottom: 96px;
-    display: flex;
-    flex-direction: row;
-
-    @include media(">=medium") {
-      margin-right: 0px;
-      margin-left: 0px;
-    }
-
-    .play-button {
-      align-items: center;
-      margin-left: 10px;
-
-      svg {
-        max-height: 54px;
-        max-width: 54px;
-      }
-
-      div {
-        color: #fff;
-        font-family: Open Sans;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 16px;
-        letter-spacing: 1.6px;
-        text-transform: capitalize;
-      }
-    }
-  }
-
