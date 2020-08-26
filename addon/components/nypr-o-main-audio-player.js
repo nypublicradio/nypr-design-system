@@ -7,7 +7,9 @@ export default Component.extend({
   classNames: ['nypr-o-main-audio-player'],
 
   displayEpisodeContent: computed('this.nowPlaying.show', function() {
-    return true;
+    // todo: if segments exist, then true
+    return this.nowPlaying.stream.currentShow.description &&
+           this.nowPlaying.stream.currentShow.description != this.onAirDescription;
   }),
 
   actions: {
