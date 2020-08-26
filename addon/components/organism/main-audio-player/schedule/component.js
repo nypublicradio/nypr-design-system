@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import moment from 'moment';
-import layout from '../../templates/components/nypr-o-main-audio-player/schedule';
+import layout from './template';
 
 export default Component.extend({
   layout,

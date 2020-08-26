@@ -1,0 +1,39 @@
+{{#if segments}}
+    <div class="segments">
+        <div class="segment">
+            <div class="dot"></div>
+            <div class="text">
+                Trump Executive Orders On Unemployment See States Footing Part Of The Bill
+            </div>
+        </div>
+        <div class="segment">
+            <div class="dot"></div>
+            <div class="text">
+                Woman Receives New ID With Photo Of Empty Chair
+            </div>
+        </div>
+        <div class="segment">
+            <div class="dot"></div>
+            <div class="text">
+                News Brief: Facebook Helping Voters, Kamala Harris And Representation, Thai Protests
+            </div>
+        </div>
+        <div class="segment">
+            <div class="dot"></div>
+            <div class="text">
+                The U.S. Military Is Using Esports As A Recruitment Tool
+            </div>
+        </div>
+    </div>
+{{else}}
+    {{#if description}}
+        <div class="description">
+            <div class="dot"></div>
+            <div class="text">
+                {{{strip-html description}}}
+            </div>
+        </div>
+    {{/if}}
+{{/if}}
+
+{{yield}}
