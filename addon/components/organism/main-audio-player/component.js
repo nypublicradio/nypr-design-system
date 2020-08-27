@@ -4,10 +4,11 @@ import layout from './template';
 
 export default Component.extend({
   layout,
-  classNames: ['nypr-o-main-audio-player'],
+  classNames: ['main-audio-player'],
 
   displayEpisodeContent: computed('this.nowPlaying.show', 'this.nowPlaying.stream', function() {
     // todo: if segments exist, then true
+    // todo: clean this up when we clean up data/api
     return get(this, 'nowPlaying.stream.currentShow.description') != get(this, 'nowPlaying.show.about.body');
   }),
 });
