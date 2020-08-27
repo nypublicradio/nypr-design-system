@@ -1,31 +1,34 @@
 {{#if segments}}
     <!-- todo: display segments from api when they are available -->
-    <div class="whats-on-episode-segments">
-        <div class="whats-on-episode-segment">
+    <!-- implementation notes: https://github.com/nypublicradio/nypr-design-system/pull/135#discussion_r478585917 -->
+    <!-- dummy data -->
+    <ul class="whats-on-episode-segments">
+        <li class="whats-on-episode-segment">
             <div class="whats-on-episode-segment-dot"></div>
             <div class="whats-on-episode-segment-text">
                 Trump Executive Orders On Unemployment See States Footing Part Of The Bill
             </div>
-        </div>
-        <div class="whats-on-episode-segment">
+        </li>
+        <li class="whats-on-episode-segment">
             <div class="whats-on-episode-segment-dot"></div>
             <div class="whats-on-episode-segment-text">
                 Woman Receives New ID With Photo Of Empty Chair
             </div>
-        </div>
-        <div class="whats-on-episode-segment">
+        </li>
+        <li class="whats-on-episode-segment">
             <div class="whats-on-episode-segment-dot"></div>
             <div class="whats-on-episode-segment-text">
                 News Brief: Facebook Helping Voters, Kamala Harris And Representation, Thai Protests
             </div>
-        </div>
-        <div class="whats-on-episode-segment">
+        </li>
+        <li class="whats-on-episode-segment">
             <div class="whats-on-episode-segment-dot"></div>
             <div class="whats-on-episode-segment-text">
                 The U.S. Military Is Using Esports As A Recruitment Tool
             </div>
-        </div>
-    </div>
+        </li>
+    </ul>
+    <!-- end dummy data -->
 {{else}}
     {{#if description}}
         <div class="whats-on-episode-description">

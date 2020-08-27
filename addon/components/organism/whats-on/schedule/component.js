@@ -10,7 +10,7 @@ export default Component.extend({
   MILLISECONDS_IN_MINUTE: 60000,
 
   time: computed('clock.minute', function() {
-    if (this.airing) {
+    if (this.airing && this.airing.startTime) {
       let currentTime = new Date();
       if (this.airing.startTime.getTime() - currentTime.getTime() > this.MILLISECONDS_IN_HOUR) {
         return moment(this.airing.startTime).format('h:mm A');
