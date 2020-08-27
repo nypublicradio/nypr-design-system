@@ -24,15 +24,15 @@
       }
     }
 
-    .schedule-metadata-text-outer {
+    .schedule-metadata-copy {
       flex: 1;
       display: flex;
       flex-direction: row;
 
-      .schedule-metadata-text-outer-title-outer {
+      .schedule-metadata-copy-title {
         flex: 1;
 
-        .schedule-metadata-text-outer-title-outer-label {
+        .schedule-metadata-copy-title-label {
           color: rgb(var(--color-primary-1));
           font-family: Open Sans;
           font-size: 11.237px;
@@ -48,7 +48,7 @@
           }
         }
 
-        .schedule-metadata-text-outer-title-outer-title {
+        .schedule-metadata-copy-title-text {
           color: rgb(var(--color-text-metadata));
           display: flex;
           font-family: Open Sans;
@@ -65,7 +65,7 @@
         }
       }
 
-      .schedule-metadata-text-outer-time {
+      .schedule-metadata-copy-time {
         align-self: flex-end;
         color: rgb(var(--color-text-muted));
         font-family: Open Sans;
