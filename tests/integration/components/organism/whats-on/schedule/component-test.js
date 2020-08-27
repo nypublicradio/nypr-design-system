@@ -6,21 +6,23 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Component | organism/whats-on/schedule', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it renders with correct title and timestamp', async function(assert) {
+    this.set('nowPlaying', {
+      nextAiring: {
+        showTitle: 'BBC World Service',
+        startTime: new Date(2020, 8, 27, 8, 0, 0, 0),
+        show: {
+          image: {
+            url: ''
+          }
+        }
+      }
+    });
 
-    await render(hbs`{{organism/whats-on/schedule}}`);
+    await render(hbs`<Organism::WhatsOn::Schedule @airing={{this.nowPlaying.nextAiring}} @scheduleUrl='https://www.wnyc.org/schedule/' />`);
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#organism/whats-on/schedule}}
-        template block text
-      {{/organism/whats-on/schedule}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom('.whats-on-schedule-metadata-text-outer-title-outer-title').hasText('BBC World Service');
+    assert.dom('.whats-on-schedule-metadata-text-outer-time').hasText('8:00 AM');
+    assert.dom('.whats-on-schedule-full-schedule-button').exists();
   });
 });

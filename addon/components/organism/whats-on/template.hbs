@@ -22,8 +22,13 @@
     @textMode={{true}}
   />
 
-  <div class="whats-on-show-title" data-test-element="show-title">{{onAirTitle}}</div>
-  <div class="whats-on-show-description" data-test-element="show-description">{{{strip-html this.nowPlaying.show.about.body}}}</div>
+  <div class="whats-on-show-title" data-test-element="show-title">
+    {{onAirTitle}}
+  </div>
+
+  <div class="whats-on-show-description" data-test-element="show-description">
+    {{{strip-html this.nowPlaying.show.about.body}}}
+  </div>
 </div>
 
 {{#if displayEpisodeContent}}
