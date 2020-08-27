@@ -27,14 +27,13 @@
 </div>
 
 {{#if displayEpisodeContent}}
-  {{organism/main-audio-player/episode-content
+  {{organism/whats-on/episode-content
     description=this.nowPlaying.stream.currentShow.description
-    segments=true
   }}
 {{/if}}
 
 {{#if this.nowPlaying.nextAiring}}
-  {{organism/main-audio-player/schedule
+  {{organism/whats-on/schedule
     airing=this.nowPlaying.nextAiring
     scheduleUrl=scheduleUrl
   }}

@@ -1,1 +1,0 @@
-export { default } from 'nypr-design-system/components/organism/main-audio-player/component';
