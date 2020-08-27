@@ -30,7 +30,8 @@ module('Integration | Component | organism/whats-on', function(hooks) {
         title: 'Morning Edition',
         about: {
           body: '<p>Morning Edition is your perfect morning companion: gentle, but straightforward, explaining the vagaries of international diplomacy, reporting weather and even recommending the best film in town. Mornings and hard news can coexist in peace. Morning hosts make complex news digestible to millions of listeners who have yet to finish their first cup of coffee. Whether the story breaks in Bosnia or Brooklyn, news reports with on-the-spot sound create a complete picture for your ears.</p>\n<p>Contact us using <a href="http://www.wnyc.org/contact/">our feedback form</a>.</p>',
-        }
+        },
+        tease: '<p>Your morning companion from NPR and the WNYC Newsroom, with world news, local features, and weather updates.</p>'
       },
       nextAiring: {
         showTitle: 'BBC World Service',
@@ -48,7 +49,7 @@ module('Integration | Component | organism/whats-on', function(hooks) {
     assert.dom('.play-button').exists();
     assert.dom('.on-air-image').exists();
     assert.dom('.whats-on-show-title').hasText('Morning Edition');
-    assert.dom('.whats-on-show-description').hasText('Morning Edition is your perfect morning companion: gentle, but straightforward, explaining the vagaries of international diplomacy, reporting weather and even recommending the best film in town. Mornings and hard news can coexist in peace. Morning hosts make complex news digestible to millions of listeners who have yet to finish their first cup of coffee. Whether the story breaks in Bosnia or Brooklyn, news reports with on-the-spot sound create a complete picture for your ears. Contact us using our feedback form.');
+    assert.dom('.whats-on-show-description').hasText('Your morning companion from NPR and the WNYC Newsroom, with world news, local features, and weather updates.');
     assert.dom('.whats-on-episode').exists();
     assert.dom('.whats-on-schedule').exists();
 

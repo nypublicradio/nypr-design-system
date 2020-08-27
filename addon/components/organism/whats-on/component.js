@@ -10,7 +10,7 @@ export default Component.extend({
     // todo: if segments exist, then true
     // todo: clean this up when we clean up data/api
     return get(this, 'nowPlaying.stream.currentShow.description') &&
-           get(this, 'nowPlaying.stream.currentShow.description') != get(this, 'nowPlaying.show.about.body');
+           get(this, 'nowPlaying.stream.currentShow.description') != get(this, 'nowPlaying.show.tease');
   }),
 
   onAirTitle: computed('this.nowPlaying.{show,stream}', function() {
