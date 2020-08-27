@@ -5,7 +5,7 @@ import layout from './template';
 
 export default Component.extend({
   layout,
-  classNames: ['whats-on-schedule'],
+  classNames: ['schedule'],
   MILLISECONDS_IN_HOUR: 3600000,
   MILLISECONDS_IN_MINUTE: 60000,
 

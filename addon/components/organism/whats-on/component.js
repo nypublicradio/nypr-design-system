@@ -6,7 +6,7 @@ export default Component.extend({
   layout,
   classNames: ['whats-on'],
 
-  displayEpisodeContent: computed('this.nowPlaying.{show,stream}', function() {
+  displayEpisode: computed('this.nowPlaying.{show,stream}', function() {
     // todo: if segments exist, then true
     // todo: clean this up when we clean up data/api
     return get(this, 'nowPlaying.stream.currentShow.description') &&

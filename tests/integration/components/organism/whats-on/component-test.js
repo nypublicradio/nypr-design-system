@@ -50,8 +50,8 @@ module('Integration | Component | organism/whats-on', function(hooks) {
     assert.dom('.on-air-image').exists();
     assert.dom('.whats-on-show-title').hasText('Morning Edition');
     assert.dom('.whats-on-show-description').hasText('Your morning companion from NPR and the WNYC Newsroom, with world news, local features, and weather updates.');
-    assert.dom('.whats-on-episode').exists();
-    assert.dom('.whats-on-schedule').exists();
+    assert.dom('.episode').exists();
+    assert.dom('.schedule').exists();
 
     this.set('nowPlaying', {
       stream: {
@@ -68,7 +68,7 @@ module('Integration | Component | organism/whats-on', function(hooks) {
 
     await render(hbs`<Organism::WhatsOn @nowPlaying={{this.nowPlaying}} @scheduleUrl='https://www.wnyc.org/schedule/'/>`);
 
-    assert.dom('.whats-on-episode').doesNotExist();
-    assert.dom('.whats-on-schedule').doesNotExist();
+    assert.dom('.episode').doesNotExist();
+    assert.dom('.schedule').doesNotExist();
   });
 });

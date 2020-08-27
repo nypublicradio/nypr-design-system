@@ -21,8 +21,8 @@ module('Integration | Component | organism/whats-on/schedule', function(hooks) {
 
     await render(hbs`<Organism::WhatsOn::Schedule @airing={{this.nowPlaying.nextAiring}} @scheduleUrl='https://www.wnyc.org/schedule/' />`);
 
-    assert.dom('.whats-on-schedule-metadata-text-outer-title-outer-title').hasText('BBC World Service');
-    assert.dom('.whats-on-schedule-metadata-text-outer-time').hasText('8:00 AM');
-    assert.dom('.whats-on-schedule-full-schedule-button').exists();
+    assert.dom('.schedule-metadata-text-outer-title-outer-title').hasText('BBC World Service');
+    assert.dom('.schedule-metadata-text-outer-time').hasText('8:00 AM');
+    assert.dom('.schedule-full-schedule-button').exists();
   });
 });

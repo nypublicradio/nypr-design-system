@@ -1,1 +1,0 @@
-export { default } from 'nypr-design-system/components/organism/whats-on/episode-content/component';

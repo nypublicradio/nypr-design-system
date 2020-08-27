@@ -31,10 +31,9 @@
   </div>
 </div>
 
-{{#if displayEpisodeContent}}
-  {{organism/whats-on/episode-content
+{{#if displayEpisode}}
+  {{organism/whats-on/episode
     description=this.nowPlaying.stream.currentShow.description
-    segments=true
   }}
 {{/if}}
 
