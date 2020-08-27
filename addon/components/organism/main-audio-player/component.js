@@ -4,7 +4,7 @@ import layout from './template';
 
 export default Component.extend({
   layout,
-  classNames: ['main-audio-player'],
+  classNames: ['whats-on'],
 
   displayEpisodeContent: computed('this.nowPlaying.show', 'this.nowPlaying.stream', function() {
     // todo: if segments exist, then true

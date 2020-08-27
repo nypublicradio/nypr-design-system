@@ -3,5 +3,5 @@ import layout from './template';
 
 export default Component.extend({
   layout,
-  classNames: ['episode-content']
+  classNames: ['whats-on-episode']
 });

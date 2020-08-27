@@ -1,9 +1,9 @@
-<div class="live-indicator">
-  <div class="text">live</div>
-  <div class="dot"></div>
+<div class="whats-on-live-indicator">
+  <div class="whats-on-live-indicator-text">live</div>
+  <div class="whats-on-live-indicator-dot"></div>
 </div>
 
-<div class="show-content">
+<div class="whats-on-show">
   <NyprMOnAirImage
     @stream={{this.nowPlaying.stream}}
     @show={{this.nowPlaying.show}}
@@ -22,13 +22,14 @@
     @textMode={{true}}
   />
 
-  <div class="title" data-test-element="show-title">{{onAirTitle}}</div>
-  <div class="description" data-test-element="show-description">{{{strip-html this.nowPlaying.show.about.body}}}</div>
+  <div class="whats-on-show-title" data-test-element="show-title">{{onAirTitle}}</div>
+  <div class="whats-on-show-description" data-test-element="show-description">{{{strip-html this.nowPlaying.show.about.body}}}</div>
 </div>
 
 {{#if displayEpisodeContent}}
   {{organism/main-audio-player/episode-content
     description=this.nowPlaying.stream.currentShow.description
+    segments=true
   }}
 {{/if}}
 

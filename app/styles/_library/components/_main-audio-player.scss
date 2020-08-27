@@ -1,4 +1,4 @@
-.main-audio-player {
+.whats-on {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
     padding-top: 64px;
   }
 
-  .live-indicator {
+  .whats-on-live-indicator {
     align-items: center;
     background-color: rgb(var(--color-background));
     border-radius: 4px;
@@ -28,7 +28,7 @@
       justify-content: left;
     }
     
-    .text {
+    .whats-on-live-indicator-text {
       @include typeface(body, 1);
 
       color: rgb(var(--color-text));
@@ -39,7 +39,7 @@
       text-transform: uppercase;
     }
   
-    .dot {
+    .whats-on-live-indicator-dot {
       background-color: #E74F4F;
       border-radius: 8px;
       height: 8px;
@@ -47,7 +47,7 @@
     } 
   }
 
-  .show-content {
+  .whats-on-show {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -120,7 +120,7 @@
       }
     }
 
-    .title {
+    .whats-on-show-title {
       @include typeface(header, 10);
 
       color: rgb(var(--color-primary-2));
@@ -139,7 +139,7 @@
       }
     }
 
-    .description {
+    .whats-on-show-description {
       color: rgb(var(--color-text));
       font-family: Open Sans;
       font-style: normal;
@@ -159,20 +159,20 @@
     }
   }
 
-  .episode-content {
+  .whats-on-episode {
     margin-bottom: 8px;
     padding-left: 20px;
     padding-right: 20px;
     width: 100%;
 
-    .segments,
-    .description {
+    .whats-on-episode-segments,
+    .whats-on-episode-description {
       background-image: linear-gradient(#EAEFF0,#EAEFF0);
       background-repeat: no-repeat;
     }
 
-    .segments .segment .text,
-    .description .text {
+    .whats-on-episode-segments .whats-on-episode-segment .whats-on-episode-segment-text,
+    .whats-on-episode-description .whats-on-episode-description-text {
       color: rgb(var(--color-text));;
       font-family: Open Sans;
       font-size: 12px;
@@ -186,7 +186,7 @@
       }
     }
 
-    .segments {
+    .whats-on-episode-segments {
       align-items: center;
       background-position: 4px top;
       background-size: 2px 100%;
@@ -199,7 +199,7 @@
         background-position: 7px top;
       }
 
-      .segment {
+      .whats-on-episode-segment {
         align-items: center;
         display: flex;
         flex-direction: row;
@@ -207,7 +207,7 @@
         padding-top: 10px;
         width: 100%;
 
-        .dot {
+        .whats-on-episode-segment-dot {
           background-color: #EAEFF0;
           border-radius: 5px;
           height: 10px;
@@ -224,7 +224,7 @@
       }
     }
 
-    .description {
+    .whats-on-episode-description {
       align-items: center;
       background-position: 7px top;
       background-size: 2px 50%;
@@ -233,7 +233,7 @@
       padding-bottom: 20px;
       padding-top: 20px;
 
-      .dot {
+      .whats-on-episode-description-dot {
         background-color: rgb(var(--color-primary-1));
         border-radius: 8px;
         height: 16px;
@@ -243,19 +243,19 @@
     }
   }
 
-  .schedule {
+  .whats-on-schedule {
     display: flex;
     flex-direction: column;
     width: 100%;
 
-    .metadata {
+    .whats-on-schedule-metadata {
       align-items: center;
       background-color: rgb(var(--color-background-muted));
       display: flex;
       flex-direction: row;
       padding: 10px;
 
-      .image {
+      .whats-on-schedule-metadata-image {
         background: rgb(var(--color-cool-white));
         filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.15));
         margin-right: 10px;
@@ -269,15 +269,15 @@
         }
       }
 
-      .text-outer {
+      .whats-on-schedule-metadata-text-outer {
         flex: 1;
         display: flex;
         flex-direction: row;
 
-        .title-outer {
+        .whats-on-schedule-metadata-text-outer-title-outer {
           flex: 1;
 
-          .label {
+          .whats-on-schedule-metadata-text-outer-title-outer-label {
             color: rgb(var(--color-primary-1));
             font-family: Open Sans;
             font-size: 11.237px;
@@ -293,7 +293,7 @@
             }
           }
 
-          .title {
+          .whats-on-schedule-metadata-text-outer-title-outer-title {
             color: rgb(var(--color-text-metadata));
             display: flex;
             font-family: Open Sans;
@@ -310,7 +310,7 @@
           }
         }
 
-        .time {
+        .whats-on-schedule-metadata-text-outer-time {
           align-self: flex-end;
           color: rgb(var(--color-text-muted));
           font-family: Open Sans;
@@ -329,7 +329,7 @@
       }
     }
 
-    .full-schedule-button {
+    .whats-on-schedule-full-schedule-button {
       background: rgb(var(--color-primary-2));
       color: rgb(var(--color-text-inverse));
       font-family: Open Sans;
