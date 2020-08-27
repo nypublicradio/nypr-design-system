@@ -1,0 +1,122 @@
+import hbs from 'htmlbars-inline-precompile';
+import { Meta, Title, Subtitle, Description, Props, Preview, Story, Heading } from '@storybook/addon-docs/blocks';
+const component = 'button';
+
+<Meta title="Components/Atoms/Button" component={component} />
+
+<Title />
+
+Buttons are used to trigger actions by clicking or tapping them. They are one of the main components used to control and affect an interface. Without buttons, well, hyperlinks would still be king, and that’d be hell.
+
+### Usage
+
+Use buttons for primary actions on a page (Edit, Add, Save, Donate, Contact Us, Submit, etc.) Don’t use buttons as navigational elements, as these elements should use links. To support users who may be using keyboard navigation, hover states should be used as the button's focus state.
+
+
+
+## Labels & Icons
+
+Buttons need labels to help users understand what the button should be used for. A label is text inside a button that should clearly and succinctly indicate to a user what the result will be when clicking on the button.
+
+Icons can be used alongside labels to convey meaning and add visual flair. In some cases (especially in dense or small UI containers), icons may be able to stand on their own. This should be limited to universal functions (i.e. Add, Play, Delete).
+
+## States
+
+Buttons in our system have four base states: Default (also called Active), Hover, Pressed, Disabled. Unless a brand has a specific set of colors for Hover and Disabled, use opacity to show state change.
+
+## Sizing
+
+Choose button sizes according to their parent container and desired visibility. Radial has three sizes of buttons: Medium (our default), Small, and Large. Buttons sizes affect their icon size, text size, and internal padding.
+
+## Accessibility
+
+Button text and background color must meet the WCAG 2.0 contrast standards, requiring a minimum contrast ratio of 4.5.
+
+Icons buttons must contain a label clearly describing the purpose of the control.
+
+
+## Developer Documentation
+
+<Subtitle />
+
+<Description of={component} />
+
+## Component Properties
+
+<Props of={component} />
+
+## Variations
+
+Radial offers four classes of buttons to help flex within a hierarchy from bold to subtle.
+
+<Heading>Primary</Heading>
+
+Primary buttons are reserved for the primary or most important action on a page. An example of a primary button is Donate.
+
+<Preview withToolbar={true}>
+  <Story name="primary" height="80px">{{
+    template: hbs`<Button @label="Button" class="mod-small"/>
+<Button @label="Button" />
+<Button @label="Button" class="mod-large"/> `
+  }}</Story>
+</Preview>
+
+<Heading>Primary with Icon</Heading>
+
+<Preview withToolbar={true}>
+  <Story name="primary with icon" height="80px">{{
+    template: hbs`<Button @icon="audio" @label="Button" class="mod-small"/>
+<Button @icon="audio" @label="Button" />
+<Button @icon="audio" @label="Button" class="mod-large"/> `
+  }}</Story>
+</Preview>
+
+<Heading>Secondary</Heading>
+
+Secondary buttons are used for secondary actions within an experience. Styles for secondary buttons can vary from brand to brand, but they must be less visually engaging then the primary button treatment. The common style for this is an outlined button. An example of a secondary button is TBD (not currently in production).
+
+<Preview withToolbar={true}>
+  <Story name="secondary" height="80px">{{
+    template: hbs`<Button @label="Button" class="mod-secondary mod-small"/>
+<Button @label="Button" class="mod-secondary" />
+<Button @label="Button" class="mod-secondary mod-large"/> `
+  }}</Story>
+</Preview>
+
+<Heading>Icon</Heading>
+
+What’s a primary button with an icon, but no label? It’s an icon button. You’ll see these a lot in our audio experiences. Use only when an icon's meaning is unambiguous.
+
+<Preview withToolbar={true}>
+  <Story name="icon" height="80px">{{
+    template: hbs`<Button @icon="audio" @alt="Play" class="mod-small"/>
+<Button @icon="audio" @alt="Play" />
+<Button @icon="audio" @alt="Play" class="mod-large"/> `,
+  }}</Story>
+</Preview>
+
+<Heading>Flat</Heading>
+
+To the untrained eye, flat buttons might look like links. The difference here is that a button should always be linked to a call to action, while a link can be contextual. Flat buttons should be reserved for tertiary, less important actions. Examples of flat buttons include a call to Cancel, Show Details, or Hide. There is only one size of flat button.
+
+<Preview withToolbar={true}>
+  <Story name="flat" height="80px">{{
+    template: hbs `<Button @label="Button" class="mod-flat" />`,
+  }}</Story>
+</Preview>
+
+
+## Modifier Classes
+
+| Class | Usage |
+|-------|---------|
+| `.mod-secondary` | Style this button as a secondary button. |
+| `.mod-flat` | Style this button as a flat button. |
+| `.mod-small` | Use the small variant for this button. Does not apply to flat buttons. |
+| `.mod-large` | Use the large variant for this button. Does not apply to flat buttons. |
+
+## State Classes
+
+| Class | State |
+|---|---|
+| `.is-icon-only` | Applied automatically to a buttons with an icon but no label. |

@@ -1,0 +1,120 @@
+.button {
+  /* normalize .button styles  */
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  line-height: 1.15;
+  overflow: visible;
+  white-space: nowrap;
+  text-transform: none;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  appearance: none;
+}
+
+.button {
+  @include typeface(body, 7);
+  padding: var(--space-1) var(--space-3);
+	border-width: 0px;
+  display: inline-flex;
+	position: relative;
+	align-items: center;
+  justify-content: center;
+	cursor: pointer;
+
+  color: rgb(var(--color-button-text));
+  border-color: rgb(var(--color-button));
+  background-color: rgb(var(--color-button));
+}
+
+.button:hover {
+  color: rgb(var(--color-button-text-hover));
+  background-color: rgba(var(--color-button-hover), var(--opacity-button-hover));
+  transform: var(--transform-button-hover);
+}
+
+.button:active {
+  color: rgb(var(--color-button-text-pressed));
+  background-color: rgba(var(--color-button-pressed));
+  transform: var(--transform-button-pressed);
+}
+
+.button-icon {
+  padding: 0 4px;
+  width: 24px;
+  height: 24px;
+  margin-right: var(--space-2);
+  margin-left: var(--space-1);
+}
+
+.button-icon * {
+  fill: rgb(var(--color-button-text));
+}
+
+.button-label {
+  line-height: 32px;
+}
+
+/* Button sizes */
+
+.button.mod-small {
+  padding:  calc(var(--space-1) / 2) var(--space-2);
+}
+
+.button.mod-large {
+  padding: var(--space-2) var(--space-4);
+}
+
+/* Secondary buttons */
+
+.button.mod-secondary {
+  color: rgb(var(--color-button));
+  border: 1px solid rgb(var(--color-button));
+  background-color: transparent;
+}
+
+.button.mod-secondary:hover {
+  color:  rgba(var(--color-button-hover), var(--opacity-button-hover));
+  border: 1px solid  rgba(var(--color-button-hover), var(--opacity-button-hover));
+}
+
+/* Icon buttons */
+
+.button.is-icon-only {
+  padding: var(--space-1);
+}
+  .button.is-icon-only .button-icon {
+    margin: 0;
+    padding: 0 4px;
+    width: 24px;
+    height: 24px;
+  }
+
+.button.is-icon-only.mod-small {
+  padding: calc(var(--space-1) / 2);
+}
+
+.button.is-icon-only.mod-large {
+  padding: var(--space-2);
+}
+
+/* Flat buttons */
+// these should match the default link styles
+
+.button.mod-flat {
+  display: inline;
+  background: none;
+  border: none;
+  margin: none;
+  padding: none;
+  color: rgb(var(--color-link));
+  text-decoration: var(--text-decoration-link);
+  transform: none;
+}
+
+.button.mod-flat :hover {
+  color: rgba(var(--color-link-hover), var(--opacity-link-hover));
+  text-decoration: var(--text-decoration-link-hover);
+  transform: none;
+}

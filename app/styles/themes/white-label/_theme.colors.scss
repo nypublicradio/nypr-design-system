@@ -59,16 +59,6 @@
   --text-decoration-navigation-link-hover: underline;
   --opacity-navigation-link-hover:         1;
 
-  /* Header */
-  --color-header-text: var(--color-white);
-  --color-header-background: var(--color-cool-white);
-  --color-header-label-text: var(--color-black);
-  --color-header-button-background: var(--color-cool-blue);
-  --color-header-button-text: var(--color-white);
-  --color-header-button-hover-text: var(--color-white);
-  --color-header-icon: var(--color-black);
-  --color-header-icon-hover: var(--color-cool-blue);
-
   /* Tags */
   --color-tag-text:             var(--color-white);
   --color-tag-background:       var(--color-ceramic-blue);
@@ -78,15 +68,20 @@
   --opacity-tag-hover:          var(--opacity-hover);
 
   /* Buttons */
-  --color-button-primary:         var(--color-cool-blue);
-  --color-button-primary-hover:   var(--color-cool-blue);
-  --color-button-primary-pressed: var(--color-ceramic-blue);
-  --opacity-button-primary-hover: var(--opacity-hover);
+  --color-button-text:          var(--color-white);
+  --color-button:               var(--color-ceramic-blue);
+  --color-button-text-pressed:  var(--color-white);
+  --color-button-pressed:       var(--color-ceramic-blue);
+  --transform-button-pressed:   scale(0.95);
+  --color-button-text-hover:    var(--color-white);
+  --color-button-hover:         var(--color-cool-blue);
+  --opacity-button-hover:       var(--opacity-hover);
+  --transform-button-hover:     none;
 
   /* Borders */
-  --color-border-subtle: var(--color-background-highlight);
-  --color-border-standard: var(--color-background-highlight);
-  --color-border-bold:   var(--color-background-highlight);
+  --color-border-subtle:        var(--color-background-highlight);
+  --color-border-standard:      var(--color-background-highlight);
+  --color-border-bold:          var(--color-background-highlight);
 }
 
 @mixin color-group-dark {
@@ -121,16 +116,6 @@
   --text-decoration-navigation-link-hover: none;
   --opacity-navigation-link-hover:         var(--opacity-hover);
 
-  /* Header */
-  --color-header-text: var(--color-white);
-  --color-header-background: var(--color-dark-gray);
-  --color-header-label-text: var(--color-light-gray);
-  --color-header-button-background: var(--color-reddish-orange);
-  --color-header-button-text: var(--color-white);
-  --color-header-button-hover-text: var(--color-white);
-  --color-header-icon: var(--color-white);
-  --color-header-icon-hover: var(--color-reddish-orange);
-
   /* Tags */
   --color-tag-text:             var(--color-white);
   --color-tag-background:       var(--color-ceramic-blue);
@@ -140,13 +125,19 @@
   --opacity-tag-hover:          var(--opacity-hover);
 
   /* Buttons */
-  --color-button-primary:         var(--color-cool-blue);
-  --color-button-primary-hover:   var(--color-cool-blue);
-  --color-button-primary-pressed: var(--color-cool-blue);
-  --opacity-button-primary-hover: var(--opacity-hover);
+  --color-button-text:            var(--color-white);
+  --color-button:                 var(--color-cool-blue);
+  --color-button-text-pressed:    var(--color-white);
+  --color-button-pressed:         var(--color-cool-blue); // we need to update this
+  --transform-button-pressed:     scale(0.95);
+  --color-button-text-hover:      var(--color-white);
+  --color-button-hover:           var(--color-cool-blue);
+  --opacity-button-hover:         var(--opacity-hover);
+  --transform-button-hover:       none;
 
-  --color-border-bold:          var(--color-background-highlight);      //none
-  --color-border-standard:      var(--color-background-highlight);  //none
+
+  --color-border-bold:          var(--color-background-highlight);    //none
+  --color-border-standard:      var(--color-background-highlight);    //none
   --color-border-subtle:        var(--color-background-highlight);    //none
 }
 
