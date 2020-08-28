@@ -6,19 +6,11 @@ export default Component.extend({
   layout,
   classNames: ['whats-on'],
 
-  displayEpisode: computed('this.nowPlaying.{show,stream}', function() {
+  displayEpisode: computed('nowPlaying.stream.currentShow.description', 'nowPlaying.show.tease', function() {
     // todo: if segments exist, then true
-    // todo: clean this up when we clean up data/api
-    return get(this, 'nowPlaying.stream.currentShow.description') &&
+    // todo: refactor when we clean up data/api
+    return get(this, 'nowPlaying.stream.currentShow.group_slug') == get(this, 'nowPlaying.show.slug') &&
+           get(this, 'nowPlaying.stream.currentShow.description') &&
            get(this, 'nowPlaying.stream.currentShow.description') != get(this, 'nowPlaying.show.tease');
-  }),
-
-  onAirTitle: computed('this.nowPlaying.{show,stream}', function() {
-    if (get(this, 'nowPlaying.show.title')) {
-      return get(this, 'nowPlaying.show.title');
-    } else if (get(this, 'nowPlaying.stream.name')) {
-      return get(this, 'nowPlaying.stream.name');
-    }
-    return undefined;
   }),
 });

@@ -7,9 +7,6 @@
   <NyprMOnAirImage
     @stream={{this.nowPlaying.stream}}
     @show={{this.nowPlaying.show}}
-    @height={{200}}
-    @width={{200}}
-    @altText={{onAirTitle}}
   />
 
   <NyprMPlayButton
@@ -23,7 +20,11 @@
   />
 
   <div class="whats-on-show-title" data-test-element="show-title">
-    {{onAirTitle}}
+    {{#if nowPlaying.show.title}}
+      {{nowPlaying.show.title}}
+    {{else}}
+      {{nowPlaying.stream.name}}
+    {{/if}}
   </div>
 
   <div class="whats-on-show-description" data-test-element="show-description">
