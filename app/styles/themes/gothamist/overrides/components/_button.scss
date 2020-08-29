@@ -27,17 +27,20 @@
       transform: translate(-10px, 10px);
     }
 
-  .button.mod-donate {
+  .button.mod-donate,
+  .button.mod-donate:hover,
+  .button.mod-donate:active {
     color: rgb(var(--color-white));
     background-color: rgb(var(--color-reddish-orange));
+  }
 
-    &:hover {
-      background-color: rgb(var(--color-reddish-orange));
-    }
+  .button.mod-flat-icon {
+    color: rgba(var(--color-text));
+    padding: var(--space-2);
+  }
 
-    &:active {
-      background-color: rgb(var(--color-reddish-orange));
-    }
+  .button.mod-flat-icon * {
+    fill: rgba(var(--color-text));
   }
 
   .button.mod-header {

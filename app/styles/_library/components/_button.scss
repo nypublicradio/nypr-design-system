@@ -1,4 +1,4 @@
-.button, .button:hover, .button:active {
+.button {
   /* normalize .button styles  */
   font: inherit;
   margin: 0;
@@ -7,10 +7,13 @@
   overflow: visible;
   white-space: nowrap;
   text-transform: none;
-  text-decoration: none;
   border: none;
   outline: none;
   appearance: none;
+}
+
+.button:hover {
+  text-decoration: none;
 }
 
 .button {
