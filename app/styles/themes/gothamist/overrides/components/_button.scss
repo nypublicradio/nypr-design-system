@@ -1,4 +1,4 @@
-.button, .button:hover, .button:active {
+.button {
   font-family: var(--font-family-small);
   font-size: var(--font-size-6);
   letter-spacing: 2px;
@@ -36,12 +36,24 @@
 
   .button.mod-flat-icon {
     color: rgba(var(--color-text));
+    background-color: transparent;
     padding: var(--space-2);
+    transition: none;
   }
 
-  .button.mod-flat-icon * {
-    fill: rgba(var(--color-text));
-  }
+    .button.mod-flat-icon:before {
+      content: none;
+    }
+
+    .button.mod-flat-icon:hover, .button.mod-flat-icon:active {
+      color: rgba(var(--color-text));
+      background-color: transparent;
+      transform: none;
+    }
+
+    .button.mod-flat-icon * {
+      fill: rgba(var(--color-text));
+    }
 
   .button.mod-header {
     font-size: var(--font-size-5);
