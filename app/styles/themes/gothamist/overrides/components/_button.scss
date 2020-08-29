@@ -1,41 +1,52 @@
 .button {
+  font-family: var(--font-family-small);
+  font-size: var(--font-size-6);
+  letter-spacing: 2px;
+  line-height: 22px;
   font-weight: bold;
+  padding: 20px var(--space-4) 18px;
   transition: all var(--animation-duration-standard) var(--animation-easing-standard);
   text-transform: uppercase;
 }
 
-.button:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: $z-index-button-outline;
-  width: 100%;
-  height: 100%;
-  border: 3px solid rgb(var(--color-button-primary));
-  border-color: rgb(var(--color-button-primary));
-  transform: translate(0, 0);
-  transition: all var(--animation-duration-standard) var(--animation-easing-standard);
-}
-
-.button:hover:before {
-  transform: translate(-10px, 10px);
-}
-
-.button.mod-donate {
-  color: rgb(var(--color-white));
-  background-color: rgb(var(--color-reddish-orange));
-
-  &:hover {
-    background-color: rgb(var(--color-reddish-orange));
+  .button:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: $z-index-button-outline;
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgb(var(--color-button-primary));
+    border-color: rgb(var(--color-button-primary));
+    transform: translate(0, 0);
+    transition: all var(--animation-duration-standard) var(--animation-easing-standard);
   }
 
-  &:active {
-    background-color: rgb(var(--color-reddish-orange));
-  }
-}
+    .button:hover:before {
+      transform: translate(-10px, 10px);
+    }
 
-.button.mod-donate:before {
-  border: 3px solid rgb(var(--color-reddish-orange));
-  border-color: rgb(var(--color-reddish-orange));
-}
+  .button.mod-donate {
+    color: rgb(var(--color-white));
+    background-color: rgb(var(--color-reddish-orange));
+
+    &:hover {
+      background-color: rgb(var(--color-reddish-orange));
+    }
+
+    &:active {
+      background-color: rgb(var(--color-reddish-orange));
+    }
+  }
+
+  .button.mod-header {
+    font-size: var(--font-size-5);
+    padding: 11px 50px 10px;
+    height: 43px;
+  }
+
+    .button.mod-donate:before {
+      border: 3px solid rgb(var(--color-reddish-orange));
+      border-color: rgb(var(--color-reddish-orange));
+    }

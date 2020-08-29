@@ -1,4 +1,4 @@
-.button {
+.button, .button:hover, .button:active {
   /* normalize .button styles  */
   font: inherit;
   margin: 0;
@@ -16,12 +16,13 @@
 .button {
   @include typeface(body, 7);
   padding: var(--space-1) var(--space-3);
-	border-width: 0px;
+  border-width: 0px;
   display: inline-flex;
-	position: relative;
-	align-items: center;
+  position: relative;
+  align-items: center;
+  text-align: center;
   justify-content: center;
-	cursor: pointer;
+  cursor: pointer;
 
   color: rgb(var(--color-button-text));
   border-color: rgb(var(--color-button));
