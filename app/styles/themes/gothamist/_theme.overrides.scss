@@ -58,30 +58,16 @@ blockquote {
 
 .c-main-footer .c-share-tools__label {
   @include typeface(small, 3);
-  text-align: left;
+  text-align: center;
   text-transform: uppercase;
 }
 
 .c-main-footer .c-share-tools__group {
-  margin: initial;
+  margin: auto;
 }
 
 .c-main-header__title {
   text-align: left;
-}
-
-.c-main-footer__nav {
-  @include media("<=xlarge") {
-    text-align: center;
-    padding-bottom: var(--space-5);
-  }
-}
-
-.c-main-footer__primary-nav {
-  @include media("<=xlarge") {
-    text-align: center;
-    padding-bottom: var(--space-5);
-  }
 }
 
 .c-main-header__share {
@@ -172,7 +158,10 @@ blockquote {
   background-image: linear-gradient(to bottom, white 0, rgb(var(--color-background)) 0%);
   background-position: 100% 142px;
   background-repeat: repeat-x;
-  padding: var(--space-5) 0;
+  padding: var(--space-5);
+  @include media(">xlarge") {
+    padding: var(--space-5) 0;
+  }
 
   // Footer uses the dark color group
   @include color-group-dark;
@@ -256,25 +245,25 @@ blockquote {
   font-weight: bold;
 
   @include media(">large") {
-    margin: 0 var(--space-5) 0 0;
+    margin: 0 11px 0 var(--space-5);
   }
 }
 
-.c-main-footer__signup {
+.c-main-footer__right-component {
   color: rgb(var(--color-text-inverse));
 }
 
-.c-main-footer .c-main-footer__signup svg,
-.c-main-footer .c-main-footer__signup svg path,
-.c-main-footer .c-main-footer__signup svg rect {
+.c-main-footer .c-main-footer__right-component svg,
+.c-main-footer .c-main-footer__right-component svg path,
+.c-main-footer .c-main-footer__right-component svg rect {
   fill: rgb(var(--color-text-inverse));
 }
 
 // brand group
 
 .c-main-footer__nypr-logo {
-  margin: 0 auto var(--space-3);
-  @include media(">large") {
+  margin: 0 auto var(--space-3) auto;
+  @include media(">xlarge") {
     margin: 0 var(--space-5) 0 0;
   }
 }
@@ -435,7 +424,7 @@ blockquote {
 
 // Side Navigaton
 .c-side-menu .c-search__button:hover {
-  background-color: rgb(var(--color-form-button));
+  background-color: rgb(var(--color-reddish-orange));
   opacity: 1;
 }
 
@@ -960,9 +949,25 @@ form .o-button:hover {
   height: 50px;
 }
 
-.c-main-footer .c-main-footer__signup svg,
-.c-main-footer .c-main-footer__signup svg path,
-.c-main-footer .c-main-footer__signup svg rect {
+.c-main-footer .c-main-footer__social {
+  margin: auto;
+  @include media(">xlarge") {
+    margin: auto 0 auto auto;
+  }
+}
+
+.c-main-footer .c-main-footer__right-component {
+  @include media(">medium") {
+    margin-top: 170px;
+  }
+  @include media(">xlarge") {
+    margin-top: 0;
+  }
+}
+
+.c-main-footer .c-main-footer__right-component svg,
+.c-main-footer .c-main-footer__right-component svg path,
+.c-main-footer .c-main-footer__right-component svg rect {
   fill: rgb(var(--color-text));
 }
 
