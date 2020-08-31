@@ -84,21 +84,19 @@
 }
 
 .c-main-footer__nav {
-  @include media("<=xlarge") {
+  @include media("<=medium") {
     text-align: center;
   }
 }
 
 .c-main-footer__primary-nav {
-  @include media("<=xlarge") {
+  @include media("<=medium") {
     text-align: center;
   }
 }
 
 .c-main-footer .c-main-footer__primary-nav .c-secondary-nav__item {
   @include media("<xlarge") {
-    display: block;
-    margin: 0 0 var(--space-2);
     text-align: left;
   }
 }
@@ -129,8 +127,9 @@
 
 .c-main-footer__nav .c-secondary-nav__item {
   display: inline-block;
+  margin: 0 var(--space-3) var(--space-4) 0;
 
-  @include media("<=xlarge") {
+  @include media("<=medium") {
     margin: 0 var(--space-3) var(--space-4);
   }
 }

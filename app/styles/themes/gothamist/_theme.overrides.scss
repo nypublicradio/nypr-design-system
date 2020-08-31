@@ -70,20 +70,6 @@ blockquote {
   text-align: left;
 }
 
-.c-main-footer__nav {
-  @include media("<=xlarge") {
-    text-align: center;
-    padding-bottom: var(--space-5);
-  }
-}
-
-.c-main-footer__primary-nav {
-  @include media("<=xlarge") {
-    text-align: center;
-    padding-bottom: var(--space-5);
-  }
-}
-
 .c-main-header__share {
   display: block;
 }
