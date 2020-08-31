@@ -2,7 +2,6 @@
     $THEME OVERRIDES
 \*------------------------------------*/
 
-
 @import "overrides/vars/colors";
 @import "overrides/vars/fonts";
 @import "overrides/vars/animations";
@@ -21,6 +20,7 @@
 
 .c-main-header {
   --color-background: var(--color-cool-white);
+
   &.side-menu-is-active {
     .c-main-header__branding {
       opacity: 0;
@@ -145,4 +145,94 @@
 
 .c-gallery-overlay {
   @include color-group-dark;
+}
+
+// main player
+
+.on-air-now .on-air-now-upper {
+  @include media("<medium") {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+}
+
+.playlist-history-container {
+  margin-top: 20px;
+  margin-left: 0;
+  @include media(">medium") {
+    margin-top: -60px;
+    display: flex;
+    justify-content: center;
+    margin-left: 300px;
+  }
+}
+
+.on-air-now {
+  background: none;
+}
+
+.on-air-now .on-air-now-label {
+  width: 84px;
+}
+
+.on-air-now .message-the-show-title {
+  color: rgb(var(--color-white));
+}
+
+.on-air-now .message-the-show-toggle-box .u-icon--xs,
+.on-air-now .message-the-show-toggle-box .u-icon--xs svg,
+.on-air-now .message-the-show-toggle-box .u-icon--xs svg path {
+  fill: rgb(var(--color-white));
+}
+
+.on-air-now .show-title {
+  color: rgb(var(--color-white));
+  font-family: "Playfair Display";
+}
+
+.on-air-now .on-air-now-inner .show-image {
+  @include media(">medium") {
+    height: 244px;
+    width: 244px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    display: block;
+    margin-right: 35px;
+  }
+}
+
+.listen-play-button {
+  display: flex;
+  position: relative;
+  background: none;
+  top: 0;
+  margin: 0 auto;
+  justify-content: center;
+  @include media(">medium") {
+    justify-content: left;
+    top: 25px;
+    margin: 0 auto 0 0;
+  }
+}
+
+.listen-play-button .play-button {
+  margin-left: 0;
+}
+
+.listen-play-button .play-button svg {
+  max-height: 60px;
+  max-width: 60px;
+}
+
+// footer
+
+.c-main-footer {
+  background-color: rgb(var(--color-water-blue));
+  padding: 100px 0 100px 0;
+  background-image: linear-gradient(to bottom, #fff 0, #00518e 0);
+  background-position: 100% 142px;
+  background-repeat: repeat-x;
 }
