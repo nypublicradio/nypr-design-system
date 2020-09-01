@@ -17,7 +17,7 @@
       line-height: 16px;
 
       @include media(">=medium") {
-        @include typeface(body, 6);
+        @include typeface(body, 5);
         line-height: 25px;
       }
     }

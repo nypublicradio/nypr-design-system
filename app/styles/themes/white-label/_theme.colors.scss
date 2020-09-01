@@ -70,6 +70,7 @@
   /* Buttons */
   --color-button-text:          var(--color-white);
   --color-button:               var(--color-ceramic-blue);
+  --color-button-primary:       var(--color-cool-blue);
   --color-button-text-pressed:  var(--color-white);
   --color-button-pressed:       var(--color-ceramic-blue);
   --transform-button-pressed:   scale(0.95);
@@ -127,6 +128,7 @@
   /* Buttons */
   --color-button-text:            var(--color-white);
   --color-button:                 var(--color-cool-blue);
+  --color-button-primary:         var(--color-cool-blue);
   --color-button-text-pressed:    var(--color-white);
   --color-button-pressed:         var(--color-cool-blue); // we need to update this
   --transform-button-pressed:     scale(0.95);
