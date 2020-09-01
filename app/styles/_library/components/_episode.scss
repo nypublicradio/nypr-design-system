@@ -6,21 +6,18 @@
 
     .episode-segments,
     .episode-description {
-      background-image: linear-gradient(#EAEFF0,#EAEFF0);
+      background-image: linear-gradient(rgb(var(--color-background-muted)), rgb(var(--color-background-muted)));
       background-repeat: no-repeat;
     }
 
     .episode-segments .episode-segments-segment .episode-segments-segment-text,
     .episode-description .episode-description-text {
+      @include typeface(body, 3);
       color: rgb(var(--color-text));;
-      font-family: Open Sans;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: normal;
       line-height: 16px;
 
       @include media(">=medium") {
-        font-size: 18px;
+        @include typeface(body, 6);
         line-height: 25px;
       }
     }
@@ -47,7 +44,7 @@
         width: 100%;
 
         .episode-segments-segment-dot {
-          background-color: #EAEFF0;
+          background-color: rgb(var(--color-background-muted));
           border-radius: 5px;
           height: 10px;
           margin-right: 10px;

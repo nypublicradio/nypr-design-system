@@ -104,11 +104,9 @@
       }
 
       .play-button-text {
+        @include typeface(body, 5);
         color: rgb(var(--color-background));
-        font-family: Open Sans;
-        font-style: normal;
         font-weight: bold;
-        font-size: 16px;
         letter-spacing: 1.6px;
         text-transform: capitalize;
       }
@@ -143,16 +141,13 @@
     }
 
     .whats-on-show-description {
+      @include typeface(body, 5);
       color: rgb(var(--color-text));
-      font-family: Open Sans;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14.22px;
       margin-bottom: 24px;
       text-align: left;
 
       @include media(">=medium") {
-        font-size: 18px;
+        @include typeface(body, 6);
         grid-column-start: 2;
         grid-column-end: 3;
         grid-row-start: 2;
