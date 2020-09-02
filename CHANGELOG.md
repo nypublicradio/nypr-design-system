@@ -1,5 +1,12 @@
 # `nypr-design-system` changelog
 
+## 3.1.2
+
+- [ENHANCEMENT] Button component added (#130)
+- [DOCS] Component development guide added to storybook docs (#130)
+- [BUGFIX] WQXR theme fixes (#136)
+- [ENHANCEMENT] Footer updates (#137)
+
 ## 3.1.1
 
 - [ENHANCEMENT] Added white label versions of main and persistent audio players (#113 #118 #123)
