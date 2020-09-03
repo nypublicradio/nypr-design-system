@@ -28,12 +28,12 @@
     }
 
   .button.mod-donate {
-    --button-color: var(--color-reddish-orange);
-    --button-color-text: var(--color-white);
+    --color-button: var(--color-reddish-orange);
+    --color-button-text: var(--color-white);
   }
 
   .button.mod-flat-icon {
-    --button-color: transparent;
+    --color-button: transparent;
     padding: var(--space-2);
     transition: none;
   }
