@@ -29,7 +29,11 @@
 
   .button.mod-donate {
     --color-button: var(--color-reddish-orange);
+    --color-button-hover: var(--color-reddish-orange);
+    --color-button-pressed: var(--color-reddish-orange);
     --color-button-text: var(--color-white);
+    --color-button-text-hover: var(--color-white);
+    --color-button-text-pressed: var(--color-white);
   }
 
   .button.mod-flat-icon {
