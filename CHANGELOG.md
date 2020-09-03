@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.3
+
+- [ENHANCEMENT] What's On Snapshot Component (#135)
+
 ## 3.1.2
 
 - [ENHANCEMENT] Button component added (#130)
