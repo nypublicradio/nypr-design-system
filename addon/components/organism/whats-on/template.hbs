@@ -1,0 +1,48 @@
+<div class="whats-on-live-indicator">
+  <div class="whats-on-live-indicator-text">live</div>
+  <div class="whats-on-live-indicator-dot"></div>
+</div>
+
+<div class="whats-on-show">
+  <NyprMOnAirImage
+    @stream={{this.nowPlaying.stream}}
+    @show={{this.nowPlaying.show}}
+  />
+
+  <NyprMPlayButton
+    class="text mod-main-page"
+    data-action="Clicked Play/Pause Stream: main-player"
+    data-label={{this.nowPlaying.stream.name}}
+    title={{this.nowPlaying.stream.name}}
+    @playItemId={{this.nowPlaying.stream.slug}}
+    @playerLabel="main player"
+    @textMode={{true}}
+  />
+
+  <div class="whats-on-show-title" data-test-element="show-title">
+    {{#if nowPlaying.show.title}}
+      {{nowPlaying.show.title}}
+    {{else}}
+      {{nowPlaying.stream.name}}
+    {{/if}}
+  </div>
+
+  <div class="whats-on-show-description" data-test-element="show-description">
+    {{{strip-html this.nowPlaying.show.tease}}}
+  </div>
+</div>
+
+{{#if displayEpisode}}
+  {{organism/whats-on/episode
+    description=this.nowPlaying.stream.currentShow.description
+  }}
+{{/if}}
+
+{{#if this.nowPlaying.nextAiring}}
+  {{organism/whats-on/schedule
+    airing=this.nowPlaying.nextAiring
+    scheduleUrl=scheduleUrl
+  }}
+{{/if}}
+
+{{yield}}

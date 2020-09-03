@@ -3,5 +3,5 @@ import layout from '../templates/components/nypr-m-on-air-image';
 
 export default Component.extend({
   layout,
-  classNames: ['show-image']
+  classNames: ['on-air-image']
 });

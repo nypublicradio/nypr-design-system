@@ -1,0 +1,99 @@
+.schedule {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .schedule-metadata {
+    align-items: center;
+    background-color: rgb(var(--color-background-muted));
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+
+    .schedule-metadata-image {
+      background: rgb(var(--color-background-muted));
+      filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.15));
+      margin-right: 10px;
+      max-width: 48px;
+      min-height: 48px;
+      min-width: 48px;
+
+      @include media(">=medium") {
+        min-height: 72px;
+        min-width: 72px;
+      }
+    }
+
+    .schedule-metadata-copy {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+
+      .schedule-metadata-copy-title {
+        flex: 1;
+
+        .schedule-metadata-copy-title-label {
+          @include typeface(body, 2);
+          color: rgb(var(--color-primary-1));
+          font-weight: bold;
+          letter-spacing: 1.2px;
+          line-height: 16px;
+          text-transform: uppercase;
+
+          @include media(">=medium") {
+            @include typeface(body, 3);
+            font-weight: bold;
+            line-height: 20px;
+          }
+        }
+
+        .schedule-metadata-copy-title-text {
+          @include typeface(body, 4);
+          color: rgb(var(--color-text-metadata));
+          display: flex;
+          font-weight: bold;
+          line-height: 19px;
+          text-align: left;
+
+          @include media(">=medium") {
+            @include typeface(body, 8);
+            font-weight: bold;
+            line-height: 34px;
+          }
+        }
+      }
+
+      .schedule-metadata-copy-time {
+        @include typeface(body, 2);
+        align-self: flex-end;
+        color: rgb(var(--color-text-muted));
+        line-height: 16px;
+        min-width: 60px;
+        text-align: right;
+
+        @include media(">=medium") {
+          @include typeface(body, 4);
+          line-height: 20px;
+        }
+      }
+    }
+  }
+
+  .schedule-full-schedule-button {
+    @include typeface(body, 3);
+    background: rgb(var(--color-primary-2));
+    color: rgb(var(--color-text-inverse));
+    font-weight: bold;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    @include media(">=medium") {
+      @include typeface(body, 5);
+      font-weight: bold;
+      line-height: 56px;
+    }
+  }
+}

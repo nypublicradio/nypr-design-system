@@ -1,0 +1,1 @@
+export { default } from 'nypr-design-system/components/organism/whats-on/schedule/component';

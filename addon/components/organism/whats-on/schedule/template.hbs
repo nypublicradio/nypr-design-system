@@ -1,0 +1,17 @@
+<div class='schedule-metadata'>
+    <div class='schedule-metadata-image'>
+        <img
+            alt="image for {{airing.showTitle}}"
+            src={{airing.show.image.url}}>
+    </div>
+    <div class="schedule-metadata-copy">
+        <div class='schedule-metadata-copy-title'>
+            <div class="schedule-metadata-copy-title-label">up next</div>
+            <div class="schedule-metadata-copy-title-text">{{airing.showTitle}}</div>
+        </div>
+        <div class="schedule-metadata-copy-time">{{time}}</div>
+    </div>
+</div>
+<a class='schedule-full-schedule-button' href='{{scheduleUrl}}' target='_blank'>view full schedule</a>
+
+{{yield}}
