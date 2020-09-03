@@ -70,7 +70,6 @@
   /* Buttons */
   --color-button-text:          var(--color-white);
   --color-button:               var(--color-ceramic-blue);
-  --color-button-primary:       var(--color-cool-blue);
   --color-button-text-pressed:  var(--color-white);
   --color-button-pressed:       var(--color-ceramic-blue);
   --transform-button-pressed:   scale(0.95);
@@ -78,6 +77,12 @@
   --color-button-hover:         var(--color-cool-blue);
   --opacity-button-hover:       var(--opacity-hover);
   --transform-button-hover:     none;
+  // todo: remove these when refactoring existing white label buttons to button component
+  // until then they are needed
+  --color-button-primary:         var(--color-cool-blue);
+  --color-button-primary-hover:   var(--color-cool-blue);
+  --color-button-primary-pressed: var(--color-ceramic-blue);
+  --opacity-button-primary-hover: var(--opacity-hover);
 
   /* Borders */
   --color-border-subtle:        var(--color-background-highlight);
