@@ -27,6 +27,10 @@
       transform: translate(-10px, 10px);
     }
 
+  .button-label {
+    line-height: 22px;
+  }
+
   .button.mod-donate {
     --color-button: var(--color-reddish-orange);
     --color-button-hover: var(--color-reddish-orange);
