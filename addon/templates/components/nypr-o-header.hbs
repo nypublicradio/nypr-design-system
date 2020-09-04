@@ -13,6 +13,7 @@
           )}}
 {{else}}
   {{yield (hash
+                  left=(component 'nypr-o-header/left-no-menu')
                   nav=(component 'nypr-o-header/nav' class="c-primary-nav--top" linkDataLabel='Top Nav')
                   right=(component 'nypr-o-header/right')
                   outOfViewport=this.outOfViewport
