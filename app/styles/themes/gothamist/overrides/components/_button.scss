@@ -31,6 +31,7 @@
     line-height: 22px;
   }
 
+  // gothamist donate button
   .button.mod-donate {
     --color-button: var(--color-reddish-orange);
     --color-button-hover: var(--color-reddish-orange);
@@ -40,6 +41,7 @@
     --color-button-text-pressed: var(--color-white);
   }
 
+  // icon button with text styling
   .button.mod-flat-icon {
     --color-button: transparent;
     padding: var(--space-2);
@@ -58,13 +60,20 @@
       fill: rgba(var(--color-text));
     }
 
+  // custom button sizing for the header
   .button.mod-header {
     font-size: var(--font-size-5);
     padding: 11px 50px 10px;
     height: 43px;
   }
 
+  // button that's wider on the sides
   .button.mod-wide {
     padding-left: 80px;
     padding-right: 80px;
+  }
+
+  // button that stretches to fill its container
+  .button.mod-stretch {
+    width: 100%;
   }

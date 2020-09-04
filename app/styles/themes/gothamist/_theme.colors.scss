@@ -74,7 +74,7 @@
   --color-button:               var(--color-banana-yellow);
   --color-button-text-pressed:  var(--color-dark-gray);
   --color-button-pressed:       var(--color-banana-yellow);
-  --transform-button-pressed:   inherit;
+  --transform-button-pressed:   translate(10px, -10px);
   --color-button-text-hover:    var(--color-dark-gray);
   --color-button-hover:         var(--color-banana-yellow);
   --opacity-button-hover:       var(--opacity-hover);
