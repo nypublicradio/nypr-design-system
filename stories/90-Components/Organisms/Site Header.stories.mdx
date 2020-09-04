@@ -398,6 +398,7 @@ On mobile, the majority of components in the Site Header will be hidden as to fi
   <Story name="Header Config 4 (No Menu)" height="150px">{{
     template: hbs`
           <NyprOHeader
+                  @showMenuButton=false
                   @donateURL={{DONATE_URL}}
                   data-test-main-header
                   as |header|
