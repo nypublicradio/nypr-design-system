@@ -71,7 +71,7 @@
     padding: 11px var(--space-3) 10px;
     height: 43px;
 
-    @include media(">tablet") {
+    @include media(">medium") {
       padding-left: 50px;
       padding-right: 50px;
     }
