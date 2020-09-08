@@ -1,6 +1,7 @@
 {{!-- BEGIN-SNIPPET nypr-m-share-tools-link.hbs --}}
 <a href={{or @href this.href}}
    class="c-share-tools__link o-icon {{@service}}"
+   aria-label="follow us on {{@service}}"
    ...attributes
    target={{if target @target "_blank"}}
    rel="noopener"
