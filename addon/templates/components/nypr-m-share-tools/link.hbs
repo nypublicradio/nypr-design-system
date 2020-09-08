@@ -6,7 +6,7 @@
    target={{if target @target "_blank"}}
    rel="noopener"
    onclick={{if clickAction (action "handleClick")}}>
-  <Icon @icon={{@service}}/>
+  <Icon @icon={{@service}} @title="{{@service}}"/>
   {{#if title}}
     <div class="c-share-tools__link-title">{{@title}}</div>
   {{/if}}

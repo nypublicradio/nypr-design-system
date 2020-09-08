@@ -12,7 +12,7 @@
   {{/if}}
 </div>
 
-<NyprMPlayButton @playItemId={{this.streamSlug}} class="nypr-o-audio-player-play-button" data-test-element="play-button"/>
+<NyprMPlayButton aria-label="play" @playItemId={{this.streamSlug}} class="nypr-o-audio-player-play-button" data-test-element="play-button"/>
 
 <NyprMTrackAdditionalInfo class="nypr-o-audio-player-level-two-three" data-test-element="track" @ensembleName={{levelSix}} @conductorName={{levelFive}} as |options|>
   {{#if @levelTwo}}

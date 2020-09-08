@@ -20,11 +20,13 @@
   />
 
   <div class="whats-on-show-title" data-test-element="show-title">
+    <h2>
     {{#if nowPlaying.show.title}}
       {{nowPlaying.show.title}}
     {{else}}
       {{nowPlaying.stream.name}}
     {{/if}}
+    </h2>
   </div>
 
   <div class="whats-on-show-description" data-test-element="show-description">
