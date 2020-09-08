@@ -8,11 +8,11 @@ import layout from '../templates/components/nypr-m-secondary-nav';
 */
 export default Component.extend({
   layout,
-  tagName: 'nav',
+  tagName: 'div',
   classNames: ['c-secondary-nav'],
 
   attributeBindings: ['aria-label'],
-  'aria-label': 'Secondary',
+  'aria-label': 'Secondary Navigation',
 
   /**
     Navigation items objects with `url` and `title` keys.
