@@ -71,7 +71,16 @@ blockquote {
 }
 
 .c-main-header__share {
-  display: block;
+  display: inline-grid;
+  margin-right: var(--space-3);
+  width: max-content;
+  @include media('>small') {
+    display: flex;
+  }
+}
+
+.c-main-header__share .c-share-tools__group {
+  width: max-content;
 }
 
 .c-main-header__share .c-share-tools__link:hover path {
