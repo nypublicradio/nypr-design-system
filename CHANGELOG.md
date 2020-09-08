@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.4
+
+- [BUGFIX] Header Social Share fix (#145)
+
 ## 3.1.3
 
 - [ENHANCEMENT] What's On Snapshot Component (#135)
