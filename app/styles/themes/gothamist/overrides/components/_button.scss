@@ -49,21 +49,27 @@
   // icon button with text styling
   .button.mod-flat-icon {
     --color-button: transparent;
+    --color-button-hover: transparent;
     padding: var(--space-2);
     transition: none;
+    &:hover, &:active {
+      transform: none;
+    }
   }
 
     .button.mod-flat-icon:before {
       content: none;
     }
 
-    .button.mod-flat-icon:hover, .button.mod-flat-icon:active {
-      transform: none;
-    }
-
     .button.mod-flat-icon * {
       fill: rgba(var(--color-text));
     }
+
+    .button.mod-flat-icon:hover *,
+    .button.mod-flat-icon:active * {
+      fill: rgba(var(--color-reddish-orange));
+    }
+
 
   // custom button sizing for the header
   .button.mod-header {
