@@ -7,6 +7,10 @@
   padding: 20px var(--space-4) 18px;
   transition: all var(--animation-duration-standard) var(--animation-easing-standard);
   text-transform: uppercase;
+  @include media(">551px") {
+    padding-right: var(--space-5);
+    padding-left: var(--space-5);
+  }
 }
 
   .button:before {
@@ -41,6 +45,7 @@
     --color-button-text-pressed: var(--color-white);
   }
 
+
   // icon button with text styling
   .button.mod-flat-icon {
     --color-button: transparent;
@@ -63,9 +68,18 @@
   // custom button sizing for the header
   .button.mod-header {
     font-size: var(--font-size-5);
-    padding: 11px 50px 10px;
+    padding: 11px var(--space-3) 10px;
     height: 43px;
+
+    @include media(">tablet") {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
   }
+
+
+
+
 
   // button that's wider on the sides
   .button.mod-wide {
