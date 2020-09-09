@@ -3,7 +3,7 @@
   <div class="whats-on-live-indicator-dot"></div>
 </div>
 
-<div class="whats-on-show">
+<div class="whats-on-show" aria-live="polite">
   <NyprMOnAirImage
     @stream={{this.nowPlaying.stream}}
     @show={{this.nowPlaying.show}}
@@ -17,17 +17,18 @@
     @playItemId={{this.nowPlaying.stream.slug}}
     @playerLabel="main player"
     @textMode={{true}}
+    aria-label="listen live to {{this.nowPlaying.stream.name}}"
+    role="button"
+    tabindex="0"
   />
 
-  <div class="whats-on-show-title" data-test-element="show-title">
-    <h2>
+  <h2 class="whats-on-show-title" data-test-element="show-title">
     {{#if nowPlaying.show.title}}
       {{nowPlaying.show.title}}
     {{else}}
       {{nowPlaying.stream.name}}
     {{/if}}
-    </h2>
-  </div>
+  </h2>
 
   <div class="whats-on-show-description" data-test-element="show-description">
     {{{strip-html this.nowPlaying.show.tease}}}
