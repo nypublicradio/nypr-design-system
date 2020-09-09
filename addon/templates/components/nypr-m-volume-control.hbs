@@ -6,7 +6,7 @@
     </div>
   </div>
   <button tabindex="0" aria-label="toggle mute" class="nypr-player-button mod-volume" {{action 'toggleMute'}}>
-    <Icon @icon="volume" @title="volume unmuted" class="nypr-player-icon mod-volume-unmuted"/>
-    <Icon @icon="volume-muted" @title="volume muted" class="nypr-player-icon mod-volume-muted"/>
+    <Icon aria-hidden="true" @icon="volume" @title="volume unmuted" class="nypr-player-icon mod-volume-unmuted"/>
+    <Icon aria-hidden="true" @icon="volume-muted" @title="volume muted" class="nypr-player-icon mod-volume-muted"/>
   </button>
 </div>
