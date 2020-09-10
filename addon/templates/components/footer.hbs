@@ -4,7 +4,7 @@
     <div class="l-grid l-grid--2up l-grid--large-gutters">
       <div>
         <div class="c-main-footer__logo u-space--double--bottom">
-          {{#link-to 'index'}}
+          {{#link-to 'index' aria-label="home page"}}
             {{yield (hash logo=(component 'blank-template'))}}
           {{/link-to}}
         </div>
@@ -38,7 +38,7 @@
     <div class="l-grid l-grid--2up--xlarge l-grid--middle l-grid--large-gutters">
       <div class="c-main-footer__brand-group u-space--triple--top">
         <div class="c-main-footer__nypr-logo">
-          <Icon @icon='nypr-logo' @title="nypr logo"/>
+          <Icon @icon='nypr-logo' @title="NYPR logo"/>
         </div>
         <NyprMBrandsLinkroll @exclude={{@site}}/>
       </div>
