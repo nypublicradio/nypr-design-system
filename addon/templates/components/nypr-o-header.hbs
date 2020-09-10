@@ -3,12 +3,12 @@
 <div class="c-main-header__inner {{if this.outOfViewport 'c-floating-header is-visible'}}" id="header-inner">
 
   {{yield (hash
-    menu=(component 'nypr-o-header/menu' donateURL=@donateURL close=(action toggleMenu false) aria-hidden=(if this.isOpen 'false' 'true') isOpen=this.isOpen)
-    left=(component 'nypr-o-header/left' openMenu=(action toggleMenu) ariaExpanded=(if this.isOpen 'true' 'false') ariaLabel=(if this.isOpen 'Close navigation menu' 'Open navigation menu'))
-    nav=(component 'nypr-o-header/nav' class="c-primary-nav--top" linkDataLabel='Top Nav')
-    right=(component 'nypr-o-header/right')
-    outOfViewport=this.outOfViewport
-    rules=this.rules
+                menu=(component 'nypr-o-header/menu' donateURL=@donateURL close=(action toggleMenu false) aria-hidden=(if this.isOpen 'false' 'true') isOpen=this.isOpen)
+                left=(component 'nypr-o-header/left' showMenuButton=showMenuButton openMenu=(action toggleMenu) ariaExpanded=(if this.isOpen 'true' 'false') ariaLabel=(if this.isOpen 'Close navigation menu' 'Open navigation menu'))
+                nav=(component 'nypr-o-header/nav' class="c-primary-nav--top" linkDataLabel='Top Nav')
+                right=(component 'nypr-o-header/right')
+                outOfViewport=this.outOfViewport
+                rules=this.rules
   )}}
 
   {{#if this.rules.progressTarget}}
