@@ -9,19 +9,6 @@
     @show={{this.nowPlaying.show}}
   />
 
-  <NyprMPlayButton
-    class="text mod-main-page"
-    data-action="Clicked Play/Pause Stream: main-player"
-    data-label={{this.nowPlaying.stream.name}}
-    title={{this.nowPlaying.stream.name}}
-    @playItemId={{this.nowPlaying.stream.slug}}
-    @playerLabel="main player"
-    @textMode={{true}}
-    aria-label="listen live to {{this.nowPlaying.stream.name}}"
-    role="button"
-    tabindex="0"
-  />
-
   <h2 class="whats-on-show-title" data-test-element="show-title">
     {{#if nowPlaying.show.title}}
       {{nowPlaying.show.title}}
@@ -33,6 +20,19 @@
   <div class="whats-on-show-description" data-test-element="show-description">
     {{{strip-html this.nowPlaying.show.tease}}}
   </div>
+
+  <NyprMPlayButton
+          class="text mod-main-page"
+          data-action="Clicked Play/Pause Stream: main-player"
+          data-label={{this.nowPlaying.stream.name}}
+          title={{this.nowPlaying.stream.name}}
+          @playItemId={{this.nowPlaying.stream.slug}}
+          @playerLabel="main player"
+          @textMode={{true}}
+          aria-label="listen live to {{this.nowPlaying.stream.name}}"
+          role="button"
+          tabindex="0"
+  />
 </div>
 
 {{#if displayEpisode}}
