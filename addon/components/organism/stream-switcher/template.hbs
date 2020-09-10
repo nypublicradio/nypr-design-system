@@ -2,7 +2,7 @@
 {{#if (gt (dictionary-length @streams) 0)}}
     <ul class='stream-switcher-streams'>
         {{#each (dictionary-values @streams) as |stream|}}
-            <li class='stream-switcher-streams-stream'>
+            <li class='stream-switcher-streams-stream {{if (eq stream.slug nowPlaying.slug) "is-active"}}'>
                 <div class='stream-switcher-streams-stream-title'>{{stream.name}}</div>
                 <NyprMOnAirImage
                     @stream={{stream.stream}}

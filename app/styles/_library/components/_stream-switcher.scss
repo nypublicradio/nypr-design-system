@@ -69,6 +69,14 @@
                 margin-bottom: 16px;
             }
 
+            &.is-active {
+                border: 3px solid rgb(var(--color-text-error));
+
+                @include media(">=xxlarge") {
+                    border-left: none;
+                }
+            }
+
             .stream-switcher-streams-stream-title {
                 @include typeface(body, 4);
                 color: rgb(var(--color-background));
@@ -139,6 +147,38 @@
                     margin-right: 8px;
                     opacity: 0.7;
                     text-align: right;
+                }
+            }
+        }
+    }
+
+    &.is-playing,
+    &.is-loading {
+        .stream-switcher-streams .stream-switcher-streams-stream {
+            &.is-active:hover {
+                @include media(">=xxlarge") {
+                    height: 125px;
+
+                    .on-air-image,
+                    .stream-switcher-streams-stream-show-title {
+                        display: block;
+                    }
+
+                    .up-next {
+                        display: flex;
+                    }
+                }
+            }
+
+            &.is-active {
+                @include media(">=xxlarge") {
+                    height: 36px;
+
+                    .on-air-image,
+                    .stream-switcher-streams-stream-show-title,
+                    .up-next {
+                        display: none;
+                    }
                 }
             }
         }
