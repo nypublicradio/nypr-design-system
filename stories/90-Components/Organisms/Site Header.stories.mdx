@@ -62,7 +62,7 @@ On mobile, the majority of components in the Site Header will be hidden as to fi
                   data-test-main-header
                   as |header|
           >
-            <header.left data-test-header-left as |left|>
+            <header.left @showMenuButton=true data-test-header-left as |left|>
               <left.branding>
                 {{#link-to "index"}}
                   <Icon @icon='gothamist/logo' @title='gothamist logo'/>
@@ -159,7 +159,7 @@ On mobile, the majority of components in the Site Header will be hidden as to fi
                   data-test-main-header
                   as |header|
           >
-            <header.left data-test-header-left as |left|>
+            <header.left @showMenuButton=true data-test-header-left as |left|>
               <left.branding>
                 {{#link-to "index"}}
                   <Icon @icon='gothamist/logo' @title='gothamist logo'/>
@@ -282,7 +282,7 @@ On mobile, the majority of components in the Site Header will be hidden as to fi
                   data-test-main-header
                   as |header|
           >
-            <header.left data-test-header-left as |left|>
+            <header.left @showMenuButton=true data-test-header-left as |left|>
               <left.branding>
                 {{#link-to "index"}}
                   <Icon @icon='gothamist/logo' @title='gothamist logo'/>
@@ -395,7 +395,7 @@ On mobile, the majority of components in the Site Header will be hidden as to fi
 </Preview>
 
 <Preview withToolbar={true}>  
-  <Story name="Header Config 4 (No Menu)" height="150px">{{
+  <Story name="Header Config 4" height="150px">{{
     template: hbs`
           <NyprOHeader
                   @showMenuButton=false
