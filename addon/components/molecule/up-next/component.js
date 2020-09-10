@@ -19,6 +19,9 @@ import layout from './template';
 export default Component.extend({
   layout,
   classNames: ['up-next'],
+  MILLISECONDS_IN_HOUR: 3600000,
+  MILLISECONDS_IN_MINUTE: 60000,
+  MILLISECONDS_IN_SECOND: 1000,
 
   /**
   Next scheduled airing.
