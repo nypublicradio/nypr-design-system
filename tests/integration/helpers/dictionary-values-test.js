@@ -1,17 +1,17 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+
+import { dictionaryValues } from 'dummy/helpers/dictionary-values';
 
 module('Integration | Helper | dictionary-values', function(hooks) {
   setupRenderingTest(hooks);
 
-  // Replace this with your real tests.
   test('it renders', async function(assert) {
-    this.set('inputValue', '1234');
 
-    await render(hbs`{{dictionary-values inputValue}}`);
+    this.set('dictionary', { 'wnyc-fm939': {}, 'wnyc-am820': {} });
+    assert.equal(dictionaryValues([ this.get('dictionary') ] ).length, 2);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.equal(dictionaryValues( null ).length, 0);
+    assert.equal(dictionaryValues([ undefined ] ).length, 0);
   });
 });
