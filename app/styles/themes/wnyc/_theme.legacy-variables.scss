@@ -1,0 +1,24 @@
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+
+/**
+ * Common Breakpoints
+ */
+$xsmall: 360px;
+$small: 550px;
+$medium: 768px;
+$large: 850px;
+$xlarge: 1024px;
+$xxlarge: 1200px;
+$xxxlarge: 1500px;
+
+$breakpoints: (
+  'xsmall': $xsmall,
+  'small': $small,
+  'medium': $medium,
+  'large': $large,
+  'xlarge': $xlarge,
+  'xxlarge': $xxlarge,
+  'xxxlarge': $xxxlarge
+);

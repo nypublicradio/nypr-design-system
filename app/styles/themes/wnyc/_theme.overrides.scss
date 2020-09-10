@@ -1,0 +1,126 @@
+/*------------------------------------*\
+    $THEME OVERRIDES
+\*------------------------------------*/
+
+// buttons
+.o-button,
+.o-button::before {
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+// header logo
+.c-main-header a svg {
+  fill: rgb(var(--color-red));
+}
+
+.c-main-header__branding a:hover {
+  svg {
+    fill: rgb(var(--color-black));
+  }
+}
+
+// header donate button
+.c-main-header__donate {
+  &:hover {
+    color: rgb(var(--color-white));
+  }
+}
+
+// Footer
+.c-main-footer {
+  margin-top: 50px;
+  --color-background: var(--color-light-gray);
+}
+
+.c-main-footer a,
+.c-main-footer a:visited,
+.c-main-footer a:active {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// footer
+.c-main-footer .c-secondary-nav__subheader {
+  @include typeface(subheader, 8);
+}
+
+.c-nypr-nav__link:hover {
+  color: rgb(var(--color-blue));
+}
+
+// main player
+.whats-on .whats-on-live-indicator .whats-on-live-indicator-text {
+  font-size: var(--font-size-3);
+  line-height: 14px;
+  letter-spacing: 0.882761px;
+}
+
+.whats-on .whats-on-show .whats-on-show-title {
+  color: rgb(var(--color-black));
+  font-size: var(--font-size-13);
+  line-height: 54px;
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+.whats-on .whats-on-show .on-air-image {
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  border: none;
+  filter: none;
+}
+
+.whats-on .whats-on-show .on-air-image img {
+  border-radius: 3px;
+}
+
+.whats-on .whats-on-show .play-button {
+  border-radius: 3px;
+}
+
+.whats-on .whats-on-show .play-button .play-button-text {
+  letter-spacing: 0.02em;
+}
+
+// what's on snapshot
+.schedule .schedule-metadata .schedule-metadata-image img {
+  border-radius: 3px;
+}
+
+.schedule .schedule-full-schedule-button {
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+
+.schedule .schedule-metadata .schedule-metadata-copy .schedule-metadata-copy-title .schedule-metadata-copy-title-label {
+  font-size: var(--font-size-4);
+  letter-spacing: 0.09em;
+}
+
+.schedule .schedule-metadata .schedule-metadata-copy .schedule-metadata-copy-title .schedule-metadata-copy-title-text {
+  @include typeface(subheader, 8);
+  color: rgb(var(--color-black));
+}
+
+.schedule .schedule-metadata {
+  border-radius: 3px 3px 0 0;
+}
+
+.schedule .schedule-full-schedule-button {
+  border-radius: 0 0 3px 3px;
+}
+
+.schedule .schedule-metadata .schedule-metadata-copy .schedule-metadata-copy-time {
+  color: rgb(var(--color-gray));
+}
+
+// persistent player
+.nypr-o-audio-player,
+.nypr-o-audio-player-controls {
+  background-color: rgb(var(--color-blue));
+}
