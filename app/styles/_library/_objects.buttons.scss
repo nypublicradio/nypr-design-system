@@ -17,7 +17,7 @@ input[type="submit"] {
 	align-items: center;
 	justify-content: center;
 	border-width: 0px;
-	background-color: rgb(var(--color-button-primary));
+	background-color: rgb(var(--color-button));
 	cursor: pointer;
 	padding: 20px var(--space-4) 18px;
 	text-align: center;
@@ -39,20 +39,20 @@ input[type="submit"] {
     z-index: $z-index-button-outline;
     width: 100%;
     height: 100%;
-    border: 3px solid rgb(var(--color-button-primary));
-    border-color: rgb(var(--color-button-primary));
+    border: 3px solid rgb(var(--color-button));
+    border-color: rgb(var(--color-button));
     transform: translate(0, 0);
     transition: var(--animation-easing-incoming) var(--animation-duration-standard);// used to be $hard-ease-in
   }
 }
 .o-button:hover {
-	opacity: var(--opacity-button-primary-hover);
-	background: rgb(var(--color-button-primary-hover));
+	opacity: var(--opacity-button-hover);
+	background: rgb(var(--color-button-hover));
   text-decoration: none;
 }
 .o-button:active {
 	opacity: 1;
-	background: rgb(var(--color-button-primary-pressed));
+	background: rgb(var(--color-button-pressed));
 }
 
 /* Sizes*/
