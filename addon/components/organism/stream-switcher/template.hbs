@@ -1,14 +1,13 @@
+<div class='stream-switcher-stations-label'>stations</div>
 {{#if (gt (dictionary-length @streams) 0)}}
     <ul class='stream-switcher-streams'>
         {{#each (dictionary-values @streams) as |stream|}}
             <li class='stream-switcher-streams-stream'>
                 <div class='stream-switcher-streams-stream-title'>{{stream.name}}</div>
-                <!--
                 <NyprMOnAirImage
                     @stream={{stream.stream}}
                     @show={{stream.liveAiring.show}}
                 />
-                -->
                 <div class='stream-switcher-streams-stream-show-title'>
                     {{stream.liveAiring.showTitle}}
                 </div>
@@ -20,4 +19,3 @@
     </ul>
 {{/if}}
 
-{{yield}}
