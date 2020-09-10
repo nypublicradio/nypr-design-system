@@ -7,13 +7,11 @@ module('Integration | Component | organism/stream-switcher', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
     await render(hbs`<Organism::StreamSwitcher />`);
     assert.dom('.stream-switcher').exists();
   });
 
-  test('it renders without any streams', async function(assert) {
+  test('it doesn\'t render a list without any streams', async function(assert) {
     await render(hbs`<Organism::StreamSwitcher />`);
     assert.dom('.stream-switcher-streams').doesNotExist();
   });

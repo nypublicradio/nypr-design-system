@@ -26,7 +26,4 @@ export default Component.extend({
   */
   streams: null,
 
-  time: computed('clock.second', function() {
-    return 'at 12:00'
-  }),
 });
