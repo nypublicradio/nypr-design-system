@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.5
+
+- [ENHANCEMENT] Add overrides for button theming to Gothamist Theme (#143)
+
 ## 3.1.4
 
 - [BUGFIX] Header Social Share fix (#145)
