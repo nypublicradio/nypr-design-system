@@ -1,9 +1,15 @@
 .stream-switcher {
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
     margin-right: 20px;
+    padding-left: 20px;
     width: 100%;
+
+    @include media(">=xxlarge") {
+        margin-right: 0px;
+        padding-left: 0px;
+        padding-top: 56px;
+    }
 
     .stream-switcher-stations-label {
         @include typeface(body, 3);
@@ -14,18 +20,32 @@
         margin-top: 8px;
         text-align: left;
         text-transform: uppercase;
+
+        @include media(">=xxlarge") {
+            margin-left: 24px;
+        }
     }
 
     .stream-switcher-streams {
         display: flex;
         flex-flow: row;
-        height: 125px;
         margin-bottom: 40px;
-        max-height: 125px;
         width: 100%;
 
+        @include media("<xxlarge") {
+            height: 125px;
+            max-height: 125px;
+        }
+
+        @include media(">=xxlarge") {
+            flex-flow: column;
+            height: 100%;
+            width: 230px;
+            max-width: 230px;
+        }
+
         // horizontal scroll with hidden scrollbar
-        overflow-x: scroll;
+        overflow: scroll;
         -webkit-overflow-scrolling: touch;
         // todo: hiding the scrollbar matches the design; is there a better way to do it, or is it something we actually don't want to do?
         /* Hide scrollbar for Chrome, Safari and Opera */
@@ -40,9 +60,14 @@
             display: grid;
             grid-template-columns: 56px 1fr;
             grid-template-rows: auto auto 1fr;
+            height: 125px;
             margin-right: 16px;
             max-width: 230px;
             min-width: 230px;
+
+            @include media(">=xxlarge") {
+                margin-bottom: 16px;
+            }
 
             .stream-switcher-streams-stream-title {
                 @include typeface(body, 4);
