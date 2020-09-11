@@ -12,15 +12,6 @@ module('Integration | Component | molecule/sound-animation', function(hooks) {
 
     await render(hbs`{{molecule/sound-animation}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#molecule/sound-animation}}
-        template block text
-      {{/molecule/sound-animation}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom('.sound-animation').exists();
   });
 });
