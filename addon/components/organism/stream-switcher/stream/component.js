@@ -15,7 +15,15 @@ export default Component.extend({
     return get(this, 'nowPlaying.slug') == get(this, 'stream.slug');
   }),
 
-  click: function() {
+  click: function(event) {
+    event.target.scrollIntoView({
+      behavior: 'smooth', block: 'nearest'
+    });
+
+    if (this.nowPlaying.slug == this.stream.slug) {
+      return;
+    }
+
     if (this.hifi.isPlaying || this.hifi.isLoading) {
       this.hifi.pause();
     }
