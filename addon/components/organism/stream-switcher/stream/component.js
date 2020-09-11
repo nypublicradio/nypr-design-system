@@ -9,10 +9,20 @@ export default Component.extend({
   layout,
   tag: 'li',
   classNames: ['stream-switcher-streams-stream'],
-  classNameBindings: ['isActive:is-active'],
+  classNameBindings: ['isActive:is-active', 'isPlaying:is-playing', 'isLoading'],
 
   isActive: computed('nowPlaying.slug', function() {
     return get(this, 'nowPlaying.slug') == get(this, 'stream.slug');
+  }),
+
+  isPlaying: computed('nowPlaying.slug', 'hifi.isPlaying', function() {
+    return get(this, 'hifi.isPlaying') === true &&
+      get(this, 'nowPlaying.slug') == get(this, 'stream.slug');
+  }),
+
+  isLoading: computed('nowPlaying.slug', 'hifi.isLoading', function() {
+    return get(this, 'hifi.isLoading') &&
+      get(this, 'nowPlaying.slug') == get(this, 'stream.slug');
   }),
 
   click: function(event) {

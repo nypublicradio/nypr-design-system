@@ -59,7 +59,7 @@
             background-color: rgb(var(--color-text));
             border: 3px solid transparent;
             display: grid;
-            grid-template-columns: 56px 1fr;
+            grid-template-columns: 56px 1fr 60px;
             grid-template-rows: auto auto 1fr;
             height: 125px;
             margin-right: 16px;
@@ -79,6 +79,33 @@
                 }
             }
 
+            &.is-active.is-playing:hover {
+                @include media(">=xxlarge") {
+                    height: 125px;
+
+                    .on-air-image,
+                    .stream-switcher-streams-stream-show-title {
+                        display: block;
+                    }
+
+                    .up-next {
+                        display: flex;
+                    }
+                }
+            }
+
+            &.is-active.is-playing {
+                @include media(">=xxlarge") {
+                    height: 36px;
+
+                    .on-air-image,
+                    .stream-switcher-streams-stream-show-title,
+                    .up-next {
+                        display: none;
+                    }
+                }
+            }
+
             .stream-switcher-streams-stream-title {
                 @include typeface(body, 4);
                 color: rgb(var(--color-background));
@@ -90,6 +117,60 @@
                 margin-left: 8px;
                 margin-top: 8px;
                 pointer-events: none;
+            }
+
+            .sound-animation {
+                align-items: flex-end;
+                display: flex;
+                flex-direction: row;
+                grid-column-start: 3;
+                grid-column-end: 3;
+                grid-row-start: 1;
+                grid-row-end: span 1;
+                height: 16px;
+                justify-content: space-between;
+                width: 40px;
+
+                &.is-playing {
+                    .sound-animation-bar {
+                        animation: sound-bars 500ms linear 0ms infinite alternate;
+                    }
+
+                    .sound-animation-bar:nth-child(1) {
+                        animation-delay: 0ms;
+                    }
+
+                    .sound-animation-bar:nth-child(2) {
+                        animation-delay: 100ms;
+                    }
+
+                    .sound-animation-bar:nth-child(3) {
+                        animation-delay: 200ms;
+                    }
+
+                    .sound-animation-bar:nth-child(4) {
+                        animation-delay: 300ms;
+                    }
+
+                    .sound-animation-bar:nth-child(5) {
+                        animation-delay: 400ms;
+                    }
+
+                    .sound-animation-bar:nth-child(6) {
+                        animation-delay: 500ms;
+                    }
+
+                    .sound-animation-bar:nth-child(7) {
+                        animation-delay: 600ms;
+                    }
+                }
+
+                .sound-animation-bar {
+                    height: 100%;
+                    width: 2.2px;
+                    max-width: 2.2px;
+                    min-width: 2.2px;
+                }
             }
 
             .on-air-image {
@@ -111,7 +192,7 @@
                 color: rgb(var(--color-background));
                 font-weight: 600;
                 grid-column-start: 2;
-                grid-column-end: 2;
+                grid-column-end: span 2;
                 grid-row-start: 2;
                 grid-row-end: span 1;
                 pointer-events: none;
@@ -123,7 +204,7 @@
                 display: flex;
                 flex-direction: row;
                 grid-column-start: 1;
-                grid-column-end: span 2;
+                grid-column-end: span 3;
                 grid-row-start: 3;
                 grid-row-end: span 1;
                 pointer-events: none;
@@ -159,36 +240,18 @@
             }
         }
     }
+}
 
-    &.is-playing,
-    &.is-loading {
-        .stream-switcher-streams .stream-switcher-streams-stream {
-            &.is-active:hover {
-                @include media(">=xxlarge") {
-                    height: 125px;
+@keyframes sound-bars {
+    0% {
+        opacity: 0.35;
+        background: #f3f3f3;
+        height: 1px;
+    }
 
-                    .on-air-image,
-                    .stream-switcher-streams-stream-show-title {
-                        display: block;
-                    }
-
-                    .up-next {
-                        display: flex;
-                    }
-                }
-            }
-
-            &.is-active {
-                @include media(">=xxlarge") {
-                    height: 36px;
-
-                    .on-air-image,
-                    .stream-switcher-streams-stream-show-title,
-                    .up-next {
-                        display: none;
-                    }
-                }
-            }
-        }
+    100% {
+        opacity: 1;
+        background: #fff;
+        height: 100%;
     }
 }
