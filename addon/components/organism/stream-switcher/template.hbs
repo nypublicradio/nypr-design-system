@@ -2,19 +2,7 @@
 {{#if (gt (dictionary-length @streams) 0)}}
     <ul class='stream-switcher-streams'>
         {{#each (dictionary-values @streams) as |stream|}}
-            <li class='stream-switcher-streams-stream {{if (eq stream.slug nowPlaying.slug) "is-active"}}'>
-                <div class='stream-switcher-streams-stream-title'>{{stream.name}}</div>
-                <NyprMOnAirImage
-                    @stream={{stream.stream}}
-                    @show={{stream.liveAiring.show}}
-                />
-                <div class='stream-switcher-streams-stream-show-title'>
-                    {{stream.liveAiring.showTitle}}
-                </div>
-                {{#if stream.nextAiring}}
-                    {{molecule/up-next airing=stream.nextAiring}}
-                {{/if}}
-            </li>
+            {{organism/stream-switcher/stream stream=stream nowPlaying=nowPlaying}}
         {{/each}}
     </ul>
 {{/if}}

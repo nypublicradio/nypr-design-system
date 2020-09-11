@@ -32,9 +32,4 @@ export default Component.extend({
   @type {[stream-schedule]}
   */
   streams: null,
-
-  actions: {
-
-  }
-
 });

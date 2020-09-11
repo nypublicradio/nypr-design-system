@@ -57,6 +57,7 @@
 
         .stream-switcher-streams-stream {
             background-color: rgb(var(--color-text));
+            border: 3px solid transparent;
             display: grid;
             grid-template-columns: 56px 1fr;
             grid-template-rows: auto auto 1fr;
@@ -67,6 +68,7 @@
 
             @include media(">=xxlarge") {
                 margin-bottom: 16px;
+                border-left: none;
             }
 
             &.is-active {
@@ -87,6 +89,7 @@
                 grid-row-end: span 1;
                 margin-left: 8px;
                 margin-top: 8px;
+                pointer-events: none;
             }
 
             .on-air-image {
@@ -95,10 +98,11 @@
                 grid-column-end: 1;
                 grid-row-start: 2;
                 grid-row-end: span 1;
-                max-height: 40px;
                 margin: 8px 8px 12px 8px;
-                width: 40px;
+                max-height: 40px;
                 max-width: 40px;
+                pointer-events: none;
+                width: 40px;
             }
 
             .stream-switcher-streams-stream-show-title {
@@ -110,6 +114,7 @@
                 grid-column-end: 2;
                 grid-row-start: 2;
                 grid-row-end: span 1;
+                pointer-events: none;
             }
 
             .up-next {
@@ -121,13 +126,14 @@
                 grid-column-end: span 2;
                 grid-row-start: 3;
                 grid-row-end: span 1;
+                pointer-events: none;
 
                 .up-next-label {
                     @include typeface(body, 1);
                     color: rgb(var(--color-background));
-                    
                     margin-left: 8px;
                     opacity: 0.7;
+                    pointer-events: none;
                     text-transform: uppercase;
                 }
 
@@ -137,6 +143,7 @@
                     font-weight: bold;
                     margin-left: 8px;
                     opacity: 0.7;
+                    pointer-events: none;
                 }
 
                 .up-next-time {
@@ -146,6 +153,7 @@
                     margin-left: 8px;
                     margin-right: 8px;
                     opacity: 0.7;
+                    pointer-events: none;
                     text-align: right;
                 }
             }
