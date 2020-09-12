@@ -60,7 +60,7 @@
             border: 3px solid transparent;
             display: grid;
             grid-template-columns: 56px 1fr 60px;
-            grid-template-rows: auto auto 1fr;
+            grid-template-rows: 30px auto 1fr;
             height: 125px;
             margin-right: 16px;
             max-width: 230px;
@@ -108,6 +108,7 @@
 
             .stream-switcher-streams-stream-title {
                 @include typeface(body, 4);
+                align-self: center;
                 color: rgb(var(--color-background));
                 font-weight: bold;
                 grid-column-start: 1;
@@ -115,12 +116,12 @@
                 grid-row-start: 1;
                 grid-row-end: span 1;
                 margin-left: 8px;
-                margin-top: 8px;
                 pointer-events: none;
             }
 
             .sound-animation {
                 align-items: flex-end;
+                align-self: center;
                 display: flex;
                 flex-direction: row;
                 grid-column-start: 3;
@@ -179,7 +180,7 @@
                 grid-column-end: 1;
                 grid-row-start: 2;
                 grid-row-end: span 1;
-                margin: 8px 8px 12px 8px;
+                margin: 4px 8px 8px 8px;
                 max-height: 40px;
                 max-width: 40px;
                 pointer-events: none;
