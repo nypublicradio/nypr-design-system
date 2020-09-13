@@ -17,8 +17,10 @@ export default Component.extend({
         return moment(this.airing.startTime).format('h:mm A');
       } else if (this.airing.startTime.getTime() - currentTime.getTime() > this.MILLISECONDS_IN_MINUTE) {
         return 'in ' + ((this.airing.startTime.getTime() - currentTime.getTime()) / this.MILLISECONDS_IN_MINUTE).toFixed(0) + ' min';
-      } else {
+      } else if (this.airing.startTime.getTime() - currentTime.getTime() >= 0) {
         return 'in ' + ((this.airing.startTime.getTime() - currentTime.getTime()) / this.MILLISECONDS_IN_SECOND).toFixed(0) + ' sec';
+      } else {
+        return 'now';
       }
     }
     return '';
