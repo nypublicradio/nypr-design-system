@@ -1,3 +1,36 @@
 /* ------------------------------------*\
     $MIXINS
 \*------------------------------------ */
+
+// Used for line wrapping text links.
+@mixin inline-accent(
+  $text-color: rgb(var(--color-dark-gray)),
+  $underline-color: rgb(var(--color-dark-gray)),
+  $hover-underline-color: rgb(var(--color-ember-red)),
+  $hover-bg-color: rgb(var(--color-ember-red)),
+  $hover-text-color: rgb(var(--color-white)),
+) {
+  color: $text-color;
+  background-image: linear-gradient(to right, transparent 55%, rgb(var(--color-dark-gray)) 45%);
+  background-position: left bottom .13em;
+  background-repeat: repeat-x;
+  background-size: 4px 2px;
+  box-decoration-break: clone;
+  padding-bottom: 0;
+  border-bottom: none;
+  line-height: 1.6;
+  display: inline;
+  box-decoration-break: clone;
+
+  &:hover {
+    color: $hover-text-color;
+    background-image: linear-gradient(to right, transparent 55%, rgb(var(--color-ember-red)) 45%);
+
+    @if $hover-bg-color {
+      background-color: rgb(var(--color-ember-red));
+    }
+    @else {
+      background-color: transparent;
+    }
+  }
+}
