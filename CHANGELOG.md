@@ -1,5 +1,15 @@
 # `nypr-design-system` changelog
 
+## 3.1.6
+
+- [ENHANCEMENT] added option to hide side menu from header (#144)
+- [ENHANCEMENT] accessibility updates (#147, WNYC 174, 177 & 178)
+- [BUGFIX] fixed header share tools bug (#145)
+
+## 3.1.5
+
+- [ENHANCEMENT] Add overrides for button theming to Gothamist Theme (#143)
+
 ## 3.1.4
 
 - [BUGFIX] Header Social Share fix (#145)

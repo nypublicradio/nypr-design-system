@@ -1,16 +1,19 @@
 {{#if (and show.about.people.firstObject.image displayHostIfAvailable)}}
   <img
-   alt="image for {{altText}}"
+   aria-hidden="true"
+   alt={{altText}}
    src={{image-template show.about.people.firstObject.image.template width height show.about.people.firstObject.image.crop}}>
 {{else}}
   {{#if show.image.url}}
     <img
-     alt="image for {{show.title}}"
+     aria-hidden="true"
+     alt={{show.title}}
      src={{show.image.url}}>
   {{else}}
     {{#if stream.imageLogo}}
       <img
-       alt="image for {{stream.name}}"
+       aria-hidden="true"
+       alt={{stream.name}}
        src={{stream.imageLogo}}>
     {{/if}}
   {{/if}}

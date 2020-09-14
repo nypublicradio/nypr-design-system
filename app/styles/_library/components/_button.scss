@@ -6,22 +6,27 @@
   line-height: 1.15;
   overflow: visible;
   white-space: nowrap;
-  text-transform: none;
   text-decoration: none;
+  text-transform: none;
   border: none;
   outline: none;
   appearance: none;
 }
 
+.button:hover {
+  text-decoration: none;
+}
+
 .button {
   @include typeface(body, 7);
   padding: var(--space-1) var(--space-3);
-	border-width: 0px;
+  border-width: 0px;
   display: inline-flex;
-	position: relative;
-	align-items: center;
+  position: relative;
+  align-items: center;
+  text-align: center;
   justify-content: center;
-	cursor: pointer;
+  cursor: pointer;
 
   color: rgb(var(--color-button-text));
   border-color: rgb(var(--color-button));

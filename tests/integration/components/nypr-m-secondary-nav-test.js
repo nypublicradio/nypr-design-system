@@ -9,6 +9,6 @@ module('Integration | Component | nypr-m-secondary-nav', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`{{nypr-m-secondary-nav}}`);
 
-    assert.dom('nav.c-secondary-nav').exists();
+    assert.dom('.c-secondary-nav').exists();
   });
 });

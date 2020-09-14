@@ -1,0 +1,99 @@
+.button {
+  font-family: var(--font-family-small);
+  font-size: var(--font-size-6);
+  letter-spacing: 2px;
+  line-height: 22px;
+  font-weight: bold;
+  padding: 20px var(--space-4) 18px;
+  transition: all var(--animation-duration-standard) var(--animation-easing-standard);
+  text-transform: uppercase;
+  @include media(">551px") {
+    padding-right: var(--space-5);
+    padding-left: var(--space-5);
+  }
+}
+
+  .button:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: $z-index-button-outline;
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgb(var(--color-button));
+    border-color: rgb(var(--color-button));
+    transform: translate(0, 0);
+    transition: all var(--animation-duration-standard) var(--animation-easing-standard);
+  }
+
+    .button:hover:before {
+      transform: translate(-10px, 10px);
+    }
+
+  .button-label {
+    line-height: 22px;
+  }
+
+  // gothamist donate button
+  .button.mod-donate {
+    --color-button: var(--color-reddish-orange);
+    --color-button-hover: var(--color-reddish-orange);
+    --color-button-pressed: var(--color-reddish-orange);
+    --color-button-text: var(--color-white);
+    --color-button-text-hover: var(--color-white);
+    --color-button-text-pressed: var(--color-white);
+  }
+
+
+  // icon button with text styling
+  .button.mod-flat-icon {
+    --color-button: transparent;
+    --color-button-hover: transparent;
+    padding: var(--space-2);
+    transition: none;
+    &:hover, &:active {
+      transform: none;
+    }
+  }
+
+    .button.mod-flat-icon:before {
+      content: none;
+    }
+
+    .button.mod-flat-icon * {
+      fill: rgba(var(--color-text));
+    }
+
+    .button.mod-flat-icon:hover *,
+    .button.mod-flat-icon:active * {
+      fill: rgba(var(--color-reddish-orange));
+    }
+
+
+  // custom button sizing for the header
+  .button.mod-header {
+    font-size: var(--font-size-5);
+    padding: 11px var(--space-3) 10px;
+    height: 43px;
+
+    @include media(">medium") {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+
+
+
+
+
+  // button that's wider on the sides
+  .button.mod-wide {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  // button that stretches to fill its container
+  .button.mod-stretch {
+    width: 100%;
+  }
