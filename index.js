@@ -8,6 +8,9 @@ const MergeTrees = require('broccoli-merge-trees');
 module.exports = {
   name: require('./package').name,
   included: function(app) {
+    // polyfills
+    app.import('node_modules/focus-visible/dist/focus-visible.min.js');
+
     // include styles for ember-basic-dropdown.
     // used for the toggle-box component
     let { sassOptions = {} } = app.options;

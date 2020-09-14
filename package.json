@@ -42,6 +42,7 @@
     "ember-in-viewport": "^3.8.0",
     "ember-moment": "^7.8.1",
     "ember-truth-helpers": "^2.1.0",
+    "focus-visible": "^5.1.0",
     "filendir": "^1.0.2",
     "glob": "^7.1.6",
     "imagesloaded": "^4.1.4",
