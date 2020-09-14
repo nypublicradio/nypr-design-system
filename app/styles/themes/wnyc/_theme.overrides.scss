@@ -85,6 +85,14 @@
 
 .whats-on .whats-on-show .play-button .play-button-text {
   letter-spacing: 0.02em;
+  &::after {
+    content: 'listen';
+    text-transform: capitalize;
+
+    @include media(">=medium") {
+      content: 'listen live';
+    }
+  }
 }
 
 // what's on snapshot
