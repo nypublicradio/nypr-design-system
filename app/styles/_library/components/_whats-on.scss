@@ -114,15 +114,6 @@
         letter-spacing: 1.6px;
         text-transform: capitalize;
       }
-
-      .button-label:after {
-        // content: 'listen';
-        // text-transform: capitalize;
-
-        @include media(">=medium") {
-          // content: 'listen live';
-        }
-      }
     }
 
     .whats-on-show-title {
