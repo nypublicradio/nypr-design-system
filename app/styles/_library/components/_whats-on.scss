@@ -30,7 +30,7 @@
     @include media(">=medium") {
       justify-content: left;
     }
-    
+
     .whats-on-live-indicator-text {
       @include typeface(body, 1);
 
@@ -41,13 +41,13 @@
       margin-right: 4px;
       text-transform: uppercase;
     }
-  
+
     .whats-on-live-indicator-dot {
       background-color: #E74F4F;
       border-radius: 8px;
       height: 8px;
       width: 8px;
-    } 
+    }
   }
 
   .whats-on-show {
@@ -111,7 +111,7 @@
         text-transform: capitalize;
       }
 
-      .play-button-text:after {
+      .play-button-text::after {
         content: 'listen';
         text-transform: capitalize;
 
