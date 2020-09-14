@@ -48,7 +48,6 @@ $slider-spacing: $slider-spacing-left + $slider-spacing-right;
   display: flex;
   height: 100%;
   cursor: pointer;
-  outline: 0;
   -webkit-tap-highlight-color: rgba($nypr-player-primary-color, 0);
 
   &.volume-hover,
@@ -119,17 +118,14 @@ $slider-spacing: $slider-spacing-left + $slider-spacing-right;
   min-width: $button-width;
   position: relative;
   height: 100%;
-  outline: 0;
   cursor: pointer;
 
   @include svg-color($nypr-player-button-color);
   &:hover,
   &:focus {
-    outline: 0;
     @include svg-color($nypr-player-button-hover-color);
   }
   &:active {
-    outline: 0;
     @include svg-color($nypr-player-button-active-color);
   }
 
@@ -146,10 +142,6 @@ $slider-spacing: $slider-spacing-left + $slider-spacing-right;
       margin: auto;
     }
   }
-
-  &:focus {
-    outline: 0;
-  }
 }
 
 .nypr-player-volume {
@@ -157,28 +149,11 @@ $slider-spacing: $slider-spacing-left + $slider-spacing-right;
     @include svg-color($nypr-player-button-color);
     &:hover,
     &:focus {
-      outline: 0;
       @include svg-color($nypr-player-button-hover-color);
     }
     &:active {
-      outline: 0;
       @include svg-color($nypr-player-button-active-color);
     }
   }
-
-  .nypr-player-icon.mod-volume-unmuted {
-    opacity: 1;
-  }
-  .nypr-player-icon.mod-volume-muted {
-    opacity: 0;
-  }
 }
 
-.nypr-player-volume.is-muted {
-  .nypr-player-icon.mod-volume-unmuted {
-    opacity: 0;
-  }
-  .nypr-player-icon.mod-volume-muted {
-    opacity: 1;
-  }
-}

@@ -4,13 +4,13 @@
     onClick={{action this.handleClick}}
     @icon="play-shapes-text-button"
     @label={{label}}
-    @alt={{if isPlaying altWhilePlaying altWhilePaused}}
+    @alt={{if this.isPlaying this.altWhilePlaying this.altWhilePaused}}
     ...attributes />
 {{else}}
   <Button
     class="play-button gtm__click-tracking {{if isPlaying 'is-playing' 'is-paused'}} {{if isLoading 'is-loading'}}"
     onClick={{action this.handleClick}}
     @icon="play-shapes"
-    @alt={{if isPlaying altWhilePlaying altWhilePaused}}
+    @alt={{if this.isPlaying this.altWhilePlaying this.altWhilePaused}}
     ...attributes />
 {{/if}}
