@@ -6,8 +6,7 @@ import layout from '../templates/components/nypr-m-play-button';
 
 export default Component.extend(InViewportMixin, {
   layout,
-  classNames: ['play-button', 'gtm__click-tracking'],
-  classNameBindings: ['isPlaying:is-playing:is-paused', 'isLoading'],
+  tagName: '',
   dataLayer: service(),
   playerLabel: 'persistent', // default
 
@@ -19,13 +18,15 @@ export default Component.extend(InViewportMixin, {
   isPlaying           : reads('hifi.isPlaying'),
   isLoading           : reads('hifi.isLoading'),
   isStream            : reads('hifi.isStream'),
+  altWhilePlaying     : 'Pause',
+  altWhilePaused      : 'Play',
 
   init() {
     this._super(...arguments);
     this.set('viewportSpy', true);
   },
 
-  click() {
+  handleClick() {
     if (this.isPlaying) {
       this.hifi.pause();
     }

@@ -91,7 +91,7 @@
       align-items: center;
       background-color: rgb(var(--color-primary-2));
       margin-bottom: 24px;
-      padding-right: 20px;
+      padding: 0 20px 0 0;
 
       @include media(">=medium") {
         grid-column-start: 2;
@@ -106,8 +106,7 @@
         max-width: 54px;
       }
 
-      .play-button-text {
-        display: block;
+      .button-label {
         @include typeface(body, 5);
         color: rgb(var(--color-background));
         display: block;
@@ -116,12 +115,12 @@
         text-transform: capitalize;
       }
 
-      .play-button-text:after {
-        content: 'listen';
-        text-transform: capitalize;
+      .button-label:after {
+        // content: 'listen';
+        // text-transform: capitalize;
 
         @include media(">=medium") {
-          content: 'listen live';
+          // content: 'listen live';
         }
       }
     }

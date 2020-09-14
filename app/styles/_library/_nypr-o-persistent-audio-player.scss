@@ -43,13 +43,13 @@
 }
 
 .nypr-o-audio-player-play-button {
-  align-self: center;
   grid-column-start: 2;
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: span 3;
   justify-self: flex-start;
   margin: 0;
+  padding: 0;
   text-align: center;
   width: 48px;
 
