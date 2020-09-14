@@ -13,7 +13,7 @@
 }
 
 // hide focus style from pointer interactions,
-// but leave it for keayboard-like interactions where it is necessary
+// but leave it for keyboard-like interactions where it is necessary
 // https://github.com/WICG/focus-visible/blob/master/explainer.md#rationale
 [data-js-focus-visible] .button:focus:not([data-focus-visible-added]),
 .button:focus:not(:focus-visible) {
