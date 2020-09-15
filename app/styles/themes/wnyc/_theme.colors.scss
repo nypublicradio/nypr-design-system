@@ -1,0 +1,167 @@
+@function hex2rgb($hexColor) {
+  @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
+}
+
+:root {
+  /* Theme Color Palette */
+
+  /* Neutrals */
+  --color-black:      #{hex2rgb(#000000)};
+  --color-dark-gray:  #{hex2rgb(#333333)};
+  --color-gray:       #{hex2rgb(#E0E2E3)};
+  --color-light-gray: #{hex2rgb(#f3f3f3)};
+  --color-white:      #{hex2rgb(#ffffff)};
+
+  /* Forms */
+  --color-valid:              #{hex2rgb(#089E00)};
+
+  /* Brand Colors */
+  --color-cool-white:         #{hex2rgb(#EAEFF0)};
+  --color-blue:               #{hex2rgb(#2B6F99)};
+  --color-concrete:           #{hex2rgb(#E0E2E3)};
+  --color-red:                #{hex2rgb(#E42231)};
+  --color-reddish-orange:     #{hex2rgb(#F25B46)};
+}
+
+@mixin color-group-light {
+  --color-primary-1:            var(--color-red);
+  --color-primary-2:            var(--color-blue);
+  --color-primary-3:            var(--color-concrete);
+  --color-background:           var(--color-white);
+  --color-background-muted:     var(--color-light-gray);
+  --color-background-highlight: var(--color-concrete);
+  --color-text:                 var(--color-black);
+  --color-text-print:           var(--color-black);
+  --color-text-muted:           var(--color-concrete);
+  --color-text-error:           var(--color-red);
+  --color-text-inverse:         var(--color-white);
+  --color-text-metadata:        var(--color-dark-gray);
+
+  /* Black and white relative to the color group background */
+  --color-high-contrast:          var(--color-black);
+  --color-high-contrast-inverse:  var(--color-white);
+
+  /* Links */
+  --color-link:                 var(--color-blue);
+  --text-decoration-link:       underline;
+  --color-link-hover:           var(--color-blue);
+  --color-link-hover-background: none;
+  --text-decoration-link-hover: underline;
+  --opacity-link-hover:         0.8;
+
+  /* Navigation Links */
+  --color-navigation-link:                 var(--color-black);
+  --text-decoration-navigation-link:       underline;
+  --color-navigation-link-hover:           var(--color-red);
+  --text-decoration-navigation-link-hover: underline;
+  --opacity-navigation-link-hover:         1;
+
+  /* Tags */
+  --color-tag-text:             var(--color-white);
+  --color-tag-background:       var(--color-blue);
+  --color-tag-highlight:        var(--color-blue);
+  --color-tag-hover-text:       var(--color-white);
+  --color-tag-hover-background: var(--color-red);
+  --opacity-tag-hover:          var(--opacity-hover);
+
+  /* Buttons */
+  --color-button-text:          var(--color-white);
+  --color-button:               var(--color-blue);
+  --color-button-text-pressed:  var(--color-white);
+  --color-button-pressed:       var(--color-blue);
+  --transform-button-pressed:   scale(0.95);
+  --color-button-text-hover:    var(--color-white);
+  --color-button-hover:         var(--color-blue);
+  --opacity-button-hover:       var(--opacity-hover);
+  --transform-button-hover:     none;
+  // todo: remove these when refactoring existing white label buttons to button component
+  // until then they are needed
+  --color-button-primary:         var(--color-blue);
+  --color-button-primary-hover:   var(--color-blue);
+  --color-button-primary-pressed: var(--color-blue);
+  --opacity-button-primary-hover: var(--opacity-hover);
+
+  /* Borders */
+  --color-border-subtle:        var(--color-background-highlight);
+  --color-border-standard:      var(--color-background-highlight);
+  --color-border-bold:          var(--color-background-highlight);
+}
+
+@mixin color-group-dark {
+  --color-primary-1:            var(--color-red);
+  --color-primary-2:            var(--color-reddish-orange);
+  --color-primary-3:            var(--color-blue);
+  --color-background:           var(--color-blue);
+  --color-background-muted:     rgb(var(--color-background));
+  --color-background-highlight: var(--color-blue);
+  --color-text:                 var(--color-white);
+  --color-text-print:           var(--color-black);
+  --color-text-muted:           var(--color-concrete);
+  --color-text-error:           var(--color-red);
+  --color-text-inverse:         var(--color-dark-gray);
+  --color-text-metadata:        var(--color-white);
+
+  /* Black and white relative to the color group background */
+  --color-high-contrast:          var(--color-white);
+  --color-high-contrast-inverse:  var(--color-black);
+
+  /* Links */
+  --color-link:                 var(--color-white);
+  --text-decoration-link:       underline;
+  --color-link-hover:           var(--color-white);
+  --text-decoration-link-hover: underline;
+  --opacity-link-hover:         var(--opacity-hover);
+
+  /* Navigation Links */
+  --color-navigation-link:                 var(--color-white);
+  --text-decoration-navigation-link:       none;
+  --color-navigation-link-hover:           var(--color-white);
+  --text-decoration-navigation-link-hover: none;
+  --opacity-navigation-link-hover:         var(--opacity-hover);
+
+  /* Tags */
+  --color-tag-text:             var(--color-white);
+  --color-tag-background:       var(--color-blue);
+  --color-tag-highlight:        var(--color-red);
+  --color-tag-hover-text:       var(--color-white);
+  --color-tag-hover-background: var(--color-reddish-orange);
+  --opacity-tag-hover:          var(--opacity-hover);
+
+  /* Buttons */
+  --color-button-text:            var(--color-white);
+  --color-button:                 var(--color-blue);
+  --color-button-primary:         var(--color-blue);
+  --color-button-text-pressed:    var(--color-white);
+  --color-button-pressed:         var(--color-blue); // we need to update this
+  --transform-button-pressed:     scale(0.95);
+  --color-button-text-hover:      var(--color-white);
+  --color-button-hover:           var(--color-white);
+  --opacity-button-hover:         var(--opacity-hover);
+  --transform-button-hover:       none;
+
+
+  --color-border-bold:          var(--color-background-highlight);    //none
+  --color-border-standard:      var(--color-background-highlight);    //none
+  --color-border-subtle:        var(--color-background-highlight);    //none
+}
+
+/*  Base */
+:root {
+  @include color-group-light;
+
+  /* Borders */
+  --border-subtle: 2px solid rgb(var(--color-border-subtle));
+  --border-standard: 3px solid  rgb(var(--color-border-standard));
+  --border-bold:   5px solid rgb(var(--color-border-bold));
+}
+
+/*Dark and Light Groups */
+.u-color-group-dark {
+  @include color-group-dark;
+
+}
+.u-color-group-light {
+  @include color-group-light;
+}
+
+

@@ -30,7 +30,7 @@
     @include media(">=medium") {
       justify-content: left;
     }
-    
+
     .whats-on-live-indicator-text {
       @include typeface(body, 1);
 
@@ -41,13 +41,13 @@
       margin-right: 4px;
       text-transform: uppercase;
     }
-  
+
     .whats-on-live-indicator-dot {
       background-color: #E74F4F;
       border-radius: 8px;
       height: 8px;
       width: 8px;
-    } 
+    }
   }
 
   .whats-on-show {
@@ -104,6 +104,7 @@
       }
 
       .play-button-text {
+        display: block;
         @include typeface(body, 5);
         color: rgb(var(--color-background));
         font-weight: bold;

@@ -1,0 +1,128 @@
+:root {
+  /** Typography */
+
+  /* Theme typefaces */
+
+  /* Header */
+  --font-family-header:    'ff-tisa-web-pro', sans-serif;
+  --letter-spacing-header: normal;
+  --font-weight-header:    700;
+
+  /* Subheader */
+  --font-family-subheader:    'ff-tisa-web-pro', sans-serif;
+  --letter-spacing-subheader: normal;
+  --font-weight-subheader:    500;
+
+  /* Body */
+  --font-family-body:    'ff-meta-web-pro', sans-serif;
+  --letter-spacing-body: normal;
+  --font-weight-body:    400;
+
+  /* Tags */
+  --font-family-tags:    'ff-meta-web-pro', sans-serif;
+  --letter-spacing-tags: normal;
+  --font-weight-tags:    400;
+
+  /* Small */
+  --font-family-small:    'ff-meta-web-pro', sans-serif;
+  --letter-spacing-small: 1px;
+  --font-weight-small:    400;
+
+
+  /* Font Levers */
+
+  --font-base:  18px;
+  --font-ratio: 1.125;
+
+  /* Modular scale */
+  --font-size-1:  calc(var(--font-size-2) / var(--font-ratio));
+  --font-size-2:  calc(var(--font-size-3) / var(--font-ratio));
+  --font-size-3:  calc(var(--font-size-4) / var(--font-ratio));
+  --font-size-4:  calc(var(--font-size-5) / var(--font-ratio));
+  --font-size-5:  calc(var(--font-size-6) / var(--font-ratio));
+  --font-size-6:  var(--font-base);
+  --font-size-7:  calc(var(--font-size-6) * var(--font-ratio));
+  --font-size-8:  calc(var(--font-size-7) * var(--font-ratio));
+  --font-size-9:  calc(var(--font-size-8) * var(--font-ratio));
+  --font-size-10: calc(var(--font-size-9) * var(--font-ratio));
+  --font-size-11: calc(var(--font-size-10) * var(--font-ratio));
+  --font-size-12: calc(var(--font-size-11) * var(--font-ratio));
+  --font-size-13: calc(var(--font-size-12) * var(--font-ratio));
+  --font-size-14: calc(var(--font-size-13) * var(--font-ratio));
+  --font-size-15: calc(var(--font-size-14) * var(--font-ratio));
+  --font-size-16: calc(var(--font-size-15) * var(--font-ratio));
+
+  --line-height-1:  1.4;
+  --line-height-2:  1.4;
+  --line-height-3:  1.4;
+  --line-height-4:  1.4;
+  --line-height-5:  1.8;
+  --line-height-6:  1.58;
+  --line-height-7:  1.1;
+  --line-height-8:  1.1;
+  --line-height-9:  1.2;
+  --line-height-10: 1.25;
+  --line-height-11: 1.2;
+  --line-height-12: 1.2;
+  --line-height-13: 1.2;
+  --line-height-14: 1.1;
+  --line-height-15: 1.1;
+  --line-height-16: 1;
+
+  /* Spacing predefined values, do not edit */
+  --spacing-base-compact:      4px;
+  --spacing-increment-compact: 4px;
+  --spacing-base-default:      8px;
+  --spacing-increment-default: 8px;
+  --spacing-base-loose:        16px;
+  --spacing-increment-loose:   10px;
+
+  /* Spacing Levers, set these using the predefined values above */
+  --spacing-base:      var(--spacing-base-default);
+  --spacing-increment: var(--spacing-increment-default);
+
+  /* Spacing Scale, use these tokens in your styles */
+  --space-1:  calc(var(--spacing-base) / 2);
+  --space-2:  var(--spacing-base);
+  --space-3:  calc(var(--space-2) + var(--spacing-increment));
+  --space-4:  calc(var(--space-3) + var(--spacing-increment));
+  --space-5:  calc(var(--space-4) + var(--spacing-increment));
+  --space-6:  calc(var(--space-5) + var(--spacing-increment));
+  --space-7:  calc(var(--space-6) + var(--spacing-increment));
+  --space-8:  calc(var(--space-7) + var(--spacing-increment));
+  --space-9:  calc(var(--space-8) + var(--spacing-increment));
+  --space-10: calc(var(--space-9) + var(--spacing-increment));
+  --space-11: calc(var(--space-10) + var(--spacing-increment));
+
+  /* Layout */
+  --max-width:      1024px;
+  --max-width-xl:   1130px;
+  --heading-height: 72px;
+
+  // Grid
+  --grid-gutter:       18px;
+  --grid-gutter-large: 36px;
+  --grid-col-width: calc(var(--max-width) / 16);
+
+  // Article
+  --article-content-width: 634px;
+
+  // Opacity
+  --opacity-hover: 0.75;
+
+  // Animation
+  --animation-easing-outgoing:          cubic-bezier(0.4, 0.0, 1, 1);
+  --animation-easing-incoming:          cubic-bezier(0.0, 0.0, 0.2, 1);
+  --animation-easing-standard:          cubic-bezier(0.4, 0.0, 0.2, 1);
+
+  --animation-easing-outgoing-search:   transform .15s ease-out;
+  --animation-easing-incoming-donate:   transform 0.2s cubic-bezier(0.86, 0, 0.07, 1);
+
+  --animation-duration-slow:            .6s;
+  --animation-duration-standard:        .25s;
+  --animation-duration-fast:            .1s;
+
+  --animation-delay-none:               0s;
+  --animation-delay-short:              .1s;
+  --animation-delay-long:               .3s;
+}
