@@ -104,6 +104,7 @@
       }
 
       .play-button-text {
+        display: block;
         @include typeface(body, 5);
         color: rgb(var(--color-background));
         font-weight: bold;
