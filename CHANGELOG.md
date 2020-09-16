@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.7
+
+- [ENHANCEMENT] Stream Switcher Component (#148, WNYC-170)
+
 ## 3.1.6
 
 - [ENHANCEMENT] added option to hide side menu from header (#144)
