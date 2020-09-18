@@ -47,13 +47,12 @@
   }
 }
 
-// footer
 .c-main-footer .c-secondary-nav__subheader {
   @include typeface(subheader, 8);
 }
 
 .c-nypr-nav__link:hover {
-  color: rgb(var(--color-blue));
+  color: rgb(var(--color-red));
 }
 
 // main player
@@ -132,6 +131,7 @@
 
 // persistent player
 .nypr-o-audio-player,
-.nypr-o-audio-player-controls {
-  background-color: rgb(var(--color-blue));
+.nypr-o-audio-player-controls,
+.nypr-o-audio-player-play-button {
+  background-color: rgb(var(--color-red));
 }

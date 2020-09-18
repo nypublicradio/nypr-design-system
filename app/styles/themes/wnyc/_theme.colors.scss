@@ -25,7 +25,7 @@
 
 @mixin color-group-light {
   --color-primary-1:            var(--color-red);
-  --color-primary-2:            var(--color-blue);
+  --color-primary-2:            var(--color-red);
   --color-primary-3:            var(--color-concrete);
   --color-background:           var(--color-white);
   --color-background-muted:     var(--color-light-gray);
@@ -42,9 +42,9 @@
   --color-high-contrast-inverse:  var(--color-white);
 
   /* Links */
-  --color-link:                 var(--color-blue);
+  --color-link:                 var(--color-red);
   --text-decoration-link:       underline;
-  --color-link-hover:           var(--color-blue);
+  --color-link-hover:           var(--color-red);
   --color-link-hover-background: none;
   --text-decoration-link-hover: underline;
   --opacity-link-hover:         0.8;
@@ -58,27 +58,27 @@
 
   /* Tags */
   --color-tag-text:             var(--color-white);
-  --color-tag-background:       var(--color-blue);
-  --color-tag-highlight:        var(--color-blue);
+  --color-tag-background:       var(--color-red);
+  --color-tag-highlight:        var(--color-red);
   --color-tag-hover-text:       var(--color-white);
   --color-tag-hover-background: var(--color-red);
   --opacity-tag-hover:          var(--opacity-hover);
 
   /* Buttons */
   --color-button-text:          var(--color-white);
-  --color-button:               var(--color-blue);
+  --color-button:               var(--color-red);
   --color-button-text-pressed:  var(--color-white);
-  --color-button-pressed:       var(--color-blue);
+  --color-button-pressed:       var(--color-red);
   --transform-button-pressed:   scale(0.95);
   --color-button-text-hover:    var(--color-white);
-  --color-button-hover:         var(--color-blue);
+  --color-button-hover:         var(--color-red);
   --opacity-button-hover:       var(--opacity-hover);
   --transform-button-hover:     none;
   // todo: remove these when refactoring existing white label buttons to button component
   // until then they are needed
-  --color-button-primary:         var(--color-blue);
-  --color-button-primary-hover:   var(--color-blue);
-  --color-button-primary-pressed: var(--color-blue);
+  --color-button-primary:         var(--color-red);
+  --color-button-primary-hover:   var(--color-red);
+  --color-button-primary-pressed: var(--color-red);
   --opacity-button-primary-hover: var(--opacity-hover);
 
   /* Borders */
