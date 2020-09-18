@@ -1,17 +1,16 @@
-@import "episode";
+@import 'episode';
 @import 'schedule';
 
 .whats-on {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
   padding: 20px;
   max-width: 728px;
 
   @include media(">=medium") {
-    align-items: flex-start;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  @include media(">=xxlarge") {
     padding-top: 64px;
   }
 
@@ -25,10 +24,14 @@
     justify-content: center;
     letter-spacing: 1px;
     margin-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
     width: 51px;
 
     @include media(">=medium") {
       justify-content: left;
+      margin-left: 0px;
+      margin-right: 0px;
     }
 
     .whats-on-live-indicator-text {
@@ -88,7 +91,7 @@
       align-items: center;
       background-color: rgb(var(--color-primary-2));
       margin-bottom: 24px;
-      padding-right: 20px;
+      padding: 0 20px 0 0;
 
       @include media(">=medium") {
         grid-column-start: 2;
@@ -103,22 +106,13 @@
         max-width: 54px;
       }
 
-      .play-button-text {
-        display: block;
+      .button-label {
         @include typeface(body, 5);
         color: rgb(var(--color-background));
+        display: block;
         font-weight: bold;
         letter-spacing: 1.6px;
         text-transform: capitalize;
-      }
-
-      .play-button-text:after {
-        content: 'listen';
-        text-transform: capitalize;
-
-        @include media(">=medium") {
-          content: 'listen live';
-        }
       }
     }
 

@@ -1,5 +1,15 @@
 # `nypr-design-system` changelog
 
+## 3.1.8
+
+- [ENCHANCEMENT] Update main-player and persistent-player alt text for button controls (#150)
+- [ENCHANCEMENT] Add :focus-visible polyfill to support finer control of focus styles (#150)
+- [ENCHANCEMENT] Change `<Button>` alt text to use aria-label instead of hidden text (#150)
+
+## 3.1.7
+
+- [ENHANCEMENT] Stream Switcher Component (#148, WNYC-170)
+
 ## 3.1.6
 
 - [ENHANCEMENT] added option to hide side menu from header (#144)

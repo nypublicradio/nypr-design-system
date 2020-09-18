@@ -1,0 +1,9 @@
+<div class='stream-switcher-stations-label'>stations</div>
+{{#if (gt (dictionary-length @streams) 0)}}
+    <ul class='stream-switcher-streams'>
+        {{#each (dictionary-values @streams) as |stream|}}
+            {{organism/stream-switcher/stream stream=stream nowPlaying=nowPlaying}}
+        {{/each}}
+    </ul>
+{{/if}}
+

@@ -43,13 +43,13 @@
 }
 
 .nypr-o-audio-player-play-button {
-  align-self: center;
   grid-column-start: 2;
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: span 3;
   justify-self: flex-start;
   margin: 0;
+  padding: 0;
   text-align: center;
   width: 48px;
 
@@ -142,17 +142,18 @@
   .nypr-player-button.mod-volume {
     align-items: center;
     display: flex;
+    padding: 0;
     flex-basis: 0;
     height: 100%;
     justify-content: center;
     margin-right: -5px;
     min-width: 50px;
     order: -1;
-    outline: 0;
     position: relative;
     text-align: center;
 
     svg {
+      width: 33px;
       left: 0;
       position: relative;
       top: 0;

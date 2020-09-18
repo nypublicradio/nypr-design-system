@@ -49,9 +49,7 @@ module('Integration | Component | button', function(hooks) {
     assert.dom('.button-label').doesNotExist();
     assert.dom('svg.button-icon').exists();
     assert.dom('.button').hasClass('is-icon-only');
-    assert.dom('.button-alt').exists();
-    assert.dom('.button-alt').hasClass('is-vishidden');
-    assert.dom('.button-alt').hasText(ALT_TEXT);
+    assert.dom('.button').hasAttribute('aria-label', ALT_TEXT);
     a11yAudit(this.element).then(() => {
       assert.ok(true, 'no a11y errors found!');
     });

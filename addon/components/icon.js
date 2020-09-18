@@ -42,7 +42,7 @@ export default Component.extend({
 
    @accessor svgPartial
    */
-  svgPartial: computed(function() {
+  svgPartial: computed('icon', function() {
     let owner = getOwner(this);
     let templateExists = Boolean(owner.lookup(`templates/component:icons/${this.icon}`));
     if (templateExists) {
