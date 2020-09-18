@@ -5,8 +5,9 @@
       <div class="js-volume-slider-handle nypr-player-volume-slider-handle" style={{handlePosition}} {{! template-lint-disable "no-inline-styles" }}></div>
     </div>
   </div>
-  <button tabindex="0" aria-label="toggle mute" class="nypr-player-button mod-volume" {{action 'toggleMute'}}>
-    <Icon aria-hidden="true" @icon="volume" @title="volume unmuted" class="nypr-player-icon mod-volume-unmuted"/>
-    <Icon aria-hidden="true" @icon="volume-muted" @title="volume muted" class="nypr-player-icon mod-volume-muted"/>
-  </button>
+  <Button class="nypr-player-button mod-volume {{if this.isMuted "is-muted" "is-unmuted"}}"
+    @icon={{if isMuted "volume-muted" "volume"}}
+    @alt={{if isMuted "Volume, Unmute" "Volume, Mute"}}
+    onClick={{action 'toggleMute'}}
+  />
 </div>

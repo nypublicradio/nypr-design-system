@@ -2,27 +2,21 @@
   <button class="button" type="button" ...attributes>{{yield}}</button>
 {{else}}
   {{#if @href}}
-      <a class="button  {{if (and @icon (not @label)) "is-icon-only"}}" href="{{@href}}" target="_blank" rel="noopener" ...attributes>
+      <a class="button  {{if (and @icon (not @label)) "is-icon-only"}}" href="{{@href}}" target="_blank" rel="noopener" aria-label="{{@alt}}" ...attributes>
         {{#if @icon}}
             <Icon class="button-icon icon" @name="icon" role="presentation" />
         {{/if}}
         {{#if @label}}
           <span class="button-label" aria-hidden={{if @alt "true"}}>{{@label}}</span>
         {{/if}}
-        {{#if @alt}}
-          <span class="button-alt">{{@alt}}</span>
-        {{/if}}
       </a>
   {{else}}
-    <button class="button  {{if (and @icon (not @label)) "is-icon-only"}}" type="button" ...attributes>
+    <button class="button  {{if (and @icon (not @label)) "is-icon-only"}}" type="button" aria-label="{{@alt}}" ...attributes>
       {{#if @icon}}
         <Icon class="button-icon icon" @icon={{@icon}} role="presentation" />
       {{/if}}
       {{#if @label}}
         <span class="button-label" aria-hidden={{if @alt "true"}}>{{@label}}</span>
-      {{/if}}
-      {{#if @alt}}
-        <span class="button-alt is-vishidden">{{@alt}}</span>
       {{/if}}
     </button>
   {{/if}}

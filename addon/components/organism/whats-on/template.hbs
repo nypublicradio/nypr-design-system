@@ -29,9 +29,9 @@
           @playItemId={{this.nowPlaying.stream.slug}}
           @playerLabel="main player"
           @textMode={{true}}
-          aria-label="listen live to {{this.nowPlaying.stream.name}}"
-          role="button"
-          tabindex="0"
+          @label="Listen Live"
+          @altWhilePaused="Listen Live, Play"
+          @altWhilePlaying="Listen Live, Pause"
   />
 </div>
 
