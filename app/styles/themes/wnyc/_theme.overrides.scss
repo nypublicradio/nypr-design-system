@@ -132,6 +132,7 @@
 // persistent player
 .nypr-o-audio-player,
 .nypr-o-audio-player-controls,
-.nypr-o-audio-player-play-button {
+.nypr-o-audio-player-play-button,
+.nypr-o-audio-player .button:active {
   background-color: rgb(var(--color-red));
 }
