@@ -19,13 +19,15 @@
   --color-cool-white:         #{hex2rgb(#EAEFF0)};
   --color-blue:               #{hex2rgb(#2B6F99)};
   --color-concrete:           #{hex2rgb(#E0E2E3)};
-  --color-red:                #{hex2rgb(#E42231)};
+  --color-red:                #{hex2rgb(#e42231)};
+  --color-dark-red:           #{hex2rgb(#6a1017)};
   --color-reddish-orange:     #{hex2rgb(#F25B46)};
 }
 
 @mixin color-group-light {
   --color-primary-1:            var(--color-red);
-  --color-primary-2:            var(--color-red);
+  --color-primary-1-darker:     var(--color-dark-red);
+  --color-primary-2:            var(--color-dark-red);
   --color-primary-3:            var(--color-concrete);
   --color-background:           var(--color-white);
   --color-background-muted:     var(--color-light-gray);

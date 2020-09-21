@@ -20,13 +20,13 @@
     .play-icon-shapes .outer-circle-fx {
       display: block;
       animation: pulse-rings-outer 5s 1s infinite;
-      fill: #a70b0b;
+      fill: RGB(var(--color-primary-1-darker));
     }
 
     .play-icon-shapes .inner-circle-fx {
       display: block;
       animation: pulse-rings-inner 5s 1s infinite;
-      fill: #900707;
+      fill: RGB(var(--color-primary-1-darker));
     }
   }
 
