@@ -1,7 +1,7 @@
 <div class="whats-on-live-indicator">
   <div class="whats-on-live-indicator-text" aria-hidden="true">live</div>
   <div class="whats-on-live-indicator-dot"></div>
-  <div class="whats-on-live-indicator-station">{{strip-html @streamSlug}}</div>
+  <div class="whats-on-live-indicator-station">{{strip-html @streamName}}</div>
 </div>
 
 <div
@@ -13,7 +13,7 @@
             class="nypr-o-audio-player-level-one"
             data-test-element="level-one"
     >
-      <h2>{{strip-html @levelOne}}</h2>
+      <h2><a href="{{@levelOneLink}}">{{strip-html @levelOne}}</a></h2>
     </div>
   {{/if}}
 
@@ -35,10 +35,12 @@
 
     {{#if @levelThree}}
       <div class="nypr-o-audio-player-level-three {{if @levelTwo 'nypr-o-audio-player-level-two-visible'}} mod-scrolling-overflow" data-test-element="level-three">
-        <span class="nypr-o-audio-player-level-three-text">
+        <a href="{{@levelOneLink}}">
+          <span class="nypr-o-audio-player-level-three-text">
           {{strip-html @levelThree}}
-        </span>
-        {{options.icon}}
+          </span>
+          {{options.icon}}
+        </a>
       </div>
     {{/if}}
   </NyprMTrackAdditionalInfo>

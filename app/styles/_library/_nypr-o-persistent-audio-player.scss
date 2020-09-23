@@ -259,6 +259,9 @@
 .nypr-o-audio-player-level-one h2 {
   @include typeface(subheader, 6);
   margin: 2px 0 4px;
+  a {
+    text-decoration: none;
+  }
 }
 
 .nypr-o-audio-player-level-two {
@@ -282,6 +285,10 @@
   width: 100%;
 
   @include toggleBoxCaret(8px, #FFF);
+
+  a {
+    text-decoration: none;
+  }
 
   .toggle-box__icon {
     height: 8px;
