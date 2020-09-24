@@ -87,7 +87,7 @@
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: span 4;
-  justify-self: flex-start;
+  justify-self: flex-end;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -95,8 +95,7 @@
 
   @include media(">=medium") {
     grid-column-end: 3;
-    justify-self: center;
-    margin: 0 20px;
+    margin: 0 65px;
     width: 55px;
   }
 }
@@ -288,6 +287,7 @@
 
   a {
     text-decoration: none;
+    overflow: hidden;
   }
 
   .toggle-box__icon {
@@ -296,10 +296,10 @@
 }
 
 .nypr-o-audio-player-level-three .nypr-o-audio-player-level-three-text {
-  display: -webkit-box;
+  display: block;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   -webkit-line-clamp: 3;
   /* autoprefixer: off */
   -webkit-box-orient: vertical;

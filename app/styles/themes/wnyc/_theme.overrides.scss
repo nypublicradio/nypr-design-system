@@ -155,12 +155,3 @@
   text-align: left;
   text-transform: capitalize;
 }
-
-.nypr-o-audio-player-play-button {
-  justify-self: flex-start;
-  margin: 0 65px;
-
-  @include media(">=medium") {
-    justify-self: end;
-  }
-}
