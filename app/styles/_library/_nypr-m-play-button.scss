@@ -142,7 +142,9 @@
 
     svg {
       // Essential for radiating waves animation
-      overflow:visible;
+      overflow: visible;
+      // Not quite sure why, but specifiying a clip path allows overflow to work in safari
+      clip-path: circle(125px at 50% 50%);
       max-width: 100%;
     }
 
