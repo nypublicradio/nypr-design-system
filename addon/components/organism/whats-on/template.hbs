@@ -1,12 +1,20 @@
-<div class="whats-on-live-indicator">
-  <div class="whats-on-live-indicator-text" aria-hidden="true">live</div>
-  <div class="whats-on-live-indicator-dot"></div>
-</div>
-
 <div class="whats-on-show" aria-live="polite">
   <NyprMOnAirImage
     @stream={{this.nowPlaying.stream}}
     @show={{this.nowPlaying.show}}
+  />
+
+  <NyprMPlayButton
+          class="text mod-main-page"
+          data-action="Clicked Play/Pause Stream: main-player"
+          data-label={{this.nowPlaying.stream.name}}
+          title={{this.nowPlaying.stream.name}}
+          @playItemId={{this.nowPlaying.stream.slug}}
+          @playerLabel="main player"
+          @textMode={{true}}
+          @label="Listen Live"
+          @altWhilePaused="Listen Live, Play"
+          @altWhilePlaying="Listen Live, Pause"
   />
 
   <h2 class="whats-on-show-title" data-test-element="show-title">
@@ -21,18 +29,11 @@
     {{{strip-html this.nowPlaying.show.tease}}}
   </div>
 
-  <NyprMPlayButton
-          class="text mod-main-page"
-          data-action="Clicked Play/Pause Stream: main-player"
-          data-label={{this.nowPlaying.stream.name}}
-          title={{this.nowPlaying.stream.name}}
-          @playItemId={{this.nowPlaying.stream.slug}}
-          @playerLabel="main player"
-          @textMode={{true}}
-          @label="Listen Live"
-          @altWhilePaused="Listen Live, Play"
-          @altWhilePlaying="Listen Live, Pause"
-  />
+  <div class="whats-on-live-indicator">
+    <div class="whats-on-live-indicator-text" aria-hidden="true">live</div>
+    <div class="whats-on-live-indicator-dot"></div>
+    <div class="whats-on-live-indicator-time">time goes here</div>
+  </div>
 </div>
 
 {{#if displayEpisode}}
