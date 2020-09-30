@@ -1,0 +1,22 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import hbs from 'htmlbars-inline-precompile';
+
+<Meta title="Components/Molecules/Social Follow" />
+
+# Social Follow
+
+Did this update?
+
+<Preview>
+<Story name="NYPR Social Follow">
+{{
+template: hbs`
+  <NyprMSocialFollow as |SocialNetwork|>
+    <SocialNetwork.twitter @href="http://www.twitter.com/wnyc"/>
+    <SocialNetwork.facebook @href="https://www.facebook.com/WNYC" />
+    <SocialNetwork.instagram @href="https://www.instagram.com/wnyc/" />
+  </NyprMSocialFollow>
+`
+}}
+</Story>
+</Preview>
