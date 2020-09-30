@@ -2,7 +2,10 @@ import { helper } from '@ember/component/helper';
 import moment from 'moment';
 
 export function formattedTimeRange(params/*, hash*/) {
-  if (!params) {
+  if (!params ||
+      params.length != 2 ||
+      !params[0] ||
+      !params[1]) {
     return '';
   }
 
