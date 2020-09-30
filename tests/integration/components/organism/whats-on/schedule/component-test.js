@@ -7,10 +7,17 @@ module('Integration | Component | organism/whats-on/schedule', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders with correct title and timestamp', async function(assert) {
+    let currentTime = new Date();
+    let startTime = new Date(currentTime.getTime() + (24 * 60 * 60 * 1000));
+    startTime.setHours(8);
+    startTime.setMinutes(0);
+    startTime.setSeconds(0);
+    startTime.setMilliseconds(0);
+
     this.set('nowPlaying', {
       nextAiring: {
         showTitle: 'BBC World Service',
-        startTime: new Date(2020, 8, 27, 8, 0, 0, 0),
+        startTime: startTime,
         show: {
           image: {
             url: ''
