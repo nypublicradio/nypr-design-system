@@ -10,7 +10,7 @@ export function formattedTimeRange(params/*, hash*/) {
   }
 
   return moment(params[0]).format('h:mm A') +
-    ' to ' +
+    ' - ' +
     moment(params[1]).format('h:mm A');
 }
 
