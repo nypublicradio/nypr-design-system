@@ -80,6 +80,7 @@
       margin-bottom: var(--space-3);
       max-height: 328px;
       max-width: 328px;
+      cursor: pointer;
 
       @include media(">=medium") {
         max-height: 180px;
