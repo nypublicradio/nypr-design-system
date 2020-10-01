@@ -2,6 +2,10 @@
   <NyprMOnAirImage
     @stream={{this.nowPlaying.stream}}
     @show={{this.nowPlaying.show}}
+    data-action="Clicked show image: main-player"
+    data-label={{this.nowPlaying.stream.name}}
+    title={{this.nowPlaying.stream.name}}
+    @playItemId={{this.nowPlaying.stream.slug}}
   />
 
   <NyprMPlayButton
