@@ -12,7 +12,7 @@ module('Integration | Helper | formatted-time-range', function(hooks) {
 
     await render(hbs`{{formatted-time-range startTime endTime}}`);
 
-    assert.equal(this.element.textContent.trim(), '9:00 PM to 10:00 PM');
+    assert.equal(this.element.textContent.trim(), '9:00 PM - 10:00 PM');
   });
 
   test('it returns empty string when parameters are undefined', async function(assert) {
