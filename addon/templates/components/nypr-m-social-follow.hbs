@@ -1,10 +1,10 @@
 {{#if @label}}
-  <div>{{@label}}</div>
+  <div class="follow-us">{{@label}}</div>
 {{else}}
-  <div>Follow Us</div>
+  <div class="follow-us">Follow Us</div>
 {{/if}}
 
-<div>
+<div class="social-buttons">
   {{#if (has-block)}}
     {{yield (hash
       twitter=(component 'button' icon="twitter")
