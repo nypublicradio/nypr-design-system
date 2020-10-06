@@ -1,0 +1,22 @@
+.m-social-follow {
+  @include media(">medium") {
+    display: flex;
+  }
+
+  .follow-us {
+    margin-right: 1em;
+    display: flex;
+    align-items: center;
+  }
+
+  .social-buttons {
+    display: flex;
+    align-items: center;
+    margin-left: -3px;
+  }
+
+  .social-buttons > * {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+}

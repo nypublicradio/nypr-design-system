@@ -1,0 +1,73 @@
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import hbs from 'htmlbars-inline-precompile';
+
+<Meta title="Components/Molecules/Social Follow" />
+
+# Social Follow
+
+The social follow component is used for linking to the social media
+accounts for a site, show, person, etc.
+
+## Default State
+
+The default state takes only a `handle` argument and returns a component that
+displays a "Follow Us" label, and three icons linked to their appropriate
+networks: Facebook, Twitter and Instagram.
+
+**Note:** If handles are different between social networks (e.g. `WNYC` vs.
+`WNYCRadio`), please use the *Component Block* version of this component to take
+full control over the component's presentation.
+
+<Preview>
+<Story name="Default State">
+{{
+template: hbs`
+  <NyprMSocialFollow @handle="wnyc" />
+`
+}}
+</Story>
+</Preview>
+
+## Overriding the "Follow Us" Label
+
+The "Follow Us" label can be overridden (because "us" may not be appropriate
+for every use-case) via the `@label` argument:
+
+<Preview>
+<Story name="Overriding Label">
+{{
+template: hbs`
+  <NyprMSocialFollow @handle="mikehearn" @label="Follow Me" />
+`
+}}
+</Story>
+</Preview>
+
+
+## Overriding / Re-arranging Social Networks via Component Block
+
+The component can also be used as a higher order component so that you can have
+complete control over a) which social networks are displayed, b) what order
+they are displayed in, and c) the full URL that they link to.
+
+This format requires you pass the full `@href` attribute into the sub-component in
+order for it to correctly link.
+
+**Note**: You *must* use this format if the social media handles differ between
+social networks (e.g. if Facebook was "WNYC" while Twitter used lower-case "wnyc").
+
+In the below example, we've moved Twitter to be the *first* social network
+displayed, and have removed Instagram entirely
+
+<Preview>
+<Story name="Full Control via Higher-Order Component">
+{{
+template: hbs`
+  <NyprMSocialFollow as |SocialNetwork|>
+    <SocialNetwork.twitter @href="http://www.twitter.com/wnyc"/>
+    <SocialNetwork.facebook @href="https://www.facebook.com/WNYC" />
+  </NyprMSocialFollow>
+`
+}}
+</Story>
+</Preview>
