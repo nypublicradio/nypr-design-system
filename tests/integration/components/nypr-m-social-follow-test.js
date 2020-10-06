@@ -12,7 +12,7 @@ module('Integration | Component | nypr-m-social-follow', function(hooks) {
 
     await render(hbs`{{nypr-m-social-follow}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.equal(this.element.textContent.trim(), 'Follow Us');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,7 @@ module('Integration | Component | nypr-m-social-follow', function(hooks) {
       {{/nypr-m-social-follow}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.ok(this.element.textContent.trim().includes('template block text'));
+    assert.ok(this.element.textContent.trim().includes('Follow Us'));
   });
 });
