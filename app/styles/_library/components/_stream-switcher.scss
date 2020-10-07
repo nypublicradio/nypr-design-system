@@ -124,12 +124,12 @@
                 align-self: center;
                 display: flex;
                 flex-direction: row;
+              justify-content: space-between;
                 grid-column-start: 3;
                 grid-column-end: 3;
                 grid-row-start: 1;
                 grid-row-end: span 1;
                 height: 16px;
-                justify-content: space-between;
                 width: 40px;
 
                 &.is-playing {
