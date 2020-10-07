@@ -1,5 +1,11 @@
 # `nypr-design-system` changelog
 
+## 3.1.9
+
+- [ENHANCEMENT] w3k button tweak (#152)
+- [BUXFIX] fix for play button radiating waves animation on safari (#153)
+- [SECURITY] Bump node-fetch from 2.6.0 to 2.6.1 (#146)
+
 ## 3.1.8
 
 - [ENCHANCEMENT] Update main-player and persistent-player alt text for button controls (#150)

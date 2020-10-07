@@ -1,0 +1,19 @@
+{{#if @label}}
+  <div class="follow-us">{{@label}}</div>
+{{else}}
+  <div class="follow-us">Follow Us</div>
+{{/if}}
+
+<div class="social-buttons">
+  {{#if (has-block)}}
+    {{yield (hash
+      twitter=(component 'button' icon="twitter")
+      facebook=(component 'button' icon="facebook")
+      instagram=(component 'button' icon="instagram")
+      )}}
+  {{else}}
+    <Button @icon="facebook" @href="https://facebook.com/{{@handle}}"/>
+    <Button @icon="instagram" @href="https://instagram.com/{{@handle}}"/>
+    <Button @icon="twitter" @href="https://twitter.com/{{@handle}}"/>
+  {{/if}}
+</div>

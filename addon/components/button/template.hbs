@@ -4,7 +4,7 @@
   {{#if @href}}
       <a class="button  {{if (and @icon (not @label)) "is-icon-only"}}" href="{{@href}}" target="_blank" rel="noopener" aria-label="{{@alt}}" ...attributes>
         {{#if @icon}}
-            <Icon class="button-icon icon" @name="icon" role="presentation" />
+            <Icon class="button-icon icon" @icon={{@icon}} @name="icon" role="presentation" />
         {{/if}}
         {{#if @label}}
           <span class="button-label" aria-hidden={{if @alt "true"}}>{{@label}}</span>

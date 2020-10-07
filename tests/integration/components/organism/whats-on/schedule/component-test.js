@@ -10,7 +10,7 @@ module('Integration | Component | organism/whats-on/schedule', function(hooks) {
     this.set('nowPlaying', {
       nextAiring: {
         showTitle: 'BBC World Service',
-        startTime: new Date(2020, 8, 27, 8, 0, 0, 0),
+        startTime: new Date(2040, 8, 27, 8, 0, 0, 0),
         show: {
           image: {
             url: ''
