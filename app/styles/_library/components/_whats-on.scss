@@ -2,8 +2,6 @@
 @import 'schedule';
 
 .whats-on {
-  padding: 20px;
-  max-width: 728px;
 
   @include media(">=medium") {
     margin-left: auto;
@@ -16,7 +14,7 @@
 
   .whats-on-live-indicator {
     align-items: center;
-    background-color: rgb(var(--color-background));
+    background-color: rgb(var(--color-tag-background));
     border-radius: 4px;
     display: flex;
     flex-direction: row;
@@ -36,8 +34,7 @@
 
     .whats-on-live-indicator-text {
       @include typeface(body, 1);
-
-      color: rgb(var(--color-text));
+      color: rgb(var(--color-tag-text));
       font-weight: bold;
       letter-spacing: 2px;
       line-height: 16px;
@@ -46,10 +43,18 @@
     }
 
     .whats-on-live-indicator-dot {
-      background-color: #E74F4F;
+      background-color: #de1e3d;
       border-radius: 8px;
       height: 8px;
       width: 8px;
+    }
+
+    .whats-on-live-indicator-time {
+      @include typeface(body, 3);
+      font-feature-settings: "lnum";
+      text-transform: uppercase;
+      color: rgb(var(--color-tag-text));
+      font-weight: bold;
     }
   }
 
@@ -66,7 +71,7 @@
     }
 
     .on-air-image {
-      border: 1px solid rgb(var(--color-text-muted));
+      z-index: 10;
       filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
       margin-bottom: 24px;
       max-height: 328px;
@@ -89,7 +94,7 @@
 
     .play-button {
       align-items: center;
-      background-color: rgb(var(--color-primary-2));
+      background-color: rgb(var(--color-button));
       margin-bottom: 24px;
       padding: 0 20px 0 0;
 
@@ -108,7 +113,7 @@
 
       .button-label {
         @include typeface(body, 5);
-        color: rgb(var(--color-background));
+        color: rgb(var(--color-button-text));
         display: block;
         font-weight: bold;
         letter-spacing: 1.6px;
@@ -119,7 +124,7 @@
     .whats-on-show-title {
       @include typeface(header, 10);
 
-      color: rgb(var(--color-primary-2));
+      color: rgb(var(--color-text));
       font-weight: normal;
       margin-bottom: 8px;
       text-align: left;

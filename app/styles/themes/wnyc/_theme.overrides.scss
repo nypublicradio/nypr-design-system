@@ -193,6 +193,7 @@ a {
   display: block;
   z-index: 1;
   max-width: 813px;
+  padding: 0;
 }
 
 .whats-on .whats-on-show {
@@ -201,7 +202,7 @@ a {
 }
 
 .whats-on .whats-on-live-indicator {
-  background: RGB(var(--color-white));
+  background: RGB(var(--color-tag-background));
   border-radius: 3px;
   padding: var(--space-1);
   justify-content: center;
@@ -212,11 +213,11 @@ a {
 .whats-on .whats-on-live-indicator .whats-on-live-indicator-text {
   font-size: var(--font-size-4);
   font-weight: 700;
-  color: RGB(var(--color-black));
+  color: RGB(var(--color-tag-text));
 }
 
 .whats-on .whats-on-show .whats-on-show-title {
-  color: RGB(var(--color-white));
+  color: RGB(var(--color-text));
   font-weight: 600;
   font-size: var(--font-size-12);
   line-height: 42px;
@@ -226,10 +227,8 @@ a {
 
 .whats-on .whats-on-show .on-air-image {
   border-radius: 3px;
-  border: none;
   max-width: 330px;
   max-height: 330px;
-  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
   margin-bottom: 0;
 }
 
@@ -253,7 +252,6 @@ a {
   line-height: 37px;
   letter-spacing: 0.09em;
   text-align: center;
-
 }
 
 .whats-on .whats-on-show .play-button .play-button-text {
@@ -310,4 +308,21 @@ a {
 .nypr-o-audio-player-play-button,
 .nypr-o-audio-player .button:active {
   background-color: RGB(var(--color-red));
+}
+
+// stream switcher
+.stream-switcher {
+  margin: auto;
+  width: 813px;
+  max-width: 100%;
+}
+
+.stream-switcher-streams-stream-show-title,
+.up-next .up-next-time,
+.stream-switcher-stations-label {
+  display: none;
+}
+
+.stream-switcher-streams-stream {
+  border-radius: 3px;
 }
