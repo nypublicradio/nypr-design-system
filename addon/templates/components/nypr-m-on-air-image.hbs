@@ -1,20 +1,26 @@
 {{#if (and show.about.people.firstObject.image displayHostIfAvailable)}}
   <img
-   aria-hidden="true"
-   alt={{altText}}
-   src={{image-template show.about.people.firstObject.image.template width height show.about.people.firstObject.image.crop}}>
+    onClick={{action this.handleClick}}
+    aria-hidden="true"
+    role="button"
+    alt={{altText}}
+    src={{image-template show.about.people.firstObject.image.template width height show.about.people.firstObject.image.crop}}>
 {{else}}
   {{#if show.image.url}}
     <img
-     aria-hidden="true"
-     alt={{show.title}}
-     src={{show.image.url}}>
+      onClick={{action this.handleClick}}
+      aria-hidden="true"
+      role="button"
+      alt={{show.title}}
+      src={{show.image.url}}>
   {{else}}
     {{#if stream.imageLogo}}
       <img
-       aria-hidden="true"
-       alt={{stream.name}}
-       src={{stream.imageLogo}}>
+        onClick={{action this.handleClick}}
+        aria-hidden="true"
+        role="button"
+        alt={{stream.name}}
+        src={{stream.imageLogo}}>
     {{/if}}
   {{/if}}
 {{/if}}

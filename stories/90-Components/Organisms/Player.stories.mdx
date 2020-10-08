@@ -1,5 +1,21 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks';
+import hbs from 'htmlbars-inline-precompile';
 
 <Meta title="Components/Organisms/Player" />
 
 # Player
+
+<Preview withToolbar={true}>
+  <Story name="Persistent Player" height="850px">{{
+    template: hbs`
+      <NyprOPersistentAudioPlayer
+        class='u-color-group-dark'
+        @levelOne='The Takeaway'
+        @levelThree='The Peabody Award-Winning Program Features Terry Gross Fearless And Insightful Interviews With Big Names In Pop Culture, Politics And The Arts.'
+        @streamSlug='slug'
+        @streamName='WNYC-FM939'
+        aria-live='polite'
+      />
+    `
+  }}</Story>
+</Preview>

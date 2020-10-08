@@ -303,6 +303,11 @@ a {
 }
 
 // persistent player
+.nypr-o-audio-player {
+  grid-template-columns: 75% 25%;
+  grid-template-rows: auto;
+}
+
 .nypr-o-audio-player,
 .nypr-o-audio-player-controls,
 .nypr-o-audio-player-play-button,
@@ -325,4 +330,21 @@ a {
 
 .stream-switcher-streams-stream {
   border-radius: 3px;
+}
+
+.nypr-o-audio-player-level-one-four {
+  justify-self: left;
+}
+
+.nypr-o-audio-player-level-one {
+  text-align: left;
+}
+
+.nypr-o-audio-player-level-two-three {
+  height: auto;
+}
+
+.nypr-o-audio-player-level-one-four {
+  text-align: left;
+  text-transform: capitalize;
 }
