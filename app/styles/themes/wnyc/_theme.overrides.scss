@@ -107,9 +107,27 @@ a {
   margin-bottom: 0;
 }
 
+.c-main-footer a,
+.c-main-footer p {
+  @include typeface(body, 5);
+}
+
 .c-main-footer .l-container {
   border-top: var(--border-subtle);
   padding: 50px 16px;
+}
+
+.c-main-footer .c-secondary-nav__subheader-spacer {
+  margin-top: 3px;
+  @include media(">medium") {
+    margin-top: 52px;
+  }
+}
+
+.c-main-footer .c-secondary-nav__subheader {
+  @include media(">medium") {
+    margin-top: 49px;
+  }
 }
 
 .c-main-footer .c-secondary-nav__subheader {
