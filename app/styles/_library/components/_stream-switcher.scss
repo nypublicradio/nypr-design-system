@@ -39,16 +39,16 @@
       line-height: 50px;
       position: relative;
 
-      &:after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        left: 30px;
-        border-left: 20px solid transparent;
-        border-right: 20px solid transparent;
-        border-top: 20px solid RGB(var(--color-text));
-      }
+      //&:after {
+      //  content: '';
+      //  position: absolute;
+      //  width: 0;
+      //  height: 0;
+      //  left: 30px;
+      //  border-left: 20px solid transparent;
+      //  border-right: 20px solid transparent;
+      //  border-top: 20px solid RGB(var(--color-text));
+      //}
 
       &:last-of-type {
         margin-right: 0;
@@ -58,33 +58,6 @@
         background-color: RGB(var(--color-text));
         color: RGB(var(--color-text-inverse));
       }
-
-      //&.is-active.is-playing:hover {
-      //  @include media(">=xxlarge") {
-      //    height: 125px;
-      //
-      //    .on-air-image,
-      //    .stream-switcher-streams-stream-show-title {
-      //      display: block;
-      //    }
-      //
-      //    .up-next {
-      //      display: flex;
-      //    }
-      //  }
-      //}
-
-      //&.is-active.is-playing {
-      //  @include media(">=xxlarge") {
-      //    height: 36px;
-      //
-      //    .on-air-image,
-      //    .stream-switcher-streams-stream-show-title,
-      //    .up-next {
-      //      display: none;
-      //    }
-      //  }
-      //}
 
       .stream-switcher-streams-stream-title {
         @include typeface(body, 4);
@@ -98,11 +71,13 @@
       .sound-animation {
         align-items: flex-end;
         align-self: center;
-        display: flex;
+        display: none;
         flex-direction: row;
         justify-content: space-between;
         height: 16px;
         width: 40px;
+        margin-right: var(--space-2);
+        background-color: RGB(var(--color-text-inverse));
 
         &.is-playing {
           display: flex;
@@ -144,7 +119,6 @@
           width: 2.2px;
           max-width: 2.2px;
           min-width: 2.2px;
-          background-color: RGB(var(--color-text));
         }
       }
 

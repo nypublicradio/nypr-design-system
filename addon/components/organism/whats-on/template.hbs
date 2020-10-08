@@ -1,13 +1,13 @@
-<div class="whats-on-live-indicator">
-  <div class="whats-on-live-indicator-text" aria-hidden="true">live</div>
-  <div class="whats-on-live-indicator-dot"></div>
-</div>
-
 <div class="whats-on-show" aria-live="polite">
   <NyprMOnAirImage
     @stream={{this.nowPlaying.stream}}
     @show={{this.nowPlaying.show}}
   />
+
+  <div class="whats-on-live-indicator">
+    <div class="whats-on-live-indicator-text" aria-hidden="true">live</div>
+    <div class="whats-on-live-indicator-dot"></div>
+  </div>
 
   <h2 class="whats-on-show-title" data-test-element="show-title">
     {{#if nowPlaying.show.title}}
