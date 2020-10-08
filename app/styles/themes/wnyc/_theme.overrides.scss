@@ -35,7 +35,7 @@ a {
   &:after {
     content: '';
     height: 8px;
-    width: 750px;
+    width: calc(100% - 40px);
     background: rgba(var(--color-primary-1), 1);
     border-radius: 0 0 6px 6px;
     margin: auto;
@@ -43,6 +43,9 @@ a {
     left: 0;
     right: 0;
     bottom: -8px;
+    @include media(">=medium") {
+      width: calc(100% - 64px);
+    }
   }
 }
 
