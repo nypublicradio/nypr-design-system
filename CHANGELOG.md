@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.10
+
+- [FEATURE] social follow component (#158)
+
 ## 3.1.9
 
 - [ENHANCEMENT] w3k button tweak (#152)
