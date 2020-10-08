@@ -2,79 +2,214 @@
     $THEME OVERRIDES
 \*------------------------------------*/
 
+main {
+  background: linear-gradient(185.91deg, rgba(var(--color-red), 1) 20.82%, rgba(var(--color-blue), 1) 50.8%);
+}
+
+a {
+  padding-bottom: var(--space-1);
+  border-bottom: solid 2px RGB(var(--color-white));
+}
+
+.dots {
+  opacity: .6;
+  background-image: radial-gradient(rgba(var(--color-white), .6) 2px, transparent 2px), radial-gradient(rgba(var(--color-white), .6) 2px, transparent 2px);
+  background-position: 35px 0, 35px 35px;
+  background-size: 35px 35px;
+}
+
+.header-dots {
+  width: 1200px;
+  height: 340px;
+  position: absolute;
+  margin: auto;
+  right: 0;
+  left: 0;
+}
+
+.wnyc-card-styles {
+  background: linear-gradient(180deg, rgba(43, 111, 153, 0.49) 0%, rgba(43, 111, 153, 0.17) 100%), #191716;
+  border-radius: 6px;
+  position: relative;
+
+  &:after {
+    content: '';
+    height: 8px;
+    width: 750px;
+    background: rgba(var(--color-primary-1), 1);
+    border-radius: 0 0 6px 6px;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+  }
+}
+
 // buttons
+.whats-on .whats-on-show .play-button,
 .c-main-header .button,
 .c-main-header .button::before {
-  border-radius: 3px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 30px;
+  padding: 0 var(--space-6);
+  height: 41px;
+  line-height: 41px;
 }
+
 .c-main-header .button .button-label {
+  text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.02em;
-  font-size: var(--font-size-5);
+  font-size: var(--font-size-6);
+}
+
+// header
+.c-main-header,
+.c-main-header__inner {
+  background: RGB(var(--color-red));
+}
+
+.c-main-header__inner {
+  padding: var(--space-2);
+  @include media(">=medium") {
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  }
 }
 
 // header logo
 .c-main-header a svg {
-  fill: rgb(var(--color-red));
+  fill: RGB(var(--color-white));
 }
 
-.c-main-header__branding a:hover {
-  svg {
-    fill: rgb(var(--color-black));
-  }
+.c-main-header a:hover svg {
+  opacity: var(--opacity-hover);
+  fill: RGB(var(--color-white));
 }
 
 // header donate button
 .c-main-header__donate {
+  color: RGB(var(--color-red));
+
   &:hover {
-    color: rgb(var(--color-white));
+    background: RGB(var(--color-white));
+    color: RGB(var(--color-red));
   }
 }
 
 // Footer
 .c-main-footer {
-  margin-top: 50px;
-  --color-background: var(--color-light-gray);
+  background: linear-gradient(180deg, rgba(var(--color-blue, 1)) 0%, rgba(var(--color-dark-blue, 1)) 100%), #191716;
+  padding: 50px 0;
+  margin-bottom: 0;
 }
 
-.c-main-footer a,
-.c-main-footer a:visited,
-.c-main-footer a:active {
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: none;
-  }
+.c-main-footer .l-container {
+  border-top: var(--border-subtle);
+  padding: 50px 16px;
 }
 
 .c-main-footer .c-secondary-nav__subheader {
   @include typeface(subheader, 8);
 }
 
-.c-nypr-nav__link:hover {
-  color: rgb(var(--color-red));
+.c-main-footer .c-main-footer__secondary-nav .c-secondary-nav__item {
+  margin-bottom: var(--space-3);
+}
+
+.c-main-footer .c-main-footer__left-component a,
+.c-main-footer .c-share-tools__link {
+  border: none;
+}
+
+.c-main-footer .c-main-footer__left-component svg path,
+.c-main-footer .c-main-footer__left-component svg polygon {
+  fill: RGB(var(--color-white));
+}
+
+.c-main-footer .c-share-tools__link:hover path,
+.c-main-footer a:hover svg {
+  fill: rgba(var(--color-white), var(--opacity-hover));
+}
+
+.c-main-footer__terms-links {
+  margin-top: var(--space-3);
+  @include media(">xlarge") {
+    margin-top: 0;
+  }
+}
+
+.c-main-footer__terms-links a {
+  width: fit-content;
+  margin: 0 auto var(--space-3);
+  padding: 0;
+  @include media(">large") {
+    padding: 0 0 var(--space-1);
+    margin: 0 var(--space-3) var(--space-3) 0;
+  }
+  @include media(">large") {
+    margin: 0 var(--space-3) 0 0;
+  }
+}
+
+// brands popup
+
+.ember-basic-dropdown-content {
+  border-radius: 3px;
+}
+
+.ember-basic-dropdown-content a {
+  color: rgba(var(--color-red));
+
+  &:hover {
+    color: rgba(var(--color-red));
+    opacity: var(--opacity-hover);
+  }
 }
 
 // main player
+.whats-on {
+  display: block;
+  z-index: 1;
+  max-width: 813px;
+}
+
+.whats-on .whats-on-show {
+  grid-template-columns: 355px 1fr;
+  @extend .wnyc-card-styles;
+}
+
+.whats-on .whats-on-live-indicator {
+  background: RGB(var(--color-white));
+  border-radius: 3px;
+  padding: var(--space-1);
+  justify-content: center;
+  height: 18px;
+  width: fit-content;
+}
+
 .whats-on .whats-on-live-indicator .whats-on-live-indicator-text {
-  font-size: var(--font-size-3);
-  line-height: 14px;
-  letter-spacing: 0.882761px;
+  font-size: var(--font-size-4);
+  font-weight: 700;
+  color: RGB(var(--color-black));
 }
 
 .whats-on .whats-on-show .whats-on-show-title {
-  color: rgb(var(--color-black));
-  font-size: var(--font-size-13);
-  line-height: 54px;
-  letter-spacing: -0.01em;
+  color: RGB(var(--color-white));
+  font-weight: 600;
+  font-size: var(--font-size-12);
+  line-height: 42px;
   position: relative;
+  margin-top: 50px;
 }
 
 .whats-on .whats-on-show .on-air-image {
-  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   border: none;
-  filter: none;
+  max-width: 330px;
+  max-height: 330px;
+  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
+  margin-bottom: 0;
 }
 
 .whats-on .whats-on-show .on-air-image img {
@@ -82,19 +217,38 @@
 }
 
 .whats-on .whats-on-show .play-button {
-  border-radius: 3px;
+  width: fit-content;
+  padding-left: var(--space-3);
+  height: 51px;
+  background: rgba(var(--color-primary-1), 1);
+}
+
+.whats-on .whats-on-show .play-button .button-label {
+  color: RGB(var(--color-white));
+  text-transform: uppercase;
+  font-size: var(--font-size-7);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 37px;
+  letter-spacing: 0.09em;
+  text-align: center;
+
 }
 
 .whats-on .whats-on-show .play-button .play-button-text {
   letter-spacing: 0.02em;
+
   &::after {
     content: 'listen';
-    text-transform: capitalize;
 
     @include media(">=medium") {
       content: 'listen live';
     }
   }
+}
+
+.whats-on .whats-on-show .whats-on-show-description {
+  font-size: var(--font-size-5);
 }
 
 // what's on snapshot
@@ -114,7 +268,7 @@
 
 .schedule .schedule-metadata .schedule-metadata-copy .schedule-metadata-copy-title .schedule-metadata-copy-title-text {
   @include typeface(subheader, 8);
-  color: rgb(var(--color-black));
+  color: RGB(var(--color-black));
 }
 
 .schedule .schedule-metadata {
@@ -126,7 +280,7 @@
 }
 
 .schedule .schedule-metadata .schedule-metadata-copy .schedule-metadata-copy-time {
-  color: rgb(var(--color-dark-gray));
+  color: RGB(var(--color-dark-gray));
 }
 
 // persistent player
@@ -134,5 +288,5 @@
 .nypr-o-audio-player-controls,
 .nypr-o-audio-player-play-button,
 .nypr-o-audio-player .button:active {
-  background-color: rgb(var(--color-red));
+  background-color: RGB(var(--color-red));
 }
