@@ -93,13 +93,14 @@
         display: none;
         flex-direction: row;
         justify-content: space-between;
-        height: auto;
         width: 20px;
+        height: 15px;
         margin-right: var(--space-2);
         background-color: RGB(var(--color-text-inverse));
 
         @include media(">medium") {
           width: 40px;
+          height: auto;
         }
 
         &.is-playing {

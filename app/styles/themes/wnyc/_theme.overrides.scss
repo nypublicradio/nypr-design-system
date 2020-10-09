@@ -2,6 +2,10 @@
     $THEME OVERRIDES
 \*------------------------------------*/
 
+body {
+  overflow-x: hidden;
+}
+
 main {
   background: linear-gradient(185.91deg, rgba(var(--color-red), 1) 20.82%, rgba(var(--color-blue), 1) 50.8%);
   padding-top: var(--space-6);
