@@ -179,10 +179,15 @@
           margin-right: var(--space-2);
           pointer-events: none;
           text-transform: uppercase;
+          width: 60px;
         }
 
         .up-next-show-title {
           pointer-events: none;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
         }
 
         .up-next-time {
