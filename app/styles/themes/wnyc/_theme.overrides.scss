@@ -98,13 +98,13 @@ a {
 
 // header nav
 .c-main-header .c-primary-nav--top {
-  @include typeface(body, 6);
-  font-weight: bold;
   padding-left: var(--space-9);
   width: 100%;
   text-align: left;
 }
 .c-primary-nav--top .c-primary-nav__link {
+  @include typeface(body, 6);
+  font-weight: bold;
   padding: 0;
 }
 
