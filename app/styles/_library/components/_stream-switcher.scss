@@ -100,7 +100,7 @@
 
         @include media(">medium") {
           width: 40px;
-          height: auto;
+          height: 30px;
         }
 
         &.is-playing {
