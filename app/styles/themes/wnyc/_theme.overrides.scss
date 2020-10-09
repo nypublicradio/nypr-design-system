@@ -105,11 +105,11 @@ a {
 
 .c-primary-nav--top .c-primary-nav__link {
   padding: 0;
+  @include typeface(body, 6);
 }
 
-.c-primary-nav--top .c-primary-nav__link__text {
-  @include typeface(body, 6);
-  font-weight: bold;
+.c-primary-nav__link .c-primary-nav-link__text {
+  font-weight: 700;
 }
 
 // header donate button
