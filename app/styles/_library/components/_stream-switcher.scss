@@ -1,4 +1,5 @@
 .stream-switcher {
+
   .stream-switcher-stations-label {
     @include typeface(body, 3);
 
@@ -16,6 +17,7 @@
 
   .stream-switcher-streams {
     width: 100%;
+    height: 87px; // height of card plus height of the active caret
     display: flex;
     // horizontal scroll with hidden scrollbar
     overflow: scroll;
@@ -29,26 +31,27 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 
+    @include media(">medium") {
+      height: 70px; // height of card plus height of the active caret
+    }
+
     .stream-switcher-streams-stream {
       display: flex;
+      flex-direction: column;
       color: RGB(var(--color-text));
       border: 1px solid RGB(var(--color-text));
       margin-right: var(--space-2);
-      padding: 0 var(--space-2);
-      height: 50px;
+      padding: 0 var(--space-3);
+      height: 67px;
+      min-width: 170px;
       line-height: 50px;
       position: relative;
+      margin-bottom: -20px; // hack to get around overflow scroll issue
 
-      //&:after {
-      //  content: '';
-      //  position: absolute;
-      //  width: 0;
-      //  height: 0;
-      //  left: 30px;
-      //  border-left: 20px solid transparent;
-      //  border-right: 20px solid transparent;
-      //  border-top: 20px solid RGB(var(--color-text));
-      //}
+      @include media(">medium") {
+        flex-direction: row;
+        height: 50px;
+      }
 
       &:last-of-type {
         margin-right: 0;
@@ -57,30 +60,51 @@
       &.is-active {
         background-color: RGB(var(--color-text));
         color: RGB(var(--color-text-inverse));
+
+        &:after {
+          content: '';
+          position: absolute;
+          width: 0;
+          bottom: -20px;
+          height: 30px;
+          left: 30px;
+          border-left: 30px solid transparent;
+          border-right: 30px solid transparent;
+          border-top: 25px solid RGB(var(--color-text));
+        }
       }
 
       .stream-switcher-streams-stream-title {
         @include typeface(body, 4);
-        align-self: center;
         color: rgb(var(--color-background));
         font-weight: bold;
-        margin-right: var(--space-2);
+        margin: var(--space-2) var(--space-3) var(--space-2) 0;
         pointer-events: none;
+        font-feature-settings: "lnum";
+        align-items: center;
+        display: flex;
+        @include media(">medium") {
+          margin: 0 var(--space-3) 0 0;
+        }
       }
 
       .sound-animation {
-        align-items: flex-end;
-        align-self: center;
+        float: left;
         display: none;
         flex-direction: row;
         justify-content: space-between;
-        height: 16px;
-        width: 40px;
+        height: auto;
+        width: 20px;
         margin-right: var(--space-2);
         background-color: RGB(var(--color-text-inverse));
 
+        @include media(">medium") {
+          width: 40px;
+        }
+
         &.is-playing {
           display: flex;
+
           .sound-animation-bar {
             animation: sound-bars 500ms linear 0ms infinite alternate;
           }
@@ -138,14 +162,13 @@
 
       .stream-switcher-streams-stream-show-title {
         @include typeface(body, 4);
-        align-self: center;
         color: rgb(var(--color-background));
         font-weight: 600;
         pointer-events: none;
       }
 
       .up-next {
-        @include typeface(body, 3);
+        @include typeface(body, 4);
         display: flex;
         align-items: center;
         flex-direction: row;
@@ -153,13 +176,12 @@
 
         .up-next-label {
           font-weight: 700;
-          margin-left: 8px;
+          margin-right: var(--space-2);
           pointer-events: none;
           text-transform: uppercase;
         }
 
         .up-next-show-title {
-          margin-left: 8px;
           pointer-events: none;
         }
 
