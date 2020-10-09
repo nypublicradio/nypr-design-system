@@ -102,10 +102,14 @@ a {
   width: 100%;
   text-align: left;
 }
-.c-primary-nav--top div.c-primary-nav__link {
+
+.c-primary-nav--top .c-primary-nav__link {
+  padding: 0;
+}
+
+.c-primary-nav--top .c-primary-nav__link__text {
   @include typeface(body, 6);
   font-weight: bold;
-  padding: 0;
 }
 
 // header donate button
