@@ -1,6 +1,8 @@
 @import 'episode';
 @import 'schedule';
 
+$live-indicator-dot-color: #de1e3d;
+
 .whats-on {
   width: 100%;
   margin: auto;
@@ -46,7 +48,7 @@
     }
 
     .whats-on-live-indicator-dot {
-      background-color: #de1e3d;
+      background-color: $live-indicator-dot-color;
       border-radius: 8px;
       height: 8px;
       width: 8px;
@@ -137,6 +139,10 @@
         grid-row-end: 3;
         margin: 0 var(--space-4) var(--space-5);
       }
+
+      a {
+        border-bottom: none;
+      }
     }
 
     .whats-on-show-description {
@@ -153,5 +159,18 @@
         line-height: 25px;
       }
     }
+  }
+}
+
+.pulse {
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgba($live-indicator-dot-color, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba($live-indicator-dot-color, 0);
   }
 }

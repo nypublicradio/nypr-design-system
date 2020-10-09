@@ -11,17 +11,19 @@
   <div class="whats-on-live-indicator">
     <div class="whats-on-live-indicator-wrapper">
       <div class="whats-on-live-indicator-text" aria-hidden="true">live</div>
-      <div class="whats-on-live-indicator-dot"></div>
+      <div class="whats-on-live-indicator-dot pulse"></div>
     </div>
     <div class="whats-on-live-indicator-time">{{formatted-time-range this.nowPlaying.currentAiring.startTime this.nowPlaying.currentAiring.endTime}}</div>
   </div>
 
   <h2 class="whats-on-show-title" data-test-element="show-title">
-    {{#if nowPlaying.show.title}}
-      {{nowPlaying.show.title}}
-    {{else}}
-      {{nowPlaying.stream.name}}
-    {{/if}}
+    <a href={{@levelOneLink}}>
+      {{#if nowPlaying.show.title}}
+        {{nowPlaying.show.title}}
+      {{else}}
+        {{nowPlaying.stream.name}}
+      {{/if}}
+    </a>
   </h2>
 
   <div class="whats-on-show-description" data-test-element="show-description">
