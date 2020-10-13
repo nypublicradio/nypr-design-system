@@ -32,7 +32,6 @@
         {{strip-html @levelTwo}}
       </div>
     {{/if}}
-
     {{#if @levelThree}}
       <div class="nypr-o-audio-player-level-three {{if @levelTwo 'nypr-o-audio-player-level-two-visible'}} mod-scrolling-overflow" data-test-element="level-three">
         <a href={{@levelOneLink}}>
@@ -46,12 +45,6 @@
   </NyprMTrackAdditionalInfo>
 </div>
 
-<NyprMPlayButton
-        @playItemId={{this.streamSlug}}
-        class="nypr-o-audio-player-play-button"
-        data-test-element="play-button"
-/>
-
 <div class="nypr-o-audio-player-controls">
   {{#if (can-change-volume)}}
     {{nypr-m-volume-control
@@ -61,3 +54,9 @@
             isMuted    = hifi.isMuted}}
   {{/if}}
 </div>
+
+<NyprMPlayButton
+        @playItemId={{this.streamSlug}}
+        class="nypr-o-audio-player-play-button"
+        data-test-element="play-button"
+/>
