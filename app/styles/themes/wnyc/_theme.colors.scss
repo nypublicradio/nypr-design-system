@@ -33,14 +33,14 @@
   --color-background-muted:     transparent;
   --color-background-highlight: transparent;
   --color-text:                 var(--color-white);
-  --color-text-print:           var(--color-black);
+  --color-text-print:           var(--color-dark-gray);
   --color-text-muted:           var(--color-cool-white);
   --color-text-error:           var(--color-red);
-  --color-text-inverse:         var(--color-black);
+  --color-text-inverse:         var(--color-dark-gray);
   --color-text-metadata:        var(--color-white);
 
   /* Black and white relative to the color group background */
-  --color-high-contrast:          var(--color-black);
+  --color-high-contrast:          var(--color-dark-gray);
   --color-high-contrast-inverse:  var(--color-white);
 
   /* Links */
@@ -59,7 +59,7 @@
   --opacity-navigation-link-hover:         0.8;
 
   /* Tags */
-  --color-tag-text:             var(--color-black);
+  --color-tag-text:             var(--color-dark-gray);
   --color-tag-background:       var(--color-white);
   --color-tag-highlight:        var(--color-white);
   --color-tag-hover-text:       var(--color-red);
@@ -97,15 +97,15 @@
   --color-background-muted:     rgb(var(--color-background));
   --color-background-highlight: var(--color-blue);
   --color-text:                 var(--color-white);
-  --color-text-print:           var(--color-black);
+  --color-text-print:           var(--color-dark-gray);
   --color-text-muted:           var(--color-concrete);
   --color-text-error:           var(--color-red);
-  --color-text-inverse:         var(--color-black);
+  --color-text-inverse:         var(--color-dark-gray);
   --color-text-metadata:        var(--color-white);
 
   /* Black and white relative to the color group background */
   --color-high-contrast:          var(--color-white);
-  --color-high-contrast-inverse:  var(--color-black);
+  --color-high-contrast-inverse:  var(--color-dark-gray);
 
   /* Links */
   --color-link:                 var(--color-white);

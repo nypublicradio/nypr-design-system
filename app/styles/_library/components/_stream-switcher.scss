@@ -16,6 +16,7 @@
   }
 
   .stream-switcher-streams {
+    cursor: pointer;
     width: 100%;
     height: 87px; // height of card plus height of the active caret
     display: flex;

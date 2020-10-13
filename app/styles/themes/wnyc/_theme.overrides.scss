@@ -17,7 +17,7 @@ a {
 }
 
 .dots {
-  opacity: .6;
+  opacity: .5;
   background-image: radial-gradient(rgba(var(--color-white), .6) 2px, transparent 2px), radial-gradient(rgba(var(--color-white), .6) 2px, transparent 2px);
   background-position: 35px 0, 35px 35px;
   background-size: 35px 35px;
@@ -288,7 +288,7 @@ a {
 
 .schedule .schedule-metadata .schedule-metadata-copy .schedule-metadata-copy-title .schedule-metadata-copy-title-text {
   @include typeface(subheader, 8);
-  color: RGB(var(--color-black));
+  color: RGB(var(--color-dark-gray));
 }
 
 .schedule .schedule-metadata {
