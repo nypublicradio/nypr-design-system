@@ -161,6 +161,14 @@
         width: 40px;
       }
 
+      .stream-switcher-streams-stream-on-now {
+        font-weight: 700;
+        margin-right: var(--space-2);
+        pointer-events: none;
+        text-transform: uppercase;
+        width: 60px;
+      }
+
       .stream-switcher-streams-stream-show-title {
         @include typeface(body, 4);
         color: rgb(var(--color-background));

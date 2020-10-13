@@ -325,10 +325,36 @@ a {
   }
 }
 
-.stream-switcher-streams-stream-show-title,
-.up-next .up-next-time,
 .stream-switcher-stations-label {
   display: none;
+}
+
+.stream-switcher .stream-switcher-streams .stream-switcher-streams-stream {
+  .up-next {
+    display: none;
+  }
+
+  .up-next .up-next-time {
+    display: none;
+  }
+
+
+  .stream-switcher-streams-stream-show-title {
+    line-height: unset;
+  }
+}
+
+.stream-switcher .stream-switcher-streams .stream-switcher-streams-stream.is-active {
+  .stream-switcher-streams-stream-on-now {
+    display: none;
+  }
+  .stream-switcher-streams-stream-show-title {
+    display: none;
+  }
+
+  .up-next {
+    display: flex;
+  }
 }
 
 .stream-switcher-streams-stream {
