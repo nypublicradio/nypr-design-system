@@ -31,12 +31,12 @@ export default Component.extend({
     });
 
     if (this.nowPlaying.slug == this.stream.slug) {
-      return;
+      if (!(this.hifi.isPlaying || this.hifi.isLoading)) {
+        this.dj.play(this.stream.slug);
+      }
+    } else {
+      this.nowPlaying.setStreamSchedule(this.stream.slug);
+      this.dj.play(this.stream.slug);
     }
-
-    if (this.hifi.isPlaying || this.hifi.isLoading) {
-      this.hifi.pause();
-    }
-    this.nowPlaying.setStreamSchedule(this.stream.slug);
   },
 });
