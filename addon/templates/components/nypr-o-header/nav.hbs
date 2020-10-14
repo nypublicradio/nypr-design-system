@@ -23,6 +23,8 @@
       {{else if item.url}}
         <a
           href={{item.url}}
+          target="_blank"
+          rel="noopener"
           class="c-primary-nav__link {{@linkClass}} {{if item.tracking.trackClick ' gtm__click-tracking'}}"
           data-test-nav-link={{i}}
           data-category={{if item.tracking.trackClick (if item.tracking.dataCategory item.tracking.dataCategory @linkDataCategory)}}
