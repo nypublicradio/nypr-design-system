@@ -48,10 +48,34 @@
       line-height: 50px;
       position: relative;
       margin-bottom: -20px; // hack to get around overflow scroll issue
+      transition: var(--animation-duration-slow) var(--animation-easing-standard);
+      background-color: transparent;
 
       @include media(">medium") {
         flex-direction: row;
         height: 50px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        bottom: -19px;
+        height: 30px;
+        left: 30px;
+        border-left: 30px solid transparent;
+        border-right: 30px solid transparent;
+        border-top: 25px solid RGB(var(--color-text));
+        opacity: 0;
+        -webkit-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 150ms;
+        -moz-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 150ms;
+        -ms-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 150ms;
+        -o-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 150ms;
+        transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 150ms;
+      }
+
+      &:hover {
+        background-color: RGBA(var(--color-text), .2);
       }
 
       &:last-of-type {
@@ -59,19 +83,11 @@
       }
 
       &.is-active {
-        background-color: RGB(var(--color-text));
+        background-color: RGBA(var(--color-text), 1);
         color: RGB(var(--color-text-inverse));
 
-        &:after {
-          content: '';
-          position: absolute;
-          width: 0;
-          bottom: -20px;
-          height: 30px;
-          left: 30px;
-          border-left: 30px solid transparent;
-          border-right: 30px solid transparent;
-          border-top: 25px solid RGB(var(--color-text));
+        &::after {
+          opacity: 1;
         }
       }
 
@@ -182,6 +198,14 @@
           pointer-events: none;
           text-transform: uppercase;
           width: 60px;
+
+          &.up-next {
+            display: none;
+          }
+
+          &.on-now {
+            display: block;
+          }
         }
 
         .up-next-show-title {
@@ -202,6 +226,18 @@
         }
       }
     }
+  }
+}
+
+.stream-switcher .stream-switcher-streams .stream-switcher-streams-stream.is-active {
+  .up-next-label.up-next {
+    display: block;
+  }
+}
+
+.stream-switcher .stream-switcher-streams .stream-switcher-streams-stream.is-active {
+  .up-next-label.on-now {
+    display: none;
   }
 }
 
