@@ -60,18 +60,18 @@
         content: '';
         position: absolute;
         width: 0;
-        bottom: -19px;
-        height: 30px;
+        bottom: -16px;
+        height: 15px;
         left: 30px;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent;
-        border-top: 25px solid RGB(var(--color-text));
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 15px solid RGB(var(--color-text));
         opacity: 0;
-        -webkit-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 150ms;
-        -moz-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 150ms;
-        -ms-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 150ms;
-        -o-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 150ms;
-        transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 150ms;
+        -webkit-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 50ms;
+        -moz-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 50ms;
+        -ms-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 50ms;
+        -o-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 50ms;
+        transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 50ms;
       }
 
       &:hover {
@@ -197,7 +197,7 @@
           margin-right: var(--space-2);
           pointer-events: none;
           text-transform: uppercase;
-          width: 60px;
+          min-width: fit-content;
 
           &.up-next {
             display: none;

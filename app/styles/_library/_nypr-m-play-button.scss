@@ -100,7 +100,7 @@
     display: block;
     position: absolute;
     top: #{$top};
-    left: #{$left};
+    left: #{$left + 1};
     right: #{$right};
     bottom: #{$bottom};
     margin: auto;

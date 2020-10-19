@@ -98,9 +98,9 @@ $live-indicator-dot-color: #de1e3d;
 
     .play-button {
       background-color: rgb(var(--color-button));
-      padding: 0 20px 0 0;
-      width: 100%;
-      max-width: 328px;
+      padding: 0;
+      width: 235px;
+      max-width: 235px;
       margin: 0 0 var(--space-5) var(--space-4);
 
       @include media(">=medium") {
@@ -109,6 +109,11 @@ $live-indicator-dot-color: #de1e3d;
         grid-row-start: 4;
         grid-row-end: 5;
         margin-bottom: var(--space-4);
+      }
+
+      &::after,
+      &::before {
+        left: 0;
       }
 
       svg {
