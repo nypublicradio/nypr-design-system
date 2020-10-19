@@ -1,84 +1,93 @@
 @import 'episode';
 @import 'schedule';
 
+$live-indicator-dot-color: #de1e3d;
+
 .whats-on {
-  padding: 20px;
-  max-width: 728px;
+  width: 100%;
+  margin: auto;
 
-  @include media(">=medium") {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  @include media(">=xxlarge") {
-    padding-top: 64px;
+  @include media(">xlarge") {
+    width: 100%;
   }
 
   .whats-on-live-indicator {
+    justify-content: center;
+    height: 18px;
+    width: fit-content;
     align-items: center;
-    background-color: rgb(var(--color-background));
-    border-radius: 4px;
     display: flex;
     flex-direction: row;
-    height: 16px;
-    justify-content: center;
     letter-spacing: 1px;
-    margin-bottom: 8px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 51px;
+    margin: var(--space-3) 0 0 var(--space-4);
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
 
-    @include media(">=medium") {
-      justify-content: left;
-      margin-left: 0px;
-      margin-right: 0px;
+    @include media(">large") {
+      margin: var(--space-6) 0 0 var(--space-4);
+    }
+
+    .whats-on-live-indicator-wrapper {
+      display: flex;
+      align-items: center;
+      background-color: rgb(var(--color-tag-background));
+      border-radius: 3px;
+      padding: 0 var(--space-1);
+      margin-right: var(--space-3);
     }
 
     .whats-on-live-indicator-text {
-      @include typeface(body, 1);
-
-      color: rgb(var(--color-text));
+      @include typeface(body, 4);
+      color: rgb(var(--color-tag-text));
       font-weight: bold;
       letter-spacing: 2px;
-      line-height: 16px;
-      margin-right: 4px;
+      margin-right: var(--space-1);
       text-transform: uppercase;
     }
 
     .whats-on-live-indicator-dot {
-      background-color: #E74F4F;
+      background-color: $live-indicator-dot-color;
       border-radius: 8px;
       height: 8px;
       width: 8px;
     }
+
+    .whats-on-live-indicator-time {
+      @include typeface(body, 4);
+      font-feature-settings: "lnum";
+      text-transform: uppercase;
+      color: rgb(var(--color-tag-text));
+      font-weight: bold;
+    }
   }
 
   .whats-on-show {
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
 
-    @include media(">=medium") {
-      align-items: flex-start;
+    @include media(">medium") {
       display: grid;
-      grid-template-columns: 200px 1fr;
-      grid-template-rows: auto auto 1fr;
+      grid-template-columns: 355px 1fr;
+      grid-template-rows: auto;
     }
 
     .on-air-image {
-      border: 1px solid rgb(var(--color-text-muted));
+      z-index: 10;
       filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
-      margin-bottom: 24px;
-      max-height: 328px;
-      max-width: 328px;
+      height: auto;
+      width: 100%;
+      max-width: 100%;
+      cursor: pointer;
 
-      @include media(">=medium") {
-        max-height: 180px;
-        max-width: 180px;
-
+      @include media(">medium") {
+        max-height: 330px;
+        max-width: 330px;
         grid-column-start: 1;
         grid-column-end: 2;
-        grid-row-start: span 3;
+        grid-row-start: span 5;
       }
 
       img {
@@ -88,17 +97,23 @@
     }
 
     .play-button {
-      align-items: center;
-      background-color: rgb(var(--color-primary-2));
-      margin-bottom: 24px;
-      padding: 0 20px 0 0;
+      background-color: rgb(var(--color-button));
+      padding: 0;
+      width: 235px;
+      max-width: 235px;
+      margin: 0 0 var(--space-5) var(--space-4);
 
       @include media(">=medium") {
         grid-column-start: 2;
         grid-column-end: 3;
-        grid-row-start: 3;
-        grid-row-end: 4;
-        width: 182px;
+        grid-row-start: 4;
+        grid-row-end: 5;
+        margin-bottom: var(--space-4);
+      }
+
+      &::after,
+      &::before {
+        left: 0;
       }
 
       svg {
@@ -108,7 +123,7 @@
 
       .button-label {
         @include typeface(body, 5);
-        color: rgb(var(--color-background));
+        color: rgb(var(--color-button-text));
         display: block;
         font-weight: bold;
         letter-spacing: 1.6px;
@@ -118,37 +133,49 @@
 
     .whats-on-show-title {
       @include typeface(header, 10);
-
-      color: rgb(var(--color-primary-2));
+      color: rgb(var(--color-text));
       font-weight: normal;
-      margin-bottom: 8px;
-      text-align: left;
+      margin: 0 var(--space-4) var(--space-2);
 
-      @include media(">=medium") {
-        font-size: 52px;
+      @include media(">xlarge") {
         grid-column-start: 2;
         grid-column-end: 3;
-        grid-row-start: 1;
-        grid-row-end: 2;
-        line-height: 60px;
-        margin-bottom: 16px;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        margin: 0 var(--space-4) var(--space-5);
+      }
+
+      a {
+        border-bottom: none;
       }
     }
 
     .whats-on-show-description {
       @include typeface(body, 5);
       color: rgb(var(--color-text));
-      margin-bottom: 24px;
-      text-align: left;
+      margin: 0 var(--space-4) var(--space-4) var(--space-4);
 
       @include media(">=medium") {
         @include typeface(body, 6);
         grid-column-start: 2;
         grid-column-end: 3;
-        grid-row-start: 2;
-        grid-row-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
         line-height: 25px;
       }
     }
+  }
+}
+
+.pulse {
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgba($live-indicator-dot-color, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba($live-indicator-dot-color, 0);
   }
 }

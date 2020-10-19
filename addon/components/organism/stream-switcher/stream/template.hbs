@@ -1,12 +1,14 @@
-<div class='stream-switcher-streams-stream-title'>{{stream.name}}</div>
-{{molecule/sound-animation isPlaying=this.isPlaying}}
+<div class='stream-switcher-streams-stream-title'>
+  {{molecule/sound-animation isPlaying=this.isPlaying}}
+  {{stream.name}}
+</div>
 <NyprMOnAirImage
-    @stream={{stream.stream}}
-    @show={{stream.liveAiring.show}}
+  @stream={{stream.stream}}
+  @show={{stream.liveAiring.show}}
 />
 <div class='stream-switcher-streams-stream-show-title'>
-    {{stream.liveAiring.showTitle}}
+  {{stream.liveAiring.showTitle}}
 </div>
 {{#if stream.nextAiring}}
-    {{molecule/up-next airing=stream.nextAiring}}
+  {{molecule/up-next airing=stream.nextAiring}}
 {{/if}}

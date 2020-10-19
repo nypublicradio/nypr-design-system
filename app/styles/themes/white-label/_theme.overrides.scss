@@ -4,6 +4,7 @@
 
 .c-main-header {
   --color-background: var(--color-cool-white);
+
   &.side-menu-is-active {
     .c-main-header__branding {
       opacity: 0;
@@ -128,4 +129,47 @@
 
 .c-gallery-overlay {
   @include color-group-dark;
+}
+
+// stream switcher
+.stream-switcher {
+  max-width: 813px;
+  margin: var(--space-6) auto var(--space-1) var(--space-4);
+  @include media(">large") {
+    margin: var(--space-6) auto var(--space-1);
+  }
+}
+
+.stream-switcher .stream-switcher-streams .stream-switcher-streams-stream.is-active .stream-switcher-streams-stream-title {
+  color: RGB(var(--color-white));
+}
+
+.stream-switcher .stream-switcher-streams .stream-switcher-streams-stream .stream-switcher-streams-stream-title {
+  color: RGB(var(--color-dark-gray));
+}
+
+.stream-switcher .stream-switcher-streams .stream-switcher-streams-stream .sound-animation.is-playing {
+  z-index: 100;
+}
+
+
+// main player
+.whats-on {
+  width: calc(100% - var(--space-8));
+  display: block;
+  z-index: 1;
+  max-width: 813px;
+  margin: 0 auto;
+  padding-bottom: var(--space-4);
+}
+
+.stream-switcher-streams-stream-show-title,
+.up-next .up-next-time,
+.stream-switcher-stations-label {
+  display: none;
+}
+
+.whats-on .whats-on-show .whats-on-show-title {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-2);
 }
