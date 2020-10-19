@@ -1,11 +1,11 @@
 .nypr-o-audio-player {
   background-color: rgb(var(--color-background));
-  bottom: -5px;
+  bottom: 0;
   box-sizing: border-box;
   display: flex;
   color: #FFF;
   height: 112px;
-  padding: 10px 15px 15px 15px;
+  padding: 8px;
   position: fixed;
   width: 100%;
   z-index: 1200;
@@ -13,6 +13,18 @@
 
 .nypr-o-audio-player .secondary-metadata-toggle-box {
   width: 100%;
+}
+
+.nypr-o-audio-player .nypr-o-audio-player-thumbnail {
+  display: none;
+  @include media(">=medium") {
+    display: block;
+    flex: 0 0 96px;
+    align-self: center;
+    width: 96px;
+    height: 96px;
+    margin-right: 16px;
+  }
 }
 
 .nypr-audio-player .whats-on-info {
