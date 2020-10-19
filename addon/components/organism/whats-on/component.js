@@ -11,6 +11,6 @@ export default Component.extend({
     // todo: refactor when we clean up data/api
     return get(this, 'nowPlaying.stream.currentShow.group_slug') == get(this, 'nowPlaying.show.slug') &&
            get(this, 'nowPlaying.stream.currentShow.description') &&
-           get(this, 'nowPlaying.stream.currentShow.description') != get(this, 'nowPlaying.show.tease');
+           get(this, 'nowPlaying.stream.currentShow.description') != get(this, 'nowPlaying.show.tease') && get(this, 'nowPlaying.stream.currentShow.episode_pk')
   }),
 });

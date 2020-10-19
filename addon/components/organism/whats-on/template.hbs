@@ -46,6 +46,14 @@
 
 <div class='whats-on-right'>
 
+  {{#if displayEpisode}}
+    {{organism/whats-on/episode
+      description=this.nowPlaying.stream.currentShow.description
+      showTitle=this.nowPlaying.stream.currentShow.show_title
+      episodeTitle=this.nowPlaying.stream.currentShow.title
+    }}
+  {{/if}}
+
   {{#if this.nowPlaying.showHost}}
   <div class="whats-on-right__title">
     <p>On Today's Show</p>
