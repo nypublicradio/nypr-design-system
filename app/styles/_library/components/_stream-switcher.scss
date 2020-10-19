@@ -48,7 +48,7 @@
       line-height: 50px;
       position: relative;
       margin-bottom: -20px; // hack to get around overflow scroll issue
-      transition: var(--animation-duration-slow) var(--animation-easing-standard);
+      transition: var(--animation-duration-slow) var(--animation-easing-incoming);
       background-color: transparent;
 
       @include media(">medium") {
@@ -67,11 +67,11 @@
         border-right: 20px solid transparent;
         border-top: 15px solid RGB(var(--color-text));
         opacity: 0;
-        -webkit-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 50ms;
-        -moz-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 50ms;
-        -ms-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 50ms;
-        -o-transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 50ms;
-        transition: opacity var(--animation-duration-slow) var(--animation-easing-standard) 50ms;
+        -webkit-transition: opacity var(--animation-duration-slow) var(--animation-easing-incoming) 50ms;
+        -moz-transition: opacity var(--animation-duration-slow) var(--animation-easing-incoming) 50ms;
+        -ms-transition: opacity var(--animation-duration-slow) var(--animation-easing-incoming) 50ms;
+        -o-transition: opacity var(--animation-duration-slow) var(--animation-easing-incoming) 50ms;
+        transition: opacity var(--animation-duration-slow) var(--animation-easing-incoming) 50ms;
       }
 
       &:hover {
