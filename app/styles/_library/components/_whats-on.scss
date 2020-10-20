@@ -170,6 +170,7 @@ $live-indicator-dot-color: #de1e3d;
     max-width: 728px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 50px 1fr 1fr;
@@ -192,8 +193,6 @@ $live-indicator-dot-color: #de1e3d;
   }
 
   .whats-on-right__title {
-
-    color: rgb(var(--color-text-print));
     font-weight: bold;
     margin-bottom: 7px;
     margin-top: 8px;
