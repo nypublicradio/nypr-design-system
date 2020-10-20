@@ -1,6 +1,6 @@
 # `nypr-design-system` changelog
 
-## 3.1.15
+## 3.1.16
 
 - [ENHANCEMENT] Persistent player redesign (#166)
 
