@@ -330,6 +330,19 @@ a {
   display: none;
 }
 
+.stream-switcher-streams-stream-show {
+  display: flex;
+  align-items: center;
+}
+
+.stream-switcher-streams-stream-on-now {
+  @include typeface(body, 4);
+
+  @include media(">medium") {
+    font-weight: 700px;
+  }
+}
+
 .stream-switcher .stream-switcher-streams .stream-switcher-streams-stream {
   .up-next {
     display: none;
@@ -341,7 +354,9 @@ a {
 
 
   .stream-switcher-streams-stream-show-title {
-    line-height: unset;
+    @include media(">medium") {
+      line-height: 25.6px;
+    }
   }
 }
 
