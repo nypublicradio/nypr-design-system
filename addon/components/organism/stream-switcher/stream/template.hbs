@@ -6,9 +6,11 @@
   @stream={{stream.stream}}
   @show={{stream.liveAiring.show}}
 />
-<div class='stream-switcher-streams-stream-on-now'>on now</div>
-<div class='stream-switcher-streams-stream-show-title'>
-  {{stream.liveAiring.showTitle}}
+<div class='stream-switcher-streams-stream-show'>
+  <div class='stream-switcher-streams-stream-on-now'>on now</div>
+  <div class='stream-switcher-streams-stream-show-title'>
+    {{stream.liveAiring.showTitle}}
+  </div>
 </div>
 {{#if stream.nextAiring}}
   {{molecule/up-next airing=stream.nextAiring}}

@@ -45,7 +45,6 @@
       padding: 0 var(--space-3);
       height: 67px;
       min-width: 170px;
-      line-height: 50px;
       position: relative;
       margin-bottom: -20px; // hack to get around overflow scroll issue
       transition: var(--animation-duration-slow) var(--animation-easing-incoming);
@@ -54,6 +53,7 @@
       @include media(">medium") {
         flex-direction: row;
         height: 50px;
+        line-height: 50px;
       }
 
       &::after {
