@@ -353,6 +353,7 @@ a {
 
 .stream-switcher-streams-stream-on-now {
   @include typeface(body, 4);
+  white-space: nowrap;
 
   @include media(">medium") {
     font-weight: 700px;
@@ -370,6 +371,7 @@ a {
 
 
   .stream-switcher-streams-stream-show-title {
+    white-space: nowrap;
     @include media(">medium") {
       line-height: 25.6px;
     }
