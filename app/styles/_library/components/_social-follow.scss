@@ -1,5 +1,5 @@
 .m-social-follow {
-  @include media(">medium") {
+  @include media(">=medium") {
     display: flex;
   }
 
@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: center;
 
-    @include media(">medium") {
+    @include media(">=medium") {
       justify-content: center;
     }
   }
@@ -20,7 +20,7 @@
     margin-left: -3px;
     justify-content: center;
 
-    @include media(">medium") {
+    @include media(">=medium") {
       justify-content: start;
     }
   }
