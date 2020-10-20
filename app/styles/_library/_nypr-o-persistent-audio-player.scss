@@ -1,25 +1,35 @@
 .nypr-o-audio-player {
   background-color: rgb(var(--color-background));
-  bottom: -5px;
+  bottom: 0;
   box-sizing: border-box;
-  display: grid;
+  display: flex;
   color: #FFF;
-  grid-template-columns: 1fr 50px;
-  grid-template-rows: 33% 33% 33%;
-  height: 90px;
-  padding: 10px 15px 15px 15px;
+  height: 112px;
+  padding: 8px;
   position: fixed;
   width: 100%;
   z-index: 1200;
-
-  @include media('>=medium') {
-    grid-template-columns: calc(50% - 45px) 90px calc(50% - 90px);
-    grid-template-rows: 33% 33% 33%;
-  }
 }
 
 .nypr-o-audio-player .secondary-metadata-toggle-box {
   width: 100%;
+}
+
+.nypr-o-audio-player .nypr-o-audio-player-thumbnail {
+  display: none;
+  @include media(">=medium") {
+    display: block;
+    flex: 0 0 96px;
+    align-self: center;
+    width: 96px;
+    height: 96px;
+    margin-right: 16px;
+  }
+}
+
+.nypr-audio-player .whats-on-info {
+  flex: 1;
+  overflow: hidden;
 }
 
 .nypr-o-audio-player .whats-on-live-indicator {
@@ -33,6 +43,7 @@
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: span 2;
+  margin-bottom: 8px;
 
   .whats-on-live-indicator-text,
   .whats-on-live-indicator-station {
@@ -94,24 +105,20 @@
 
   @include media(">=medium") {
     grid-column-end: 3;
-    margin: 0 65px;
+    margin: 0;
     width: 55px;
   }
 }
 
 .nypr-o-audio-player-controls {
-  @include media("<medium") {
-    display: none;
-  }
+  display: flex;
+  flex: 1;
 
   align-items: center;
   background-color: rgb(var(--color-background));
   bottom: 0;
   height: 100%;
   justify-content: flex-end;
-  position: absolute;
-  right: 0;
-  top: 0;
 
   .nypr-player-volume-slider-track::after {
     z-index: 0;
@@ -124,10 +131,11 @@
     flex-direction: row;
     height: 100%;
     justify-content: flex-end;
-    margin-right: -20px;
     outline: 0;
-    padding-right: 10px;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    position: absolute;
+    right: 16px;
+    top: 0;
   }
 
   .nypr-player-volume-slider-wrapper {
@@ -145,13 +153,15 @@
   }
 
   .nypr-player-volume {
+    position: relative;
     display: flex;
+    flex: 1;
     height: 100%;
     margin-left: 0;
     margin-right: 0;
-    padding-right: 20px;
+    width: 64px;
     @include media("<medium") {
-      margin-right: -10px;
+      display: none;
     }
 
     .mod-volume-unmuted {
@@ -255,10 +265,14 @@
 }
 
 .nypr-o-audio-player-level-one h2 {
-  @include typeface(subheader, 6);
+  @include typeface(body, 9);
+  line-height: 1.5;
+  font-weight: 700;
   margin: 2px 0 4px;
   a {
     text-decoration: none;
+    border: none;
+    cursor: pointer;
   }
 }
 
@@ -286,6 +300,8 @@
 
   a {
     text-decoration: none;
+    border: none;
+    cursor: pointer;
     overflow: hidden;
   }
 

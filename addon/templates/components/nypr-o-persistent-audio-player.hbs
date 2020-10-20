@@ -1,56 +1,55 @@
-<div class="whats-on-live-indicator">
-  <div class="whats-on-live-indicator-text" aria-hidden="true">live</div>
-  <div class="whats-on-live-indicator-dot"></div>
-  <div class="whats-on-live-indicator-station">{{strip-html @streamName}}</div>
-</div>
+{{#if streamThumbnailImageUrl}}
+  <img class="nypr-o-audio-player-thumbnail" src={{streamThumbnailImageUrl}} alt="">
+{{/if}}
 
-<div
-        class="nypr-o-audio-player-level-one-four"
-        data-test-element="level-one-four"
->
-  {{#if @levelOne}}
-    <div
-            class="nypr-o-audio-player-level-one"
-            data-test-element="level-one"
-    >
-      <h2><a href={{@levelOneLink}}>{{strip-html @levelOne}}</a></h2>
-    </div>
-  {{/if}}
+<div class="whats-on-info">
+  <div class="whats-on-live-indicator">
+    <div class="whats-on-live-indicator-text" aria-hidden="true">live</div>
+    <div class="whats-on-live-indicator-dot"></div>
+    <div class="whats-on-live-indicator-station">{{strip-html @streamName}}</div>
+  </div>
 
-  {{#if @levelFour}}
-    <div
-            class="nypr-o-audio-player-level-four"
-            data-test-element="level-four"
-    >
-      {{strip-html @levelFour}}
-    </div>
-  {{/if}}
-
-  <NyprMTrackAdditionalInfo class="nypr-o-audio-player-level-two-three" data-test-element="track" @ensembleName={{levelSix}} @conductorName={{levelFive}} as |options|>
-    {{#if @levelTwo}}
-      <div class="nypr-o-audio-player-level-two mod-scrolling-overflow" data-test-element="level-two">
-        {{strip-html @levelTwo}}
+  <div
+          class="nypr-o-audio-player-level-one-four"
+          data-test-element="level-one-four"
+  >
+    {{#if @levelOne}}
+      <div
+              class="nypr-o-audio-player-level-one"
+              data-test-element="level-one"
+      >
+        <h2><a href={{@levelOneLink}} target="_blank" rel="noopener">{{strip-html @levelOne}}</a></h2>
       </div>
     {{/if}}
 
-    {{#if @levelThree}}
-      <div class="nypr-o-audio-player-level-three {{if @levelTwo 'nypr-o-audio-player-level-two-visible'}} mod-scrolling-overflow" data-test-element="level-three">
-        <a href={{@levelOneLink}}>
-          <span class="nypr-o-audio-player-level-three-text">
-            {{strip-html @levelThree}}
-          </span>
-          {{options.icon}}
-        </a>
+    {{#if @levelFour}}
+      <div
+              class="nypr-o-audio-player-level-four"
+              data-test-element="level-four"
+      >
+        {{strip-html @levelFour}}
       </div>
     {{/if}}
-  </NyprMTrackAdditionalInfo>
-</div>
 
-<NyprMPlayButton
-        @playItemId={{this.streamSlug}}
-        class="nypr-o-audio-player-play-button"
-        data-test-element="play-button"
-/>
+    <NyprMTrackAdditionalInfo class="nypr-o-audio-player-level-two-three" data-test-element="track" @ensembleName={{levelSix}} @conductorName={{levelFive}} as |options|>
+      {{#if @levelTwo}}
+        <div class="nypr-o-audio-player-level-two mod-scrolling-overflow" data-test-element="level-two">
+          {{strip-html @levelTwo}}
+        </div>
+      {{/if}}
+      {{#if @levelThree}}
+        <div class="nypr-o-audio-player-level-three {{if @levelTwo 'nypr-o-audio-player-level-two-visible'}} mod-scrolling-overflow" data-test-element="level-three">
+          <a href={{@levelOneLink}} target="_blank" rel="noopener">
+            <span class="nypr-o-audio-player-level-three-text">
+              {{strip-html @levelThree}}
+            </span>
+            {{options.icon}}
+          </a>
+        </div>
+      {{/if}}
+    </NyprMTrackAdditionalInfo>
+  </div>
+</div>
 
 <div class="nypr-o-audio-player-controls">
   {{#if (can-change-volume)}}
@@ -60,4 +59,13 @@
             toggleMute = (action "toggleMute")
             isMuted    = hifi.isMuted}}
   {{/if}}
+
+  <NyprMPlayButton
+    @playItemId={{this.streamSlug}}
+    class="text nypr-o-audio-player-play-button"
+    data-test-element="play-button"
+    @altWhilePaused="Listen Live, Play"
+    @altWhilePlaying="Listen Live, Pause"
+  />
 </div>
+
