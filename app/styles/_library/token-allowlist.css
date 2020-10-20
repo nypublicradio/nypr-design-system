@@ -34,6 +34,10 @@
   --font-size-15: *;
   --font-size-16: *;
 
+  /* fonts */
+  --font-family-body: *;
+  --font-family-subheader: *;
+
   /* Line Height */
   --line-height-1:  *;
   --line-height-2:  *;
@@ -67,6 +71,7 @@
   --color-text-error:           *;
   --color-text-inverse:         *;
   --color-text-metadata:        *;
+  --color-cool-white:           *;
 
   /* Colors: Neutral Accents */
   --color-high-contrast:    *;
