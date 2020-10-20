@@ -1,8 +1,12 @@
 # `nypr-design-system` changelog
 
+## 3.1.15
+
+- [ENHANCEMENT] Persistent player redesign (#166)
+
 ## 3.1.14
 
-- [ENCHANCEMENT] Minor updates to On Todays Show grid
+- [ENHANCEMENT] Minor updates to On Todays Show grid
 
 ## 3.1.13
 
