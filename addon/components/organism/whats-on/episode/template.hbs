@@ -30,11 +30,11 @@
     </ul>
     <!-- end dummy data -->
 {{else}}
-    {{#if description}}
+    {{#if episodeTitle}}
         <div class="episode-description">
-            <div class="on-today">Today on {{{strip-html title}}}</div>
+            <div class="on-today">Today on {{{strip-html showTitle}}}</div>
             <div class="episode-description-text">
-                {{{strip-html description}}}
+                {{{strip-html episodeTitle}}}
             </div>
         </div>
     {{/if}}
