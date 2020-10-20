@@ -44,14 +44,15 @@
   />
 </div>
 
+{{#if displayEpisode}}
+  {{organism/whats-on/episode
+    description=this.nowPlaying.stream.currentShow.description
+    showTitle=this.nowPlaying.stream.currentShow.show_title
+    episodeTitle=this.nowPlaying.stream.currentShow.title
+  }}
+{{/if}}
+
 <div class='whats-on-right'>
-
-  {{#if this.nowPlaying.showHost}}
-  <div class="whats-on-right__title">
-    <p>On Today's Show</p>
-  </div>
-  {{/if}}
-
   {{#if this.nowPlaying.showHost}}
   <div class="whats-on-right__people">
     {{#if this.nowPlaying.showHost.image}}
@@ -82,3 +83,4 @@
 </div>
 
 {{yield}}
+

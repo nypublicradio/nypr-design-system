@@ -1,80 +1,116 @@
 .episode {
-    margin-bottom: 8px;
-    padding-left: 20px;
-    padding-right: 20px;
-    width: 100%;
+  width: 100%;
+  margin-top: var(--space-8);
 
-    .episode-segments,
-    .episode-description {
-      background-image: linear-gradient(rgb(var(--color-background-muted)), rgb(var(--color-background-muted)));
-      background-repeat: no-repeat;
+  .episode-segments,
+  .episode-description {
+    background-image: linear-gradient(rgb(var(--color-background-muted)), rgb(var(--color-background-muted)));
+    background-repeat: no-repeat;
+  }
+
+  .episode-segments .episode-segments-segment .episode-segments-segment-text,
+  .episode-description .episode-description-text {
+    @include typeface(body, 3);
+    color: rgb(var(--color-text));;
+    line-height: 16px;
+
+    @include media(">=medium") {
+      @include typeface(body, 5);
+      line-height: 25px;
+    }
+  }
+
+  .episode-segments {
+    align-items: flex-start;
+    background-position: 4px top;
+    background-size: 2px 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    @include media(">=medium") {
+      background-position: 7px top;
     }
 
-    .episode-segments .episode-segments-segment .episode-segments-segment-text,
-    .episode-description .episode-description-text {
-      @include typeface(body, 3);
-      color: rgb(var(--color-text));;
-      line-height: 16px;
-
-      @include media(">=medium") {
-        @include typeface(body, 5);
-        line-height: 25px;
-      }
-    }
-
-    .episode-segments {
+    .episode-segments-segment {
       align-items: center;
-      background-position: 4px top;
-      background-size: 2px 100%;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       padding-bottom: 10px;
       padding-top: 10px;
+      width: 100%;
 
-      @include media(">=medium") {
-        background-position: 7px top;
-      }
+      .episode-segments-segment-dot {
+        background-color: rgb(var(--color-background-muted));
+        border-radius: 5px;
+        height: 10px;
+        margin-right: 10px;
+        min-width: 10px;
 
-      .episode-segments-segment {
-        align-items: center;
-        display: flex;
-        flex-direction: row;
-        padding-bottom: 10px;
-        padding-top: 10px;
-        width: 100%;
-
-        .episode-segments-segment-dot {
-          background-color: rgb(var(--color-background-muted));
-          border-radius: 5px;
-          height: 10px;
+        @include media(">=medium") {
+          border-radius: 8px;
+          height: 16px;
           margin-right: 10px;
-          min-width: 10px;
-
-          @include media(">=medium") {
-            border-radius: 8px;
-            height: 16px;
-            margin-right: 10px;
-            min-width: 16px;
-          }
+          min-width: 16px;
         }
       }
     }
+  }
 
-    .episode-description {
-      align-items: center;
-      background-position: 7px top;
-      background-size: 2px 50%;
-      display: flex;
-      flex-direction: row;
-      padding-bottom: 20px;
-      padding-top: 20px;
+  .episode-description {
+    align-items: flex-start;
+    background-position: 7px top;
+    background-size: 2px 50%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    overflow: hidden;
 
-      .episode-description-dot {
-        background-color: rgb(var(--color-primary-1));
-        border-radius: 8px;
-        height: 16px;
-        margin-right: 10px;
-        min-width: 16px;
+    .on-today {
+      text-transform: capitalize;
+      font-family: var(--font-family-body);
+      font-size: var(--font-size-9);
+      font-weight: bold;
+      position: relative;
+      width: 100%;
+      margin-bottom: var(--space-2);
+
+      &::after {
+        content: '';
+        position: absolute;
+        margin-left: 20px;
+        height: 2px;
+        width: 100%;
+        top: 50%;
+        background: RGB(var(--color-cool-white));
+        opacity: .2;
       }
     }
+
+    .episode-description-text {
+      text-transform: capitalize;
+      @include typeface(subheader, 10);
+      line-height: 43.3px;
+    }
+
+    .on-today {
+      text-transform: capitalize;
+      font-family: var(--font-family-body);
+    }
+
+    .episode-description-text {
+      text-transform: capitalize;
+      font-family: var(--font-family-subheader);
+    }
+
+    .episode-description-dot {
+      background-color: rgb(var(--color-primary-1));
+      border-radius: 8px;
+      height: 16px;
+      margin-right: 10px;
+      min-width: 16px;
+    }
   }
+}
