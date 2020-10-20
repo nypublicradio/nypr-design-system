@@ -1,6 +1,6 @@
 # `nypr-design-system` changelog
 
-## 3.1.11
+## 3.1.12
 
 - [ENCHANCEMENT] header nav styling (#159)
 
