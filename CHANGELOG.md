@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.11
+
+- [ENCHANCEMENT] header nav styling (#159)
+
 ## 3.1.10
 
 - [FEATURE] social follow component (#158)
