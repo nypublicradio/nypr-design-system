@@ -7,12 +7,22 @@
     margin-right: 1em;
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    @include media(">medium") {
+      justify-content: center;
+    }
   }
 
   .social-buttons {
     display: flex;
     align-items: center;
     margin-left: -3px;
+    justify-content: center;
+
+    @include media(">medium") {
+      justify-content: start;
+    }
   }
 
   .social-buttons > * {

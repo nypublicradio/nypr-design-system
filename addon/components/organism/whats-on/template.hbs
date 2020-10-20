@@ -44,4 +44,39 @@
   />
 </div>
 
+<div class='whats-on-right'>
+
+  {{#if this.nowPlaying.showHost}}
+  <div class="whats-on-right__title">
+    <p>On Today's Show</p>
+  </div>
+  {{/if}}
+
+  {{#if this.nowPlaying.showHost}}
+  <div class="whats-on-right__people">
+    <img src="{{this.nowPlaying.showHost.image.url}}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 9999px;" class="person-avatar" />
+    <a href="{{this.nowPlaying.showHost.url}}" class="person-name">{{this.nowPlaying.showHost.name}}</a>
+  </div>
+  {{/if}}
+
+  <div class="whats-on-right__social">
+    {{#if this.nowPlaying.showSocialLinks as |socialLinks|}}
+      <NyprMSocialFollow @label="Connect with the show!" as |SocialNetwork|>
+        {{#each this.nowPlaying.showSocialLinks as |sl|}}
+          {{#if (eq sl.title 'twitter')}}
+            <SocialNetwork.twitter @href={{sl.href}} />
+          {{/if}}
+          {{#if (eq sl.title 'facebook')}}
+            <SocialNetwork.facebook @href={{sl.href}} />
+          {{/if}}
+          {{#if (eq sl.title 'instagram')}}
+            <SocialNetwork.instagram @href={{sl.href}} />
+          {{/if}}
+        {{/each}}
+      </NyprMSocialFollow>
+    {{/if}}
+  </div>
+
+</div>
+
 {{yield}}
