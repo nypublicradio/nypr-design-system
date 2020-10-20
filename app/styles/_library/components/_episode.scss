@@ -1,5 +1,6 @@
 .episode {
   width: 100%;
+  margin-top: var(--space-8);
 
   .episode-segments,
   .episode-description {
@@ -90,8 +91,7 @@
 
     .episode-description-text {
       text-transform: capitalize;
-      font-family: var(--font-family-subheader);
-      font-size: var(--font-size-10);
+      @include typeface(subheader, 10);
     }
 
     .on-today {
