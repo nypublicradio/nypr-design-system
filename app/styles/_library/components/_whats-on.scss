@@ -173,7 +173,7 @@ $live-indicator-dot-color: #de1e3d;
     margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 50px 1fr 1fr;
+    grid-template-rows: 50px auto 1fr;
     gap: 0px 0px;
     grid-template-areas:
       "whats-on-right__title"
@@ -184,8 +184,9 @@ $live-indicator-dot-color: #de1e3d;
 
     @include media(">=medium") {
       justify-items: start;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: auto 1fr;
       grid-template-rows: 1fr 1fr;
+      grid-gap: 0px 20px;
       grid-template-areas:
         "whats-on-right__title whats-on-right__title"
         "whats-on-right__people whats-on-right__social";
@@ -200,7 +201,12 @@ $live-indicator-dot-color: #de1e3d;
     text-transform: uppercase;
   }
 
-  .whats-on-right__social { grid-area: whats-on-right__social; }
+  .whats-on-right__social {
+    grid-area: whats-on-right__social;
+    @include media(">=medium") {
+      justify-self: center;
+    }
+  }
 
 
   .whats-on-right__people {

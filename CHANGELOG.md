@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.14
+
+- [ENCHANCEMENT] Minor updates to On Todays Show grid
+
 ## 3.1.13
 
 - [BUGFIX] Update ember moment shim to 3.8.0

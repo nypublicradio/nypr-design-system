@@ -54,7 +54,9 @@
 
   {{#if this.nowPlaying.showHost}}
   <div class="whats-on-right__people">
-    <img src="{{this.nowPlaying.showHost.image.url}}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 9999px;" class="person-avatar" />
+    {{#if this.nowPlaying.showHost.image}}
+      <img src="{{this.nowPlaying.showHost.image.url}}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 9999px;" class="person-avatar" />
+    {{/if}}
     <a href="{{this.nowPlaying.showHost.url}}" class="person-name">{{this.nowPlaying.showHost.name}}</a>
   </div>
   {{/if}}
