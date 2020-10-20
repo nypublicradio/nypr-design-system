@@ -23,7 +23,7 @@
     }
 
     .episode-segments {
-      align-items: center;
+      align-items: flex-start;
       background-position: 4px top;
       background-size: 2px 100%;
       display: flex;
@@ -65,9 +65,19 @@
       background-position: 7px top;
       background-size: 2px 50%;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       padding-bottom: 20px;
       padding-top: 20px;
+
+      .on-today {
+        text-transform: capitalize;
+        font-family: var(--font-family-body);
+      }
+
+      .episode-description-text {
+        text-transform: capitalize;
+        font-family: var(--font-family-subheader);
+      }
 
       .episode-description-dot {
         background-color: rgb(var(--color-primary-1));
