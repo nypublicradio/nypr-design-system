@@ -18,7 +18,7 @@
               class="nypr-o-audio-player-level-one"
               data-test-element="level-one"
       >
-        <h2><a href={{@levelOneLink}}>{{strip-html @levelOne}}</a></h2>
+        <h2><a href={{@levelOneLink}} target="_blank" rel="noopener">{{strip-html @levelOne}}</a></h2>
       </div>
     {{/if}}
 
@@ -39,7 +39,7 @@
       {{/if}}
       {{#if @levelThree}}
         <div class="nypr-o-audio-player-level-three {{if @levelTwo 'nypr-o-audio-player-level-two-visible'}} mod-scrolling-overflow" data-test-element="level-three">
-          <a href={{@levelOneLink}}>
+          <a href={{@levelOneLink}} target="_blank" rel="noopener">
             <span class="nypr-o-audio-player-level-three-text">
               {{strip-html @levelThree}}
             </span>
