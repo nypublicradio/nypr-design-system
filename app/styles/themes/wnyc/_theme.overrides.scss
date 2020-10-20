@@ -96,6 +96,22 @@ a {
   fill: RGB(var(--color-white));
 }
 
+// header nav
+.c-main-header .c-primary-nav--top {
+  padding-left: var(--space-9);
+  width: 100%;
+  text-align: left;
+}
+
+.c-primary-nav--top .c-primary-nav__link {
+  padding: 0;
+  @include typeface(body, 6);
+}
+
+.c-primary-nav__link .c-primary-nav-link__text {
+  font-weight: 700;
+}
+
 // header donate button
 .c-main-header__donate {
   color: RGB(var(--color-red));
