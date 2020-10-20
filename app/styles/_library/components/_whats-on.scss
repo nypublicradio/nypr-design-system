@@ -203,9 +203,6 @@ $live-indicator-dot-color: #de1e3d;
 
   .whats-on-right__social {
     grid-area: whats-on-right__social;
-    @include media(">=medium") {
-      justify-self: center;
-    }
   }
 
 
@@ -220,7 +217,13 @@ $live-indicator-dot-color: #de1e3d;
       "person-name";
     align-items: center;
     justify-items: center;
-    grid-gap: 0px 10px;
+    grid-gap: 0px 20px;
+
+    @include media(">=medium") {
+      gap: 0px 48px;
+      border-right: solid 1px RGBA(var(--color-cool-white), .5);
+      padding-right: 48px;
+    }
 
     .person-avatar {
       grid-area: person-avatar;
@@ -228,6 +231,10 @@ $live-indicator-dot-color: #de1e3d;
 
     .person-name {
       grid-area: person-name;
+      border: none;
+      padding-bottom: 0;
+      font-weight: bold;
+      font-size: var(--font-size-6);
     }
 
     @include media(">=medium") {

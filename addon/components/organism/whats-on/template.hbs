@@ -49,6 +49,7 @@
     description=this.nowPlaying.stream.currentShow.description
     showTitle=this.nowPlaying.stream.currentShow.show_title
     episodeTitle=this.nowPlaying.stream.currentShow.title
+    episodeLink=@levelThreeLink
   }}
 {{/if}}
 
@@ -58,7 +59,7 @@
     {{#if this.nowPlaying.showHost.image}}
       <img src="{{this.nowPlaying.showHost.image.url}}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 9999px;" class="person-avatar" />
     {{/if}}
-    <a href="{{this.nowPlaying.showHost.url}}" class="person-name">{{this.nowPlaying.showHost.name}}</a>
+    <a href="https://www.wnyc.org{{this.nowPlaying.showHost.url}}" target="_blank" class="person-name">{{this.nowPlaying.showHost.name}}</a>
   </div>
   {{/if}}
 

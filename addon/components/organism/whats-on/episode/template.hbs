@@ -32,10 +32,10 @@
 {{else}}
     {{#if episodeTitle}}
         <div class="episode-description">
-            <div class="on-today">Today on {{{strip-html showTitle}}}</div>
-            <div class="episode-description-text">
+            <div class="on-today">On Today's Show</div>
+            <a class="episode-description-text" href="{{episodeLink}}" target="_blank">
                 {{{strip-html episodeTitle}}}
-            </div>
+            </a>
         </div>
     {{/if}}
 {{/if}}

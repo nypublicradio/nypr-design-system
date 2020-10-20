@@ -1,10 +1,12 @@
 .m-social-follow {
   @include media(">=medium") {
     display: flex;
+    flex-direction: column;
   }
 
   .follow-us {
     margin-right: 1em;
+    margin-left: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,10 +25,19 @@
     @include media(">=medium") {
       justify-content: start;
     }
+
+    .button-icon * {
+      fill: RGB(var(--color-text));
+
+      a:hover {
+        opacity: var(--opacity-button-hover);
+      }
+    }
   }
 
   .social-buttons > * {
     margin-left: 3px;
     margin-right: 3px;
+    background: transparent;
   }
 }
