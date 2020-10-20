@@ -92,6 +92,7 @@
     .episode-description-text {
       text-transform: capitalize;
       @include typeface(subheader, 10);
+      line-height: 43.3px;
     }
 
     .on-today {
