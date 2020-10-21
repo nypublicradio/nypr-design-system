@@ -191,6 +191,10 @@
         color: rgb(var(--color-background));
         font-weight: 600;
         pointer-events: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
       }
 
       .up-next {
