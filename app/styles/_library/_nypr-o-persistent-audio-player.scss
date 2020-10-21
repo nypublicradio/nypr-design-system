@@ -27,7 +27,7 @@
   }
 }
 
-.nypr-audio-player .whats-on-info {
+.nypr-o-audio-player .whats-on-info {
   flex: 1;
   overflow: hidden;
 }
@@ -112,7 +112,7 @@
 
 .nypr-o-audio-player-controls {
   display: flex;
-  flex: 1;
+  flex: 0;
 
   align-items: center;
   background-color: rgb(var(--color-background));
