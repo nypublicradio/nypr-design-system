@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.19
+
+- [BUGFIX] fix fastboot check in can-change-volume
+
 ## 3.1.16
 
 - [ENHANCEMENT] Persistent player redesign (#166)
