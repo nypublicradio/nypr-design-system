@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.20
+
+- [ENHANCEMENT] added accessibility link to footer component
+
 ## 3.1.19
 
 - [BUGFIX] fix fastboot check in can-change-volume
