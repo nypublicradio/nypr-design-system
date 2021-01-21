@@ -16,7 +16,7 @@
     </p>
   </div>
 
-  <NyprMNewsletterForm class="u-spacing gtm__click-tracking" @location="Footer" @endpoint={{@endpoint}} @params={{@params}} as |form|>
+  <NyprMNewsletterForm class="u-spacing gtm__click-tracking" @location="Footer" @endpoint={{@endpoint}} @params={{@params}} @onSuccess={{@onSuccess}} @onFailure={{@onFailure}} as |form|>
     <form.label/>
 
     <form.input/>

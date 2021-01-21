@@ -70,6 +70,18 @@ export default Component.extend({
   subscribedMessage: DEFAULT_SUBSCRIBED_MESSAGE,
 
   /**
+    Handler for successful signup.
+    @method onSuccess
+  */
+  onSuccess() {},
+
+  /**
+    Handler for failed signup.
+    @method onSuccess
+  */
+  onFailure() {},
+
+  /**
     Email submission handler. Makes a POST call to the provided `endpoint` argument,
     sending `body` and any additional `params` passed in.
 
@@ -93,6 +105,9 @@ export default Component.extend({
       return this.getMessage(response);
 
     } catch({ detail }) {
+      if (this.onFailure) {
+        this.onFailure()
+      }
       return detail;
     }
   }),
@@ -107,8 +122,14 @@ export default Component.extend({
   getMessage({ status }) {
     switch(status) {
       case "subscribed":
+        if (this.onSuccess) {
+          this.onSuccess();
+        }
         return this.subscribedMessage;
       default:
+        if (this.onFailure) {
+          this.onFailure();
+        }
         return `No message set for ${status}`;
     }
   },
