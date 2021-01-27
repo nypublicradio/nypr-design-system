@@ -13,7 +13,7 @@
     {{yield (hash branding=(component 'blank-template'))}}
   </div>
 
-  <NyprAButton class='c-side-menu__donate mod-donate' name="donateSideMenu" @url={{@donateUrl}}>
+  <NyprAButton class='c-side-menu__donate mod-donate' name="donateSideMenu" @url={{@donateUrl}} onClick={{optional @onDonateClick}}>
     Donate
   </NyprAButton>
 
