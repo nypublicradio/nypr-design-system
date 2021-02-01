@@ -1,5 +1,10 @@
 # `nypr-design-system` changelog
 
+## 3.1.22
+
+- [ENHANCEMENT] add onclick events to buttons
+- [ENHANCEMENT] add onDonateClick events to donation modules
+
 ## 3.1.21
 
 - [ENHANCEMENT] add onsuccess and onfailure hooks to newsletter forms (#178)
