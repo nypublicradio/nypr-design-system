@@ -1,5 +1,10 @@
 # `nypr-design-system` changelog
 
+## 3.1.21
+
+- [ENHANCEMENT] add onsuccess and onfailure hooks to newsletter forms (#178)
+- [SECURITY] dependency updates (#174, #177, #179)
+
 ## 3.1.20
 
 - [ENHANCEMENT] added accessibility link to footer component

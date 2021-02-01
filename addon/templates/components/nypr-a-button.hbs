@@ -6,6 +6,7 @@
       target="_blank"
       rel="noopener"
       class="{{unless @blank 'o-button'}} {{this.tierClass}} {{@class}}"
+      onClick={{optional @onclick}}
       ...attributes>
       {{#if (has-block)}}
         {{yield}}
