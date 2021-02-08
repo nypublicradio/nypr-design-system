@@ -7428,7 +7428,7 @@ ember-cli-lodash-subset@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-2.0.1.tgz#20cb68a790fe0fde2488ddfd8efbb7df6fe766f2"
 
-ember-cli-moment-shim@^3.7.1, ember-cli-moment-shim@^3.8.0:
+ember-cli-moment-shim@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/ember-cli-moment-shim/-/ember-cli-moment-shim-3.8.0.tgz#dc61bbac9dce4963394e60dd42726d4ba38e2bc1"
   integrity sha512-dN5ImjrjZevEqB7xhwFXaPWwxdKGSFiR1kqy9gDVB+A5EGnhCL1uveKugcyJE/MICVhXUAHBUu6G2LFWEPF2YA==
@@ -12095,10 +12095,8 @@ nwsapi@^2.0.9:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.0.tgz#204879a9e3d068ff2a55139c2c772780681a38b7"
 
-nypr-design-system@^3.1.10:
-  version "3.1.10"
-  resolved "https://registry.yarnpkg.com/nypr-design-system/-/nypr-design-system-3.1.10.tgz#2c2b09fbb313467995e4c22c49493d0dae47a84f"
-  integrity sha512-D62I9DUXIR7pQpTBICzrid3bkAoOWTDh3wAbncAb1TcScNl+A8BcYrB8G/KEeQISxJR98jDf50Ipj06Xu5jxjg==
+"nypr-design-system@file:.yalc/nypr-design-system":
+  version "3.1.22-6bfcda20"
   dependencies:
     "@babel/core" "^7.0.0"
     "@panosvoudouris/addon-versions" "^1.0.1"
@@ -12108,7 +12106,7 @@ nypr-design-system@^3.1.10:
     ember-basic-dropdown "^1.1.2"
     ember-cli-babel "^7.1.2"
     ember-cli-htmlbars "^3.0.0"
-    ember-cli-moment-shim "^3.7.1"
+    ember-cli-moment-shim "^3.8.0"
     ember-cli-sass "^10.0.0"
     ember-cli-string-helpers "^2.0.0"
     ember-click-outside "^1.0.4"
