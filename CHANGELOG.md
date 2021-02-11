@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.23
+
+- [ENHANCEMENT] support for curated tage page styles and update timestamp (#181)
+
 ## 3.1.22
 
 - [ENHANCEMENT] add onclick events to buttons
