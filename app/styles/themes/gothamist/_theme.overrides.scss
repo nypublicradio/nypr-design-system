@@ -997,3 +997,73 @@ form .o-button:hover {
 .o-caption .o-icon--dashed-arrow svg path {
   fill: rgb(var(--color-primary-2));
 }
+
+// curated tage page
+
+.c-main.tags-page {
+  display: flex;
+  flex-wrap: wrap;
+
+  .c-tag-listing__image {
+    height: 95px;
+    overflow: hidden;
+    margin-top: -32px;
+    @include media(">medium") {
+      height: 277px;
+      margin-top: -80px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin: auto;
+    }
+  }
+
+  .c-tag-listing__description {
+    margin-top: var(--space-2);
+  }
+
+  .c-listing__sections iframe,
+  .c-listing__sections .twitter-tweet {
+    margin: auto;
+  }
+
+  .c-banners {
+    order: 2;
+    padding-top: 0;
+  }
+
+  .c-tag-listing__image {
+    order: 1;
+    flex-basis: 100%;
+  }
+
+  .c-listing__sections {
+    order: 3;
+  }
+
+  .c-article__body-spacer {
+    padding-top: var(--space-5);
+  }
+
+  // force 4:3 ratio on images
+  .o-figure__image .o-picture {
+    position: relative;
+    overflow: hidden;
+    padding-top: 75%;
+    background-color: RGB(var(--color-dark-gray));
+  }
+
+  .o-figure__image .o-picture img {
+    position: absolute;
+    top: calc(50%); // account for the figcaption
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+}
