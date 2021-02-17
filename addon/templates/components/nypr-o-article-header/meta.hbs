@@ -5,9 +5,7 @@
   )}}
   <div class="c-article__meta-group">
     {{yield (hash publishDate=(component 'nypr-o-article-header/publish-date'))}}
-    {{#if @updateDate}}
-      {{yield (hash updateDate=(component 'nypr-o-article-header/update-date'))}}
-    {{/if}}
+    {{yield (hash updateDate=(component 'nypr-o-article-header/update-date'))}}
 
     {{#if @commentCount}}
       &bull;
