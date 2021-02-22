@@ -1,7 +1,9 @@
 {{!-- BEGIN-SNIPPET nypr-o-article-header-publish-date.hbs --}}
-<span class="o-updated-date__time">
-  <time datetime={{moment-format @publishDate 'YYYY-MM-DDThh:mmZ' @inputFormat}}>
-    &bull;&nbsp;Updated:&nbsp;{{moment-format @publishDate (or @format this.format) @inputFormat}}
-  </time>
-</span>
+{{#if @updateDate}}
+  <span class="o-updated-date__time">
+    <time datetime={{moment-format @updateDate 'YYYY-MM-DDThh:mmZ' @inputFormat}}>
+      &bull;&nbsp;Updated:&nbsp;{{moment-format @updateDate (or @format this.format) @inputFormat}}
+    </time>
+  </span>
+{{/if}}
 {{!-- END-SNIPPET --}}
