@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.24
+
+- [BUGFIX] update timestamp bug fix (#182)
+
 ## 3.1.23
 
 - [ENHANCEMENT] support for curated tage page styles and update timestamp (#181)
