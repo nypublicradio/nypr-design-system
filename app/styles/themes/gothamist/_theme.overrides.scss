@@ -769,6 +769,7 @@ form .o-button:hover {
 .c-tag-listing__heading {
   @include typeface(tags, 10);
   color: rgb(var(--color-text-inverse));
+  text-transform: none;
   font-weight: normal;
   padding: var(--space-2) var(--space-3);
   background-color: rgb(var(--color-tag-highlight)); //dark
