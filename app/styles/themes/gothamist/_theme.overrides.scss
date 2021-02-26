@@ -56,6 +56,12 @@ blockquote {
   .c-share-tools__label {
     color: rgb(var(--color-white));
   }
+
+  .c-primary-nav {
+    @media all and (max-width: 1050px) {
+        display: none;
+    }
+  }
 }
 
 .c-main-footer .c-share-tools__label {
