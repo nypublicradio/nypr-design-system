@@ -1,5 +1,10 @@
 # `nypr-design-system` changelog
 
+
+## 3.1.25
+
+- [ENHANCEMENT] change casing rules for gothamist theme tag page heading (#183)
+
 ## 3.1.24
 
 - [BUGFIX] update timestamp bug fix (#182)
