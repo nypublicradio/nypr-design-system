@@ -57,7 +57,7 @@ blockquote {
     color: rgb(var(--color-white));
   }
 
-  .c-primary-nav {
+  .c-primary-nav:not(.c-primary-nav--side) {
     @media all and (max-width: 1090px) {
         display: none;
     }
@@ -451,7 +451,6 @@ blockquote {
 
 .c-primary-nav--side {
   margin-bottom: 0;
-  display: block;
 }
 
 .c-primary-nav--side .c-primary-nav__link {
