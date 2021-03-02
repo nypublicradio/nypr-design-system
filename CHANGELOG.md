@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.26
+
+- [ENHANCEMENT] updated tag styles (#185) and hide primary nav at larger breakpoint (#184)
+
 ## 3.1.24
 
 - [BUGFIX] update timestamp bug fix (#182)
