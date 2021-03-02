@@ -1,5 +1,10 @@
 # `nypr-design-system` changelog
 
+
+## 3.1.25
+
+- [ENHANCEMENT] change casing rules for gothamist theme tag page heading (#183)
+
 ## 3.1.26
 
 - [ENHANCEMENT] updated tag styles (#185) and hide primary nav at larger breakpoint (#184)
