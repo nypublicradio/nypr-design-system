@@ -1002,7 +1002,8 @@ form .o-button:hover {
 
 .c-main.tags-page {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+
 
   .c-tag-listing__image {
     height: 95px;
