@@ -5,6 +5,7 @@
 /**
  * Standard block
  */
+
 .c-block__media {
   margin-bottom: var(--space-2);
   text-align: right;
@@ -14,6 +15,7 @@
 .c-block__media:hover + .c-block__object .c-block__title-link,
 .c-block__media:hover .c-block__title-link {
   color: rgb(var(--color-link-hover));
+  background-color: transparent;
   text-decoration: var(--text-decoration-link-hover);
   opacity: var(--opacity-link-hover);
 }
