@@ -52,6 +52,9 @@
 
 .c-block a.o-kicker {
   text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .c-block__title a {
