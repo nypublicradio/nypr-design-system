@@ -98,6 +98,10 @@ module('Integration | Component | nypr-o-header', function(hooks) {
 
     assert.dom('.c-main-header.side-menu-is-active').exists();
     assert.dom('body.side-menu-is-active', document).exists();
+
+    await click('.c-side-menu .o-menu-toggle');
+
+    assert.dom('.c-main-header__left .o-menu-toggle').exists();
   });
 
   skip('floating header', async function(assert) {
