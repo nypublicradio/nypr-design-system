@@ -1004,6 +1004,9 @@ form .o-button:hover {
   display: flex;
   flex-direction: column;
 
+  .tagpage-zone {
+    max-width: none;
+  }
 
   .c-tag-listing__image {
     height: 95px;
