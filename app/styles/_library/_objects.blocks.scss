@@ -51,8 +51,10 @@
 }
 
 .c-block a.o-kicker {
+  color: rgb(var(--color-tag-text)
   text-decoration: none;
   &:hover {
+    color: rgb(var(--color-link-hover));
     text-decoration: none;
   }
 }
