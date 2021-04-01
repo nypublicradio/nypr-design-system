@@ -49,6 +49,10 @@
   }
 }
 
+.c-block .o-kicker:not(:last-child) {
+  margin-right: var(--space-2);
+}
+
 .c-block a.o-kicker {
   color: rgb(var(--color-tag-text));
   text-decoration: none;
