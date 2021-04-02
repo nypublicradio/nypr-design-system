@@ -1048,10 +1048,16 @@ form .o-button:hover {
     order: 3;
   }
 
-  .c-article__body-spacer:not(:first-child) {
+  .c-article__body-spacer {
     margin-top: var(--space-5);
     margin-bottom: var(--space-5);
   }
+
+  .c-article__body-spacer:first-child {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
 
   // force 4:3 ratio on images
   .o-figure__image .o-picture {
