@@ -233,7 +233,7 @@
   text-transform: uppercase;
 }
 
-.c-block-meta__comments {
+.c-block-meta .c-block-meta__comments {
   vertical-align: middle;
   display: inline-flex;
   align-items: center;
@@ -247,15 +247,15 @@
   }
 }
 
-.c-block-meta__comments:hover {
+.c-block-meta .c-block-meta__comments:hover {
   color: rgb(var(--color-primary-2));
 }
 
-.c-block-meta__comments:hover .o-icon--comment {
+.c-block-meta .c-block-meta__comments:hover .o-icon--comment {
   fill: rgb(var(--color-primary-2));
 }
 
-.c-block-meta__comments .o-icon--comment {
+.c-block-meta .c-block-meta__comments .o-icon--comment {
   margin-right: var(--space-1);
   fill: rgb(var(--color-text-metadata));
 
