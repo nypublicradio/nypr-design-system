@@ -773,6 +773,7 @@ form .o-button:hover {
   font-weight: normal;
   padding: var(--space-2) var(--space-3);
   background-color: rgb(var(--color-tag-highlight)); //dark
+  margin-bottom: 0;
 
   @include media(">medium") {
     @include typeface(tags, 14);
