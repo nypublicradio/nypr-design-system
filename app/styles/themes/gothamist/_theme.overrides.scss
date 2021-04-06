@@ -779,6 +779,7 @@ form .o-button:hover {
   font-weight: normal;
   padding: var(--space-2) var(--space-3);
   background-color: rgb(var(--color-tag-highlight)); //dark
+  margin-bottom: 0;
 
   @include media(">medium") {
     @include typeface(tags, 14);
@@ -1008,7 +1009,11 @@ form .o-button:hover {
 
 .c-main.tags-page {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+
+  .tagpage-zone {
+    max-width: none;
+  }
 
   .c-tag-listing__image {
     height: 95px;
@@ -1051,8 +1056,15 @@ form .o-button:hover {
   }
 
   .c-article__body-spacer {
-    padding-top: var(--space-5);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-5);
   }
+
+  .c-article__body-spacer:first-child {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
 
   // force 4:3 ratio on images
   .o-figure__image .o-picture {
