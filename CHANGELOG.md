@@ -1,5 +1,9 @@
 # `nypr-design-system` changelog
 
+## 3.1.27
+- [ENHANCEMENT] Updates to the block component when appearing in an article (#193)
+- [ENHANCEMENT] Updated tag page layout (#193)
+
 ## 3.1.26
 
 - [ENHANCEMENT] updated tag styles (#185) and hide primary nav at larger breakpoint (#184)
