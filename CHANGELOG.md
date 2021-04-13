@@ -1,5 +1,8 @@
 # `nypr-design-system` changelog
 
+## 3.1.28
+- [ENHANCEMENT] tweak to tag styles (#195)
+
 ## 3.1.27
 - [ENHANCEMENT] Updates to the block component when appearing in an article (#193)
 - [ENHANCEMENT] Updated tag page layout (#193)
