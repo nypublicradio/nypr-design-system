@@ -53,11 +53,7 @@
 
 <div class="nypr-o-audio-player-controls">
   {{#if (can-change-volume)}}
-    {{nypr-m-volume-control
-            volume     = hifi.volume
-            setVolume  = (action "setVolume")
-            toggleMute = (action "toggleMute")
-            isMuted    = hifi.isMuted}}
+    <NyprMVolumeControl @volume={{hifi.volume}} @setVolume={{action "setVolume"}} @toggleMute={{action "toggleMute"}} @isMuted={{hifi.isMuted}} />
   {{/if}}
 
   <NyprMPlayButton

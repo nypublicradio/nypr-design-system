@@ -48,7 +48,7 @@ module('Integration | Component | nypr-m-on-air-image', function(hooks) {
 
     await render(hbs`{{nypr-m-on-air-image}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom(this.element).hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -57,6 +57,6 @@ module('Integration | Component | nypr-m-on-air-image', function(hooks) {
       {{/nypr-m-on-air-image}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('template block text');
   });
 });

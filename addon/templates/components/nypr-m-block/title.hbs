@@ -3,29 +3,17 @@
     class="c-block__title {{this.iconClassNames}}"
     data-test-block-title
   >
-    {{#nypr-m-block/title-layout
-      route=@route
-      url=@url
-      hasGallery=@hasGallery
-      hasVideo=@hasVideo
-      hasAudio=@hasAudio
-    }}
+    <NyprMBlock::TitleLayout @route={{@route}} @url={{@url}} @hasGallery={{@hasGallery}} @hasVideo={{@hasVideo}} @hasAudio={{@hasAudio}}>
       {{yield}}
-    {{/nypr-m-block/title-layout}}
+    </NyprMBlock::TitleLayout>
   </h2>
 {{else if (eq @h3 '')}}
   <h3
     class="c-block__title {{this.iconClassNames}}"
     data-test-block-title
   >
-    {{#nypr-m-block/title-layout
-      route=@route
-      url=@url
-      hasGallery=@hasGallery
-      hasVideo=@hasVideo
-      hasAudio=@hasAudio
-    }}
+    <NyprMBlock::TitleLayout @route={{@route}} @url={{@url}} @hasGallery={{@hasGallery}} @hasVideo={{@hasVideo}} @hasAudio={{@hasAudio}}>
       {{yield}}
-    {{/nypr-m-block/title-layout}}
+    </NyprMBlock::TitleLayout>
   </h3>
 {{/if}}

@@ -10,20 +10,20 @@ export default Component.extend({
   classNameBindings: ['isMuted'],
   volumeInPercent: computed('volume', 'isMuted', {
     get() {
-      if (get(this, 'isMuted')) {
+      if (this.isMuted) {
         return 0;
       }
-      return get(this, 'volume');
+      return this.volume;
     },
     set(k, v) {
       return v;
     }
   }),
   trackWidth: computed('volumeInPercent', function() {
-    return htmlSafe(`width: ${get(this, 'volumeInPercent')}%;`);
+    return htmlSafe(`width: ${this.volumeInPercent}%;`);
   }),
   handlePosition: computed('volumeInPercent', function() {
-    return htmlSafe(`left : ${get(this, 'volumeInPercent')}%;`);
+    return htmlSafe(`left : ${this.volumeInPercent}%;`);
   }),
   click({target, pageX}) {
     this._setVolume(target, pageX);
@@ -56,12 +56,12 @@ export default Component.extend({
       } else {
         p = (x - leftLimit) / $controls.width();
       }
-      get(this, 'setVolume')(p * 100);
+      this.setVolume(p * 100);
     }
   },
   actions: {
     toggleMute() {
-      get(this, 'toggleMute')();
+      this.toggleMute();
     }
   }
 });

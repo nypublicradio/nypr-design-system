@@ -17,7 +17,7 @@ export default Component.extend(ClickOutsideMixin, {
   role: 'dialog',
 
   ariaHidden: computed('isOpen', function() {
-    return this.get('isOpen') ? "false" : "true";
+    return this.isOpen ? "false" : "true";
   }),
 
   init() {

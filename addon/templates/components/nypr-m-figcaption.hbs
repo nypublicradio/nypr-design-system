@@ -6,7 +6,7 @@
   )}}
 {{else}}
   {{#if (or @caption @credit)}}
-    {{nypr-m-figcaption/caption caption=@caption credit=@credit creditLink=@creditLink}}
+    <NyprMFigcaption::Caption @caption={{@caption}} @credit={{@credit}} @creditLink={{@creditLink}} />
   {{/if}}
 {{/if}}
 {{!-- END-SNIPPET --}}

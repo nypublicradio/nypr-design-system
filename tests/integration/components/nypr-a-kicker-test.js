@@ -18,6 +18,6 @@ module('Integration | Component | nypr-a-kicker', function(hooks) {
       </NyprAKicker>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('template block text');
   });
 });

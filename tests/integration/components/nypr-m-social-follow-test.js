@@ -12,7 +12,7 @@ module('Integration | Component | nypr-m-social-follow', function(hooks) {
 
     await render(hbs`{{nypr-m-social-follow}}`);
 
-    assert.equal(this.element.textContent.trim(), 'Follow Us');
+    assert.dom(this.element).hasText('Follow Us');
 
     // Template block usage:
     await render(hbs`

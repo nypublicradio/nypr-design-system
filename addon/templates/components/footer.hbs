@@ -4,9 +4,9 @@
     <div class="l-grid l-grid--2up l-grid--large-gutters">
       <div>
         <div class="c-main-footer__logo u-space--double--bottom">
-          {{#link-to 'index' aria-label="home page"}}
+          <LinkTo @route="index" @aria-label="home page">
             {{yield (hash logo=(component 'blank-template'))}}
-          {{/link-to}}
+          </LinkTo>
         </div>
         <div class="c-main-footer__slogan u-space--double--bottom">
           {{yield (hash slogan=(component 'blank-template'))}}

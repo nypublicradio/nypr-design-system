@@ -9,6 +9,9 @@ This repo contains an Ember addon, `nypr-design-system` and the files to
 power Storybook.
 
 
+* Ember.js v3.4 or above
+* Ember CLI v2.13 or above
+* Node.js v8 or above
 
 ## Ember Addon
 

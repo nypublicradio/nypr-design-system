@@ -12,10 +12,6 @@
     )
   )}}
 {{else}}
-  {{nypr-m-inline-search/form
-    search=(action (optional @search))
-    class=@formClass
-    query=@query
-  }}
+  <NyprMInlineSearch::Form @search={{action (optional @search)}} @class={{@formClass}} @query={{@query}} />
 {{/if}}
 {{!-- END-SNIPPET --}}

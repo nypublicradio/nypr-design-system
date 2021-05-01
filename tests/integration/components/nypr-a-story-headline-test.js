@@ -12,7 +12,7 @@ module('Integration | Component | nypr-a-story-headline', function(hooks) {
 
     await render(hbs`<NyprAStoryHeadline/>`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom(this.element).hasText('');
 
     // Template block usage:
     await render(hbs`

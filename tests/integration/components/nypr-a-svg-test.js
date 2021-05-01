@@ -8,7 +8,7 @@ module('Integration | Component | nypr-a-svg', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`<NyprASvg/>`);
-    assert.equal(this.element.textContent.trim(), '', 'renders nothing with no inputs');
+    assert.dom(this.element).hasText('', 'renders nothing with no inputs');
 
     await render(hbs`<NyprASvg @icon="whatever"/>`);
     assert.ok('renders ok with a bad filename');

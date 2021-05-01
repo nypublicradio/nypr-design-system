@@ -5,7 +5,7 @@
     attribution=(component 'nypr-m-pullquote/attribution')
   )}}
 {{else}}
-  {{nypr-m-pullquote/quote quote=@quote}}
-  {{nypr-m-pullquote/attribution attribution=@attribution}}
+  <NyprMPullquote::Quote @quote={{@quote}} />
+  <NyprMPullquote::Attribution @attribution={{@attribution}} />
 {{/if}}
 {{!-- END-SNIPPET --}}

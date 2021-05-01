@@ -8,7 +8,7 @@ module('Integration | Helper | dictionary-length', function(hooks) {
 
   test('it renders', async function(assert) {
     this.set('dictionary', { 'wnyc-fm939': {}, 'wnyc-am820': {} });
-    assert.equal(dictionaryLength([ this.get('dictionary') ] ), 2);
+    assert.equal(dictionaryLength([ this.dictionary ] ), 2);
 
     assert.equal(dictionaryLength( null ), 0);
     assert.equal(dictionaryLength([ undefined ] ), 0);

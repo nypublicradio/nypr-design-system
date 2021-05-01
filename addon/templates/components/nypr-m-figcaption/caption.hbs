@@ -16,10 +16,7 @@
   {{/if}}
 
   {{#if @credit}}
-    {{nypr-m-figcaption/credit
-      creditLink=@creditLink
-      credit=@credit
-      includeIcon=(and (not @caption) (not (has-block)))}}
+    <NyprMFigcaption::Credit @creditLink={{@creditLink}} @credit={{@credit}} @includeIcon={{and (not @caption) (not (has-block ))}} />
   {{/if}}
 </div>
 {{!-- END-SNIPPET --}}

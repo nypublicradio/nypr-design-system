@@ -5,13 +5,7 @@
   </NyprAButton>
 {{/if}}
 
-{{input
-  name="search"
-  type="search"
-  class="c-search__input"
-  placeholder="Search"
-  value=this.value
-}}
+<Input @name="search" @type="search" class="c-search__input" placeholder="Search" @value={{this.value}} />
 
 <button
   role="button"

@@ -9,7 +9,7 @@ module('Integration | Helper | dictionary-values', function(hooks) {
   test('it renders', async function(assert) {
 
     this.set('dictionary', { 'wnyc-fm939': {}, 'wnyc-am820': {} });
-    assert.equal(dictionaryValues([ this.get('dictionary') ] ).length, 2);
+    assert.equal(dictionaryValues([ this.dictionary ] ).length, 2);
 
     assert.equal(dictionaryValues( null ).length, 0);
     assert.equal(dictionaryValues([ undefined ] ).length, 0);

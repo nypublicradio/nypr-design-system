@@ -87,6 +87,7 @@ module('Integration | Component | nypr-o-header', function(hooks) {
   });
 
   test('interactivity', async function(assert) {
+    debugger;
     await render(hbs`
       <NyprOHeader as |header|>
         <header.menu/>
@@ -94,6 +95,7 @@ module('Integration | Component | nypr-o-header', function(hooks) {
       </NyprOHeader>
     `);
 
+    debugger;
     await click('.c-main-header__left .o-menu-toggle');
 
     assert.dom('.c-main-header.side-menu-is-active').exists();

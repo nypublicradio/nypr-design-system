@@ -7,6 +7,7 @@ export default Component.extend({
   classNames: ['c-main-header__left', '_u-truncate--flex'],
   init() {
     this._super(...arguments);
+    debugger;
     if (this.showMenuButton === undefined) {
       this.showMenuButton = true;
     }

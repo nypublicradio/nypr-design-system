@@ -5,21 +5,7 @@
     figcaption=(component 'nypr-m-figcaption')
   )}}
 {{else}}
-  {{nypr-m-figure/image
-    breakXl=@breakXl
-    srcXl=@srcXl
-    breakL=@breakL
-    srcL=@srcL
-    breakM=@breakM
-    srcM=@srcM
-    breakS=@breakS
-    srcS=@srcS
-    lazy=@lazy-load
-    alt=(or @alt @caption)
-    ratio=@ratio
-    width=@width
-    height=@height
-  }}
+  <NyprMFigure::Image @breakXl={{@breakXl}} @srcXl={{@srcXl}} @breakL={{@breakL}} @srcL={{@srcL}} @breakM={{@breakM}} @srcM={{@srcM}} @breakS={{@breakS}} @srcS={{@srcS}} @lazy={{@lazy-load}} @alt={{or @alt @caption}} @ratio={{@ratio}} @width={{@width}} @height={{@height}} />
 
   <NyprMFigcaption @caption={{@caption}} @credit={{@credit}} @creditLink={{@creditLink}} />
 {{/if}}

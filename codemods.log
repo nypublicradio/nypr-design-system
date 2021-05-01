@@ -1,0 +1,15 @@
+2021-04-30T23:44:53.565Z [warn] WARNING: {{or}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-m-share-tools/link.hbs
+2021-04-30T23:44:53.860Z [warn] WARNING: {{optional}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-o-donate.hbs
+2021-04-30T23:44:54.192Z [warn] WARNING: {{or}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-m-figure/image.hbs
+2021-04-30T23:44:54.700Z [warn] WARNING: {{strip-html}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-o-persistent-audio-player.hbs
+2021-04-30T23:44:54.700Z [warn] WARNING: {{strip-html}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-o-persistent-audio-player.hbs
+2021-04-30T23:44:54.700Z [warn] WARNING: {{strip-html}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-o-persistent-audio-player.hbs
+2021-04-30T23:44:54.700Z [warn] WARNING: {{strip-html}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-o-persistent-audio-player.hbs
+2021-04-30T23:44:54.701Z [warn] WARNING: {{strip-html}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-o-persistent-audio-player.hbs
+2021-04-30T23:44:54.998Z [warn] WARNING: {{optional}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-a-button.hbs
+2021-04-30T23:44:55.291Z [warn] WARNING: {{optional}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-o-header/menu.hbs
+2021-04-30T23:44:55.306Z [warn] WARNING: {{or}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-a-tag.hbs
+2021-04-30T23:44:56.183Z [warn] WARNING: {{or}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-m-text-banner.hbs
+2021-04-30T23:44:56.273Z [warn] WARNING: {{image-template}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-m-on-air-image.hbs
+2021-04-30T23:44:56.291Z [warn] WARNING: {{or}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-m-newsletter-form.hbs
+2021-04-30T23:44:56.199Z [warn] WARNING: {{or}} was not converted as it has positional parameters which can't be automatically converted. Source: addon/templates/components/nypr-m-tags.hbs

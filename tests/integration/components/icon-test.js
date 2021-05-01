@@ -8,7 +8,7 @@ module('Integration | Component | icon', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`<Icon/>`);
-    assert.equal(this.element.textContent.trim(), '', 'renders nothing with no inputs');
+    assert.dom(this.element).hasText('', 'renders nothing with no inputs');
 
     await render(hbs`<Icon @icon="whatever"/>`);
     assert.ok('renders ok with a bad filename');
