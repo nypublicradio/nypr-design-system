@@ -1,0 +1,47 @@
+
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Organisms/Collections"/>
+
+# Collections
+
+Our collection component serves as wrapper allows for easy arrangement of other molecules in a vertical or horizontal list format. It also contains an optional title.
+
+## Use Cases
+
+-   Grouping together similar content items like [cards](https://storybook.nypr.digital/latest/index.html?path=/docs/components-molecules-cards--horizontal-small) (i.e. a list of articles, a selection of podcast episodes)     
+-   Enclosing related UI elements in a cohesive way (i.e. wrapping a text input and some body text to create an email collector)
+    
+-   **Don't** group unrelated elements together.
+    
+
+## What’s Inside
+
+<img alt="alt text" src="./images/collections-anatomy.png" width="400" />  
+ 
+ 1- **Background** - An optional background can be used to "visually" put a collection's contents in a container.
+
+2- **Title** - An optional title can give context to the contents of the collection.
+
+3- **Inside Object** - Collections can hold just about anything, but this doesn't mean that they should. Collections are meant to group similar elements or related bits of UI. 
+
+## Variants
+
+### Gothamist - Related Links
+<img alt="alt text" src="./images/Organisms-Collections-Gothamist-RelatedLinks.png" width="400" />  
+
+A collection can hold a sequence of the same component. In Gothamist, a collection is used to hold a series of small cards to provide “Related Links” to other content. Related Link Collections in Gothamist must have a minimum of 2 objects within them and a maximum of 5. Each object must be of the same type as the others (i.e. all hortizontal card or all vertical cards)
+
+
+### Gothamist - Recirculation Modules
+<img alt="alt text" src="./images/Organisms-Collections-Gothamist-RecircModule.png.png" width="800" />  
+
+In the future, collection can also be used to build article recirculation modules in a sustainable way. In the example above, two collections are used to show a list of recent news articles and a featured news story.
+
+
+
+## Accessibility
+Ensure that the order of the elements in a collection are mirrored by the order they should be logicly read by a screen reader. Left to right for horizontal lists. Top to bottom for vertical. 
+
+## Testing and Iterations
+Any updates/progress to this component can be listed out here. Maybe eventually this will be automated.
